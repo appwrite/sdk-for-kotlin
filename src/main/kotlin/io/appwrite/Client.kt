@@ -55,33 +55,71 @@ class Client @JvmOverloads constructor(
         setSelfSigned(selfSigned)
     }
 
-    /// Your project ID
+    /**
+     * Set Project
+     *
+     * Your project ID
+     *
+     * @param {string} project
+     *
+     * @return this
+     */
     fun setProject(value: String): Client {
         config["project"] = value
         addHeader("x-appwrite-project", value)
         return this
     }
 
-    /// Your secret API key
+    /**
+     * Set Key
+     *
+     * Your secret API key
+     *
+     * @param {string} key
+     *
+     * @return this
+     */
     fun setKey(value: String): Client {
         config["key"] = value
         addHeader("x-appwrite-key", value)
         return this
     }
 
-    /// Your secret JSON Web Token
+    /**
+     * Set JWT
+     *
+     * Your secret JSON Web Token
+     *
+     * @param {string} jwt
+     *
+     * @return this
+     */
     fun setJWT(value: String): Client {
         config["jWT"] = value
         addHeader("x-appwrite-jwt", value)
         return this
     }
 
+    /**
+     * Set Locale
+     *
+     * @param {string} locale
+     *
+     * @return this
+     */
     fun setLocale(value: String): Client {
         config["locale"] = value
         addHeader("x-appwrite-locale", value)
         return this
     }
 
+    /**
+     * Set self Signed
+     * 
+     * @param status
+     *
+     * @return this     
+     */
     fun setSelfSigned(status: Boolean): Client {
         selfSigned = status
 
@@ -123,16 +161,41 @@ class Client @JvmOverloads constructor(
         return this
     }
 
+    /**
+     * Set endpoint
+     * 
+     * @param endpoint
+     *
+     * @return this     
+     */
     fun setEndpoint(endPoint: String): Client {
         this.endPoint = endPoint
         return this
     }
 
+    /**
+     * Add Header
+     * 
+     * @param key
+     * @param value
+     *
+     * @return this     
+     */
     fun addHeader(key: String, value: String): Client {
         headers[key] = value
         return this
     }
 
+    /**
+     * Send the HTTP request
+     * 
+     * @param method
+     * @param path
+     * @param headers
+     * @param params
+     *
+     * @return [Response]    
+     */
     @Throws(AppwriteException::class)
     suspend fun call(
         method: String, 
@@ -210,6 +273,16 @@ class Client @JvmOverloads constructor(
         return awaitResponse(request)
     }
 
+    /**
+     * Await Response
+     * 
+     * @param method
+     * @param path
+     * @param headers
+     * @param params
+     *
+     * @return [Response]    
+     */
     @Throws(AppwriteException::class)
     private suspend fun awaitResponse(request: Request) = suspendCancellableCoroutine<Response> {
         http.newCall(request).enqueue(object : Callback {

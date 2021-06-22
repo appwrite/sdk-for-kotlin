@@ -15,7 +15,7 @@ Appwrite is an open-source backend as a service server that abstract and simplif
 
 ### Gradle
 
-Appwrite's Android SDK is hosted on Maven Central. In order to fetch the Appwrite SDK, add this to your root level `build.gradle(.kts)` file:
+Appwrite's Kotlin SDK is hosted on Maven Central. In order to fetch the Appwrite SDK, add this to your root level `build.gradle(.kts)` file:
 
 ```groovy
 repositories {      
