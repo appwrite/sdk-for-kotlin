@@ -1,5 +1,6 @@
 # Appwrite Kotlin SDK
 
+![Maven Central](https://img.shields.io/maven-central/v/io.appwrite/sdk-for-kotlin.svg?color=green&style=flat-square)
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-kotlin.svg?style=flat-square)
 ![Version](https://img.shields.io/badge/api%20version-0.8.0-blue.svg?style=flat-square)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite_io?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite_io)
