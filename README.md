@@ -5,11 +5,11 @@
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite_io?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite_io)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
-**This SDK is compatible with Appwrite server version 0.7.x. For older versions, please check previous releases.**
+**This SDK is compatible with Appwrite server version 0.8.x. For older versions, please check [previous releases](https://github.com/appwrite/sdk-for-kotlin/releases).**
 
-Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way. Use the Flutter SDK to integrate your app with the Appwrite server to easily start interacting with all of Appwrite backend APIs and tools. For full API documentation and tutorials go to https://appwrite.io/docs
+Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way. Use the Kotlin SDK to integrate your app with the Appwrite server to easily start interacting with all of Appwrite backend APIs and tools. For full API documentation and tutorials go to [https://appwrite.io/docs](https://appwrite.io/docs)
 
-![Appwrite](https://appwrite.io/v1/images/console.png)
+![Appwrite](https://appwrite.io/images/github.png)
 
 ## Installation
 
@@ -36,7 +36,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:0.0.0-SNAPSHOT")
+implementation("io.appwrite:sdk-for-kotlin:0.0.0")
 ```
 
 ### Maven
@@ -47,7 +47,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>0.0.0-SNAPSHOT</version>
+        <version>0.0.0</version>
     </dependency>
 </dependencies>
 ```
