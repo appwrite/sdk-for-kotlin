@@ -52,7 +52,7 @@ class Functions(private val client: Client) : BaseService(client) {
      *
      * @param name
      * @param execute
-     * @param env
+     * @param runtime
      * @param vars
      * @param events
      * @param schedule
@@ -64,7 +64,7 @@ class Functions(private val client: Client) : BaseService(client) {
     suspend fun create(
 		name: String,
 		execute: List<Any>,
-		env: String,
+		runtime: String,
 		vars: Any? = null,
 		events: List<Any>? = null,
 		schedule: String? = null,
@@ -74,7 +74,7 @@ class Functions(private val client: Client) : BaseService(client) {
         val params = mapOf<String, Any?>(
             "name" to name,
             "execute" to execute,
-            "env" to env,
+            "runtime" to runtime,
             "vars" to vars,
             "events" to events,
             "schedule" to schedule,
