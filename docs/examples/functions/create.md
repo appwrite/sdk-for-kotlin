@@ -11,7 +11,7 @@ suspend fun main() {
     val response = functions.create(
         name = "[NAME]",
         execute = listOf(),
-        runtime = "java-11.0",
+        runtime = "java-11",
     )
     val json = response.body?.string()
 }
