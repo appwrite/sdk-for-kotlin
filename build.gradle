@@ -7,7 +7,7 @@ plugins {
 ext {
     PUBLISH_GROUP_ID = 'io.appwrite'
     PUBLISH_ARTIFACT_ID = 'sdk-for-kotlin'
-    PUBLISH_VERSION = '0.0.1-SNAPSHOT'
+    PUBLISH_VERSION = '0.0.1'
     POM_URL = 'https://github.com/appwrite/sdk-for-kotlin'
     POM_SCM_URL = 'https://github.com/appwrite/sdk-for-kotlin'
     POM_ISSUE_URL = 'https://github.com/appwrite/sdk-for-kotlin/issues'

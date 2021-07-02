@@ -37,7 +37,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:0.0.1-SNAPSHOT")
+implementation("io.appwrite:sdk-for-kotlin:0.0.1")
 ```
 
 ### Maven
@@ -48,7 +48,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </dependency>
 </dependencies>
 ```

@@ -47,7 +47,7 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "x-sdk-version" to "appwrite:kotlin:0.0.1-SNAPSHOT",            
+            "x-sdk-version" to "appwrite:kotlin:0.0.1",            
             "x-appwrite-response-format" to "0.9.0"
         )
         config = mutableMapOf()
