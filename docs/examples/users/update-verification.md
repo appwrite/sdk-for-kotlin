@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Functions
+import io.appwrite.services.Users
 
 suspend fun main() {
     val client = Client(context)
@@ -7,11 +7,10 @@ suspend fun main() {
       .setProject("5df5acd0d48c2") // Your project ID
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
-    val functions = Functions(client)
-    val response = functions.create(
-        name = "[NAME]",
-        execute = listOf(),
-        runtime = "java-11.0",
+    val users = Users(client)
+    val response = users.updateVerification(
+        userId = "[USER_ID]",
+        emailVerification = false
     )
     val json = response.body?.string()
 }

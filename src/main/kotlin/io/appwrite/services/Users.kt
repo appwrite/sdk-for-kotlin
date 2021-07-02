@@ -299,4 +299,31 @@ class Users(private val client: Client) : BaseService(client) {
         return client.call("PATCH", path, headers, params)
     }
     
+    /**
+     * Update Email Verification
+     *
+     * Update the user email verification status by its unique ID.
+     *
+     * @param userId
+     * @param emailVerification
+     * @return [Response]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateVerification(
+		userId: String,
+		emailVerification: Boolean
+	): Response {
+        val path = "/users/{userId}/verification".replace("{userId}", userId)
+        val params = mapOf<String, Any?>(
+            "emailVerification" to emailVerification
+        )
+
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+
+        return client.call("PATCH", path, headers, params)
+    }
+    
 }

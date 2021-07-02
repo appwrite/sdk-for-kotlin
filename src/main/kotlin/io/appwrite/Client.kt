@@ -47,8 +47,8 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "x-sdk-version" to "appwrite:kotlin:0.0.0",            
-            "x-appwrite-response-format" to "0.8.0"
+            "x-sdk-version" to "appwrite:kotlin:0.0.1",            
+            "x-appwrite-response-format" to "0.9.0"
         )
         config = mutableMapOf()
         
@@ -219,7 +219,13 @@ class Client @JvmOverloads constructor(
                         return@forEach
                     }
                     is List<*> -> {
-                        httpBuilder.addQueryParameter(it.key + "[]", it.value.toString())
+                        val list = it.value as List<*>
+                        for (index in list.indices) {
+                            httpBuilder.addQueryParameter(
+                                "${it.key}[]",
+                                list[index].toString()
+                            )
+                        }
                     }
                     else -> {
                         httpBuilder.addQueryParameter(it.key, it.value.toString())
