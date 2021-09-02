@@ -222,7 +222,7 @@ class Database(private val client: Client) : BaseService(client) {
      * directly from your database console.
      *
      * @param collectionId
-     * @param xdata
+     * @param data
      * @param read
      * @param write
      * @param parentDocument
@@ -234,7 +234,7 @@ class Database(private val client: Client) : BaseService(client) {
     @Throws(AppwriteException::class)
     suspend fun createDocument(
 		collectionId: String,
-		xdata: Any,
+		data: Any,
 		read: List<Any>? = null,
 		write: List<Any>? = null,
 		parentDocument: String? = null,
@@ -243,7 +243,7 @@ class Database(private val client: Client) : BaseService(client) {
 	): Response {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
-            "data" to xdata,
+            "data" to data,
             "read" to read,
             "write" to write,
             "parentDocument" to parentDocument,
@@ -293,7 +293,7 @@ class Database(private val client: Client) : BaseService(client) {
      *
      * @param collectionId
      * @param documentId
-     * @param xdata
+     * @param data
      * @param read
      * @param write
      * @return [Response]     
@@ -303,13 +303,13 @@ class Database(private val client: Client) : BaseService(client) {
     suspend fun updateDocument(
 		collectionId: String,
 		documentId: String,
-		xdata: Any,
+		data: Any,
 		read: List<Any>? = null,
 		write: List<Any>? = null
 	): Response {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
         val params = mapOf<String, Any?>(
-            "data" to xdata,
+            "data" to data,
             "read" to read,
             "write" to write
         )
