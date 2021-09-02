@@ -9,9 +9,9 @@ public void main() {
 
     Database database = new Database(client);
     database.updateCollection(
-        "[COLLECTION_ID]",
-        "[NAME]",
-        new Continuation<Object>() {
+        collectionId = "[COLLECTION_ID]",
+        name = "[NAME]",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

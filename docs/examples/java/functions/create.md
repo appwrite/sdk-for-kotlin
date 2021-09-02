@@ -9,10 +9,10 @@ public void main() {
 
     Functions functions = new Functions(client);
     functions.create(
-        "[NAME]",
-        listOf(),
-        "java-11.0",
-        new Continuation<Object>() {
+        name = "[NAME]",
+        execute = listOf(),
+        runtime = "dotnet-5.0",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

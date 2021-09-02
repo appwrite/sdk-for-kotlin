@@ -123,6 +123,33 @@ class Users(private val client: Client) : BaseService(client) {
     }
     
     /**
+     * Update Email
+     *
+     * Update the user email by its unique ID.
+     *
+     * @param userId
+     * @param email
+     * @return [Response]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateEmail(
+		userId: String,
+		email: String
+	): Response {
+        val path = "/users/{userId}/email".replace("{userId}", userId)
+        val params = mapOf<String, Any?>(
+            "email" to email
+        )
+
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+
+        return client.call("PATCH", path, headers, params)
+    }
+    
+    /**
      * Get User Logs
      *
      * Get a user activity logs list by its unique ID.
@@ -144,6 +171,60 @@ class Users(private val client: Client) : BaseService(client) {
         )
 
         return client.call("GET", path, headers, params)
+    }
+    
+    /**
+     * Update Name
+     *
+     * Update the user name by its unique ID.
+     *
+     * @param userId
+     * @param name
+     * @return [Response]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateName(
+		userId: String,
+		name: String
+	): Response {
+        val path = "/users/{userId}/name".replace("{userId}", userId)
+        val params = mapOf<String, Any?>(
+            "name" to name
+        )
+
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+
+        return client.call("PATCH", path, headers, params)
+    }
+    
+    /**
+     * Update Password
+     *
+     * Update the user password by its unique ID.
+     *
+     * @param userId
+     * @param password
+     * @return [Response]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePassword(
+		userId: String,
+		password: String
+	): Response {
+        val path = "/users/{userId}/password".replace("{userId}", userId)
+        val params = mapOf<String, Any?>(
+            "password" to password
+        )
+
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+
+        return client.call("PATCH", path, headers, params)
     }
     
     /**

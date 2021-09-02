@@ -9,10 +9,10 @@ public void main() {
 
     Functions functions = new Functions(client);
     functions.createTag(
-        "[FUNCTION_ID]",
-        "[COMMAND]",
-        File("./path-to-files/image.jpg")
-        new Continuation<Object>() {
+        functionId = "[FUNCTION_ID]",
+        command = "[COMMAND]",
+        code = File("./path-to-files/image.jpg")
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

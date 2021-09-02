@@ -9,8 +9,8 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.getMemberships(
-        "[TEAM_ID]",
-        new Continuation<Object>() {
+        teamId = "[TEAM_ID]",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

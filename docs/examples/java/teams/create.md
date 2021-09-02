@@ -9,8 +9,8 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.create(
-        "[NAME]",
-        new Continuation<Object>() {
+        name = "[NAME]",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

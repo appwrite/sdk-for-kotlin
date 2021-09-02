@@ -9,9 +9,9 @@ public void main() {
 
     Users users = new Users(client);
     users.updatePrefs(
-        "[USER_ID]",
-        mapOf( "a" to "b" )
-        new Continuation<Object>() {
+        userId = "[USER_ID]",
+        prefs = mapOf( "a" to "b" )
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

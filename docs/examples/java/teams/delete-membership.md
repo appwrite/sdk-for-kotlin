@@ -9,9 +9,9 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.deleteMembership(
-        "[TEAM_ID]",
-        "[MEMBERSHIP_ID]"
-        new Continuation<Object>() {
+        teamId = "[TEAM_ID]",
+        membershipId = "[MEMBERSHIP_ID]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

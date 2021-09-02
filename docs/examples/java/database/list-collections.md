@@ -9,7 +9,7 @@ public void main() {
 
     Database database = new Database(client);
     database.listCollections(
-        new Continuation<Object>() {
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

@@ -9,10 +9,10 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.updateMembershipRoles(
-        "[TEAM_ID]",
-        "[MEMBERSHIP_ID]",
-        listOf()
-        new Continuation<Object>() {
+        teamId = "[TEAM_ID]",
+        membershipId = "[MEMBERSHIP_ID]",
+        roles = listOf()
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

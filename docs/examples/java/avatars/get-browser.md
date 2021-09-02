@@ -9,8 +9,8 @@ public void main() {
 
     Avatars avatars = new Avatars(client);
     avatars.getBrowser(
-        "aa",
-        new Continuation<Object>() {
+        code = "aa",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

@@ -9,9 +9,9 @@ public void main() {
 
     Account account = new Account(client);
     account.updateVerification(
-        "[USER_ID]",
-        "[SECRET]"
-        new Continuation<Object>() {
+        userId = "[USER_ID]",
+        secret = "[SECRET]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

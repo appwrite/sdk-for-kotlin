@@ -8,7 +8,7 @@ public void main() {
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
     Health health = new Health(client);
-    health.getCache(new Continuation<Object>() {
+    health.getCache(new Continuation<Response>() {
         @NotNull
         @Override
         public CoroutineContext getContext() {

@@ -9,8 +9,8 @@ public void main() {
 
     Storage storage = new Storage(client);
     storage.getFileDownload(
-        "[FILE_ID]"
-        new Continuation<Object>() {
+        fileId = "[FILE_ID]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

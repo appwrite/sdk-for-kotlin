@@ -9,8 +9,8 @@ public void main() {
 
     Account account = new Account(client);
     account.getSession(
-        "[SESSION_ID]"
-        new Continuation<Object>() {
+        sessionId = "[SESSION_ID]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {
