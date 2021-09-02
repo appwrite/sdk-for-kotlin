@@ -9,7 +9,7 @@ public void main() {
 
     Avatars avatars = new Avatars(client);
     avatars.getInitials(
-        new Continuation<Object>() {
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

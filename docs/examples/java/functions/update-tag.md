@@ -9,9 +9,9 @@ public void main() {
 
     Functions functions = new Functions(client);
     functions.updateTag(
-        "[FUNCTION_ID]",
-        "[TAG]"
-        new Continuation<Object>() {
+        functionId = "[FUNCTION_ID]",
+        tag = "[TAG]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

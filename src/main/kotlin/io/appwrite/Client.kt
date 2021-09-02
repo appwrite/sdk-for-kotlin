@@ -47,8 +47,8 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "x-sdk-version" to "appwrite:kotlin:0.0.1",            
-            "x-appwrite-response-format" to "0.9.0"
+            "x-sdk-version" to "appwrite:kotlin:0.1.0",            
+            "x-appwrite-response-format" to "0.10.0"
         )
         config = mutableMapOf()
         
@@ -162,12 +162,12 @@ class Client @JvmOverloads constructor(
     }
 
     /**
-     * Set endpoint
-     * 
-     * @param endpoint
-     *
-     * @return this     
-     */
+    * Set endpoint.
+    *
+    * @param endpoint
+    *
+    * @return this
+    */
     fun setEndpoint(endPoint: String): Client {
         this.endPoint = endPoint
         return this

@@ -9,8 +9,8 @@ public void main() {
 
     Database database = new Database(client);
     database.deleteCollection(
-        "[COLLECTION_ID]"
-        new Continuation<Object>() {
+        collectionId = "[COLLECTION_ID]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

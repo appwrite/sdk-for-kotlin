@@ -9,8 +9,8 @@ public void main() {
 
     Users users = new Users(client);
     users.getPrefs(
-        "[USER_ID]"
-        new Continuation<Object>() {
+        userId = "[USER_ID]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Database
+import io.appwrite.services.Users
 
 public void main() {
     Client client = Client(context)
@@ -7,9 +7,10 @@ public void main() {
         .setProject("5df5acd0d48c2") // Your project ID
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-    Database database = new Database(client);
-    database.listDocuments(
-        collectionId = "[COLLECTION_ID]",
+    Users users = new Users(client);
+    users.updateName(
+        userId = "[USER_ID]",
+        name = "[NAME]"
         new Continuation<Response>() {
             @NotNull
             @Override

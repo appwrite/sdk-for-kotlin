@@ -9,9 +9,9 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.update(
-        "[TEAM_ID]",
-        "[NAME]"
-        new Continuation<Object>() {
+        teamId = "[TEAM_ID]",
+        name = "[NAME]"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

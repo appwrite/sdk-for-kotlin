@@ -9,11 +9,11 @@ public void main() {
 
     Teams teams = new Teams(client);
     teams.createMembership(
-        "[TEAM_ID]",
-        "email@example.com",
-        listOf(),
-        "https://example.com",
-        new Continuation<Object>() {
+        teamId = "[TEAM_ID]",
+        email = "email@example.com",
+        roles = listOf(),
+        url = "https://example.com",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

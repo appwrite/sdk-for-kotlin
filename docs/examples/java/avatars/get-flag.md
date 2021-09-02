@@ -9,8 +9,8 @@ public void main() {
 
     Avatars avatars = new Avatars(client);
     avatars.getFlag(
-        "af",
-        new Continuation<Object>() {
+        code = "af",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

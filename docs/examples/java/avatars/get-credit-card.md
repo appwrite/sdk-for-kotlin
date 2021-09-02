@@ -9,8 +9,8 @@ public void main() {
 
     Avatars avatars = new Avatars(client);
     avatars.getCreditCard(
-        "amex",
-        new Continuation<Object>() {
+        code = "amex",
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

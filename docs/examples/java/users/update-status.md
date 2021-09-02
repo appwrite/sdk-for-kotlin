@@ -9,9 +9,9 @@ public void main() {
 
     Users users = new Users(client);
     users.updateStatus(
-        "[USER_ID]",
-        1
-        new Continuation<Object>() {
+        userId = "[USER_ID]",
+        status = 1
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

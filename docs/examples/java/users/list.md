@@ -9,7 +9,7 @@ public void main() {
 
     Users users = new Users(client);
     users.list(
-        new Continuation<Object>() {
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

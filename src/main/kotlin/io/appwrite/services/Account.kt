@@ -247,7 +247,7 @@ class Account(private val client: Client) : BaseService(client) {
     }
     
     /**
-     * Complete Password Recovery
+     * Create Password Recovery (confirmation)
      *
      * Use this endpoint to complete the user account password reset. Both the
      * **userId** and **secret** arguments will be passed as query parameters to
@@ -423,7 +423,7 @@ class Account(private val client: Client) : BaseService(client) {
     }
     
     /**
-     * Complete Email Verification
+     * Create Email Verification (confirmation)
      *
      * Use this endpoint to complete the user email verification process. Use both
      * the **userId** and **secret** parameters that were attached to your app URL

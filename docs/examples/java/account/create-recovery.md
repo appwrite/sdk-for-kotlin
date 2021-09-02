@@ -9,9 +9,9 @@ public void main() {
 
     Account account = new Account(client);
     account.createRecovery(
-        "email@example.com",
-        "https://example.com"
-        new Continuation<Object>() {
+        email = "email@example.com",
+        url = "https://example.com"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {

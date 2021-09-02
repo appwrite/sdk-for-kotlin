@@ -9,8 +9,8 @@ public void main() {
 
     Account account = new Account(client);
     account.createVerification(
-        "https://example.com"
-        new Continuation<Object>() {
+        url = "https://example.com"
+        new Continuation<Response>() {
             @NotNull
             @Override
             public CoroutineContext getContext() {
