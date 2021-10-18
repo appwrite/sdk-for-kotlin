@@ -226,18 +226,18 @@ class Functions(private val client: Client) : BaseService(client) {
      * function execution process will start asynchronously.
      *
      * @param functionId
-     * @param data
+     * @param xdata
      * @return [Response]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createExecution(
 		functionId: String,
-		data: String? = null
+		xdata: String? = null
 	): Response {
         val path = "/functions/{functionId}/executions".replace("{functionId}", functionId)
         val params = mapOf<String, Any?>(
-            "data" to data
+            "data" to xdata
         )
 
         val headers = mapOf(
