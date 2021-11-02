@@ -1,12 +1,12 @@
 package io.appwrite.services
-
 import io.appwrite.Client
+import io.appwrite.models.*
 import io.appwrite.exceptions.AppwriteException
 import okhttp3.Cookie
 import okhttp3.Response
 import java.io.File
 
-class Users(private val client: Client) : BaseService(client) {
+class Users(client: Client) : Service(client) {
 
     /**
      * List Users
@@ -14,20 +14,20 @@ class Users(private val client: Client) : BaseService(client) {
      * Get a list of all the project's users. You can use the query params to
      * filter your results.
      *
-     * @param search
-     * @param limit
-     * @param offset
-     * @param orderType
-     * @return [Response]     
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param orderType Order result by ASC or DESC order.
+     * @return [io.appwrite.models.UserList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun list(
 		search: String? = null,
-		limit: Int? = null,
-		offset: Int? = null,
+		limit: Long? = null,
+		offset: Long? = null,
 		orderType: String? = null
-	): Response {
+	): io.appwrite.models.UserList {
         val path = "/users"
         val params = mapOf<String, Any?>(
             "search" to search,
@@ -35,12 +35,20 @@ class Users(private val client: Client) : BaseService(client) {
             "offset" to offset,
             "orderType" to orderType
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.UserList = {
+            io.appwrite.models.UserList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.UserList::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -48,10 +56,10 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Create a new user.
      *
-     * @param email
-     * @param password
-     * @param name
-     * @return [Response]     
+     * @param email User email.
+     * @param password User password. Must be between 6 to 32 chars.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -59,19 +67,27 @@ class Users(private val client: Client) : BaseService(client) {
 		email: String,
 		password: String,
 		name: String? = null
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users"
         val params = mapOf<String, Any?>(
             "email" to email,
             "password" to password,
             "name" to name
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("POST", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -79,23 +95,31 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Get a user by its unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun get(
 		userId: String
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users/{userId}".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -103,23 +127,27 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Delete a user by its unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [Any]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun delete(
 		userId: String
-	): Response {
+	): Any {
         val path = "/users/{userId}".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("DELETE", path, headers, params)
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
     }
     
     /**
@@ -127,26 +155,34 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Update the user email by its unique ID.
      *
-     * @param userId
-     * @param email
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param email User email.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEmail(
 		userId: String,
 		email: String
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users/{userId}/email".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "email" to email
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -154,23 +190,31 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Get a user activity logs list by its unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [io.appwrite.models.LogList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getLogs(
 		userId: String
-	): Response {
+	): io.appwrite.models.LogList {
         val path = "/users/{userId}/logs".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.LogList = {
+            io.appwrite.models.LogList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.LogList::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -178,26 +222,34 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Update the user name by its unique ID.
      *
-     * @param userId
-     * @param name
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateName(
 		userId: String,
 		name: String
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users/{userId}/name".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "name" to name
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -205,26 +257,34 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Update the user password by its unique ID.
      *
-     * @param userId
-     * @param password
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param password New user password. Must be between 6 to 32 chars.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePassword(
 		userId: String,
 		password: String
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users/{userId}/password".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "password" to password
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -232,23 +292,31 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Get the user preferences by its unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [io.appwrite.models.Preferences]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getPrefs(
 		userId: String
-	): Response {
+	): io.appwrite.models.Preferences {
         val path = "/users/{userId}/prefs".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
+            io.appwrite.models.Preferences.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Preferences::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -257,26 +325,34 @@ class Users(private val client: Client) : BaseService(client) {
      * Update the user preferences by its unique ID. You can pass only the
      * specific settings you wish to update.
      *
-     * @param userId
-     * @param prefs
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param prefs Prefs key-value JSON object.
+     * @return [io.appwrite.models.Preferences]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePrefs(
 		userId: String,
 		prefs: Any
-	): Response {
+	): io.appwrite.models.Preferences {
         val path = "/users/{userId}/prefs".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "prefs" to prefs
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
+            io.appwrite.models.Preferences.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Preferences::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -284,23 +360,31 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Get the user sessions list by its unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [io.appwrite.models.SessionList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getSessions(
 		userId: String
-	): Response {
+	): io.appwrite.models.SessionList {
         val path = "/users/{userId}/sessions".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.SessionList = {
+            io.appwrite.models.SessionList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.SessionList::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -308,23 +392,27 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Delete all user's sessions by using the user's unique ID.
      *
-     * @param userId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @return [Any]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteSessions(
 		userId: String
-	): Response {
+	): Any {
         val path = "/users/{userId}/sessions".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("DELETE", path, headers, params)
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
     }
     
     /**
@@ -332,25 +420,29 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Delete a user sessions by its unique ID.
      *
-     * @param userId
-     * @param sessionId
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param sessionId User unique session ID.
+     * @return [Any]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteSession(
 		userId: String,
 		sessionId: String
-	): Response {
+	): Any {
         val path = "/users/{userId}/sessions/{sessionId}".replace("{userId}", userId).replace("{sessionId}", sessionId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("DELETE", path, headers, params)
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
     }
     
     /**
@@ -358,26 +450,34 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Update the user status by its unique ID.
      *
-     * @param userId
-     * @param status
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param status User Status code. To activate the user pass 1, to block the user pass 2 and for disabling the user pass 0
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateStatus(
 		userId: String,
-		status: Int
-	): Response {
+		status: Long
+	): io.appwrite.models.User {
         val path = "/users/{userId}/status".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "status" to status
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -385,26 +485,34 @@ class Users(private val client: Client) : BaseService(client) {
      *
      * Update the user email verification status by its unique ID.
      *
-     * @param userId
-     * @param emailVerification
-     * @return [Response]     
+     * @param userId User unique ID.
+     * @param emailVerification User Email Verification Status.
+     * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateVerification(
 		userId: String,
 		emailVerification: Boolean
-	): Response {
+	): io.appwrite.models.User {
         val path = "/users/{userId}/verification".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
             "emailVerification" to emailVerification
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            convert = convert
+        )
     }
     
 }

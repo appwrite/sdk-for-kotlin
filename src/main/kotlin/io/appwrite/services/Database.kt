@@ -1,12 +1,12 @@
 package io.appwrite.services
-
 import io.appwrite.Client
+import io.appwrite.models.*
 import io.appwrite.exceptions.AppwriteException
 import okhttp3.Cookie
 import okhttp3.Response
 import java.io.File
 
-class Database(private val client: Client) : BaseService(client) {
+class Database(client: Client) : Service(client) {
 
     /**
      * List Collections
@@ -16,20 +16,20 @@ class Database(private val client: Client) : BaseService(client) {
      * of the project's collections. [Learn more about different API
      * modes](/docs/admin).
      *
-     * @param search
-     * @param limit
-     * @param offset
-     * @param orderType
-     * @return [Response]     
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param orderType Order result by ASC or DESC order.
+     * @return [io.appwrite.models.CollectionList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listCollections(
 		search: String? = null,
-		limit: Int? = null,
-		offset: Int? = null,
+		limit: Long? = null,
+		offset: Long? = null,
 		orderType: String? = null
-	): Response {
+	): io.appwrite.models.CollectionList {
         val path = "/database/collections"
         val params = mapOf<String, Any?>(
             "search" to search,
@@ -37,12 +37,20 @@ class Database(private val client: Client) : BaseService(client) {
             "offset" to offset,
             "orderType" to orderType
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.CollectionList = {
+            io.appwrite.models.CollectionList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.CollectionList::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -50,11 +58,11 @@ class Database(private val client: Client) : BaseService(client) {
      *
      * Create a new Collection.
      *
-     * @param name
-     * @param read
-     * @param write
-     * @param rules
-     * @return [Response]     
+     * @param name Collection name. Max length: 128 chars.
+     * @param read An array of strings with read permissions. By default no user is granted with any read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param write An array of strings with write permissions. By default no user is granted with any write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param rules Array of [rule objects](/docs/rules). Each rule define a collection field name, data type and validation.
+     * @return [io.appwrite.models.Collection]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -63,7 +71,7 @@ class Database(private val client: Client) : BaseService(client) {
 		read: List<Any>,
 		write: List<Any>,
 		rules: List<Any>
-	): Response {
+	): io.appwrite.models.Collection {
         val path = "/database/collections"
         val params = mapOf<String, Any?>(
             "name" to name,
@@ -71,12 +79,20 @@ class Database(private val client: Client) : BaseService(client) {
             "write" to write,
             "rules" to rules
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("POST", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
+            io.appwrite.models.Collection.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Collection::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -85,23 +101,31 @@ class Database(private val client: Client) : BaseService(client) {
      * Get a collection by its unique ID. This endpoint response returns a JSON
      * object with the collection metadata.
      *
-     * @param collectionId
-     * @return [Response]     
+     * @param collectionId Collection unique ID.
+     * @return [io.appwrite.models.Collection]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getCollection(
 		collectionId: String
-	): Response {
+	): io.appwrite.models.Collection {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
+            io.appwrite.models.Collection.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Collection::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -109,12 +133,12 @@ class Database(private val client: Client) : BaseService(client) {
      *
      * Update a collection by its unique ID.
      *
-     * @param collectionId
-     * @param name
-     * @param read
-     * @param write
-     * @param rules
-     * @return [Response]     
+     * @param collectionId Collection unique ID.
+     * @param name Collection name. Max length: 128 chars.
+     * @param read An array of strings with read permissions. By default inherits the existing read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param write An array of strings with write permissions. By default inherits the existing write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param rules Array of [rule objects](/docs/rules). Each rule define a collection field name, data type and validation.
+     * @return [io.appwrite.models.Collection]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -124,7 +148,7 @@ class Database(private val client: Client) : BaseService(client) {
 		read: List<Any>? = null,
 		write: List<Any>? = null,
 		rules: List<Any>? = null
-	): Response {
+	): io.appwrite.models.Collection {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
             "name" to name,
@@ -132,12 +156,20 @@ class Database(private val client: Client) : BaseService(client) {
             "write" to write,
             "rules" to rules
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PUT", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
+            io.appwrite.models.Collection.from(map = it)
+        }
+        return client.call(
+            "PUT",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Collection::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -146,23 +178,27 @@ class Database(private val client: Client) : BaseService(client) {
      * Delete a collection by its unique ID. Only users with write permissions
      * have access to delete this resource.
      *
-     * @param collectionId
-     * @return [Response]     
+     * @param collectionId Collection unique ID.
+     * @return [Any]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteCollection(
 		collectionId: String
-	): Response {
+	): Any {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("DELETE", path, headers, params)
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
     }
     
     /**
@@ -173,28 +209,28 @@ class Database(private val client: Client) : BaseService(client) {
      * of the project's documents. [Learn more about different API
      * modes](/docs/admin).
      *
-     * @param collectionId
-     * @param filters
-     * @param limit
-     * @param offset
-     * @param orderField
-     * @param orderType
-     * @param orderCast
-     * @param search
-     * @return [Response]     
+     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param filters Array of filter strings. Each filter is constructed from a key name, comparison operator (=, !=, &gt;, &lt;, &lt;=, &gt;=) and a value. You can also use a dot (.) separator in attribute names to filter by child document attributes. Examples: &#039;name=John Doe&#039; or &#039;category.$id&gt;=5bed2d152c362&#039;.
+     * @param limit Maximum number of documents to return in response.  Use this value to manage pagination. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this param to manage pagination.
+     * @param orderField Document field that results will be sorted by.
+     * @param orderType Order direction. Possible values are DESC for descending order, or ASC for ascending order.
+     * @param orderCast Order field type casting. Possible values are int, string, date, time or datetime. The database will attempt to cast the order field to the value you pass here. The default value is a string.
+     * @param search Search query. Enter any free text search. The database will try to find a match against all document attributes and children. Max length: 256 chars.
+     * @return [io.appwrite.models.DocumentList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listDocuments(
 		collectionId: String,
 		filters: List<Any>? = null,
-		limit: Int? = null,
-		offset: Int? = null,
+		limit: Long? = null,
+		offset: Long? = null,
 		orderField: String? = null,
 		orderType: String? = null,
 		orderCast: String? = null,
 		search: String? = null
-	): Response {
+	): io.appwrite.models.DocumentList {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
             "filters" to filters,
@@ -205,12 +241,20 @@ class Database(private val client: Client) : BaseService(client) {
             "orderCast" to orderCast,
             "search" to search
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.DocumentList = {
+            io.appwrite.models.DocumentList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.DocumentList::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -221,14 +265,14 @@ class Database(private val client: Client) : BaseService(client) {
      * integration](/docs/server/database#databaseCreateCollection) API or
      * directly from your database console.
      *
-     * @param collectionId
-     * @param data
-     * @param read
-     * @param write
-     * @param parentDocument
-     * @param parentProperty
-     * @param parentPropertyType
-     * @return [Response]     
+     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param data Document data as JSON object.
+     * @param read An array of strings with read permissions. By default only the current user is granted with read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param write An array of strings with write permissions. By default only the current user is granted with write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param parentDocument Parent document unique ID. Use when you want your new document to be a child of a parent document.
+     * @param parentProperty Parent document property name. Use when you want your new document to be a child of a parent document.
+     * @param parentPropertyType Parent document property connection type. You can set this value to **assign**, **append** or **prepend**, default value is assign. Use when you want your new document to be a child of a parent document.
+     * @return [io.appwrite.models.Document]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -240,7 +284,7 @@ class Database(private val client: Client) : BaseService(client) {
 		parentDocument: String? = null,
 		parentProperty: String? = null,
 		parentPropertyType: String? = null
-	): Response {
+	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
             "data" to data,
@@ -250,12 +294,20 @@ class Database(private val client: Client) : BaseService(client) {
             "parentProperty" to parentProperty,
             "parentPropertyType" to parentPropertyType
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("POST", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
+            io.appwrite.models.Document.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Document::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -264,25 +316,33 @@ class Database(private val client: Client) : BaseService(client) {
      * Get a document by its unique ID. This endpoint response returns a JSON
      * object with the document data.
      *
-     * @param collectionId
-     * @param documentId
-     * @return [Response]     
+     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param documentId Document unique ID.
+     * @return [io.appwrite.models.Document]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getDocument(
 		collectionId: String,
 		documentId: String
-	): Response {
+	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("GET", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
+            io.appwrite.models.Document.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Document::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -291,12 +351,12 @@ class Database(private val client: Client) : BaseService(client) {
      * Update a document by its unique ID. Using the patch method you can pass
      * only specific fields that will get updated.
      *
-     * @param collectionId
-     * @param documentId
-     * @param data
-     * @param read
-     * @param write
-     * @return [Response]     
+     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param documentId Document unique ID.
+     * @param data Document data as JSON object.
+     * @param read An array of strings with read permissions. By default inherits the existing read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param write An array of strings with write permissions. By default inherits the existing write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @return [io.appwrite.models.Document]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -306,19 +366,27 @@ class Database(private val client: Client) : BaseService(client) {
 		data: Any,
 		read: List<Any>? = null,
 		write: List<Any>? = null
-	): Response {
+	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
         val params = mapOf<String, Any?>(
             "data" to data,
             "read" to read,
             "write" to write
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("PATCH", path, headers, params)
+        val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
+            io.appwrite.models.Document.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Document::class.java,
+            convert = convert
+        )
     }
     
     /**
@@ -328,25 +396,29 @@ class Database(private val client: Client) : BaseService(client) {
      * documents, its attributes and relations to other documents. Child documents
      * **will not** be deleted.
      *
-     * @param collectionId
-     * @param documentId
-     * @return [Response]     
+     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param documentId Document unique ID.
+     * @return [Any]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteDocument(
 		collectionId: String,
 		documentId: String
-	): Response {
+	): Any {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
         val params = mapOf<String, Any?>(
         )
-
         val headers = mapOf(
             "content-type" to "application/json"
         )
-
-        return client.call("DELETE", path, headers, params)
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
     }
     
 }
