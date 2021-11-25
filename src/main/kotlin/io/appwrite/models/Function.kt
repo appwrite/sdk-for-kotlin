@@ -3,7 +3,7 @@ package io.appwrite.models
 /// Function
 data class Function(
     val id: String,
-    val permissions: Permissions,
+    val execute: List<Any>,
     val name: String,
     val dateCreated: Long,
     val dateUpdated: Long,
@@ -20,7 +20,7 @@ data class Function(
     companion object {
         fun from(map: Map<String, Any>) = Function(
             id = map["\$id"] as String,
-            permissions = Permissions.from(map = map["\$permissions"] as Map<String, Any>),
+            execute = map["execute"] as List<Any>,
             name = map["name"] as String,
             dateCreated = map["dateCreated"] as Long,
             dateUpdated = map["dateUpdated"] as Long,
@@ -38,7 +38,7 @@ data class Function(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
-        "\$permissions" to permissions.toMap() as Any,
+        "execute" to execute as Any,
         "name" to name as Any,
         "dateCreated" to dateCreated as Any,
         "dateUpdated" to dateUpdated as Any,

@@ -113,13 +113,20 @@ class Account(client: Client) : Service(client) {
      * Get currently logged in user list of latest security activity logs. Each
      * log returns user IP address, location and date and time of log.
      *
+     * @param limit Maximum number of logs to return in response.  Use this value to manage pagination. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this param to manage pagination.
      * @return [io.appwrite.models.LogList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getLogs(): io.appwrite.models.LogList {
+    suspend fun getLogs(
+		limit: Long? = null,
+		offset: Long? = null
+	): io.appwrite.models.LogList {
         val path = "/account/logs"
         val params = mapOf<String, Any?>(
+            "limit" to limit,
+            "offset" to offset
         )
         val headers = mapOf(
             "content-type" to "application/json"

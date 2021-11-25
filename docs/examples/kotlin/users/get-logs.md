@@ -9,7 +9,7 @@ suspend fun main() {
 
     val users = Users(client)
     val response = users.getLogs(
-        userId = "[USER_ID]"
+        userId = "[USER_ID]",
     )
     val json = response.body?.string()
 }

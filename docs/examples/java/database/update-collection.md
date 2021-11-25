@@ -11,6 +11,7 @@ public void main() {
     database.updateCollection(
         collectionId = "[COLLECTION_ID]",
         name = "[NAME]",
+        permission = "document",
         new Continuation<Response>() {
             @NotNull
             @Override

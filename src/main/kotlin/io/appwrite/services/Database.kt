@@ -19,6 +19,8 @@ class Database(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param cursor ID of the collection used as the starting point for the query, excluding the collection itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.CollectionList]     
      */
@@ -28,6 +30,8 @@ class Database(client: Client) : Service(client) {
 		search: String? = null,
 		limit: Long? = null,
 		offset: Long? = null,
+		cursor: String? = null,
+		cursorDirection: String? = null,
 		orderType: String? = null
 	): io.appwrite.models.CollectionList {
         val path = "/database/collections"
@@ -35,6 +39,8 @@ class Database(client: Client) : Service(client) {
             "search" to search,
             "limit" to limit,
             "offset" to offset,
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
         val headers = mapOf(
@@ -58,26 +64,29 @@ class Database(client: Client) : Service(client) {
      *
      * Create a new Collection.
      *
+     * @param collectionId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param name Collection name. Max length: 128 chars.
+     * @param permission Permissions type model to use for reading documents in this collection. You can use collection-level permission set once on the collection using the `read` and `write` params, or you can set document-level permission where each document read and write params will decide who has access to read and write to each document individually. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param read An array of strings with read permissions. By default no user is granted with any read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param write An array of strings with write permissions. By default no user is granted with any write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
-     * @param rules Array of [rule objects](/docs/rules). Each rule define a collection field name, data type and validation.
      * @return [io.appwrite.models.Collection]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createCollection(
+		collectionId: String,
 		name: String,
+		permission: String,
 		read: List<Any>,
-		write: List<Any>,
-		rules: List<Any>
+		write: List<Any>
 	): io.appwrite.models.Collection {
         val path = "/database/collections"
         val params = mapOf<String, Any?>(
+            "collectionId" to collectionId,
             "name" to name,
+            "permission" to permission,
             "read" to read,
-            "write" to write,
-            "rules" to rules
+            "write" to write
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -135,9 +144,9 @@ class Database(client: Client) : Service(client) {
      *
      * @param collectionId Collection unique ID.
      * @param name Collection name. Max length: 128 chars.
+     * @param permission Permissions type model to use for reading documents in this collection. You can use collection-level permission set once on the collection using the `read` and `write` params, or you can set document-level permission where each document read and write params will decide who has access to read and write to each document individually. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param read An array of strings with read permissions. By default inherits the existing read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param write An array of strings with write permissions. By default inherits the existing write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
-     * @param rules Array of [rule objects](/docs/rules). Each rule define a collection field name, data type and validation.
      * @return [io.appwrite.models.Collection]     
      */
     @JvmOverloads
@@ -145,16 +154,16 @@ class Database(client: Client) : Service(client) {
     suspend fun updateCollection(
 		collectionId: String,
 		name: String,
+		permission: String,
 		read: List<Any>? = null,
-		write: List<Any>? = null,
-		rules: List<Any>? = null
+		write: List<Any>? = null
 	): io.appwrite.models.Collection {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
             "name" to name,
+            "permission" to permission,
             "read" to read,
-            "write" to write,
-            "rules" to rules
+            "write" to write
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -202,6 +211,469 @@ class Database(client: Client) : Service(client) {
     }
     
     /**
+     * List Attributes
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @return [io.appwrite.models.AttributeList]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listAttributes(
+		collectionId: String
+	): io.appwrite.models.AttributeList {
+        val path = "/database/collections/{collectionId}/attributes".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeList = {
+            io.appwrite.models.AttributeList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeList::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Boolean Attribute
+     *
+     * Create a boolean attribute.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeBoolean]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBooleanAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		default: Boolean? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeBoolean {
+        val path = "/database/collections/{collectionId}/attributes/boolean".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeBoolean = {
+            io.appwrite.models.AttributeBoolean.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeBoolean::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Email Attribute
+     *
+     * Create an email attribute.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeEmail]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createEmailAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeEmail {
+        val path = "/database/collections/{collectionId}/attributes/email".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeEmail = {
+            io.appwrite.models.AttributeEmail.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeEmail::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Enum Attribute
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeEnum]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createEnumAttribute(
+		collectionId: String,
+		attributeId: String,
+		elements: List<Any>,
+		required: Boolean,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeEnum {
+        val path = "/database/collections/{collectionId}/attributes/enum".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "elements" to elements,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeEnum = {
+            io.appwrite.models.AttributeEnum.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeEnum::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Float Attribute
+     *
+     * Create a float attribute. Optionally, minimum and maximum values can be
+     * provided.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param min Minimum value to enforce on new documents
+     * @param max Maximum value to enforce on new documents
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeFloat]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createFloatAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		min: String? = null,
+		max: String? = null,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeFloat {
+        val path = "/database/collections/{collectionId}/attributes/float".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeFloat = {
+            io.appwrite.models.AttributeFloat.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeFloat::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Integer Attribute
+     *
+     * Create an integer attribute. Optionally, minimum and maximum values can be
+     * provided.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param min Minimum value to enforce on new documents
+     * @param max Maximum value to enforce on new documents
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeInteger]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIntegerAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		min: Long? = null,
+		max: Long? = null,
+		default: Long? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeInteger {
+        val path = "/database/collections/{collectionId}/attributes/integer".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeInteger = {
+            io.appwrite.models.AttributeInteger.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeInteger::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create IP Address Attribute
+     *
+     * Create IP address attribute.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeIp]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIpAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeIp {
+        val path = "/database/collections/{collectionId}/attributes/ip".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeIp = {
+            io.appwrite.models.AttributeIp.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeIp::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create String Attribute
+     *
+     * Create a new string attribute.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param size Attribute size for text attributes, in number of characters.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeString]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createStringAttribute(
+		collectionId: String,
+		attributeId: String,
+		size: Long,
+		required: Boolean,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeString {
+        val path = "/database/collections/{collectionId}/attributes/string".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "size" to size,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeString = {
+            io.appwrite.models.AttributeString.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeString::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create URL Attribute
+     *
+     * Create a URL attribute.
+     * 
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeUrl]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createUrlAttribute(
+		collectionId: String,
+		attributeId: String,
+		required: Boolean,
+		default: String? = null,
+		array: Boolean? = null
+	): io.appwrite.models.AttributeUrl {
+        val path = "/database/collections/{collectionId}/attributes/url".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "attributeId" to attributeId,
+            "required" to required,
+            "default" to default,
+            "array" to array
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.AttributeUrl = {
+            io.appwrite.models.AttributeUrl.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.AttributeUrl::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Get Attribute
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @return [Any]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getAttribute(
+		collectionId: String,
+		attributeId: String
+	): Any {
+        val path = "/database/collections/{collectionId}/attributes/{attributeId}".replace("{collectionId}", collectionId).replace("{attributeId}", attributeId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
+    }
+    
+    /**
+     * Delete Attribute
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param attributeId Attribute ID.
+     * @return [Any]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun deleteAttribute(
+		collectionId: String,
+		attributeId: String
+	): Any {
+        val path = "/database/collections/{collectionId}/attributes/{attributeId}".replace("{collectionId}", collectionId).replace("{attributeId}", attributeId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
+    }
+    
+    /**
      * List Documents
      *
      * Get a list of all the user documents. You can use the query params to
@@ -209,37 +681,37 @@ class Database(client: Client) : Service(client) {
      * of the project's documents. [Learn more about different API
      * modes](/docs/admin).
      *
-     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
-     * @param filters Array of filter strings. Each filter is constructed from a key name, comparison operator (=, !=, &gt;, &lt;, &lt;=, &gt;=) and a value. You can also use a dot (.) separator in attribute names to filter by child document attributes. Examples: &#039;name=John Doe&#039; or &#039;category.$id&gt;=5bed2d152c362&#039;.
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param queries Array of query strings.
      * @param limit Maximum number of documents to return in response.  Use this value to manage pagination. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Offset value. The default value is 0. Use this param to manage pagination.
-     * @param orderField Document field that results will be sorted by.
-     * @param orderType Order direction. Possible values are DESC for descending order, or ASC for ascending order.
-     * @param orderCast Order field type casting. Possible values are int, string, date, time or datetime. The database will attempt to cast the order field to the value you pass here. The default value is a string.
-     * @param search Search query. Enter any free text search. The database will try to find a match against all document attributes and children. Max length: 256 chars.
+     * @param cursor ID of the document used as the starting point for the query, excluding the document itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
+     * @param orderAttributes Array of attributes used to sort results.
+     * @param orderTypes Array of order directions for sorting attribtues. Possible values are DESC for descending order, or ASC for ascending order.
      * @return [io.appwrite.models.DocumentList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listDocuments(
 		collectionId: String,
-		filters: List<Any>? = null,
+		queries: List<Any>? = null,
 		limit: Long? = null,
 		offset: Long? = null,
-		orderField: String? = null,
-		orderType: String? = null,
-		orderCast: String? = null,
-		search: String? = null
+		cursor: String? = null,
+		cursorDirection: String? = null,
+		orderAttributes: List<Any>? = null,
+		orderTypes: List<Any>? = null
 	): io.appwrite.models.DocumentList {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
-            "filters" to filters,
+            "queries" to queries,
             "limit" to limit,
             "offset" to offset,
-            "orderField" to orderField,
-            "orderType" to orderType,
-            "orderCast" to orderCast,
-            "search" to search
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection,
+            "orderAttributes" to orderAttributes,
+            "orderTypes" to orderTypes
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -266,33 +738,27 @@ class Database(client: Client) : Service(client) {
      * directly from your database console.
      *
      * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param documentId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
      * @param read An array of strings with read permissions. By default only the current user is granted with read permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param write An array of strings with write permissions. By default only the current user is granted with write permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
-     * @param parentDocument Parent document unique ID. Use when you want your new document to be a child of a parent document.
-     * @param parentProperty Parent document property name. Use when you want your new document to be a child of a parent document.
-     * @param parentPropertyType Parent document property connection type. You can set this value to **assign**, **append** or **prepend**, default value is assign. Use when you want your new document to be a child of a parent document.
      * @return [io.appwrite.models.Document]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createDocument(
 		collectionId: String,
+		documentId: String,
 		data: Any,
 		read: List<Any>? = null,
-		write: List<Any>? = null,
-		parentDocument: String? = null,
-		parentProperty: String? = null,
-		parentPropertyType: String? = null
+		write: List<Any>? = null
 	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
         val params = mapOf<String, Any?>(
+            "documentId" to documentId,
             "data" to data,
             "read" to read,
-            "write" to write,
-            "parentDocument" to parentDocument,
-            "parentProperty" to parentProperty,
-            "parentPropertyType" to parentPropertyType
+            "write" to write
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -316,7 +782,7 @@ class Database(client: Client) : Service(client) {
      * Get a document by its unique ID. This endpoint response returns a JSON
      * object with the document data.
      *
-     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
      * @param documentId Document unique ID.
      * @return [io.appwrite.models.Document]     
      */
@@ -396,7 +862,7 @@ class Database(client: Client) : Service(client) {
      * documents, its attributes and relations to other documents. Child documents
      * **will not** be deleted.
      *
-     * @param collectionId Collection unique ID. You can create a new collection with validation rules using the Database service [server integration](/docs/server/database#createCollection).
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
      * @param documentId Document unique ID.
      * @return [Any]     
      */
@@ -407,6 +873,138 @@ class Database(client: Client) : Service(client) {
 		documentId: String
 	): Any {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        return client.call(
+            "DELETE",
+            path,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
+    }
+    
+    /**
+     * List Indexes
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @return [io.appwrite.models.IndexList]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listIndexes(
+		collectionId: String
+	): io.appwrite.models.IndexList {
+        val path = "/database/collections/{collectionId}/indexes".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.IndexList = {
+            io.appwrite.models.IndexList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.IndexList::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Create Index
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param indexId Index ID.
+     * @param type Index type.
+     * @param attributes Array of attributes to index.
+     * @param orders Array of index orders.
+     * @return [io.appwrite.models.Index]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIndex(
+		collectionId: String,
+		indexId: String,
+		type: String,
+		attributes: List<Any>,
+		orders: List<Any>? = null
+	): io.appwrite.models.Index {
+        val path = "/database/collections/{collectionId}/indexes".replace("{collectionId}", collectionId)
+        val params = mapOf<String, Any?>(
+            "indexId" to indexId,
+            "type" to type,
+            "attributes" to attributes,
+            "orders" to orders
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.Index = {
+            io.appwrite.models.Index.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Index::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Get Index
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param indexId Index ID.
+     * @return [io.appwrite.models.Index]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getIndex(
+		collectionId: String,
+		indexId: String
+	): io.appwrite.models.Index {
+        val path = "/database/collections/{collectionId}/indexes/{indexId}".replace("{collectionId}", collectionId).replace("{indexId}", indexId)
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.Index = {
+            io.appwrite.models.Index.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Index::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
+     * Delete Index
+     *
+     * @param collectionId Collection unique ID. You can create a new collection using the Database service [server integration](/docs/server/database#createCollection).
+     * @param indexId Index ID.
+     * @return [Any]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun deleteIndex(
+		collectionId: String,
+		indexId: String
+	): Any {
+        val path = "/database/collections/{collectionId}/indexes/{indexId}".replace("{collectionId}", collectionId).replace("{indexId}", indexId)
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(

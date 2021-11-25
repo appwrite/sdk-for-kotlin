@@ -17,6 +17,8 @@ class Functions(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param cursor ID of the function used as the starting point for the query, excluding the function itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.FunctionList]     
      */
@@ -26,6 +28,8 @@ class Functions(client: Client) : Service(client) {
 		search: String? = null,
 		limit: Long? = null,
 		offset: Long? = null,
+		cursor: String? = null,
+		cursorDirection: String? = null,
 		orderType: String? = null
 	): io.appwrite.models.FunctionList {
         val path = "/functions"
@@ -33,6 +37,8 @@ class Functions(client: Client) : Service(client) {
             "search" to search,
             "limit" to limit,
             "offset" to offset,
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
         val headers = mapOf(
@@ -58,6 +64,7 @@ class Functions(client: Client) : Service(client) {
      * [permissions](/docs/permissions) to allow different project users or team
      * with access to execute the function using the client API.
      *
+     * @param functionId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param name Function name. Max length: 128 chars.
      * @param execute An array of strings with execution permissions. By default no user is granted with any execute permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
      * @param runtime Execution runtime.
@@ -70,6 +77,7 @@ class Functions(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun create(
+		functionId: String,
 		name: String,
 		execute: List<Any>,
 		runtime: String,
@@ -80,6 +88,7 @@ class Functions(client: Client) : Service(client) {
 	): io.appwrite.models.Function {
         val path = "/functions"
         val params = mapOf<String, Any?>(
+            "functionId" to functionId,
             "name" to name,
             "execute" to execute,
             "runtime" to runtime,
@@ -223,27 +232,30 @@ class Functions(client: Client) : Service(client) {
      * different API modes](/docs/admin).
      *
      * @param functionId Function unique ID.
-     * @param search Search term to filter your list results. Max length: 256 chars.
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
-     * @param orderType Order result by ASC or DESC order.
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param cursor ID of the execution used as the starting point for the query, excluding the execution itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
      * @return [io.appwrite.models.ExecutionList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listExecutions(
 		functionId: String,
-		search: String? = null,
 		limit: Long? = null,
 		offset: Long? = null,
-		orderType: String? = null
+		search: String? = null,
+		cursor: String? = null,
+		cursorDirection: String? = null
 	): io.appwrite.models.ExecutionList {
         val path = "/functions/{functionId}/executions".replace("{functionId}", functionId)
         val params = mapOf<String, Any?>(
-            "search" to search,
             "limit" to limit,
             "offset" to offset,
-            "orderType" to orderType
+            "search" to search,
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -380,6 +392,8 @@ class Functions(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param cursor ID of the tag used as the starting point for the query, excluding the tag itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.TagList]     
      */
@@ -390,6 +404,8 @@ class Functions(client: Client) : Service(client) {
 		search: String? = null,
 		limit: Long? = null,
 		offset: Long? = null,
+		cursor: String? = null,
+		cursorDirection: String? = null,
 		orderType: String? = null
 	): io.appwrite.models.TagList {
         val path = "/functions/{functionId}/tags".replace("{functionId}", functionId)
@@ -397,6 +413,8 @@ class Functions(client: Client) : Service(client) {
             "search" to search,
             "limit" to limit,
             "offset" to offset,
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
         val headers = mapOf(

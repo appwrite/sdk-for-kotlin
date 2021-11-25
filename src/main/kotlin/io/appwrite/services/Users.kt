@@ -17,6 +17,8 @@ class Users(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param cursor ID of the user used as the starting point for the query, excluding the user itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.UserList]     
      */
@@ -26,6 +28,8 @@ class Users(client: Client) : Service(client) {
 		search: String? = null,
 		limit: Long? = null,
 		offset: Long? = null,
+		cursor: String? = null,
+		cursorDirection: String? = null,
 		orderType: String? = null
 	): io.appwrite.models.UserList {
         val path = "/users"
@@ -33,6 +37,8 @@ class Users(client: Client) : Service(client) {
             "search" to search,
             "limit" to limit,
             "offset" to offset,
+            "cursor" to cursor,
+            "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
         val headers = mapOf(
@@ -56,6 +62,7 @@ class Users(client: Client) : Service(client) {
      *
      * Create a new user.
      *
+     * @param userId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param email User email.
      * @param password User password. Must be between 6 to 32 chars.
      * @param name User name. Max length: 128 chars.
@@ -64,12 +71,14 @@ class Users(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun create(
+		userId: String,
 		email: String,
 		password: String,
 		name: String? = null
 	): io.appwrite.models.User {
         val path = "/users"
         val params = mapOf<String, Any?>(
+            "userId" to userId,
             "email" to email,
             "password" to password,
             "name" to name
@@ -188,18 +197,24 @@ class Users(client: Client) : Service(client) {
     /**
      * Get User Logs
      *
-     * Get a user activity logs list by its unique ID.
+     * Get the user activity logs list by its unique ID.
      *
      * @param userId User unique ID.
+     * @param limit Maximum number of logs to return in response.  Use this value to manage pagination. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this param to manage pagination.
      * @return [io.appwrite.models.LogList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getLogs(
-		userId: String
+		userId: String,
+		limit: Long? = null,
+		offset: Long? = null
 	): io.appwrite.models.LogList {
         val path = "/users/{userId}/logs".replace("{userId}", userId)
         val params = mapOf<String, Any?>(
+            "limit" to limit,
+            "offset" to offset
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -451,14 +466,14 @@ class Users(client: Client) : Service(client) {
      * Update the user status by its unique ID.
      *
      * @param userId User unique ID.
-     * @param status User Status code. To activate the user pass 1, to block the user pass 2 and for disabling the user pass 0
+     * @param status User Status. To activate the user pass `true` and to block the user pass `false`
      * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateStatus(
 		userId: String,
-		status: Long
+		status: Boolean
 	): io.appwrite.models.User {
         val path = "/users/{userId}/status".replace("{userId}", userId)
         val params = mapOf<String, Any?>(

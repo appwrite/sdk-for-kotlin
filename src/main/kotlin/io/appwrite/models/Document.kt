@@ -4,14 +4,16 @@ package io.appwrite.models
 data class Document(
     val id: String,
     val collection: String,
-    val permissions: Permissions,
+    val read: List<Any>,
+    val write: List<Any>,
     val data: Map<String, Any>
 ) {
     companion object {
         fun from(map: Map<String, Any>) = Document(
             id = map["\$id"] as String,
             collection = map["\$collection"] as String,
-            permissions = Permissions.from(map = map["\$permissions"] as Map<String, Any>),
+            read = map["\$read"] as List<Any>,
+            write = map["\$write"] as List<Any>,
             data = map
         )
     }
@@ -19,7 +21,8 @@ data class Document(
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
         "\$collection" to collection as Any,
-        "\$permissions" to permissions.toMap() as Any,
+        "\$read" to read as Any,
+        "\$write" to write as Any,
         "data" to data
     )
 
