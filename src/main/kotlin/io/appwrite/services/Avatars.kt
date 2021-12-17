@@ -1,6 +1,6 @@
 package io.appwrite.services
-
 import io.appwrite.Client
+import io.appwrite.models.*
 import io.appwrite.exceptions.AppwriteException
 import okhttp3.Cookie
 import okhttp3.Response
@@ -8,7 +8,7 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
-class Avatars(private val client: Client) : BaseService(client) {
+class Avatars(client: Client) : Service(client) {
 
     /**
      * Get Browser Icon
@@ -18,20 +18,20 @@ class Avatars(private val client: Client) : BaseService(client) {
      * /account/sessions endpoint. Use width, height and quality arguments to
      * change the output settings.
      *
-     * @param code
-     * @param width
-     * @param height
-     * @param quality
-     * @return [Response]     
+     * @param code Browser Code.
+     * @param width Image width. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param height Image height. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param quality Image quality. Pass an integer between 0 to 100. Defaults to 100.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getBrowser(
 		code: String,
-		width: Int? = null,
-		height: Int? = null,
-		quality: Int? = null
-	): Response {
+		width: Long? = null,
+		height: Long? = null,
+		quality: Long? = null
+	): ByteArray {
         val path = "/avatars/browsers/{code}".replace("{code}", code)
         val params = mapOf<String, Any?>(
             "width" to width,
@@ -40,8 +40,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -51,20 +55,20 @@ class Avatars(private val client: Client) : BaseService(client) {
      * provider you need. Use width, height and quality arguments to change the
      * output settings.
      *
-     * @param code
-     * @param width
-     * @param height
-     * @param quality
-     * @return [Response]     
+     * @param code Credit Card Code. Possible values: amex, argencard, cabal, censosud, diners, discover, elo, hipercard, jcb, mastercard, naranja, targeta-shopping, union-china-pay, visa, mir, maestro.
+     * @param width Image width. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param height Image height. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param quality Image quality. Pass an integer between 0 to 100. Defaults to 100.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getCreditCard(
 		code: String,
-		width: Int? = null,
-		height: Int? = null,
-		quality: Int? = null
-	): Response {
+		width: Long? = null,
+		height: Long? = null,
+		quality: Long? = null
+	): ByteArray {
         val path = "/avatars/credit-cards/{code}".replace("{code}", code)
         val params = mapOf<String, Any?>(
             "width" to width,
@@ -73,8 +77,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -84,22 +92,26 @@ class Avatars(private val client: Client) : BaseService(client) {
      * website URL.
      * 
      *
-     * @param url
-     * @return [Response]     
+     * @param url Website URL which you want to fetch the favicon from.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFavicon(
 		url: String
-	): Response {
+	): ByteArray {
         val path = "/avatars/favicon"
         val params = mapOf<String, Any?>(
             "url" to url,
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -109,20 +121,20 @@ class Avatars(private val client: Client) : BaseService(client) {
      * users. The code argument receives the 2 letter country code. Use width,
      * height and quality arguments to change the output settings.
      *
-     * @param code
-     * @param width
-     * @param height
-     * @param quality
-     * @return [Response]     
+     * @param code Country Code. ISO Alpha-2 country code format.
+     * @param width Image width. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param height Image height. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param quality Image quality. Pass an integer between 0 to 100. Defaults to 100.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFlag(
 		code: String,
-		width: Int? = null,
-		height: Int? = null,
-		quality: Int? = null
-	): Response {
+		width: Long? = null,
+		height: Long? = null,
+		quality: Long? = null
+	): ByteArray {
         val path = "/avatars/flags/{code}".replace("{code}", code)
         val params = mapOf<String, Any?>(
             "width" to width,
@@ -131,8 +143,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -143,18 +159,18 @@ class Avatars(private val client: Client) : BaseService(client) {
      * remote images in your app or in case you want to make sure a 3rd party
      * image is properly served using a TLS protocol.
      *
-     * @param url
-     * @param width
-     * @param height
-     * @return [Response]     
+     * @param url Image URL which you want to crop.
+     * @param width Resize preview image width, Pass an integer between 0 to 2000.
+     * @param height Resize preview image height, Pass an integer between 0 to 2000.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getImage(
 		url: String,
-		width: Int? = null,
-		height: Int? = null
-	): Response {
+		width: Long? = null,
+		height: Long? = null
+	): ByteArray {
         val path = "/avatars/image"
         val params = mapOf<String, Any?>(
             "url" to url,
@@ -163,8 +179,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -181,22 +201,22 @@ class Avatars(private val client: Client) : BaseService(client) {
      * the user's initials when reloading the same theme will always return for
      * the same initials.
      *
-     * @param name
-     * @param width
-     * @param height
-     * @param color
-     * @param background
-     * @return [Response]     
+     * @param name Full Name. When empty, current user name or email will be used. Max length: 128 chars.
+     * @param width Image width. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param height Image height. Pass an integer between 0 to 2000. Defaults to 100.
+     * @param color Changes text color. By default a random color will be picked and stay will persistent to the given name.
+     * @param background Changes background color. By default a random color will be picked and stay will persistent to the given name.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getInitials(
 		name: String? = null,
-		width: Int? = null,
-		height: Int? = null,
+		width: Long? = null,
+		height: Long? = null,
 		color: String? = null,
 		background: String? = null
-	): Response {
+	): ByteArray {
         val path = "/avatars/initials"
         val params = mapOf<String, Any?>(
             "name" to name,
@@ -207,8 +227,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
     /**
@@ -217,20 +241,20 @@ class Avatars(private val client: Client) : BaseService(client) {
      * Converts a given plain text to a QR code image. You can use the query
      * parameters to change the size and style of the resulting image.
      *
-     * @param text
-     * @param size
-     * @param margin
-     * @param download
-     * @return [Response]     
+     * @param text Plain text to be converted to QR code image.
+     * @param size QR code size. Pass an integer between 0 to 1000. Defaults to 400.
+     * @param margin Margin from edge. Pass an integer between 0 to 10. Defaults to 1.
+     * @param download Return resulting image with &#039;Content-Disposition: attachment &#039; headers for the browser to start downloading it. Pass 0 for no header, or 1 for otherwise. Default value is set to 0.
+     * @return [ByteArray]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getQR(
 		text: String,
-		size: Int? = null,
-		margin: Int? = null,
+		size: Long? = null,
+		margin: Long? = null,
 		download: Boolean? = null
-	): Response {
+	): ByteArray {
         val path = "/avatars/qr"
         val params = mapOf<String, Any?>(
             "text" to text,
@@ -240,8 +264,12 @@ class Avatars(private val client: Client) : BaseService(client) {
             "project" to client.config["project"],
             "key" to client.config["key"]
         )
-
-        return client.call("GET", path, params = params)
+        return client.call(
+            "GET",
+            path,
+            params = params,
+            responseType = ByteArray::class.java
+        )
     }
     
 }
