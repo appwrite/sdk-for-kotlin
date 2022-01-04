@@ -8,26 +8,28 @@ public void main() {
         .setJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ..."); // Your secret JSON Web Token
 
     Account account = new Account(client);
-    account.getLogs(new Continuation<Response>() {
-        @NotNull
-        @Override
-        public CoroutineContext getContext() {
-            return EmptyCoroutineContext.INSTANCE;
-        }
+    account.getLogs(
+        new Continuation<Response>() {
+            @NotNull
+            @Override
+            public CoroutineContext getContext() {
+                return EmptyCoroutineContext.INSTANCE;
+            }
 
-        @Override
-        public void resumeWith(@NotNull Object o) {
-            String json = "";
-            try {
-                if (o instanceof Result.Failure) {
-                    Result.Failure failure = (Result.Failure) o;
-                    throw failure.exception;
-                } else {
-                    Response response = (Response) o;
+            @Override
+            public void resumeWith(@NotNull Object o) {
+                String json = "";
+                try {
+                    if (o instanceof Result.Failure) {
+                        Result.Failure failure = (Result.Failure) o;
+                        throw failure.exception;
+                    } else {
+                        Response response = (Response) o;
+                    }
+                } catch (Throwable th) {
+                    Log.e("ERROR", th.toString());
                 }
-            } catch (Throwable th) {
-                Log.e("ERROR", th.toString());
             }
         }
-    });
+    );
 }

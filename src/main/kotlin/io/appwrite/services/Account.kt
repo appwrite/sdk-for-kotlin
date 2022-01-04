@@ -70,14 +70,16 @@ class Account(client: Client) : Service(client) {
      * Update Account Email
      *
      * Update currently logged in user account email address. After changing user
-     * address, user confirmation status is being reset and a new confirmation
-     * mail is sent. For security measures, user password is required to complete
-     * this request.
+     * address, the user confirmation status will get reset. A new confirmation
+     * email is not sent automatically however you can use the send confirmation
+     * email endpoint again to send the confirmation email. For security measures,
+     * user password is required to complete this request.
      * This endpoint can also be used to convert an anonymous account to a normal
      * one, by passing an email address and a new password.
+     * 
      *
      * @param email User email.
-     * @param password User password. Must be between 6 to 32 chars.
+     * @param password User password. Must be at least 8 chars.
      * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
@@ -113,13 +115,20 @@ class Account(client: Client) : Service(client) {
      * Get currently logged in user list of latest security activity logs. Each
      * log returns user IP address, location and date and time of log.
      *
+     * @param limit Maximum number of logs to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @return [io.appwrite.models.LogList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getLogs(): io.appwrite.models.LogList {
+    suspend fun getLogs(
+		limit: Long? = null,
+		offset: Long? = null
+	): io.appwrite.models.LogList {
         val path = "/account/logs"
         val params = mapOf<String, Any?>(
+            "limit" to limit,
+            "offset" to offset
         )
         val headers = mapOf(
             "content-type" to "application/json"
@@ -177,8 +186,8 @@ class Account(client: Client) : Service(client) {
      * to pass in the new password, and the old password. For users created with
      * OAuth and Team Invites, oldPassword is optional.
      *
-     * @param password New user password. Must be between 6 to 32 chars.
-     * @param oldPassword Old user password. Must be between 6 to 32 chars.
+     * @param password New user password. Must be at least 8 chars.
+     * @param oldPassword Current user password. Must be at least 8 chars.
      * @return [io.appwrite.models.User]     
      */
     @JvmOverloads
@@ -327,10 +336,10 @@ class Account(client: Client) : Service(client) {
      * the only valid redirect URLs are the ones from domains you have set when
      * adding your platforms in the console interface.
      *
-     * @param userId User account UID address.
+     * @param userId User ID.
      * @param secret Valid reset token.
-     * @param password New password. Must be between 6 to 32 chars.
-     * @param passwordAgain New password again. Must be between 6 to 32 chars.
+     * @param password New user password. Must be at least 8 chars.
+     * @param passwordAgain Repeat new user password. Must be at least 8 chars.
      * @return [io.appwrite.models.Token]     
      */
     @JvmOverloads
@@ -426,7 +435,7 @@ class Account(client: Client) : Service(client) {
      * Use this endpoint to get a logged in user's session using a Session ID.
      * Inputting 'current' will return the current session being used.
      *
-     * @param sessionId Session unique ID. Use the string &#039;current&#039; to get the current device session.
+     * @param sessionId Session ID. Use the string &#039;current&#039; to get the current device session.
      * @return [io.appwrite.models.Session]     
      */
     @JvmOverloads
@@ -460,7 +469,7 @@ class Account(client: Client) : Service(client) {
      * account sessions across all of their different devices. When using the
      * option id argument, only the session unique ID provider will be deleted.
      *
-     * @param sessionId Session unique ID. Use the string &#039;current&#039; to delete the current device session.
+     * @param sessionId Session ID. Use the string &#039;current&#039; to delete the current device session.
      * @return [Any]     
      */
     @JvmOverloads
@@ -538,7 +547,7 @@ class Account(client: Client) : Service(client) {
      * to verify the user email ownership. If confirmed this route will return a
      * 200 status code.
      *
-     * @param userId User unique ID.
+     * @param userId User ID.
      * @param secret Valid verification token.
      * @return [io.appwrite.models.Token]     
      */

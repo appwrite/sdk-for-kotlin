@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Health
+import io.appwrite.services.Database
 
 suspend fun main() {
     val client = Client(context)
@@ -7,7 +7,11 @@ suspend fun main() {
       .setProject("5df5acd0d48c2") // Your project ID
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
-    val health = Health(client)
-    val response = health.getAntiVirus()
+    val database = Database(client)
+    val response = database.createBooleanAttribute(
+        collectionId = "[COLLECTION_ID]",
+        key = "",
+        required = false,
+    )
     val json = response.body?.string()
 }

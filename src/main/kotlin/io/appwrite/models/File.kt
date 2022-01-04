@@ -3,7 +3,8 @@ package io.appwrite.models
 /// File
 data class File(
     val id: String,
-    val permissions: Permissions,
+    val read: List<Any>,
+    val write: List<Any>,
     val name: String,
     val dateCreated: Long,
     val signature: String,
@@ -13,7 +14,8 @@ data class File(
     companion object {
         fun from(map: Map<String, Any>) = File(
             id = map["\$id"] as String,
-            permissions = Permissions.from(map = map["\$permissions"] as Map<String, Any>),
+            read = map["\$read"] as List<Any>,
+            write = map["\$write"] as List<Any>,
             name = map["name"] as String,
             dateCreated = map["dateCreated"] as Long,
             signature = map["signature"] as String,
@@ -24,7 +26,8 @@ data class File(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
-        "\$permissions" to permissions.toMap() as Any,
+        "\$read" to read as Any,
+        "\$write" to write as Any,
         "name" to name as Any,
         "dateCreated" to dateCreated as Any,
         "signature" to signature as Any,

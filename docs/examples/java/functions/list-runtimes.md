@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Health
+import io.appwrite.services.Functions
 
 public void main() {
     Client client = Client(context)
@@ -7,8 +7,8 @@ public void main() {
         .setProject("5df5acd0d48c2") // Your project ID
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-    Health health = new Health(client);
-    health.getAntiVirus(new Continuation<Response>() {
+    Functions functions = new Functions(client);
+    functions.listRuntimes(new Continuation<Response>() {
         @NotNull
         @Override
         public CoroutineContext getContext() {

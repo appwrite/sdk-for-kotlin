@@ -9,7 +9,7 @@ public void main() {
 
     Users users = new Users(client);
     users.getLogs(
-        userId = "[USER_ID]"
+        userId = "[USER_ID]",
         new Continuation<Response>() {
             @NotNull
             @Override

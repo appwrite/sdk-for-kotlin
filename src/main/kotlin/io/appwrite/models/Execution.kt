@@ -3,7 +3,7 @@ package io.appwrite.models
 /// Execution
 data class Execution(
     val id: String,
-    val permissions: Permissions,
+    val read: List<Any>,
     val functionId: String,
     val dateCreated: Long,
     val trigger: String,
@@ -16,7 +16,7 @@ data class Execution(
     companion object {
         fun from(map: Map<String, Any>) = Execution(
             id = map["\$id"] as String,
-            permissions = Permissions.from(map = map["\$permissions"] as Map<String, Any>),
+            read = map["\$read"] as List<Any>,
             functionId = map["functionId"] as String,
             dateCreated = map["dateCreated"] as Long,
             trigger = map["trigger"] as String,
@@ -30,7 +30,7 @@ data class Execution(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
-        "\$permissions" to permissions.toMap() as Any,
+        "\$read" to read as Any,
         "functionId" to functionId as Any,
         "dateCreated" to dateCreated as Any,
         "trigger" to trigger as Any,

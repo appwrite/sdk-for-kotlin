@@ -9,6 +9,7 @@ suspend fun main() {
 
     val users = Users(client)
     val response = users.create(
+        userId = "",
         email = "email@example.com",
         password = "password",
     )
