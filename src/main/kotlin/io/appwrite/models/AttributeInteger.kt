@@ -6,10 +6,10 @@ data class AttributeInteger(
     val type: String,
     val status: String,
     val required: Boolean,
-    var array: Boolean? = ,
-    var min: Long? = ,
-    var max: Long? = ,
-    var default: Long? = 
+    var array: Boolean?,
+    var min: Long?,
+    var max: Long?,
+    var default: Long?
 ) {
     companion object {
         fun from(map: Map<String, Any>) = AttributeInteger(

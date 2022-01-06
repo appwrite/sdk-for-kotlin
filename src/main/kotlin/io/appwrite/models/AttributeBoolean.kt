@@ -6,8 +6,8 @@ data class AttributeBoolean(
     val type: String,
     val status: String,
     val required: Boolean,
-    var array: Boolean? = ,
-    var default: Boolean? = 
+    var array: Boolean?,
+    var default: Boolean?
 ) {
     companion object {
         fun from(map: Map<String, Any>) = AttributeBoolean(

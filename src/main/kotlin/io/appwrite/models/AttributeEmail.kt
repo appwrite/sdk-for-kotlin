@@ -6,9 +6,9 @@ data class AttributeEmail(
     val type: String,
     val status: String,
     val required: Boolean,
-    var array: Boolean? = ,
+    var array: Boolean?,
     val format: String,
-    var default: String? = 
+    var default: String?
 ) {
     companion object {
         fun from(map: Map<String, Any>) = AttributeEmail(

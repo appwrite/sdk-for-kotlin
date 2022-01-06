@@ -6,10 +6,10 @@ data class AttributeFloat(
     val type: String,
     val status: String,
     val required: Boolean,
-    var array: Boolean? = ,
-    var min: Double? = ,
-    var max: Double? = ,
-    var default: Double? = 
+    var array: Boolean?,
+    var min: Double?,
+    var max: Double?,
+    var default: Double?
 ) {
     companion object {
         fun from(map: Map<String, Any>) = AttributeFloat(
