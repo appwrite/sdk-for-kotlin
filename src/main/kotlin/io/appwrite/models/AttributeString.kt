@@ -7,7 +7,7 @@ data class AttributeString(
     val status: String,
     val required: Boolean,
     var array: Boolean?,
-    val size: String,
+    val size: Long,
     var default: String?
 ) {
     companion object {
@@ -17,7 +17,7 @@ data class AttributeString(
             status = map["status"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean,
-            size = map["size"] as String,
+            size = map["size"] as Long,
             default = map["default"] as? String
         )
     }

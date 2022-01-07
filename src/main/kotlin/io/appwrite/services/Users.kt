@@ -337,8 +337,9 @@ class Users(client: Client) : Service(client) {
     /**
      * Update User Preferences
      *
-     * Update the user preferences by its unique ID. You can pass only the
-     * specific settings you wish to update.
+     * Update the user preferences by its unique ID. The object you pass is stored
+     * as is, and replaces any previous value. The maximum allowed prefs size is
+     * 64kB and throws error if exceeded.
      *
      * @param userId User ID.
      * @param prefs Prefs key-value JSON object.
