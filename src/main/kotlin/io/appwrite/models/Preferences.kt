@@ -1,10 +1,13 @@
 package io.appwrite.models
 
-/// Preferences
+/**
+ * Preferences
+ */
 data class Preferences(
     val data: Map<String, Any>
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Preferences(
             data = map
         )

@@ -15,9 +15,9 @@ class Functions(client: Client) : Service(client) {
      * filter your results.
      *
      * @param search Search term to filter your list results. Max length: 256 chars.
-     * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
-     * @param offset Results offset. The default value is 0. Use this param to manage pagination.
-     * @param cursor ID of the function used as the starting point for the query, excluding the function itself. Should be used for efficient pagination when working with large sets of data.
+     * @param limit Maximum number of functions to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
+     * @param cursor ID of the function used as the starting point for the query, excluding the function itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.FunctionList]     
@@ -64,11 +64,11 @@ class Functions(client: Client) : Service(client) {
      * [permissions](/docs/permissions) to allow different project users or team
      * with access to execute the function using the client API.
      *
-     * @param functionId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param functionId Function ID. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param name Function name. Max length: 128 chars.
-     * @param execute An array of strings with execution permissions. By default no user is granted with any execute permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
+     * @param execute An array of strings with execution permissions. By default no user is granted with any execute permissions. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
      * @param runtime Execution runtime.
-     * @param vars Key-value JSON object.
+     * @param vars Key-value JSON object that will be passed to the function as environment variables.
      * @param events Events list.
      * @param schedule Schedule CRON syntax.
      * @param timeout Function maximum execution time in seconds.
@@ -114,11 +114,40 @@ class Functions(client: Client) : Service(client) {
     }
     
     /**
+     * List the currently active function runtimes.
+     *
+     * Get a list of all runtimes that are currently active in your project.
+     *
+     * @return [io.appwrite.models.RuntimeList]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listRuntimes(): io.appwrite.models.RuntimeList {
+        val path = "/functions/runtimes"
+        val params = mapOf<String, Any?>(
+        )
+        val headers = mapOf(
+            "content-type" to "application/json"
+        )
+        val convert: (Map<String, Any>) -> io.appwrite.models.RuntimeList = {
+            io.appwrite.models.RuntimeList.from(map = it)
+        }
+        return client.call(
+            "GET",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.RuntimeList::class.java,
+            convert = convert
+        )
+    }
+    
+    /**
      * Get Function
      *
      * Get a function by its unique ID.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @return [io.appwrite.models.Function]     
      */
     @JvmOverloads
@@ -150,13 +179,13 @@ class Functions(client: Client) : Service(client) {
      *
      * Update function by its unique ID.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @param name Function name. Max length: 128 chars.
-     * @param execute An array of strings with execution permissions. By default no user is granted with any execute permissions. [learn more about permissions](/docs/permissions) and get a full list of available permissions.
-     * @param vars Key-value JSON object.
+     * @param execute An array of strings with execution permissions. By default no user is granted with any execute permissions. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
+     * @param vars Key-value JSON object that will be passed to the function as environment variables.
      * @param events Events list.
      * @param schedule Schedule CRON syntax.
-     * @param timeout Function maximum execution time in seconds.
+     * @param timeout Maximum execution time in seconds.
      * @return [io.appwrite.models.Function]     
      */
     @JvmOverloads
@@ -200,7 +229,7 @@ class Functions(client: Client) : Service(client) {
      *
      * Delete a function by its unique ID.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @return [Any]     
      */
     @JvmOverloads
@@ -231,11 +260,11 @@ class Functions(client: Client) : Service(client) {
      * return a list of all of the project's executions. [Learn more about
      * different API modes](/docs/admin).
      *
-     * @param functionId Function unique ID.
-     * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
-     * @param offset Results offset. The default value is 0. Use this param to manage pagination.
+     * @param functionId Function ID.
+     * @param limit Maximum number of executions to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param search Search term to filter your list results. Max length: 256 chars.
-     * @param cursor ID of the execution used as the starting point for the query, excluding the execution itself. Should be used for efficient pagination when working with large sets of data.
+     * @param cursor ID of the execution used as the starting point for the query, excluding the execution itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursorDirection Direction of the cursor.
      * @return [io.appwrite.models.ExecutionList]     
      */
@@ -281,7 +310,7 @@ class Functions(client: Client) : Service(client) {
      * updates on the current execution status. Once this endpoint is called, your
      * function execution process will start asynchronously.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @param data String of custom data to send to function.
      * @return [io.appwrite.models.Execution]     
      */
@@ -316,8 +345,8 @@ class Functions(client: Client) : Service(client) {
      *
      * Get a function execution log by its unique ID.
      *
-     * @param functionId Function unique ID.
-     * @param executionId Execution unique ID.
+     * @param functionId Function ID.
+     * @param executionId Execution ID.
      * @return [io.appwrite.models.Execution]     
      */
     @JvmOverloads
@@ -352,8 +381,8 @@ class Functions(client: Client) : Service(client) {
      * endpoint to switch the code tag that should be executed by the execution
      * endpoint.
      *
-     * @param functionId Function unique ID.
-     * @param tag Tag unique ID.
+     * @param functionId Function ID.
+     * @param tag Tag ID.
      * @return [io.appwrite.models.Function]     
      */
     @JvmOverloads
@@ -388,11 +417,11 @@ class Functions(client: Client) : Service(client) {
      * Get a list of all the project's code tags. You can use the query params to
      * filter your results.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @param search Search term to filter your list results. Max length: 256 chars.
-     * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
-     * @param offset Results offset. The default value is 0. Use this param to manage pagination.
-     * @param cursor ID of the tag used as the starting point for the query, excluding the tag itself. Should be used for efficient pagination when working with large sets of data.
+     * @param limit Maximum number of tags to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
+     * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
+     * @param cursor ID of the tag used as the starting point for the query, excluding the tag itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursorDirection Direction of the cursor.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.TagList]     
@@ -447,7 +476,7 @@ class Functions(client: Client) : Service(client) {
      * 
      * Use the "command" param to set the entry point used to execute your code.
      *
-     * @param functionId Function unique ID.
+     * @param functionId Function ID.
      * @param command Code execution command.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
      * @return [io.appwrite.models.Tag]     
@@ -485,8 +514,8 @@ class Functions(client: Client) : Service(client) {
      *
      * Get a code tag by its unique ID.
      *
-     * @param functionId Function unique ID.
-     * @param tagId Tag unique ID.
+     * @param functionId Function ID.
+     * @param tagId Tag ID.
      * @return [io.appwrite.models.Tag]     
      */
     @JvmOverloads
@@ -519,8 +548,8 @@ class Functions(client: Client) : Service(client) {
      *
      * Delete a code tag by its unique ID.
      *
-     * @param functionId Function unique ID.
-     * @param tagId Tag unique ID.
+     * @param functionId Function ID.
+     * @param tagId Tag ID.
      * @return [Any]     
      */
     @JvmOverloads

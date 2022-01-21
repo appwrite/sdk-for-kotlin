@@ -55,8 +55,8 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "x-sdk-version" to "appwrite:kotlin:0.2.0-SNAPSHOT",            
-            "x-appwrite-response-format" to "0.11.0"
+            "x-sdk-version" to "appwrite:kotlin:0.2.4-SNAPSHOT",            
+            "x-appwrite-response-format" to "0.12.0"
         )
         config = mutableMapOf()
 
@@ -321,8 +321,17 @@ class Client @JvmOverloads constructor(
                         .charStream()
                         .buffered()
                         .use(BufferedReader::readText)
+                        
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
-                        body.fromJson()
+                        val map = gson.fromJson<Map<String, Any>>(
+                            body,
+                            object : TypeToken<Map<String, Any>>(){}.type
+                        )
+                        AppwriteException(
+                            map["message"] as? String ?: "", 
+                            (map["code"] as Number).toInt(), 
+                            body
+                        )
                     } else {
                         AppwriteException(body, response.code)
                     }

@@ -1,38 +1,110 @@
 package io.appwrite.models
 
-/// Function
+/**
+ * Function
+ */
 data class Function(
+    /**
+     * Function ID.
+     *
+     */
     val id: String,
-    val execute: List<Any>,
+
+    /**
+     * Execution permissions.
+     *
+     */
+    val execute: String,
+
+    /**
+     * Function name.
+     *
+     */
     val name: String,
+
+    /**
+     * Function creation date in Unix timestamp.
+     *
+     */
     val dateCreated: Long,
+
+    /**
+     * Function update date in Unix timestamp.
+     *
+     */
     val dateUpdated: Long,
+
+    /**
+     * Function status. Possible values: `disabled`, `enabled`
+     *
+     */
     val status: String,
+
+    /**
+     * Function execution runtime.
+     *
+     */
     val runtime: String,
+
+    /**
+     * Function active tag ID.
+     *
+     */
     val tag: String,
+
+    /**
+     * Function environment variables.
+     *
+     */
     val vars: String,
+
+    /**
+     * Function trigger events.
+     *
+     */
     val events: List<Any>,
+
+    /**
+     * Function execution schedult in CRON format.
+     *
+     */
     val schedule: String,
+
+    /**
+     * Function next scheduled execution date in Unix timestamp.
+     *
+     */
     val scheduleNext: Long,
+
+    /**
+     * Function next scheduled execution date in Unix timestamp.
+     *
+     */
     val schedulePrevious: Long,
+
+    /**
+     * Function execution timeout in seconds.
+     *
+     */
     val timeout: Long
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Function(
             id = map["\$id"] as String,
-            execute = map["execute"] as List<Any>,
+            execute = map["execute"] as String,
             name = map["name"] as String,
-            dateCreated = map["dateCreated"] as Long,
-            dateUpdated = map["dateUpdated"] as Long,
+            dateCreated = (map["dateCreated"] as Number).toLong(),
+            dateUpdated = (map["dateUpdated"] as Number).toLong(),
             status = map["status"] as String,
             runtime = map["runtime"] as String,
             tag = map["tag"] as String,
             vars = map["vars"] as String,
             events = map["events"] as List<Any>,
             schedule = map["schedule"] as String,
-            scheduleNext = map["scheduleNext"] as Long,
-            schedulePrevious = map["schedulePrevious"] as Long,
-            timeout = map["timeout"] as Long
+            scheduleNext = (map["scheduleNext"] as Number).toLong(),
+            schedulePrevious = (map["schedulePrevious"] as Number).toLong(),
+            timeout = (map["timeout"] as Number).toLong()
         )
     }
 

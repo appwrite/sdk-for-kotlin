@@ -1,9 +1,9 @@
 package io.appwrite.models
 
 /**
- * Collections List
+ * Runtimes List
  */
-data class CollectionList(
+data class RuntimeList(
     /**
      * Total number of items available on the server.
      *
@@ -11,21 +11,21 @@ data class CollectionList(
     val sum: Long,
 
     /**
-     * List of collections.
+     * List of runtimes.
      *
      */
-    val collections: List<Collection>
+    val runtimes: List<Runtime>
 ) {
     companion object {
         @Suppress("UNCHECKED_CAST")
-        fun from(map: Map<String, Any>) = CollectionList(
+        fun from(map: Map<String, Any>) = RuntimeList(
             sum = (map["sum"] as Number).toLong(),
-            collections = (map["collections"] as List<Map<String, Any>>).map { Collection.from(map = it) }
+            runtimes = (map["runtimes"] as List<Map<String, Any>>).map { Runtime.from(map = it) }
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
         "sum" to sum as Any,
-        "collections" to collections.map { it.toMap() } as Any
+        "runtimes" to runtimes.map { it.toMap() } as Any
     )
 }

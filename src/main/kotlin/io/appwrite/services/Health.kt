@@ -13,48 +13,56 @@ class Health(client: Client) : Service(client) {
      *
      * Check the Appwrite HTTP server is up and responsive.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthStatus]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun get(): Any {
+    suspend fun get(): io.appwrite.models.HealthStatus {
         val path = "/health"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            convert = convert
         )
     }
     
     /**
-     * Get Anti virus
+     * Get Antivirus
      *
-     * Check the Appwrite Anti Virus server is up and connection is successful.
+     * Check the Appwrite Antivirus server is up and connection is successful.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthAntivirus]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getAntiVirus(): Any {
+    suspend fun getAntivirus(): io.appwrite.models.HealthAntivirus {
         val path = "/health/anti-virus"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthAntivirus = {
+            io.appwrite.models.HealthAntivirus.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthAntivirus::class.java,
+            convert = convert
         )
     }
     
@@ -64,23 +72,27 @@ class Health(client: Client) : Service(client) {
      * Check the Appwrite in-memory cache server is up and connection is
      * successful.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthStatus]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCache(): Any {
+    suspend fun getCache(): io.appwrite.models.HealthStatus {
         val path = "/health/cache"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            convert = convert
         )
     }
     
@@ -89,23 +101,27 @@ class Health(client: Client) : Service(client) {
      *
      * Check the Appwrite database server is up and connection is successful.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthStatus]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getDB(): Any {
+    suspend fun getDB(): io.appwrite.models.HealthStatus {
         val path = "/health/db"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            convert = convert
         )
     }
     
@@ -116,46 +132,54 @@ class Health(client: Client) : Service(client) {
      * [Letsencrypt](https://letsencrypt.org/) in the Appwrite internal queue
      * server.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthQueue]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueCertificates(): Any {
+    suspend fun getQueueCertificates(): io.appwrite.models.HealthQueue {
         val path = "/health/queue/certificates"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            convert = convert
         )
     }
     
     /**
      * Get Functions Queue
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthQueue]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueFunctions(): Any {
+    suspend fun getQueueFunctions(): io.appwrite.models.HealthQueue {
         val path = "/health/queue/functions"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            convert = convert
         )
     }
     
@@ -165,23 +189,27 @@ class Health(client: Client) : Service(client) {
      * Get the number of logs that are waiting to be processed in the Appwrite
      * internal queue server.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthQueue]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueLogs(): Any {
+    suspend fun getQueueLogs(): io.appwrite.models.HealthQueue {
         val path = "/health/queue/logs"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            convert = convert
         )
     }
     
@@ -191,23 +219,27 @@ class Health(client: Client) : Service(client) {
      * Get the number of usage stats that are waiting to be processed in the
      * Appwrite internal queue server.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthQueue]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueUsage(): Any {
+    suspend fun getQueueUsage(): io.appwrite.models.HealthQueue {
         val path = "/health/queue/usage"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            convert = convert
         )
     }
     
@@ -217,23 +249,27 @@ class Health(client: Client) : Service(client) {
      * Get the number of webhooks that are waiting to be processed in the Appwrite
      * internal queue server.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthQueue]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueWebhooks(): Any {
+    suspend fun getQueueWebhooks(): io.appwrite.models.HealthQueue {
         val path = "/health/queue/webhooks"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            convert = convert
         )
     }
     
@@ -242,23 +278,27 @@ class Health(client: Client) : Service(client) {
      *
      * Check the Appwrite local storage device is up and connection is successful.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthStatus]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getStorageLocal(): Any {
+    suspend fun getStorageLocal(): io.appwrite.models.HealthStatus {
         val path = "/health/storage/local"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            convert = convert
         )
     }
     
@@ -273,23 +313,27 @@ class Health(client: Client) : Service(client) {
      * clocks over the Internet. If your computer sets its own clock, it likely
      * uses NTP.
      *
-     * @return [Any]     
+     * @return [io.appwrite.models.HealthTime]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getTime(): Any {
+    suspend fun getTime(): io.appwrite.models.HealthTime {
         val path = "/health/time"
         val params = mapOf<String, Any?>(
         )
         val headers = mapOf(
             "content-type" to "application/json"
         )
+        val convert: (Map<String, Any>) -> io.appwrite.models.HealthTime = {
+            io.appwrite.models.HealthTime.from(map = it)
+        }
         return client.call(
             "GET",
             path,
             headers,
             params,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.HealthTime::class.java,
+            convert = convert
         )
     }
     

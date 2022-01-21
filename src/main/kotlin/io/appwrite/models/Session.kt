@@ -1,35 +1,147 @@
 package io.appwrite.models
 
-/// Session
+/**
+ * Session
+ */
 data class Session(
+    /**
+     * Session ID.
+     *
+     */
     val id: String,
+
+    /**
+     * User ID.
+     *
+     */
     val userId: String,
+
+    /**
+     * Session expiration date in Unix timestamp.
+     *
+     */
     val expire: Long,
+
+    /**
+     * Session Provider.
+     *
+     */
     val provider: String,
+
+    /**
+     * Session Provider User ID.
+     *
+     */
     val providerUid: String,
+
+    /**
+     * Session Provider Token.
+     *
+     */
     val providerToken: String,
+
+    /**
+     * IP in use when the session was created.
+     *
+     */
     val ip: String,
+
+    /**
+     * Operating system code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/os.json).
+     *
+     */
     val osCode: String,
+
+    /**
+     * Operating system name.
+     *
+     */
     val osName: String,
+
+    /**
+     * Operating system version.
+     *
+     */
     val osVersion: String,
+
+    /**
+     * Client type.
+     *
+     */
     val clientType: String,
+
+    /**
+     * Client code name. View list of [available options](https://github.com/appwrite/appwrite/blob/master/docs/lists/clients.json).
+     *
+     */
     val clientCode: String,
+
+    /**
+     * Client name.
+     *
+     */
     val clientName: String,
+
+    /**
+     * Client version.
+     *
+     */
     val clientVersion: String,
+
+    /**
+     * Client engine name.
+     *
+     */
     val clientEngine: String,
+
+    /**
+     * Client engine name.
+     *
+     */
     val clientEngineVersion: String,
+
+    /**
+     * Device name.
+     *
+     */
     val deviceName: String,
+
+    /**
+     * Device brand name.
+     *
+     */
     val deviceBrand: String,
+
+    /**
+     * Device model name.
+     *
+     */
     val deviceModel: String,
+
+    /**
+     * Country two-character ISO 3166-1 alpha code.
+     *
+     */
     val countryCode: String,
+
+    /**
+     * Country name.
+     *
+     */
     val countryName: String,
+
+    /**
+     * Returns true if this the current user session.
+     *
+     */
     val current: Boolean
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Session(
             id = map["\$id"] as String,
             userId = map["userId"] as String,
-            expire = map["expire"] as Long,
+            expire = (map["expire"] as Number).toLong(),
             provider = map["provider"] as String,
             providerUid = map["providerUid"] as String,
             providerToken = map["providerToken"] as String,

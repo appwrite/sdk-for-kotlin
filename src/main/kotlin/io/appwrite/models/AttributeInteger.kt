@@ -1,26 +1,68 @@
 package io.appwrite.models
 
-/// AttributeInteger
+/**
+ * AttributeInteger
+ */
 data class AttributeInteger(
+    /**
+     * Attribute Key.
+     *
+     */
     val key: String,
+
+    /**
+     * Attribute type.
+     *
+     */
     val type: String,
+
+    /**
+     * Attribute status. Possible values: `available`, `processing`, `deleting`, `stuck`, or `failed`
+     *
+     */
     val status: String,
+
+    /**
+     * Is attribute required?
+     *
+     */
     val required: Boolean,
-    val array: Boolean,
-    val min: Long,
-    val max: Long,
-    val default: Long
+
+    /**
+     * Is attribute an array?
+     *
+     */
+    var array: Boolean?,
+
+    /**
+     * Minimum value to enforce for new documents.
+     *
+     */
+    var min: Long?,
+
+    /**
+     * Maximum value to enforce for new documents.
+     *
+     */
+    var max: Long?,
+
+    /**
+     * Default value for attribute when not provided. Cannot be set when attribute is required.
+     *
+     */
+    var default: Long?
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = AttributeInteger(
             key = map["key"] as String,
             type = map["type"] as String,
             status = map["status"] as String,
             required = map["required"] as Boolean,
-            array = map["array"] as Boolean,
-            min = map["min"] as Long,
-            max = map["max"] as Long,
-            default = map["default"] as Long
+            array = map["array"] as? Boolean,
+            min = (map["min"] as Number).toLong(),
+            max = (map["max"] as Number).toLong(),
+            default = (map["default"] as Number).toLong()
         )
     }
 

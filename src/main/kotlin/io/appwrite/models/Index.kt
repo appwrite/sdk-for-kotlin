@@ -1,14 +1,41 @@
 package io.appwrite.models
 
-/// Index
+/**
+ * Index
+ */
 data class Index(
+    /**
+     * Index Key.
+     *
+     */
     val key: String,
+
+    /**
+     * Index type.
+     *
+     */
     val type: String,
+
+    /**
+     * Index status. Possible values: `available`, `processing`, `deleting`, `stuck`, or `failed`
+     *
+     */
     val status: String,
+
+    /**
+     * Index attributes.
+     *
+     */
     val attributes: List<Any>,
+
+    /**
+     * Index orders.
+     *
+     */
     val orders: List<Any>
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Index(
             key = map["key"] as String,
             type = map["type"] as String,

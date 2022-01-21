@@ -1,13 +1,25 @@
 package io.appwrite.models
 
-/// Logs List
+/**
+ * Logs List
+ */
 data class LogList(
+    /**
+     * Total number of items available on the server.
+     *
+     */
     val sum: Long,
+
+    /**
+     * List of logs.
+     *
+     */
     val logs: List<Log>
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = LogList(
-            sum = map["sum"] as Long,
+            sum = (map["sum"] as Number).toLong(),
             logs = (map["logs"] as List<Map<String, Any>>).map { Log.from(map = it) }
         )
     }

@@ -1,13 +1,25 @@
 package io.appwrite.models
 
-/// Sessions List
+/**
+ * Sessions List
+ */
 data class SessionList(
+    /**
+     * Total number of items available on the server.
+     *
+     */
     val sum: Long,
+
+    /**
+     * List of sessions.
+     *
+     */
     val sessions: List<Session>
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = SessionList(
-            sum = map["sum"] as Long,
+            sum = (map["sum"] as Number).toLong(),
             sessions = (map["sessions"] as List<Map<String, Any>>).map { Session.from(map = it) }
         )
     }

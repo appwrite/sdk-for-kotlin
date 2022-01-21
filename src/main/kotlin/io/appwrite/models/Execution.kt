@@ -1,30 +1,82 @@
 package io.appwrite.models
 
-/// Execution
+/**
+ * Execution
+ */
 data class Execution(
+    /**
+     * Execution ID.
+     *
+     */
     val id: String,
+
+    /**
+     * Execution read permissions.
+     *
+     */
     val read: List<Any>,
+
+    /**
+     * Function ID.
+     *
+     */
     val functionId: String,
+
+    /**
+     * The execution creation date in Unix timestamp.
+     *
+     */
     val dateCreated: Long,
+
+    /**
+     * The trigger that caused the function to execute. Possible values can be: `http`, `schedule`, or `event`.
+     *
+     */
     val trigger: String,
+
+    /**
+     * The status of the function execution. Possible values can be: `waiting`, `processing`, `completed`, or `failed`.
+     *
+     */
     val status: String,
+
+    /**
+     * The script exit code.
+     *
+     */
     val exitCode: Long,
+
+    /**
+     * The script stdout output string. Logs the last 4,000 characters of the execution stdout output.
+     *
+     */
     val stdout: String,
+
+    /**
+     * The script stderr output string. Logs the last 4,000 characters of the execution stderr output
+     *
+     */
     val stderr: String,
+
+    /**
+     * The script execution time in seconds.
+     *
+     */
     val time: Double
 ) {
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Execution(
             id = map["\$id"] as String,
             read = map["\$read"] as List<Any>,
             functionId = map["functionId"] as String,
-            dateCreated = map["dateCreated"] as Long,
+            dateCreated = (map["dateCreated"] as Number).toLong(),
             trigger = map["trigger"] as String,
             status = map["status"] as String,
-            exitCode = map["exitCode"] as Long,
+            exitCode = (map["exitCode"] as Number).toLong(),
             stdout = map["stdout"] as String,
             stderr = map["stderr"] as String,
-            time = map["time"] as Double
+            time = (map["time"] as Number).toDouble()
         )
     }
 
