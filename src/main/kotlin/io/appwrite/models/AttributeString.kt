@@ -38,7 +38,7 @@ data class AttributeString(
      * Attribute size.
      *
      */
-    val size: String,
+    val size: Long,
 
     /**
      * Default value for attribute when not provided. Cannot be set when attribute is required.
@@ -54,7 +54,7 @@ data class AttributeString(
             status = map["status"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean,
-            size = map["size"] as String,
+            size = (map["size"] as Number).toLong(),
             default = map["default"] as? String
         )
     }
