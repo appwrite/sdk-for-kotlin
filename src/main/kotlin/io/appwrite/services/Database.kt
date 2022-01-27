@@ -400,9 +400,9 @@ class Database(client: Client) : Service(client) {
 		collectionId: String,
 		key: String,
 		required: Boolean,
-		min: String? = null,
-		max: String? = null,
-		default: String? = null,
+		min: Double? = null,
+		max: Double? = null,
+		default: Double? = null,
 		array: Boolean? = null
 	): io.appwrite.models.AttributeFloat {
         val path = "/database/collections/{collectionId}/attributes/float".replace("{collectionId}", collectionId)
