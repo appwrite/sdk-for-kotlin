@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Runtime
  */
@@ -8,42 +10,49 @@ data class Runtime(
      * Runtime ID.
      *
      */
+    @SerializedName("\$id")
     val id: String,
 
     /**
      * Runtime Name.
      *
      */
+    @SerializedName("name")
     val name: String,
 
     /**
      * Runtime version.
      *
      */
+    @SerializedName("version")
     val version: String,
 
     /**
      * Base Docker image used to build the runtime.
      *
      */
+    @SerializedName("base")
     val base: String,
 
     /**
      * Image name of Docker Hub.
      *
      */
+    @SerializedName("image")
     val image: String,
 
     /**
      * Name of the logo image.
      *
      */
+    @SerializedName("logo")
     val logo: String,
 
     /**
      * List of supported architectures.
      *
      */
+    @SerializedName("supports")
     val supports: List<Any>
 ) {
     companion object {

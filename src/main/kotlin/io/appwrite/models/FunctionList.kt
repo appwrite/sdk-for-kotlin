@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Functions List
  */
@@ -8,12 +10,14 @@ data class FunctionList(
      * Total number of items available on the server.
      *
      */
+    @SerializedName("sum")
     val sum: Long,
 
     /**
      * List of functions.
      *
      */
+    @SerializedName("functions")
     val functions: List<Function>
 ) {
     companion object {

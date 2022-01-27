@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Health Queue
  */
@@ -8,6 +10,7 @@ data class HealthQueue(
      * Amount of actions in the queue.
      *
      */
+    @SerializedName("size")
     val size: Long
 ) {
     companion object {

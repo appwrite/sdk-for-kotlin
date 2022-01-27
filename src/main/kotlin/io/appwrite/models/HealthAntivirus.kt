@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Health Antivirus
  */
@@ -8,12 +10,14 @@ data class HealthAntivirus(
      * Antivirus version.
      *
      */
+    @SerializedName("version")
     val version: String,
 
     /**
      * Antivirus status. Possible values can are: `disabled`, `offline`, `online`
      *
      */
+    @SerializedName("status")
     val status: String
 ) {
     companion object {

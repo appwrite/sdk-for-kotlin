@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Function
  */
@@ -8,84 +10,98 @@ data class Function(
      * Function ID.
      *
      */
+    @SerializedName("\$id")
     val id: String,
 
     /**
      * Execution permissions.
      *
      */
+    @SerializedName("execute")
     val execute: String,
 
     /**
      * Function name.
      *
      */
+    @SerializedName("name")
     val name: String,
 
     /**
      * Function creation date in Unix timestamp.
      *
      */
+    @SerializedName("dateCreated")
     val dateCreated: Long,
 
     /**
      * Function update date in Unix timestamp.
      *
      */
+    @SerializedName("dateUpdated")
     val dateUpdated: Long,
 
     /**
      * Function status. Possible values: `disabled`, `enabled`
      *
      */
+    @SerializedName("status")
     val status: String,
 
     /**
      * Function execution runtime.
      *
      */
+    @SerializedName("runtime")
     val runtime: String,
 
     /**
      * Function active tag ID.
      *
      */
+    @SerializedName("tag")
     val tag: String,
 
     /**
      * Function environment variables.
      *
      */
+    @SerializedName("vars")
     val vars: String,
 
     /**
      * Function trigger events.
      *
      */
+    @SerializedName("events")
     val events: List<Any>,
 
     /**
      * Function execution schedult in CRON format.
      *
      */
+    @SerializedName("schedule")
     val schedule: String,
 
     /**
      * Function next scheduled execution date in Unix timestamp.
      *
      */
+    @SerializedName("scheduleNext")
     val scheduleNext: Long,
 
     /**
      * Function next scheduled execution date in Unix timestamp.
      *
      */
+    @SerializedName("schedulePrevious")
     val schedulePrevious: Long,
 
     /**
      * Function execution timeout in seconds.
      *
      */
+    @SerializedName("timeout")
     val timeout: Long
 ) {
     companion object {

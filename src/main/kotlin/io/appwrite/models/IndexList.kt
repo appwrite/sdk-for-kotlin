@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Indexes List
  */
@@ -8,12 +10,14 @@ data class IndexList(
      * Total number of items available on the server.
      *
      */
+    @SerializedName("sum")
     val sum: Long,
 
     /**
      * List of indexes.
      *
      */
+    @SerializedName("indexes")
     val indexes: List<Index>
 ) {
     companion object {

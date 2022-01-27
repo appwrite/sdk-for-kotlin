@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Runtimes List
  */
@@ -8,12 +10,14 @@ data class RuntimeList(
      * Total number of items available on the server.
      *
      */
+    @SerializedName("sum")
     val sum: Long,
 
     /**
      * List of runtimes.
      *
      */
+    @SerializedName("runtimes")
     val runtimes: List<Runtime>
 ) {
     companion object {

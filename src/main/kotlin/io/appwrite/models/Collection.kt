@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Collection
  */
@@ -8,48 +10,56 @@ data class Collection(
      * Collection ID.
      *
      */
+    @SerializedName("\$id")
     val id: String,
 
     /**
      * Collection read permissions.
      *
      */
+    @SerializedName("\$read")
     val read: List<Any>,
 
     /**
      * Collection write permissions.
      *
      */
+    @SerializedName("\$write")
     val write: List<Any>,
 
     /**
      * Collection name.
      *
      */
+    @SerializedName("name")
     val name: String,
 
     /**
      * Collection enabled.
      *
      */
+    @SerializedName("enabled")
     val enabled: Boolean,
 
     /**
      * Collection permission model. Possible values: `document` or `collection`
      *
      */
+    @SerializedName("permission")
     val permission: String,
 
     /**
      * Collection attributes.
      *
      */
+    @SerializedName("attributes")
     val attributes: List<Any>,
 
     /**
      * Collection indexes.
      *
      */
+    @SerializedName("indexes")
     val indexes: List<Index>
 ) {
     companion object {

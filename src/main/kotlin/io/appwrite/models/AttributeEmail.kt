@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * AttributeEmail
  */
@@ -8,42 +10,49 @@ data class AttributeEmail(
      * Attribute Key.
      *
      */
+    @SerializedName("key")
     val key: String,
 
     /**
      * Attribute type.
      *
      */
+    @SerializedName("type")
     val type: String,
 
     /**
      * Attribute status. Possible values: `available`, `processing`, `deleting`, `stuck`, or `failed`
      *
      */
+    @SerializedName("status")
     val status: String,
 
     /**
      * Is attribute required?
      *
      */
+    @SerializedName("required")
     val required: Boolean,
 
     /**
      * Is attribute an array?
      *
      */
+    @SerializedName("array")
     var array: Boolean?,
 
     /**
      * String format.
      *
      */
+    @SerializedName("format")
     val format: String,
 
     /**
      * Default value for attribute when not provided. Cannot be set when attribute is required.
      *
      */
+    @SerializedName("default")
     var default: String?
 ) {
     companion object {

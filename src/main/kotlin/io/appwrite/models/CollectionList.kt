@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Collections List
  */
@@ -8,12 +10,14 @@ data class CollectionList(
      * Total number of items available on the server.
      *
      */
+    @SerializedName("sum")
     val sum: Long,
 
     /**
      * List of collections.
      *
      */
+    @SerializedName("collections")
     val collections: List<Collection>
 ) {
     companion object {

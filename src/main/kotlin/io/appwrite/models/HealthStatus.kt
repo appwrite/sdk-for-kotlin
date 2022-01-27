@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Health Status
  */
@@ -8,12 +10,14 @@ data class HealthStatus(
      * Duration in milliseconds how long the health check took.
      *
      */
+    @SerializedName("ping")
     val ping: Long,
 
     /**
      * Service status. Possible values can are: `pass`, `fail`
      *
      */
+    @SerializedName("status")
     val status: String
 ) {
     companion object {

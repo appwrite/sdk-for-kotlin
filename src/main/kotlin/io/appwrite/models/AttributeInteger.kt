@@ -1,5 +1,7 @@
 package io.appwrite.models
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * AttributeInteger
  */
@@ -8,48 +10,56 @@ data class AttributeInteger(
      * Attribute Key.
      *
      */
+    @SerializedName("key")
     val key: String,
 
     /**
      * Attribute type.
      *
      */
+    @SerializedName("type")
     val type: String,
 
     /**
      * Attribute status. Possible values: `available`, `processing`, `deleting`, `stuck`, or `failed`
      *
      */
+    @SerializedName("status")
     val status: String,
 
     /**
      * Is attribute required?
      *
      */
+    @SerializedName("required")
     val required: Boolean,
 
     /**
      * Is attribute an array?
      *
      */
+    @SerializedName("array")
     var array: Boolean?,
 
     /**
      * Minimum value to enforce for new documents.
      *
      */
+    @SerializedName("min")
     var min: Long?,
 
     /**
      * Maximum value to enforce for new documents.
      *
      */
+    @SerializedName("max")
     var max: Long?,
 
     /**
      * Default value for attribute when not provided. Cannot be set when attribute is required.
      *
      */
+    @SerializedName("default")
     var default: Long?
 ) {
     companion object {
@@ -60,9 +70,9 @@ data class AttributeInteger(
             status = map["status"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean,
-            min = (map["min"] as Number).toLong(),
-            max = (map["max"] as Number).toLong(),
-            default = (map["default"] as Number).toLong()
+            min = (map["min"] as? Number)?.toLong(),
+            max = (map["max"] as? Number)?.toLong(),
+            default = (map["default"] as? Number)?.toLong()
         )
     }
 
