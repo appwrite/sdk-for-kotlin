@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Functions
+import io.appwrite.services.Storage
 
 public void main() {
     Client client = Client(context)
@@ -7,10 +7,11 @@ public void main() {
         .setProject("5df5acd0d48c2") // Your project ID
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-    Functions functions = new Functions(client);
-    functions.getTag(
-        functionId = "[FUNCTION_ID]",
-        tagId = "[TAG_ID]"
+    Storage storage = new Storage(client);
+    storage.createBucket(
+        bucketId = "[BUCKET_ID]",
+        name = "[NAME]",
+        permission = "file",
         new Continuation<Response>() {
             @NotNull
             @Override

@@ -9,6 +9,7 @@ public void main() {
 
     Storage storage = new Storage(client);
     storage.listFiles(
+        bucketId = "[BUCKET_ID]",
         new Continuation<Response>() {
             @NotNull
             @Override

@@ -8,9 +8,8 @@ suspend fun main() {
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
     val storage = Storage(client)
-    val response = storage.deleteFile(
-        bucketId = "[BUCKET_ID]",
-        fileId = "[FILE_ID]"
+    val response = storage.getBucket(
+        bucketId = "[BUCKET_ID]"
     )
     val json = response.body?.string()
 }

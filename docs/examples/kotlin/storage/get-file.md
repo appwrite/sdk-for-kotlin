@@ -9,6 +9,7 @@ suspend fun main() {
 
     val storage = Storage(client)
     val response = storage.getFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]"
     )
     val json = response.body?.string()

@@ -8,9 +8,10 @@ public void main() {
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
     Storage storage = new Storage(client);
-    storage.getFileView(
+    storage.updateBucket(
         bucketId = "[BUCKET_ID]",
-        fileId = "[FILE_ID]"
+        name = "[NAME]",
+        permission = "file",
         new Continuation<Response>() {
             @NotNull
             @Override

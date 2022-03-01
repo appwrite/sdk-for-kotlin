@@ -1,12 +1,15 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
-    id 'java-library'
+    id "org.jetbrains.kotlin.jvm" version '1.5.31'
+    id "java-library"
+    id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
 }
+
+apply from: "${rootDir}/scripts/configure.gradle"
 
 ext {
     PUBLISH_GROUP_ID = 'io.appwrite'
     PUBLISH_ARTIFACT_ID = 'sdk-for-kotlin'
-    PUBLISH_VERSION = '0.2.5'
+    PUBLISH_VERSION = System.getenv('SDK_VERSION')
     POM_URL = 'https://github.com/appwrite/sdk-for-kotlin'
     POM_SCM_URL = 'https://github.com/appwrite/sdk-for-kotlin'
     POM_ISSUE_URL = 'https://github.com/appwrite/sdk-for-kotlin/issues'
@@ -41,6 +44,7 @@ test {
 }
 
 compileKotlin {
+    dependsOn createBuildConfig
     kotlinOptions.jvmTarget = '1.8'
 }
 

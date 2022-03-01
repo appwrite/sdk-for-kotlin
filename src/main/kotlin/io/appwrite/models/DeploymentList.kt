@@ -3,9 +3,9 @@ package io.appwrite.models
 import com.google.gson.annotations.SerializedName
 
 /**
- * Tags List
+ * Deployments List
  */
-data class TagList(
+data class DeploymentList(
     /**
      * Total number of items available on the server.
      *
@@ -14,22 +14,22 @@ data class TagList(
     val sum: Long,
 
     /**
-     * List of tags.
+     * List of deployments.
      *
      */
-    @SerializedName("tags")
-    val tags: List<Tag>
+    @SerializedName("deployments")
+    val deployments: List<Deployment>
 ) {
     companion object {
         @Suppress("UNCHECKED_CAST")
-        fun from(map: Map<String, Any>) = TagList(
+        fun from(map: Map<String, Any>) = DeploymentList(
             sum = (map["sum"] as Number).toLong(),
-            tags = (map["tags"] as List<Map<String, Any>>).map { Tag.from(map = it) }
+            deployments = (map["deployments"] as List<Map<String, Any>>).map { Deployment.from(map = it) }
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
         "sum" to sum as Any,
-        "tags" to tags.map { it.toMap() } as Any
+        "deployments" to deployments.map { it.toMap() } as Any
     )
 }

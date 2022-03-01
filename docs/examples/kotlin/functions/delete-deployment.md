@@ -1,5 +1,5 @@
 import io.appwrite.Client
-import io.appwrite.services.Storage
+import io.appwrite.services.Functions
 
 suspend fun main() {
     val client = Client(context)
@@ -7,10 +7,10 @@ suspend fun main() {
       .setProject("5df5acd0d48c2") // Your project ID
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
-    val storage = Storage(client)
-    val response = storage.deleteFile(
-        bucketId = "[BUCKET_ID]",
-        fileId = "[FILE_ID]"
+    val functions = Functions(client)
+    val response = functions.deleteDeployment(
+        functionId = "[FUNCTION_ID]",
+        deploymentId = "[DEPLOYMENT_ID]"
     )
     val json = response.body?.string()
 }

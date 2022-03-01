@@ -9,6 +9,7 @@ public void main() {
 
     Storage storage = new Storage(client);
     storage.createFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]",
         file = File("./path-to-files/image.jpg"),
         new Continuation<Response>() {

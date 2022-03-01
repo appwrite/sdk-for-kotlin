@@ -9,9 +9,8 @@ public void main() {
 
     Storage storage = new Storage(client);
     storage.updateFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]",
-        read = listOf(),
-        write = listOf()
         new Continuation<Response>() {
             @NotNull
             @Override

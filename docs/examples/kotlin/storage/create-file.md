@@ -9,6 +9,7 @@ suspend fun main() {
 
     val storage = Storage(client)
     val response = storage.createFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]",
         file = File("./path-to-files/image.jpg"),
     )
