@@ -329,7 +329,7 @@ class Functions(client: Client) : Service(client) {
 		functionId: String,
 		entrypoint: String,
 		code: File,
-		activate: Boolean, onProgress: ((Double) -> Unit)? = null
+		activate: Boolean, onProgress: ((UploadProgress) -> Unit)? = null
 	): io.appwrite.models.Deployment {
         val path = "/functions/{functionId}/deployments".replace("{functionId}", functionId)
         val params = mutableMapOf<String, Any?>(

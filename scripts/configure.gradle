@@ -5,7 +5,7 @@ task createBuildConfig()  {
         file.createNewFile()
         file.text = """
             public class BuildConfig {
-                public static String SDK_VERSION = "${System.getenv("SDK_VERSION")}";
+                public static String SDK_VERSION = "${System.getenv("SDK_VERSION") ?: "0.0.0"}";
             }
         """.stripIndent().trim()
     }

@@ -67,7 +67,7 @@ data class Function(
      *
      */
     @SerializedName("vars")
-    val vars: String,
+    val vars: Map<String, Any>,
 
     /**
      * Function trigger events.
@@ -115,7 +115,7 @@ data class Function(
             status = map["status"] as String,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
-            vars = map["vars"] as String,
+            vars = map["vars"] as Map<String, Any>,
             events = map["events"] as List<Any>,
             schedule = map["schedule"] as String,
             scheduleNext = (map["scheduleNext"] as Number).toLong(),

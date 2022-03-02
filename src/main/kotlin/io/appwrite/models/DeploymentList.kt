@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 data class DeploymentList(
     /**
-     * Total number of items available on the server.
+     * Total number of deployments documents that matched your query.
      *
      */
-    @SerializedName("sum")
-    val sum: Long,
+    @SerializedName("total")
+    val total: Long,
 
     /**
      * List of deployments.
@@ -23,13 +23,13 @@ data class DeploymentList(
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = DeploymentList(
-            sum = (map["sum"] as Number).toLong(),
+            total = (map["total"] as Number).toLong(),
             deployments = (map["deployments"] as List<Map<String, Any>>).map { Deployment.from(map = it) }
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
-        "sum" to sum as Any,
+        "total" to total as Any,
         "deployments" to deployments.map { it.toMap() } as Any
     )
 }

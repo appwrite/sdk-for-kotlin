@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 data class RuntimeList(
     /**
-     * Total number of items available on the server.
+     * Total number of runtimes documents that matched your query.
      *
      */
-    @SerializedName("sum")
-    val sum: Long,
+    @SerializedName("total")
+    val total: Long,
 
     /**
      * List of runtimes.
@@ -23,13 +23,13 @@ data class RuntimeList(
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = RuntimeList(
-            sum = (map["sum"] as Number).toLong(),
+            total = (map["total"] as Number).toLong(),
             runtimes = (map["runtimes"] as List<Map<String, Any>>).map { Runtime.from(map = it) }
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
-        "sum" to sum as Any,
+        "total" to total as Any,
         "runtimes" to runtimes.map { it.toMap() } as Any
     )
 }
