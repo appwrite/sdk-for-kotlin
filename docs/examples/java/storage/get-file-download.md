@@ -9,6 +9,7 @@ public void main() {
 
     Storage storage = new Storage(client);
     storage.getFileDownload(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]"
         new Continuation<Response>() {
             @NotNull

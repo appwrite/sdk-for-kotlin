@@ -18,7 +18,7 @@ data class Function(
      *
      */
     @SerializedName("execute")
-    val execute: String,
+    val execute: List<Any>,
 
     /**
      * Function name.
@@ -56,18 +56,18 @@ data class Function(
     val runtime: String,
 
     /**
-     * Function active tag ID.
+     * Function&#039;s active deployment ID.
      *
      */
-    @SerializedName("tag")
-    val tag: String,
+    @SerializedName("deployment")
+    val deployment: String,
 
     /**
      * Function environment variables.
      *
      */
     @SerializedName("vars")
-    val vars: String,
+    val vars: Map<String, Any>,
 
     /**
      * Function trigger events.
@@ -108,14 +108,14 @@ data class Function(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Function(
             id = map["\$id"] as String,
-            execute = map["execute"] as String,
+            execute = map["execute"] as List<Any>,
             name = map["name"] as String,
             dateCreated = (map["dateCreated"] as Number).toLong(),
             dateUpdated = (map["dateUpdated"] as Number).toLong(),
             status = map["status"] as String,
             runtime = map["runtime"] as String,
-            tag = map["tag"] as String,
-            vars = map["vars"] as String,
+            deployment = map["deployment"] as String,
+            vars = map["vars"] as Map<String, Any>,
             events = map["events"] as List<Any>,
             schedule = map["schedule"] as String,
             scheduleNext = (map["scheduleNext"] as Number).toLong(),
@@ -132,7 +132,7 @@ data class Function(
         "dateUpdated" to dateUpdated as Any,
         "status" to status as Any,
         "runtime" to runtime as Any,
-        "tag" to tag as Any,
+        "deployment" to deployment as Any,
         "vars" to vars as Any,
         "events" to events as Any,
         "schedule" to schedule as Any,

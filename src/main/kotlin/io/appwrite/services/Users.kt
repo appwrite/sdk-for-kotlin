@@ -33,7 +33,7 @@ class Users(client: Client) : Service(client) {
 		orderType: String? = null
 	): io.appwrite.models.UserList {
         val path = "/users"
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "search" to search,
             "limit" to limit,
             "offset" to offset,
@@ -41,7 +41,7 @@ class Users(client: Client) : Service(client) {
             "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.UserList = {
@@ -53,7 +53,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.UserList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -62,7 +62,7 @@ class Users(client: Client) : Service(client) {
      *
      * Create a new user.
      *
-     * @param userId User ID. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param email User email.
      * @param password User password. Must be at least 8 chars.
      * @param name User name. Max length: 128 chars.
@@ -77,13 +77,13 @@ class Users(client: Client) : Service(client) {
 		name: String? = null
 	): io.appwrite.models.User {
         val path = "/users"
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
             "password" to password,
             "name" to name
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -95,7 +95,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -113,9 +113,9 @@ class Users(client: Client) : Service(client) {
 		userId: String
 	): io.appwrite.models.User {
         val path = "/users/{userId}".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -127,7 +127,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -145,9 +145,9 @@ class Users(client: Client) : Service(client) {
 		userId: String
 	): Any {
         val path = "/users/{userId}".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -175,10 +175,10 @@ class Users(client: Client) : Service(client) {
 		email: String
 	): io.appwrite.models.User {
         val path = "/users/{userId}/email".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "email" to email
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -190,7 +190,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -212,11 +212,11 @@ class Users(client: Client) : Service(client) {
 		offset: Long? = null
 	): io.appwrite.models.LogList {
         val path = "/users/{userId}/logs".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "limit" to limit,
             "offset" to offset
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.LogList = {
@@ -228,7 +228,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.LogList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -248,10 +248,10 @@ class Users(client: Client) : Service(client) {
 		name: String
 	): io.appwrite.models.User {
         val path = "/users/{userId}/name".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "name" to name
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -263,7 +263,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -283,10 +283,10 @@ class Users(client: Client) : Service(client) {
 		password: String
 	): io.appwrite.models.User {
         val path = "/users/{userId}/password".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "password" to password
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -298,7 +298,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -316,9 +316,9 @@ class Users(client: Client) : Service(client) {
 		userId: String
 	): io.appwrite.models.Preferences {
         val path = "/users/{userId}/prefs".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
@@ -330,7 +330,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Preferences::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -352,10 +352,10 @@ class Users(client: Client) : Service(client) {
 		prefs: Any
 	): io.appwrite.models.Preferences {
         val path = "/users/{userId}/prefs".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "prefs" to prefs
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
@@ -367,7 +367,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Preferences::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -385,9 +385,9 @@ class Users(client: Client) : Service(client) {
 		userId: String
 	): io.appwrite.models.SessionList {
         val path = "/users/{userId}/sessions".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.SessionList = {
@@ -399,7 +399,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.SessionList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -417,9 +417,9 @@ class Users(client: Client) : Service(client) {
 		userId: String
 	): Any {
         val path = "/users/{userId}/sessions".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -447,9 +447,9 @@ class Users(client: Client) : Service(client) {
 		sessionId: String
 	): Any {
         val path = "/users/{userId}/sessions/{sessionId}".replace("{userId}", userId).replace("{sessionId}", sessionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -477,10 +477,10 @@ class Users(client: Client) : Service(client) {
 		status: Boolean
 	): io.appwrite.models.User {
         val path = "/users/{userId}/status".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "status" to status
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -492,7 +492,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -512,10 +512,10 @@ class Users(client: Client) : Service(client) {
 		emailVerification: Boolean
 	): io.appwrite.models.User {
         val path = "/users/{userId}/verification".replace("{userId}", userId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "emailVerification" to emailVerification
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.User = {
@@ -527,7 +527,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     

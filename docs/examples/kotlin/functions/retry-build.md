@@ -8,9 +8,10 @@ suspend fun main() {
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
     val functions = Functions(client)
-    val response = functions.deleteTag(
+    val response = functions.retryBuild(
         functionId = "[FUNCTION_ID]",
-        tagId = "[TAG_ID]"
+        deploymentId = "[DEPLOYMENT_ID]",
+        buildId = "[BUILD_ID]"
     )
     val json = response.body?.string()
 }

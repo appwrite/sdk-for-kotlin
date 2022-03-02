@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 data class AttributeList(
     /**
-     * Total sum of items in the list.
+     * Total number of attributes in the given collection.
      *
      */
-    @SerializedName("sum")
-    val sum: Long,
+    @SerializedName("total")
+    val total: Long,
 
     /**
      * List of attributes.
@@ -23,13 +23,13 @@ data class AttributeList(
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = AttributeList(
-            sum = (map["sum"] as Number).toLong(),
+            total = (map["total"] as Number).toLong(),
             attributes = map["attributes"] as List<Any>
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
-        "sum" to sum as Any,
+        "total" to total as Any,
         "attributes" to attributes as Any
     )
 }

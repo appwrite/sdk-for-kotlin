@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 data class CollectionList(
     /**
-     * Total number of items available on the server.
+     * Total number of collections documents that matched your query.
      *
      */
-    @SerializedName("sum")
-    val sum: Long,
+    @SerializedName("total")
+    val total: Long,
 
     /**
      * List of collections.
@@ -23,13 +23,13 @@ data class CollectionList(
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = CollectionList(
-            sum = (map["sum"] as Number).toLong(),
+            total = (map["total"] as Number).toLong(),
             collections = (map["collections"] as List<Map<String, Any>>).map { Collection.from(map = it) }
         )
     }
 
     fun toMap(): Map<String, Any> = mapOf(
-        "sum" to sum as Any,
+        "total" to total as Any,
         "collections" to collections.map { it.toMap() } as Any
     )
 }

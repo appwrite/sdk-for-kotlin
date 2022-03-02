@@ -8,9 +8,11 @@ public void main() {
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
     Functions functions = new Functions(client);
-    functions.deleteTag(
+    functions.createDeployment(
         functionId = "[FUNCTION_ID]",
-        tagId = "[TAG_ID]"
+        entrypoint = "[ENTRYPOINT]",
+        code = File("./path-to-files/image.jpg"),
+        activate = false
         new Continuation<Response>() {
             @NotNull
             @Override

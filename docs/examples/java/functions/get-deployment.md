@@ -8,10 +8,9 @@ public void main() {
         .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
     Functions functions = new Functions(client);
-    functions.createTag(
+    functions.getDeployment(
         functionId = "[FUNCTION_ID]",
-        command = "[COMMAND]",
-        code = File("./path-to-files/image.jpg")
+        deploymentId = "[DEPLOYMENT_ID]"
         new Continuation<Response>() {
             @NotNull
             @Override

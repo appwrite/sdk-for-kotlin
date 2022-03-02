@@ -9,6 +9,7 @@ suspend fun main() {
 
     val storage = Storage(client)
     val response = storage.deleteFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]"
     )
     val json = response.body?.string()

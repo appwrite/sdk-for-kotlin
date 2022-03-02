@@ -9,9 +9,8 @@ suspend fun main() {
 
     val storage = Storage(client)
     val response = storage.updateFile(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]",
-        read = listOf(),
-        write = listOf()
     )
     val json = response.body?.string()
 }

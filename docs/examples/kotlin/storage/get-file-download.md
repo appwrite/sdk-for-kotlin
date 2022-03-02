@@ -9,6 +9,7 @@ suspend fun main() {
 
     val storage = Storage(client)
     val result = storage.getFileDownload(
+        bucketId = "[BUCKET_ID]",
         fileId = "[FILE_ID]"
     )
     println(result); // Resource URL

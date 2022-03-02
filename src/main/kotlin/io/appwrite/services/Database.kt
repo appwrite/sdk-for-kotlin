@@ -35,7 +35,7 @@ class Database(client: Client) : Service(client) {
 		orderType: String? = null
 	): io.appwrite.models.CollectionList {
         val path = "/database/collections"
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "search" to search,
             "limit" to limit,
             "offset" to offset,
@@ -43,7 +43,7 @@ class Database(client: Client) : Service(client) {
             "cursorDirection" to cursorDirection,
             "orderType" to orderType
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.CollectionList = {
@@ -55,7 +55,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.CollectionList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -64,7 +64,7 @@ class Database(client: Client) : Service(client) {
      *
      * Create a new Collection.
      *
-     * @param collectionId Unique Id. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param collectionId Unique Id. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param name Collection name. Max length: 128 chars.
      * @param permission Permissions type model to use for reading documents in this collection. You can use collection-level permission set once on the collection using the `read` and `write` params, or you can set document-level permission where each document read and write params will decide who has access to read and write to each document individually. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
      * @param read An array of strings with read permissions. By default no user is granted with any read permissions. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
@@ -81,14 +81,14 @@ class Database(client: Client) : Service(client) {
 		write: List<Any>
 	): io.appwrite.models.Collection {
         val path = "/database/collections"
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "collectionId" to collectionId,
             "name" to name,
             "permission" to permission,
             "read" to read,
             "write" to write
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
@@ -100,7 +100,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -119,9 +119,9 @@ class Database(client: Client) : Service(client) {
 		collectionId: String
 	): io.appwrite.models.Collection {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
@@ -133,7 +133,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -161,14 +161,14 @@ class Database(client: Client) : Service(client) {
 		enabled: Boolean? = null
 	): io.appwrite.models.Collection {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "name" to name,
             "permission" to permission,
             "read" to read,
             "write" to write,
             "enabled" to enabled
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Collection = {
@@ -180,7 +180,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -199,9 +199,9 @@ class Database(client: Client) : Service(client) {
 		collectionId: String
 	): Any {
         val path = "/database/collections/{collectionId}".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -225,9 +225,9 @@ class Database(client: Client) : Service(client) {
 		collectionId: String
 	): io.appwrite.models.AttributeList {
         val path = "/database/collections/{collectionId}/attributes".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeList = {
@@ -239,7 +239,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -266,13 +266,13 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeBoolean {
         val path = "/database/collections/{collectionId}/attributes/boolean".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeBoolean = {
@@ -284,7 +284,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeBoolean::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -311,13 +311,13 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeEmail {
         val path = "/database/collections/{collectionId}/attributes/email".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeEmail = {
@@ -329,7 +329,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeEmail::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -355,14 +355,14 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeEnum {
         val path = "/database/collections/{collectionId}/attributes/enum".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "elements" to elements,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeEnum = {
@@ -374,7 +374,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeEnum::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -406,7 +406,7 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeFloat {
         val path = "/database/collections/{collectionId}/attributes/float".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "min" to min,
@@ -414,7 +414,7 @@ class Database(client: Client) : Service(client) {
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeFloat = {
@@ -426,7 +426,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeFloat::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -458,7 +458,7 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeInteger {
         val path = "/database/collections/{collectionId}/attributes/integer".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "min" to min,
@@ -466,7 +466,7 @@ class Database(client: Client) : Service(client) {
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeInteger = {
@@ -478,7 +478,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeInteger::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -505,13 +505,13 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeIp {
         val path = "/database/collections/{collectionId}/attributes/ip".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeIp = {
@@ -523,7 +523,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeIp::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -552,14 +552,14 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeString {
         val path = "/database/collections/{collectionId}/attributes/string".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "size" to size,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeString = {
@@ -571,7 +571,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeString::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -598,13 +598,13 @@ class Database(client: Client) : Service(client) {
 		array: Boolean? = null
 	): io.appwrite.models.AttributeUrl {
         val path = "/database/collections/{collectionId}/attributes/url".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
             "default" to default,
             "array" to array
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.AttributeUrl = {
@@ -616,7 +616,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.AttributeUrl::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -634,9 +634,9 @@ class Database(client: Client) : Service(client) {
 		key: String
 	): Any {
         val path = "/database/collections/{collectionId}/attributes/{key}".replace("{collectionId}", collectionId).replace("{key}", key)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -662,9 +662,9 @@ class Database(client: Client) : Service(client) {
 		key: String
 	): Any {
         val path = "/database/collections/{collectionId}/attributes/{key}".replace("{collectionId}", collectionId).replace("{key}", key)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -707,7 +707,7 @@ class Database(client: Client) : Service(client) {
 		orderTypes: List<Any>? = null
 	): io.appwrite.models.DocumentList {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "queries" to queries,
             "limit" to limit,
             "offset" to offset,
@@ -716,7 +716,7 @@ class Database(client: Client) : Service(client) {
             "orderAttributes" to orderAttributes,
             "orderTypes" to orderTypes
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.DocumentList = {
@@ -728,7 +728,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.DocumentList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -741,7 +741,7 @@ class Database(client: Client) : Service(client) {
      * directly from your database console.
      *
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/database#createCollection). Make sure to define attributes before creating documents.
-     * @param documentId Document ID. Choose your own unique ID or pass the string `unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param documentId Document ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
      * @param read An array of strings with read permissions. By default only the current user is granted with read permissions. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
      * @param write An array of strings with write permissions. By default only the current user is granted with write permissions. [learn more about permissions](https://appwrite.io/docs/permissions) and get a full list of available permissions.
@@ -757,13 +757,13 @@ class Database(client: Client) : Service(client) {
 		write: List<Any>? = null
 	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "documentId" to documentId,
             "data" to data,
             "read" to read,
             "write" to write
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
@@ -775,7 +775,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Document::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -796,9 +796,9 @@ class Database(client: Client) : Service(client) {
 		documentId: String
 	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
@@ -810,7 +810,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Document::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -837,12 +837,12 @@ class Database(client: Client) : Service(client) {
 		write: List<Any>? = null
 	): io.appwrite.models.Document {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "data" to data,
             "read" to read,
             "write" to write
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Document = {
@@ -854,7 +854,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Document::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -876,9 +876,9 @@ class Database(client: Client) : Service(client) {
 		documentId: String
 	): Any {
         val path = "/database/collections/{collectionId}/documents/{documentId}".replace("{collectionId}", collectionId).replace("{documentId}", documentId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(
@@ -902,9 +902,9 @@ class Database(client: Client) : Service(client) {
 		collectionId: String
 	): io.appwrite.models.IndexList {
         val path = "/database/collections/{collectionId}/indexes".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.IndexList = {
@@ -916,7 +916,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.IndexList::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -940,13 +940,13 @@ class Database(client: Client) : Service(client) {
 		orders: List<Any>? = null
 	): io.appwrite.models.Index {
         val path = "/database/collections/{collectionId}/indexes".replace("{collectionId}", collectionId)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
             "key" to key,
             "type" to type,
             "attributes" to attributes,
             "orders" to orders
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Index = {
@@ -958,7 +958,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Index::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -976,9 +976,9 @@ class Database(client: Client) : Service(client) {
 		key: String
 	): io.appwrite.models.Index {
         val path = "/database/collections/{collectionId}/indexes/{key}".replace("{collectionId}", collectionId).replace("{key}", key)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         val convert: (Map<String, Any>) -> io.appwrite.models.Index = {
@@ -990,7 +990,7 @@ class Database(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Index::class.java,
-            convert = convert
+            convert = convert,
         )
     }
     
@@ -1008,9 +1008,9 @@ class Database(client: Client) : Service(client) {
 		key: String
 	): Any {
         val path = "/database/collections/{collectionId}/indexes/{key}".replace("{collectionId}", collectionId).replace("{key}", key)
-        val params = mapOf<String, Any?>(
+        val params = mutableMapOf<String, Any?>(
         )
-        val headers = mapOf(
+        val headers = mutableMapOf(
             "content-type" to "application/json"
         )
         return client.call(

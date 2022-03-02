@@ -8,9 +8,11 @@ suspend fun main() {
       .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
 
     val functions = Functions(client)
-    val response = functions.updateTag(
+    val response = functions.createDeployment(
         functionId = "[FUNCTION_ID]",
-        tag = "[TAG]"
+        entrypoint = "[ENTRYPOINT]",
+        code = File("./path-to-files/image.jpg"),
+        activate = false
     )
     val json = response.body?.string()
 }
