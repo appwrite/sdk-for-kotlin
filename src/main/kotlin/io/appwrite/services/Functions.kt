@@ -44,7 +44,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.FunctionList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.FunctionList = {
             io.appwrite.models.FunctionList.from(map = it)
         }
         return client.call(
@@ -53,7 +53,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.FunctionList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -100,7 +100,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Function = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Function = {
             io.appwrite.models.Function.from(map = it)
         }
         return client.call(
@@ -109,14 +109,14 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Function::class.java,
-            convert = convert,
+            converter,
         )
     }
     
     /**
      * List the currently active function runtimes.
      *
-     * Get a list of all runtimes that are currently active in your project.
+     * Get a list of all runtimes that are currently active on your instance.
      *
      * @return [io.appwrite.models.RuntimeList]     
      */
@@ -129,7 +129,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.RuntimeList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.RuntimeList = {
             io.appwrite.models.RuntimeList.from(map = it)
         }
         return client.call(
@@ -138,7 +138,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.RuntimeList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -161,7 +161,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Function = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Function = {
             io.appwrite.models.Function.from(map = it)
         }
         return client.call(
@@ -170,7 +170,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Function::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -211,7 +211,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Function = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Function = {
             io.appwrite.models.Function.from(map = it)
         }
         return client.call(
@@ -220,7 +220,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Function::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -290,7 +290,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.DeploymentList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.DeploymentList = {
             io.appwrite.models.DeploymentList.from(map = it)
         }
         return client.call(
@@ -299,7 +299,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.DeploymentList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -340,17 +340,19 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "multipart/form-data"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Deployment = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it)
         }
+        val idParamName: String? = null
         val paramName = "code"
         return client.chunkedUpload(
             path,
             headers,
             params,
             responseType = io.appwrite.models.Deployment::class.java,
-            convert = convert,
+            converter,
             paramName,
+            idParamName,
             onProgress,
         )
     }
@@ -376,7 +378,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.DeploymentList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.DeploymentList = {
             io.appwrite.models.DeploymentList.from(map = it)
         }
         return client.call(
@@ -385,7 +387,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.DeploymentList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -412,7 +414,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Function = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Function = {
             io.appwrite.models.Function.from(map = it)
         }
         return client.call(
@@ -421,7 +423,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Function::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -522,7 +524,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.ExecutionList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.ExecutionList = {
             io.appwrite.models.ExecutionList.from(map = it)
         }
         return client.call(
@@ -531,7 +533,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.ExecutionList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -563,7 +565,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Execution = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Execution = {
             io.appwrite.models.Execution.from(map = it)
         }
         return client.call(
@@ -572,7 +574,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Execution::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -597,7 +599,7 @@ class Functions(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Execution = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Execution = {
             io.appwrite.models.Execution.from(map = it)
         }
         return client.call(
@@ -606,7 +608,7 @@ class Functions(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Execution::class.java,
-            convert = convert,
+            converter,
         )
     }
     

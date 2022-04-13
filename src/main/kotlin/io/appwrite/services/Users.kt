@@ -44,7 +44,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.UserList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.UserList = {
             io.appwrite.models.UserList.from(map = it)
         }
         return client.call(
@@ -53,7 +53,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.UserList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -86,7 +86,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -95,7 +95,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -118,7 +118,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -127,7 +127,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -181,7 +181,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -190,7 +190,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -219,7 +219,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.LogList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it)
         }
         return client.call(
@@ -228,7 +228,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.LogList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -254,7 +254,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -263,7 +263,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -289,7 +289,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -298,7 +298,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -321,7 +321,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Preferences = {
             io.appwrite.models.Preferences.from(map = it)
         }
         return client.call(
@@ -330,7 +330,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Preferences::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -358,7 +358,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Preferences = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Preferences = {
             io.appwrite.models.Preferences.from(map = it)
         }
         return client.call(
@@ -367,7 +367,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Preferences::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -390,7 +390,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.SessionList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.SessionList = {
             io.appwrite.models.SessionList.from(map = it)
         }
         return client.call(
@@ -399,7 +399,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.SessionList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -483,7 +483,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -492,7 +492,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -518,7 +518,7 @@ class Users(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.User = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
             io.appwrite.models.User.from(map = it)
         }
         return client.call(
@@ -527,7 +527,7 @@ class Users(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.User::class.java,
-            convert = convert,
+            converter,
         )
     }
     

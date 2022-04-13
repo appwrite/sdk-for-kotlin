@@ -24,7 +24,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it)
         }
         return client.call(
@@ -33,7 +33,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthStatus::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -53,7 +53,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthAntivirus = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthAntivirus = {
             io.appwrite.models.HealthAntivirus.from(map = it)
         }
         return client.call(
@@ -62,7 +62,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthAntivirus::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -83,7 +83,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it)
         }
         return client.call(
@@ -92,7 +92,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthStatus::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -112,7 +112,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it)
         }
         return client.call(
@@ -121,7 +121,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthStatus::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -143,7 +143,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it)
         }
         return client.call(
@@ -152,7 +152,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthQueue::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -170,7 +170,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it)
         }
         return client.call(
@@ -179,7 +179,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthQueue::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -200,7 +200,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it)
         }
         return client.call(
@@ -209,7 +209,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthQueue::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -230,7 +230,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it)
         }
         return client.call(
@@ -239,7 +239,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthQueue::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -260,7 +260,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it)
         }
         return client.call(
@@ -269,7 +269,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthQueue::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -289,7 +289,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it)
         }
         return client.call(
@@ -298,7 +298,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthStatus::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -324,7 +324,7 @@ class Health(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.HealthTime = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.HealthTime = {
             io.appwrite.models.HealthTime.from(map = it)
         }
         return client.call(
@@ -333,7 +333,7 @@ class Health(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.HealthTime::class.java,
-            convert = convert,
+            converter,
         )
     }
     

@@ -47,7 +47,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.TeamList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.TeamList = {
             io.appwrite.models.TeamList.from(map = it)
         }
         return client.call(
@@ -56,7 +56,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.TeamList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -88,7 +88,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Team = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Team = {
             io.appwrite.models.Team.from(map = it)
         }
         return client.call(
@@ -97,7 +97,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Team::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -120,7 +120,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Team = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Team = {
             io.appwrite.models.Team.from(map = it)
         }
         return client.call(
@@ -129,7 +129,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Team::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -156,7 +156,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Team = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Team = {
             io.appwrite.models.Team.from(map = it)
         }
         return client.call(
@@ -165,7 +165,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Team::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -236,7 +236,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.MembershipList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.MembershipList = {
             io.appwrite.models.MembershipList.from(map = it)
         }
         return client.call(
@@ -245,7 +245,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.MembershipList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -294,7 +294,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Membership = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it)
         }
         return client.call(
@@ -303,7 +303,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Membership::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -329,7 +329,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.MembershipList = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.MembershipList = {
             io.appwrite.models.MembershipList.from(map = it)
         }
         return client.call(
@@ -338,7 +338,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.MembershipList::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -368,7 +368,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Membership = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it)
         }
         return client.call(
@@ -377,7 +377,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Membership::class.java,
-            convert = convert,
+            converter,
         )
     }
     
@@ -446,7 +446,7 @@ class Teams(client: Client) : Service(client) {
         val headers = mutableMapOf(
             "content-type" to "application/json"
         )
-        val convert: (Map<String, Any>) -> io.appwrite.models.Membership = {
+        val converter: (Map<String, Any>) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it)
         }
         return client.call(
@@ -455,7 +455,7 @@ class Teams(client: Client) : Service(client) {
             headers,
             params,
             responseType = io.appwrite.models.Membership::class.java,
-            convert = convert,
+            converter,
         )
     }
     
