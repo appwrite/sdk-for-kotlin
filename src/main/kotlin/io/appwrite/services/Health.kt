@@ -214,36 +214,6 @@ class Health(client: Client) : Service(client) {
     }
     
     /**
-     * Get Usage Queue
-     *
-     * Get the number of usage stats that are waiting to be processed in the
-     * Appwrite internal queue server.
-     *
-     * @return [io.appwrite.models.HealthQueue]     
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun getQueueUsage(): io.appwrite.models.HealthQueue {
-        val path = "/health/queue/usage"
-        val params = mutableMapOf<String, Any?>(
-        )
-        val headers = mutableMapOf(
-            "content-type" to "application/json"
-        )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
-            io.appwrite.models.HealthQueue.from(map = it)
-        }
-        return client.call(
-            "GET",
-            path,
-            headers,
-            params,
-            responseType = io.appwrite.models.HealthQueue::class.java,
-            converter,
-        )
-    }
-    
-    /**
      * Get Webhooks Queue
      *
      * Get the number of webhooks that are waiting to be processed in the Appwrite

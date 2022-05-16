@@ -1,13 +1,13 @@
 import io.appwrite.Client
-import io.appwrite.services.Health
+import io.appwrite.services.Account
 
 suspend fun main() {
     val client = Client(context)
       .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
       .setProject("5df5acd0d48c2") // Your project ID
-      .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+      .setJWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ...") // Your secret JSON Web Token
 
-    val health = Health(client)
-    val response = health.getQueueUsage()
+    val account = Account(client)
+    val response = account.updateStatus()
     val json = response.body?.string()
 }
