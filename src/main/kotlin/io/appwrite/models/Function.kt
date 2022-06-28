@@ -14,6 +14,20 @@ data class Function(
     val id: String,
 
     /**
+     * Function creation date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: Long,
+
+    /**
+     * Function update date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: Long,
+
+    /**
      * Execution permissions.
      *
      */
@@ -26,20 +40,6 @@ data class Function(
      */
     @SerializedName("name")
     val name: String,
-
-    /**
-     * Function creation date in Unix timestamp.
-     *
-     */
-    @SerializedName("dateCreated")
-    val dateCreated: Long,
-
-    /**
-     * Function update date in Unix timestamp.
-     *
-     */
-    @SerializedName("dateUpdated")
-    val dateUpdated: Long,
 
     /**
      * Function status. Possible values: `disabled`, `enabled`
@@ -108,10 +108,10 @@ data class Function(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Function(
             id = map["\$id"] as String,
+            createdAt = (map["\$createdAt"] as Number).toLong(),
+            updatedAt = (map["\$updatedAt"] as Number).toLong(),
             execute = map["execute"] as List<Any>,
             name = map["name"] as String,
-            dateCreated = (map["dateCreated"] as Number).toLong(),
-            dateUpdated = (map["dateUpdated"] as Number).toLong(),
             status = map["status"] as String,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
@@ -126,10 +126,10 @@ data class Function(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "execute" to execute as Any,
         "name" to name as Any,
-        "dateCreated" to dateCreated as Any,
-        "dateUpdated" to dateUpdated as Any,
         "status" to status as Any,
         "runtime" to runtime as Any,
         "deployment" to deployment as Any,

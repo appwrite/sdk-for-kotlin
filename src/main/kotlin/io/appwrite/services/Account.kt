@@ -6,7 +6,9 @@ import okhttp3.Cookie
 import okhttp3.Response
 import java.io.File
 
-class Account(client: Client) : Service(client) {
+class Account : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * Get Account
@@ -171,6 +173,45 @@ class Account(client: Client) : Service(client) {
         val params = mutableMapOf<String, Any?>(
             "password" to password,
             "oldPassword" to oldPassword
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "PATCH",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Update Account Phone
+     *
+     * Update currently logged in user account phone number. After changing phone
+     * number, the user confirmation status will get reset. A new confirmation SMS
+     * is not sent automatically however you can use the phone confirmation
+     * endpoint again to send the confirmation SMS.
+     *
+     * @param number Phone number. Format this number with a leading &#039;+&#039; and a country code, e.g., +16175551212.
+     * @param password User password. Must be at least 8 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePhone(
+		number: String,
+		password: String
+	): io.appwrite.models.User {
+        val path = "/account/phone"
+        val params = mutableMapOf<String, Any?>(
+            "number" to number,
+            "password" to password
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"
@@ -540,8 +581,8 @@ class Account(client: Client) : Service(client) {
      * should redirect the user back to your app and allow you to complete the
      * verification process by verifying both the **userId** and **secret**
      * parameters. Learn more about how to [complete the verification
-     * process](/docs/client/account#accountUpdateVerification). The verification
-     * link sent to the user's email address is valid for 7 days.
+     * process](/docs/client/account#accountUpdateEmailVerification). The
+     * verification link sent to the user's email address is valid for 7 days.
      * 
      * Please note that in order to avoid a [Redirect
      * Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md),
@@ -596,6 +637,80 @@ class Account(client: Client) : Service(client) {
 		secret: String
 	): io.appwrite.models.Token {
         val path = "/account/verification"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "secret" to secret
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.Token = {
+            io.appwrite.models.Token.from(map = it)
+        }
+        return client.call(
+            "PUT",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Token::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create Phone Verification
+     *
+     * Use this endpoint to send a verification message to your user's phone
+     * number to confirm they are the valid owners of that address. The provided
+     * secret should allow you to complete the verification process by verifying
+     * both the **userId** and **secret** parameters. Learn more about how to
+     * [complete the verification
+     * process](/docs/client/account#accountUpdatePhoneVerification). The
+     * verification link sent to the user's phone number is valid for 15 minutes.
+     *
+     * @return [io.appwrite.models.Token]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPhoneVerification(): io.appwrite.models.Token {
+        val path = "/account/verification/phone"
+        val params = mutableMapOf<String, Any?>(
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.Token = {
+            io.appwrite.models.Token.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.Token::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create Phone Verification (confirmation)
+     *
+     * Use this endpoint to complete the user phone verification process. Use the
+     * **userId** and **secret** that were sent to your user's phone number to
+     * verify the user email ownership. If confirmed this route will return a 200
+     * status code.
+     *
+     * @param userId User ID.
+     * @param secret Valid verification token.
+     * @return [io.appwrite.models.Token]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePhoneVerification(
+		userId: String,
+		secret: String
+	): io.appwrite.models.Token {
+        val path = "/account/verification/phone"
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret

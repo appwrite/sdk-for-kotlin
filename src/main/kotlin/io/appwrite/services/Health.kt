@@ -6,7 +6,9 @@ import okhttp3.Cookie
 import okhttp3.Response
 import java.io.File
 
-class Health(client: Client) : Service(client) {
+class Health : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * Get HTTP

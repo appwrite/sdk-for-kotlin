@@ -14,6 +14,20 @@ data class Bucket(
     val id: String,
 
     /**
+     * Bucket creation date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: Long,
+
+    /**
+     * Bucket update date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: Long,
+
+    /**
      * File read permissions.
      *
      */
@@ -33,20 +47,6 @@ data class Bucket(
      */
     @SerializedName("permission")
     val permission: String,
-
-    /**
-     * Bucket creation date in Unix timestamp.
-     *
-     */
-    @SerializedName("dateCreated")
-    val dateCreated: Long,
-
-    /**
-     * Bucket update date in Unix timestamp.
-     *
-     */
-    @SerializedName("dateUpdated")
-    val dateUpdated: Long,
 
     /**
      * Bucket name.
@@ -94,11 +94,11 @@ data class Bucket(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Bucket(
             id = map["\$id"] as String,
+            createdAt = (map["\$createdAt"] as Number).toLong(),
+            updatedAt = (map["\$updatedAt"] as Number).toLong(),
             read = map["\$read"] as List<Any>,
             write = map["\$write"] as List<Any>,
             permission = map["permission"] as String,
-            dateCreated = (map["dateCreated"] as Number).toLong(),
-            dateUpdated = (map["dateUpdated"] as Number).toLong(),
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             maximumFileSize = (map["maximumFileSize"] as Number).toLong(),
@@ -110,11 +110,11 @@ data class Bucket(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "\$read" to read as Any,
         "\$write" to write as Any,
         "permission" to permission as Any,
-        "dateCreated" to dateCreated as Any,
-        "dateUpdated" to dateUpdated as Any,
         "name" to name as Any,
         "enabled" to enabled as Any,
         "maximumFileSize" to maximumFileSize as Any,

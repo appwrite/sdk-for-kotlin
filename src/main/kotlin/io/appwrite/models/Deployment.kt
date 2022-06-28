@@ -14,6 +14,20 @@ data class Deployment(
     val id: String,
 
     /**
+     * Deployment creation date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: Long,
+
+    /**
+     * Deployment update date in Unix timestamp.
+     *
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: Long,
+
+    /**
      * Resource ID.
      *
      */
@@ -26,13 +40,6 @@ data class Deployment(
      */
     @SerializedName("resourceType")
     val resourceType: String,
-
-    /**
-     * The deployment creation date in Unix timestamp.
-     *
-     */
-    @SerializedName("dateCreated")
-    val dateCreated: Long,
 
     /**
      * The entrypoint file to use to execute the deployment code.
@@ -87,9 +94,10 @@ data class Deployment(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Deployment(
             id = map["\$id"] as String,
+            createdAt = (map["\$createdAt"] as Number).toLong(),
+            updatedAt = (map["\$updatedAt"] as Number).toLong(),
             resourceId = map["resourceId"] as String,
             resourceType = map["resourceType"] as String,
-            dateCreated = (map["dateCreated"] as Number).toLong(),
             entrypoint = map["entrypoint"] as String,
             size = (map["size"] as Number).toLong(),
             buildId = map["buildId"] as String,
@@ -102,9 +110,10 @@ data class Deployment(
 
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "resourceId" to resourceId as Any,
         "resourceType" to resourceType as Any,
-        "dateCreated" to dateCreated as Any,
         "entrypoint" to entrypoint as Any,
         "size" to size as Any,
         "buildId" to buildId as Any,

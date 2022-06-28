@@ -8,7 +8,9 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
-class Storage(client: Client) : Service(client) {
+class Storage : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * List buckets
@@ -20,7 +22,7 @@ class Storage(client: Client) : Service(client) {
      * @param limit Results limit value. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Results offset. The default value is 0. Use this param to manage pagination.
      * @param cursor ID of the bucket used as the starting point for the query, excluding the bucket itself. Should be used for efficient pagination when working with large sets of data.
-     * @param cursorDirection Direction of the cursor.
+     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.BucketList]     
      */
@@ -251,7 +253,7 @@ class Storage(client: Client) : Service(client) {
      * @param limit Maximum number of files to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Offset value. The default value is 0. Use this param to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursor ID of the file used as the starting point for the query, excluding the file itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursorDirection Direction of the cursor.
+     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.FileList]     
      */
@@ -325,7 +327,7 @@ class Storage(client: Client) : Service(client) {
     suspend fun createFile(
 		bucketId: String,
 		fileId: String,
-		file: File,
+		file: InputFile,
 		read: List<Any>? = null,
 		write: List<Any>? = null, onProgress: ((UploadProgress) -> Unit)? = null
 	): io.appwrite.models.File {

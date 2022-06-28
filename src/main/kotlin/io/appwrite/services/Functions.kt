@@ -6,7 +6,9 @@ import okhttp3.Cookie
 import okhttp3.Response
 import java.io.File
 
-class Functions(client: Client) : Service(client) {
+class Functions : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * List Functions
@@ -18,7 +20,7 @@ class Functions(client: Client) : Service(client) {
      * @param limit Maximum number of functions to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursor ID of the function used as the starting point for the query, excluding the function itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursorDirection Direction of the cursor.
+     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.FunctionList]     
      */
@@ -263,7 +265,7 @@ class Functions(client: Client) : Service(client) {
      * @param limit Maximum number of deployments to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
      * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param cursor ID of the deployment used as the starting point for the query, excluding the deployment itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursorDirection Direction of the cursor.
+     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
      * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.DeploymentList]     
      */
@@ -328,7 +330,7 @@ class Functions(client: Client) : Service(client) {
     suspend fun createDeployment(
 		functionId: String,
 		entrypoint: String,
-		code: File,
+		code: InputFile,
 		activate: Boolean, onProgress: ((UploadProgress) -> Unit)? = null
 	): io.appwrite.models.Deployment {
         val path = "/functions/{functionId}/deployments".replace("{functionId}", functionId)
@@ -500,7 +502,7 @@ class Functions(client: Client) : Service(client) {
      * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param cursor ID of the execution used as the starting point for the query, excluding the execution itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursorDirection Direction of the cursor.
+     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
      * @return [io.appwrite.models.ExecutionList]     
      */
     @JvmOverloads
