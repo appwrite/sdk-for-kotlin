@@ -14,39 +14,32 @@ data class Bucket(
     val id: String,
 
     /**
-     * Bucket creation date in Unix timestamp.
+     * Bucket creation time in ISO 8601 format.
      *
      */
     @SerializedName("\$createdAt")
-    val createdAt: Long,
+    val createdAt: String,
 
     /**
-     * Bucket update date in Unix timestamp.
+     * Bucket update date in ISO 8601 format.
      *
      */
     @SerializedName("\$updatedAt")
-    val updatedAt: Long,
+    val updatedAt: String,
 
     /**
-     * File read permissions.
+     * Bucket permissions. [Learn more about permissions](/docs/permissions).
      *
      */
-    @SerializedName("\$read")
-    val read: List<Any>,
+    @SerializedName("\$permissions")
+    val permissions: List<Any>,
 
     /**
-     * File write permissions.
+     * Whether file-level security is enabled. [Learn more about permissions](/docs/permissions).
      *
      */
-    @SerializedName("\$write")
-    val write: List<Any>,
-
-    /**
-     * Bucket permission model. Possible values: `bucket` or `file`
-     *
-     */
-    @SerializedName("permission")
-    val permission: String,
+    @SerializedName("fileSecurity")
+    val fileSecurity: String,
 
     /**
      * Bucket name.
@@ -77,6 +70,13 @@ data class Bucket(
     val allowedFileExtensions: List<Any>,
 
     /**
+     * Compression algorithm choosen for compression. Will be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd).
+     *
+     */
+    @SerializedName("compression")
+    val compression: String,
+
+    /**
      * Bucket is encrypted.
      *
      */
@@ -94,15 +94,15 @@ data class Bucket(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Bucket(
             id = map["\$id"] as String,
-            createdAt = (map["\$createdAt"] as Number).toLong(),
-            updatedAt = (map["\$updatedAt"] as Number).toLong(),
-            read = map["\$read"] as List<Any>,
-            write = map["\$write"] as List<Any>,
-            permission = map["permission"] as String,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
+            permissions = map["\$permissions"] as List<Any>,
+            fileSecurity = map["fileSecurity"] as String,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             maximumFileSize = (map["maximumFileSize"] as Number).toLong(),
             allowedFileExtensions = map["allowedFileExtensions"] as List<Any>,
+            compression = map["compression"] as String,
             encryption = map["encryption"] as Boolean,
             antivirus = map["antivirus"] as Boolean
         )
@@ -112,13 +112,13 @@ data class Bucket(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
-        "\$read" to read as Any,
-        "\$write" to write as Any,
-        "permission" to permission as Any,
+        "\$permissions" to permissions as Any,
+        "fileSecurity" to fileSecurity as Any,
         "name" to name as Any,
         "enabled" to enabled as Any,
         "maximumFileSize" to maximumFileSize as Any,
         "allowedFileExtensions" to allowedFileExtensions as Any,
+        "compression" to compression as Any,
         "encryption" to encryption as Any,
         "antivirus" to antivirus as Any
     )

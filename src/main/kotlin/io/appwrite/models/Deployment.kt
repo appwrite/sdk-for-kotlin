@@ -14,18 +14,18 @@ data class Deployment(
     val id: String,
 
     /**
-     * Deployment creation date in Unix timestamp.
+     * Deployment creation date in ISO 8601 format.
      *
      */
     @SerializedName("\$createdAt")
-    val createdAt: Long,
+    val createdAt: String,
 
     /**
-     * Deployment update date in Unix timestamp.
+     * Deployment update date in ISO 8601 format.
      *
      */
     @SerializedName("\$updatedAt")
-    val updatedAt: Long,
+    val updatedAt: String,
 
     /**
      * Resource ID.
@@ -70,7 +70,7 @@ data class Deployment(
     val activate: Boolean,
 
     /**
-     * The deployment status.
+     * The deployment status. Possible values are &quot;processing&quot;, &quot;building&quot;, &quot;pending&quot;, &quot;ready&quot;, and &quot;failed&quot;.
      *
      */
     @SerializedName("status")
@@ -94,8 +94,8 @@ data class Deployment(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Deployment(
             id = map["\$id"] as String,
-            createdAt = (map["\$createdAt"] as Number).toLong(),
-            updatedAt = (map["\$updatedAt"] as Number).toLong(),
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             resourceId = map["resourceId"] as String,
             resourceType = map["resourceType"] as String,
             entrypoint = map["entrypoint"] as String,

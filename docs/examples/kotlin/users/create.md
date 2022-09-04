@@ -10,8 +10,6 @@ suspend fun main() {
     val users = Users(client)
     val response = users.create(
         userId = "[USER_ID]",
-        email = "email@example.com",
-        password = "password",
     )
     val json = response.body?.string()
 }

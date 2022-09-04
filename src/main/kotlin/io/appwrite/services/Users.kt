@@ -16,32 +16,20 @@ class Users : Service {
      * Get a list of all the project's users. You can use the query params to
      * filter your results.
      *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification
      * @param search Search term to filter your list results. Max length: 256 chars.
-     * @param limit Maximum number of users to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
-     * @param offset Offset value. The default value is 0. Use this param to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursor ID of the user used as the starting point for the query, excluding the user itself. Should be used for efficient pagination when working with large sets of data. [learn more about pagination](https://appwrite.io/docs/pagination)
-     * @param cursorDirection Direction of the cursor, can be either &#039;before&#039; or &#039;after&#039;.
-     * @param orderType Order result by ASC or DESC order.
      * @return [io.appwrite.models.UserList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun list(
-		search: String? = null,
-		limit: Long? = null,
-		offset: Long? = null,
-		cursor: String? = null,
-		cursorDirection: String? = null,
-		orderType: String? = null
+		queries: List<String>? = null,
+		search: String? = null
 	): io.appwrite.models.UserList {
         val path = "/users"
         val params = mutableMapOf<String, Any?>(
-            "search" to search,
-            "limit" to limit,
-            "offset" to offset,
-            "cursor" to cursor,
-            "cursorDirection" to cursorDirection,
-            "orderType" to orderType
+            "queries" to queries,
+            "search" to search
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"
@@ -66,7 +54,8 @@ class Users : Service {
      *
      * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
      * @param email User email.
-     * @param password User password. Must be at least 8 chars.
+     * @param phone Phone number. Format this number with a leading &#039;+&#039; and a country code, e.g., +16175551212.
+     * @param password Plain text user password. Must be at least 8 chars.
      * @param name User name. Max length: 128 chars.
      * @return [io.appwrite.models.User]     
      */
@@ -74,15 +63,359 @@ class Users : Service {
     @Throws(AppwriteException::class)
     suspend fun create(
 		userId: String,
-		email: String,
-		password: String,
+		email: String? = null,
+		phone: String? = null,
+		password: String? = null,
 		name: String? = null
 	): io.appwrite.models.User {
         val path = "/users"
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
+            "phone" to phone,
             "password" to password,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with Argon2 Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [Argon2](https://en.wikipedia.org/wiki/Argon2) algorithm. Use the [POST
+     * /users](/docs/server/users#usersCreate) endpoint to create users with a
+     * plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using Argon2.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createArgon2User(
+		userId: String,
+		email: String,
+		password: String,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/argon2"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with Bcrypt Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt) algorithm. Use the [POST
+     * /users](/docs/server/users#usersCreate) endpoint to create users with a
+     * plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using Bcrypt.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBcryptUser(
+		userId: String,
+		email: String,
+		password: String,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/bcrypt"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with MD5 Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [MD5](https://en.wikipedia.org/wiki/MD5) algorithm. Use the [POST
+     * /users](/docs/server/users#usersCreate) endpoint to create users with a
+     * plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using MD5.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createMD5User(
+		userId: String,
+		email: String,
+		password: String,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/md5"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with PHPass Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [PHPass](https://www.openwall.com/phpass/) algorithm. Use the [POST
+     * /users](/docs/server/users#usersCreate) endpoint to create users with a
+     * plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using PHPass.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPHPassUser(
+		userId: String,
+		email: String,
+		password: String,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/phpass"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with Scrypt Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [Scrypt](https://github.com/Tarsnap/scrypt) algorithm. Use the [POST
+     * /users](/docs/server/users#usersCreate) endpoint to create users with a
+     * plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using Scrypt.
+     * @param passwordSalt Optional salt used to hash password.
+     * @param passwordCpu Optional CPU cost used to hash password.
+     * @param passwordMemory Optional memory cost used to hash password.
+     * @param passwordParallel Optional parallelization cost used to hash password.
+     * @param passwordLength Optional hash length used to hash password.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createScryptUser(
+		userId: String,
+		email: String,
+		password: String,
+		passwordSalt: String,
+		passwordCpu: Long,
+		passwordMemory: Long,
+		passwordParallel: Long,
+		passwordLength: Long,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/scrypt"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "passwordSalt" to passwordSalt,
+            "passwordCpu" to passwordCpu,
+            "passwordMemory" to passwordMemory,
+            "passwordParallel" to passwordParallel,
+            "passwordLength" to passwordLength,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with Scrypt Modified Password
+     *
+     * Create a new user. Password provided must be hashed with the [Scrypt
+     * Modified](https://gist.github.com/Meldiron/eecf84a0225eccb5a378d45bb27462cc)
+     * algorithm. Use the [POST /users](/docs/server/users#usersCreate) endpoint
+     * to create users with a plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using Scrypt Modified.
+     * @param passwordSalt Salt used to hash password.
+     * @param passwordSaltSeparator Salt separator used to hash password.
+     * @param passwordSignerKey Signer key used to hash password.
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createScryptModifiedUser(
+		userId: String,
+		email: String,
+		password: String,
+		passwordSalt: String,
+		passwordSaltSeparator: String,
+		passwordSignerKey: String,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/scrypt-modified"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "passwordSalt" to passwordSalt,
+            "passwordSaltSeparator" to passwordSaltSeparator,
+            "passwordSignerKey" to passwordSignerKey,
+            "name" to name
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json"
+        )
+        val converter: (Map<String, Any>) -> io.appwrite.models.User = {
+            io.appwrite.models.User.from(map = it)
+        }
+        return client.call(
+            "POST",
+            path,
+            headers,
+            params,
+            responseType = io.appwrite.models.User::class.java,
+            converter,
+        )
+    }
+    
+    /**
+     * Create User with SHA Password
+     *
+     * Create a new user. Password provided must be hashed with the
+     * [SHA](https://en.wikipedia.org/wiki/Secure_Hash_Algorithm) algorithm. Use
+     * the [POST /users](/docs/server/users#usersCreate) endpoint to create users
+     * with a plain text password.
+     *
+     * @param userId User ID. Choose your own unique ID or pass the string &quot;unique()&quot; to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can&#039;t start with a special char. Max length is 36 chars.
+     * @param email User email.
+     * @param password User password hashed using SHA.
+     * @param passwordVersion Optional SHA version used to hash password. Allowed values are: &#039;sha1&#039;, &#039;sha224&#039;, &#039;sha256&#039;, &#039;sha384&#039;, &#039;sha512/224&#039;, &#039;sha512/256&#039;, &#039;sha512&#039;, &#039;sha3-224&#039;, &#039;sha3-256&#039;, &#039;sha3-384&#039;, &#039;sha3-512&#039;
+     * @param name User name. Max length: 128 chars.
+     * @return [io.appwrite.models.User]     
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createSHAUser(
+		userId: String,
+		email: String,
+		password: String,
+		passwordVersion: String? = null,
+		name: String? = null
+	): io.appwrite.models.User {
+        val path = "/users/sha"
+        val params = mutableMapOf<String, Any?>(
+            "userId" to userId,
+            "email" to email,
+            "password" to password,
+            "passwordVersion" to passwordVersion,
             "name" to name
         )
         val headers = mutableMapOf(
@@ -206,21 +539,18 @@ class Users : Service {
      * Get the user activity logs list by its unique ID.
      *
      * @param userId User ID.
-     * @param limit Maximum number of logs to return in response. By default will return maximum 25 results. Maximum of 100 results allowed per request.
-     * @param offset Offset value. The default value is 0. Use this value to manage pagination. [learn more about pagination](https://appwrite.io/docs/pagination)
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only supported methods are limit and offset
      * @return [io.appwrite.models.LogList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getLogs(
 		userId: String,
-		limit: Long? = null,
-		offset: Long? = null
+		queries: List<String>? = null
 	): io.appwrite.models.LogList {
         val path = "/users/{userId}/logs".replace("{userId}", userId)
         val params = mutableMapOf<String, Any?>(
-            "limit" to limit,
-            "offset" to offset
+            "queries" to queries
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"

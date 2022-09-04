@@ -34,7 +34,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 
 class Client @JvmOverloads constructor(
-    var endPoint: String = "https://appwrite.io/v1",
+    var endPoint: String = "https://HOSTNAME/v1",
     private var selfSigned: Boolean = false
 ) : CoroutineScope {
 
@@ -62,8 +62,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "x-sdk-version" to "appwrite:kotlin:${BuildConfig.SDK_VERSION}",            
-            "x-appwrite-response-format" to "0.15.0"
+            "x-sdk-name" to "Kotlin",
+            "x-sdk-platform" to "server",
+            "x-sdk-language" to "kotlin",
+            "x-sdk-version" to "0.7.0-SNAPSHOT",            
+            "x-appwrite-response-format" to "1.0.0-RC1"
         )
         config = mutableMapOf()
 

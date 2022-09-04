@@ -9,7 +9,7 @@ suspend fun main() {
 
     val account = Account(client)
     val response = account.updatePhone(
-        number = "",
+        phone = "",
         password = "password"
     )
     val json = response.body?.string()
