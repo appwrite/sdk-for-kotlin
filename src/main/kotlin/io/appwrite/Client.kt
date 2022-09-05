@@ -65,7 +65,7 @@ class Client @JvmOverloads constructor(
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "0.7.0-SNAPSHOT",            
+            "x-sdk-version" to "1.0.0-SNAPSHOT",            
             "x-appwrite-response-format" to "1.0.0-RC1"
         )
         config = mutableMapOf()
