@@ -11,7 +11,6 @@ suspend fun main() {
     val response = storage.updateBucket(
         bucketId = "[BUCKET_ID]",
         name = "[NAME]",
-        permission = "file",
     )
     val json = response.body?.string()
 }

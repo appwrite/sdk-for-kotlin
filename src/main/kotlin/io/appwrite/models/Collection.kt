@@ -14,32 +14,25 @@ data class Collection(
     val id: String,
 
     /**
-     * Collection creation date in Unix timestamp.
+     * Collection creation date in ISO 8601 format.
      *
      */
     @SerializedName("\$createdAt")
-    val createdAt: Long,
+    val createdAt: String,
 
     /**
-     * Collection update date in Unix timestamp.
+     * Collection update date in ISO 8601 format.
      *
      */
     @SerializedName("\$updatedAt")
-    val updatedAt: Long,
+    val updatedAt: String,
 
     /**
-     * Collection read permissions.
+     * Collection permissions. [Learn more about permissions](/docs/permissions).
      *
      */
-    @SerializedName("\$read")
-    val read: List<Any>,
-
-    /**
-     * Collection write permissions.
-     *
-     */
-    @SerializedName("\$write")
-    val write: List<Any>,
+    @SerializedName("\$permissions")
+    val permissions: List<Any>,
 
     /**
      * Database ID.
@@ -63,11 +56,11 @@ data class Collection(
     val enabled: Boolean,
 
     /**
-     * Collection permission model. Possible values: `document` or `collection`
+     * Whether document-level permissions are enabled. [Learn more about permissions](/docs/permissions).
      *
      */
-    @SerializedName("permission")
-    val permission: String,
+    @SerializedName("documentSecurity")
+    val documentSecurity: Boolean,
 
     /**
      * Collection attributes.
@@ -87,14 +80,13 @@ data class Collection(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = Collection(
             id = map["\$id"] as String,
-            createdAt = (map["\$createdAt"] as Number).toLong(),
-            updatedAt = (map["\$updatedAt"] as Number).toLong(),
-            read = map["\$read"] as List<Any>,
-            write = map["\$write"] as List<Any>,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
+            permissions = map["\$permissions"] as List<Any>,
             databaseId = map["databaseId"] as String,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
-            permission = map["permission"] as String,
+            documentSecurity = map["documentSecurity"] as Boolean,
             attributes = map["attributes"] as List<Any>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { Index.from(map = it) }
         )
@@ -104,12 +96,11 @@ data class Collection(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
-        "\$read" to read as Any,
-        "\$write" to write as Any,
+        "\$permissions" to permissions as Any,
         "databaseId" to databaseId as Any,
         "name" to name as Any,
         "enabled" to enabled as Any,
-        "permission" to permission as Any,
+        "documentSecurity" to documentSecurity as Any,
         "attributes" to attributes as Any,
         "indexes" to indexes.map { it.toMap() } as Any
     )

@@ -14,18 +14,18 @@ data class User(
     val id: String,
 
     /**
-     * User creation date in Unix timestamp.
+     * User creation date in ISO 8601 format.
      *
      */
     @SerializedName("\$createdAt")
-    val createdAt: Long,
+    val createdAt: String,
 
     /**
-     * User update date in Unix timestamp.
+     * User update date in ISO 8601 format.
      *
      */
     @SerializedName("\$updatedAt")
-    val updatedAt: Long,
+    val updatedAt: String,
 
     /**
      * User name.
@@ -35,11 +35,32 @@ data class User(
     val name: String,
 
     /**
-     * User registration date in Unix timestamp.
+     * Hashed user password.
+     *
+     */
+    @SerializedName("password")
+    val password: String,
+
+    /**
+     * Password hashing algorithm.
+     *
+     */
+    @SerializedName("hash")
+    val hash: String,
+
+    /**
+     * Password hashing algorithm configuration.
+     *
+     */
+    @SerializedName("hashOptions")
+    val hashOptions: Any,
+
+    /**
+     * User registration date in ISO 8601 format.
      *
      */
     @SerializedName("registration")
-    val registration: Long,
+    val registration: String,
 
     /**
      * User status. Pass `true` for enabled and `false` for disabled.
@@ -49,11 +70,11 @@ data class User(
     val status: Boolean,
 
     /**
-     * Unix timestamp of the most recent password update
+     * Password update time in ISO 8601 format.
      *
      */
     @SerializedName("passwordUpdate")
-    val passwordUpdate: Long,
+    val passwordUpdate: String,
 
     /**
      * User email address.
@@ -94,12 +115,15 @@ data class User(
         @Suppress("UNCHECKED_CAST")
         fun from(map: Map<String, Any>) = User(
             id = map["\$id"] as String,
-            createdAt = (map["\$createdAt"] as Number).toLong(),
-            updatedAt = (map["\$updatedAt"] as Number).toLong(),
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             name = map["name"] as String,
-            registration = (map["registration"] as Number).toLong(),
+            password = map["password"] as String,
+            hash = map["hash"] as String,
+            hashOptions = map["hashOptions"] as Any,
+            registration = map["registration"] as String,
             status = map["status"] as Boolean,
-            passwordUpdate = (map["passwordUpdate"] as Number).toLong(),
+            passwordUpdate = map["passwordUpdate"] as String,
             email = map["email"] as String,
             phone = map["phone"] as String,
             emailVerification = map["emailVerification"] as Boolean,
@@ -113,6 +137,9 @@ data class User(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
+        "password" to password as Any,
+        "hash" to hash as Any,
+        "hashOptions" to hashOptions as Any,
         "registration" to registration as Any,
         "status" to status as Any,
         "passwordUpdate" to passwordUpdate as Any,

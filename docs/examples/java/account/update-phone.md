@@ -9,7 +9,7 @@ public void main() {
 
     Account account = new Account(client);
     account.updatePhone(
-        number = "",
+        phone = "",
         password = "password"
         new Continuation<Response>() {
             @NotNull

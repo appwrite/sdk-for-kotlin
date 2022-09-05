@@ -11,7 +11,6 @@ public void main() {
     storage.updateBucket(
         bucketId = "[BUCKET_ID]",
         name = "[NAME]",
-        permission = "file",
         new Continuation<Response>() {
             @NotNull
             @Override

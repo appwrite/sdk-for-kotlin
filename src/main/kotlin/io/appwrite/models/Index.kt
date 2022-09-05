@@ -39,7 +39,7 @@ data class Index(
      *
      */
     @SerializedName("orders")
-    val orders: List<Any>
+    var orders: List<Any>?
 ) {
     companion object {
         @Suppress("UNCHECKED_CAST")
@@ -48,7 +48,7 @@ data class Index(
             type = map["type"] as String,
             status = map["status"] as String,
             attributes = map["attributes"] as List<Any>,
-            orders = map["orders"] as List<Any>
+            orders = map["orders"] as? List<Any>
         )
     }
 
