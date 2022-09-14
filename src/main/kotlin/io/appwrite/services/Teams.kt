@@ -189,7 +189,7 @@ class Teams : Service {
     }
     
     /**
-     * Get Team Memberships
+     * List Team Memberships
      *
      * Use this endpoint to list a team's members using the team's ID. All team
      * members have read access to this endpoint.
@@ -201,7 +201,7 @@ class Teams : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getMemberships(
+    suspend fun listMemberships(
 		teamId: String,
 		queries: List<String>? = null,
 		search: String? = null

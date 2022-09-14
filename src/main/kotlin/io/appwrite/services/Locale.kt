@@ -54,7 +54,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getContinents(): io.appwrite.models.ContinentList {
+    suspend fun listContinents(): io.appwrite.models.ContinentList {
         val path = "/locale/continents"
         val params = mutableMapOf<String, Any?>(
         )
@@ -84,7 +84,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCountries(): io.appwrite.models.CountryList {
+    suspend fun listCountries(): io.appwrite.models.CountryList {
         val path = "/locale/countries"
         val params = mutableMapOf<String, Any?>(
         )
@@ -114,7 +114,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCountriesEU(): io.appwrite.models.CountryList {
+    suspend fun listCountriesEU(): io.appwrite.models.CountryList {
         val path = "/locale/countries/eu"
         val params = mutableMapOf<String, Any?>(
         )
@@ -144,7 +144,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCountriesPhones(): io.appwrite.models.PhoneList {
+    suspend fun listCountriesPhones(): io.appwrite.models.PhoneList {
         val path = "/locale/countries/phones"
         val params = mutableMapOf<String, Any?>(
         )
@@ -175,7 +175,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCurrencies(): io.appwrite.models.CurrencyList {
+    suspend fun listCurrencies(): io.appwrite.models.CurrencyList {
         val path = "/locale/currencies"
         val params = mutableMapOf<String, Any?>(
         )
@@ -205,7 +205,7 @@ class Locale : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getLanguages(): io.appwrite.models.LanguageList {
+    suspend fun listLanguages(): io.appwrite.models.LanguageList {
         val path = "/locale/languages"
         val params = mutableMapOf<String, Any?>(
         )

@@ -16,7 +16,7 @@ class Functions : Service {
      * Get a list of all the project's functions. You can use the query params to
      * filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, status, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.FunctionList]     
      */
@@ -61,6 +61,7 @@ class Functions : Service {
      * @param events Events list. Maximum of 100 events are allowed.
      * @param schedule Schedule CRON syntax.
      * @param timeout Function maximum execution time in seconds.
+     * @param enabled Is function enabled?
      * @return [io.appwrite.models.Function]     
      */
     @JvmOverloads
@@ -72,7 +73,8 @@ class Functions : Service {
 		runtime: String,
 		events: List<String>? = null,
 		schedule: String? = null,
-		timeout: Long? = null
+		timeout: Long? = null,
+		enabled: Boolean? = null
 	): io.appwrite.models.Function {
         val path = "/functions"
         val params = mutableMapOf<String, Any?>(
@@ -82,7 +84,8 @@ class Functions : Service {
             "runtime" to runtime,
             "events" to events,
             "schedule" to schedule,
-            "timeout" to timeout
+            "timeout" to timeout,
+            "enabled" to enabled
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"
@@ -172,6 +175,7 @@ class Functions : Service {
      * @param events Events list. Maximum of 100 events are allowed.
      * @param schedule Schedule CRON syntax.
      * @param timeout Maximum execution time in seconds.
+     * @param enabled Is function enabled?
      * @return [io.appwrite.models.Function]     
      */
     @JvmOverloads
@@ -182,7 +186,8 @@ class Functions : Service {
 		execute: List<String>,
 		events: List<String>? = null,
 		schedule: String? = null,
-		timeout: Long? = null
+		timeout: Long? = null,
+		enabled: Boolean? = null
 	): io.appwrite.models.Function {
         val path = "/functions/{functionId}".replace("{functionId}", functionId)
         val params = mutableMapOf<String, Any?>(
@@ -190,7 +195,8 @@ class Functions : Service {
             "execute" to execute,
             "events" to events,
             "schedule" to schedule,
-            "timeout" to timeout
+            "timeout" to timeout,
+            "enabled" to enabled
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"
@@ -468,7 +474,7 @@ class Functions : Service {
      * different API modes](/docs/admin).
      *
      * @param functionId Function ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, statusCode, time
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, statusCode, duration
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.ExecutionList]     
      */
@@ -510,7 +516,7 @@ class Functions : Service {
      *
      * @param functionId Function ID.
      * @param data String of custom data to send to function.
-     * @param async Execute code asynchronously. Default value is true.
+     * @param async Execute code in the background. Default value is false.
      * @return [io.appwrite.models.Execution]     
      */
     @JvmOverloads
@@ -581,21 +587,15 @@ class Functions : Service {
      * Get a list of all variables of a specific function.
      *
      * @param functionId Function unique ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key
-     * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.VariableList]     
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listVariables(
-		functionId: String,
-		queries: List<String>? = null,
-		search: String? = null
+		functionId: String
 	): io.appwrite.models.VariableList {
         val path = "/functions/{functionId}/variables".replace("{functionId}", functionId)
         val params = mutableMapOf<String, Any?>(
-            "queries" to queries,
-            "search" to search
         )
         val headers = mutableMapOf(
             "content-type" to "application/json"

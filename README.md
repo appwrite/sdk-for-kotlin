@@ -2,11 +2,11 @@
 
 ![Maven Central](https://img.shields.io/maven-central/v/io.appwrite/sdk-for-kotlin.svg?color=green&style=flat-square)
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-kotlin.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-1.0.0-RC1-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-1.0.0-blue.svg?style=flat-square)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
-**This SDK is compatible with Appwrite server version 1.0.0-RC1. For older versions, please check [previous releases](https://github.com/appwrite/sdk-for-kotlin/releases).**
+**This SDK is compatible with Appwrite server version 1.0.0. For older versions, please check [previous releases](https://github.com/appwrite/sdk-for-kotlin/releases).**
 
  > This is the Kotlin SDK for integrating with Appwrite from your Kotlin server-side code. If you're looking for the Android SDK you should check [appwrite/sdk-for-android](https://github.com/appwrite/sdk-for-android)
 
@@ -39,7 +39,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:1.0.0-SNAPSHOT")
+implementation("io.appwrite:sdk-for-kotlin:1.0.0")
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </dependency>
 </dependencies>
 ```
@@ -81,12 +81,11 @@ Once your SDK object is set, create any of the Appwrite service objects and choo
 
 ```kotlin
 val users = Users(client)
-val response = users.create(
-    user = "[USER_ID]",
+val user = users.create(
+    user = ID.unique(),
     email = "email@example.com",
     password = "password",
 )
-val json = response.body?.string()
 ```
 
 ### Full Example
@@ -94,6 +93,7 @@ val json = response.body?.string()
 ```kotlin
 import io.appwrite.Client
 import io.appwrite.services.Users
+import io.appwrite.ID
 
 suspend fun main() {
     val client = Client(context)
@@ -103,12 +103,11 @@ suspend fun main() {
       .setSelfSigned(true) // Use only on dev mode with a self-signed SSL cert
 
     val users = Users(client)
-    val response = users.create(
-        user = "[USER_ID]",
+    val user = users.create(
+        user = ID.unique(),
         email = "email@example.com",
         password = "password",
     )
-    val json = response.body?.string()
 }
 ```
 
@@ -118,20 +117,19 @@ The Appwrite Kotlin SDK raises `AppwriteException` object with `message`, `code`
 
 ```kotlin
 import io.appwrite.Client
+import io.appwrite.ID
 import io.appwrite.services.Users
 
 suspend fun main() {
     val users = Users(client)
     try {
-        val response = users.create(
-            user = "[USER_ID]",
+        val user = users.create(
+            user = ID.unique(),
             email = "email@example.com",
             password = "password",
         )
-        var jsonString = response.body?.string() ?: ""
-
     } catch (e: AppwriteException) {
-        println(e)
+        e.printStackTrace()
     }
 }
 ```

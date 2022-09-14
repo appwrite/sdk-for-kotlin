@@ -534,7 +534,7 @@ class Users : Service {
     }
     
     /**
-     * Get User Logs
+     * List User Logs
      *
      * Get the user activity logs list by its unique ID.
      *
@@ -544,7 +544,7 @@ class Users : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getLogs(
+    suspend fun listLogs(
 		userId: String,
 		queries: List<String>? = null
 	): io.appwrite.models.LogList {
@@ -569,7 +569,7 @@ class Users : Service {
     }
     
     /**
-     * Get User Memberships
+     * List User Memberships
      *
      * Get the user membership list by its unique ID.
      *
@@ -578,7 +578,7 @@ class Users : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getMemberships(
+    suspend fun listMemberships(
 		userId: String
 	): io.appwrite.models.MembershipList {
         val path = "/users/{userId}/memberships".replace("{userId}", userId)
@@ -775,7 +775,7 @@ class Users : Service {
     }
     
     /**
-     * Get User Sessions
+     * List User Sessions
      *
      * Get the user sessions list by its unique ID.
      *
@@ -784,7 +784,7 @@ class Users : Service {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getSessions(
+    suspend fun listSessions(
 		userId: String
 	): io.appwrite.models.SessionList {
         val path = "/users/{userId}/sessions".replace("{userId}", userId)

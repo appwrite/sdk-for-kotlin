@@ -42,11 +42,11 @@ data class Function(
     val name: String,
 
     /**
-     * Function status. Possible values: `disabled`, `enabled`
+     * Function enabled.
      *
      */
-    @SerializedName("status")
-    val status: String,
+    @SerializedName("enabled")
+    val enabled: Boolean,
 
     /**
      * Function execution runtime.
@@ -112,7 +112,7 @@ data class Function(
             updatedAt = map["\$updatedAt"] as String,
             execute = map["execute"] as List<Any>,
             name = map["name"] as String,
-            status = map["status"] as String,
+            enabled = map["enabled"] as Boolean,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
@@ -130,7 +130,7 @@ data class Function(
         "\$updatedAt" to updatedAt as Any,
         "execute" to execute as Any,
         "name" to name as Any,
-        "status" to status as Any,
+        "enabled" to enabled as Any,
         "runtime" to runtime as Any,
         "deployment" to deployment as Any,
         "vars" to vars.map { it.toMap() } as Any,

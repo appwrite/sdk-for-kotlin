@@ -39,7 +39,7 @@ data class Bucket(
      *
      */
     @SerializedName("fileSecurity")
-    val fileSecurity: String,
+    val fileSecurity: Boolean,
 
     /**
      * Bucket name.
@@ -97,7 +97,7 @@ data class Bucket(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             permissions = map["\$permissions"] as List<Any>,
-            fileSecurity = map["fileSecurity"] as String,
+            fileSecurity = map["fileSecurity"] as Boolean,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             maximumFileSize = (map["maximumFileSize"] as Number).toLong(),
