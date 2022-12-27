@@ -1,11 +1,15 @@
 package io.appwrite.services
+
 import io.appwrite.Client
 import io.appwrite.models.*
 import io.appwrite.exceptions.AppwriteException
+import io.appwrite.extensions.classOf
 import okhttp3.Cookie
-import okhttp3.Response
 import java.io.File
 
+/**
+ * The Health service allows you to both validate and monitor your Appwrite server&#039;s health.
+**/
 class Health : Service {
 
     public constructor (client: Client) : super(client) { }
@@ -15,20 +19,21 @@ class Health : Service {
      *
      * Check the Appwrite HTTP server is up and responsive.
      *
-     * @return [io.appwrite.models.HealthStatus]     
+     * @return [io.appwrite.models.HealthStatus]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun get(): io.appwrite.models.HealthStatus {
+    suspend fun get(
+    ): io.appwrite.models.HealthStatus {
         val path = "/health"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -38,26 +43,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Antivirus
      *
      * Check the Appwrite Antivirus server is up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthAntivirus]     
+     * @return [io.appwrite.models.HealthAntivirus]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getAntivirus(): io.appwrite.models.HealthAntivirus {
+    suspend fun getAntivirus(
+    ): io.appwrite.models.HealthAntivirus {
         val path = "/health/anti-virus"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthAntivirus = {
-            io.appwrite.models.HealthAntivirus.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthAntivirus = {
+                io.appwrite.models.HealthAntivirus.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -67,27 +73,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Cache
      *
-     * Check the Appwrite in-memory cache server is up and connection is
-     * successful.
+     * Check the Appwrite in-memory cache server is up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]     
+     * @return [io.appwrite.models.HealthStatus]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getCache(): io.appwrite.models.HealthStatus {
+    suspend fun getCache(
+    ): io.appwrite.models.HealthStatus {
         val path = "/health/cache"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -97,26 +103,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get DB
      *
      * Check the Appwrite database server is up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]     
+     * @return [io.appwrite.models.HealthStatus]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getDB(): io.appwrite.models.HealthStatus {
+    suspend fun getDB(
+    ): io.appwrite.models.HealthStatus {
         val path = "/health/db"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -126,28 +133,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Certificates Queue
      *
-     * Get the number of certificates that are waiting to be issued against
-     * [Letsencrypt](https://letsencrypt.org/) in the Appwrite internal queue
-     * server.
+     * Get the number of certificates that are waiting to be issued against [Letsencrypt](https://letsencrypt.org/) in the Appwrite internal queue server.
      *
-     * @return [io.appwrite.models.HealthQueue]     
+     * @return [io.appwrite.models.HealthQueue]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueCertificates(): io.appwrite.models.HealthQueue {
+    suspend fun getQueueCertificates(
+    ): io.appwrite.models.HealthQueue {
         val path = "/health/queue/certificates"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
-            io.appwrite.models.HealthQueue.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -157,24 +163,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Functions Queue
      *
-     * @return [io.appwrite.models.HealthQueue]     
+     * 
+     *
+     * @return [io.appwrite.models.HealthQueue]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueFunctions(): io.appwrite.models.HealthQueue {
+    suspend fun getQueueFunctions(
+    ): io.appwrite.models.HealthQueue {
         val path = "/health/queue/functions"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
-            io.appwrite.models.HealthQueue.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -184,27 +193,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Logs Queue
      *
-     * Get the number of logs that are waiting to be processed in the Appwrite
-     * internal queue server.
+     * Get the number of logs that are waiting to be processed in the Appwrite internal queue server.
      *
-     * @return [io.appwrite.models.HealthQueue]     
+     * @return [io.appwrite.models.HealthQueue]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueLogs(): io.appwrite.models.HealthQueue {
+    suspend fun getQueueLogs(
+    ): io.appwrite.models.HealthQueue {
         val path = "/health/queue/logs"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
-            io.appwrite.models.HealthQueue.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -214,27 +223,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Webhooks Queue
      *
-     * Get the number of webhooks that are waiting to be processed in the Appwrite
-     * internal queue server.
+     * Get the number of webhooks that are waiting to be processed in the Appwrite internal queue server.
      *
-     * @return [io.appwrite.models.HealthQueue]     
+     * @return [io.appwrite.models.HealthQueue]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueWebhooks(): io.appwrite.models.HealthQueue {
+    suspend fun getQueueWebhooks(
+    ): io.appwrite.models.HealthQueue {
         val path = "/health/queue/webhooks"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthQueue = {
-            io.appwrite.models.HealthQueue.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -244,26 +253,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Local Storage
      *
      * Check the Appwrite local storage device is up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]     
+     * @return [io.appwrite.models.HealthStatus]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getStorageLocal(): io.appwrite.models.HealthStatus {
+    suspend fun getStorageLocal(
+    ): io.appwrite.models.HealthStatus {
         val path = "/health/storage/local"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -273,32 +283,27 @@ class Health : Service {
             converter,
         )
     }
-    
+
     /**
      * Get Time
      *
-     * Check the Appwrite server time is synced with Google remote NTP server. We
-     * use this technology to smoothly handle leap seconds with no disruptive
-     * events. The [Network Time
-     * Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol) (NTP) is
-     * used by hundreds of millions of computers and devices to synchronize their
-     * clocks over the Internet. If your computer sets its own clock, it likely
-     * uses NTP.
+     * Check the Appwrite server time is synced with Google remote NTP server. We use this technology to smoothly handle leap seconds with no disruptive events. The [Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol) (NTP) is used by hundreds of millions of computers and devices to synchronize their clocks over the Internet. If your computer sets its own clock, it likely uses NTP.
      *
-     * @return [io.appwrite.models.HealthTime]     
+     * @return [io.appwrite.models.HealthTime]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getTime(): io.appwrite.models.HealthTime {
+    suspend fun getTime(
+    ): io.appwrite.models.HealthTime {
         val path = "/health/time"
+
         val params = mutableMapOf<String, Any?>(
         )
         val headers = mutableMapOf(
-            "content-type" to "application/json"
+            "content-type" to "application/json",
         )
-        val converter: (Map<String, Any>) -> io.appwrite.models.HealthTime = {
-            io.appwrite.models.HealthTime.from(map = it)
-        }
+        val converter: (Any) -> io.appwrite.models.HealthTime = {
+                io.appwrite.models.HealthTime.from(map = it as Map<String, Any>)
+                }
         return client.call(
             "GET",
             path,
@@ -308,5 +313,5 @@ class Health : Service {
             converter,
         )
     }
-    
+
 }
