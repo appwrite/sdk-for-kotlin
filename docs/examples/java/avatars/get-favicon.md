@@ -1,36 +1,22 @@
-import io.appwrite.Client
-import io.appwrite.services.Avatars
+import io.appwrite.Client;
+import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.services.Avatars;
 
-public void main() {
-    Client client = Client(context)
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-        .setProject("5df5acd0d48c2") // Your project ID
-        .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
+Client client = new Client()
+    .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
+    .setProject("5df5acd0d48c2") // Your project ID
+    .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-    Avatars avatars = new Avatars(client);
-    avatars.getFavicon(
-        url = "https://example.com"
-        new Continuation<Response>() {
-            @NotNull
-            @Override
-            public CoroutineContext getContext() {
-                return EmptyCoroutineContext.INSTANCE;
-            }
+Avatars avatars = new Avatars(client);
 
-            @Override
-            public void resumeWith(@NotNull Object o) {
-                String json = "";
-                try {
-                    if (o instanceof Result.Failure) {
-                        Result.Failure failure = (Result.Failure) o;
-                        throw failure.exception;
-                    } else {
-                        Response response = (Response) o;
-                    }
-                } catch (Throwable th) {
-                    Log.e("ERROR", th.toString());
-                }
-            }
+avatars.getFavicon(
+    "https://example.com"
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
         }
-    );
-}
+
+        System.out.println(result);
+    })
+);

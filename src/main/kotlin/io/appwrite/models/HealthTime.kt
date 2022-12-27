@@ -1,6 +1,7 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
+import io.appwrite.extensions.jsonCast
 
 /**
  * Health Time
@@ -8,37 +9,38 @@ import com.google.gson.annotations.SerializedName
 data class HealthTime(
     /**
      * Current unix timestamp on trustful remote server.
-     *
      */
     @SerializedName("remoteTime")
     val remoteTime: Long,
 
     /**
      * Current unix timestamp of local server where Appwrite runs.
-     *
      */
     @SerializedName("localTime")
     val localTime: Long,
 
     /**
      * Difference of unix remote and local timestamps in milliseconds.
-     *
      */
     @SerializedName("diff")
-    val diff: Long
-) {
-    companion object {
-        @Suppress("UNCHECKED_CAST")
-        fun from(map: Map<String, Any>) = HealthTime(
-            remoteTime = (map["remoteTime"] as Number).toLong(),
-            localTime = (map["localTime"] as Number).toLong(),
-            diff = (map["diff"] as Number).toLong()
-        )
-    }
+    val diff: Long,
 
+) {
     fun toMap(): Map<String, Any> = mapOf(
         "remoteTime" to remoteTime as Any,
         "localTime" to localTime as Any,
-        "diff" to diff as Any
+        "diff" to diff as Any,
     )
+
+    companion object {
+
+        @Suppress("UNCHECKED_CAST")
+        fun from(
+            map: Map<String, Any>,
+        ) = HealthTime(
+            remoteTime = (map["remoteTime"] as Number).toLong(),
+            localTime = (map["localTime"] as Number).toLong(),
+            diff = (map["diff"] as Number).toLong(),
+        )
+    }
 }
