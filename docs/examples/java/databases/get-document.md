@@ -12,7 +12,7 @@ Databases databases = new Databases(client);
 databases.getDocument(
     "[DATABASE_ID]",
     "[COLLECTION_ID]",
-    "[DOCUMENT_ID]"
+    "[DOCUMENT_ID]",
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

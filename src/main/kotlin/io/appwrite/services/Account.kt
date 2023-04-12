@@ -19,12 +19,12 @@ class Account : Service {
      *
      * Get currently logged in user data as JSON object.
      *
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> get(
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account"
 
         val params = mutableMapOf<String, Any?>(
@@ -32,9 +32,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "GET",
             path,
@@ -50,11 +50,11 @@ class Account : Service {
      *
      * Get currently logged in user data as JSON object.
      *
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun get(
-    ) = get(
+    ): io.appwrite.models.User<Map<String, Any>> = get(
         nestedType = classOf(),
     )
 
@@ -65,14 +65,14 @@ class Account : Service {
      *
      * @param email User email.
      * @param password User password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updateEmail(
         email: String,
         password: String,
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/email"
 
         val params = mutableMapOf<String, Any?>(
@@ -82,9 +82,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -102,13 +102,13 @@ class Account : Service {
      *
      * @param email User email.
      * @param password User password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updateEmail(
         email: String,
         password: String,
-    ) = updateEmail(
+    ): io.appwrite.models.User<Map<String, Any>> = updateEmail(
         email,
         password,
         nestedType = classOf(),
@@ -119,7 +119,7 @@ class Account : Service {
      *
      * Get currently logged in user list of latest security activity logs. Each log returns user IP address, location and date and time of log.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only supported methods are limit and offset
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -136,8 +136,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
-                io.appwrite.models.LogList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.LogList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -154,13 +154,13 @@ class Account : Service {
      * Update currently logged in user account name.
      *
      * @param name User name. Max length: 128 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updateName(
         name: String,
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/name"
 
         val params = mutableMapOf<String, Any?>(
@@ -169,9 +169,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -188,12 +188,12 @@ class Account : Service {
      * Update currently logged in user account name.
      *
      * @param name User name. Max length: 128 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updateName(
         name: String,
-    ) = updateName(
+    ): io.appwrite.models.User<Map<String, Any>> = updateName(
         name,
         nestedType = classOf(),
     )
@@ -205,7 +205,7 @@ class Account : Service {
      *
      * @param password New user password. Must be at least 8 chars.
      * @param oldPassword Current user password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -213,7 +213,7 @@ class Account : Service {
         password: String,
         oldPassword: String? = null,
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/password"
 
         val params = mutableMapOf<String, Any?>(
@@ -223,9 +223,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -243,14 +243,14 @@ class Account : Service {
      *
      * @param password New user password. Must be at least 8 chars.
      * @param oldPassword Current user password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePassword(
         password: String,
         oldPassword: String? = null,
-    ) = updatePassword(
+    ): io.appwrite.models.User<Map<String, Any>> = updatePassword(
         password,
         oldPassword,
         nestedType = classOf(),
@@ -263,14 +263,14 @@ class Account : Service {
      *
      * @param phone Phone number. Format this number with a leading '+' and a country code, e.g., +16175551212.
      * @param password User password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updatePhone(
         phone: String,
         password: String,
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/phone"
 
         val params = mutableMapOf<String, Any?>(
@@ -280,9 +280,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -300,13 +300,13 @@ class Account : Service {
      *
      * @param phone Phone number. Format this number with a leading '+' and a country code, e.g., +16175551212.
      * @param password User password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updatePhone(
         phone: String,
         password: String,
-    ) = updatePhone(
+    ): io.appwrite.models.User<Map<String, Any>> = updatePhone(
         phone,
         password,
         nestedType = classOf(),
@@ -331,8 +331,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Preferences<T> = {
-                io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
-                }
+            io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "GET",
             path,
@@ -352,7 +352,7 @@ class Account : Service {
      */
     @Throws(AppwriteException::class)
     suspend fun getPrefs(
-    ) = getPrefs(
+    ): io.appwrite.models.Preferences<Map<String, Any>> = getPrefs(
         nestedType = classOf(),
     )
 
@@ -362,13 +362,13 @@ class Account : Service {
      * Update currently logged in user account preferences. The object you pass is stored as is, and replaces any previous value. The maximum allowed prefs size is 64kB and throws error if exceeded.
      *
      * @param prefs Prefs key-value JSON object.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updatePrefs(
         prefs: Any,
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/prefs"
 
         val params = mutableMapOf<String, Any?>(
@@ -377,9 +377,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -396,12 +396,12 @@ class Account : Service {
      * Update currently logged in user account preferences. The object you pass is stored as is, and replaces any previous value. The maximum allowed prefs size is 64kB and throws error if exceeded.
      *
      * @param prefs Prefs key-value JSON object.
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updatePrefs(
         prefs: Any,
-    ) = updatePrefs(
+    ): io.appwrite.models.User<Map<String, Any>> = updatePrefs(
         prefs,
         nestedType = classOf(),
     )
@@ -430,8 +430,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -472,8 +472,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,
@@ -502,8 +502,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SessionList = {
-                io.appwrite.models.SessionList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.SessionList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -561,8 +561,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
-                io.appwrite.models.Session.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -594,8 +594,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
-                io.appwrite.models.Session.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PATCH",
             path,
@@ -640,12 +640,12 @@ class Account : Service {
      *
      * Block the currently logged in user account. Behind the scene, the user record is not deleted but permanently blocked from any access. To completely delete a user, use the Users API instead.
      *
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updateStatus(
         nestedType: Class<T>,
-    ): io.appwrite.models.Account<T> {
+    ): io.appwrite.models.User<T> {
         val path = "/account/status"
 
         val params = mutableMapOf<String, Any?>(
@@ -653,9 +653,9 @@ class Account : Service {
         val headers = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Account<T> = {
-                io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
-                }
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
         return client.call(
             "PATCH",
             path,
@@ -671,11 +671,11 @@ class Account : Service {
      *
      * Block the currently logged in user account. Behind the scene, the user record is not deleted but permanently blocked from any access. To completely delete a user, use the Users API instead.
      *
-     * @return [io.appwrite.models.Account<T>]
+     * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updateStatus(
-    ) = updateStatus(
+    ): io.appwrite.models.User<Map<String, Any>> = updateStatus(
         nestedType = classOf(),
     )
 
@@ -700,8 +700,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -736,8 +736,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,
@@ -766,8 +766,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -802,8 +802,8 @@ class Account : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
-                io.appwrite.models.Token.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,

@@ -19,7 +19,7 @@ class Functions : Service {
      *
      * Get a list of all the project&#039;s functions. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.FunctionList]
      */
@@ -39,8 +39,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FunctionList = {
-                io.appwrite.models.FunctionList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.FunctionList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -56,10 +56,10 @@ class Functions : Service {
      *
      * Create a new function. You can pass a list of [permissions](/docs/permissions) to allow different project users or team with access to execute the function using the client API.
      *
-     * @param functionId Function ID. Choose your own unique ID or pass the string `ID.unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param functionId Function ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Function name. Max length: 128 chars.
-     * @param execute An array of strings with execution roles. By default no user is granted with any execute permissions. [learn more about permissions](https://appwrite.io/docs/permissions). Maximum of 100 roles are allowed, each 64 characters long.
      * @param runtime Execution runtime.
+     * @param execute An array of strings with execution roles. By default no user is granted with any execute permissions. [learn more about permissions](https://appwrite.io/docs/permissions). Maximum of 100 roles are allowed, each 64 characters long.
      * @param events Events list. Maximum of 100 events are allowed.
      * @param schedule Schedule CRON syntax.
      * @param timeout Function maximum execution time in seconds.
@@ -71,8 +71,8 @@ class Functions : Service {
     suspend fun create(
         functionId: String,
         name: String,
-        execute: List<String>,
         runtime: String,
+        execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
         timeout: Long? = null,
@@ -94,8 +94,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
-                io.appwrite.models.Function.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Function.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -124,8 +124,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.RuntimeList = {
-                io.appwrite.models.RuntimeList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.RuntimeList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -157,8 +157,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
-                io.appwrite.models.Function.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Function.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -188,7 +188,7 @@ class Functions : Service {
     suspend fun update(
         functionId: String,
         name: String,
-        execute: List<String>,
+        execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
         timeout: Long? = null,
@@ -209,8 +209,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
-                io.appwrite.models.Function.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Function.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,
@@ -256,7 +256,7 @@ class Functions : Service {
      * Get a list of all the project&#039;s code deployments. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: entrypoint, size, buildId, activate
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: entrypoint, size, buildId, activate
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.DeploymentList]
      */
@@ -278,8 +278,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DeploymentList = {
-                io.appwrite.models.DeploymentList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.DeploymentList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -321,8 +321,8 @@ class Functions : Service {
             "content-type" to "multipart/form-data",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
-                io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
         val idParamName: String? = null
         val paramName = "code"
         return client.chunkedUpload(
@@ -361,8 +361,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
-                io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -397,8 +397,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
-                io.appwrite.models.Function.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Function.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PATCH",
             path,
@@ -482,7 +482,7 @@ class Functions : Service {
      * Get a list of all the current user function execution logs. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, statusCode, duration
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, statusCode, duration
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.ExecutionList]
      */
@@ -504,8 +504,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ExecutionList = {
-                io.appwrite.models.ExecutionList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.ExecutionList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -544,8 +544,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
-                io.appwrite.models.Execution.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Execution.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -580,8 +580,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
-                io.appwrite.models.Execution.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Execution.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -613,8 +613,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
-                io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -652,8 +652,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
-                io.appwrite.models.Variable.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Variable.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -688,8 +688,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
-                io.appwrite.models.Variable.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Variable.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -731,8 +731,8 @@ class Functions : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
-                io.appwrite.models.Variable.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Variable.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,
