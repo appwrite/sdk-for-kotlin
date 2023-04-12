@@ -32,8 +32,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
-                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -62,8 +62,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthAntivirus = {
-                io.appwrite.models.HealthAntivirus.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthAntivirus.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -92,8 +92,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
-                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -122,8 +122,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
-                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -152,8 +152,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
-                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -182,8 +182,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
-                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -212,8 +212,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
-                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -242,8 +242,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
-                io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -272,8 +272,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
-                io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -302,8 +302,8 @@ class Health : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthTime = {
-                io.appwrite.models.HealthTime.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.HealthTime.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,

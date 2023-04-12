@@ -9,5 +9,5 @@ val client = Client(context)
 val account = Account(client)
 
 val response = account.updatePassword(
-    password = "password",
+    password = "",
 )

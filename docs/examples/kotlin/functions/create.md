@@ -11,6 +11,5 @@ val functions = Functions(client)
 val response = functions.create(
     functionId = "[FUNCTION_ID]",
     name = "[NAME]",
-    execute = listOf("any"),
     runtime = "node-14.5",
 )

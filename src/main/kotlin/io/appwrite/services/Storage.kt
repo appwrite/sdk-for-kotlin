@@ -21,7 +21,7 @@ class Storage : Service {
      *
      * Get a list of all the storage buckets. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.BucketList]
      */
@@ -41,8 +41,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BucketList = {
-                io.appwrite.models.BucketList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.BucketList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -58,9 +58,9 @@ class Storage : Service {
      *
      * Create a new storage bucket.
      *
-     * @param bucketId Unique Id. Choose your own unique ID or pass the string `ID.unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param bucketId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Bucket name
-     * @param permissions An array of permission strings. By default no user is granted with any permissions. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permission strings. By default, no user is granted with any permissions. [Learn more about permissions](/docs/permissions).
      * @param fileSecurity Enables configuring permissions for individual file. A user needs one of file or bucket level permissions to access a file. [Learn more about permissions](/docs/permissions).
      * @param enabled Is bucket enabled?
      * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB. For self-hosted setups you can change the max limit by changing the `_APP_STORAGE_LIMIT` environment variable. [Learn more about storage environment variables](docs/environment-variables#storage)
@@ -102,8 +102,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
-                io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "POST",
             path,
@@ -135,8 +135,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
-                io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -154,7 +154,7 @@ class Storage : Service {
      *
      * @param bucketId Bucket unique ID.
      * @param name Bucket name
-     * @param permissions An array of permission strings. By default the current permissions are inherited. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
      * @param fileSecurity Enables configuring permissions for individual file. A user needs one of file or bucket level permissions to access a file. [Learn more about permissions](/docs/permissions).
      * @param enabled Is bucket enabled?
      * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB. For self hosted version you can change the limit by changing _APP_STORAGE_LIMIT environment variable. [Learn more about storage environment variables](docs/environment-variables#storage)
@@ -196,8 +196,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
-                io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,
@@ -243,7 +243,7 @@ class Storage : Service {
      * Get a list of all the user files. You can use the query params to filter your results.
      *
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](/docs/server/storage#createBucket).
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, signature, mimeType, sizeOriginal, chunksTotal, chunksUploaded
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, signature, mimeType, sizeOriginal, chunksTotal, chunksUploaded
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.FileList]
      */
@@ -265,8 +265,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FileList = {
-                io.appwrite.models.FileList.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.FileList.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -283,9 +283,9 @@ class Storage : Service {
      * Create a new file. Before using this route, you should create a new bucket resource using either a [server integration](/docs/server/storage#storageCreateBucket) API or directly from your Appwrite console.Larger files should be uploaded using multiple requests with the [content-range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range) header to send a partial request with a maximum supported chunk of `5MB`. The `content-range` header values should always be in bytes.When the first request is sent, the server will return the **File** object, and the subsequent part request must include the file&#039;s **id** in `x-appwrite-id` header to allow the server to know that the partial upload is for the existing file and not for a new one.If you&#039;re creating a new file using one of the Appwrite SDKs, all the chunking logic will be managed by the SDK internally.
      *
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](/docs/server/storage#createBucket).
-     * @param fileId File ID. Choose your own unique ID or pass the string `ID.unique()` to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param file Binary file.
-     * @param permissions An array of permission strings. By default the current user is granted with all permissions. [Learn more about permissions](/docs/permissions).
+     * @param fileId File ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param file Binary file. Appwrite SDKs provide helpers to handle file input. [Learn about file input](/docs/storage#file-input).
+     * @param permissions An array of permission strings. By default, only the current user is granted all permissions. [Learn more about permissions](/docs/permissions).
      * @return [io.appwrite.models.File]
      */
     @JvmOverloads
@@ -309,8 +309,8 @@ class Storage : Service {
             "content-type" to "multipart/form-data",
         )
         val converter: (Any) -> io.appwrite.models.File = {
-                io.appwrite.models.File.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.File.from(map = it as Map<String, Any>)
+        }
         val idParamName: String? = "fileId"
         val paramName = "file"
         return client.chunkedUpload(
@@ -349,8 +349,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
-                io.appwrite.models.File.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.File.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             path,
@@ -368,7 +368,7 @@ class Storage : Service {
      *
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](/docs/server/storage#createBucket).
      * @param fileId File unique ID.
-     * @param permissions An array of permission string. By default the current permissions are inherited. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permission string. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
      * @return [io.appwrite.models.File]
      */
     @JvmOverloads
@@ -389,8 +389,8 @@ class Storage : Service {
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
-                io.appwrite.models.File.from(map = it as Map<String, Any>)
-                }
+            io.appwrite.models.File.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             path,

@@ -35,19 +35,19 @@ data class User<T>(
      * Hashed user password.
      */
     @SerializedName("password")
-    val password: String,
+    var password: String?,
 
     /**
      * Password hashing algorithm.
      */
     @SerializedName("hash")
-    val hash: String,
+    var hash: String?,
 
     /**
      * Password hashing algorithm configuration.
      */
     @SerializedName("hashOptions")
-    val hashOptions: Any,
+    var hashOptions: Any?,
 
     /**
      * User registration date in ISO 8601 format.
@@ -122,9 +122,9 @@ data class User<T>(
             createdAt: String,
             updatedAt: String,
             name: String,
-            password: String,
-            hash: String,
-            hashOptions: Any,
+            password: String?,
+            hash: String?,
+            hashOptions: Any?,
             registration: String,
             status: Boolean,
             passwordUpdate: String,
@@ -160,9 +160,9 @@ data class User<T>(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             name = map["name"] as String,
-            password = map["password"] as String,
-            hash = map["hash"] as String,
-            hashOptions = map["hashOptions"] as Any,
+            password = map["password"] as? String?,
+            hash = map["hash"] as? String?,
+            hashOptions = map["hashOptions"] as? Any?,
             registration = map["registration"] as String,
             status = map["status"] as Boolean,
             passwordUpdate = map["passwordUpdate"] as String,

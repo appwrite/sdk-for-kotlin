@@ -8,8 +8,10 @@ val client = Client(context)
 
 val databases = Databases(client)
 
-val response = databases.getDocument(
+val response = databases.updateEmailAttribute(
     databaseId = "[DATABASE_ID]",
     collectionId = "[COLLECTION_ID]",
-    documentId = "[DOCUMENT_ID]",
+    key = "",
+    required = false,
+    default = "email@example.com"
 )

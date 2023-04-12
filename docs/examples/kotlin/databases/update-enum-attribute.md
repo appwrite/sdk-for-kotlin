@@ -8,8 +8,11 @@ val client = Client(context)
 
 val databases = Databases(client)
 
-val response = databases.getDocument(
+val response = databases.updateEnumAttribute(
     databaseId = "[DATABASE_ID]",
     collectionId = "[COLLECTION_ID]",
-    documentId = "[DOCUMENT_ID]",
+    key = "",
+    elements = listOf(),
+    required = false,
+    default = "[DEFAULT]"
 )

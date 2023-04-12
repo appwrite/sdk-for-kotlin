@@ -8,8 +8,12 @@ val client = Client(context)
 
 val databases = Databases(client)
 
-val response = databases.getDocument(
+val response = databases.updateIntegerAttribute(
     databaseId = "[DATABASE_ID]",
     collectionId = "[COLLECTION_ID]",
-    documentId = "[DOCUMENT_ID]",
+    key = "",
+    required = false,
+    min = 0,
+    max = 0,
+    default = 0
 )

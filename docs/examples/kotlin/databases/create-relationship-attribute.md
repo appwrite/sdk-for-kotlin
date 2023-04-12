@@ -8,8 +8,9 @@ val client = Client(context)
 
 val databases = Databases(client)
 
-val response = databases.getDocument(
+val response = databases.createRelationshipAttribute(
     databaseId = "[DATABASE_ID]",
     collectionId = "[COLLECTION_ID]",
-    documentId = "[DOCUMENT_ID]",
+    relatedCollectionId = "[RELATED_COLLECTION_ID]",
+    type = "oneToOne",
 )

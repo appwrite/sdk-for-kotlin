@@ -12,7 +12,6 @@ Functions functions = new Functions(client);
 functions.create(
     "[FUNCTION_ID]",
     "[NAME]",
-    listOf("any"),
     "node-14.5",
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
