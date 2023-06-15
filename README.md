@@ -138,7 +138,7 @@ suspend fun main() {
 
 You can use the following resources to learn more and get help
 
-- 🚀 [Getting Started Tutorial](https://appwrite.io/docs/getting-started-for-server)
+- 🚀 [Getting Started Tutorial](https://appwrite.io/docs/getting-started-for-android)
 - 📜 [Appwrite Docs](https://appwrite.io/docs)
 - 💬 [Discord Community](https://appwrite.io/discord)
 - 🚂 [Appwrite Kotlin Playground](https://github.com/appwrite/playground-for-kotlin)
