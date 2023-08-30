@@ -30,7 +30,7 @@ class Users : Service {
         search: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.UserList<T> {
-        val path = "/users"
+        val apiPath = "/users"
 
         val params = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -44,7 +44,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -94,7 +94,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users"
+        val apiPath = "/users"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -111,7 +111,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -168,7 +168,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/argon2"
+        val apiPath = "/users/argon2"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -184,7 +184,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -238,7 +238,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/bcrypt"
+        val apiPath = "/users/bcrypt"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -254,7 +254,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -289,6 +289,72 @@ class Users : Service {
     )
 
     /**
+     * List Identities
+     *
+     * Get identities for all users.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, provider, providerUid, providerEmail, providerAccessTokenExpiry
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @return [io.appwrite.models.IdentityList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listIdentities(
+        queries: String? = null,
+        search: String? = null,
+    ): io.appwrite.models.IdentityList {
+        val apiPath = "/users/identities"
+
+        val params = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "search" to search,
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.IdentityList = {
+            io.appwrite.models.IdentityList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            headers,
+            params,
+            responseType = io.appwrite.models.IdentityList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete Identity
+     *
+     * Delete an identity by its unique ID.
+     *
+     * @param identityId Identity ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteIdentity(
+        identityId: String,
+    ): Any {
+        val apiPath = "/users/identities/{identityId}"
+            .replace("{identityId}", identityId)
+
+        val params = mutableMapOf<String, Any?>(
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Create User with MD5 Password
      *
      * Create a new user. Password provided must be hashed with the [MD5](https://en.wikipedia.org/wiki/MD5) algorithm. Use the [POST /users](/docs/server/users#usersCreate) endpoint to create users with a plain text password.
@@ -308,7 +374,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/md5"
+        val apiPath = "/users/md5"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -324,7 +390,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -378,7 +444,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/phpass"
+        val apiPath = "/users/phpass"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -394,7 +460,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -458,7 +524,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/scrypt"
+        val apiPath = "/users/scrypt"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -479,7 +545,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -554,7 +620,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/scrypt-modified"
+        val apiPath = "/users/scrypt-modified"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -573,7 +639,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -638,7 +704,7 @@ class Users : Service {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/sha"
+        val apiPath = "/users/sha"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -655,7 +721,7 @@ class Users : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -705,7 +771,7 @@ class Users : Service {
         userId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}"
+        val apiPath = "/users/{userId}"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -718,7 +784,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -754,7 +820,7 @@ class Users : Service {
     suspend fun delete(
         userId: String,
     ): Any {
-        val path = "/users/{userId}"
+        val apiPath = "/users/{userId}"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -764,7 +830,7 @@ class Users : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -786,7 +852,7 @@ class Users : Service {
         email: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/email"
+        val apiPath = "/users/{userId}/email"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -800,7 +866,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -828,6 +894,62 @@ class Users : Service {
     )
 
     /**
+     * Update User Labels
+     *
+     * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](/docs/permissions) for more info.
+     *
+     * @param userId User ID.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 5 labels are allowed, each up to 36 alphanumeric characters long.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateLabels(
+        userId: String,
+        labels: List<String>,
+        nestedType: Class<T>,
+    ): io.appwrite.models.User<T> {
+        val apiPath = "/users/{userId}/labels"
+            .replace("{userId}", userId)
+
+        val params = mutableMapOf<String, Any?>(
+            "labels" to labels,
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            headers,
+            params,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update User Labels
+     *
+     * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](/docs/permissions) for more info.
+     *
+     * @param userId User ID.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 5 labels are allowed, each up to 36 alphanumeric characters long.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateLabels(
+        userId: String,
+        labels: List<String>,
+    ): io.appwrite.models.User<Map<String, Any>> = updateLabels(
+        userId,
+        labels,
+        nestedType = classOf(),
+    )
+
+    /**
      * List User Logs
      *
      * Get the user activity logs list by its unique ID.
@@ -842,7 +964,7 @@ class Users : Service {
         userId: String,
         queries: List<String>? = null,
     ): io.appwrite.models.LogList {
-        val path = "/users/{userId}/logs"
+        val apiPath = "/users/{userId}/logs"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -856,7 +978,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.LogList::class.java,
@@ -876,7 +998,7 @@ class Users : Service {
     suspend fun listMemberships(
         userId: String,
     ): io.appwrite.models.MembershipList {
-        val path = "/users/{userId}/memberships"
+        val apiPath = "/users/{userId}/memberships"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -889,7 +1011,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.MembershipList::class.java,
@@ -912,7 +1034,7 @@ class Users : Service {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/name"
+        val apiPath = "/users/{userId}/name"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -926,7 +1048,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -968,7 +1090,7 @@ class Users : Service {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/password"
+        val apiPath = "/users/{userId}/password"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -982,7 +1104,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1024,7 +1146,7 @@ class Users : Service {
         number: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/phone"
+        val apiPath = "/users/{userId}/phone"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1038,7 +1160,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1078,7 +1200,7 @@ class Users : Service {
         userId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val path = "/users/{userId}/prefs"
+        val apiPath = "/users/{userId}/prefs"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1091,7 +1213,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1130,7 +1252,7 @@ class Users : Service {
         prefs: Any,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val path = "/users/{userId}/prefs"
+        val apiPath = "/users/{userId}/prefs"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1144,7 +1266,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1183,7 +1305,7 @@ class Users : Service {
     suspend fun listSessions(
         userId: String,
     ): io.appwrite.models.SessionList {
-        val path = "/users/{userId}/sessions"
+        val apiPath = "/users/{userId}/sessions"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1196,7 +1318,7 @@ class Users : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.SessionList::class.java,
@@ -1216,7 +1338,7 @@ class Users : Service {
     suspend fun deleteSessions(
         userId: String,
     ): Any {
-        val path = "/users/{userId}/sessions"
+        val apiPath = "/users/{userId}/sessions"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1226,7 +1348,7 @@ class Users : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -1247,7 +1369,7 @@ class Users : Service {
         userId: String,
         sessionId: String,
     ): Any {
-        val path = "/users/{userId}/sessions/{sessionId}"
+        val apiPath = "/users/{userId}/sessions/{sessionId}"
             .replace("{userId}", userId)
             .replace("{sessionId}", sessionId)
 
@@ -1258,7 +1380,7 @@ class Users : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -1280,7 +1402,7 @@ class Users : Service {
         status: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/status"
+        val apiPath = "/users/{userId}/status"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1294,7 +1416,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1336,7 +1458,7 @@ class Users : Service {
         emailVerification: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/verification"
+        val apiPath = "/users/{userId}/verification"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1350,7 +1472,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1392,7 +1514,7 @@ class Users : Service {
         phoneVerification: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/users/{userId}/verification/phone"
+        val apiPath = "/users/{userId}/verification/phone"
             .replace("{userId}", userId)
 
         val params = mutableMapOf<String, Any?>(
@@ -1406,7 +1528,7 @@ class Users : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),

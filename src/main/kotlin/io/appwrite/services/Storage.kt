@@ -31,7 +31,7 @@ class Storage : Service {
         queries: List<String>? = null,
         search: String? = null,
     ): io.appwrite.models.BucketList {
-        val path = "/storage/buckets"
+        val apiPath = "/storage/buckets"
 
         val params = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -45,7 +45,7 @@ class Storage : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.BucketList::class.java,
@@ -62,8 +62,8 @@ class Storage : Service {
      * @param name Bucket name
      * @param permissions An array of permission strings. By default, no user is granted with any permissions. [Learn more about permissions](/docs/permissions).
      * @param fileSecurity Enables configuring permissions for individual file. A user needs one of file or bucket level permissions to access a file. [Learn more about permissions](/docs/permissions).
-     * @param enabled Is bucket enabled?
-     * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB. For self-hosted setups you can change the max limit by changing the `_APP_STORAGE_LIMIT` environment variable. [Learn more about storage environment variables](docs/environment-variables#storage)
+     * @param enabled Is bucket enabled? When set to 'disabled', users cannot access the files in this bucket but Server SDKs with and API key can still access the bucket. No files are lost when this is toggled.
+     * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB.
      * @param allowedFileExtensions Allowed file extensions. Maximum of 100 extensions are allowed, each 64 characters long.
      * @param compression Compression algorithm choosen for compression. Can be one of none,  [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
@@ -84,7 +84,7 @@ class Storage : Service {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
     ): io.appwrite.models.Bucket {
-        val path = "/storage/buckets"
+        val apiPath = "/storage/buckets"
 
         val params = mutableMapOf<String, Any?>(
             "bucketId" to bucketId,
@@ -106,7 +106,7 @@ class Storage : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Bucket::class.java,
@@ -126,7 +126,7 @@ class Storage : Service {
     suspend fun getBucket(
         bucketId: String,
     ): io.appwrite.models.Bucket {
-        val path = "/storage/buckets/{bucketId}"
+        val apiPath = "/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
 
         val params = mutableMapOf<String, Any?>(
@@ -139,7 +139,7 @@ class Storage : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Bucket::class.java,
@@ -156,8 +156,8 @@ class Storage : Service {
      * @param name Bucket name
      * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
      * @param fileSecurity Enables configuring permissions for individual file. A user needs one of file or bucket level permissions to access a file. [Learn more about permissions](/docs/permissions).
-     * @param enabled Is bucket enabled?
-     * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB. For self hosted version you can change the limit by changing _APP_STORAGE_LIMIT environment variable. [Learn more about storage environment variables](docs/environment-variables#storage)
+     * @param enabled Is bucket enabled? When set to 'disabled', users cannot access the files in this bucket but Server SDKs with and API key can still access the bucket. No files are lost when this is toggled.
+     * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 30MB.
      * @param allowedFileExtensions Allowed file extensions. Maximum of 100 extensions are allowed, each 64 characters long.
      * @param compression Compression algorithm choosen for compression. Can be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
@@ -178,7 +178,7 @@ class Storage : Service {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
     ): io.appwrite.models.Bucket {
-        val path = "/storage/buckets/{bucketId}"
+        val apiPath = "/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
 
         val params = mutableMapOf<String, Any?>(
@@ -200,7 +200,7 @@ class Storage : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Bucket::class.java,
@@ -220,7 +220,7 @@ class Storage : Service {
     suspend fun deleteBucket(
         bucketId: String,
     ): Any {
-        val path = "/storage/buckets/{bucketId}"
+        val apiPath = "/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
 
         val params = mutableMapOf<String, Any?>(
@@ -230,7 +230,7 @@ class Storage : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -254,7 +254,7 @@ class Storage : Service {
         queries: List<String>? = null,
         search: String? = null,
     ): io.appwrite.models.FileList {
-        val path = "/storage/buckets/{bucketId}/files"
+        val apiPath = "/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
 
         val params = mutableMapOf<String, Any?>(
@@ -269,7 +269,7 @@ class Storage : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.FileList::class.java,
@@ -297,7 +297,7 @@ class Storage : Service {
         permissions: List<String>? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.File {
-        val path = "/storage/buckets/{bucketId}/files"
+        val apiPath = "/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
 
         val params = mutableMapOf<String, Any?>(
@@ -314,7 +314,7 @@ class Storage : Service {
         val idParamName: String? = "fileId"
         val paramName = "file"
         return client.chunkedUpload(
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.File::class.java,
@@ -339,7 +339,7 @@ class Storage : Service {
         bucketId: String,
         fileId: String,
     ): io.appwrite.models.File {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
@@ -353,7 +353,7 @@ class Storage : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.File::class.java,
@@ -368,6 +368,7 @@ class Storage : Service {
      *
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](/docs/server/storage#createBucket).
      * @param fileId File unique ID.
+     * @param name Name of the file
      * @param permissions An array of permission string. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
      * @return [io.appwrite.models.File]
      */
@@ -376,13 +377,15 @@ class Storage : Service {
     suspend fun updateFile(
         bucketId: String,
         fileId: String,
+        name: String? = null,
         permissions: List<String>? = null,
     ): io.appwrite.models.File {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
         val params = mutableMapOf<String, Any?>(
+            "name" to name,
             "permissions" to permissions,
         )
         val headers = mutableMapOf(
@@ -393,7 +396,7 @@ class Storage : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.File::class.java,
@@ -415,7 +418,7 @@ class Storage : Service {
         bucketId: String,
         fileId: String,
     ): Any {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
@@ -426,7 +429,7 @@ class Storage : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -447,7 +450,7 @@ class Storage : Service {
         bucketId: String,
         fileId: String,
     ): ByteArray {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}/download"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/download"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
@@ -455,7 +458,7 @@ class Storage : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -498,7 +501,7 @@ class Storage : Service {
         background: String? = null,
         output: String? = null,
     ): ByteArray {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}/preview"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/preview"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
@@ -517,7 +520,7 @@ class Storage : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -537,7 +540,7 @@ class Storage : Service {
         bucketId: String,
         fileId: String,
     ): ByteArray {
-        val path = "/storage/buckets/{bucketId}/files/{fileId}/view"
+        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/view"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
 
@@ -545,7 +548,7 @@ class Storage : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )

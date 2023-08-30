@@ -17,7 +17,7 @@ class Account : Service {
     /**
      * Get Account
      *
-     * Get currently logged in user data as JSON object.
+     * Get the currently logged in user.
      *
      * @return [io.appwrite.models.User<T>]
      */
@@ -25,7 +25,7 @@ class Account : Service {
     suspend fun <T> get(
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account"
+        val apiPath = "/account"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -37,7 +37,7 @@ class Account : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -48,7 +48,7 @@ class Account : Service {
     /**
      * Get Account
      *
-     * Get currently logged in user data as JSON object.
+     * Get the currently logged in user.
      *
      * @return [io.appwrite.models.User<T>]
      */
@@ -73,7 +73,7 @@ class Account : Service {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/email"
+        val apiPath = "/account/email"
 
         val params = mutableMapOf<String, Any?>(
             "email" to email,
@@ -87,7 +87,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -115,9 +115,72 @@ class Account : Service {
     )
 
     /**
+     * List Identities
+     *
+     * Get the list of identities for the currently logged in user.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, provider, providerUid, providerEmail, providerAccessTokenExpiry
+     * @return [io.appwrite.models.IdentityList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listIdentities(
+        queries: String? = null,
+    ): io.appwrite.models.IdentityList {
+        val apiPath = "/account/identities"
+
+        val params = mutableMapOf<String, Any?>(
+            "queries" to queries,
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.IdentityList = {
+            io.appwrite.models.IdentityList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            headers,
+            params,
+            responseType = io.appwrite.models.IdentityList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete Identity
+     *
+     * Delete an identity by its unique ID.
+     *
+     * @param identityId Identity ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteIdentity(
+        identityId: String,
+    ): Any {
+        val apiPath = "/account/identities/{identityId}"
+            .replace("{identityId}", identityId)
+
+        val params = mutableMapOf<String, Any?>(
+        )
+        val headers = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            headers,
+            params,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * List Logs
      *
-     * Get currently logged in user list of latest security activity logs. Each log returns user IP address, location and date and time of log.
+     * Get the list of latest security activity logs for the currently logged in user. Each log returns user IP address, location and date and time of log.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
      * @return [io.appwrite.models.LogList]
@@ -127,7 +190,7 @@ class Account : Service {
     suspend fun listLogs(
         queries: List<String>? = null,
     ): io.appwrite.models.LogList {
-        val path = "/account/logs"
+        val apiPath = "/account/logs"
 
         val params = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -140,7 +203,7 @@ class Account : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.LogList::class.java,
@@ -161,7 +224,7 @@ class Account : Service {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/name"
+        val apiPath = "/account/name"
 
         val params = mutableMapOf<String, Any?>(
             "name" to name,
@@ -174,7 +237,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -214,7 +277,7 @@ class Account : Service {
         oldPassword: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/password"
+        val apiPath = "/account/password"
 
         val params = mutableMapOf<String, Any?>(
             "password" to password,
@@ -228,7 +291,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -271,7 +334,7 @@ class Account : Service {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/phone"
+        val apiPath = "/account/phone"
 
         val params = mutableMapOf<String, Any?>(
             "phone" to phone,
@@ -285,7 +348,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -315,7 +378,7 @@ class Account : Service {
     /**
      * Get Account Preferences
      *
-     * Get currently logged in user preferences as a key-value object.
+     * Get the preferences as a key-value object for the currently logged in user.
      *
      * @return [io.appwrite.models.Preferences<T>]
      */
@@ -323,7 +386,7 @@ class Account : Service {
     suspend fun <T> getPrefs(
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val path = "/account/prefs"
+        val apiPath = "/account/prefs"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -335,7 +398,7 @@ class Account : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -346,7 +409,7 @@ class Account : Service {
     /**
      * Get Account Preferences
      *
-     * Get currently logged in user preferences as a key-value object.
+     * Get the preferences as a key-value object for the currently logged in user.
      *
      * @return [io.appwrite.models.Preferences<T>]
      */
@@ -369,7 +432,7 @@ class Account : Service {
         prefs: Any,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/prefs"
+        val apiPath = "/account/prefs"
 
         val params = mutableMapOf<String, Any?>(
             "prefs" to prefs,
@@ -382,7 +445,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -420,7 +483,7 @@ class Account : Service {
         email: String,
         url: String,
     ): io.appwrite.models.Token {
-        val path = "/account/recovery"
+        val apiPath = "/account/recovery"
 
         val params = mutableMapOf<String, Any?>(
             "email" to email,
@@ -434,7 +497,7 @@ class Account : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,
@@ -460,7 +523,7 @@ class Account : Service {
         password: String,
         passwordAgain: String,
     ): io.appwrite.models.Token {
-        val path = "/account/recovery"
+        val apiPath = "/account/recovery"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -476,7 +539,7 @@ class Account : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,
@@ -487,14 +550,14 @@ class Account : Service {
     /**
      * List Sessions
      *
-     * Get currently logged in user list of active sessions across different devices.
+     * Get the list of active sessions across different devices for the currently logged in user.
      *
      * @return [io.appwrite.models.SessionList]
      */
     @Throws(AppwriteException::class)
     suspend fun listSessions(
     ): io.appwrite.models.SessionList {
-        val path = "/account/sessions"
+        val apiPath = "/account/sessions"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -506,7 +569,7 @@ class Account : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.SessionList::class.java,
@@ -524,7 +587,7 @@ class Account : Service {
     @Throws(AppwriteException::class)
     suspend fun deleteSessions(
     ): Any {
-        val path = "/account/sessions"
+        val apiPath = "/account/sessions"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -533,7 +596,7 @@ class Account : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -552,7 +615,7 @@ class Account : Service {
     suspend fun getSession(
         sessionId: String,
     ): io.appwrite.models.Session {
-        val path = "/account/sessions/{sessionId}"
+        val apiPath = "/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
 
         val params = mutableMapOf<String, Any?>(
@@ -565,7 +628,7 @@ class Account : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Session::class.java,
@@ -585,7 +648,7 @@ class Account : Service {
     suspend fun updateSession(
         sessionId: String,
     ): io.appwrite.models.Session {
-        val path = "/account/sessions/{sessionId}"
+        val apiPath = "/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
 
         val params = mutableMapOf<String, Any?>(
@@ -598,7 +661,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Session::class.java,
@@ -609,7 +672,7 @@ class Account : Service {
     /**
      * Delete Session
      *
-     * Use this endpoint to log out the currently logged in user from all their account sessions across all of their different devices. When using the Session ID argument, only the unique session ID provided is deleted.
+     * Logout the user. Use &#039;current&#039; as the session ID to logout on this device, use a session ID to logout on another device. If you&#039;re looking to logout the user on all devices, use [Delete Sessions](/docs/client/account#accountDeleteSessions) instead.
      *
      * @param sessionId Session ID. Use the string 'current' to delete the current device session.
      * @return [Any]
@@ -618,7 +681,7 @@ class Account : Service {
     suspend fun deleteSession(
         sessionId: String,
     ): Any {
-        val path = "/account/sessions/{sessionId}"
+        val apiPath = "/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
 
         val params = mutableMapOf<String, Any?>(
@@ -628,7 +691,7 @@ class Account : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -646,7 +709,7 @@ class Account : Service {
     suspend fun <T> updateStatus(
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val path = "/account/status"
+        val apiPath = "/account/status"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -658,7 +721,7 @@ class Account : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -691,7 +754,7 @@ class Account : Service {
     suspend fun createVerification(
         url: String,
     ): io.appwrite.models.Token {
-        val path = "/account/verification"
+        val apiPath = "/account/verification"
 
         val params = mutableMapOf<String, Any?>(
             "url" to url,
@@ -704,7 +767,7 @@ class Account : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,
@@ -726,7 +789,7 @@ class Account : Service {
         userId: String,
         secret: String,
     ): io.appwrite.models.Token {
-        val path = "/account/verification"
+        val apiPath = "/account/verification"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -740,7 +803,7 @@ class Account : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,
@@ -758,7 +821,7 @@ class Account : Service {
     @Throws(AppwriteException::class)
     suspend fun createPhoneVerification(
     ): io.appwrite.models.Token {
-        val path = "/account/verification/phone"
+        val apiPath = "/account/verification/phone"
 
         val params = mutableMapOf<String, Any?>(
         )
@@ -770,7 +833,7 @@ class Account : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,
@@ -792,7 +855,7 @@ class Account : Service {
         userId: String,
         secret: String,
     ): io.appwrite.models.Token {
-        val path = "/account/verification/phone"
+        val apiPath = "/account/verification/phone"
 
         val params = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -806,7 +869,7 @@ class Account : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Token::class.java,

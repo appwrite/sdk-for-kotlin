@@ -35,7 +35,7 @@ class Avatars : Service {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val path = "/avatars/browsers/{code}"
+        val apiPath = "/avatars/browsers/{code}"
             .replace("{code}", code)
 
         val params = mutableMapOf<String, Any?>(
@@ -45,7 +45,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -70,7 +70,7 @@ class Avatars : Service {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val path = "/avatars/credit-cards/{code}"
+        val apiPath = "/avatars/credit-cards/{code}"
             .replace("{code}", code)
 
         val params = mutableMapOf<String, Any?>(
@@ -80,7 +80,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -98,14 +98,14 @@ class Avatars : Service {
     suspend fun getFavicon(
         url: String,
     ): ByteArray {
-        val path = "/avatars/favicon"
+        val apiPath = "/avatars/favicon"
 
         val params = mutableMapOf<String, Any?>(
             "url" to url,
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -130,7 +130,7 @@ class Avatars : Service {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val path = "/avatars/flags/{code}"
+        val apiPath = "/avatars/flags/{code}"
             .replace("{code}", code)
 
         val params = mutableMapOf<String, Any?>(
@@ -140,7 +140,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -163,7 +163,7 @@ class Avatars : Service {
         width: Long? = null,
         height: Long? = null,
     ): ByteArray {
-        val path = "/avatars/image"
+        val apiPath = "/avatars/image"
 
         val params = mutableMapOf<String, Any?>(
             "url" to url,
@@ -172,7 +172,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -197,7 +197,7 @@ class Avatars : Service {
         height: Long? = null,
         background: String? = null,
     ): ByteArray {
-        val path = "/avatars/initials"
+        val apiPath = "/avatars/initials"
 
         val params = mutableMapOf<String, Any?>(
             "name" to name,
@@ -207,7 +207,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )
@@ -232,7 +232,7 @@ class Avatars : Service {
         margin: Long? = null,
         download: Boolean? = null,
     ): ByteArray {
-        val path = "/avatars/qr"
+        val apiPath = "/avatars/qr"
 
         val params = mutableMapOf<String, Any?>(
             "text" to text,
@@ -242,7 +242,7 @@ class Avatars : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             params = params,
             responseType = ByteArray::class.java
         )

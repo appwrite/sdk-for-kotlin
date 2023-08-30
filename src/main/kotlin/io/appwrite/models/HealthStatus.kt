@@ -8,6 +8,12 @@ import io.appwrite.extensions.jsonCast
  */
 data class HealthStatus(
     /**
+     * Name of the service.
+     */
+    @SerializedName("name")
+    val name: String,
+
+    /**
      * Duration in milliseconds how long the health check took.
      */
     @SerializedName("ping")
@@ -21,6 +27,7 @@ data class HealthStatus(
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
+        "name" to name as Any,
         "ping" to ping as Any,
         "status" to status as Any,
     )
@@ -31,6 +38,7 @@ data class HealthStatus(
         fun from(
             map: Map<String, Any>,
         ) = HealthStatus(
+            name = map["name"] as String,
             ping = (map["ping"] as Number).toLong(),
             status = map["status"] as String,
         )

@@ -44,7 +44,7 @@ data class Collection(
     val name: String,
 
     /**
-     * Collection enabled.
+     * Collection enabled. Can be &#039;enabled&#039; or &#039;disabled&#039;. When disabled, the collection is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
     val enabled: Boolean,

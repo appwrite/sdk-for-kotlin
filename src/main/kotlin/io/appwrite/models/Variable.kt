@@ -38,10 +38,16 @@ data class Variable(
     val value: String,
 
     /**
-     * Function ID.
+     * Service to which the variable belongs. Possible values are &quot;project&quot;, &quot;function&quot;
      */
-    @SerializedName("functionId")
-    val functionId: String,
+    @SerializedName("resourceType")
+    val resourceType: String,
+
+    /**
+     * ID of resource to which the variable belongs. If resourceType is &quot;project&quot;, it is empty. If resourceType is &quot;function&quot;, it is ID of the function.
+     */
+    @SerializedName("resourceId")
+    val resourceId: String,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -50,7 +56,8 @@ data class Variable(
         "\$updatedAt" to updatedAt as Any,
         "key" to key as Any,
         "value" to value as Any,
-        "functionId" to functionId as Any,
+        "resourceType" to resourceType as Any,
+        "resourceId" to resourceId as Any,
     )
 
     companion object {
@@ -64,7 +71,8 @@ data class Variable(
             updatedAt = map["\$updatedAt"] as String,
             key = map["key"] as String,
             value = map["value"] as String,
-            functionId = map["functionId"] as String,
+            resourceType = map["resourceType"] as String,
+            resourceId = map["resourceId"] as String,
         )
     }
 }
