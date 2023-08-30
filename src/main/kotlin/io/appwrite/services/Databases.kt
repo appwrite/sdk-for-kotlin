@@ -29,7 +29,7 @@ class Databases : Service {
         queries: List<String>? = null,
         search: String? = null,
     ): io.appwrite.models.DatabaseList {
-        val path = "/databases"
+        val apiPath = "/databases"
 
         val params = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -43,7 +43,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.DatabaseList::class.java,
@@ -57,19 +57,23 @@ class Databases : Service {
      * Create a new Database.
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param name Collection name. Max length: 128 chars.
+     * @param name Database name. Max length: 128 chars.
+     * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @return [io.appwrite.models.Database]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun create(
         databaseId: String,
         name: String,
+        enabled: Boolean? = null,
     ): io.appwrite.models.Database {
-        val path = "/databases"
+        val apiPath = "/databases"
 
         val params = mutableMapOf<String, Any?>(
             "databaseId" to databaseId,
             "name" to name,
+            "enabled" to enabled,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -79,7 +83,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Database::class.java,
@@ -99,7 +103,7 @@ class Databases : Service {
     suspend fun get(
         databaseId: String,
     ): io.appwrite.models.Database {
-        val path = "/databases/{databaseId}"
+        val apiPath = "/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
 
         val params = mutableMapOf<String, Any?>(
@@ -112,7 +116,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Database::class.java,
@@ -127,18 +131,22 @@ class Databases : Service {
      *
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
+     * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @return [io.appwrite.models.Database]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun update(
         databaseId: String,
         name: String,
+        enabled: Boolean? = null,
     ): io.appwrite.models.Database {
-        val path = "/databases/{databaseId}"
+        val apiPath = "/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
 
         val params = mutableMapOf<String, Any?>(
             "name" to name,
+            "enabled" to enabled,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -148,7 +156,7 @@ class Databases : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Database::class.java,
@@ -168,7 +176,7 @@ class Databases : Service {
     suspend fun delete(
         databaseId: String,
     ): Any {
-        val path = "/databases/{databaseId}"
+        val apiPath = "/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
 
         val params = mutableMapOf<String, Any?>(
@@ -178,7 +186,7 @@ class Databases : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -202,7 +210,7 @@ class Databases : Service {
         queries: List<String>? = null,
         search: String? = null,
     ): io.appwrite.models.CollectionList {
-        val path = "/databases/{databaseId}/collections"
+        val apiPath = "/databases/{databaseId}/collections"
             .replace("{databaseId}", databaseId)
 
         val params = mutableMapOf<String, Any?>(
@@ -217,7 +225,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.CollectionList::class.java,
@@ -235,6 +243,7 @@ class Databases : Service {
      * @param name Collection name. Max length: 128 chars.
      * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](/docs/permissions).
+     * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
     @JvmOverloads
@@ -245,8 +254,9 @@ class Databases : Service {
         name: String,
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
+        enabled: Boolean? = null,
     ): io.appwrite.models.Collection {
-        val path = "/databases/{databaseId}/collections"
+        val apiPath = "/databases/{databaseId}/collections"
             .replace("{databaseId}", databaseId)
 
         val params = mutableMapOf<String, Any?>(
@@ -254,6 +264,7 @@ class Databases : Service {
             "name" to name,
             "permissions" to permissions,
             "documentSecurity" to documentSecurity,
+            "enabled" to enabled,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -263,7 +274,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
@@ -285,7 +296,7 @@ class Databases : Service {
         databaseId: String,
         collectionId: String,
     ): io.appwrite.models.Collection {
-        val path = "/databases/{databaseId}/collections/{collectionId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -299,7 +310,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
@@ -317,7 +328,7 @@ class Databases : Service {
      * @param name Collection name. Max length: 128 chars.
      * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](/docs/permissions).
-     * @param enabled Is collection enabled?
+     * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
     @JvmOverloads
@@ -330,7 +341,7 @@ class Databases : Service {
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Collection {
-        val path = "/databases/{databaseId}/collections/{collectionId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -348,7 +359,7 @@ class Databases : Service {
         }
         return client.call(
             "PUT",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Collection::class.java,
@@ -370,7 +381,7 @@ class Databases : Service {
         databaseId: String,
         collectionId: String,
     ): Any {
-        val path = "/databases/{databaseId}/collections/{collectionId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -381,7 +392,7 @@ class Databases : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -395,18 +406,22 @@ class Databases : Service {
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, size, required, array, status, error
      * @return [io.appwrite.models.AttributeList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listAttributes(
         databaseId: String,
         collectionId: String,
+        queries: List<String>? = null,
     ): io.appwrite.models.AttributeList {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
         val params = mutableMapOf<String, Any?>(
+            "queries" to queries,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -416,7 +431,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeList::class.java,
@@ -447,7 +462,7 @@ class Databases : Service {
         default: Boolean? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeBoolean {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/boolean"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/boolean"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -465,7 +480,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeBoolean::class.java,
@@ -493,7 +508,7 @@ class Databases : Service {
         required: Boolean,
         default: Boolean? = null,
     ): io.appwrite.models.AttributeBoolean {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/boolean/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/boolean/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -510,7 +525,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeBoolean::class.java,
@@ -541,7 +556,7 @@ class Databases : Service {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeDatetime {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/datetime"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/datetime"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -559,7 +574,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeDatetime::class.java,
@@ -587,7 +602,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeDatetime {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/datetime/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/datetime/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -604,7 +619,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeDatetime::class.java,
@@ -635,7 +650,7 @@ class Databases : Service {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeEmail {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/email"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/email"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -653,7 +668,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeEmail::class.java,
@@ -681,7 +696,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeEmail {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/email/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/email/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -698,7 +713,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeEmail::class.java,
@@ -731,7 +746,7 @@ class Databases : Service {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeEnum {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/enum"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/enum"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -750,7 +765,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeEnum::class.java,
@@ -780,7 +795,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeEnum {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/enum/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/enum/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -798,7 +813,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeEnum::class.java,
@@ -833,7 +848,7 @@ class Databases : Service {
         default: Double? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeFloat {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/float"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/float"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -853,7 +868,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeFloat::class.java,
@@ -885,7 +900,7 @@ class Databases : Service {
         max: Double,
         default: Double? = null,
     ): io.appwrite.models.AttributeFloat {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/float/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/float/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -904,7 +919,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeFloat::class.java,
@@ -939,7 +954,7 @@ class Databases : Service {
         default: Long? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeInteger {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/integer"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/integer"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -959,7 +974,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeInteger::class.java,
@@ -991,7 +1006,7 @@ class Databases : Service {
         max: Long,
         default: Long? = null,
     ): io.appwrite.models.AttributeInteger {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/integer/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/integer/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1010,7 +1025,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeInteger::class.java,
@@ -1041,7 +1056,7 @@ class Databases : Service {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeIp {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/ip"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/ip"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1059,7 +1074,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeIp::class.java,
@@ -1087,7 +1102,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeIp {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/ip/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/ip/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1104,7 +1119,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeIp::class.java,
@@ -1115,7 +1130,7 @@ class Databases : Service {
     /**
      * Create Relationship Attribute
      *
-     * Create relationship attribute. [Learn more about relationship attributes](docs/databases-relationships#relationship-attributes).
+     * Create relationship attribute. [Learn more about relationship attributes](/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1139,7 +1154,7 @@ class Databases : Service {
         twoWayKey: String? = null,
         onDelete: String? = null,
     ): io.appwrite.models.AttributeRelationship {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1159,7 +1174,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeRelationship::class.java,
@@ -1179,6 +1194,7 @@ class Databases : Service {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeString]
      */
     @JvmOverloads
@@ -1191,8 +1207,9 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.AttributeString {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/string"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/string"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1202,6 +1219,7 @@ class Databases : Service {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -1211,7 +1229,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeString::class.java,
@@ -1239,7 +1257,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeString {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/string/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/string/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1256,7 +1274,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeString::class.java,
@@ -1287,7 +1305,7 @@ class Databases : Service {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.AttributeUrl {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/url"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/url"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1305,7 +1323,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeUrl::class.java,
@@ -1333,7 +1351,7 @@ class Databases : Service {
         required: Boolean,
         default: String? = null,
     ): io.appwrite.models.AttributeUrl {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/url/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/url/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1350,7 +1368,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeUrl::class.java,
@@ -1374,7 +1392,7 @@ class Databases : Service {
         collectionId: String,
         key: String,
     ): Any {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1386,7 +1404,7 @@ class Databases : Service {
         )
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -1409,7 +1427,7 @@ class Databases : Service {
         collectionId: String,
         key: String,
     ): Any {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1421,7 +1439,7 @@ class Databases : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -1431,7 +1449,7 @@ class Databases : Service {
     /**
      * Update Relationship Attribute
      *
-     * Update relationship attribute. [Learn more about relationship attributes](docs/databases-relationships#relationship-attributes).
+     * Update relationship attribute. [Learn more about relationship attributes](/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1447,7 +1465,7 @@ class Databases : Service {
         key: String,
         onDelete: String? = null,
     ): io.appwrite.models.AttributeRelationship {
-        val path = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1463,7 +1481,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.AttributeRelationship::class.java,
@@ -1489,7 +1507,7 @@ class Databases : Service {
         queries: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
-        val path = "/databases/{databaseId}/collections/{collectionId}/documents"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1504,7 +1522,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1557,7 +1575,7 @@ class Databases : Service {
         permissions: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Document<T> {
-        val path = "/databases/{databaseId}/collections/{collectionId}/documents"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1574,7 +1592,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1631,7 +1649,7 @@ class Databases : Service {
         queries: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Document<T> {
-        val path = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
@@ -1647,7 +1665,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1703,7 +1721,7 @@ class Databases : Service {
         permissions: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Document<T> {
-        val path = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
@@ -1720,7 +1738,7 @@ class Databases : Service {
         }
         return client.call(
             "PATCH",
-            path,
+            apiPath,
             headers,
             params,
             responseType = classOf(),
@@ -1773,7 +1791,7 @@ class Databases : Service {
         collectionId: String,
         documentId: String,
     ): Any {
-        val path = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
@@ -1785,7 +1803,7 @@ class Databases : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,
@@ -1799,18 +1817,22 @@ class Databases : Service {
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, status, attributes, error
      * @return [io.appwrite.models.IndexList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listIndexes(
         databaseId: String,
         collectionId: String,
+        queries: List<String>? = null,
     ): io.appwrite.models.IndexList {
-        val path = "/databases/{databaseId}/collections/{collectionId}/indexes"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
         val params = mutableMapOf<String, Any?>(
+            "queries" to queries,
         )
         val headers = mutableMapOf(
             "content-type" to "application/json",
@@ -1820,7 +1842,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.IndexList::class.java,
@@ -1851,7 +1873,7 @@ class Databases : Service {
         attributes: List<String>,
         orders: List<String>? = null,
     ): io.appwrite.models.Index {
-        val path = "/databases/{databaseId}/collections/{collectionId}/indexes"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
 
@@ -1869,7 +1891,7 @@ class Databases : Service {
         }
         return client.call(
             "POST",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Index::class.java,
@@ -1893,7 +1915,7 @@ class Databases : Service {
         collectionId: String,
         key: String,
     ): io.appwrite.models.Index {
-        val path = "/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1908,7 +1930,7 @@ class Databases : Service {
         }
         return client.call(
             "GET",
-            path,
+            apiPath,
             headers,
             params,
             responseType = io.appwrite.models.Index::class.java,
@@ -1932,7 +1954,7 @@ class Databases : Service {
         collectionId: String,
         key: String,
     ): Any {
-        val path = "/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
@@ -1944,7 +1966,7 @@ class Databases : Service {
         )
         return client.call(
             "DELETE",
-            path,
+            apiPath,
             headers,
             params,
             responseType = Any::class.java,

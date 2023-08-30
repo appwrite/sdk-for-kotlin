@@ -26,6 +26,12 @@ data class AttributeBoolean(
     val status: String,
 
     /**
+     * Error message. Displays error generated on failure of creating or deleting an attribute.
+     */
+    @SerializedName("error")
+    val error: String,
+
+    /**
      * Is attribute required?
      */
     @SerializedName("required")
@@ -48,6 +54,7 @@ data class AttributeBoolean(
         "key" to key as Any,
         "type" to type as Any,
         "status" to status as Any,
+        "error" to error as Any,
         "required" to required as Any,
         "array" to array as Any,
         "default" to default as Any,
@@ -62,6 +69,7 @@ data class AttributeBoolean(
             key = map["key"] as String,
             type = map["type"] as String,
             status = map["status"] as String,
+            error = map["error"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean?,
             default = map["default"] as? Boolean?,

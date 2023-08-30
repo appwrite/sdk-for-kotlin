@@ -26,6 +26,12 @@ data class Index(
     val status: String,
 
     /**
+     * Error message. Displays error generated on failure of creating or deleting an index.
+     */
+    @SerializedName("error")
+    val error: String,
+
+    /**
      * Index attributes.
      */
     @SerializedName("attributes")
@@ -42,6 +48,7 @@ data class Index(
         "key" to key as Any,
         "type" to type as Any,
         "status" to status as Any,
+        "error" to error as Any,
         "attributes" to attributes as Any,
         "orders" to orders as Any,
     )
@@ -55,6 +62,7 @@ data class Index(
             key = map["key"] as String,
             type = map["type"] as String,
             status = map["status"] as String,
+            error = map["error"] as String,
             attributes = map["attributes"] as List<Any>,
             orders = map["orders"] as? List<Any>?,
         )
