@@ -33,11 +33,11 @@ class Functions : Service {
     ): io.appwrite.models.FunctionList {
         val apiPath = "/functions"
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FunctionList = {
@@ -46,8 +46,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.FunctionList::class.java,
             converter,
         )
@@ -106,7 +106,7 @@ class Functions : Service {
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "functionId" to functionId,
             "name" to name,
             "runtime" to runtime,
@@ -128,7 +128,7 @@ class Functions : Service {
             "templateRootDirectory" to templateRootDirectory,
             "templateBranch" to templateBranch,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
@@ -137,8 +137,8 @@ class Functions : Service {
         return client.call(
             "POST",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Function::class.java,
             converter,
         )
@@ -156,9 +156,9 @@ class Functions : Service {
     ): io.appwrite.models.RuntimeList {
         val apiPath = "/functions/runtimes"
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.RuntimeList = {
@@ -167,8 +167,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.RuntimeList::class.java,
             converter,
         )
@@ -189,9 +189,9 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
@@ -200,8 +200,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Function::class.java,
             converter,
         )
@@ -253,7 +253,7 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "runtime" to runtime,
             "execute" to execute,
@@ -270,7 +270,7 @@ class Functions : Service {
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
@@ -279,8 +279,8 @@ class Functions : Service {
         return client.call(
             "PUT",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Function::class.java,
             converter,
         )
@@ -301,16 +301,16 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
             "DELETE",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = Any::class.java,
         )
     }
@@ -335,11 +335,11 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DeploymentList = {
@@ -348,8 +348,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.DeploymentList::class.java,
             converter,
         )
@@ -380,13 +380,13 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "entrypoint" to entrypoint,
             "commands" to commands,
             "code" to code,
             "activate" to activate,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "multipart/form-data",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
@@ -396,8 +396,8 @@ class Functions : Service {
         val paramName = "code"
         return client.chunkedUpload(
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Deployment::class.java,
             converter,
             paramName,
@@ -424,9 +424,9 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
@@ -435,8 +435,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Deployment::class.java,
             converter,
         )
@@ -460,9 +460,9 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
@@ -471,8 +471,8 @@ class Functions : Service {
         return client.call(
             "PATCH",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Function::class.java,
             converter,
         )
@@ -496,16 +496,16 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
             "DELETE",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = Any::class.java,
         )
     }
@@ -531,16 +531,16 @@ class Functions : Service {
             .replace("{deploymentId}", deploymentId)
             .replace("{buildId}", buildId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
             "POST",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = Any::class.java,
         )
     }
@@ -563,12 +563,12 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
         return client.call(
             "GET",
             apiPath,
-            params = params,
+            params = apiParams,
             responseType = ByteArray::class.java
         )
     }
@@ -593,11 +593,11 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ExecutionList = {
@@ -606,8 +606,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.ExecutionList::class.java,
             converter,
         )
@@ -639,14 +639,14 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "body" to body,
             "async" to async,
             "path" to path,
             "method" to method,
             "headers" to headers,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
@@ -655,8 +655,8 @@ class Functions : Service {
         return client.call(
             "POST",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Execution::class.java,
             converter,
         )
@@ -680,9 +680,9 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{executionId}", executionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
@@ -691,8 +691,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Execution::class.java,
             converter,
         )
@@ -713,9 +713,9 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
@@ -724,8 +724,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.VariableList::class.java,
             converter,
         )
@@ -750,11 +750,11 @@ class Functions : Service {
         val apiPath = "/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
@@ -763,8 +763,8 @@ class Functions : Service {
         return client.call(
             "POST",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Variable::class.java,
             converter,
         )
@@ -788,9 +788,9 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
@@ -799,8 +799,8 @@ class Functions : Service {
         return client.call(
             "GET",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Variable::class.java,
             converter,
         )
@@ -829,11 +829,11 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
@@ -842,8 +842,8 @@ class Functions : Service {
         return client.call(
             "PUT",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = io.appwrite.models.Variable::class.java,
             converter,
         )
@@ -867,16 +867,16 @@ class Functions : Service {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
 
-        val params = mutableMapOf<String, Any?>(
+        val apiParams = mutableMapOf<String, Any?>(
         )
-        val headers = mutableMapOf(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
             "DELETE",
             apiPath,
-            headers,
-            params,
+            apiHeaders,
+            apiParams,
             responseType = Any::class.java,
         )
     }

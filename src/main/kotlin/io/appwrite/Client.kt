@@ -62,11 +62,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/3.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/3.0.1 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "3.0.0",            "x-appwrite-response-format" to "1.4.0"
+            "x-sdk-version" to "3.0.1",            "x-appwrite-response-format" to "1.4.0"
         )
         config = mutableMapOf()
 
@@ -368,7 +368,7 @@ class Client @JvmOverloads constructor(
                 responseType = Map::class.java,
             )
             val chunksUploaded = current["chunksUploaded"] as Long
-            offset = (chunksUploaded * CHUNK_SIZE).coerceAtMost(size)
+            offset = chunksUploaded * CHUNK_SIZE
         }
 
         while (offset < size) {
@@ -379,7 +379,7 @@ class Client @JvmOverloads constructor(
                 }
                 "bytes" -> {
                     val end = if (offset + CHUNK_SIZE < size) {
-                        offset + CHUNK_SIZE
+                        offset + CHUNK_SIZE - 1
                     } else {
                         size - 1
                     }
@@ -399,7 +399,7 @@ class Client @JvmOverloads constructor(
             )
 
             headers["Content-Range"] =
-                "bytes $offset-${((offset + CHUNK_SIZE) - 1).coerceAtMost(size)}/$size"
+                "bytes $offset-${((offset + CHUNK_SIZE) - 1).coerceAtMost(size - 1)}/$size"
 
             result = call(
                 method = "POST",
