@@ -899,7 +899,7 @@ class Users : Service {
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](/docs/permissions) for more info.
      *
      * @param userId User ID.
-     * @param labels Array of user labels. Replaces the previous labels. Maximum of 5 labels are allowed, each up to 36 alphanumeric characters long.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 100 labels are allowed, each up to 36 alphanumeric characters long.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
@@ -936,7 +936,7 @@ class Users : Service {
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](/docs/permissions) for more info.
      *
      * @param userId User ID.
-     * @param labels Array of user labels. Replaces the previous labels. Maximum of 5 labels are allowed, each up to 36 alphanumeric characters long.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 100 labels are allowed, each up to 36 alphanumeric characters long.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
