@@ -235,7 +235,7 @@ class Functions : Service {
     suspend fun update(
         functionId: String,
         name: String,
-        runtime: String,
+        runtime: String? = null,
         execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
