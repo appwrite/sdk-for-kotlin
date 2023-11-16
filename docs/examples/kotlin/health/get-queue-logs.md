@@ -8,4 +8,5 @@ val client = Client(context)
 
 val health = Health(client)
 
-val response = health.getQueueLogs()
+val response = health.getQueueLogs(
+)

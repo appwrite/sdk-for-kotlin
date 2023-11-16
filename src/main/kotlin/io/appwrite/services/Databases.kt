@@ -15,7 +15,7 @@ class Databases : Service {
     public constructor (client: Client) : super(client) { }
 
     /**
-     * List Databases
+     * List databases
      *
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
      *
@@ -52,7 +52,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Database
+     * Create database
      *
      * Create a new Database.
      *
@@ -92,7 +92,7 @@ class Databases : Service {
     }
 
     /**
-     * Get Database
+     * Get database
      *
      * Get a database by its unique ID. This endpoint response returns a JSON object with the database metadata.
      *
@@ -125,7 +125,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Database
+     * Update database
      *
      * Update a database by its unique ID.
      *
@@ -165,7 +165,7 @@ class Databases : Service {
     }
 
     /**
-     * Delete Database
+     * Delete database
      *
      * Delete a database by its unique ID. Only API keys with with databases.write scope can delete a database.
      *
@@ -194,7 +194,7 @@ class Databases : Service {
     }
 
     /**
-     * List Collections
+     * List collections
      *
      * Get a list of all collections that belong to the provided databaseId. You can use the search parameter to filter your results.
      *
@@ -234,15 +234,15 @@ class Databases : Service {
     }
 
     /**
-     * Create Collection
+     * Create collection
      *
-     * Create a new Collection. Before using this route, you should create a new database resource using either a [server integration](/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create a new Collection. Before using this route, you should create a new database resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Collection name. Max length: 128 chars.
-     * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](/docs/permissions).
-     * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
@@ -283,7 +283,7 @@ class Databases : Service {
     }
 
     /**
-     * Get Collection
+     * Get collection
      *
      * Get a collection by its unique ID. This endpoint response returns a JSON object with the collection metadata.
      *
@@ -319,15 +319,15 @@ class Databases : Service {
     }
 
     /**
-     * Update Collection
+     * Update collection
      *
      * Update a collection by its unique ID.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param name Collection name. Max length: 128 chars.
-     * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
-     * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
@@ -368,7 +368,7 @@ class Databases : Service {
     }
 
     /**
-     * Delete Collection
+     * Delete collection
      *
      * Delete a collection by its unique ID. Only users with write permissions have access to delete this resource.
      *
@@ -400,7 +400,7 @@ class Databases : Service {
     }
 
     /**
-     * List Attributes
+     * List attributes
      *
      * 
      *
@@ -440,7 +440,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Boolean Attribute
+     * Create boolean attribute
      *
      * Create a boolean attribute.
      *
@@ -489,7 +489,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Boolean Attribute
+     * Update boolean attribute
      *
      * 
      *
@@ -534,7 +534,7 @@ class Databases : Service {
     }
 
     /**
-     * Create DateTime Attribute
+     * Create datetime attribute
      *
      * 
      *
@@ -583,7 +583,7 @@ class Databases : Service {
     }
 
     /**
-     * Update DateTime Attribute
+     * Update dateTime attribute
      *
      * 
      *
@@ -628,7 +628,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Email Attribute
+     * Create email attribute
      *
      * Create an email attribute.
      *
@@ -677,7 +677,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Email Attribute
+     * Update email attribute
      *
      * Update an email attribute. Changing the `default` value will not update already existing documents.
      *
@@ -722,7 +722,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Enum Attribute
+     * Create enum attribute
      *
      * 
      *
@@ -774,7 +774,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Enum Attribute
+     * Update enum attribute
      *
      * Update an enum attribute. Changing the `default` value will not update already existing documents.
      *
@@ -822,7 +822,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Float Attribute
+     * Create float attribute
      *
      * Create a float attribute. Optionally, minimum and maximum values can be provided.
      *
@@ -877,7 +877,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Float Attribute
+     * Update float attribute
      *
      * Update a float attribute. Changing the `default` value will not update already existing documents.
      *
@@ -928,7 +928,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Integer Attribute
+     * Create integer attribute
      *
      * Create an integer attribute. Optionally, minimum and maximum values can be provided.
      *
@@ -983,7 +983,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Integer Attribute
+     * Update integer attribute
      *
      * Update an integer attribute. Changing the `default` value will not update already existing documents.
      *
@@ -1034,7 +1034,7 @@ class Databases : Service {
     }
 
     /**
-     * Create IP Address Attribute
+     * Create IP address attribute
      *
      * Create IP address attribute.
      *
@@ -1083,7 +1083,7 @@ class Databases : Service {
     }
 
     /**
-     * Update IP Address Attribute
+     * Update IP address attribute
      *
      * Update an ip attribute. Changing the `default` value will not update already existing documents.
      *
@@ -1128,9 +1128,9 @@ class Databases : Service {
     }
 
     /**
-     * Create Relationship Attribute
+     * Create relationship attribute
      *
-     * Create relationship attribute. [Learn more about relationship attributes](/docs/databases-relationships#relationship-attributes).
+     * Create relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1183,7 +1183,7 @@ class Databases : Service {
     }
 
     /**
-     * Create String Attribute
+     * Create string attribute
      *
      * Create a string attribute.
      *
@@ -1238,7 +1238,7 @@ class Databases : Service {
     }
 
     /**
-     * Update String Attribute
+     * Update string attribute
      *
      * Update a string attribute. Changing the `default` value will not update already existing documents.
      *
@@ -1283,7 +1283,7 @@ class Databases : Service {
     }
 
     /**
-     * Create URL Attribute
+     * Create URL attribute
      *
      * Create a URL attribute.
      *
@@ -1332,7 +1332,7 @@ class Databases : Service {
     }
 
     /**
-     * Update URL Attribute
+     * Update URL attribute
      *
      * Update an url attribute. Changing the `default` value will not update already existing documents.
      *
@@ -1377,7 +1377,7 @@ class Databases : Service {
     }
 
     /**
-     * Get Attribute
+     * Get attribute
      *
      * 
      *
@@ -1412,7 +1412,7 @@ class Databases : Service {
     }
 
     /**
-     * Delete Attribute
+     * Delete attribute
      *
      * 
      *
@@ -1447,9 +1447,9 @@ class Databases : Service {
     }
 
     /**
-     * Update Relationship Attribute
+     * Update relationship attribute
      *
-     * Update relationship attribute. [Learn more about relationship attributes](/docs/databases-relationships#relationship-attributes).
+     * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1490,7 +1490,7 @@ class Databases : Service {
     }
 
     /**
-     * List Documents
+     * List documents
      *
      * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
      *
@@ -1531,7 +1531,7 @@ class Databases : Service {
     }
 
     /**
-     * List Documents
+     * List documents
      *
      * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
      *
@@ -1554,15 +1554,15 @@ class Databases : Service {
     )
 
     /**
-     * Create Document
+     * Create document
      *
-     * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documentId Document ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
-     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1601,15 +1601,15 @@ class Databases : Service {
     }
 
     /**
-     * Create Document
+     * Create document
      *
-     * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documentId Document ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
-     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1630,7 +1630,7 @@ class Databases : Service {
     )
 
     /**
-     * Get Document
+     * Get document
      *
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
      *
@@ -1674,7 +1674,7 @@ class Databases : Service {
     }
 
     /**
-     * Get Document
+     * Get document
      *
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
      *
@@ -1700,7 +1700,7 @@ class Databases : Service {
     )
 
     /**
-     * Update Document
+     * Update document
      *
      * Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
      *
@@ -1708,7 +1708,7 @@ class Databases : Service {
      * @param collectionId Collection ID.
      * @param documentId Document ID.
      * @param data Document data as JSON object. Include only attribute and value pairs to be updated.
-     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1747,7 +1747,7 @@ class Databases : Service {
     }
 
     /**
-     * Update Document
+     * Update document
      *
      * Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
      *
@@ -1755,7 +1755,7 @@ class Databases : Service {
      * @param collectionId Collection ID.
      * @param documentId Document ID.
      * @param data Document data as JSON object. Include only attribute and value pairs to be updated.
-     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1776,7 +1776,7 @@ class Databases : Service {
     )
 
     /**
-     * Delete Document
+     * Delete document
      *
      * Delete a document by its unique ID.
      *
@@ -1811,7 +1811,7 @@ class Databases : Service {
     }
 
     /**
-     * List Indexes
+     * List indexes
      *
      * 
      *
@@ -1851,7 +1851,7 @@ class Databases : Service {
     }
 
     /**
-     * Create Index
+     * Create index
      *
      * 
      *
@@ -1900,7 +1900,7 @@ class Databases : Service {
     }
 
     /**
-     * Get Index
+     * Get index
      *
      * 
      *
@@ -1939,7 +1939,7 @@ class Databases : Service {
     }
 
     /**
-     * Delete Index
+     * Delete index
      *
      * 
      *

@@ -26,7 +26,7 @@ data class Collection(
     val updatedAt: String,
 
     /**
-     * Collection permissions. [Learn more about permissions](/docs/permissions).
+     * Collection permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("\$permissions")
     val permissions: List<Any>,
@@ -50,7 +50,7 @@ data class Collection(
     val enabled: Boolean,
 
     /**
-     * Whether document-level permissions are enabled. [Learn more about permissions](/docs/permissions).
+     * Whether document-level permissions are enabled. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("documentSecurity")
     val documentSecurity: Boolean,
