@@ -9,11 +9,13 @@ Client client = new Client()
 
 Health health = new Health(client);
 
-health.getQueueFunctions(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+health.getQueueFunctions(
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);

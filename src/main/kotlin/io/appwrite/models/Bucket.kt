@@ -26,13 +26,13 @@ data class Bucket(
     val updatedAt: String,
 
     /**
-     * Bucket permissions. [Learn more about permissions](/docs/permissions).
+     * Bucket permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("\$permissions")
     val permissions: List<Any>,
 
     /**
-     * Whether file-level security is enabled. [Learn more about permissions](/docs/permissions).
+     * Whether file-level security is enabled. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("fileSecurity")
     val fileSecurity: Boolean,

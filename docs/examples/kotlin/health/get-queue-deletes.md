@@ -8,5 +8,5 @@ val client = Client(context)
 
 val health = Health(client)
 
-val response = health.getQueueFunctions(
+val response = health.getQueueDeletes(
 )

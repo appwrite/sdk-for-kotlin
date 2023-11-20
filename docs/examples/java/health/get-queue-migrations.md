@@ -9,7 +9,7 @@ Client client = new Client()
 
 Health health = new Health(client);
 
-health.getQueueLogs(
+health.getQueueMigrations(
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

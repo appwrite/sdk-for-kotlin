@@ -2,7 +2,7 @@
 
 ![Maven Central](https://img.shields.io/maven-central/v/io.appwrite/sdk-for-kotlin.svg?color=green&style=flat-square)
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-kotlin.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-1.4.2-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-1.4.12-blue.svg?style=flat-square)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
@@ -39,7 +39,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:4.0.0")
+implementation("io.appwrite:sdk-for-kotlin:4.1.0")
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>4.0.0</version>
+        <version>4.1.0</version>
     </dependency>
 </dependencies>
 ```
