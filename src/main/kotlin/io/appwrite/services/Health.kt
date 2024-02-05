@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -10,9 +11,7 @@ import java.io.File
 /**
  * The Health service allows you to both validate and monitor your Appwrite server&#039;s health.
 **/
-class Health : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Health(client: Client) : Service(client) {
 
     /**
      * Get HTTP

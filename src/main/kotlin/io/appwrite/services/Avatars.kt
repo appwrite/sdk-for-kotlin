@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -12,9 +13,7 @@ import java.io.File
 /**
  * The Avatars service aims to help you complete everyday tasks related to your app image, icons, and avatars.
 **/
-class Avatars : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Avatars(client: Client) : Service(client) {
 
     /**
      * Get browser icon
@@ -30,13 +29,13 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getBrowser(
-        code: String,
+        code: Browser,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/browsers/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -65,13 +64,13 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getCreditCard(
-        code: String,
+        code: CreditCard,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/credit-cards/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -125,13 +124,13 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFlag(
-        code: String,
+        code: Flag,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/flags/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,

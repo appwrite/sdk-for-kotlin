@@ -1,6 +1,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Databases;
+import io.appwrite.enums.RelationshipType;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
@@ -13,7 +14,7 @@ databases.createRelationshipAttribute(
     "[DATABASE_ID]",
     "[COLLECTION_ID]",
     "[RELATED_COLLECTION_ID]",
-    "oneToOne",
+    RelationshipType.ONE_TO_ONE,
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
