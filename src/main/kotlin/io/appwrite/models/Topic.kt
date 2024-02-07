@@ -37,12 +37,6 @@ data class Topic(
     @SerializedName("total")
     val total: Long,
 
-    /**
-     * Description of the topic.
-     */
-    @SerializedName("description")
-    var description: String?,
-
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -50,7 +44,6 @@ data class Topic(
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
         "total" to total as Any,
-        "description" to description as Any,
     )
 
     companion object {
@@ -64,7 +57,6 @@ data class Topic(
             updatedAt = map["\$updatedAt"] as String,
             name = map["name"] as String,
             total = (map["total"] as Number).toLong(),
-            description = map["description"] as? String?,
         )
     }
 }

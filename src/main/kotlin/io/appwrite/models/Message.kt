@@ -85,12 +85,6 @@ data class Message(
     @SerializedName("status")
     val status: String,
 
-    /**
-     * Message description.
-     */
-    @SerializedName("description")
-    var description: String?,
-
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -106,7 +100,6 @@ data class Message(
         "deliveredTotal" to deliveredTotal as Any,
         "data" to data as Any,
         "status" to status as Any,
-        "description" to description as Any,
     )
 
     companion object {
@@ -128,7 +121,6 @@ data class Message(
             deliveredTotal = (map["deliveredTotal"] as Number).toLong(),
             data = map["data"] as Any,
             status = map["status"] as String,
-            description = map["description"] as? String?,
         )
     }
 }
