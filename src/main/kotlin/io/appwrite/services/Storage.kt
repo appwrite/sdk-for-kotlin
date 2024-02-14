@@ -2,7 +2,6 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
-import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -13,7 +12,9 @@ import java.io.File
 /**
  * The Storage service allows you to manage your project files.
 **/
-class Storage(client: Client) : Service(client) {
+class Storage : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * List buckets
@@ -79,7 +80,7 @@ class Storage(client: Client) : Service(client) {
         enabled: Boolean? = null,
         maximumFileSize: Long? = null,
         allowedFileExtensions: List<String>? = null,
-        compression: Compression? = null,
+        compression: String? = null,
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
     ): io.appwrite.models.Bucket {
@@ -173,7 +174,7 @@ class Storage(client: Client) : Service(client) {
         enabled: Boolean? = null,
         maximumFileSize: Long? = null,
         allowedFileExtensions: List<String>? = null,
-        compression: Compression? = null,
+        compression: String? = null,
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
     ): io.appwrite.models.Bucket {
@@ -490,7 +491,7 @@ class Storage(client: Client) : Service(client) {
         fileId: String,
         width: Long? = null,
         height: Long? = null,
-        gravity: ImageGravity? = null,
+        gravity: String? = null,
         quality: Long? = null,
         borderWidth: Long? = null,
         borderColor: String? = null,
@@ -498,7 +499,7 @@ class Storage(client: Client) : Service(client) {
         opacity: Double? = null,
         rotation: Long? = null,
         background: String? = null,
-        output: ImageFormat? = null,
+        output: String? = null,
     ): ByteArray {
         val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/preview"
             .replace("{bucketId}", bucketId)

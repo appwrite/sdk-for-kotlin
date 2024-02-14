@@ -2,7 +2,6 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
-import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -11,7 +10,9 @@ import java.io.File
 /**
  * The Databases service allows you to create structured collections of documents, query and filter lists of documents
 **/
-class Databases(client: Client) : Service(client) {
+class Databases : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * List databases
@@ -541,7 +542,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for the attribute in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when attribute is required.
+     * @param default Default value for the attribute in ISO 8601 format. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeDatetime]
      */
@@ -1147,11 +1148,11 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         relatedCollectionId: String,
-        type: RelationshipType,
+        type: String,
         twoWay: Boolean? = null,
         key: String? = null,
         twoWayKey: String? = null,
-        onDelete: RelationMutate? = null,
+        onDelete: String? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
             .replace("{databaseId}", databaseId)
@@ -1462,7 +1463,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-        onDelete: RelationMutate? = null,
+        onDelete: String? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
             .replace("{databaseId}", databaseId)
@@ -1636,7 +1637,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param documentId Document ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only method allowed is select.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1680,7 +1681,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param documentId Document ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only method allowed is select.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1868,7 +1869,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-        type: IndexType,
+        type: String,
         attributes: List<String>,
         orders: List<String>? = null,
     ): io.appwrite.models.Index {

@@ -2,7 +2,6 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
-import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -11,7 +10,9 @@ import java.io.File
 /**
  * The Locale service allows you to customize your app based on your users&#039; location.
 **/
-class Locale(client: Client) : Service(client) {
+class Locale : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * Get user locale

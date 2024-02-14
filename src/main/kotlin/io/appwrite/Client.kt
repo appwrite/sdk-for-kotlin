@@ -62,11 +62,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/5.0.0-rc.1 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/4.1.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "5.0.0-rc.1",            "x-appwrite-response-format" to "1.4.0"
+            "x-sdk-version" to "4.1.0",            "x-appwrite-response-format" to "1.4.0"
         )
         config = mutableMapOf()
 
@@ -128,51 +128,6 @@ class Client @JvmOverloads constructor(
     fun setLocale(value: String): Client {
         config["locale"] = value
         addHeader("x-appwrite-locale", value)
-        return this
-    }
-
-    /**
-     * Set Session
-     *
-     * The user session to authenticate with
-     *
-     * @param {string} session
-     *
-     * @return this
-     */
-    fun setSession(value: String): Client {
-        config["session"] = value
-        addHeader("x-appwrite-session", value)
-        return this
-    }
-
-    /**
-     * Set ForwardedFor
-     *
-     * The IP address of the client that made the request
-     *
-     * @param {string} forwardedfor
-     *
-     * @return this
-     */
-    fun setForwardedFor(value: String): Client {
-        config["forwardedFor"] = value
-        addHeader("x-forwarded-for", value)
-        return this
-    }
-
-    /**
-     * Set ForwardedUserAgent
-     *
-     * The user agent string of the client that made the request
-     *
-     * @param {string} forwardeduseragent
-     *
-     * @return this
-     */
-    fun setForwardedUserAgent(value: String): Client {
-        config["forwardedUserAgent"] = value
-        addHeader("x-forwarded-user-agent", value)
         return this
     }
 

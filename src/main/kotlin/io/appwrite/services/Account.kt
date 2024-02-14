@@ -2,7 +2,6 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
-import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -11,7 +10,9 @@ import java.io.File
 /**
  * The Account service allows you to authenticate and manage a user account.
 **/
-class Account(client: Client) : Service(client) {
+class Account : Service {
+
+    public constructor (client: Client) : super(client) { }
 
     /**
      * Get account
@@ -54,76 +55,6 @@ class Account(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun get(
     ): io.appwrite.models.User<Map<String, Any>> = get(
-        nestedType = classOf(),
-    )
-
-    /**
-     * Create account
-     *
-     * Use this endpoint to allow a new user to register a new account in your project. After the user registration completes successfully, you can use the [/account/verfication](https://appwrite.io/docs/references/cloud/client-web/account#createVerification) route to start verifying the user email address. To allow the new user to login to their new account, you need to create a new [account session](https://appwrite.io/docs/references/cloud/client-web/account#createEmailSession).
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param email User email.
-     * @param password New user password. Must be between 8 and 256 chars.
-     * @param name User name. Max length: 128 chars.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun <T> create(
-        userId: String,
-        email: String,
-        password: String,
-        name: String? = null,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
-        val apiPath = "/account"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "email" to email,
-            "password" to password,
-            "name" to name,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = classOf(),
-            converter,
-        )
-    }
-
-    /**
-     * Create account
-     *
-     * Use this endpoint to allow a new user to register a new account in your project. After the user registration completes successfully, you can use the [/account/verfication](https://appwrite.io/docs/references/cloud/client-web/account#createVerification) route to start verifying the user email address. To allow the new user to login to their new account, you need to create a new [account session](https://appwrite.io/docs/references/cloud/client-web/account#createEmailSession).
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param email User email.
-     * @param password New user password. Must be between 8 and 256 chars.
-     * @param name User name. Max length: 128 chars.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun create(
-        userId: String,
-        email: String,
-        password: String,
-        name: String? = null,
-    ): io.appwrite.models.User<Map<String, Any>> = create(
-        userId,
-        email,
-        password,
-        name,
         nestedType = classOf(),
     )
 
@@ -194,7 +125,7 @@ class Account(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listIdentities(
-        queries: List<String>? = null,
+        queries: String? = null,
     ): io.appwrite.models.IdentityList {
         val apiPath = "/account/identities"
 
@@ -218,7 +149,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Delete identity
+     * Delete Identity
      *
      * Delete an identity by its unique ID.
      *
@@ -243,36 +174,6 @@ class Account(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * Create JWT
-     *
-     * Use this endpoint to create a JSON Web Token. You can use the resulting JWT to authenticate on behalf of the current user when working with the Appwrite server-side API and SDKs. The JWT secret is valid for 15 minutes from its creation and will be invalid if the user will logout in that time frame.
-     *
-     * @return [io.appwrite.models.Jwt]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createJWT(
-    ): io.appwrite.models.Jwt {
-        val apiPath = "/account/jwt"
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Jwt = {
-            io.appwrite.models.Jwt.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Jwt::class.java,
-            converter,
         )
     }
 
@@ -309,296 +210,6 @@ class Account(client: Client) : Service(client) {
             converter,
         )
     }
-
-    /**
-     * Update MFA
-     *
-     * 
-     *
-     * @param mfa Enable or disable MFA.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun <T> updateMFA(
-        mfa: Boolean,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
-        val apiPath = "/account/mfa"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "mfa" to mfa,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = classOf(),
-            converter,
-        )
-    }
-
-    /**
-     * Update MFA
-     *
-     * 
-     *
-     * @param mfa Enable or disable MFA.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun updateMFA(
-        mfa: Boolean,
-    ): io.appwrite.models.User<Map<String, Any>> = updateMFA(
-        mfa,
-        nestedType = classOf(),
-    )
-
-    /**
-     * Create MFA Challenge
-     *
-     * 
-     *
-     * @param provider provider.
-     * @return [io.appwrite.models.MfaChallenge]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createChallenge(
-        provider: AuthenticatorProvider,
-    ): io.appwrite.models.MfaChallenge {
-        val apiPath = "/account/mfa/challenge"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "provider" to provider,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.MfaChallenge = {
-            io.appwrite.models.MfaChallenge.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.MfaChallenge::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create MFA Challenge (confirmation)
-     *
-     * 
-     *
-     * @param challengeId Valid verification token.
-     * @param otp Valid verification token.
-     * @return [Any]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun updateChallenge(
-        challengeId: String,
-        otp: String,
-    ): Any {
-        val apiPath = "/account/mfa/challenge"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "challengeId" to challengeId,
-            "otp" to otp,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        return client.call(
-            "PUT",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * List Factors
-     *
-     * Get the currently logged in user.
-     *
-     * @return [io.appwrite.models.MfaProviders]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun listFactors(
-    ): io.appwrite.models.MfaProviders {
-        val apiPath = "/account/mfa/factors"
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.MfaProviders = {
-            io.appwrite.models.MfaProviders.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.MfaProviders::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Add Authenticator
-     *
-     * 
-     *
-     * @param factor Factor.
-     * @return [io.appwrite.models.MfaProvider]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun addAuthenticator(
-        factor: AuthenticatorFactor,
-    ): io.appwrite.models.MfaProvider {
-        val apiPath = "/account/mfa/{factor}"
-            .replace("{factor}", factor.value)
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.MfaProvider = {
-            io.appwrite.models.MfaProvider.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.MfaProvider::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Verify Authenticator
-     *
-     * 
-     *
-     * @param factor Factor.
-     * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun <T> verifyAuthenticator(
-        factor: AuthenticatorFactor,
-        otp: String,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
-        val apiPath = "/account/mfa/{factor}"
-            .replace("{factor}", factor.value)
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "otp" to otp,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
-        return client.call(
-            "PUT",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = classOf(),
-            converter,
-        )
-    }
-
-    /**
-     * Verify Authenticator
-     *
-     * 
-     *
-     * @param factor Factor.
-     * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun verifyAuthenticator(
-        factor: AuthenticatorFactor,
-        otp: String,
-    ): io.appwrite.models.User<Map<String, Any>> = verifyAuthenticator(
-        factor,
-        otp,
-        nestedType = classOf(),
-    )
-
-    /**
-     * Delete Authenticator
-     *
-     * 
-     *
-     * @param provider Provider.
-     * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun <T> deleteAuthenticator(
-        provider: AuthenticatorProvider,
-        otp: String,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
-        val apiPath = "/account/mfa/{provider}"
-            .replace("{provider}", provider.value)
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "otp" to otp,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
-        return client.call(
-            "DELETE",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = classOf(),
-            converter,
-        )
-    }
-
-    /**
-     * Delete Authenticator
-     *
-     * 
-     *
-     * @param provider Provider.
-     * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun deleteAuthenticator(
-        provider: AuthenticatorProvider,
-        otp: String,
-    ): io.appwrite.models.User<Map<String, Any>> = deleteAuthenticator(
-        provider,
-        otp,
-        nestedType = classOf(),
-    )
 
     /**
      * Update name
@@ -901,7 +512,8 @@ class Account(client: Client) : Service(client) {
      *
      * @param userId User ID.
      * @param secret Valid reset token.
-     * @param password New user password. Must be between 8 and 256 chars.
+     * @param password New user password. Must be at least 8 chars.
+     * @param passwordAgain Repeat new user password. Must be at least 8 chars.
      * @return [io.appwrite.models.Token]
      */
     @Throws(AppwriteException::class)
@@ -909,6 +521,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
         password: String,
+        passwordAgain: String,
     ): io.appwrite.models.Token {
         val apiPath = "/account/recovery"
 
@@ -916,6 +529,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
             "password" to password,
+            "passwordAgain" to passwordAgain,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -990,186 +604,6 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Create anonymous session
-     *
-     * Use this endpoint to allow a new user to register an anonymous account in your project. This route will also create a new session for the user. To allow the new user to convert an anonymous account to a normal account, you need to update its [email and password](https://appwrite.io/docs/references/cloud/client-web/account#updateEmail) or create an [OAuth2 session](https://appwrite.io/docs/references/cloud/client-web/account#CreateOAuth2Session).
-     *
-     * @return [io.appwrite.models.Session]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createAnonymousSession(
-    ): io.appwrite.models.Session {
-        val apiPath = "/account/sessions/anonymous"
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Session = {
-            io.appwrite.models.Session.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Session::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create email password session
-     *
-     * Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     *
-     * @param email User email.
-     * @param password User password. Must be at least 8 chars.
-     * @return [io.appwrite.models.Session]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createEmailPasswordSession(
-        email: String,
-        password: String,
-    ): io.appwrite.models.Session {
-        val apiPath = "/account/sessions/email"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "email" to email,
-            "password" to password,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Session = {
-            io.appwrite.models.Session.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Session::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create session (deprecated)
-     *
-     * Use this endpoint to create a session from token. Provide the **userId** and **secret** parameters from the successful response of authentication flows initiated by token creation. For example, magic URL and phone login.
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param secret Valid verification token.
-     * @return [io.appwrite.models.Session]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun updateMagicURLSession(
-        userId: String,
-        secret: String,
-    ): io.appwrite.models.Session {
-        val apiPath = "/account/sessions/magic-url"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "secret" to secret,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Session = {
-            io.appwrite.models.Session.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PUT",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Session::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create OAuth2 session
-     *
-     * Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL&#039;s back to your app when login is completed.If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for a user with the same email address as the email received from the OAuth2 provider and attach the new session to the existing user. If no matching user is found - the server will create a new user.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom.
-     * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param token Include token credentials in the final redirect, useful for server-side integrations, or when cookies are not available.
-     * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createOAuth2Session(
-        activity: ComponentActivity,
-        provider: OAuthProvider,
-        success: String? = null,
-        failure: String? = null,
-        token: Boolean? = null,
-        scopes: List<String>? = null,
-    ): Bool {
-        val apiPath = "/account/sessions/oauth2/{provider}"
-            .replace("{provider}", provider.value)
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "success" to success,
-            "failure" to failure,
-            "token" to token,
-            "scopes" to scopes,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = Bool::class.java,
-        )
-    }
-
-    /**
-     * Create session
-     *
-     * Use this endpoint to create a session from token. Provide the **userId** and **secret** parameters from the successful response of authentication flows initiated by token creation. For example, magic URL and phone login.
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param secret Secret of a token generated by login methods. For example, the `createMagicURLToken` or `createPhoneToken` methods.
-     * @return [io.appwrite.models.Session]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createSession(
-        userId: String,
-        secret: String,
-    ): io.appwrite.models.Session {
-        val apiPath = "/account/sessions/token"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "secret" to secret,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Session = {
-            io.appwrite.models.Session.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Session::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Get session
      *
      * Use this endpoint to get a logged in user&#039;s session using a Session ID. Inputting &#039;current&#039; will return the current session being used.
@@ -1203,9 +637,9 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Update (or renew) a session
+     * Update OAuth session (refresh tokens)
      *
-     * Extend session&#039;s expiry to increase it&#039;s lifespan. Extending a session is useful when session length is short such as 5 minutes.
+     * Access tokens have limited lifespan and expire to mitigate security risks. If session was created using an OAuth provider, this route can be used to &quot;refresh&quot; the access token.
      *
      * @param sessionId Session ID. Use the string 'current' to update the current device session.
      * @return [io.appwrite.models.Session]
@@ -1307,125 +741,6 @@ class Account(client: Client) : Service(client) {
     ): io.appwrite.models.User<Map<String, Any>> = updateStatus(
         nestedType = classOf(),
     )
-
-    /**
-     * Create email token (OTP)
-     *
-     * Sends the user an email with a secret key for creating a session. If the provided user ID has not be registered, a new user will be created. Use the returned user ID and secret and submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The secret sent to the user&#039;s email is valid for 15 minutes.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param email User email.
-     * @param phrase Toggle for security phrase. If enabled, email will be send with a randomly generated phrase and the phrase will also be included in the response. Confirming phrases match increases the security of your authentication flow.
-     * @return [io.appwrite.models.Token]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createEmailToken(
-        userId: String,
-        email: String,
-        phrase: Boolean? = null,
-    ): io.appwrite.models.Token {
-        val apiPath = "/account/tokens/email"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "email" to email,
-            "phrase" to phrase,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Token = {
-            io.appwrite.models.Token.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Token::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create magic URL token
-     *
-     * Sends the user an email with a secret key for creating a session. If the provided user ID has not been registered, a new user will be created. When the user clicks the link in the email, the user is redirected back to the URL you provided with the secret key and userId values attached to the URL query string. Use the query string parameters to submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The link sent to the user&#039;s email address is valid for 1 hour. If you are on a mobile device you can leave the URL parameter empty, so that the login completion will be handled by your Appwrite instance by default.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     *
-     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param email User email.
-     * @param url URL to redirect the user back to your app from the magic URL login. Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param phrase Toggle for security phrase. If enabled, email will be send with a randomly generated phrase and the phrase will also be included in the response. Confirming phrases match increases the security of your authentication flow.
-     * @return [io.appwrite.models.Token]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createMagicURLToken(
-        userId: String,
-        email: String,
-        url: String? = null,
-        phrase: Boolean? = null,
-    ): io.appwrite.models.Token {
-        val apiPath = "/account/tokens/magic-url"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "email" to email,
-            "url" to url,
-            "phrase" to phrase,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Token = {
-            io.appwrite.models.Token.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Token::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create phone token
-     *
-     * Sends the user an SMS with a secret key for creating a session. If the provided user ID has not be registered, a new user will be created. Use the returned user ID and secret and submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The secret sent to the user&#039;s phone is valid for 15 minutes.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     *
-     * @param userId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param phone Phone number. Format this number with a leading '+' and a country code, e.g., +16175551212.
-     * @return [io.appwrite.models.Token]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun createPhoneToken(
-        userId: String,
-        phone: String,
-    ): io.appwrite.models.Token {
-        val apiPath = "/account/tokens/phone"
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "userId" to userId,
-            "phone" to phone,
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Token = {
-            io.appwrite.models.Token.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Token::class.java,
-            converter,
-        )
-    }
 
     /**
      * Create email verification
