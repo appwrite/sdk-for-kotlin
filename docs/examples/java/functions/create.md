@@ -1,6 +1,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Functions;
+import io.appwrite.enums.Runtime;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +13,7 @@ Functions functions = new Functions(client);
 functions.create(
     "[FUNCTION_ID]",
     "[NAME]",
-    "node-18.0",
+    .NODE180,
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

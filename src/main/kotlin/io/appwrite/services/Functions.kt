@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -12,9 +13,7 @@ import java.io.File
 /**
  * The Functions Service allows you view, create and manage your Cloud Functions.
 **/
-class Functions : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Functions(client: Client) : Service(client) {
 
     /**
      * List functions
@@ -85,7 +84,7 @@ class Functions : Service {
     suspend fun create(
         functionId: String,
         name: String,
-        runtime: String,
+        runtime: Runtime,
         execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
@@ -235,7 +234,7 @@ class Functions : Service {
     suspend fun update(
         functionId: String,
         name: String,
-        runtime: String? = null,
+        runtime: Runtime? = null,
         execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
@@ -633,7 +632,7 @@ class Functions : Service {
         body: String? = null,
         async: Boolean? = null,
         path: String? = null,
-        method: String? = null,
+        method: ExecutionMethod? = null,
         headers: Any? = null,
     ): io.appwrite.models.Execution {
         val apiPath = "/functions/{functionId}/executions"

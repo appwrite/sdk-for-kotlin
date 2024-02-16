@@ -1,10 +1,8 @@
 package io.appwrite
 
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.fromJson
-import io.appwrite.json.PreciseNumberAdapter
+import io.appwrite.extensions.toJson
 import io.appwrite.models.InputFile
 import io.appwrite.models.UploadProgress
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +32,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 
 class Client @JvmOverloads constructor(
-    var endPoint: String = "https://HOSTNAME/v1",
+    var endPoint: String = "https://cloud.appwrite.io/v1",
     private var selfSigned: Boolean = false
 ) : CoroutineScope {
 
@@ -47,11 +45,6 @@ class Client @JvmOverloads constructor(
 
     private val job = Job()
 
-    private val gson = GsonBuilder().registerTypeAdapter(
-        object : TypeToken<Map<String, Any>>(){}.type,
-        PreciseNumberAdapter()
-    ).create()
-
     lateinit var http: OkHttpClient
 
     private val headers: MutableMap<String, String>
@@ -62,11 +55,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/4.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/5.0.0-rc.2 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "4.1.0",            "x-appwrite-response-format" to "1.4.0"
+            "x-sdk-version" to "5.0.0-rc.2",            "x-appwrite-response-format" to "1.4.0"
         )
         config = mutableMapOf()
 
@@ -128,6 +121,51 @@ class Client @JvmOverloads constructor(
     fun setLocale(value: String): Client {
         config["locale"] = value
         addHeader("x-appwrite-locale", value)
+        return this
+    }
+
+    /**
+     * Set Session
+     *
+     * The user session to authenticate with
+     *
+     * @param {string} session
+     *
+     * @return this
+     */
+    fun setSession(value: String): Client {
+        config["session"] = value
+        addHeader("x-appwrite-session", value)
+        return this
+    }
+
+    /**
+     * Set ForwardedFor
+     *
+     * The IP address of the client that made the request
+     *
+     * @param {string} forwardedfor
+     *
+     * @return this
+     */
+    fun setForwardedFor(value: String): Client {
+        config["forwardedFor"] = value
+        addHeader("x-forwarded-for", value)
+        return this
+    }
+
+    /**
+     * Set ForwardedUserAgent
+     *
+     * The user agent string of the client that made the request
+     *
+     * @param {string} forwardeduseragent
+     *
+     * @return this
+     */
+    fun setForwardedUserAgent(value: String): Client {
+        config["forwardedUserAgent"] = value
+        addHeader("x-forwarded-user-agent", value)
         return this
     }
 
@@ -287,7 +325,8 @@ class Client @JvmOverloads constructor(
             }
             builder.build()
         } else {
-            gson.toJson(filteredParams)
+            filteredParams
+                .toJson()
                 .toRequestBody("application/json".toMediaType())
         }
 
@@ -457,10 +496,8 @@ class Client @JvmOverloads constructor(
                         .use(BufferedReader::readText)
                         
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
-                        val map = gson.fromJson<Map<String, Any>>(
-                            body,
-                            object : TypeToken<Map<String, Any>>(){}.type
-                        )
+                        val map = body.fromJson<Map<String, Any>>()
+
                         AppwriteException(
                             map["message"] as? String ?: "", 
                             (map["code"] as Number).toInt(),
@@ -499,10 +536,7 @@ class Client @JvmOverloads constructor(
                     it.resume(true as T)
                     return
                 }
-                val map = gson.fromJson<Map<String, Any>>(
-                    body,
-                    object : TypeToken<Map<String, Any>>(){}.type
-                )
+                val map = body.fromJson<Map<String, Any>>()
                 it.resume(
                     converter?.invoke(map) ?: map as T
                 )
