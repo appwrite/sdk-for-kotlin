@@ -1120,7 +1120,7 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun <T> deleteAuthenticator(
         userId: String,
-        type: Type,
+        type: AuthenticatorType,
         otp: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
@@ -1160,7 +1160,7 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun deleteAuthenticator(
         userId: String,
-        type: Type,
+        type: AuthenticatorType,
         otp: String,
     ): io.appwrite.models.User<Map<String, Any>> = deleteAuthenticator(
         userId,
