@@ -9,8 +9,21 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateSMTPProvider(
-    "[PROVIDER_ID]",
+messaging.updateSmtpProvider(
+    "[PROVIDER_ID]", // providerId
+    "[NAME]", // name (optional)
+    "[HOST]", // host (optional)
+    1, // port (optional)
+    "[USERNAME]", // username (optional)
+    "[PASSWORD]", // password (optional)
+    .NONE, // encryption (optional)
+    false, // autoTLS (optional)
+    "[MAILER]", // mailer (optional)
+    "[FROM_NAME]", // fromName (optional)
+    "email@example.com", // fromEmail (optional)
+    "[REPLY_TO_NAME]", // replyToName (optional)
+    "[REPLY_TO_EMAIL]", // replyToEmail (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -20,3 +33,4 @@ messaging.updateSMTPProvider(
         System.out.println(result);
     })
 );
+

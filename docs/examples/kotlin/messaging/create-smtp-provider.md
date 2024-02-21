@@ -9,12 +9,16 @@ val client = Client()
 
 val messaging = Messaging(client)
 
-val response = messaging.createMailgunProvider(
+val response = messaging.createSmtpProvider(
     providerId = "[PROVIDER_ID]",
     name = "[NAME]",
-    apiKey = "[API_KEY]", // optional
-    domain = "[DOMAIN]", // optional
-    isEuRegion = false, // optional
+    host = "[HOST]",
+    port = 1, // optional
+    username = "[USERNAME]", // optional
+    password = "[PASSWORD]", // optional
+    encryption = "none", // optional
+    autoTLS = false, // optional
+    mailer = "[MAILER]", // optional
     fromName = "[FROM_NAME]", // optional
     fromEmail = "email@example.com", // optional
     replyToName = "[REPLY_TO_NAME]", // optional

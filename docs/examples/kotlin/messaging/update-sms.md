@@ -9,7 +9,12 @@ val client = Client()
 
 val messaging = Messaging(client)
 
-val response = messaging.createAPNSProvider(
-    providerId = "[PROVIDER_ID]",
-    name = "[NAME]",
+val response = messaging.updateSms(
+    messageId = "[MESSAGE_ID]",
+    topics = listOf(), // optional
+    users = listOf(), // optional
+    targets = listOf(), // optional
+    content = "[CONTENT]", // optional
+    status = "draft", // optional
+    scheduledAt = "" // optional
 )

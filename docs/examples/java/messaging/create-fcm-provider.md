@@ -9,10 +9,11 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.createSMTPProvider(
-    "[PROVIDER_ID]",
-    "[NAME]",
-    "[HOST]",
+messaging.createFcmProvider(
+    "[PROVIDER_ID]", // providerId
+    "[NAME]", // name
+    mapOf( "a" to "b" ), // serviceAccountJSON (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -22,3 +23,4 @@ messaging.createSMTPProvider(
         System.out.println(result);
     })
 );
+

@@ -9,7 +9,12 @@ val client = Client()
 
 val messaging = Messaging(client)
 
-val response = messaging.createSMS(
+val response = messaging.createSms(
     messageId = "[MESSAGE_ID]",
     content = "[CONTENT]",
+    topics = listOf(), // optional
+    users = listOf(), // optional
+    targets = listOf(), // optional
+    status = "draft", // optional
+    scheduledAt = "" // optional
 )

@@ -9,9 +9,14 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.createAPNSProvider(
-    "[PROVIDER_ID]",
-    "[NAME]",
+messaging.createApnsProvider(
+    "[PROVIDER_ID]", // providerId
+    "[NAME]", // name
+    "[AUTH_KEY]", // authKey (optional)
+    "[AUTH_KEY_ID]", // authKeyId (optional)
+    "[TEAM_ID]", // teamId (optional)
+    "[BUNDLE_ID]", // bundleId (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -21,3 +26,4 @@ messaging.createAPNSProvider(
         System.out.println(result);
     })
 );
+

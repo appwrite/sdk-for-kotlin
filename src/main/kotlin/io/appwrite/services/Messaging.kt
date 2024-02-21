@@ -16,7 +16,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List messages
      *
-     * 
+     * Get a list of all messages from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: scheduledAt, deliveredAt, deliveredTotal, status, description, providerType
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -51,9 +51,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create an email.
+     * Create an email
      *
-     * 
+     * Create a new email message.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param subject Email Subject.
@@ -63,6 +63,7 @@ class Messaging(client: Client) : Service(client) {
      * @param targets List of Targets IDs.
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
+     * @param attachments Array of compound bucket IDs to file IDs to be attached to the email.
      * @param status Message Status. Value must be one of: draft, scheduled, processing.
      * @param html Is content of type HTML
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
@@ -79,6 +80,7 @@ class Messaging(client: Client) : Service(client) {
         targets: List<String>? = null,
         cc: List<String>? = null,
         bcc: List<String>? = null,
+        attachments: List<String>? = null,
         status: MessageStatus? = null,
         html: Boolean? = null,
         scheduledAt: String? = null,
@@ -94,6 +96,7 @@ class Messaging(client: Client) : Service(client) {
             "targets" to targets,
             "cc" to cc,
             "bcc" to bcc,
+            "attachments" to attachments,
             "status" to status,
             "html" to html,
             "scheduledAt" to scheduledAt,
@@ -115,9 +118,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update an email.
+     * Update an email
      *
-     * 
+     * Update an email message by its unique ID.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -179,9 +182,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a push notification.
+     * Create a push notification
      *
-     * 
+     * Create a new push notification.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param title Title for push notification.
@@ -191,6 +194,7 @@ class Messaging(client: Client) : Service(client) {
      * @param targets List of Targets IDs.
      * @param data Additional Data for push notification.
      * @param action Action for push notification.
+     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage.
      * @param icon Icon for push notification. Available only for Android and Web Platform.
      * @param sound Sound for push notification. Available only for Android and IOS Platform.
      * @param color Color for push notification. Available only for Android Platform.
@@ -211,6 +215,7 @@ class Messaging(client: Client) : Service(client) {
         targets: List<String>? = null,
         data: Any? = null,
         action: String? = null,
+        image: String? = null,
         icon: String? = null,
         sound: String? = null,
         color: String? = null,
@@ -230,6 +235,7 @@ class Messaging(client: Client) : Service(client) {
             "targets" to targets,
             "data" to data,
             "action" to action,
+            "image" to image,
             "icon" to icon,
             "sound" to sound,
             "color" to color,
@@ -255,9 +261,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update a push notification.
+     * Update a push notification
      *
-     * 
+     * Update a push notification by its unique ID.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -267,6 +273,7 @@ class Messaging(client: Client) : Service(client) {
      * @param body Body for push notification.
      * @param data Additional Data for push notification.
      * @param action Action for push notification.
+     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage.
      * @param icon Icon for push notification. Available only for Android and Web platforms.
      * @param sound Sound for push notification. Available only for Android and iOS platforms.
      * @param color Color for push notification. Available only for Android platforms.
@@ -287,6 +294,7 @@ class Messaging(client: Client) : Service(client) {
         body: String? = null,
         data: Any? = null,
         action: String? = null,
+        image: String? = null,
         icon: String? = null,
         sound: String? = null,
         color: String? = null,
@@ -306,6 +314,7 @@ class Messaging(client: Client) : Service(client) {
             "body" to body,
             "data" to data,
             "action" to action,
+            "image" to image,
             "icon" to icon,
             "sound" to sound,
             "color" to color,
@@ -331,9 +340,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create an SMS.
+     * Create an SMS
      *
-     * 
+     * Create a new SMS message.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param content SMS Content.
@@ -346,7 +355,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createSMS(
+    suspend fun createSms(
         messageId: String,
         content: String,
         topics: List<String>? = null,
@@ -383,9 +392,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update an SMS.
+     * Update an SMS
      *
-     * 
+     * Update an email message by its unique ID.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -398,7 +407,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateSMS(
+    suspend fun updateSms(
         messageId: String,
         topics: List<String>? = null,
         users: List<String>? = null,
@@ -437,7 +446,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Get a message
      *
-     * 
+     * Get a message by its unique ID.
      *
      * @param messageId Message ID.
      * @return [io.appwrite.models.Message]
@@ -499,7 +508,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List message logs
      *
-     * 
+     * Get the message activity logs listed by its unique ID.
      *
      * @param messageId Message ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -536,7 +545,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List message targets
      *
-     * List the targets associated with a message as set via the targets attribute.
+     * Get a list of the targets associated with a message.
      *
      * @param messageId Message ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, providerId, identifier, providerType
@@ -573,7 +582,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List providers
      *
-     * 
+     * Get a list of all providers from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, provider, type, enabled
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -610,7 +619,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create APNS provider
      *
-     * 
+     * Create a new Apple Push Notification service provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -623,7 +632,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createAPNSProvider(
+    suspend fun createApnsProvider(
         providerId: String,
         name: String,
         authKey: String? = null,
@@ -662,7 +671,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update APNS provider
      *
-     * 
+     * Update a Apple Push Notification service provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -714,7 +723,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create FCM provider
      *
-     * 
+     * Create a new Firebase Cloud Messaging provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -724,7 +733,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createFCMProvider(
+    suspend fun createFcmProvider(
         providerId: String,
         name: String,
         serviceAccountJSON: Any? = null,
@@ -757,7 +766,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update FCM provider
      *
-     * 
+     * Update a Firebase Cloud Messaging provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -800,7 +809,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Mailgun provider
      *
-     * 
+     * Create a new Mailgun provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -861,7 +870,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Mailgun provider
      *
-     * 
+     * Update a Mailgun provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -922,7 +931,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Msg91 provider
      *
-     * 
+     * Create a new MSG91 provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -971,7 +980,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Msg91 provider
      *
-     * 
+     * Update a MSG91 provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1075,7 +1084,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Sendgrid provider
      *
-     * 
+     * Update a Sendgrid provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1130,11 +1139,11 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create SMTP provider
      *
-     * 
+     * Create a new SMTP provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
-     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host by using this format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com"). You can also specify encryption type, for example: (e.g. "tls://smtp1.example.com:587;ssl://smtp2.example.com:465"). Hosts will be tried in order.
+     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls://smtp1.example.com:587;ssl://smtp2.example.com:465"`. Hosts will be tried in order.
      * @param port The default SMTP server port.
      * @param username Authentication username.
      * @param password Authentication password.
@@ -1150,14 +1159,14 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createSMTPProvider(
+    suspend fun createSmtpProvider(
         providerId: String,
         name: String,
         host: String,
         port: Long? = null,
         username: String? = null,
         password: String? = null,
-        encryption: SMTPEncryption? = null,
+        encryption: Encryption? = null,
         autoTLS: Boolean? = null,
         mailer: String? = null,
         fromName: String? = null,
@@ -1203,11 +1212,11 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update SMTP provider
      *
-     * 
+     * Update a SMTP provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
-     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host by using this format: [hostname:port] (e.g. "smtp1.example.com:25;smtp2.example.com"). You can also specify encryption type, for example: (e.g. "tls://smtp1.example.com:587;ssl://smtp2.example.com:465"). Hosts will be tried in order.
+     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls://smtp1.example.com:587;ssl://smtp2.example.com:465"`. Hosts will be tried in order.
      * @param port SMTP port.
      * @param username Authentication username.
      * @param password Authentication password.
@@ -1223,14 +1232,14 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateSMTPProvider(
+    suspend fun updateSmtpProvider(
         providerId: String,
         name: String? = null,
         host: String? = null,
         port: Long? = null,
         username: String? = null,
         password: String? = null,
-        encryption: SMTPEncryption? = null,
+        encryption: Encryption? = null,
         autoTLS: Boolean? = null,
         mailer: String? = null,
         fromName: String? = null,
@@ -1276,7 +1285,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Telesign provider
      *
-     * 
+     * Create a new Telesign provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -1325,7 +1334,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Telesign provider
      *
-     * 
+     * Update a Telesign provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1374,7 +1383,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Textmagic provider
      *
-     * 
+     * Create a new Textmagic provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -1423,7 +1432,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Textmagic provider
      *
-     * 
+     * Update a Textmagic provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1472,7 +1481,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Twilio provider
      *
-     * 
+     * Create a new Twilio provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -1521,7 +1530,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Twilio provider
      *
-     * 
+     * Update a Twilio provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1570,7 +1579,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Vonage provider
      *
-     * 
+     * Create a new Vonage provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -1619,7 +1628,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update Vonage provider
      *
-     * 
+     * Update a Vonage provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @param name Provider name.
@@ -1668,7 +1677,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Get provider
      *
-     * 
+     * Get a provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @return [io.appwrite.models.Provider]
@@ -1701,7 +1710,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Delete provider
      *
-     * 
+     * Delete a provider by its unique ID.
      *
      * @param providerId Provider ID.
      * @return [Any]
@@ -1730,7 +1739,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List provider logs
      *
-     * 
+     * Get the provider activity logs listed by its unique ID.
      *
      * @param providerId Provider ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -1767,7 +1776,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List subscriber logs
      *
-     * 
+     * Get the subscriber activity logs listed by its unique ID.
      *
      * @param subscriberId Subscriber ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -1802,9 +1811,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List topics.
+     * List topics
      *
-     * 
+     * Get a list of all topics from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, description, emailTotal, smsTotal, pushTotal
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -1839,9 +1848,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a topic.
+     * Create a topic
      *
-     * 
+     * Create a new topic.
      *
      * @param topicId Topic ID. Choose a custom Topic ID or a new Topic ID.
      * @param name Topic Name.
@@ -1879,9 +1888,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get a topic.
+     * Get a topic
      *
-     * 
+     * Get a topic by its unique ID.
      *
      * @param topicId Topic ID.
      * @return [io.appwrite.models.Topic]
@@ -1912,9 +1921,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update a topic.
+     * Update a topic
      *
-     * 
+     * Update a topic by its unique ID.
      *
      * @param topicId Topic ID.
      * @param name Topic Name.
@@ -1949,9 +1958,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a topic.
+     * Delete a topic
      *
-     * 
+     * Delete a topic by its unique ID.
      *
      * @param topicId Topic ID.
      * @return [Any]
@@ -1980,7 +1989,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * List topic logs
      *
-     * 
+     * Get the topic activity logs listed by its unique ID.
      *
      * @param topicId Topic ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -2015,9 +2024,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List subscribers.
+     * List subscribers
      *
-     * 
+     * Get a list of all subscribers from the current Appwrite project.
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, provider, type, enabled
@@ -2055,9 +2064,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a subscriber.
+     * Create a subscriber
      *
-     * 
+     * Create a new subscriber.
      *
      * @param topicId Topic ID. The topic ID to subscribe to.
      * @param subscriberId Subscriber ID. Choose a custom Subscriber ID or a new Subscriber ID.
@@ -2094,9 +2103,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get a subscriber.
+     * Get a subscriber
      *
-     * 
+     * Get a subscriber by its unique ID.
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param subscriberId Subscriber ID.
@@ -2130,9 +2139,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a subscriber.
+     * Delete a subscriber
      *
-     * 
+     * Delete a subscriber by its unique ID.
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param subscriberId Subscriber ID.

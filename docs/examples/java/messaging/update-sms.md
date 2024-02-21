@@ -9,8 +9,14 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateSMS(
-    "[MESSAGE_ID]",
+messaging.updateSms(
+    "[MESSAGE_ID]", // messageId
+    listOf(), // topics (optional)
+    listOf(), // users (optional)
+    listOf(), // targets (optional)
+    "[CONTENT]", // content (optional)
+    MessageStatus.DRAFT, // status (optional)
+    "", // scheduledAt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -20,3 +26,4 @@ messaging.updateSMS(
         System.out.println(result);
     })
 );
+
