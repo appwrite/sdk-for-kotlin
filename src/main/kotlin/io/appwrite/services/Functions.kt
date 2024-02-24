@@ -564,6 +564,9 @@ class Functions(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,

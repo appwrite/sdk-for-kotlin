@@ -9,14 +9,11 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateAPNSProvider(
-    "[PROVIDER_ID]", // providerId
-    "[NAME]", // name (optional)
+messaging.updateFcmProvider(
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name (optional)
     false, // enabled (optional)
-    "[AUTH_KEY]", // authKey (optional)
-    "[AUTH_KEY_ID]", // authKeyId (optional)
-    "[TEAM_ID]", // teamId (optional)
-    "[BUNDLE_ID]", // bundleId (optional)
+    mapOf( "a" to "b" ), // serviceAccountJSON (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -42,6 +42,9 @@ class Avatars(client: Client) : Service(client) {
             "height" to height,
             "quality" to quality,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -77,6 +80,9 @@ class Avatars(client: Client) : Service(client) {
             "height" to height,
             "quality" to quality,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -101,6 +107,9 @@ class Avatars(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -137,6 +146,9 @@ class Avatars(client: Client) : Service(client) {
             "height" to height,
             "quality" to quality,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -168,6 +180,9 @@ class Avatars(client: Client) : Service(client) {
             "url" to url,
             "width" to width,
             "height" to height,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -204,6 +219,9 @@ class Avatars(client: Client) : Service(client) {
             "height" to height,
             "background" to background,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -238,6 +256,9 @@ class Avatars(client: Client) : Service(client) {
             "size" to size,
             "margin" to margin,
             "download" to download,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",

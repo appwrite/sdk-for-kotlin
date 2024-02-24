@@ -369,7 +369,7 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.MfaChallenge]
      */
     @Throws(AppwriteException::class)
-    suspend fun create2FAChallenge(
+    suspend fun createChallenge(
         factor: AuthenticationFactor,
     ): io.appwrite.models.MfaChallenge {
         val apiPath = "/account/mfa/challenge"
@@ -1099,37 +1099,33 @@ class Account(client: Client) : Service(client) {
      * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom.
      * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param token Include token credentials in the final redirect, useful for server-side integrations, or when cookies are not available.
      * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
+     * @return [String]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createOAuth2Session(
-        activity: ComponentActivity,
         provider: OAuthProvider,
         success: String? = null,
         failure: String? = null,
-        token: Boolean? = null,
         scopes: List<String>? = null,
-    ): Bool {
+    ): String {
         val apiPath = "/account/sessions/oauth2/{provider}"
             .replace("{provider}", provider.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "success" to success,
             "failure" to failure,
-            "token" to token,
             "scopes" to scopes,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
-        return client.call(
+        return client.redirect(
             "GET",
             apiPath,
             apiHeaders,
-            apiParams,
-            responseType = Bool::class.java,
+            apiParams
         )
     }
 
@@ -1388,6 +1384,44 @@ class Account(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.Token::class.java,
             converter,
+        )
+    }
+
+    /**
+     * Create OAuth2 token
+     *
+     * Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL&#039;s back to your app when login is completed. If authentication succeeds, `userId` and `secret` of a token will be appended to the success URL as query parameters. These can be used to create a new session using the [Create session](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
+     *
+     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom.
+     * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+     * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
+     * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
+     * @return [String]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createOAuth2Token(
+        provider: OAuthProvider,
+        success: String? = null,
+        failure: String? = null,
+        scopes: List<String>? = null,
+    ): String {
+        val apiPath = "/account/tokens/oauth2/{provider}"
+            .replace("{provider}", provider.value)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "success" to success,
+            "failure" to failure,
+            "scopes" to scopes,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        return client.redirect(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams
         )
     }
 

@@ -627,6 +627,7 @@ class Messaging(client: Client) : Service(client) {
      * @param authKeyId APNS authentication key ID.
      * @param teamId APNS team ID.
      * @param bundleId APNS bundle ID.
+     * @param sandbox Use APNS sandbox environment.
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
@@ -639,6 +640,7 @@ class Messaging(client: Client) : Service(client) {
         authKeyId: String? = null,
         teamId: String? = null,
         bundleId: String? = null,
+        sandbox: Boolean? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
         val apiPath = "/messaging/providers/apns"
@@ -650,6 +652,7 @@ class Messaging(client: Client) : Service(client) {
             "authKeyId" to authKeyId,
             "teamId" to teamId,
             "bundleId" to bundleId,
+            "sandbox" to sandbox,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf(
@@ -680,11 +683,12 @@ class Messaging(client: Client) : Service(client) {
      * @param authKeyId APNS authentication key ID.
      * @param teamId APNS team ID.
      * @param bundleId APNS bundle ID.
+     * @param sandbox Use APNS sandbox environment.
      * @return [io.appwrite.models.Provider]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateAPNSProvider(
+    suspend fun updateApnsProvider(
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
@@ -692,6 +696,7 @@ class Messaging(client: Client) : Service(client) {
         authKeyId: String? = null,
         teamId: String? = null,
         bundleId: String? = null,
+        sandbox: Boolean? = null,
     ): io.appwrite.models.Provider {
         val apiPath = "/messaging/providers/apns/{providerId}"
             .replace("{providerId}", providerId)
@@ -703,6 +708,7 @@ class Messaging(client: Client) : Service(client) {
             "authKeyId" to authKeyId,
             "teamId" to teamId,
             "bundleId" to bundleId,
+            "sandbox" to sandbox,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -776,7 +782,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateFCMProvider(
+    suspend fun updateFcmProvider(
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
@@ -1166,7 +1172,7 @@ class Messaging(client: Client) : Service(client) {
         port: Long? = null,
         username: String? = null,
         password: String? = null,
-        encryption: Encryption? = null,
+        encryption: SmtpEncryption? = null,
         autoTLS: Boolean? = null,
         mailer: String? = null,
         fromName: String? = null,
@@ -1239,7 +1245,7 @@ class Messaging(client: Client) : Service(client) {
         port: Long? = null,
         username: String? = null,
         password: String? = null,
-        encryption: Encryption? = null,
+        encryption: SmtpEncryption? = null,
         autoTLS: Boolean? = null,
         mailer: String? = null,
         fromName: String? = null,
@@ -1927,6 +1933,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param topicId Topic ID.
      * @param name Topic Name.
+     * @param subscribe An array of role strings with subscribe permission. By default all users are granted with any subscribe permission. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
      * @return [io.appwrite.models.Topic]
      */
     @JvmOverloads
@@ -1934,12 +1941,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun updateTopic(
         topicId: String,
         name: String? = null,
+        subscribe: List<String>? = null,
     ): io.appwrite.models.Topic {
         val apiPath = "/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
+            "subscribe" to subscribe,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",

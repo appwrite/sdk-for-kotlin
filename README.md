@@ -39,7 +39,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:5.0.0-rc.4")
+implementation("io.appwrite:sdk-for-kotlin:5.0.0-rc.5")
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>5.0.0-rc.4</version>
+        <version>5.0.0-rc.5</version>
     </dependency>
 </dependencies>
 ```
@@ -84,7 +84,9 @@ val users = Users(client)
 val user = users.create(
     user = ID.unique(),
     email = "email@example.com",
+    phone = "+123456789",
     password = "password",
+    name = "Walter O'Brien"
 )
 ```
 
@@ -106,7 +108,9 @@ suspend fun main() {
     val user = users.create(
         user = ID.unique(),
         email = "email@example.com",
+        phone = "+123456789",
         password = "password",
+        name = "Walter O'Brien"
     )
 }
 ```
@@ -126,7 +130,9 @@ suspend fun main() {
         val user = users.create(
             user = ID.unique(),
             email = "email@example.com",
+            phone = "+123456789",
             password = "password",
+            name = "Walter O'Brien"
         )
     } catch (e: AppwriteException) {
         e.printStackTrace()

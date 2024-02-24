@@ -219,7 +219,7 @@ data class User<T>(
             mfa = map["mfa"] as Boolean,
             totp = map["totp"] as Boolean,
             prefs = Preferences.from(map = map["prefs"] as Map<String, Any>, nestedType),
-            targets = (map["targets"] as List<Map<String, Any>>).map { Target.from(map = it, nestedType) },
+            targets = (map["targets"] as List<Map<String, Any>>).map { Target.from(map = it) },
             accessedAt = map["accessedAt"] as String,
         )
     }
