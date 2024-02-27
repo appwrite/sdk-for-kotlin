@@ -313,7 +313,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Update MFA
      *
-     * 
+     * Enable or disable MFA on an account.
      *
      * @param mfa Enable or disable MFA.
      * @return [io.appwrite.models.User<T>]
@@ -347,7 +347,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Update MFA
      *
-     * 
+     * Enable or disable MFA on an account.
      *
      * @param mfa Enable or disable MFA.
      * @return [io.appwrite.models.User<T>]
@@ -396,7 +396,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Create MFA Challenge (confirmation)
      *
-     * 
+     * Complete the MFA challenge by providing the one-time password.
      *
      * @param challengeId ID of the challenge.
      * @param otp Valid verification token.
@@ -428,7 +428,7 @@ class Account(client: Client) : Service(client) {
     /**
      * List Factors
      *
-     * 
+     * List the factors available on the account to be used as a MFA challange.
      *
      * @return [io.appwrite.models.MfaFactors]
      */
@@ -458,7 +458,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Add Authenticator
      *
-     * 
+     * Add an authenticator app to be used as an MFA factor. Verify the authenticator using the [verify authenticator](/docs/references/cloud/client-web/account#verifyAuthenticator) method.
      *
      * @param type Type of authenticator.
      * @return [io.appwrite.models.MfaType]
@@ -491,7 +491,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * 
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#addAuthenticator) method.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -528,7 +528,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * 
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#addAuthenticator) method.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -547,7 +547,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Delete Authenticator
      *
-     * 
+     * Delete an authenticator for a user by ID.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -584,7 +584,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Delete Authenticator
      *
-     * 
+     * Delete an authenticator for a user by ID.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -1056,7 +1056,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Create session (deprecated)
+     * Update magic URL session
      *
      * Use this endpoint to create a session from token. Provide the **userId** and **secret** parameters from the successful response of authentication flows initiated by token creation. For example, magic URL and phone login.
      *
@@ -1092,40 +1092,38 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Create OAuth2 session
+     * Update phone session
      *
-     * Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL&#039;s back to your app when login is completed.If there is already an active session, the new session will be attached to the logged-in account. If there are no active sessions, the server will attempt to look for a user with the same email address as the email received from the OAuth2 provider and attach the new session to the existing user. If no matching user is found - the server will create a new user.A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
+     * Use this endpoint to create a session from token. Provide the **userId** and **secret** parameters from the successful response of authentication flows initiated by token creation. For example, magic URL and phone login.
      *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom.
-     * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
-     * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
-     * @return [String]
+     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param secret Valid verification token.
+     * @return [io.appwrite.models.Session]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createOAuth2Session(
-        provider: OAuthProvider,
-        success: String? = null,
-        failure: String? = null,
-        scopes: List<String>? = null,
-    ): String {
-        val apiPath = "/account/sessions/oauth2/{provider}"
-            .replace("{provider}", provider.value)
+    suspend fun updatePhoneSession(
+        userId: String,
+        secret: String,
+    ): io.appwrite.models.Session {
+        val apiPath = "/account/sessions/phone"
 
         val apiParams = mutableMapOf<String, Any?>(
-            "success" to success,
-            "failure" to failure,
-            "scopes" to scopes,
+            "userId" to userId,
+            "secret" to secret,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
-        return client.redirect(
-            "GET",
+        val converter: (Any) -> io.appwrite.models.Session = {
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
             apiPath,
             apiHeaders,
-            apiParams
+            apiParams,
+            responseType = io.appwrite.models.Session::class.java,
+            converter,
         )
     }
 
@@ -1199,7 +1197,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Update (or renew) a session
+     * Update (or renew) session
      *
      * Extend session&#039;s expiry to increase it&#039;s lifespan. Extending a session is useful when session length is short such as 5 minutes.
      *

@@ -406,7 +406,7 @@ class Health(client: Client) : Service(client) {
     /**
      * Get functions queue
      *
-     * 
+     * Get the number of function executions that are waiting to be processed in the Appwrite internal queue server.
      *
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
      * @return [io.appwrite.models.HealthQueue]

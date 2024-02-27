@@ -51,7 +51,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create an email
+     * Create email
      *
      * Create a new email message.
      *
@@ -64,7 +64,7 @@ class Messaging(client: Client) : Service(client) {
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
      * @param attachments Array of compound bucket IDs to file IDs to be attached to the email.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param html Is content of type HTML
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
@@ -81,7 +81,7 @@ class Messaging(client: Client) : Service(client) {
         cc: List<String>? = null,
         bcc: List<String>? = null,
         attachments: List<String>? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         html: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
@@ -97,7 +97,7 @@ class Messaging(client: Client) : Service(client) {
             "cc" to cc,
             "bcc" to bcc,
             "attachments" to attachments,
-            "status" to status,
+            "draft" to draft,
             "html" to html,
             "scheduledAt" to scheduledAt,
         )
@@ -118,7 +118,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update an email
+     * Update email
      *
      * Update an email message by its unique ID.
      *
@@ -128,7 +128,7 @@ class Messaging(client: Client) : Service(client) {
      * @param targets List of Targets IDs.
      * @param subject Email Subject.
      * @param content Email Content.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param html Is content of type HTML
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
@@ -144,7 +144,7 @@ class Messaging(client: Client) : Service(client) {
         targets: List<String>? = null,
         subject: String? = null,
         content: String? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         html: Boolean? = null,
         cc: List<String>? = null,
         bcc: List<String>? = null,
@@ -159,7 +159,7 @@ class Messaging(client: Client) : Service(client) {
             "targets" to targets,
             "subject" to subject,
             "content" to content,
-            "status" to status,
+            "draft" to draft,
             "html" to html,
             "cc" to cc,
             "bcc" to bcc,
@@ -182,7 +182,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a push notification
+     * Create push notification
      *
      * Create a new push notification.
      *
@@ -200,7 +200,7 @@ class Messaging(client: Client) : Service(client) {
      * @param color Color for push notification. Available only for Android Platform.
      * @param tag Tag for push notification. Available only for Android Platform.
      * @param badge Badge for push notification. Available only for IOS Platform.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
@@ -221,7 +221,7 @@ class Messaging(client: Client) : Service(client) {
         color: String? = null,
         tag: String? = null,
         badge: String? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push"
@@ -241,7 +241,7 @@ class Messaging(client: Client) : Service(client) {
             "color" to color,
             "tag" to tag,
             "badge" to badge,
-            "status" to status,
+            "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
@@ -261,7 +261,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update a push notification
+     * Update push notification
      *
      * Update a push notification by its unique ID.
      *
@@ -279,7 +279,7 @@ class Messaging(client: Client) : Service(client) {
      * @param color Color for push notification. Available only for Android platforms.
      * @param tag Tag for push notification. Available only for Android platforms.
      * @param badge Badge for push notification. Available only for iOS platforms.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
@@ -300,7 +300,7 @@ class Messaging(client: Client) : Service(client) {
         color: String? = null,
         tag: String? = null,
         badge: Long? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push/{messageId}"
@@ -320,7 +320,7 @@ class Messaging(client: Client) : Service(client) {
             "color" to color,
             "tag" to tag,
             "badge" to badge,
-            "status" to status,
+            "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
@@ -340,7 +340,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create an SMS
+     * Create SMS
      *
      * Create a new SMS message.
      *
@@ -349,7 +349,7 @@ class Messaging(client: Client) : Service(client) {
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
@@ -361,7 +361,7 @@ class Messaging(client: Client) : Service(client) {
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/sms"
@@ -372,7 +372,7 @@ class Messaging(client: Client) : Service(client) {
             "topics" to topics,
             "users" to users,
             "targets" to targets,
-            "status" to status,
+            "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
@@ -392,7 +392,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update an SMS
+     * Update SMS
      *
      * Update an email message by its unique ID.
      *
@@ -401,7 +401,7 @@ class Messaging(client: Client) : Service(client) {
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
      * @param content Email Content.
-     * @param status Message Status. Value must be one of: draft, scheduled, processing.
+     * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
@@ -413,7 +413,7 @@ class Messaging(client: Client) : Service(client) {
         users: List<String>? = null,
         targets: List<String>? = null,
         content: String? = null,
-        status: MessageStatus? = null,
+        draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/sms/{messageId}"
@@ -424,7 +424,7 @@ class Messaging(client: Client) : Service(client) {
             "users" to users,
             "targets" to targets,
             "content" to content,
-            "status" to status,
+            "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
@@ -444,7 +444,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get a message
+     * Get message
      *
      * Get a message by its unique ID.
      *
@@ -477,9 +477,9 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a message
+     * Delete message
      *
-     * 
+     * Delete a message. If the message is not a draft or scheduled, but has been sent, this will not recall the message.
      *
      * @param messageId Message ID.
      * @return [Any]
@@ -1035,7 +1035,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Create Sendgrid provider
      *
-     * 
+     * Create a new Sendgrid provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
@@ -1854,7 +1854,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a topic
+     * Create topic
      *
      * Create a new topic.
      *
@@ -1894,7 +1894,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get a topic
+     * Get topic
      *
      * Get a topic by its unique ID.
      *
@@ -1927,7 +1927,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update a topic
+     * Update topic
      *
      * Update a topic by its unique ID.
      *
@@ -1967,7 +1967,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a topic
+     * Delete topic
      *
      * Delete a topic by its unique ID.
      *
@@ -2073,7 +2073,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create a subscriber
+     * Create subscriber
      *
      * Create a new subscriber.
      *
@@ -2112,7 +2112,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get a subscriber
+     * Get subscriber
      *
      * Get a subscriber by its unique ID.
      *
@@ -2148,7 +2148,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a subscriber
+     * Delete subscriber
      *
      * Delete a subscriber by its unique ID.
      *

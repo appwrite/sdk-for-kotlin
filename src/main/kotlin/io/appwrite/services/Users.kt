@@ -1021,7 +1021,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Update MFA
      *
-     * 
+     * Enable or disable MFA on a user account.
      *
      * @param userId User ID.
      * @param mfa Enable or disable MFA.
@@ -1058,7 +1058,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Update MFA
      *
-     * 
+     * Enable or disable MFA on a user account.
      *
      * @param userId User ID.
      * @param mfa Enable or disable MFA.
@@ -1077,7 +1077,7 @@ class Users(client: Client) : Service(client) {
     /**
      * List Factors
      *
-     * 
+     * List the factors available on the account to be used as a MFA challange.
      *
      * @param userId User ID.
      * @return [io.appwrite.models.MfaFactors]
@@ -1110,18 +1110,16 @@ class Users(client: Client) : Service(client) {
     /**
      * Delete Authenticator
      *
-     * 
+     * Delete an authenticator app.
      *
      * @param userId User ID.
      * @param type Type of authenticator.
-     * @param otp Valid verification token.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> deleteAuthenticator(
         userId: String,
         type: AuthenticatorType,
-        otp: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
         val apiPath = "/users/{userId}/mfa/{type}"
@@ -1129,7 +1127,6 @@ class Users(client: Client) : Service(client) {
             .replace("{type}", type.value)
 
         val apiParams = mutableMapOf<String, Any?>(
-            "otp" to otp,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -1150,22 +1147,19 @@ class Users(client: Client) : Service(client) {
     /**
      * Delete Authenticator
      *
-     * 
+     * Delete an authenticator app.
      *
      * @param userId User ID.
      * @param type Type of authenticator.
-     * @param otp Valid verification token.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun deleteAuthenticator(
         userId: String,
         type: AuthenticatorType,
-        otp: String,
     ): io.appwrite.models.User<Map<String, Any>> = deleteAuthenticator(
         userId,
         type,
-        otp,
         nestedType = classOf(),
     )
 
@@ -1629,7 +1623,7 @@ class Users(client: Client) : Service(client) {
     /**
      * List User Targets
      *
-     * 
+     * List the messaging targets that are associated with a user.
      *
      * @param userId User ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
@@ -1666,7 +1660,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Create User Target
      *
-     * 
+     * Create a messaging target.
      *
      * @param userId User ID.
      * @param targetId Target ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1715,7 +1709,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Get User Target
      *
-     * 
+     * Get a user&#039;s push notification target by ID.
      *
      * @param userId User ID.
      * @param targetId Target ID.
@@ -1751,7 +1745,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Update User target
      *
-     * 
+     * Update a messaging target.
      *
      * @param userId User ID.
      * @param targetId Target ID.
@@ -1797,7 +1791,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Delete user target
      *
-     * 
+     * Delete a messaging target.
      *
      * @param userId User ID.
      * @param targetId Target ID.

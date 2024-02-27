@@ -401,7 +401,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * List attributes
      *
-     * 
+     * List attributes in the collection.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -490,7 +490,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Update boolean attribute
      *
-     * 
+     * Update a boolean attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -535,7 +535,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Create datetime attribute
      *
-     * 
+     * Create a date time attribute according to the ISO 8601 standard.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -584,7 +584,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Update dateTime attribute
      *
-     * 
+     * Update a date time attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -723,7 +723,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Create enum attribute
      *
-     * 
+     * Create an enumeration attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1378,7 +1378,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Get attribute
      *
-     * 
+     * Get attribute by ID.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1413,7 +1413,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Delete attribute
      *
-     * 
+     * Deletes an attribute.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1812,7 +1812,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * List indexes
      *
-     * 
+     * List indexes in the collection.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1852,7 +1852,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Create index
      *
-     * 
+     * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.Attributes can be `key`, `fulltext`, and `unique`.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1901,7 +1901,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Get index
      *
-     * 
+     * Get index by ID.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1940,7 +1940,7 @@ class Databases(client: Client) : Service(client) {
     /**
      * Delete index
      *
-     * 
+     * Delete an index.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
