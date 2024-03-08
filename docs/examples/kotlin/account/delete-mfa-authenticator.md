@@ -1,6 +1,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Account
+import io.appwrite.enums.AuthenticatorType
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
@@ -9,4 +10,7 @@ val client = Client()
 
 val account = Account(client)
 
-val response = account.listFactors()
+val response = account.deleteMfaAuthenticator(
+    type =  AuthenticatorType.TOTP,
+    otp = "<OTP>"
+)

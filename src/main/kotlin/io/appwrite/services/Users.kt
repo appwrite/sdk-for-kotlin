@@ -1075,39 +1075,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List Factors
-     *
-     * List the factors available on the account to be used as a MFA challange.
-     *
-     * @param userId User ID.
-     * @return [io.appwrite.models.MfaFactors]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun listFactors(
-        userId: String,
-    ): io.appwrite.models.MfaFactors {
-        val apiPath = "/users/{userId}/mfa/factors"
-            .replace("{userId}", userId)
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.MfaFactors = {
-            io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.MfaFactors::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Delete Authenticator
      *
      * Delete an authenticator app.
@@ -1117,12 +1084,12 @@ class Users(client: Client) : Service(client) {
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun <T> deleteAuthenticator(
+    suspend fun <T> deleteMfaAuthenticator(
         userId: String,
         type: AuthenticatorType,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = "/users/{userId}/mfa/{type}"
+        val apiPath = "/users/{userId}/mfa/authenticators/{type}"
             .replace("{userId}", userId)
             .replace("{type}", type.value)
 
@@ -1154,14 +1121,146 @@ class Users(client: Client) : Service(client) {
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun deleteAuthenticator(
+    suspend fun deleteMfaAuthenticator(
         userId: String,
         type: AuthenticatorType,
-    ): io.appwrite.models.User<Map<String, Any>> = deleteAuthenticator(
+    ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
         userId,
         type,
         nestedType = classOf(),
     )
+
+    /**
+     * List Factors
+     *
+     * List the factors available on the account to be used as a MFA challange.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaFactors]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listMfaFactors(
+        userId: String,
+    ): io.appwrite.models.MfaFactors {
+        val apiPath = "/users/{userId}/mfa/factors"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaFactors = {
+            io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaFactors::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get MFA Recovery Codes
+     *
+     * Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Regenerate MFA Recovery Codes
+     *
+     * Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create MFA Recovery Codes
+     *
+     * Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](/docs/references/cloud/client-web/account#createMfaChallenge) method by client SDK.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
 
     /**
      * Update name

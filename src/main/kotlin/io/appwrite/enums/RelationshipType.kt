@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 enum class RelationshipType(val value: String) {
     @SerializedName("oneToOne")
-    ONE_TO_ONE("oneToOne"),
+    ONETOONE("oneToOne"),
     @SerializedName("manyToOne")
-    MANY_TO_ONE("manyToOne"),
+    MANYTOONE("manyToOne"),
     @SerializedName("manyToMany")
-    MANY_TO_MANY("manyToMany"),
+    MANYTOMANY("manyToMany"),
     @SerializedName("oneToMany")
-    ONE_TO_MANY("oneToMany");
+    ONETOMANY("oneToMany");
 
     override fun toString() = value
 }

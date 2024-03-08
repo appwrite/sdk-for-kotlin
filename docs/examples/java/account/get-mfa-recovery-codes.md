@@ -9,16 +9,11 @@ Client client = new Client()
 
 Account account = new Account(client);
 
-account.updateChallenge(
-    "<CHALLENGE_ID>", // challengeId
-    "<OTP>", // otp
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+account.getMfaRecoveryCodes(new CoroutineCallback<>((result, error) -> {
+    if (error != null) {
+        error.printStackTrace();
+        return;
+    }
 
-        System.out.println(result);
-    })
-);
-
+    System.out.println(result);
+}));

@@ -574,6 +574,74 @@ class Health(client: Client) : Service(client) {
     }
 
     /**
+     * Get usage queue
+     *
+     * Get the number of metrics that are waiting to be processed in the Appwrite internal queue server.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueUsage(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/usage"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get usage dump queue
+     *
+     * Get the number of projects containing metrics that are waiting to be processed in the Appwrite internal queue server.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueUsage(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/usage-dump"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get webhooks queue
      *
      * Get the number of webhooks that are waiting to be processed in the Appwrite internal queue server.
@@ -603,6 +671,36 @@ class Health(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get storage
+     *
+     * Check the Appwrite storage device is up and connection is successful.
+     *
+     * @return [io.appwrite.models.HealthStatus]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getStorage(
+    ): io.appwrite.models.HealthStatus {
+        val apiPath = "/health/storage"
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthStatus::class.java,
             converter,
         )
     }

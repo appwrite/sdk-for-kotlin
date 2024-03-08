@@ -9,7 +9,4 @@ val client = Client()
 
 val account = Account(client)
 
-val response = account.updateChallenge(
-    challengeId = "<CHALLENGE_ID>",
-    otp = "<OTP>"
-)
+val response = account.listMfaFactors()

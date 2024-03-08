@@ -1,18 +1,16 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Health;
-import io.appwrite.enums.Name;
+import io.appwrite.services.Users;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
     .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
 
-Health health = new Health(client);
+Users users = new Users(client);
 
-health.getFailedJobs(
-    .V1_DATABASE, // name
-    0, // threshold (optional)
+users.listMfaFactors(
+    "<USER_ID>", // userId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -8,7 +8,7 @@ enum class RelationMutate(val value: String) {
     @SerializedName("restrict")
     RESTRICT("restrict"),
     @SerializedName("setNull")
-    SET_NULL("setNull");
+    SETNULL("setNull");
 
     override fun toString() = value
 }

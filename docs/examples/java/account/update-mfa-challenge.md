@@ -1,16 +1,17 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Users;
+import io.appwrite.services.Account;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
+    .setSession(""); // The user session to authenticate with
 
-Users users = new Users(client);
+Account account = new Account(client);
 
-users.listFactors(
-    "<USER_ID>", // userId
+account.updateMfaChallenge(
+    "<CHALLENGE_ID>", // challengeId
+    "<OTP>", // otp
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
