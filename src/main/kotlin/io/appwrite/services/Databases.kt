@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -10,9 +11,7 @@ import java.io.File
 /**
  * The Databases service allows you to create structured collections of documents, query and filter lists of documents
 **/
-class Databases : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Databases(client: Client) : Service(client) {
 
     /**
      * List databases
@@ -402,7 +401,7 @@ class Databases : Service {
     /**
      * List attributes
      *
-     * 
+     * List attributes in the collection.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -491,7 +490,7 @@ class Databases : Service {
     /**
      * Update boolean attribute
      *
-     * 
+     * Update a boolean attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -536,13 +535,13 @@ class Databases : Service {
     /**
      * Create datetime attribute
      *
-     * 
+     * Create a date time attribute according to the ISO 8601 standard.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for the attribute in ISO 8601 format. Cannot be set when attribute is required.
+     * @param default Default value for the attribute in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeDatetime]
      */
@@ -585,7 +584,7 @@ class Databases : Service {
     /**
      * Update dateTime attribute
      *
-     * 
+     * Update a date time attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -724,12 +723,12 @@ class Databases : Service {
     /**
      * Create enum attribute
      *
-     * 
+     * Create an enumeration attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
-     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 4096 characters long.
+     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 255 characters long.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
@@ -781,7 +780,7 @@ class Databases : Service {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
-     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 4096 characters long.
+     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 255 characters long.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @return [io.appwrite.models.AttributeEnum]
@@ -1148,11 +1147,11 @@ class Databases : Service {
         databaseId: String,
         collectionId: String,
         relatedCollectionId: String,
-        type: String,
+        type: io.appwrite.enums.RelationshipType,
         twoWay: Boolean? = null,
         key: String? = null,
         twoWayKey: String? = null,
-        onDelete: String? = null,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
             .replace("{databaseId}", databaseId)
@@ -1379,7 +1378,7 @@ class Databases : Service {
     /**
      * Get attribute
      *
-     * 
+     * Get attribute by ID.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1414,7 +1413,7 @@ class Databases : Service {
     /**
      * Delete attribute
      *
-     * 
+     * Deletes an attribute.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1463,7 +1462,7 @@ class Databases : Service {
         databaseId: String,
         collectionId: String,
         key: String,
-        onDelete: String? = null,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
             .replace("{databaseId}", databaseId)
@@ -1637,7 +1636,7 @@ class Databases : Service {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param documentId Document ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only method allowed is select.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1681,7 +1680,7 @@ class Databases : Service {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param documentId Document ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only method allowed is select.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -1813,7 +1812,7 @@ class Databases : Service {
     /**
      * List indexes
      *
-     * 
+     * List indexes in the collection.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1853,7 +1852,7 @@ class Databases : Service {
     /**
      * Create index
      *
-     * 
+     * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.Attributes can be `key`, `fulltext`, and `unique`.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1869,7 +1868,7 @@ class Databases : Service {
         databaseId: String,
         collectionId: String,
         key: String,
-        type: String,
+        type: io.appwrite.enums.IndexType,
         attributes: List<String>,
         orders: List<String>? = null,
     ): io.appwrite.models.Index {
@@ -1902,7 +1901,7 @@ class Databases : Service {
     /**
      * Get index
      *
-     * 
+     * Get index by ID.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1941,7 +1940,7 @@ class Databases : Service {
     /**
      * Delete index
      *
-     * 
+     * Delete an index.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).

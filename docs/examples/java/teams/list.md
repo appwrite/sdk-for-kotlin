@@ -5,11 +5,13 @@ import io.appwrite.services.Teams;
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2"); // Your secret API key
+    .setSession(""); // The user session to authenticate with
 
 Teams teams = new Teams(client);
 
 teams.list(
+    listOf(), // queries (optional)
+    "<SEARCH>", // search (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -19,3 +21,4 @@ teams.list(
         System.out.println(result);
     })
 );
+

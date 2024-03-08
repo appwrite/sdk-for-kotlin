@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -10,16 +11,14 @@ import java.io.File
 /**
  * The Users service allows you to manage your project users.
 **/
-class Users : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Users(client: Client) : Service(client) {
 
     /**
      * List users
      *
      * Get a list of all the project&#039;s users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.UserList<T>]
      */
@@ -57,7 +56,7 @@ class Users : Service {
      *
      * Get a list of all the project&#039;s users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.UserList<T>]
      */
@@ -300,7 +299,7 @@ class Users : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listIdentities(
-        queries: String? = null,
+        queries: List<String>? = null,
         search: String? = null,
     ): io.appwrite.models.IdentityList {
         val apiPath = "/users/identities"
@@ -326,7 +325,7 @@ class Users : Service {
     }
 
     /**
-     * Delete Identity
+     * Delete identity
      *
      * Delete an identity by its unique ID.
      *
@@ -700,7 +699,7 @@ class Users : Service {
         userId: String,
         email: String,
         password: String,
-        passwordVersion: String? = null,
+        passwordVersion: io.appwrite.enums.PasswordHash? = null,
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
@@ -747,7 +746,7 @@ class Users : Service {
         userId: String,
         email: String,
         password: String,
-        passwordVersion: String? = null,
+        passwordVersion: io.appwrite.enums.PasswordHash? = null,
         name: String? = null,
     ): io.appwrite.models.User<Map<String, Any>> = createSHAUser(
         userId,
@@ -899,7 +898,7 @@ class Users : Service {
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
-     * @param labels Array of user labels. Replaces the previous labels. Maximum of 100 labels are allowed, each up to 36 alphanumeric characters long.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
@@ -936,7 +935,7 @@ class Users : Service {
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
-     * @param labels Array of user labels. Replaces the previous labels. Maximum of 100 labels are allowed, each up to 36 alphanumeric characters long.
+     * @param labels Array of user labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
@@ -1015,6 +1014,250 @@ class Users : Service {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.MembershipList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update MFA
+     *
+     * Enable or disable MFA on a user account.
+     *
+     * @param userId User ID.
+     * @param mfa Enable or disable MFA.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateMfa(
+        userId: String,
+        mfa: Boolean,
+        nestedType: Class<T>,
+    ): io.appwrite.models.User<T> {
+        val apiPath = "/users/{userId}/mfa"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "mfa" to mfa,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update MFA
+     *
+     * Enable or disable MFA on a user account.
+     *
+     * @param userId User ID.
+     * @param mfa Enable or disable MFA.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateMfa(
+        userId: String,
+        mfa: Boolean,
+    ): io.appwrite.models.User<Map<String, Any>> = updateMfa(
+        userId,
+        mfa,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Delete Authenticator
+     *
+     * Delete an authenticator app.
+     *
+     * @param userId User ID.
+     * @param type Type of authenticator.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> deleteMfaAuthenticator(
+        userId: String,
+        type: io.appwrite.enums.AuthenticatorType,
+        nestedType: Class<T>,
+    ): io.appwrite.models.User<T> {
+        val apiPath = "/users/{userId}/mfa/authenticators/{type}"
+            .replace("{userId}", userId)
+            .replace("{type}", type.value)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Delete Authenticator
+     *
+     * Delete an authenticator app.
+     *
+     * @param userId User ID.
+     * @param type Type of authenticator.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteMfaAuthenticator(
+        userId: String,
+        type: io.appwrite.enums.AuthenticatorType,
+    ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
+        userId,
+        type,
+        nestedType = classOf(),
+    )
+
+    /**
+     * List Factors
+     *
+     * List the factors available on the account to be used as a MFA challange.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaFactors]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listMfaFactors(
+        userId: String,
+    ): io.appwrite.models.MfaFactors {
+        val apiPath = "/users/{userId}/mfa/factors"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaFactors = {
+            io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaFactors::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get MFA Recovery Codes
+     *
+     * Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Regenerate MFA Recovery Codes
+     *
+     * Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create MFA Recovery Codes
+     *
+     * Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](/docs/references/cloud/client-web/account#createMfaChallenge) method by client SDK.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
             converter,
         )
     }
@@ -1327,6 +1570,39 @@ class Users : Service {
     }
 
     /**
+     * Create session
+     *
+     * Creates a session for a user. Returns an immediately usable session object.If you want to generate a token for a custom authentication flow, use the [POST /users/{userId}/tokens](https://appwrite.io/docs/server/users#createToken) endpoint.
+     *
+     * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @return [io.appwrite.models.Session]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createSession(
+        userId: String,
+    ): io.appwrite.models.Session {
+        val apiPath = "/users/{userId}/sessions"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Session = {
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Session::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Delete user sessions
      *
      * Delete all user&#039;s sessions by using the user&#039;s unique ID.
@@ -1442,6 +1718,246 @@ class Users : Service {
         status,
         nestedType = classOf(),
     )
+
+    /**
+     * List User Targets
+     *
+     * List the messaging targets that are associated with a user.
+     *
+     * @param userId User ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
+     * @return [io.appwrite.models.TargetList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listTargets(
+        userId: String,
+        queries: List<String>? = null,
+    ): io.appwrite.models.TargetList {
+        val apiPath = "/users/{userId}/targets"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.TargetList = {
+            io.appwrite.models.TargetList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.TargetList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create User Target
+     *
+     * Create a messaging target.
+     *
+     * @param userId User ID.
+     * @param targetId Target ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param providerType The target provider type. Can be one of the following: `email`, `sms` or `push`.
+     * @param identifier The target identifier (token, email, phone etc.)
+     * @param providerId Provider ID. Message will be sent to this target from the specified provider ID. If no provider ID is set the first setup provider will be used.
+     * @param name Target name. Max length: 128 chars. For example: My Awesome App Galaxy S23.
+     * @return [io.appwrite.models.Target]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTarget(
+        userId: String,
+        targetId: String,
+        providerType: io.appwrite.enums.MessagingProviderType,
+        identifier: String,
+        providerId: String? = null,
+        name: String? = null,
+    ): io.appwrite.models.Target {
+        val apiPath = "/users/{userId}/targets"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "targetId" to targetId,
+            "providerType" to providerType,
+            "identifier" to identifier,
+            "providerId" to providerId,
+            "name" to name,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Target = {
+            io.appwrite.models.Target.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Target::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get User Target
+     *
+     * Get a user&#039;s push notification target by ID.
+     *
+     * @param userId User ID.
+     * @param targetId Target ID.
+     * @return [io.appwrite.models.Target]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getTarget(
+        userId: String,
+        targetId: String,
+    ): io.appwrite.models.Target {
+        val apiPath = "/users/{userId}/targets/{targetId}"
+            .replace("{userId}", userId)
+            .replace("{targetId}", targetId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Target = {
+            io.appwrite.models.Target.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Target::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update User target
+     *
+     * Update a messaging target.
+     *
+     * @param userId User ID.
+     * @param targetId Target ID.
+     * @param identifier The target identifier (token, email, phone etc.)
+     * @param providerId Provider ID. Message will be sent to this target from the specified provider ID. If no provider ID is set the first setup provider will be used.
+     * @param name Target name. Max length: 128 chars. For example: My Awesome App Galaxy S23.
+     * @return [io.appwrite.models.Target]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTarget(
+        userId: String,
+        targetId: String,
+        identifier: String? = null,
+        providerId: String? = null,
+        name: String? = null,
+    ): io.appwrite.models.Target {
+        val apiPath = "/users/{userId}/targets/{targetId}"
+            .replace("{userId}", userId)
+            .replace("{targetId}", targetId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "identifier" to identifier,
+            "providerId" to providerId,
+            "name" to name,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Target = {
+            io.appwrite.models.Target.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Target::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete user target
+     *
+     * Delete a messaging target.
+     *
+     * @param userId User ID.
+     * @param targetId Target ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteTarget(
+        userId: String,
+        targetId: String,
+    ): Any {
+        val apiPath = "/users/{userId}/targets/{targetId}"
+            .replace("{userId}", userId)
+            .replace("{targetId}", targetId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Create token
+     *
+     * Returns a token with a secret key for creating a session. If the provided user ID has not be registered, a new user will be created. Use the returned user ID and secret and submit a request to the [PUT /account/sessions/custom](https://appwrite.io/docs/references/cloud/client-web/account#updateCustomSession) endpoint to complete the login process.
+     *
+     * @param userId User ID.
+     * @param length Token length in characters. The default length is 6 characters
+     * @param expire Token expiration period in seconds. The default expiration is 15 minutes.
+     * @return [io.appwrite.models.Token]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createToken(
+        userId: String,
+        length: Long? = null,
+        expire: Long? = null,
+    ): io.appwrite.models.Token {
+        val apiPath = "/users/{userId}/tokens"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "length" to length,
+            "expire" to expire,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Token = {
+            io.appwrite.models.Token.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Token::class.java,
+            converter,
+        )
+    }
 
     /**
      * Update email verification

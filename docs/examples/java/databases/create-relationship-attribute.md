@@ -1,6 +1,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Databases;
+import io.appwrite.enums.RelationshipType;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,10 +11,14 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createRelationshipAttribute(
-    "[DATABASE_ID]",
-    "[COLLECTION_ID]",
-    "[RELATED_COLLECTION_ID]",
-    "oneToOne",
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
+    "<RELATED_COLLECTION_ID>", // relatedCollectionId
+    RelationshipType.ONETOONE, // type
+    false, // twoWay (optional)
+    "", // key (optional)
+    "", // twoWayKey (optional)
+    RelationMutate.CASCADE, // onDelete (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -23,3 +28,4 @@ databases.createRelationshipAttribute(
         System.out.println(result);
     })
 );
+

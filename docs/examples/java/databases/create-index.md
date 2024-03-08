@@ -1,6 +1,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Databases;
+import io.appwrite.enums.IndexType;
 
 Client client = new Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,11 +11,12 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createIndex(
-    "[DATABASE_ID]",
-    "[COLLECTION_ID]",
-    "",
-    "key",
-    listOf(),
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
+    "", // key
+    IndexType.KEY, // type
+    listOf(), // attributes
+    listOf(), // orders (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
@@ -24,3 +26,4 @@ databases.createIndex(
         System.out.println(result);
     })
 );
+

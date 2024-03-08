@@ -2,6 +2,7 @@ package io.appwrite.services
 
 import io.appwrite.Client
 import io.appwrite.models.*
+import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
 import okhttp3.Cookie
@@ -12,9 +13,7 @@ import java.io.File
 /**
  * The Avatars service aims to help you complete everyday tasks related to your app image, icons, and avatars.
 **/
-class Avatars : Service {
-
-    public constructor (client: Client) : super(client) { }
+class Avatars(client: Client) : Service(client) {
 
     /**
      * Get browser icon
@@ -30,18 +29,21 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getBrowser(
-        code: String,
+        code: io.appwrite.enums.Browser,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/browsers/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
             "height" to height,
             "quality" to quality,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -65,18 +67,21 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getCreditCard(
-        code: String,
+        code: io.appwrite.enums.CreditCard,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/credit-cards/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
             "height" to height,
             "quality" to quality,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -103,6 +108,9 @@ class Avatars : Service {
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -125,18 +133,21 @@ class Avatars : Service {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFlag(
-        code: String,
+        code: io.appwrite.enums.Flag,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
         val apiPath = "/avatars/flags/{code}"
-            .replace("{code}", code)
+            .replace("{code}", code.value)
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
             "height" to height,
             "quality" to quality,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -169,6 +180,9 @@ class Avatars : Service {
             "url" to url,
             "width" to width,
             "height" to height,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -205,6 +219,9 @@ class Avatars : Service {
             "height" to height,
             "background" to background,
         )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
         return client.call(
             "GET",
             apiPath,
@@ -239,6 +256,9 @@ class Avatars : Service {
             "size" to size,
             "margin" to margin,
             "download" to download,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
         )
         return client.call(
             "GET",

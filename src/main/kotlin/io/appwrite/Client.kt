@@ -1,10 +1,8 @@
 package io.appwrite
 
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.fromJson
-import io.appwrite.json.PreciseNumberAdapter
+import io.appwrite.extensions.toJson
 import io.appwrite.models.InputFile
 import io.appwrite.models.UploadProgress
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +32,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 
 class Client @JvmOverloads constructor(
-    var endPoint: String = "https://HOSTNAME/v1",
+    var endPoint: String = "https://cloud.appwrite.io/v1",
     private var selfSigned: Boolean = false
 ) : CoroutineScope {
 
@@ -47,12 +45,9 @@ class Client @JvmOverloads constructor(
 
     private val job = Job()
 
-    private val gson = GsonBuilder().registerTypeAdapter(
-        object : TypeToken<Map<String, Any>>(){}.type,
-        PreciseNumberAdapter()
-    ).create()
-
     lateinit var http: OkHttpClient
+
+    lateinit var httpForRedirect: OkHttpClient
 
     private val headers: MutableMap<String, String>
 
@@ -62,12 +57,14 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/4.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/5.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "4.1.0",            "x-appwrite-response-format" to "1.4.0"
+            "x-sdk-version" to "5.0.0",
+            "x-appwrite-response-format" to "1.5.0",
         )
+
         config = mutableMapOf()
 
         setSelfSigned(selfSigned)
@@ -132,6 +129,36 @@ class Client @JvmOverloads constructor(
     }
 
     /**
+     * Set Session
+     *
+     * The user session to authenticate with
+     *
+     * @param {string} session
+     *
+     * @return this
+     */
+    fun setSession(value: String): Client {
+        config["session"] = value
+        addHeader("x-appwrite-session", value)
+        return this
+    }
+
+    /**
+     * Set ForwardedUserAgent
+     *
+     * The user agent string of the client that made the request
+     *
+     * @param {string} forwardeduseragent
+     *
+     * @return this
+     */
+    fun setForwardedUserAgent(value: String): Client {
+        config["forwardedUserAgent"] = value
+        addHeader("x-forwarded-user-agent", value)
+        return this
+    }
+
+    /**
      * Set self Signed
      *
      * @param status
@@ -146,6 +173,7 @@ class Client @JvmOverloads constructor(
 
         if (!selfSigned) {
             http = builder.build()
+            httpForRedirect = builder.followRedirects(false).build()
             return this
         }
 
@@ -208,24 +236,22 @@ class Client @JvmOverloads constructor(
     }
 
     /**
-     * Send the HTTP request
-     *
+     * Prepare the HTTP request
+     * 
      * @param method
      * @param path
      * @param headers
      * @param params
      *
-     * @return [T]    
+     * @return [Request]
      */
     @Throws(AppwriteException::class)
-    suspend fun <T> call(
+    suspend fun prepareRequest(
         method: String,
         path: String,
         headers:  Map<String, String> = mapOf(),
         params: Map<String, Any?> = mapOf(),
-        responseType: Class<T>,
-        converter: ((Any) -> T)? = null
-    ): T {
+    ): Request {
         val filteredParams = params.filterValues { it != null }
 
         val requestHeaders = this.headers.toHeaders().newBuilder()
@@ -254,13 +280,12 @@ class Client @JvmOverloads constructor(
                     }
                 }
             }
-            val request = Request.Builder()
+
+            return Request.Builder()
                 .url(httpBuilder.build())
                 .headers(requestHeaders)
                 .get()
                 .build()
-
-            return awaitResponse(request, responseType, converter)
         }
 
         val body = if (MultipartBody.FORM.toString() == headers["content-type"]) {
@@ -287,17 +312,61 @@ class Client @JvmOverloads constructor(
             }
             builder.build()
         } else {
-            gson.toJson(filteredParams)
+            filteredParams
+                .toJson()
                 .toRequestBody("application/json".toMediaType())
         }
 
-        val request = Request.Builder()
+        return Request.Builder()
             .url(httpBuilder.build())
             .headers(requestHeaders)
             .method(method, body)
             .build()
+    }
 
+    /**
+     * Send the HTTP request
+     *
+     * @param method
+     * @param path
+     * @param headers
+     * @param params
+     *
+     * @return [T]    
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> call(
+        method: String,
+        path: String,
+        headers:  Map<String, String> = mapOf(),
+        params: Map<String, Any?> = mapOf(),
+        responseType: Class<T>,
+        converter: ((Any) -> T)? = null
+    ): T {
+        val request = prepareRequest(method, path, headers, params)
         return awaitResponse(request, responseType, converter)
+    }
+
+    /**
+     * Send the HTTP request
+     *
+     * @param method
+     * @param path
+     * @param headers
+     * @param params
+     *
+     * @return [T]    
+     */
+    @Throws(AppwriteException::class)
+    suspend fun redirect(
+        method: String,
+        path: String,
+        headers:  Map<String, String> = mapOf(),
+        params: Map<String, Any?> = mapOf(),
+    ): String {
+        val request = prepareRequest(method, path, headers, params)
+        val response = awaitRedirect(request)
+        return response.header("Location") ?: ""
     }
 
     /**
@@ -425,6 +494,54 @@ class Client @JvmOverloads constructor(
         return converter(result as Map<String, Any>)
     }
 
+    /** 
+     * Await Redirect
+     *
+     * @param request
+     * @param responseType
+
+     * @return [Response]
+     */
+    @Throws(AppwriteException::class)
+    private suspend fun awaitRedirect(
+        request: Request
+    ) = suspendCancellableCoroutine<Response> {
+        httpForRedirect.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                if (it.isCancelled) {
+                    return
+                }
+                it.cancel(e)
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun onResponse(call: Call, response: Response) {
+                if (response.code < 300 || response.code >= 400) {
+                    val body = response.body!!
+                        .charStream()
+                        .buffered()
+                        .use(BufferedReader::readText)
+                        
+                    val error = if (response.headers["content-type"]?.contains("application/json") == true) {
+                        val map = body.fromJson<Map<String, Any>>()
+
+                        AppwriteException(
+                            map["message"] as? String ?: "", 
+                            (map["code"] as Number).toInt(),
+                            map["type"] as? String ?: "", 
+                            body
+                        )
+                    } else {
+                        AppwriteException(body, response.code)
+                    }
+                    it.cancel(error)
+                    return
+                }
+                it.resume(response)
+            }
+        })
+    }
+
     /**
      * Await Response
      *
@@ -457,10 +574,8 @@ class Client @JvmOverloads constructor(
                         .use(BufferedReader::readText)
                         
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
-                        val map = gson.fromJson<Map<String, Any>>(
-                            body,
-                            object : TypeToken<Map<String, Any>>(){}.type
-                        )
+                        val map = body.fromJson<Map<String, Any>>()
+
                         AppwriteException(
                             map["message"] as? String ?: "", 
                             (map["code"] as Number).toInt(),
@@ -499,10 +614,7 @@ class Client @JvmOverloads constructor(
                     it.resume(true as T)
                     return
                 }
-                val map = gson.fromJson<Map<String, Any>>(
-                    body,
-                    object : TypeToken<Map<String, Any>>(){}.type
-                )
+                val map = body.fromJson<Map<String, Any>>()
                 it.resume(
                     converter?.invoke(map) ?: map as T
                 )
