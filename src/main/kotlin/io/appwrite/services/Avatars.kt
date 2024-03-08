@@ -29,7 +29,7 @@ class Avatars(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getBrowser(
-        code: Browser,
+        code: io.appwrite.enums.Browser,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
@@ -67,7 +67,7 @@ class Avatars(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getCreditCard(
-        code: CreditCard,
+        code: io.appwrite.enums.CreditCard,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,
@@ -133,7 +133,7 @@ class Avatars(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFlag(
-        code: Flag,
+        code: io.appwrite.enums.Flag,
         width: Long? = null,
         height: Long? = null,
         quality: Long? = null,

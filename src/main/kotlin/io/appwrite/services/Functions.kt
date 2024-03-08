@@ -84,7 +84,7 @@ class Functions(client: Client) : Service(client) {
     suspend fun create(
         functionId: String,
         name: String,
-        runtime: Runtime,
+        runtime: io.appwrite.enums.Runtime,
         execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
@@ -234,7 +234,7 @@ class Functions(client: Client) : Service(client) {
     suspend fun update(
         functionId: String,
         name: String,
-        runtime: Runtime? = null,
+        runtime: io.appwrite.enums.Runtime? = null,
         execute: List<String>? = null,
         events: List<String>? = null,
         schedule: String? = null,
@@ -635,7 +635,7 @@ class Functions(client: Client) : Service(client) {
         body: String? = null,
         async: Boolean? = null,
         path: String? = null,
-        method: ExecutionMethod? = null,
+        method: io.appwrite.enums.ExecutionMethod? = null,
         headers: Any? = null,
     ): io.appwrite.models.Execution {
         val apiPath = "/functions/{functionId}/executions"

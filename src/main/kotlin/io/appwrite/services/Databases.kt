@@ -1147,11 +1147,11 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         relatedCollectionId: String,
-        type: RelationshipType,
+        type: io.appwrite.enums.RelationshipType,
         twoWay: Boolean? = null,
         key: String? = null,
         twoWayKey: String? = null,
-        onDelete: RelationMutate? = null,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
             .replace("{databaseId}", databaseId)
@@ -1462,7 +1462,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-        onDelete: RelationMutate? = null,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
             .replace("{databaseId}", databaseId)
@@ -1868,7 +1868,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-        type: IndexType,
+        type: io.appwrite.enums.IndexType,
         attributes: List<String>,
         orders: List<String>? = null,
     ): io.appwrite.models.Index {

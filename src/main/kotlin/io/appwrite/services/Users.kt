@@ -699,7 +699,7 @@ class Users(client: Client) : Service(client) {
         userId: String,
         email: String,
         password: String,
-        passwordVersion: PasswordHash? = null,
+        passwordVersion: io.appwrite.enums.PasswordHash? = null,
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
@@ -746,7 +746,7 @@ class Users(client: Client) : Service(client) {
         userId: String,
         email: String,
         password: String,
-        passwordVersion: PasswordHash? = null,
+        passwordVersion: io.appwrite.enums.PasswordHash? = null,
         name: String? = null,
     ): io.appwrite.models.User<Map<String, Any>> = createSHAUser(
         userId,
@@ -1086,7 +1086,7 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun <T> deleteMfaAuthenticator(
         userId: String,
-        type: AuthenticatorType,
+        type: io.appwrite.enums.AuthenticatorType,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
         val apiPath = "/users/{userId}/mfa/authenticators/{type}"
@@ -1123,7 +1123,7 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun deleteMfaAuthenticator(
         userId: String,
-        type: AuthenticatorType,
+        type: io.appwrite.enums.AuthenticatorType,
     ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
         userId,
         type,
@@ -1774,7 +1774,7 @@ class Users(client: Client) : Service(client) {
     suspend fun createTarget(
         userId: String,
         targetId: String,
-        providerType: MessagingProviderType,
+        providerType: io.appwrite.enums.MessagingProviderType,
         identifier: String,
         providerId: String? = null,
         name: String? = null,

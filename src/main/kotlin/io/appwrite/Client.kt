@@ -61,8 +61,10 @@ class Client @JvmOverloads constructor(
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "5.0.0",            "x-appwrite-response-format" to "1.5.0"
+            "x-sdk-version" to "5.0.0",
+            "x-appwrite-response-format" to "1.5.0",
         )
+
         config = mutableMapOf()
 
         setSelfSigned(selfSigned)
