@@ -617,7 +617,7 @@ class Health(client: Client) : Service(client) {
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun getQueueUsage(
+    suspend fun getQueueUsageDump(
         threshold: Long? = null,
     ): io.appwrite.models.HealthQueue {
         val apiPath = "/health/queue/usage-dump"
