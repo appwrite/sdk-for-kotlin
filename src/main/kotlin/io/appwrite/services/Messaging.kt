@@ -941,9 +941,9 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
-     * @param from Sender Phone number. Format this number with a leading '+' and a country code, e.g., +16175551212.
-     * @param senderId Msg91 Sender ID.
-     * @param authKey Msg91 Auth Key.
+     * @param templateId Msg91 template ID
+     * @param senderId Msg91 sender ID.
+     * @param authKey Msg91 auth key.
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
@@ -952,7 +952,7 @@ class Messaging(client: Client) : Service(client) {
     suspend fun createMsg91Provider(
         providerId: String,
         name: String,
-        from: String? = null,
+        templateId: String? = null,
         senderId: String? = null,
         authKey: String? = null,
         enabled: Boolean? = null,
@@ -962,7 +962,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
-            "from" to from,
+            "templateId" to templateId,
             "senderId" to senderId,
             "authKey" to authKey,
             "enabled" to enabled,
@@ -991,9 +991,9 @@ class Messaging(client: Client) : Service(client) {
      * @param providerId Provider ID.
      * @param name Provider name.
      * @param enabled Set as enabled.
-     * @param senderId Msg91 Sender ID.
-     * @param authKey Msg91 Auth Key.
-     * @param from Sender number.
+     * @param templateId Msg91 template ID.
+     * @param senderId Msg91 sender ID.
+     * @param authKey Msg91 auth key.
      * @return [io.appwrite.models.Provider]
      */
     @JvmOverloads
@@ -1002,9 +1002,9 @@ class Messaging(client: Client) : Service(client) {
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
+        templateId: String? = null,
         senderId: String? = null,
         authKey: String? = null,
-        from: String? = null,
     ): io.appwrite.models.Provider {
         val apiPath = "/messaging/providers/msg91/{providerId}"
             .replace("{providerId}", providerId)
@@ -1012,9 +1012,9 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "templateId" to templateId,
             "senderId" to senderId,
             "authKey" to authKey,
-            "from" to from,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
