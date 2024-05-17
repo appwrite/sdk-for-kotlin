@@ -41,6 +41,8 @@ enum class Runtime(val value: String) {
     PYTHON_3_11("python-3.11"),
     @SerializedName("python-3.12")
     PYTHON_3_12("python-3.12"),
+    @SerializedName("python-ml-3.11")
+    PYTHON_ML_3_11("python-ml-3.11"),
     @SerializedName("deno-1.40")
     DENO_1_40("deno-1.40"),
     @SerializedName("dart-2.15")

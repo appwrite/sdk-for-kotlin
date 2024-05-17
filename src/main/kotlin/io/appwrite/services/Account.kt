@@ -363,7 +363,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Add Authenticator
      *
-     * Add an authenticator app to be used as an MFA factor. Verify the authenticator using the [verify authenticator](/docs/references/cloud/client-web/account#verifyAuthenticator) method.
+     * Add an authenticator app to be used as an MFA factor. Verify the authenticator using the [verify authenticator](/docs/references/cloud/client-web/account#updateMfaAuthenticator) method.
      *
      * @param type Type of authenticator. Must be `totp`
      * @return [io.appwrite.models.MfaType]
@@ -396,7 +396,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#addAuthenticator) method.
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method. add 
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -433,7 +433,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#addAuthenticator) method.
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method. add 
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -456,14 +456,13 @@ class Account(client: Client) : Service(client) {
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
+     * @return [Any]
      */
     @Throws(AppwriteException::class)
-    suspend fun <T> deleteMfaAuthenticator(
+    suspend fun deleteMfaAuthenticator(
         type: io.appwrite.enums.AuthenticatorType,
         otp: String,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
+    ): Any {
         val apiPath = "/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
 
@@ -473,37 +472,14 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
         return client.call(
             "DELETE",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = classOf(),
-            converter,
+            responseType = Any::class.java,
         )
     }
-
-    /**
-     * Delete Authenticator
-     *
-     * Delete an authenticator for a user by ID.
-     *
-     * @param type Type of authenticator.
-     * @param otp Valid verification token.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun deleteMfaAuthenticator(
-        type: io.appwrite.enums.AuthenticatorType,
-        otp: String,
-    ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
-        type,
-        otp,
-        nestedType = classOf(),
-    )
 
     /**
      * Create 2FA Challenge
