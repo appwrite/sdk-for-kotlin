@@ -63,7 +63,7 @@ class Messaging(client: Client) : Service(client) {
      * @param targets List of Targets IDs.
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
-     * @param attachments Array of compound bucket IDs to file IDs to be attached to the email.
+     * @param attachments Array of compound ID strings of bucket IDs and file IDs to be attached to the email. They should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param draft Is message a draft
      * @param html Is content of type HTML
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
@@ -133,6 +133,7 @@ class Messaging(client: Client) : Service(client) {
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @param attachments Array of compound ID strings of bucket IDs and file IDs to be attached to the email. They should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -149,6 +150,7 @@ class Messaging(client: Client) : Service(client) {
         cc: List<String>? = null,
         bcc: List<String>? = null,
         scheduledAt: String? = null,
+        attachments: List<String>? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/email/{messageId}"
             .replace("{messageId}", messageId)
@@ -164,6 +166,7 @@ class Messaging(client: Client) : Service(client) {
             "cc" to cc,
             "bcc" to bcc,
             "scheduledAt" to scheduledAt,
+            "attachments" to attachments,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -194,7 +197,7 @@ class Messaging(client: Client) : Service(client) {
      * @param targets List of Targets IDs.
      * @param data Additional Data for push notification.
      * @param action Action for push notification.
-     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage.
+     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage. It should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param icon Icon for push notification. Available only for Android and Web Platform.
      * @param sound Sound for push notification. Available only for Android and IOS Platform.
      * @param color Color for push notification. Available only for Android Platform.
@@ -273,7 +276,7 @@ class Messaging(client: Client) : Service(client) {
      * @param body Body for push notification.
      * @param data Additional Data for push notification.
      * @param action Action for push notification.
-     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage.
+     * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage. It should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param icon Icon for push notification. Available only for Android and Web platforms.
      * @param sound Sound for push notification. Available only for Android and iOS platforms.
      * @param color Color for push notification. Available only for Android platforms.
