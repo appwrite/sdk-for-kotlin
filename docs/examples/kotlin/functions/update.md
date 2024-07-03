@@ -4,8 +4,8 @@ import io.appwrite.services.Functions
 
 val client = Client()
     .setEndpoint("https://cloud.appwrite.io/v1") // Your API Endpoint
-    .setProject("5df5acd0d48c2") // Your project ID
-    .setKey("919c2d18fb5d4...a2ae413da83346ad2") // Your secret API key
+    .setProject("&lt;YOUR_PROJECT_ID&gt;") // Your project ID
+    .setKey("&lt;YOUR_API_KEY&gt;") // Your secret API key
 
 val functions = Functions(client)
 
@@ -21,6 +21,7 @@ val response = functions.update(
     logging = false, // optional
     entrypoint = "<ENTRYPOINT>", // optional
     commands = "<COMMANDS>", // optional
+    scopes = listOf(), // optional
     installationId = "<INSTALLATION_ID>", // optional
     providerRepositoryId = "<PROVIDER_REPOSITORY_ID>", // optional
     providerBranch = "<PROVIDER_BRANCH>", // optional

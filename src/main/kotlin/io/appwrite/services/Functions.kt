@@ -68,6 +68,7 @@ class Functions(client: Client) : Service(client) {
      * @param logging Whether executions will be logged. When set to false, executions will not be logged, but will reduce resource used by your Appwrite project.
      * @param entrypoint Entrypoint File. This path is relative to the "providerRootDirectory".
      * @param commands Build Commands.
+     * @param scopes List of scopes allowed for API key auto-generated for every execution. Maximum of 100 scopes are allowed.
      * @param installationId Appwrite Installation ID for VCS (Version Control System) deployment.
      * @param providerRepositoryId Repository ID of the repo linked to the function.
      * @param providerBranch Production branch for the repo linked to the function.
@@ -93,6 +94,7 @@ class Functions(client: Client) : Service(client) {
         logging: Boolean? = null,
         entrypoint: String? = null,
         commands: String? = null,
+        scopes: List<String>? = null,
         installationId: String? = null,
         providerRepositoryId: String? = null,
         providerBranch: String? = null,
@@ -117,6 +119,7 @@ class Functions(client: Client) : Service(client) {
             "logging" to logging,
             "entrypoint" to entrypoint,
             "commands" to commands,
+            "scopes" to scopes,
             "installationId" to installationId,
             "providerRepositoryId" to providerRepositoryId,
             "providerBranch" to providerBranch,
@@ -222,6 +225,7 @@ class Functions(client: Client) : Service(client) {
      * @param logging Whether executions will be logged. When set to false, executions will not be logged, but will reduce resource used by your Appwrite project.
      * @param entrypoint Entrypoint File. This path is relative to the "providerRootDirectory".
      * @param commands Build Commands.
+     * @param scopes List of scopes allowed for API Key auto-generated for every execution. Maximum of 100 scopes are allowed.
      * @param installationId Appwrite Installation ID for VCS (Version Controle System) deployment.
      * @param providerRepositoryId Repository ID of the repo linked to the function
      * @param providerBranch Production branch for the repo linked to the function
@@ -243,6 +247,7 @@ class Functions(client: Client) : Service(client) {
         logging: Boolean? = null,
         entrypoint: String? = null,
         commands: String? = null,
+        scopes: List<String>? = null,
         installationId: String? = null,
         providerRepositoryId: String? = null,
         providerBranch: String? = null,
@@ -263,6 +268,7 @@ class Functions(client: Client) : Service(client) {
             "logging" to logging,
             "entrypoint" to entrypoint,
             "commands" to commands,
+            "scopes" to scopes,
             "installationId" to installationId,
             "providerRepositoryId" to providerRepositoryId,
             "providerBranch" to providerBranch,
@@ -510,27 +516,28 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create build
+     * Rebuild deployment
      *
-     * Create a new build for an Appwrite Function deployment. This endpoint can be used to retry a failed build.
+     * 
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.
      * @param buildId Build unique ID.
      * @return [Any]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createBuild(
         functionId: String,
         deploymentId: String,
-        buildId: String,
+        buildId: String? = null,
     ): Any {
-        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/builds/{buildId}"
+        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/build"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
-            .replace("{buildId}", buildId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "buildId" to buildId,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -541,6 +548,42 @@ class Functions(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Cancel deployment
+     *
+     * 
+     *
+     * @param functionId Function ID.
+     * @param deploymentId Deployment ID.
+     * @return [io.appwrite.models.Build]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDeploymentBuild(
+        functionId: String,
+        deploymentId: String,
+    ): io.appwrite.models.Build {
+        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/build"
+            .replace("{functionId}", functionId)
+            .replace("{deploymentId}", deploymentId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Build = {
+            io.appwrite.models.Build.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Build::class.java,
+            converter,
         )
     }
 
@@ -581,7 +624,7 @@ class Functions(client: Client) : Service(client) {
      * Get a list of all the current user function execution logs. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, responseStatusCode, duration
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, responseStatusCode, duration, requestMethod, requestPath, deploymentId
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.ExecutionList]
      */
@@ -626,6 +669,7 @@ class Functions(client: Client) : Service(client) {
      * @param path HTTP path of execution. Path can include query params. Default value is /
      * @param method HTTP method of execution. Default value is GET.
      * @param headers HTTP headers of execution. Defaults to empty.
+     * @param scheduledAt Scheduled execution time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Execution]
      */
     @JvmOverloads
@@ -637,6 +681,7 @@ class Functions(client: Client) : Service(client) {
         path: String? = null,
         method: io.appwrite.enums.ExecutionMethod? = null,
         headers: Any? = null,
+        scheduledAt: String? = null,
     ): io.appwrite.models.Execution {
         val apiPath = "/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
@@ -647,6 +692,7 @@ class Functions(client: Client) : Service(client) {
             "path" to path,
             "method" to method,
             "headers" to headers,
+            "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -697,6 +743,38 @@ class Functions(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.Execution::class.java,
             converter,
+        )
+    }
+
+    /**
+     * Delete execution
+     *
+     * Delete a function execution by its unique ID.
+     *
+     * @param functionId Function ID.
+     * @param executionId Execution ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteExecution(
+        functionId: String,
+        executionId: String,
+    ): Any {
+        val apiPath = "/functions/{functionId}/executions/{executionId}"
+            .replace("{functionId}", functionId)
+            .replace("{executionId}", executionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
         )
     }
 

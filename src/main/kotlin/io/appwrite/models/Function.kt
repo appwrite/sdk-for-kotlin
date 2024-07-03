@@ -68,6 +68,12 @@ data class Function(
     val deployment: String,
 
     /**
+     * Allowed permission scopes.
+     */
+    @SerializedName("scopes")
+    val scopes: List<Any>,
+
+    /**
      * Function variables.
      */
     @SerializedName("vars")
@@ -151,6 +157,7 @@ data class Function(
         "logging" to logging as Any,
         "runtime" to runtime as Any,
         "deployment" to deployment as Any,
+        "scopes" to scopes as Any,
         "vars" to vars.map { it.toMap() } as Any,
         "events" to events as Any,
         "schedule" to schedule as Any,
@@ -181,6 +188,7 @@ data class Function(
             logging = map["logging"] as Boolean,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
+            scopes = map["scopes"] as List<Any>,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
             events = map["events"] as List<Any>,
             schedule = map["schedule"] as String,

@@ -17,8 +17,8 @@ enum class Name(val value: String) {
     V1_USAGE("v1-usage"),
     @SerializedName("v1-usage-dump")
     V1_USAGE_DUMP("v1-usage-dump"),
-    @SerializedName("webhooksv1")
-    WEBHOOKSV1("webhooksv1"),
+    @SerializedName("v1-webhooks")
+    V1_WEBHOOKS("v1-webhooks"),
     @SerializedName("v1-certificates")
     V1_CERTIFICATES("v1-certificates"),
     @SerializedName("v1-builds")
@@ -26,9 +26,7 @@ enum class Name(val value: String) {
     @SerializedName("v1-messaging")
     V1_MESSAGING("v1-messaging"),
     @SerializedName("v1-migrations")
-    V1_MIGRATIONS("v1-migrations"),
-    @SerializedName("hamsterv1")
-    HAMSTERV1("hamsterv1");
+    V1_MIGRATIONS("v1-migrations");
 
     override fun toString() = value
 }
