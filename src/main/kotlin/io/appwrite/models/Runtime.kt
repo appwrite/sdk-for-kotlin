@@ -14,6 +14,12 @@ data class Runtime(
     val id: String,
 
     /**
+     * Parent runtime key.
+     */
+    @SerializedName("key")
+    val key: String,
+
+    /**
      * Runtime Name.
      */
     @SerializedName("name")
@@ -52,6 +58,7 @@ data class Runtime(
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
+        "key" to key as Any,
         "name" to name as Any,
         "version" to version as Any,
         "base" to base as Any,
@@ -67,6 +74,7 @@ data class Runtime(
             map: Map<String, Any>,
         ) = Runtime(
             id = map["\$id"] as String,
+            key = map["key"] as String,
             name = map["name"] as String,
             version = map["version"] as String,
             base = map["base"] as String,
