@@ -78,6 +78,7 @@ class Functions(client: Client) : Service(client) {
      * @param templateOwner The name of the owner of the template.
      * @param templateRootDirectory Path to function code in the template repo.
      * @param templateVersion Version (tag) for the repo linked to the function template.
+     * @param specification Runtime specification for the function and builds.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -104,6 +105,7 @@ class Functions(client: Client) : Service(client) {
         templateOwner: String? = null,
         templateRootDirectory: String? = null,
         templateVersion: String? = null,
+        specification: String? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
 
@@ -129,6 +131,7 @@ class Functions(client: Client) : Service(client) {
             "templateOwner" to templateOwner,
             "templateRootDirectory" to templateRootDirectory,
             "templateVersion" to templateVersion,
+            "specification" to specification,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -172,6 +175,36 @@ class Functions(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.RuntimeList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List available function runtime specifications
+     *
+     * List allowed function specifications for this instance.
+     *
+     * @return [io.appwrite.models.SpecificationList]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listSpecifications(
+    ): io.appwrite.models.SpecificationList {
+        val apiPath = "/functions/specifications"
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.SpecificationList = {
+            io.appwrite.models.SpecificationList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.SpecificationList::class.java,
             converter,
         )
     }
@@ -307,6 +340,7 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
+     * @param specification Runtime specification for the function and builds.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -329,6 +363,7 @@ class Functions(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
+        specification: String? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions/{functionId}"
             .replace("{functionId}", functionId)
@@ -350,6 +385,7 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
+            "specification" to specification,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -758,7 +794,6 @@ class Functions(client: Client) : Service(client) {
         method: io.appwrite.enums.ExecutionMethod? = null,
         headers: Any? = null,
         scheduledAt: String? = null,
-        onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.Execution {
         val apiPath = "/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
@@ -772,21 +807,18 @@ class Functions(client: Client) : Service(client) {
             "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "multipart/form-data",
+            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
             io.appwrite.models.Execution.from(map = it as Map<String, Any>)
         }
-        val idParamName: String? = null
-        return client.chunkedUpload(
+        return client.call(
+            "POST",
             apiPath,
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.Execution::class.java,
             converter,
-            paramName,
-            idParamName,
-            onProgress,
         )
     }
 

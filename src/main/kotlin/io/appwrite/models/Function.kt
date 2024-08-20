@@ -145,6 +145,12 @@ data class Function(
     @SerializedName("providerSilentMode")
     val providerSilentMode: Boolean,
 
+    /**
+     * Machine specification for builds and executions.
+     */
+    @SerializedName("specification")
+    val specification: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -170,6 +176,7 @@ data class Function(
         "providerBranch" to providerBranch as Any,
         "providerRootDirectory" to providerRootDirectory as Any,
         "providerSilentMode" to providerSilentMode as Any,
+        "specification" to specification as Any,
     )
 
     companion object {
@@ -201,6 +208,7 @@ data class Function(
             providerBranch = map["providerBranch"] as String,
             providerRootDirectory = map["providerRootDirectory"] as String,
             providerSilentMode = map["providerSilentMode"] as Boolean,
+            specification = map["specification"] as String,
         )
     }
 }
