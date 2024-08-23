@@ -93,8 +93,8 @@ enum class Runtime(val value: String) {
     CPP_20("cpp-20"),
     @SerializedName("bun-1.0")
     BUN_1_0("bun-1.0"),
-    @SerializedName("go-1.22")
-    GO_1_22("go-1.22");
+    @SerializedName("go-1.23")
+    GO_1_23("go-1.23");
 
     override fun toString() = value
 }
