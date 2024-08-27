@@ -56,6 +56,12 @@ data class Deployment(
     val size: Long,
 
     /**
+     * The build output size in bytes.
+     */
+    @SerializedName("buildSize")
+    val buildSize: Long,
+
+    /**
      * The current build ID.
      */
     @SerializedName("buildId")
@@ -155,6 +161,7 @@ data class Deployment(
         "resourceType" to resourceType as Any,
         "entrypoint" to entrypoint as Any,
         "size" to size as Any,
+        "buildSize" to buildSize as Any,
         "buildId" to buildId as Any,
         "activate" to activate as Any,
         "status" to status as Any,
@@ -186,6 +193,7 @@ data class Deployment(
             resourceType = map["resourceType"] as String,
             entrypoint = map["entrypoint"] as String,
             size = (map["size"] as Number).toLong(),
+            buildSize = (map["buildSize"] as Number).toLong(),
             buildId = map["buildId"] as String,
             activate = map["activate"] as Boolean,
             status = map["status"] as String,

@@ -256,7 +256,7 @@ class Account(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createJWT(
     ): io.appwrite.models.Jwt {
-        val apiPath = "/account/jwt"
+        val apiPath = "/account/jwts"
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -361,7 +361,7 @@ class Account(client: Client) : Service(client) {
     )
 
     /**
-     * Add Authenticator
+     * Create Authenticator
      *
      * Add an authenticator app to be used as an MFA factor. Verify the authenticator using the [verify authenticator](/docs/references/cloud/client-web/account#updateMfaAuthenticator) method.
      *
@@ -396,7 +396,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method. add 
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -433,7 +433,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Verify Authenticator
      *
-     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method. add 
+     * Verify an authenticator app after adding it using the [add authenticator](/docs/references/cloud/client-web/account#createMfaAuthenticator) method.
      *
      * @param type Type of authenticator.
      * @param otp Valid verification token.
@@ -455,19 +455,16 @@ class Account(client: Client) : Service(client) {
      * Delete an authenticator for a user by ID.
      *
      * @param type Type of authenticator.
-     * @param otp Valid verification token.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
     suspend fun deleteMfaAuthenticator(
         type: io.appwrite.enums.AuthenticatorType,
-        otp: String,
     ): Any {
         val apiPath = "/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
 
         val apiParams = mutableMapOf<String, Any?>(
-            "otp" to otp,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -482,7 +479,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Create 2FA Challenge
+     * Create MFA Challenge
      *
      * Begin the process of MFA verification after sign-in. Finish the flow with [updateMfaChallenge](/docs/references/cloud/client-web/account#updateMfaChallenge) method.
      *
@@ -1625,7 +1622,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Create phone verification (confirmation)
+     * Update phone verification (confirmation)
      *
      * Use this endpoint to complete the user phone verification process. Use the **userId** and **secret** that were sent to your user&#039;s phone number to verify the user email ownership. If confirmed this route will return a 200 status code.
      *
