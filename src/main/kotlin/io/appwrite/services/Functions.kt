@@ -210,39 +210,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get function template
-     *
-     * Get a function template using ID. You can use template details in [createFunction](/docs/references/cloud/server-nodejs/functions#create) method.
-     *
-     * @param templateId Template ID.
-     * @return [io.appwrite.models.TemplateFunction]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun getTemplate(
-        templateId: String,
-    ): io.appwrite.models.TemplateFunction {
-        val apiPath = "/functions/templates/{templateId}"
-            .replace("{templateId}", templateId)
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.TemplateFunction = {
-            io.appwrite.models.TemplateFunction.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.TemplateFunction::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Get function
      *
      * Get a function by its unique ID.
