@@ -68,6 +68,12 @@ data class Function(
     val deployment: String,
 
     /**
+     * Allowed permission scopes.
+     */
+    @SerializedName("scopes")
+    val scopes: List<Any>,
+
+    /**
      * Function variables.
      */
     @SerializedName("vars")
@@ -139,6 +145,12 @@ data class Function(
     @SerializedName("providerSilentMode")
     val providerSilentMode: Boolean,
 
+    /**
+     * Machine specification for builds and executions.
+     */
+    @SerializedName("specification")
+    val specification: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -151,6 +163,7 @@ data class Function(
         "logging" to logging as Any,
         "runtime" to runtime as Any,
         "deployment" to deployment as Any,
+        "scopes" to scopes as Any,
         "vars" to vars.map { it.toMap() } as Any,
         "events" to events as Any,
         "schedule" to schedule as Any,
@@ -163,6 +176,7 @@ data class Function(
         "providerBranch" to providerBranch as Any,
         "providerRootDirectory" to providerRootDirectory as Any,
         "providerSilentMode" to providerSilentMode as Any,
+        "specification" to specification as Any,
     )
 
     companion object {
@@ -181,6 +195,7 @@ data class Function(
             logging = map["logging"] as Boolean,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
+            scopes = map["scopes"] as List<Any>,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
             events = map["events"] as List<Any>,
             schedule = map["schedule"] as String,
@@ -193,6 +208,7 @@ data class Function(
             providerBranch = map["providerBranch"] as String,
             providerRootDirectory = map["providerRootDirectory"] as String,
             providerSilentMode = map["providerSilentMode"] as Boolean,
+            specification = map["specification"] as String,
         )
     }
 }

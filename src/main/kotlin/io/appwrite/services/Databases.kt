@@ -497,8 +497,10 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeBoolean]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateBooleanAttribute(
         databaseId: String,
@@ -506,6 +508,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: Boolean? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeBoolean {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/boolean/{key}"
             .replace("{databaseId}", databaseId)
@@ -515,6 +518,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -591,8 +595,10 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeDatetime]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateDatetimeAttribute(
         databaseId: String,
@@ -600,6 +606,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: String? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeDatetime {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/datetime/{key}"
             .replace("{databaseId}", databaseId)
@@ -609,6 +616,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -685,8 +693,10 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeEmail]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEmailAttribute(
         databaseId: String,
@@ -694,6 +704,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: String? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeEmail {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/email/{key}"
             .replace("{databaseId}", databaseId)
@@ -703,6 +714,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -783,8 +795,10 @@ class Databases(client: Client) : Service(client) {
      * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 255 characters long.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeEnum]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEnumAttribute(
         databaseId: String,
@@ -793,6 +807,7 @@ class Databases(client: Client) : Service(client) {
         elements: List<String>,
         required: Boolean,
         default: String? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeEnum {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/enum/{key}"
             .replace("{databaseId}", databaseId)
@@ -803,6 +818,7 @@ class Databases(client: Client) : Service(client) {
             "elements" to elements,
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -887,8 +903,10 @@ class Databases(client: Client) : Service(client) {
      * @param min Minimum value to enforce on new documents
      * @param max Maximum value to enforce on new documents
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeFloat]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateFloatAttribute(
         databaseId: String,
@@ -898,6 +916,7 @@ class Databases(client: Client) : Service(client) {
         min: Double,
         max: Double,
         default: Double? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeFloat {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/float/{key}"
             .replace("{databaseId}", databaseId)
@@ -909,6 +928,7 @@ class Databases(client: Client) : Service(client) {
             "min" to min,
             "max" to max,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -993,8 +1013,10 @@ class Databases(client: Client) : Service(client) {
      * @param min Minimum value to enforce on new documents
      * @param max Maximum value to enforce on new documents
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeInteger]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateIntegerAttribute(
         databaseId: String,
@@ -1004,6 +1026,7 @@ class Databases(client: Client) : Service(client) {
         min: Long,
         max: Long,
         default: Long? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeInteger {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/integer/{key}"
             .replace("{databaseId}", databaseId)
@@ -1015,6 +1038,7 @@ class Databases(client: Client) : Service(client) {
             "min" to min,
             "max" to max,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -1091,8 +1115,10 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeIp]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateIpAttribute(
         databaseId: String,
@@ -1100,6 +1126,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: String? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeIp {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/ip/{key}"
             .replace("{databaseId}", databaseId)
@@ -1109,6 +1136,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -1246,8 +1274,11 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param size Maximum size of the string attribute.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeString]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateStringAttribute(
         databaseId: String,
@@ -1255,6 +1286,8 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: String? = null,
+        size: Long? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeString {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/string/{key}"
             .replace("{databaseId}", databaseId)
@@ -1264,6 +1297,8 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "size" to size,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -1340,8 +1375,10 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeUrl]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateUrlAttribute(
         databaseId: String,
@@ -1349,6 +1386,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: String? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeUrl {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/url/{key}"
             .replace("{databaseId}", databaseId)
@@ -1358,6 +1396,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -1454,6 +1493,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param onDelete Constraints option
+     * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeRelationship]
      */
     @JvmOverloads
@@ -1463,6 +1503,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         onDelete: io.appwrite.enums.RelationMutate? = null,
+        newKey: String? = null,
     ): io.appwrite.models.AttributeRelationship {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
             .replace("{databaseId}", databaseId)
@@ -1471,6 +1512,7 @@ class Databases(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
+            "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",

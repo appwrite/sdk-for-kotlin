@@ -893,6 +893,46 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
+     * Create user JWT
+     *
+     * Use this endpoint to create a JSON Web Token for user by its unique ID. You can use the resulting JWT to authenticate on behalf of the user. The JWT secret will become invalid if the session it uses gets deleted.
+     *
+     * @param userId User ID.
+     * @param sessionId Session ID. Use the string 'recent' to use the most recent session. Defaults to the most recent session.
+     * @param duration Time in seconds before JWT expires. Default duration is 900 seconds, and maximum is 3600 seconds.
+     * @return [io.appwrite.models.Jwt]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createJWT(
+        userId: String,
+        sessionId: String? = null,
+        duration: Long? = null,
+    ): io.appwrite.models.Jwt {
+        val apiPath = "/users/{userId}/jwts"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "sessionId" to sessionId,
+            "duration" to duration,
+        )
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Jwt = {
+            io.appwrite.models.Jwt.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Jwt::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update user labels
      *
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
