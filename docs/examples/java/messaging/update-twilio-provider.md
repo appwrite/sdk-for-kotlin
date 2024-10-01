@@ -10,12 +10,12 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updateTwilioProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name (optional)
+    "{$example}", // providerId
+    "{$example}", // name (optional)
     false, // enabled (optional)
-    "<ACCOUNT_SID>", // accountSid (optional)
-    "<AUTH_TOKEN>", // authToken (optional)
-    "<FROM>", // from (optional)
+    "{$example}", // accountSid (optional)
+    "{$example}", // authToken (optional)
+    "{$example}", // from (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

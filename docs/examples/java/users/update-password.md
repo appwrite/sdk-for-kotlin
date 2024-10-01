@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updatePassword(
-    "<USER_ID>", // userId
+    "{$example}", // userId
     "", // password
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

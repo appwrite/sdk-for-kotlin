@@ -10,7 +10,7 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.create(
-    databaseId = "<DATABASE_ID>",
-    name = "<NAME>",
+    databaseId = "{$example}",
+    name = "{$example}",
     enabled = false // optional
 )

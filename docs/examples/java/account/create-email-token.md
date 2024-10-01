@@ -9,8 +9,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.createEmailToken(
-    "<USER_ID>", // userId
-    "email@example.com", // email
+    "{$example}", // userId
+    "{$example}", // email
     false, // phrase (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

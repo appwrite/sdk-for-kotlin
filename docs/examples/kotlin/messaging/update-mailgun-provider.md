@@ -10,14 +10,14 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.updateMailgunProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>", // optional
-    apiKey = "<API_KEY>", // optional
-    domain = "<DOMAIN>", // optional
+    providerId = "{$example}",
+    name = "{$example}", // optional
+    apiKey = "{$example}", // optional
+    domain = "{$example}", // optional
     isEuRegion = false, // optional
     enabled = false, // optional
-    fromName = "<FROM_NAME>", // optional
-    fromEmail = "email@example.com", // optional
-    replyToName = "<REPLY_TO_NAME>", // optional
-    replyToEmail = "<REPLY_TO_EMAIL>" // optional
+    fromName = "{$example}", // optional
+    fromEmail = "{$example}", // optional
+    replyToName = "{$example}", // optional
+    replyToEmail = "{$example}" // optional
 )

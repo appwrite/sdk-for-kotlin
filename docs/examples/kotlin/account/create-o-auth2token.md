@@ -11,7 +11,7 @@ val account = Account(client)
 
 account.createOAuth2Token(
     provider =  OAuthProvider.AMAZON,
-    success = "https://example.com", // optional
-    failure = "https://example.com", // optional
+    success = "{$example}", // optional
+    failure = "{$example}", // optional
     scopes = listOf() // optional
 )

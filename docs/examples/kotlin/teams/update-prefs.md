@@ -10,6 +10,6 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.updatePrefs(
-    teamId = "<TEAM_ID>",
+    teamId = "{$example}",
     prefs = mapOf( "a" to "b" )
 )

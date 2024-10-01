@@ -10,12 +10,12 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createApnsProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>",
-    authKey = "<AUTH_KEY>", // optional
-    authKeyId = "<AUTH_KEY_ID>", // optional
-    teamId = "<TEAM_ID>", // optional
-    bundleId = "<BUNDLE_ID>", // optional
+    providerId = "{$example}",
+    name = "{$example}",
+    authKey = "{$example}", // optional
+    authKeyId = "{$example}", // optional
+    teamId = "{$example}", // optional
+    bundleId = "{$example}", // optional
     sandbox = false, // optional
     enabled = false // optional
 )

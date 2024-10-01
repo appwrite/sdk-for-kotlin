@@ -10,12 +10,12 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createStringAttribute(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
+    "{$example}", // databaseId
+    "{$example}", // collectionId
     "", // key
     1, // size
     false, // required
-    "<DEFAULT>", // default (optional)
+    "{$example}", // default (optional)
     false, // array (optional)
     false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {

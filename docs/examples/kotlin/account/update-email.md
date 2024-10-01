@@ -10,6 +10,6 @@ val client = Client()
 val account = Account(client)
 
 val response = account.updateEmail(
-    email = "email@example.com",
-    password = "password"
+    email = "{$example}",
+    password = "{$example}"
 )

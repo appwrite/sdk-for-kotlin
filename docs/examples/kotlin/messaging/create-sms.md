@@ -10,8 +10,8 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createSms(
-    messageId = "<MESSAGE_ID>",
-    content = "<CONTENT>",
+    messageId = "{$example}",
+    content = "{$example}",
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional

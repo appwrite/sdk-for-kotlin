@@ -10,7 +10,7 @@ val client = Client()
 val users = Users(client)
 
 val response = users.createToken(
-    userId = "<USER_ID>",
+    userId = "{$example}",
     length = 4, // optional
     expire = 60 // optional
 )

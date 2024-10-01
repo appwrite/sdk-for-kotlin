@@ -10,8 +10,8 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.updateRelationshipAttribute(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
+    "{$example}", // databaseId
+    "{$example}", // collectionId
     "", // key
     RelationMutate.CASCADE, // onDelete (optional)
     "", // newKey (optional)

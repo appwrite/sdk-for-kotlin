@@ -10,11 +10,11 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.createExecution(
-    functionId = "<FUNCTION_ID>",
-    body = "<BODY>", // optional
+    functionId = "{$example}",
+    body = Payload.fromJson(mapOf("x" to "y" as Any)), // optional
     async = false, // optional
-    path = "<PATH>", // optional
-    method = "GET", // optional
+    path = "{$example}", // optional
+    method = "{$example}", // optional
     headers = mapOf( "a" to "b" ), // optional
     scheduledAt = "" // optional
 )

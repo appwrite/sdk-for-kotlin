@@ -10,12 +10,12 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.createApnsProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name
-    "<AUTH_KEY>", // authKey (optional)
-    "<AUTH_KEY_ID>", // authKeyId (optional)
-    "<TEAM_ID>", // teamId (optional)
-    "<BUNDLE_ID>", // bundleId (optional)
+    "{$example}", // providerId
+    "{$example}", // name
+    "{$example}", // authKey (optional)
+    "{$example}", // authKeyId (optional)
+    "{$example}", // teamId (optional)
+    "{$example}", // bundleId (optional)
     false, // sandbox (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {

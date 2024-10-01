@@ -11,8 +11,8 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createIndex(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
     key = "",
     type =  IndexType.KEY,
     attributes = listOf(),

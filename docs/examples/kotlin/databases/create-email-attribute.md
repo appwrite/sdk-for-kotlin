@@ -10,10 +10,10 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createEmailAttribute(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
     key = "",
     required = false,
-    default = "email@example.com", // optional
+    default = "{$example}", // optional
     array = false // optional
 )

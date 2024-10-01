@@ -10,7 +10,7 @@ val client = Client()
 val avatars = Avatars(client)
 
 val result = avatars.getImage(
-    url = "https://example.com",
+    url = "{$example}",
     width = 0, // optional
     height = 0 // optional
 )

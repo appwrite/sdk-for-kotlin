@@ -10,9 +10,9 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createCollection(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
-    name = "<NAME>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
+    name = "{$example}",
     permissions = listOf("read("any")"), // optional
     documentSecurity = false, // optional
     enabled = false // optional

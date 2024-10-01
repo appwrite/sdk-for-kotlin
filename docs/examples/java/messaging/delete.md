@@ -10,7 +10,7 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.delete(
-    "<MESSAGE_ID>", // messageId
+    "{$example}", // messageId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

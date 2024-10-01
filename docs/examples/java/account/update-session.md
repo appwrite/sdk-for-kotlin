@@ -10,7 +10,7 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.updateSession(
-    "<SESSION_ID>", // sessionId
+    "{$example}", // sessionId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

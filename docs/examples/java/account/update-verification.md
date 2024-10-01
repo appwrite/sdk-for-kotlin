@@ -10,8 +10,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.updateVerification(
-    "<USER_ID>", // userId
-    "<SECRET>", // secret
+    "{$example}", // userId
+    "{$example}", // secret
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

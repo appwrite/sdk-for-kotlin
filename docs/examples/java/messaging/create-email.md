@@ -10,9 +10,9 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.createEmail(
-    "<MESSAGE_ID>", // messageId
-    "<SUBJECT>", // subject
-    "<CONTENT>", // content
+    "{$example}", // messageId
+    "{$example}", // subject
+    "{$example}", // content
     listOf(), // topics (optional)
     listOf(), // users (optional)
     listOf(), // targets (optional)

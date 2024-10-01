@@ -10,11 +10,11 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createUrlAttribute(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
+    "{$example}", // databaseId
+    "{$example}", // collectionId
     "", // key
     false, // required
-    "https://example.com", // default (optional)
+    "{$example}", // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

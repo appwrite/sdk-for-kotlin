@@ -10,7 +10,7 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.listMemberships(
-    teamId = "<TEAM_ID>",
+    teamId = "{$example}",
     queries = listOf(), // optional
-    search = "<SEARCH>" // optional
+    search = "{$example}" // optional
 )

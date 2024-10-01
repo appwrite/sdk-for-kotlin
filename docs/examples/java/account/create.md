@@ -9,10 +9,10 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.create(
-    "<USER_ID>", // userId
-    "email@example.com", // email
+    "{$example}", // userId
+    "{$example}", // email
     "", // password
-    "<NAME>", // name (optional)
+    "{$example}", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

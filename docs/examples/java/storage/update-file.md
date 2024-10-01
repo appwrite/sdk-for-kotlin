@@ -10,9 +10,9 @@ Client client = new Client()
 Storage storage = new Storage(client);
 
 storage.updateFile(
-    "<BUCKET_ID>", // bucketId
-    "<FILE_ID>", // fileId
-    "<NAME>", // name (optional)
+    "{$example}", // bucketId
+    "{$example}", // fileId
+    "{$example}", // name (optional)
     listOf("read("any")"), // permissions (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

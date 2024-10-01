@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.updateEmailVerification(
-    userId = "<USER_ID>",
+    userId = "{$example}",
     emailVerification = false
 )

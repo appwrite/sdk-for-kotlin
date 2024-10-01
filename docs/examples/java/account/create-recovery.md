@@ -10,8 +10,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.createRecovery(
-    "email@example.com", // email
-    "https://example.com", // url
+    "{$example}", // email
+    "{$example}", // url
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

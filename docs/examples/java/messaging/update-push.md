@@ -10,19 +10,19 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updatePush(
-    "<MESSAGE_ID>", // messageId
+    "{$example}", // messageId
     listOf(), // topics (optional)
     listOf(), // users (optional)
     listOf(), // targets (optional)
-    "<TITLE>", // title (optional)
-    "<BODY>", // body (optional)
+    "{$example}", // title (optional)
+    "{$example}", // body (optional)
     mapOf( "a" to "b" ), // data (optional)
-    "<ACTION>", // action (optional)
-    "[ID1:ID2]", // image (optional)
-    "<ICON>", // icon (optional)
-    "<SOUND>", // sound (optional)
-    "<COLOR>", // color (optional)
-    "<TAG>", // tag (optional)
+    "{$example}", // action (optional)
+    "{$example}", // image (optional)
+    "{$example}", // icon (optional)
+    "{$example}", // sound (optional)
+    "{$example}", // color (optional)
+    "{$example}", // tag (optional)
     0, // badge (optional)
     false, // draft (optional)
     "", // scheduledAt (optional)

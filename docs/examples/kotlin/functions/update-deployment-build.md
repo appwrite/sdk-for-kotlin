@@ -10,6 +10,6 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.updateDeploymentBuild(
-    functionId = "<FUNCTION_ID>",
-    deploymentId = "<DEPLOYMENT_ID>"
+    functionId = "{$example}",
+    deploymentId = "{$example}"
 )

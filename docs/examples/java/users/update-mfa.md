@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updateMfa(
-    "<USER_ID>", // userId
+    "{$example}", // userId
     false, // mfa
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

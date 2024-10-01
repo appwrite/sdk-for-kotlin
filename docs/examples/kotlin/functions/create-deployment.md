@@ -1,6 +1,6 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.models.InputFile
+import io.appwrite.models.Payload
 import io.appwrite.services.Functions
 
 val client = Client()
@@ -11,9 +11,9 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.createDeployment(
-    functionId = "<FUNCTION_ID>",
-    code = InputFile.fromPath("file.png"),
+    functionId = "{$example}",
+    code = Payload.fromFile("/path/to/file.png"),
     activate = false,
-    entrypoint = "<ENTRYPOINT>", // optional
-    commands = "<COMMANDS>" // optional
+    entrypoint = "{$example}", // optional
+    commands = "{$example}" // optional
 )

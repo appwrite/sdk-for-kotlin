@@ -1,6 +1,6 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.models.InputFile;
+import io.appwrite.models.Payload;
 import io.appwrite.services.Storage;
 
 Client client = new Client()
@@ -11,9 +11,9 @@ Client client = new Client()
 Storage storage = new Storage(client);
 
 storage.createFile(
-    "<BUCKET_ID>", // bucketId
-    "<FILE_ID>", // fileId
-    InputFile.fromPath("file.png"), // file
+    "{$example}", // bucketId
+    "{$example}", // fileId
+    Payload.fromFile("/path/to/file.png"), // file
     listOf("read("any")"), // permissions (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

@@ -10,10 +10,10 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createUrlAttribute(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
     key = "",
     required = false,
-    default = "https://example.com", // optional
+    default = "{$example}", // optional
     array = false // optional
 )

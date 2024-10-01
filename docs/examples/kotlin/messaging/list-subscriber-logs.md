@@ -10,6 +10,6 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.listSubscriberLogs(
-    subscriberId = "<SUBSCRIBER_ID>",
+    subscriberId = "{$example}",
     queries = listOf() // optional
 )

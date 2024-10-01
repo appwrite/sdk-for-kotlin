@@ -10,14 +10,14 @@ val client = Client()
 val storage = Storage(client)
 
 val response = storage.updateBucket(
-    bucketId = "<BUCKET_ID>",
-    name = "<NAME>",
+    bucketId = "{$example}",
+    name = "{$example}",
     permissions = listOf("read("any")"), // optional
     fileSecurity = false, // optional
     enabled = false, // optional
     maximumFileSize = 1, // optional
     allowedFileExtensions = listOf(), // optional
-    compression = "none", // optional
+    compression = "{$example}", // optional
     encryption = false, // optional
     antivirus = false // optional
 )

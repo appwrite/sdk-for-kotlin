@@ -10,10 +10,10 @@ Client client = new Client()
 Functions functions = new Functions(client);
 
 functions.updateVariable(
-    "<FUNCTION_ID>", // functionId
-    "<VARIABLE_ID>", // variableId
-    "<KEY>", // key
-    "<VALUE>", // value (optional)
+    "{$example}", // functionId
+    "{$example}", // variableId
+    "{$example}", // key
+    "{$example}", // value (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
