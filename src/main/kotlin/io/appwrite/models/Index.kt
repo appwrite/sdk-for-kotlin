@@ -43,6 +43,18 @@ data class Index(
     @SerializedName("orders")
     var orders: List<Any>?,
 
+    /**
+     * Index creation date in ISO 8601 format.
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: String,
+
+    /**
+     * Index update date in ISO 8601 format.
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "key" to key as Any,
@@ -51,6 +63,8 @@ data class Index(
         "error" to error as Any,
         "attributes" to attributes as Any,
         "orders" to orders as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
     )
 
     companion object {
@@ -65,6 +79,8 @@ data class Index(
             error = map["error"] as String,
             attributes = map["attributes"] as List<Any>,
             orders = map["orders"] as? List<Any>?,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
         )
     }
 }
