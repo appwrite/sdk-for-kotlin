@@ -44,6 +44,18 @@ data class AttributeInteger(
     var array: Boolean?,
 
     /**
+     * Attribute creation date in ISO 8601 format.
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: String,
+
+    /**
+     * Attribute update date in ISO 8601 format.
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: String,
+
+    /**
      * Minimum value to enforce for new documents.
      */
     @SerializedName("min")
@@ -69,6 +81,8 @@ data class AttributeInteger(
         "error" to error as Any,
         "required" to required as Any,
         "array" to array as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "min" to min as Any,
         "max" to max as Any,
         "default" to default as Any,
@@ -86,6 +100,8 @@ data class AttributeInteger(
             error = map["error"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean?,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             min = (map["min"] as? Number)?.toLong(),
             max = (map["max"] as? Number)?.toLong(),
             default = (map["default"] as? Number)?.toLong(),

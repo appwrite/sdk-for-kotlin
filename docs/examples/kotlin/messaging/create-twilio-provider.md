@@ -10,10 +10,10 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createTwilioProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>",
-    from = "+12065550100", // optional
-    accountSid = "<ACCOUNT_SID>", // optional
-    authToken = "<AUTH_TOKEN>", // optional
+    providerId = "{$example}",
+    name = "{$example}",
+    from = "{$example}", // optional
+    accountSid = "{$example}", // optional
+    authToken = "{$example}", // optional
     enabled = false // optional
 )

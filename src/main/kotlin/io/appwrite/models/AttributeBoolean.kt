@@ -44,6 +44,18 @@ data class AttributeBoolean(
     var array: Boolean?,
 
     /**
+     * Attribute creation date in ISO 8601 format.
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: String,
+
+    /**
+     * Attribute update date in ISO 8601 format.
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: String,
+
+    /**
      * Default value for attribute when not provided. Cannot be set when attribute is required.
      */
     @SerializedName("default")
@@ -57,6 +69,8 @@ data class AttributeBoolean(
         "error" to error as Any,
         "required" to required as Any,
         "array" to array as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "default" to default as Any,
     )
 
@@ -72,6 +86,8 @@ data class AttributeBoolean(
             error = map["error"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean?,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             default = map["default"] as? Boolean?,
         )
     }

@@ -10,6 +10,6 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.listTargets(
-    messageId = "<MESSAGE_ID>",
+    messageId = "{$example}",
     queries = listOf() // optional
 )

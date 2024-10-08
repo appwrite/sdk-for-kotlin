@@ -10,10 +10,10 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createTextmagicProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>",
-    from = "+12065550100", // optional
-    username = "<USERNAME>", // optional
-    apiKey = "<API_KEY>", // optional
+    providerId = "{$example}",
+    name = "{$example}",
+    from = "{$example}", // optional
+    username = "{$example}", // optional
+    apiKey = "{$example}", // optional
     enabled = false // optional
 )

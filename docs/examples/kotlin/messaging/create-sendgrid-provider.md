@@ -10,12 +10,12 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createSendgridProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>",
-    apiKey = "<API_KEY>", // optional
-    fromName = "<FROM_NAME>", // optional
-    fromEmail = "email@example.com", // optional
-    replyToName = "<REPLY_TO_NAME>", // optional
-    replyToEmail = "email@example.com", // optional
+    providerId = "{$example}",
+    name = "{$example}",
+    apiKey = "{$example}", // optional
+    fromName = "{$example}", // optional
+    fromEmail = "{$example}", // optional
+    replyToName = "{$example}", // optional
+    replyToEmail = "{$example}", // optional
     enabled = false // optional
 )

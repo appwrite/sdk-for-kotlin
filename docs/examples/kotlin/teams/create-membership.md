@@ -10,11 +10,11 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.createMembership(
-    teamId = "<TEAM_ID>",
+    teamId = "{$example}",
     roles = listOf(),
-    email = "email@example.com", // optional
-    userId = "<USER_ID>", // optional
-    phone = "+12065550100", // optional
-    url = "https://example.com", // optional
-    name = "<NAME>" // optional
+    email = "{$example}", // optional
+    userId = "{$example}", // optional
+    phone = "{$example}", // optional
+    url = "{$example}", // optional
+    name = "{$example}" // optional
 )

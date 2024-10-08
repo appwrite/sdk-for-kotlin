@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.listTargets(
-    "<USER_ID>", // userId
+    "{$example}", // userId
     listOf(), // queries (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

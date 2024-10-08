@@ -11,12 +11,12 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createRelationshipAttribute(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
-    relatedCollectionId = "<RELATED_COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
+    relatedCollectionId = "{$example}",
     type =  RelationshipType.ONETOONE,
     twoWay = false, // optional
     key = "", // optional
     twoWayKey = "", // optional
-    onDelete = "cascade" // optional
+    onDelete = "{$example}" // optional
 )

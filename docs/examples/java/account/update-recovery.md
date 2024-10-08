@@ -10,8 +10,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.updateRecovery(
-    "<USER_ID>", // userId
-    "<SECRET>", // secret
+    "{$example}", // userId
+    "{$example}", // secret
     "", // password
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

@@ -11,8 +11,8 @@ Account account = new Account(client);
 
 account.createOAuth2Token(
     OAuthProvider.AMAZON, // provider
-    "https://example.com", // success (optional)
-    "https://example.com", // failure (optional)
+    "{$example}", // success (optional)
+    "{$example}", // failure (optional)
     listOf(), // scopes (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

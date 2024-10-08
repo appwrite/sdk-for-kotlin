@@ -11,10 +11,10 @@ val client = Client()
 val users = Users(client)
 
 val response = users.createTarget(
-    userId = "<USER_ID>",
-    targetId = "<TARGET_ID>",
+    userId = "{$example}",
+    targetId = "{$example}",
     providerType =  MessagingProviderType.EMAIL,
-    identifier = "<IDENTIFIER>",
-    providerId = "<PROVIDER_ID>", // optional
-    name = "<NAME>" // optional
+    identifier = "{$example}",
+    providerId = "{$example}", // optional
+    name = "{$example}" // optional
 )

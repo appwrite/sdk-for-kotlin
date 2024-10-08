@@ -10,8 +10,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.updatePhone(
-    "+12065550100", // phone
-    "password", // password
+    "{$example}", // phone
+    "{$example}", // password
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

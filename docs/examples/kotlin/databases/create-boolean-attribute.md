@@ -10,8 +10,8 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createBooleanAttribute(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
     key = "",
     required = false,
     default = false, // optional

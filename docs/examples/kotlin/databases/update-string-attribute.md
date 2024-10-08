@@ -10,11 +10,11 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.updateStringAttribute(
-    databaseId = "<DATABASE_ID>",
-    collectionId = "<COLLECTION_ID>",
+    databaseId = "{$example}",
+    collectionId = "{$example}",
     key = "",
     required = false,
-    default = "<DEFAULT>",
+    default = "{$example}",
     size = 0, // optional
     newKey = "" // optional
 )

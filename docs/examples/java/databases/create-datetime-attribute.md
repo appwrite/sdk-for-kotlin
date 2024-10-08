@@ -10,8 +10,8 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createDatetimeAttribute(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
+    "{$example}", // databaseId
+    "{$example}", // collectionId
     "", // key
     false, // required
     "", // default (optional)

@@ -9,8 +9,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.createEmailPasswordSession(
-    "email@example.com", // email
-    "password", // password
+    "{$example}", // email
+    "{$example}", // password
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

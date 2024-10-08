@@ -10,10 +10,10 @@ Client client = new Client()
 Functions functions = new Functions(client);
 
 functions.createExecution(
-    "<FUNCTION_ID>", // functionId
-    "<BODY>", // body (optional)
+    "{$example}", // functionId
+    Payload.fromJson(mapOf("x" to "y" as Any)), // body (optional)
     false, // async (optional)
-    "<PATH>", // path (optional)
+    "{$example}", // path (optional)
     ExecutionMethod.GET, // method (optional)
     mapOf( "a" to "b" ), // headers (optional)
     "", // scheduledAt (optional)

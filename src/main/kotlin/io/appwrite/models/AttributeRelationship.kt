@@ -44,6 +44,18 @@ data class AttributeRelationship(
     var array: Boolean?,
 
     /**
+     * Attribute creation date in ISO 8601 format.
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: String,
+
+    /**
+     * Attribute update date in ISO 8601 format.
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: String,
+
+    /**
      * The ID of the related collection.
      */
     @SerializedName("relatedCollection")
@@ -87,6 +99,8 @@ data class AttributeRelationship(
         "error" to error as Any,
         "required" to required as Any,
         "array" to array as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "relatedCollection" to relatedCollection as Any,
         "relationType" to relationType as Any,
         "twoWay" to twoWay as Any,
@@ -107,6 +121,8 @@ data class AttributeRelationship(
             error = map["error"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean?,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             relatedCollection = map["relatedCollection"] as String,
             relationType = map["relationType"] as String,
             twoWay = map["twoWay"] as Boolean,

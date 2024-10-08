@@ -10,8 +10,8 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.createJWT(
-    "<USER_ID>", // userId
-    "<SESSION_ID>", // sessionId (optional)
+    "{$example}", // userId
+    "{$example}", // sessionId (optional)
     0, // duration (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

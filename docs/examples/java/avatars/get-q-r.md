@@ -10,7 +10,7 @@ Client client = new Client()
 Avatars avatars = new Avatars(client);
 
 avatars.getQR(
-    "<TEXT>", // text
+    "{$example}", // text
     1, // size (optional)
     0, // margin (optional)
     false, // download (optional)

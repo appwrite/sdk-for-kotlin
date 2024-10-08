@@ -10,7 +10,7 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.create(
-    teamId = "<TEAM_ID>",
-    name = "<NAME>",
+    teamId = "{$example}",
+    name = "{$example}",
     roles = listOf() // optional
 )

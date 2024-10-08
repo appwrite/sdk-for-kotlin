@@ -9,8 +9,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.createPhoneToken(
-    "<USER_ID>", // userId
-    "+12065550100", // phone
+    "{$example}", // userId
+    "{$example}", // phone
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

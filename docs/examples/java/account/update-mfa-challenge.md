@@ -10,8 +10,8 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.updateMfaChallenge(
-    "<CHALLENGE_ID>", // challengeId
-    "<OTP>", // otp
+    "{$example}", // challengeId
+    "{$example}", // otp
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -27,7 +27,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -57,7 +57,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthAntivirus = {
@@ -87,7 +87,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -121,7 +121,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthCertificate = {
@@ -151,7 +151,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -181,7 +181,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -211,7 +211,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -245,7 +245,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -279,7 +279,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -316,7 +316,7 @@ class Health(client: Client) : Service(client) {
             "name" to name,
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -350,7 +350,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -387,7 +387,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -421,7 +421,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -455,7 +455,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -489,7 +489,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -523,7 +523,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -557,7 +557,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -591,7 +591,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -625,7 +625,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -659,7 +659,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
@@ -689,7 +689,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -719,7 +719,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
@@ -749,7 +749,7 @@ class Health(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.HealthTime = {

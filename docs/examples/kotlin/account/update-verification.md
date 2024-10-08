@@ -10,6 +10,6 @@ val client = Client()
 val account = Account(client)
 
 val response = account.updateVerification(
-    userId = "<USER_ID>",
-    secret = "<SECRET>"
+    userId = "{$example}",
+    secret = "{$example}"
 )

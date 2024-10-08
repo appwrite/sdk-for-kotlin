@@ -10,10 +10,10 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.updateVonageProvider(
-    providerId = "<PROVIDER_ID>",
-    name = "<NAME>", // optional
+    providerId = "{$example}",
+    name = "{$example}", // optional
     enabled = false, // optional
-    apiKey = "<API_KEY>", // optional
-    apiSecret = "<API_SECRET>", // optional
-    from = "<FROM>" // optional
+    apiKey = "{$example}", // optional
+    apiSecret = "{$example}", // optional
+    from = "{$example}" // optional
 )

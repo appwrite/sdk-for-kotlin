@@ -10,7 +10,7 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.getTopic(
-    "<TOPIC_ID>", // topicId
+    "{$example}", // topicId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

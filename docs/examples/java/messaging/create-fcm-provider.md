@@ -10,8 +10,8 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.createFcmProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name
+    "{$example}", // providerId
+    "{$example}", // name
     mapOf( "a" to "b" ), // serviceAccountJSON (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {

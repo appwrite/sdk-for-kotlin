@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updateMfaRecoveryCodes(
-    "<USER_ID>", // userId
+    "{$example}", // userId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
