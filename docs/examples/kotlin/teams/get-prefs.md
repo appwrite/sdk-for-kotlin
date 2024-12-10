@@ -10,5 +10,5 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.getPrefs(
-    teamId = "{$example}"
+    teamId = "<TEAM_ID>"
 )

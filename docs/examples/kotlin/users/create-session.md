@@ -10,5 +10,5 @@ val client = Client()
 val users = Users(client)
 
 val response = users.createSession(
-    userId = "{$example}"
+    userId = "<USER_ID>"
 )

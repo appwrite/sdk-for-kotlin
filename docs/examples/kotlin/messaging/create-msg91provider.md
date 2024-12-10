@@ -10,10 +10,10 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createMsg91Provider(
-    providerId = "{$example}",
-    name = "{$example}",
-    templateId = "{$example}", // optional
-    senderId = "{$example}", // optional
-    authKey = "{$example}", // optional
+    providerId = "<PROVIDER_ID>",
+    name = "<NAME>",
+    templateId = "<TEMPLATE_ID>", // optional
+    senderId = "<SENDER_ID>", // optional
+    authKey = "<AUTH_KEY>", // optional
     enabled = false // optional
 )

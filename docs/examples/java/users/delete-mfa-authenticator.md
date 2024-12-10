@@ -11,7 +11,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.deleteMfaAuthenticator(
-    "{$example}", // userId
+    "<USER_ID>", // userId
     AuthenticatorType.TOTP, // type
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

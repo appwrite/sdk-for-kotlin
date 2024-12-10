@@ -10,8 +10,8 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.updateFcmProvider(
-    providerId = "{$example}",
-    name = "{$example}", // optional
+    providerId = "<PROVIDER_ID>",
+    name = "<NAME>", // optional
     enabled = false, // optional
     serviceAccountJSON = mapOf( "a" to "b" ) // optional
 )

@@ -10,9 +10,9 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.deleteDocument(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
-    "{$example}", // documentId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
+    "<DOCUMENT_ID>", // documentId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

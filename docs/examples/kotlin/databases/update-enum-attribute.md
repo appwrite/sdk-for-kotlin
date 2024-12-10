@@ -10,11 +10,11 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.updateEnumAttribute(
-    databaseId = "{$example}",
-    collectionId = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    collectionId = "<COLLECTION_ID>",
     key = "",
     elements = listOf(),
     required = false,
-    default = "{$example}",
+    default = "<DEFAULT>",
     newKey = "" // optional
 )

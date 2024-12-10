@@ -10,6 +10,6 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.listTopicLogs(
-    topicId = "{$example}",
+    topicId = "<TOPIC_ID>",
     queries = listOf() // optional
 )

@@ -11,9 +11,9 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createRelationshipAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
-    "{$example}", // relatedCollectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
+    "<RELATED_COLLECTION_ID>", // relatedCollectionId
     RelationshipType.ONETOONE, // type
     false, // twoWay (optional)
     "", // key (optional)

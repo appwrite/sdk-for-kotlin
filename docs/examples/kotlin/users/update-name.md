@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.updateName(
-    userId = "{$example}",
-    name = "{$example}"
+    userId = "<USER_ID>",
+    name = "<NAME>"
 )

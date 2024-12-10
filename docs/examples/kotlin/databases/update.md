@@ -10,7 +10,7 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.update(
-    databaseId = "{$example}",
-    name = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    name = "<NAME>",
     enabled = false // optional
 )

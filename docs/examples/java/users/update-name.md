@@ -10,8 +10,8 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updateName(
-    "{$example}", // userId
-    "{$example}", // name
+    "<USER_ID>", // userId
+    "<NAME>", // name
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

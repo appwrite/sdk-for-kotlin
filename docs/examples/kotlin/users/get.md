@@ -10,5 +10,5 @@ val client = Client()
 val users = Users(client)
 
 val response = users.get(
-    userId = "{$example}"
+    userId = "<USER_ID>"
 )

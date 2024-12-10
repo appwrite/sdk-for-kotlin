@@ -10,7 +10,7 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.listSubscribers(
-    topicId = "{$example}",
+    topicId = "<TOPIC_ID>",
     queries = listOf(), // optional
-    search = "{$example}" // optional
+    search = "<SEARCH>" // optional
 )

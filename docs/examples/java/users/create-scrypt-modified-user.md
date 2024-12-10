@@ -10,13 +10,13 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.createScryptModifiedUser(
-    "{$example}", // userId
-    "{$example}", // email
-    "{$example}", // password
-    "{$example}", // passwordSalt
-    "{$example}", // passwordSaltSeparator
-    "{$example}", // passwordSignerKey
-    "{$example}", // name (optional)
+    "<USER_ID>", // userId
+    "email@example.com", // email
+    "password", // password
+    "<PASSWORD_SALT>", // passwordSalt
+    "<PASSWORD_SALT_SEPARATOR>", // passwordSaltSeparator
+    "<PASSWORD_SIGNER_KEY>", // passwordSignerKey
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

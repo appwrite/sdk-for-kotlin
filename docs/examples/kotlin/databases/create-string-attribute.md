@@ -10,12 +10,12 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createStringAttribute(
-    databaseId = "{$example}",
-    collectionId = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    collectionId = "<COLLECTION_ID>",
     key = "",
     size = 1,
     required = false,
-    default = "{$example}", // optional
+    default = "<DEFAULT>", // optional
     array = false, // optional
     encrypt = false // optional
 )

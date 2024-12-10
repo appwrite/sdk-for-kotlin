@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.updateStatus(
-    userId = "{$example}",
+    userId = "<USER_ID>",
     status = false
 )

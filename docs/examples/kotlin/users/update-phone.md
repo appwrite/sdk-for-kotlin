@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.updatePhone(
-    userId = "{$example}",
-    number = "{$example}"
+    userId = "<USER_ID>",
+    number = "+12065550100"
 )

@@ -10,12 +10,12 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.updateStringAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     "", // key
     false, // required
-    "{$example}", // default
-    0, // size (optional)
+    "<DEFAULT>", // default
+    1, // size (optional)
     "", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

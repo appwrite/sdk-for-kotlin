@@ -11,5 +11,5 @@ val teams = Teams(client)
 
 val response = teams.list(
     queries = listOf(), // optional
-    search = "{$example}" // optional
+    search = "<SEARCH>" // optional
 )

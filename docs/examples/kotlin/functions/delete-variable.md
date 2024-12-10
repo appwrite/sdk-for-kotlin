@@ -10,6 +10,6 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.deleteVariable(
-    functionId = "{$example}",
-    variableId = "{$example}"
+    functionId = "<FUNCTION_ID>",
+    variableId = "<VARIABLE_ID>"
 )

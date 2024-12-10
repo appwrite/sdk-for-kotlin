@@ -10,12 +10,12 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updateTextmagicProvider(
-    "{$example}", // providerId
-    "{$example}", // name (optional)
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name (optional)
     false, // enabled (optional)
-    "{$example}", // username (optional)
-    "{$example}", // apiKey (optional)
-    "{$example}", // from (optional)
+    "<USERNAME>", // username (optional)
+    "<API_KEY>", // apiKey (optional)
+    "<FROM>", // from (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

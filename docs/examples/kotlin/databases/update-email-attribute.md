@@ -10,10 +10,10 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.updateEmailAttribute(
-    databaseId = "{$example}",
-    collectionId = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    collectionId = "<COLLECTION_ID>",
     key = "",
     required = false,
-    default = "{$example}",
+    default = "email@example.com",
     newKey = "" // optional
 )

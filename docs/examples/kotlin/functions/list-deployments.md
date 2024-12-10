@@ -10,7 +10,7 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.listDeployments(
-    functionId = "{$example}",
+    functionId = "<FUNCTION_ID>",
     queries = listOf(), // optional
-    search = "{$example}" // optional
+    search = "<SEARCH>" // optional
 )

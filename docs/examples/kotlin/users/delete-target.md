@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.deleteTarget(
-    userId = "{$example}",
-    targetId = "{$example}"
+    userId = "<USER_ID>",
+    targetId = "<TARGET_ID>"
 )

@@ -10,9 +10,9 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.updateRelationshipAttribute(
-    databaseId = "{$example}",
-    collectionId = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    collectionId = "<COLLECTION_ID>",
     key = "",
-    onDelete = "{$example}", // optional
+    onDelete = "cascade", // optional
     newKey = "" // optional
 )

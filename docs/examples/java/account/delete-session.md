@@ -10,7 +10,7 @@ Client client = new Client()
 Account account = new Account(client);
 
 account.deleteSession(
-    "{$example}", // sessionId
+    "<SESSION_ID>", // sessionId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

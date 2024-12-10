@@ -10,5 +10,5 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.delete(
-    functionId = "{$example}"
+    functionId = "<FUNCTION_ID>"
 )

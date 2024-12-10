@@ -10,9 +10,9 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.listCollections(
-    "{$example}", // databaseId
+    "<DATABASE_ID>", // databaseId
     listOf(), // queries (optional)
-    "{$example}", // search (optional)
+    "<SEARCH>", // search (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -10,11 +10,11 @@ val client = Client()
 val storage = Storage(client)
 
 val result = storage.getFilePreview(
-    bucketId = "{$example}",
-    fileId = "{$example}",
+    bucketId = "<BUCKET_ID>",
+    fileId = "<FILE_ID>",
     width = 0, // optional
     height = 0, // optional
-    gravity = "{$example}", // optional
+    gravity = "center", // optional
     quality = 0, // optional
     borderWidth = 0, // optional
     borderColor = "", // optional
@@ -22,5 +22,5 @@ val result = storage.getFilePreview(
     opacity = 0, // optional
     rotation = -360, // optional
     background = "", // optional
-    output = "{$example}" // optional
+    output = "jpg" // optional
 )

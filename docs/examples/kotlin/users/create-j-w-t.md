@@ -10,7 +10,7 @@ val client = Client()
 val users = Users(client)
 
 val response = users.createJWT(
-    userId = "{$example}",
-    sessionId = "{$example}", // optional
+    userId = "<USER_ID>",
+    sessionId = "<SESSION_ID>", // optional
     duration = 0 // optional
 )

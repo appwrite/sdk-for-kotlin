@@ -10,16 +10,16 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updateMailgunProvider(
-    "{$example}", // providerId
-    "{$example}", // name (optional)
-    "{$example}", // apiKey (optional)
-    "{$example}", // domain (optional)
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name (optional)
+    "<API_KEY>", // apiKey (optional)
+    "<DOMAIN>", // domain (optional)
     false, // isEuRegion (optional)
     false, // enabled (optional)
-    "{$example}", // fromName (optional)
-    "{$example}", // fromEmail (optional)
-    "{$example}", // replyToName (optional)
-    "{$example}", // replyToEmail (optional)
+    "<FROM_NAME>", // fromName (optional)
+    "email@example.com", // fromEmail (optional)
+    "<REPLY_TO_NAME>", // replyToName (optional)
+    "<REPLY_TO_EMAIL>", // replyToEmail (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

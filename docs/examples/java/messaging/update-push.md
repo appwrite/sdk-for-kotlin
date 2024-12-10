@@ -10,22 +10,25 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updatePush(
-    "{$example}", // messageId
+    "<MESSAGE_ID>", // messageId
     listOf(), // topics (optional)
     listOf(), // users (optional)
     listOf(), // targets (optional)
-    "{$example}", // title (optional)
-    "{$example}", // body (optional)
+    "<TITLE>", // title (optional)
+    "<BODY>", // body (optional)
     mapOf( "a" to "b" ), // data (optional)
-    "{$example}", // action (optional)
-    "{$example}", // image (optional)
-    "{$example}", // icon (optional)
-    "{$example}", // sound (optional)
-    "{$example}", // color (optional)
-    "{$example}", // tag (optional)
+    "<ACTION>", // action (optional)
+    "[ID1:ID2]", // image (optional)
+    "<ICON>", // icon (optional)
+    "<SOUND>", // sound (optional)
+    "<COLOR>", // color (optional)
+    "<TAG>", // tag (optional)
     0, // badge (optional)
     false, // draft (optional)
     "", // scheduledAt (optional)
+    false, // contentAvailable (optional)
+    false, // critical (optional)
+    MessagePriority.NORMAL, // priority (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

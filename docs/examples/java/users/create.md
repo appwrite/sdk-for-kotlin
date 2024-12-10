@@ -10,11 +10,11 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.create(
-    "{$example}", // userId
-    "{$example}", // email (optional)
-    "{$example}", // phone (optional)
+    "<USER_ID>", // userId
+    "email@example.com", // email (optional)
+    "+12065550100", // phone (optional)
     "", // password (optional)
-    "{$example}", // name (optional)
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -59,7 +59,7 @@ data class AttributeEnum(
      * Array of elements in enumerated type.
      */
     @SerializedName("elements")
-    val elements: List<Any>,
+    val elements: List<String>,
 
     /**
      * String format.
@@ -102,7 +102,7 @@ data class AttributeEnum(
             array = map["array"] as? Boolean?,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            elements = map["elements"] as List<Any>,
+            elements = map["elements"] as List<String>,
             format = map["format"] as String,
             default = map["default"] as? String?,
         )

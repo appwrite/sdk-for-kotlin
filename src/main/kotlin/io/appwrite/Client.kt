@@ -3,8 +3,7 @@ package io.appwrite
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.fromJson
 import io.appwrite.extensions.toJson
-import io.appwrite.extensions.fromMultiPart
-import io.appwrite.models.Payload
+import io.appwrite.models.InputFile
 import io.appwrite.models.UploadProgress
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -58,11 +57,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/7.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/6.2.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "7.0.0",
+            "x-sdk-version" to "6.2.0",
             "x-appwrite-response-format" to "1.6.0",
         )
 
@@ -238,7 +237,7 @@ class Client @JvmOverloads constructor(
 
     /**
      * Prepare the HTTP request
-     *
+     * 
      * @param method
      * @param path
      * @param headers
@@ -306,14 +305,6 @@ class Client @JvmOverloads constructor(
                             )
                         }
                     }
-                    it.value is Payload -> {
-                        val payload = it.value as Payload
-                        if (payload.sourceType == "path") {
-                            builder.addFormDataPart(it.key, payload.filename, File(payload.path).asRequestBody())
-                        } else {
-                            builder.addFormDataPart(it.key, payload.toString())
-                        }
-                    }
                     else -> {
                         builder.addFormDataPart(it.key, it.value.toString())
                     }
@@ -341,7 +332,7 @@ class Client @JvmOverloads constructor(
      * @param headers
      * @param params
      *
-     * @return [T]
+     * @return [T]    
      */
     @Throws(AppwriteException::class)
     suspend fun <T> call(
@@ -364,7 +355,7 @@ class Client @JvmOverloads constructor(
      * @param headers
      * @param params
      *
-     * @return [T]
+     * @return [T]    
      */
     @Throws(AppwriteException::class)
     suspend fun redirect(
@@ -399,14 +390,14 @@ class Client @JvmOverloads constructor(
         onProgress: ((UploadProgress) -> Unit)? = null,
     ): T {
         var file: RandomAccessFile? = null
-        val input = params[paramName] as Payload
+        val input = params[paramName] as InputFile
         val size: Long = when(input.sourceType) {
             "path", "file" -> {
                 file = RandomAccessFile(input.path, "r")
                 file.length()
             }
             "bytes" -> {
-                input.toBinary().size.toLong()
+                (input.data as ByteArray).size.toLong()
             }
             else -> throw UnsupportedOperationException()
         }
@@ -414,7 +405,7 @@ class Client @JvmOverloads constructor(
         if (size < CHUNK_SIZE) {
             val data = when(input.sourceType) {
                 "file", "path" -> File(input.path).asRequestBody()
-                "bytes" -> input.toBinary().toRequestBody(input.mimeType?.toMediaType())
+                "bytes" -> (input.data as ByteArray).toRequestBody(input.mimeType.toMediaType())
                 else -> throw UnsupportedOperationException()
             }
             params[paramName] = MultipartBody.Part.createFormData(
@@ -461,7 +452,7 @@ class Client @JvmOverloads constructor(
                     } else {
                         size - 1
                     }
-                    input.toBinary().copyInto(
+                    (input.data as ByteArray).copyInto(
                         buffer,
                         startIndex = offset.toInt(),
                         endIndex = end.toInt()
@@ -503,7 +494,7 @@ class Client @JvmOverloads constructor(
         return converter(result as Map<String, Any>)
     }
 
-    /**
+    /** 
      * Await Redirect
      *
      * @param request
@@ -530,14 +521,14 @@ class Client @JvmOverloads constructor(
                         .charStream()
                         .buffered()
                         .use(BufferedReader::readText)
-
+                        
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
                         val map = body.fromJson<Map<String, Any>>()
 
                         AppwriteException(
-                            map["message"] as? String ?: "",
+                            map["message"] as? String ?: "", 
                             (map["code"] as Number).toInt(),
-                            map["type"] as? String ?: "",
+                            map["type"] as? String ?: "", 
                             body
                         )
                     } else {
@@ -581,14 +572,14 @@ class Client @JvmOverloads constructor(
                         .charStream()
                         .buffered()
                         .use(BufferedReader::readText)
-
+                        
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
                         val map = body.fromJson<Map<String, Any>>()
 
                         AppwriteException(
-                            map["message"] as? String ?: "",
+                            map["message"] as? String ?: "", 
                             (map["code"] as Number).toInt(),
-                            map["type"] as? String ?: "",
+                            map["type"] as? String ?: "", 
                             body
                         )
                     } else {
@@ -623,14 +614,6 @@ class Client @JvmOverloads constructor(
                         return
                     }
                 }
-                if (response.headers["content-type"]?.contains("multipart/form-data") == true) {
-                    val binaryBody = response.body!!.bytes()
-                    val body = String(binaryBody)
-                    val map = body.fromMultiPart(binaryBody)
-                    it.resume(converter?.invoke(map) ?: map as T)
-                    return
-                }
-
                 val body = response.body!!
                     .charStream()
                     .buffered()
@@ -639,7 +622,6 @@ class Client @JvmOverloads constructor(
                     it.resume(true as T)
                     return
                 }
-
                 val map = body.fromJson<Map<String, Any>>()
                 it.resume(
                     converter?.invoke(map) ?: map as T

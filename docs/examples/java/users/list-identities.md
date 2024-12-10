@@ -11,7 +11,7 @@ Users users = new Users(client);
 
 users.listIdentities(
     listOf(), // queries (optional)
-    "{$example}", // search (optional)
+    "<SEARCH>", // search (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

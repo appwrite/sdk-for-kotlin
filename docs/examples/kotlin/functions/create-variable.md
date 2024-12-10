@@ -10,7 +10,7 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.createVariable(
-    functionId = "{$example}",
-    key = "{$example}",
-    value = "{$example}"
+    functionId = "<FUNCTION_ID>",
+    key = "<KEY>",
+    value = "<VALUE>"
 )

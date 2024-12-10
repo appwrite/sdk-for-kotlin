@@ -10,8 +10,8 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createIpAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     "", // key
     false, // required
     "", // default (optional)

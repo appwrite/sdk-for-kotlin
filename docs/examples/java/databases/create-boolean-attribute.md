@@ -10,8 +10,8 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.createBooleanAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     "", // key
     false, // required
     false, // default (optional)

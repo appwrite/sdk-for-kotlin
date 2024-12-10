@@ -10,7 +10,7 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.delete(
-    "{$example}", // databaseId
+    "<DATABASE_ID>", // databaseId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

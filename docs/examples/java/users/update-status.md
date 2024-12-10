@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updateStatus(
-    "{$example}", // userId
+    "<USER_ID>", // userId
     false, // status
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

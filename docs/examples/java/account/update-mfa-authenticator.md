@@ -12,7 +12,7 @@ Account account = new Account(client);
 
 account.updateMfaAuthenticator(
     AuthenticatorType.TOTP, // type
-    "{$example}", // otp
+    "<OTP>", // otp
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -10,19 +10,19 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.createSmtpProvider(
-    "{$example}", // providerId
-    "{$example}", // name
-    "{$example}", // host
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name
+    "<HOST>", // host
     1, // port (optional)
-    "{$example}", // username (optional)
-    "{$example}", // password (optional)
+    "<USERNAME>", // username (optional)
+    "<PASSWORD>", // password (optional)
     SmtpEncryption.NONE, // encryption (optional)
     false, // autoTLS (optional)
-    "{$example}", // mailer (optional)
-    "{$example}", // fromName (optional)
-    "{$example}", // fromEmail (optional)
-    "{$example}", // replyToName (optional)
-    "{$example}", // replyToEmail (optional)
+    "<MAILER>", // mailer (optional)
+    "<FROM_NAME>", // fromName (optional)
+    "email@example.com", // fromEmail (optional)
+    "<REPLY_TO_NAME>", // replyToName (optional)
+    "email@example.com", // replyToEmail (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

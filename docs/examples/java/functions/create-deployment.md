@@ -1,6 +1,6 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.models.Payload;
+import io.appwrite.models.InputFile;
 import io.appwrite.services.Functions;
 
 Client client = new Client()
@@ -11,11 +11,11 @@ Client client = new Client()
 Functions functions = new Functions(client);
 
 functions.createDeployment(
-    "{$example}", // functionId
-    Payload.fromFile("/path/to/file.png"), // code
+    "<FUNCTION_ID>", // functionId
+    InputFile.fromPath("file.png"), // code
     false, // activate
-    "{$example}", // entrypoint (optional)
-    "{$example}", // commands (optional)
+    "<ENTRYPOINT>", // entrypoint (optional)
+    "<COMMANDS>", // commands (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

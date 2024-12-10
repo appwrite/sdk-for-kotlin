@@ -10,12 +10,12 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.updateEnumAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     "", // key
     listOf(), // elements
     false, // required
-    "{$example}", // default
+    "<DEFAULT>", // default
     "", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

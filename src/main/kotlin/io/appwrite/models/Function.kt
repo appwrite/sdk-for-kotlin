@@ -29,7 +29,7 @@ data class Function(
      * Execution permissions.
      */
     @SerializedName("execute")
-    val execute: List<Any>,
+    val execute: List<String>,
 
     /**
      * Function name.
@@ -71,7 +71,7 @@ data class Function(
      * Allowed permission scopes.
      */
     @SerializedName("scopes")
-    val scopes: List<Any>,
+    val scopes: List<String>,
 
     /**
      * Function variables.
@@ -83,10 +83,10 @@ data class Function(
      * Function trigger events.
      */
     @SerializedName("events")
-    val events: List<Any>,
+    val events: List<String>,
 
     /**
-     * Function execution schedult in CRON format.
+     * Function execution schedule in CRON format.
      */
     @SerializedName("schedule")
     val schedule: String,
@@ -188,16 +188,16 @@ data class Function(
             id = map["\$id"] as String,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            execute = map["execute"] as List<Any>,
+            execute = map["execute"] as List<String>,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             live = map["live"] as Boolean,
             logging = map["logging"] as Boolean,
             runtime = map["runtime"] as String,
             deployment = map["deployment"] as String,
-            scopes = map["scopes"] as List<Any>,
+            scopes = map["scopes"] as List<String>,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
-            events = map["events"] as List<Any>,
+            events = map["events"] as List<String>,
             schedule = map["schedule"] as String,
             timeout = (map["timeout"] as Number).toLong(),
             entrypoint = map["entrypoint"] as String,

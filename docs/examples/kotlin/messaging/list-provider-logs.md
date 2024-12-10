@@ -10,6 +10,6 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.listProviderLogs(
-    providerId = "{$example}",
+    providerId = "<PROVIDER_ID>",
     queries = listOf() // optional
 )

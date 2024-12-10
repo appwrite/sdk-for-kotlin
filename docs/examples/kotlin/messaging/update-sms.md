@@ -10,11 +10,11 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.updateSms(
-    messageId = "{$example}",
+    messageId = "<MESSAGE_ID>",
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional
-    content = "{$example}", // optional
+    content = "<CONTENT>", // optional
     draft = false, // optional
     scheduledAt = "" // optional
 )

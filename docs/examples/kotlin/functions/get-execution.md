@@ -10,6 +10,6 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.getExecution(
-    functionId = "{$example}",
-    executionId = "{$example}"
+    functionId = "<FUNCTION_ID>",
+    executionId = "<EXECUTION_ID>"
 )

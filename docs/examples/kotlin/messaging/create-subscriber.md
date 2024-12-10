@@ -10,7 +10,7 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createSubscriber(
-    topicId = "{$example}",
-    subscriberId = "{$example}",
-    targetId = "{$example}"
+    topicId = "<TOPIC_ID>",
+    subscriberId = "<SUBSCRIBER_ID>",
+    targetId = "<TARGET_ID>"
 )

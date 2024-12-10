@@ -10,6 +10,6 @@ val client = Client()
 val teams = Teams(client)
 
 val response = teams.updateName(
-    teamId = "{$example}",
-    name = "{$example}"
+    teamId = "<TEAM_ID>",
+    name = "<NAME>"
 )

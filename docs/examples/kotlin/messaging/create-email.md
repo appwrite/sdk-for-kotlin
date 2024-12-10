@@ -10,9 +10,9 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.createEmail(
-    messageId = "{$example}",
-    subject = "{$example}",
-    content = "{$example}",
+    messageId = "<MESSAGE_ID>",
+    subject = "<SUBJECT>",
+    content = "<CONTENT>",
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional

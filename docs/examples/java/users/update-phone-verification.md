@@ -10,7 +10,7 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updatePhoneVerification(
-    "{$example}", // userId
+    "<USER_ID>", // userId
     false, // phoneVerification
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

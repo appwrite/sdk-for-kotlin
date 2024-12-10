@@ -34,7 +34,7 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MessageList = {
@@ -101,7 +101,7 @@ class Messaging(client: Client) : Service(client) {
             "html" to html,
             "scheduledAt" to scheduledAt,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -168,7 +168,7 @@ class Messaging(client: Client) : Service(client) {
             "scheduledAt" to scheduledAt,
             "attachments" to attachments,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -195,24 +195,27 @@ class Messaging(client: Client) : Service(client) {
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param data Additional Data for push notification.
+     * @param data Additional key-value pair data for push notification.
      * @param action Action for push notification.
      * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage. It should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param icon Icon for push notification. Available only for Android and Web Platform.
-     * @param sound Sound for push notification. Available only for Android and IOS Platform.
+     * @param sound Sound for push notification. Available only for Android and iOS Platform.
      * @param color Color for push notification. Available only for Android Platform.
      * @param tag Tag for push notification. Available only for Android Platform.
-     * @param badge Badge for push notification. Available only for IOS Platform.
+     * @param badge Badge for push notification. Available only for iOS Platform.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
+     * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
+     * @param priority Set the notification priority. "normal" will consider device state and may not deliver notifications immediately. "high" will always attempt to immediately deliver the notification.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createPush(
         messageId: String,
-        title: String,
-        body: String,
+        title: String? = null,
+        body: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
@@ -223,9 +226,12 @@ class Messaging(client: Client) : Service(client) {
         sound: String? = null,
         color: String? = null,
         tag: String? = null,
-        badge: String? = null,
+        badge: Long? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
+        contentAvailable: Boolean? = null,
+        critical: Boolean? = null,
+        priority: io.appwrite.enums.MessagePriority? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push"
 
@@ -246,8 +252,11 @@ class Messaging(client: Client) : Service(client) {
             "badge" to badge,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
+            "contentAvailable" to contentAvailable,
+            "critical" to critical,
+            "priority" to priority,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -284,6 +293,9 @@ class Messaging(client: Client) : Service(client) {
      * @param badge Badge for push notification. Available only for iOS platforms.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
+     * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
+     * @param priority Set the notification priority. "normal" will consider device battery state and may send notifications later. "high" will always attempt to immediately deliver the notification.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -305,6 +317,9 @@ class Messaging(client: Client) : Service(client) {
         badge: Long? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
+        contentAvailable: Boolean? = null,
+        critical: Boolean? = null,
+        priority: io.appwrite.enums.MessagePriority? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push/{messageId}"
             .replace("{messageId}", messageId)
@@ -325,8 +340,11 @@ class Messaging(client: Client) : Service(client) {
             "badge" to badge,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
+            "contentAvailable" to contentAvailable,
+            "critical" to critical,
+            "priority" to priority,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -378,7 +396,7 @@ class Messaging(client: Client) : Service(client) {
             "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -430,7 +448,7 @@ class Messaging(client: Client) : Service(client) {
             "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -463,7 +481,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
@@ -496,7 +514,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
@@ -529,7 +547,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
@@ -566,7 +584,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TargetList = {
@@ -603,7 +621,7 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProviderList = {
@@ -658,7 +676,7 @@ class Messaging(client: Client) : Service(client) {
             "sandbox" to sandbox,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -713,7 +731,7 @@ class Messaging(client: Client) : Service(client) {
             "bundleId" to bundleId,
             "sandbox" to sandbox,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -756,7 +774,7 @@ class Messaging(client: Client) : Service(client) {
             "serviceAccountJSON" to serviceAccountJSON,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -799,7 +817,7 @@ class Messaging(client: Client) : Service(client) {
             "enabled" to enabled,
             "serviceAccountJSON" to serviceAccountJSON,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -860,7 +878,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToEmail" to replyToEmail,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -921,7 +939,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToName" to replyToName,
             "replyToEmail" to replyToEmail,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -970,7 +988,7 @@ class Messaging(client: Client) : Service(client) {
             "authKey" to authKey,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1019,7 +1037,7 @@ class Messaging(client: Client) : Service(client) {
             "senderId" to senderId,
             "authKey" to authKey,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1074,7 +1092,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToEmail" to replyToEmail,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1129,7 +1147,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToName" to replyToName,
             "replyToEmail" to replyToEmail,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1202,7 +1220,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToEmail" to replyToEmail,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1275,7 +1293,7 @@ class Messaging(client: Client) : Service(client) {
             "replyToEmail" to replyToEmail,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1324,7 +1342,7 @@ class Messaging(client: Client) : Service(client) {
             "apiKey" to apiKey,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1373,7 +1391,7 @@ class Messaging(client: Client) : Service(client) {
             "apiKey" to apiKey,
             "from" to from,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1422,7 +1440,7 @@ class Messaging(client: Client) : Service(client) {
             "apiKey" to apiKey,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1471,7 +1489,7 @@ class Messaging(client: Client) : Service(client) {
             "apiKey" to apiKey,
             "from" to from,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1520,7 +1538,7 @@ class Messaging(client: Client) : Service(client) {
             "authToken" to authToken,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1569,7 +1587,7 @@ class Messaging(client: Client) : Service(client) {
             "authToken" to authToken,
             "from" to from,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1618,7 +1636,7 @@ class Messaging(client: Client) : Service(client) {
             "apiSecret" to apiSecret,
             "enabled" to enabled,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1667,7 +1685,7 @@ class Messaging(client: Client) : Service(client) {
             "apiSecret" to apiSecret,
             "from" to from,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1700,7 +1718,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
@@ -1733,7 +1751,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
@@ -1766,7 +1784,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
@@ -1803,7 +1821,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
@@ -1840,7 +1858,7 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TopicList = {
@@ -1880,7 +1898,7 @@ class Messaging(client: Client) : Service(client) {
             "name" to name,
             "subscribe" to subscribe,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Topic = {
@@ -1913,7 +1931,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Topic = {
@@ -1953,7 +1971,7 @@ class Messaging(client: Client) : Service(client) {
             "name" to name,
             "subscribe" to subscribe,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Topic = {
@@ -1986,7 +2004,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(
@@ -2019,7 +2037,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
@@ -2059,7 +2077,7 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SubscriberList = {
@@ -2098,7 +2116,7 @@ class Messaging(client: Client) : Service(client) {
             "subscriberId" to subscriberId,
             "targetId" to targetId,
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Subscriber = {
@@ -2134,7 +2152,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Subscriber = {
@@ -2170,7 +2188,7 @@ class Messaging(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf<String, String>(
+        val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
         return client.call(

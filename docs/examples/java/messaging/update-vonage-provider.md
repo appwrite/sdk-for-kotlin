@@ -10,12 +10,12 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updateVonageProvider(
-    "{$example}", // providerId
-    "{$example}", // name (optional)
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name (optional)
     false, // enabled (optional)
-    "{$example}", // apiKey (optional)
-    "{$example}", // apiSecret (optional)
-    "{$example}", // from (optional)
+    "<API_KEY>", // apiKey (optional)
+    "<API_SECRET>", // apiSecret (optional)
+    "<FROM>", // from (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

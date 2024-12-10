@@ -10,6 +10,6 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.deleteDeployment(
-    functionId = "{$example}",
-    deploymentId = "{$example}"
+    functionId = "<FUNCTION_ID>",
+    deploymentId = "<DEPLOYMENT_ID>"
 )

@@ -10,11 +10,11 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.createSHAUser(
-    "{$example}", // userId
-    "{$example}", // email
-    "{$example}", // password
+    "<USER_ID>", // userId
+    "email@example.com", // email
+    "password", // password
     PasswordHash.SHA1, // passwordVersion (optional)
-    "{$example}", // name (optional)
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

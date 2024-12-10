@@ -10,5 +10,5 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.getMessage(
-    messageId = "{$example}"
+    messageId = "<MESSAGE_ID>"
 )

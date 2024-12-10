@@ -10,8 +10,8 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.getCollection(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

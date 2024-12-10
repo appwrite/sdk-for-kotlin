@@ -10,8 +10,8 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.deleteSession(
-    "{$example}", // userId
-    "{$example}", // sessionId
+    "<USER_ID>", // userId
+    "<SESSION_ID>", // sessionId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

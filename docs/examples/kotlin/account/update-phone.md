@@ -10,6 +10,6 @@ val client = Client()
 val account = Account(client)
 
 val response = account.updatePhone(
-    phone = "{$example}",
-    password = "{$example}"
+    phone = "+12065550100",
+    password = "password"
 )

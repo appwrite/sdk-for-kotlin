@@ -10,8 +10,8 @@ Client client = new Client()
 Storage storage = new Storage(client);
 
 storage.updateBucket(
-    "{$example}", // bucketId
-    "{$example}", // name
+    "<BUCKET_ID>", // bucketId
+    "<NAME>", // name
     listOf("read("any")"), // permissions (optional)
     false, // fileSecurity (optional)
     false, // enabled (optional)

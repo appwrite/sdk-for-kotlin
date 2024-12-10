@@ -10,12 +10,12 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.updateMsg91Provider(
-    "{$example}", // providerId
-    "{$example}", // name (optional)
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name (optional)
     false, // enabled (optional)
-    "{$example}", // templateId (optional)
-    "{$example}", // senderId (optional)
-    "{$example}", // authKey (optional)
+    "<TEMPLATE_ID>", // templateId (optional)
+    "<SENDER_ID>", // senderId (optional)
+    "<AUTH_KEY>", // authKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

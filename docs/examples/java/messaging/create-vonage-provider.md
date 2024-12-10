@@ -10,11 +10,11 @@ Client client = new Client()
 Messaging messaging = new Messaging(client);
 
 messaging.createVonageProvider(
-    "{$example}", // providerId
-    "{$example}", // name
-    "{$example}", // from (optional)
-    "{$example}", // apiKey (optional)
-    "{$example}", // apiSecret (optional)
+    "<PROVIDER_ID>", // providerId
+    "<NAME>", // name
+    "+12065550100", // from (optional)
+    "<API_KEY>", // apiKey (optional)
+    "<API_SECRET>", // apiSecret (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

@@ -10,6 +10,6 @@ val client = Client()
 val account = Account(client)
 
 val response = account.createRecovery(
-    email = "{$example}",
-    url = "{$example}"
+    email = "email@example.com",
+    url = "https://example.com"
 )

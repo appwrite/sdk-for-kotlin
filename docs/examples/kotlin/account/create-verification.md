@@ -10,5 +10,5 @@ val client = Client()
 val account = Account(client)
 
 val response = account.createVerification(
-    url = "{$example}"
+    url = "https://example.com"
 )

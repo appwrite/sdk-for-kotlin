@@ -10,10 +10,10 @@ val client = Client()
 val messaging = Messaging(client)
 
 val response = messaging.updateMsg91Provider(
-    providerId = "{$example}",
-    name = "{$example}", // optional
+    providerId = "<PROVIDER_ID>",
+    name = "<NAME>", // optional
     enabled = false, // optional
-    templateId = "{$example}", // optional
-    senderId = "{$example}", // optional
-    authKey = "{$example}" // optional
+    templateId = "<TEMPLATE_ID>", // optional
+    senderId = "<SENDER_ID>", // optional
+    authKey = "<AUTH_KEY>" // optional
 )

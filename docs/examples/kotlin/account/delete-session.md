@@ -10,5 +10,5 @@ val client = Client()
 val account = Account(client)
 
 val response = account.deleteSession(
-    sessionId = "{$example}"
+    sessionId = "<SESSION_ID>"
 )

@@ -10,5 +10,5 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.delete(
-    databaseId = "{$example}"
+    databaseId = "<DATABASE_ID>"
 )

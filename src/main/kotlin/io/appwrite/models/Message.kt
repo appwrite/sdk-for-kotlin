@@ -35,19 +35,19 @@ data class Message(
      * Topic IDs set as recipients.
      */
     @SerializedName("topics")
-    val topics: List<Any>,
+    val topics: List<String>,
 
     /**
      * User IDs set as recipients.
      */
     @SerializedName("users")
-    val users: List<Any>,
+    val users: List<String>,
 
     /**
      * Target IDs set as recipients.
      */
     @SerializedName("targets")
-    val targets: List<Any>,
+    val targets: List<String>,
 
     /**
      * The scheduled time for message.
@@ -65,7 +65,7 @@ data class Message(
      * Delivery errors if any.
      */
     @SerializedName("deliveryErrors")
-    var deliveryErrors: List<Any>?,
+    var deliveryErrors: List<String>?,
 
     /**
      * Number of recipients the message was delivered to.
@@ -112,12 +112,12 @@ data class Message(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             providerType = map["providerType"] as String,
-            topics = map["topics"] as List<Any>,
-            users = map["users"] as List<Any>,
-            targets = map["targets"] as List<Any>,
+            topics = map["topics"] as List<String>,
+            users = map["users"] as List<String>,
+            targets = map["targets"] as List<String>,
             scheduledAt = map["scheduledAt"] as? String?,
             deliveredAt = map["deliveredAt"] as? String?,
-            deliveryErrors = map["deliveryErrors"] as? List<Any>?,
+            deliveryErrors = map["deliveryErrors"] as? List<String>?,
             deliveredTotal = (map["deliveredTotal"] as Number).toLong(),
             data = map["data"] as Any,
             status = map["status"] as String,

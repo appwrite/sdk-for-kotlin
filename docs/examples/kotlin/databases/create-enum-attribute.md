@@ -10,11 +10,11 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.createEnumAttribute(
-    databaseId = "{$example}",
-    collectionId = "{$example}",
+    databaseId = "<DATABASE_ID>",
+    collectionId = "<COLLECTION_ID>",
     key = "",
     elements = listOf(),
     required = false,
-    default = "{$example}", // optional
+    default = "<DEFAULT>", // optional
     array = false // optional
 )

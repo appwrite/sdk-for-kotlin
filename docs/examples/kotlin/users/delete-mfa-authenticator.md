@@ -11,6 +11,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.deleteMfaAuthenticator(
-    userId = "{$example}",
+    userId = "<USER_ID>",
     type =  AuthenticatorType.TOTP
 )

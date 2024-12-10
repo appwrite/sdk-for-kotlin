@@ -10,6 +10,6 @@ val client = Client()
 val users = Users(client)
 
 val response = users.updateEmail(
-    userId = "{$example}",
-    email = "{$example}"
+    userId = "<USER_ID>",
+    email = "email@example.com"
 )

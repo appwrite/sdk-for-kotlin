@@ -10,9 +10,9 @@ Client client = new Client()
 Functions functions = new Functions(client);
 
 functions.createBuild(
-    "{$example}", // functionId
-    "{$example}", // deploymentId
-    "{$example}", // buildId (optional)
+    "<FUNCTION_ID>", // functionId
+    "<DEPLOYMENT_ID>", // deploymentId
+    "<BUILD_ID>", // buildId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

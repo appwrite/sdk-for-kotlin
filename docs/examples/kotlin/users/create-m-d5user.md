@@ -10,8 +10,8 @@ val client = Client()
 val users = Users(client)
 
 val response = users.createMD5User(
-    userId = "{$example}",
-    email = "{$example}",
-    password = "{$example}",
-    name = "{$example}" // optional
+    userId = "<USER_ID>",
+    email = "email@example.com",
+    password = "password",
+    name = "<NAME>" // optional
 )

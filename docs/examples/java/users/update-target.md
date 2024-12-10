@@ -10,11 +10,11 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updateTarget(
-    "{$example}", // userId
-    "{$example}", // targetId
-    "{$example}", // identifier (optional)
-    "{$example}", // providerId (optional)
-    "{$example}", // name (optional)
+    "<USER_ID>", // userId
+    "<TARGET_ID>", // targetId
+    "<IDENTIFIER>", // identifier (optional)
+    "<PROVIDER_ID>", // providerId (optional)
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -10,13 +10,13 @@ Client client = new Client()
 Teams teams = new Teams(client);
 
 teams.createMembership(
-    "{$example}", // teamId
+    "<TEAM_ID>", // teamId
     listOf(), // roles
-    "{$example}", // email (optional)
-    "{$example}", // userId (optional)
-    "{$example}", // phone (optional)
-    "{$example}", // url (optional)
-    "{$example}", // name (optional)
+    "email@example.com", // email (optional)
+    "<USER_ID>", // userId (optional)
+    "+12065550100", // phone (optional)
+    "https://example.com", // url (optional)
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

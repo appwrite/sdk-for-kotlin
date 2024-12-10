@@ -10,8 +10,8 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.updatePhone(
-    "{$example}", // userId
-    "{$example}", // number
+    "<USER_ID>", // userId
+    "+12065550100", // number
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

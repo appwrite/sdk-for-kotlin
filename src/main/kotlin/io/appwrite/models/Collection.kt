@@ -29,7 +29,7 @@ data class Collection(
      * Collection permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("\$permissions")
-    val permissions: List<Any>,
+    val permissions: List<String>,
 
     /**
      * Database ID.
@@ -90,7 +90,7 @@ data class Collection(
             id = map["\$id"] as String,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            permissions = map["\$permissions"] as List<Any>,
+            permissions = map["\$permissions"] as List<String>,
             databaseId = map["databaseId"] as String,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,

@@ -35,13 +35,13 @@ data class Index(
      * Index attributes.
      */
     @SerializedName("attributes")
-    val attributes: List<Any>,
+    val attributes: List<String>,
 
     /**
      * Index orders.
      */
     @SerializedName("orders")
-    var orders: List<Any>?,
+    var orders: List<String>?,
 
     /**
      * Index creation date in ISO 8601 format.
@@ -77,8 +77,8 @@ data class Index(
             type = map["type"] as String,
             status = map["status"] as String,
             error = map["error"] as String,
-            attributes = map["attributes"] as List<Any>,
-            orders = map["orders"] as? List<Any>?,
+            attributes = map["attributes"] as List<String>,
+            orders = map["orders"] as? List<String>?,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
         )

@@ -10,11 +10,11 @@ Client client = new Client()
 Databases databases = new Databases(client);
 
 databases.updateUrlAttribute(
-    "{$example}", // databaseId
-    "{$example}", // collectionId
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
     "", // key
     false, // required
-    "{$example}", // default
+    "https://example.com", // default
     "", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

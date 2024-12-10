@@ -11,12 +11,12 @@ Client client = new Client()
 Users users = new Users(client);
 
 users.createTarget(
-    "{$example}", // userId
-    "{$example}", // targetId
+    "<USER_ID>", // userId
+    "<TARGET_ID>", // targetId
     MessagingProviderType.EMAIL, // providerType
-    "{$example}", // identifier
-    "{$example}", // providerId (optional)
-    "{$example}", // name (optional)
+    "<IDENTIFIER>", // identifier
+    "<PROVIDER_ID>", // providerId (optional)
+    "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

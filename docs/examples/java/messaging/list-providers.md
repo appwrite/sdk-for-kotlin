@@ -11,7 +11,7 @@ Messaging messaging = new Messaging(client);
 
 messaging.listProviders(
     listOf(), // queries (optional)
-    "{$example}", // search (optional)
+    "<SEARCH>", // search (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

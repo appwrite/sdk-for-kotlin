@@ -53,7 +53,7 @@ data class Runtime(
      * List of supported architectures.
      */
     @SerializedName("supports")
-    val supports: List<Any>,
+    val supports: List<String>,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -80,7 +80,7 @@ data class Runtime(
             base = map["base"] as String,
             image = map["image"] as String,
             logo = map["logo"] as String,
-            supports = map["supports"] as List<Any>,
+            supports = map["supports"] as List<String>,
         )
     }
 }

@@ -10,10 +10,10 @@ Client client = new Client()
 Teams teams = new Teams(client);
 
 teams.updateMembershipStatus(
-    "{$example}", // teamId
-    "{$example}", // membershipId
-    "{$example}", // userId
-    "{$example}", // secret
+    "<TEAM_ID>", // teamId
+    "<MEMBERSHIP_ID>", // membershipId
+    "<USER_ID>", // userId
+    "<SECRET>", // secret
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
