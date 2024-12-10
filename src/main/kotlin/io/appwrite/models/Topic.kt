@@ -53,7 +53,7 @@ data class Topic(
      * Subscribe permissions.
      */
     @SerializedName("subscribe")
-    val subscribe: List<Any>,
+    val subscribe: List<String>,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -80,7 +80,7 @@ data class Topic(
             emailTotal = (map["emailTotal"] as Number).toLong(),
             smsTotal = (map["smsTotal"] as Number).toLong(),
             pushTotal = (map["pushTotal"] as Number).toLong(),
-            subscribe = map["subscribe"] as List<Any>,
+            subscribe = map["subscribe"] as List<String>,
         )
     }
 }
