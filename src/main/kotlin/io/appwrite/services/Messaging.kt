@@ -195,24 +195,27 @@ class Messaging(client: Client) : Service(client) {
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param data Additional Data for push notification.
+     * @param data Additional key-value pair data for push notification.
      * @param action Action for push notification.
      * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage. It should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param icon Icon for push notification. Available only for Android and Web Platform.
-     * @param sound Sound for push notification. Available only for Android and IOS Platform.
+     * @param sound Sound for push notification. Available only for Android and iOS Platform.
      * @param color Color for push notification. Available only for Android Platform.
      * @param tag Tag for push notification. Available only for Android Platform.
-     * @param badge Badge for push notification. Available only for IOS Platform.
+     * @param badge Badge for push notification. Available only for iOS Platform.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
+     * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
+     * @param priority Set the notification priority. "normal" will consider device state and may not deliver notifications immediately. "high" will always attempt to immediately deliver the notification.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createPush(
         messageId: String,
-        title: String,
-        body: String,
+        title: String? = null,
+        body: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
@@ -223,9 +226,12 @@ class Messaging(client: Client) : Service(client) {
         sound: String? = null,
         color: String? = null,
         tag: String? = null,
-        badge: String? = null,
+        badge: Long? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
+        contentAvailable: Boolean? = null,
+        critical: Boolean? = null,
+        priority: io.appwrite.enums.MessagePriority? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push"
 
@@ -246,6 +252,9 @@ class Messaging(client: Client) : Service(client) {
             "badge" to badge,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
+            "contentAvailable" to contentAvailable,
+            "critical" to critical,
+            "priority" to priority,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
@@ -284,6 +293,9 @@ class Messaging(client: Client) : Service(client) {
      * @param badge Badge for push notification. Available only for iOS platforms.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
+     * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
+     * @param priority Set the notification priority. "normal" will consider device battery state and may send notifications later. "high" will always attempt to immediately deliver the notification.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -305,6 +317,9 @@ class Messaging(client: Client) : Service(client) {
         badge: Long? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
+        contentAvailable: Boolean? = null,
+        critical: Boolean? = null,
+        priority: io.appwrite.enums.MessagePriority? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push/{messageId}"
             .replace("{messageId}", messageId)
@@ -325,6 +340,9 @@ class Messaging(client: Client) : Service(client) {
             "badge" to badge,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
+            "contentAvailable" to contentAvailable,
+            "critical" to critical,
+            "priority" to priority,
         )
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",

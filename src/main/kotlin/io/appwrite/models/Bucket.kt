@@ -29,7 +29,7 @@ data class Bucket(
      * Bucket permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      */
     @SerializedName("\$permissions")
-    val permissions: List<Any>,
+    val permissions: List<String>,
 
     /**
      * Whether file-level security is enabled. [Learn more about permissions](https://appwrite.io/docs/permissions).
@@ -59,7 +59,7 @@ data class Bucket(
      * Allowed file extensions.
      */
     @SerializedName("allowedFileExtensions")
-    val allowedFileExtensions: List<Any>,
+    val allowedFileExtensions: List<String>,
 
     /**
      * Compression algorithm choosen for compression. Will be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd).
@@ -104,12 +104,12 @@ data class Bucket(
             id = map["\$id"] as String,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            permissions = map["\$permissions"] as List<Any>,
+            permissions = map["\$permissions"] as List<String>,
             fileSecurity = map["fileSecurity"] as Boolean,
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             maximumFileSize = (map["maximumFileSize"] as Number).toLong(),
-            allowedFileExtensions = map["allowedFileExtensions"] as List<Any>,
+            allowedFileExtensions = map["allowedFileExtensions"] as List<String>,
             compression = map["compression"] as String,
             encryption = map["encryption"] as Boolean,
             antivirus = map["antivirus"] as Boolean,

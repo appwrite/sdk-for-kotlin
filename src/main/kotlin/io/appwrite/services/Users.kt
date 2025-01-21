@@ -288,7 +288,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List Identities
+     * List identities
      *
      * Get identities for all users.
      *
@@ -1115,7 +1115,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Delete Authenticator
+     * Delete authenticator
      *
      * Delete an authenticator app.
      *
@@ -1152,7 +1152,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete Authenticator
+     * Delete authenticator
      *
      * Delete an authenticator app.
      *
@@ -1171,7 +1171,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List Factors
+     * List factors
      *
      * List the factors available on the account to be used as a MFA challange.
      *
@@ -1204,7 +1204,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get MFA Recovery Codes
+     * Get MFA recovery codes
      *
      * Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
      *
@@ -1237,7 +1237,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Regenerate MFA Recovery Codes
+     * Regenerate MFA recovery codes
      *
      * Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
      *
@@ -1270,7 +1270,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create MFA Recovery Codes
+     * Create MFA recovery codes
      *
      * Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](/docs/references/cloud/client-web/account#createMfaChallenge) method by client SDK.
      *
@@ -1760,7 +1760,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List User Targets
+     * List user targets
      *
      * List the messaging targets that are associated with a user.
      *
@@ -1797,7 +1797,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create User Target
+     * Create user target
      *
      * Create a messaging target.
      *
@@ -1846,7 +1846,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get User Target
+     * Get user target
      *
      * Get a user&#039;s push notification target by ID.
      *
@@ -1882,7 +1882,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update User target
+     * Update user target
      *
      * Update a messaging target.
      *
