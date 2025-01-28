@@ -415,7 +415,7 @@ class Messaging(client: Client) : Service(client) {
     /**
      * Update SMS
      *
-     * Update an email message by its unique ID.
+     * Update an SMS message by its unique ID.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.

@@ -1121,14 +1121,13 @@ class Users(client: Client) : Service(client) {
      *
      * @param userId User ID.
      * @param type Type of authenticator.
-     * @return [io.appwrite.models.User<T>]
+     * @return [Any]
      */
     @Throws(AppwriteException::class)
-    suspend fun <T> deleteMfaAuthenticator(
+    suspend fun deleteMfaAuthenticator(
         userId: String,
         type: io.appwrite.enums.AuthenticatorType,
-        nestedType: Class<T>,
-    ): io.appwrite.models.User<T> {
+    ): Any {
         val apiPath = "/users/{userId}/mfa/authenticators/{type}"
             .replace("{userId}", userId)
             .replace("{type}", type.value)
@@ -1138,37 +1137,14 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.User<T> = {
-            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
-        }
         return client.call(
             "DELETE",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = classOf(),
-            converter,
+            responseType = Any::class.java,
         )
     }
-
-    /**
-     * Delete authenticator
-     *
-     * Delete an authenticator app.
-     *
-     * @param userId User ID.
-     * @param type Type of authenticator.
-     * @return [io.appwrite.models.User<T>]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun deleteMfaAuthenticator(
-        userId: String,
-        type: io.appwrite.enums.AuthenticatorType,
-    ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
-        userId,
-        type,
-        nestedType = classOf(),
-    )
 
     /**
      * List factors

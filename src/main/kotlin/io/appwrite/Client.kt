@@ -57,11 +57,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/6.2.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/6.2.1 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "6.2.0",
+            "x-sdk-version" to "6.2.1",
             "x-appwrite-response-format" to "1.6.0",
         )
 
@@ -236,8 +236,27 @@ class Client @JvmOverloads constructor(
     }
 
     /**
+     * Sends a "ping" request to Appwrite to verify connectivity.
+     *
+     * @return String
+     */
+    suspend fun ping(): String {
+        val apiPath = "/ping"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf("content-type" to "application/json")
+
+        return call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = String::class.java
+        )
+    }
+
+    /**
      * Prepare the HTTP request
-     * 
+     *
      * @param method
      * @param path
      * @param headers
@@ -332,7 +351,7 @@ class Client @JvmOverloads constructor(
      * @param headers
      * @param params
      *
-     * @return [T]    
+     * @return [T]
      */
     @Throws(AppwriteException::class)
     suspend fun <T> call(
@@ -355,7 +374,7 @@ class Client @JvmOverloads constructor(
      * @param headers
      * @param params
      *
-     * @return [T]    
+     * @return [T]
      */
     @Throws(AppwriteException::class)
     suspend fun redirect(
@@ -427,7 +446,7 @@ class Client @JvmOverloads constructor(
         var offset = 0L
         var result: Map<*, *>? = null
 
-        if (idParamName?.isNotEmpty() == true && params[idParamName] != "unique()") {
+        if (idParamName?.isNotEmpty() == true) {
             // Make a request to check if a file already exists
             val current = call(
                 method = "GET",
@@ -494,7 +513,7 @@ class Client @JvmOverloads constructor(
         return converter(result as Map<String, Any>)
     }
 
-    /** 
+    /**
      * Await Redirect
      *
      * @param request
@@ -521,14 +540,14 @@ class Client @JvmOverloads constructor(
                         .charStream()
                         .buffered()
                         .use(BufferedReader::readText)
-                        
+
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
                         val map = body.fromJson<Map<String, Any>>()
 
                         AppwriteException(
-                            map["message"] as? String ?: "", 
+                            map["message"] as? String ?: "",
                             (map["code"] as Number).toInt(),
-                            map["type"] as? String ?: "", 
+                            map["type"] as? String ?: "",
                             body
                         )
                     } else {
@@ -572,14 +591,14 @@ class Client @JvmOverloads constructor(
                         .charStream()
                         .buffered()
                         .use(BufferedReader::readText)
-                        
+
                     val error = if (response.headers["content-type"]?.contains("application/json") == true) {
                         val map = body.fromJson<Map<String, Any>>()
 
                         AppwriteException(
-                            map["message"] as? String ?: "", 
+                            map["message"] as? String ?: "",
                             (map["code"] as Number).toInt(),
-                            map["type"] as? String ?: "", 
+                            map["type"] as? String ?: "",
                             body
                         )
                     } else {
@@ -599,6 +618,14 @@ class Client @JvmOverloads constructor(
                 when {
                     responseType == Boolean::class.java -> {
                         it.resume(true as T)
+                        return
+                    }
+                    responseType == String::class.java -> {
+                        val body = response.body!!
+                            .charStream()
+                            .buffered()
+                            .use(BufferedReader::readText)
+                        it.resume(body as T)
                         return
                     }
                     responseType == ByteArray::class.java -> {
