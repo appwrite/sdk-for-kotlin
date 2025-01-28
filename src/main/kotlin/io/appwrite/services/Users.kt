@@ -1147,6 +1147,25 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
+     * Delete authenticator
+     *
+     * Delete an authenticator app.
+     *
+     * @param userId User ID.
+     * @param type Type of authenticator.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteMfaAuthenticator(
+        userId: String,
+        type: io.appwrite.enums.AuthenticatorType,
+    ): io.appwrite.models.User<Map<String, Any>> = deleteMfaAuthenticator(
+        userId,
+        type,
+        nestedType = classOf(),
+    )
+
+    /**
      * List factors
      *
      * List the factors available on the account to be used as a MFA challange.
