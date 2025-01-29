@@ -518,13 +518,13 @@ class Account(client: Client) : Service(client) {
      *
      * @param challengeId ID of the challenge.
      * @param otp Valid verification token.
-     * @return [Any]
+     * @return [io.appwrite.models.Session]
      */
     @Throws(AppwriteException::class)
     suspend fun updateMfaChallenge(
         challengeId: String,
         otp: String,
-    ): Any {
+    ): io.appwrite.models.Session {
         val apiPath = "/account/mfa/challenge"
 
         val apiParams = mutableMapOf<String, Any?>(
@@ -534,12 +534,16 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf(
             "content-type" to "application/json",
         )
+        val converter: (Any) -> io.appwrite.models.Session = {
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "PUT",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = Any::class.java,
+            responseType = io.appwrite.models.Session::class.java,
+            converter,
         )
     }
 
