@@ -14,8 +14,6 @@ import java.io.File
 class Databases(client: Client) : Service(client) {
 
     /**
-     * List databases
-     *
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name
@@ -35,7 +33,6 @@ class Databases(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DatabaseList = {
             io.appwrite.models.DatabaseList.from(map = it as Map<String, Any>)
@@ -51,8 +48,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create database
-     *
      * Create a new Database.
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -91,8 +86,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get database
-     *
      * Get a database by its unique ID. This endpoint response returns a JSON object with the database metadata.
      *
      * @param databaseId Database ID.
@@ -108,7 +101,6 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Database = {
             io.appwrite.models.Database.from(map = it as Map<String, Any>)
@@ -124,8 +116,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update database
-     *
      * Update a database by its unique ID.
      *
      * @param databaseId Database ID.
@@ -164,8 +154,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Delete database
-     *
      * Delete a database by its unique ID. Only API keys with with databases.write scope can delete a database.
      *
      * @param databaseId Database ID.
@@ -193,8 +181,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List collections
-     *
      * Get a list of all collections that belong to the provided databaseId. You can use the search parameter to filter your results.
      *
      * @param databaseId Database ID.
@@ -217,7 +203,6 @@ class Databases(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.CollectionList = {
             io.appwrite.models.CollectionList.from(map = it as Map<String, Any>)
@@ -233,8 +218,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create collection
-     *
      * Create a new Collection. Before using this route, you should create a new database resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
@@ -282,8 +265,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get collection
-     *
      * Get a collection by its unique ID. This endpoint response returns a JSON object with the collection metadata.
      *
      * @param databaseId Database ID.
@@ -302,7 +283,6 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Collection = {
             io.appwrite.models.Collection.from(map = it as Map<String, Any>)
@@ -318,8 +298,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update collection
-     *
      * Update a collection by its unique ID.
      *
      * @param databaseId Database ID.
@@ -367,8 +345,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Delete collection
-     *
      * Delete a collection by its unique ID. Only users with write permissions have access to delete this resource.
      *
      * @param databaseId Database ID.
@@ -399,8 +375,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List attributes
-     *
      * List attributes in the collection.
      *
      * @param databaseId Database ID.
@@ -423,7 +397,6 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeList = {
             io.appwrite.models.AttributeList.from(map = it as Map<String, Any>)
@@ -439,8 +412,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create boolean attribute
-     *
      * Create a boolean attribute.
      *
      * @param databaseId Database ID.
@@ -488,8 +459,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update boolean attribute
-     *
      * Update a boolean attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -537,8 +506,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create datetime attribute
-     *
      * Create a date time attribute according to the ISO 8601 standard.
      *
      * @param databaseId Database ID.
@@ -586,8 +553,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update dateTime attribute
-     *
      * Update a date time attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -635,8 +600,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create email attribute
-     *
      * Create an email attribute.
      *
      * @param databaseId Database ID.
@@ -684,8 +647,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update email attribute
-     *
      * Update an email attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -733,8 +694,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create enum attribute
-     *
      * Create an enumeration attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
      *
      * @param databaseId Database ID.
@@ -785,8 +744,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update enum attribute
-     *
      * Update an enum attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -837,8 +794,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create float attribute
-     *
      * Create a float attribute. Optionally, minimum and maximum values can be provided.
      *
      * @param databaseId Database ID.
@@ -892,17 +847,15 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update float attribute
-     *
      * Update a float attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param min Minimum value to enforce on new documents
      * @param max Maximum value to enforce on new documents
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeFloat]
      */
@@ -913,9 +866,9 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        min: Double,
-        max: Double,
         default: Double? = null,
+        min: Double? = null,
+        max: Double? = null,
         newKey: String? = null,
     ): io.appwrite.models.AttributeFloat {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/float/{key}"
@@ -947,8 +900,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create integer attribute
-     *
      * Create an integer attribute. Optionally, minimum and maximum values can be provided.
      *
      * @param databaseId Database ID.
@@ -1002,17 +953,15 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update integer attribute
-     *
      * Update an integer attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param min Minimum value to enforce on new documents
      * @param max Maximum value to enforce on new documents
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeInteger]
      */
@@ -1023,9 +972,9 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        min: Long,
-        max: Long,
         default: Long? = null,
+        min: Long? = null,
+        max: Long? = null,
         newKey: String? = null,
     ): io.appwrite.models.AttributeInteger {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/integer/{key}"
@@ -1057,8 +1006,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create IP address attribute
-     *
      * Create IP address attribute.
      *
      * @param databaseId Database ID.
@@ -1106,8 +1053,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update IP address attribute
-     *
      * Update an ip attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -1155,8 +1100,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create relationship attribute
-     *
      * Create relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
@@ -1210,8 +1153,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create string attribute
-     *
      * Create a string attribute.
      *
      * @param databaseId Database ID.
@@ -1265,8 +1206,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update string attribute
-     *
      * Update a string attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -1317,8 +1256,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create URL attribute
-     *
      * Create a URL attribute.
      *
      * @param databaseId Database ID.
@@ -1366,8 +1303,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update URL attribute
-     *
      * Update an url attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
@@ -1415,8 +1350,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get attribute
-     *
      * Get attribute by ID.
      *
      * @param databaseId Database ID.
@@ -1438,7 +1371,6 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -1450,8 +1382,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Delete attribute
-     *
      * Deletes an attribute.
      *
      * @param databaseId Database ID.
@@ -1485,8 +1415,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update relationship attribute
-     *
      * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
      *
      * @param databaseId Database ID.
@@ -1531,8 +1459,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List documents
-     *
      * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
@@ -1556,7 +1482,6 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
             io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
@@ -1572,8 +1497,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List documents
-     *
      * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
@@ -1595,8 +1518,6 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Create document
-     *
      * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
@@ -1642,8 +1563,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create document
-     *
      * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
@@ -1671,8 +1590,6 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Get document
-     *
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
      *
      * @param databaseId Database ID.
@@ -1699,7 +1616,6 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
             io.appwrite.models.Document.from(map = it as Map<String, Any>, nestedType)
@@ -1715,8 +1631,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get document
-     *
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
      *
      * @param databaseId Database ID.
@@ -1741,8 +1655,6 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Update document
-     *
      * Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
      *
      * @param databaseId Database ID.
@@ -1788,8 +1700,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update document
-     *
      * Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
      *
      * @param databaseId Database ID.
@@ -1817,8 +1727,6 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Delete document
-     *
      * Delete a document by its unique ID.
      *
      * @param databaseId Database ID.
@@ -1852,8 +1760,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List indexes
-     *
      * List indexes in the collection.
      *
      * @param databaseId Database ID.
@@ -1876,7 +1782,6 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.IndexList = {
             io.appwrite.models.IndexList.from(map = it as Map<String, Any>)
@@ -1892,8 +1797,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create index
-     *
      * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.Attributes can be `key`, `fulltext`, and `unique`.
      *
      * @param databaseId Database ID.
@@ -1941,8 +1844,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get index
-     *
      * Get index by ID.
      *
      * @param databaseId Database ID.
@@ -1964,7 +1865,6 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Index = {
             io.appwrite.models.Index.from(map = it as Map<String, Any>)
@@ -1980,8 +1880,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Delete index
-     *
      * Delete an index.
      *
      * @param databaseId Database ID.

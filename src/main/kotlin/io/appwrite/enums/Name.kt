@@ -13,10 +13,10 @@ enum class Name(val value: String) {
     V1_MAILS("v1-mails"),
     @SerializedName("v1-functions")
     V1_FUNCTIONS("v1-functions"),
-    @SerializedName("v1-usage")
-    V1_USAGE("v1-usage"),
-    @SerializedName("v1-usage-dump")
-    V1_USAGE_DUMP("v1-usage-dump"),
+    @SerializedName("v1-stats-resources")
+    V1_STATS_RESOURCES("v1-stats-resources"),
+    @SerializedName("v1-stats-usage")
+    V1_STATS_USAGE("v1-stats-usage"),
     @SerializedName("v1-webhooks")
     V1_WEBHOOKS("v1-webhooks"),
     @SerializedName("v1-certificates")
