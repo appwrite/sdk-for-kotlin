@@ -16,8 +16,6 @@ import java.io.File
 class Functions(client: Client) : Service(client) {
 
     /**
-     * List functions
-     *
      * Get a list of all the project&#039;s functions. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout, entrypoint, commands, installationId
@@ -37,7 +35,6 @@ class Functions(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FunctionList = {
             io.appwrite.models.FunctionList.from(map = it as Map<String, Any>)
@@ -53,8 +50,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create function
-     *
      * Create a new function. You can pass a list of [permissions](https://appwrite.io/docs/permissions) to allow different project users or team with access to execute the function using the client API.
      *
      * @param functionId Function ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -150,8 +145,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * List runtimes
-     *
      * Get a list of all runtimes that are currently active on your instance.
      *
      * @return [io.appwrite.models.RuntimeList]
@@ -164,7 +157,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.RuntimeList = {
             io.appwrite.models.RuntimeList.from(map = it as Map<String, Any>)
@@ -180,8 +172,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * List available function runtime specifications
-     *
      * List allowed function specifications for this instance.
      *
      * @return [io.appwrite.models.SpecificationList]
@@ -194,7 +184,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SpecificationList = {
             io.appwrite.models.SpecificationList.from(map = it as Map<String, Any>)
@@ -210,8 +199,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get function
-     *
      * Get a function by its unique ID.
      *
      * @param functionId Function ID.
@@ -227,7 +214,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Function = {
             io.appwrite.models.Function.from(map = it as Map<String, Any>)
@@ -243,8 +229,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Update function
-     *
      * Update function by its unique ID.
      *
      * @param functionId Function ID.
@@ -328,8 +312,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Delete function
-     *
      * Delete a function by its unique ID.
      *
      * @param functionId Function ID.
@@ -357,8 +339,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * List deployments
-     *
      * Get a list of all the project&#039;s code deployments. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
@@ -381,7 +361,6 @@ class Functions(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DeploymentList = {
             io.appwrite.models.DeploymentList.from(map = it as Map<String, Any>)
@@ -397,8 +376,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create deployment
-     *
      * Create a new function code deployment. Use this endpoint to upload a new version of your code function. To execute your newly uploaded code, you&#039;ll need to update the function&#039;s deployment to use your new deployment UID.This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).Use the &quot;command&quot; param to set the entrypoint used to execute your code.
      *
      * @param functionId Function ID.
@@ -448,8 +425,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get deployment
-     *
      * Get a code deployment by its unique ID.
      *
      * @param functionId Function ID.
@@ -468,7 +443,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -484,8 +458,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Update deployment
-     *
      * Update the function code deployment ID using the unique function ID. Use this endpoint to switch the code deployment that should be executed by the execution endpoint.
      *
      * @param functionId Function ID.
@@ -520,8 +492,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Delete deployment
-     *
      * Delete a code deployment by its unique ID.
      *
      * @param functionId Function ID.
@@ -552,8 +522,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Rebuild deployment
-     *
      * Create a new build for an existing function deployment. This endpoint allows you to rebuild a deployment with the updated function configuration, including its entrypoint and build commands if they have been modified The build process will be queued and executed asynchronously. The original deployment&#039;s code will be preserved and used for the new build.
      *
      * @param functionId Function ID.
@@ -588,8 +556,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Cancel deployment
-     *
      * Cancel an ongoing function deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn&#039;t started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status &#039;ready&#039;) or failed. The response includes the final build status and details.
      *
      * @param functionId Function ID.
@@ -624,8 +590,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Download deployment
-     *
      * Get a Deployment&#039;s contents by its unique ID. This endpoint supports range requests for partial or streaming file download.
      *
      * @param functionId Function ID.
@@ -644,7 +608,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         return client.call(
             "GET",
@@ -655,8 +618,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * List executions
-     *
      * Get a list of all the current user function execution logs. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
@@ -679,7 +640,6 @@ class Functions(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ExecutionList = {
             io.appwrite.models.ExecutionList.from(map = it as Map<String, Any>)
@@ -695,8 +655,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create execution
-     *
      * Trigger a function execution. The returned object will return you the current execution status. You can ping the `Get Execution` endpoint to get updates on the current execution status. Once this endpoint is called, your function execution process will start asynchronously.
      *
      * @param functionId Function ID.
@@ -747,8 +705,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get execution
-     *
      * Get a function execution log by its unique ID.
      *
      * @param functionId Function ID.
@@ -767,7 +723,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
             io.appwrite.models.Execution.from(map = it as Map<String, Any>)
@@ -783,8 +738,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Delete execution
-     *
      * Delete a function execution by its unique ID.
      *
      * @param functionId Function ID.
@@ -815,8 +768,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * List variables
-     *
      * Get a list of all variables of a specific function.
      *
      * @param functionId Function unique ID.
@@ -832,7 +783,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
             io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
@@ -848,8 +798,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create variable
-     *
      * Create a new function environment variable. These variables can be accessed in the function at runtime as environment variables.
      *
      * @param functionId Function unique ID.
@@ -887,8 +835,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get variable
-     *
      * Get a variable by its unique ID.
      *
      * @param functionId Function unique ID.
@@ -907,7 +853,6 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -923,8 +868,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Update variable
-     *
      * Update variable by its unique ID.
      *
      * @param functionId Function unique ID.
@@ -966,8 +909,6 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Delete variable
-     *
      * Delete a variable by its unique ID.
      *
      * @param functionId Function unique ID.

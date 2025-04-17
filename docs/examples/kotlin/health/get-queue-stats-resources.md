@@ -9,6 +9,6 @@ val client = Client()
 
 val health = Health(client)
 
-val response = health.getQueueUsageDump(
+val response = health.getQueueStatsResources(
     threshold = 0 // optional
 )

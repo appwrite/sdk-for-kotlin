@@ -21,6 +21,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.RandomAccessFile
 import java.io.IOException
+import java.lang.IllegalArgumentException
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HostnameVerifier
@@ -57,11 +58,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/7.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/8.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "7.0.0",
+            "x-sdk-version" to "8.0.0",
             "x-appwrite-response-format" to "1.6.0",
         )
 
@@ -217,7 +218,12 @@ class Client @JvmOverloads constructor(
     *
     * @return this
     */
+    @Throws(IllegalArgumentException::class)
     fun setEndpoint(endPoint: String): Client {
+        require(endPoint.startsWith("http://") || endPoint.startsWith("https://")) {
+            "Invalid endpoint URL: $endPoint"
+        }
+
         this.endPoint = endPoint
         return this
     }
@@ -551,7 +557,7 @@ class Client @JvmOverloads constructor(
                             body
                         )
                     } else {
-                        AppwriteException(body, response.code)
+                        AppwriteException(body, response.code, "", body)
                     }
                     it.cancel(error)
                     return
@@ -602,7 +608,7 @@ class Client @JvmOverloads constructor(
                             body
                         )
                     } else {
-                        AppwriteException(body, response.code)
+                        AppwriteException(body, response.code, "", body)
                     }
                     it.cancel(error)
                     return

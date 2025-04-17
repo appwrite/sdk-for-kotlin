@@ -14,8 +14,6 @@ import java.io.File
 class Messaging(client: Client) : Service(client) {
 
     /**
-     * List messages
-     *
      * Get a list of all messages from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: scheduledAt, deliveredAt, deliveredTotal, status, description, providerType
@@ -35,7 +33,6 @@ class Messaging(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MessageList = {
             io.appwrite.models.MessageList.from(map = it as Map<String, Any>)
@@ -51,8 +48,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create email
-     *
      * Create a new email message.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -118,9 +113,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update email
-     *
-     * Update an email message by its unique ID.
+     * Update an email message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -185,8 +178,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create push notification
-     *
      * Create a new push notification.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -273,9 +264,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update push notification
-     *
-     * Update a push notification by its unique ID.
+     * Update a push notification by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -361,8 +350,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create SMS
-     *
      * Create a new SMS message.
      *
      * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -413,9 +400,7 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update SMS
-     *
-     * Update an SMS message by its unique ID.
+     * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -465,8 +450,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get message
-     *
      * Get a message by its unique ID.
      *
      * @param messageId Message ID.
@@ -482,7 +465,6 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Message = {
             io.appwrite.models.Message.from(map = it as Map<String, Any>)
@@ -498,8 +480,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete message
-     *
      * Delete a message. If the message is not a draft or scheduled, but has been sent, this will not recall the message.
      *
      * @param messageId Message ID.
@@ -527,8 +507,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List message logs
-     *
      * Get the message activity logs listed by its unique ID.
      *
      * @param messageId Message ID.
@@ -548,7 +526,6 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -564,8 +541,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List message targets
-     *
      * Get a list of the targets associated with a message.
      *
      * @param messageId Message ID.
@@ -585,7 +560,6 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TargetList = {
             io.appwrite.models.TargetList.from(map = it as Map<String, Any>)
@@ -601,8 +575,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List providers
-     *
      * Get a list of all providers from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, provider, type, enabled
@@ -622,7 +594,6 @@ class Messaging(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProviderList = {
             io.appwrite.models.ProviderList.from(map = it as Map<String, Any>)
@@ -638,8 +609,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create APNS provider
-     *
      * Create a new Apple Push Notification service provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -693,8 +662,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update APNS provider
-     *
      * Update a Apple Push Notification service provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -748,8 +715,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create FCM provider
-     *
      * Create a new Firebase Cloud Messaging provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -791,8 +756,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update FCM provider
-     *
      * Update a Firebase Cloud Messaging provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -834,8 +797,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Mailgun provider
-     *
      * Create a new Mailgun provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -895,8 +856,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Mailgun provider
-     *
      * Update a Mailgun provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -956,8 +915,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Msg91 provider
-     *
      * Create a new MSG91 provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1005,8 +962,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Msg91 provider
-     *
      * Update a MSG91 provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1054,8 +1009,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Sendgrid provider
-     *
      * Create a new Sendgrid provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1109,8 +1062,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Sendgrid provider
-     *
      * Update a Sendgrid provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1164,8 +1115,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create SMTP provider
-     *
      * Create a new SMTP provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1237,8 +1186,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update SMTP provider
-     *
      * Update a SMTP provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1310,8 +1257,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Telesign provider
-     *
      * Create a new Telesign provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1359,8 +1304,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Telesign provider
-     *
      * Update a Telesign provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1408,8 +1351,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Textmagic provider
-     *
      * Create a new Textmagic provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1457,8 +1398,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Textmagic provider
-     *
      * Update a Textmagic provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1506,8 +1445,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Twilio provider
-     *
      * Create a new Twilio provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1555,8 +1492,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Twilio provider
-     *
      * Update a Twilio provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1604,8 +1539,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create Vonage provider
-     *
      * Create a new Vonage provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1653,8 +1586,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update Vonage provider
-     *
      * Update a Vonage provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1702,8 +1633,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get provider
-     *
      * Get a provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1719,7 +1648,6 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Provider = {
             io.appwrite.models.Provider.from(map = it as Map<String, Any>)
@@ -1735,8 +1663,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete provider
-     *
      * Delete a provider by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1764,8 +1690,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List provider logs
-     *
      * Get the provider activity logs listed by its unique ID.
      *
      * @param providerId Provider ID.
@@ -1785,7 +1709,6 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -1801,8 +1724,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List subscriber logs
-     *
      * Get the subscriber activity logs listed by its unique ID.
      *
      * @param subscriberId Subscriber ID.
@@ -1822,7 +1743,6 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -1838,8 +1758,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List topics
-     *
      * Get a list of all topics from the current Appwrite project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, description, emailTotal, smsTotal, pushTotal
@@ -1859,7 +1777,6 @@ class Messaging(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TopicList = {
             io.appwrite.models.TopicList.from(map = it as Map<String, Any>)
@@ -1875,8 +1792,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create topic
-     *
      * Create a new topic.
      *
      * @param topicId Topic ID. Choose a custom Topic ID or a new Topic ID.
@@ -1915,8 +1830,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get topic
-     *
      * Get a topic by its unique ID.
      *
      * @param topicId Topic ID.
@@ -1932,7 +1845,6 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Topic = {
             io.appwrite.models.Topic.from(map = it as Map<String, Any>)
@@ -1948,8 +1860,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Update topic
-     *
      * Update a topic by its unique ID.
      *
      * @param topicId Topic ID.
@@ -1988,8 +1898,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete topic
-     *
      * Delete a topic by its unique ID.
      *
      * @param topicId Topic ID.
@@ -2017,8 +1925,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List topic logs
-     *
      * Get the topic activity logs listed by its unique ID.
      *
      * @param topicId Topic ID.
@@ -2038,7 +1944,6 @@ class Messaging(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -2054,8 +1959,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * List subscribers
-     *
      * Get a list of all subscribers from the current Appwrite project.
      *
      * @param topicId Topic ID. The topic ID subscribed to.
@@ -2078,7 +1981,6 @@ class Messaging(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SubscriberList = {
             io.appwrite.models.SubscriberList.from(map = it as Map<String, Any>)
@@ -2094,8 +1996,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Create subscriber
-     *
      * Create a new subscriber.
      *
      * @param topicId Topic ID. The topic ID to subscribe to.
@@ -2133,8 +2033,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Get subscriber
-     *
      * Get a subscriber by its unique ID.
      *
      * @param topicId Topic ID. The topic ID subscribed to.
@@ -2153,7 +2051,6 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Subscriber = {
             io.appwrite.models.Subscriber.from(map = it as Map<String, Any>)
@@ -2169,8 +2066,6 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
-     * Delete subscriber
-     *
      * Delete a subscriber by its unique ID.
      *
      * @param topicId Topic ID. The topic ID subscribed to.

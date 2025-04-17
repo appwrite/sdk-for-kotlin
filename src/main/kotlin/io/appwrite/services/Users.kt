@@ -14,8 +14,6 @@ import java.io.File
 class Users(client: Client) : Service(client) {
 
     /**
-     * List users
-     *
      * Get a list of all the project&#039;s users. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
@@ -36,7 +34,6 @@ class Users(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.UserList<T> = {
             io.appwrite.models.UserList.from(map = it as Map<String, Any>, nestedType)
@@ -52,8 +49,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * List users
-     *
      * Get a list of all the project&#039;s users. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
@@ -72,8 +67,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user
-     *
      * Create a new user.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -119,8 +112,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user
-     *
      * Create a new user.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -148,8 +139,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with Argon2 password
-     *
      * Create a new user. Password provided must be hashed with the [Argon2](https://en.wikipedia.org/wiki/Argon2) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -192,8 +181,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with Argon2 password
-     *
      * Create a new user. Password provided must be hashed with the [Argon2](https://en.wikipedia.org/wiki/Argon2) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -218,8 +205,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with bcrypt password
-     *
      * Create a new user. Password provided must be hashed with the [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -262,8 +247,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with bcrypt password
-     *
      * Create a new user. Password provided must be hashed with the [Bcrypt](https://en.wikipedia.org/wiki/Bcrypt) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -288,8 +271,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List identities
-     *
      * Get identities for all users.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, provider, providerUid, providerEmail, providerAccessTokenExpiry
@@ -309,7 +290,6 @@ class Users(client: Client) : Service(client) {
             "search" to search,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.IdentityList = {
             io.appwrite.models.IdentityList.from(map = it as Map<String, Any>)
@@ -325,8 +305,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete identity
-     *
      * Delete an identity by its unique ID.
      *
      * @param identityId Identity ID.
@@ -354,8 +332,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with MD5 password
-     *
      * Create a new user. Password provided must be hashed with the [MD5](https://en.wikipedia.org/wiki/MD5) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -398,8 +374,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with MD5 password
-     *
      * Create a new user. Password provided must be hashed with the [MD5](https://en.wikipedia.org/wiki/MD5) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -424,8 +398,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with PHPass password
-     *
      * Create a new user. Password provided must be hashed with the [PHPass](https://www.openwall.com/phpass/) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or pass the string `ID.unique()`to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -468,8 +440,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with PHPass password
-     *
      * Create a new user. Password provided must be hashed with the [PHPass](https://www.openwall.com/phpass/) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or pass the string `ID.unique()`to auto generate it. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -494,8 +464,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with Scrypt password
-     *
      * Create a new user. Password provided must be hashed with the [Scrypt](https://github.com/Tarsnap/scrypt) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -553,8 +521,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with Scrypt password
-     *
      * Create a new user. Password provided must be hashed with the [Scrypt](https://github.com/Tarsnap/scrypt) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -594,8 +560,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with Scrypt modified password
-     *
      * Create a new user. Password provided must be hashed with the [Scrypt Modified](https://gist.github.com/Meldiron/eecf84a0225eccb5a378d45bb27462cc) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -647,8 +611,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with Scrypt modified password
-     *
      * Create a new user. Password provided must be hashed with the [Scrypt Modified](https://gist.github.com/Meldiron/eecf84a0225eccb5a378d45bb27462cc) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -682,8 +644,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user with SHA password
-     *
      * Create a new user. Password provided must be hashed with the [SHA](https://en.wikipedia.org/wiki/Secure_Hash_Algorithm) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -729,8 +689,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user with SHA password
-     *
      * Create a new user. Password provided must be hashed with the [SHA](https://en.wikipedia.org/wiki/Secure_Hash_Algorithm) algorithm. Use the [POST /users](https://appwrite.io/docs/server/users#usersCreate) endpoint to create users with a plain text password.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -758,8 +716,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Get user
-     *
      * Get a user by its unique ID.
      *
      * @param userId User ID.
@@ -776,7 +732,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
             io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
@@ -792,8 +747,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get user
-     *
      * Get a user by its unique ID.
      *
      * @param userId User ID.
@@ -808,8 +761,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Delete user
-     *
      * Delete a user by its unique ID, thereby releasing it&#039;s ID. Since ID is released and can be reused, all user-related resources like documents or storage files should be deleted before user deletion. If you want to keep ID reserved, use the [updateStatus](https://appwrite.io/docs/server/users#usersUpdateStatus) endpoint instead.
      *
      * @param userId User ID.
@@ -837,8 +788,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update email
-     *
      * Update the user email by its unique ID.
      *
      * @param userId User ID.
@@ -874,8 +823,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update email
-     *
      * Update the user email by its unique ID.
      *
      * @param userId User ID.
@@ -893,8 +840,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Create user JWT
-     *
      * Use this endpoint to create a JSON Web Token for user by its unique ID. You can use the resulting JWT to authenticate on behalf of the user. The JWT secret will become invalid if the session it uses gets deleted.
      *
      * @param userId User ID.
@@ -933,8 +878,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user labels
-     *
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
@@ -970,8 +913,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user labels
-     *
      * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
@@ -989,8 +930,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List user logs
-     *
      * Get the user activity logs list by its unique ID.
      *
      * @param userId User ID.
@@ -1010,7 +949,6 @@ class Users(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -1026,8 +964,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * List user memberships
-     *
      * Get the user membership list by its unique ID.
      *
      * @param userId User ID.
@@ -1043,7 +979,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MembershipList = {
             io.appwrite.models.MembershipList.from(map = it as Map<String, Any>)
@@ -1059,8 +994,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update MFA
-     *
      * Enable or disable MFA on a user account.
      *
      * @param userId User ID.
@@ -1096,8 +1029,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update MFA
-     *
      * Enable or disable MFA on a user account.
      *
      * @param userId User ID.
@@ -1115,8 +1046,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Delete authenticator
-     *
      * Delete an authenticator app.
      *
      * @param userId User ID.
@@ -1147,8 +1076,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * List factors
-     *
      * List the factors available on the account to be used as a MFA challange.
      *
      * @param userId User ID.
@@ -1164,7 +1091,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaFactors = {
             io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
@@ -1180,8 +1106,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get MFA recovery codes
-     *
      * Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
      *
      * @param userId User ID.
@@ -1197,7 +1121,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
             io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
@@ -1213,8 +1136,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Regenerate MFA recovery codes
-     *
      * Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
      *
      * @param userId User ID.
@@ -1246,8 +1167,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create MFA recovery codes
-     *
      * Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](/docs/references/cloud/client-web/account#createMfaChallenge) method by client SDK.
      *
      * @param userId User ID.
@@ -1279,8 +1198,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update name
-     *
      * Update the user name by its unique ID.
      *
      * @param userId User ID.
@@ -1316,8 +1233,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update name
-     *
      * Update the user name by its unique ID.
      *
      * @param userId User ID.
@@ -1335,8 +1250,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Update password
-     *
      * Update the user password by its unique ID.
      *
      * @param userId User ID.
@@ -1372,8 +1285,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update password
-     *
      * Update the user password by its unique ID.
      *
      * @param userId User ID.
@@ -1391,8 +1302,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Update phone
-     *
      * Update the user phone by its unique ID.
      *
      * @param userId User ID.
@@ -1428,8 +1337,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update phone
-     *
      * Update the user phone by its unique ID.
      *
      * @param userId User ID.
@@ -1447,8 +1354,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Get user preferences
-     *
      * Get the user preferences by its unique ID.
      *
      * @param userId User ID.
@@ -1465,7 +1370,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Preferences<T> = {
             io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
@@ -1481,8 +1385,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get user preferences
-     *
      * Get the user preferences by its unique ID.
      *
      * @param userId User ID.
@@ -1497,8 +1399,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Update user preferences
-     *
      * Update the user preferences by its unique ID. The object you pass is stored as is, and replaces any previous value. The maximum allowed prefs size is 64kB and throws error if exceeded.
      *
      * @param userId User ID.
@@ -1534,8 +1434,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user preferences
-     *
      * Update the user preferences by its unique ID. The object you pass is stored as is, and replaces any previous value. The maximum allowed prefs size is 64kB and throws error if exceeded.
      *
      * @param userId User ID.
@@ -1553,8 +1451,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List user sessions
-     *
      * Get the user sessions list by its unique ID.
      *
      * @param userId User ID.
@@ -1570,7 +1466,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SessionList = {
             io.appwrite.models.SessionList.from(map = it as Map<String, Any>)
@@ -1586,8 +1481,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create session
-     *
      * Creates a session for a user. Returns an immediately usable session object.If you want to generate a token for a custom authentication flow, use the [POST /users/{userId}/tokens](https://appwrite.io/docs/server/users#createToken) endpoint.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1619,8 +1512,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete user sessions
-     *
      * Delete all user&#039;s sessions by using the user&#039;s unique ID.
      *
      * @param userId User ID.
@@ -1648,8 +1539,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete user session
-     *
      * Delete a user sessions by its unique ID.
      *
      * @param userId User ID.
@@ -1680,8 +1569,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user status
-     *
      * Update the user status by its unique ID. Use this endpoint as an alternative to deleting a user if you want to keep user&#039;s ID reserved.
      *
      * @param userId User ID.
@@ -1717,8 +1604,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user status
-     *
      * Update the user status by its unique ID. Use this endpoint as an alternative to deleting a user if you want to keep user&#039;s ID reserved.
      *
      * @param userId User ID.
@@ -1736,8 +1621,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * List user targets
-     *
      * List the messaging targets that are associated with a user.
      *
      * @param userId User ID.
@@ -1757,7 +1640,6 @@ class Users(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TargetList = {
             io.appwrite.models.TargetList.from(map = it as Map<String, Any>)
@@ -1773,8 +1655,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create user target
-     *
      * Create a messaging target.
      *
      * @param userId User ID.
@@ -1822,8 +1702,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get user target
-     *
      * Get a user&#039;s push notification target by ID.
      *
      * @param userId User ID.
@@ -1842,7 +1720,6 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf(
-            "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Target = {
             io.appwrite.models.Target.from(map = it as Map<String, Any>)
@@ -1858,8 +1735,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update user target
-     *
      * Update a messaging target.
      *
      * @param userId User ID.
@@ -1904,8 +1779,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete user target
-     *
      * Delete a messaging target.
      *
      * @param userId User ID.
@@ -1936,8 +1809,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Create token
-     *
      * Returns a token with a secret key for creating a session. Use the user ID and secret and submit a request to the [PUT /account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process.
      *
      * @param userId User ID.
@@ -1976,8 +1847,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update email verification
-     *
      * Update the user email verification status by its unique ID.
      *
      * @param userId User ID.
@@ -2013,8 +1882,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update email verification
-     *
      * Update the user email verification status by its unique ID.
      *
      * @param userId User ID.
@@ -2032,8 +1899,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Update phone verification
-     *
      * Update the user phone verification status by its unique ID.
      *
      * @param userId User ID.
@@ -2069,8 +1934,6 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update phone verification
-     *
      * Update the user phone verification status by its unique ID.
      *
      * @param userId User ID.

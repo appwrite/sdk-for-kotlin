@@ -9,11 +9,15 @@ Client client = new Client()
 
 Health health = new Health(client);
 
-health.getQueue(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+health.getQueueStatsResources(
+    0, // threshold (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
