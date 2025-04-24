@@ -34,7 +34,7 @@ class Storage(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.BucketList = {
             io.appwrite.models.BucketList.from(map = it as Map<String, Any>)
@@ -92,7 +92,7 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
@@ -123,7 +123,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
             io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
@@ -181,7 +181,7 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
@@ -212,7 +212,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -246,7 +246,7 @@ class Storage(client: Client) : Service(client) {
             "queries" to queries,
             "search" to search,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.FileList = {
             io.appwrite.models.FileList.from(map = it as Map<String, Any>)
@@ -287,7 +287,7 @@ class Storage(client: Client) : Service(client) {
             "file" to file,
             "permissions" to permissions,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "multipart/form-data",
         )
         val converter: (Any) -> io.appwrite.models.File = {
@@ -325,7 +325,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.File = {
             io.appwrite.models.File.from(map = it as Map<String, Any>)
@@ -365,7 +365,7 @@ class Storage(client: Client) : Service(client) {
             "name" to name,
             "permissions" to permissions,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
@@ -399,7 +399,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -429,7 +429,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         return client.call(
             "GET",
@@ -491,7 +491,7 @@ class Storage(client: Client) : Service(client) {
             "background" to background,
             "output" to output,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         return client.call(
             "GET",
@@ -519,7 +519,7 @@ class Storage(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         return client.call(
             "GET",

@@ -26,7 +26,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
             io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
@@ -78,7 +78,7 @@ class Account(client: Client) : Service(client) {
             "password" to password,
             "name" to name,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -137,7 +137,7 @@ class Account(client: Client) : Service(client) {
             "email" to email,
             "password" to password,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -186,7 +186,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.IdentityList = {
             io.appwrite.models.IdentityList.from(map = it as Map<String, Any>)
@@ -216,7 +216,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -240,7 +240,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Jwt = {
@@ -272,7 +272,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.LogList = {
             io.appwrite.models.LogList.from(map = it as Map<String, Any>)
@@ -303,7 +303,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "mfa" to mfa,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -348,7 +348,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaType = {
@@ -383,7 +383,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "otp" to otp,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -431,7 +431,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -458,7 +458,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "factor" to factor,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaChallenge = {
@@ -492,7 +492,7 @@ class Account(client: Client) : Service(client) {
             "challengeId" to challengeId,
             "otp" to otp,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -520,7 +520,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.MfaFactors = {
             io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
@@ -547,7 +547,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
             io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
@@ -574,7 +574,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
@@ -602,7 +602,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
@@ -634,7 +634,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -684,7 +684,7 @@ class Account(client: Client) : Service(client) {
             "password" to password,
             "oldPassword" to oldPassword,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -737,7 +737,7 @@ class Account(client: Client) : Service(client) {
             "phone" to phone,
             "password" to password,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -783,7 +783,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.Preferences<T> = {
             io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
@@ -825,7 +825,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "prefs" to prefs,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -873,7 +873,7 @@ class Account(client: Client) : Service(client) {
             "email" to email,
             "url" to url,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -910,7 +910,7 @@ class Account(client: Client) : Service(client) {
             "secret" to secret,
             "password" to password,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -938,7 +938,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.SessionList = {
             io.appwrite.models.SessionList.from(map = it as Map<String, Any>)
@@ -965,7 +965,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -989,7 +989,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1023,7 +1023,7 @@ class Account(client: Client) : Service(client) {
             "email" to email,
             "password" to password,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1057,7 +1057,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1091,7 +1091,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1125,7 +1125,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1156,7 +1156,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.Session = {
             io.appwrite.models.Session.from(map = it as Map<String, Any>)
@@ -1186,7 +1186,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Session = {
@@ -1217,7 +1217,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         return client.call(
@@ -1242,7 +1242,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.User<T> = {
@@ -1291,7 +1291,7 @@ class Account(client: Client) : Service(client) {
             "email" to email,
             "phrase" to phrase,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1332,7 +1332,7 @@ class Account(client: Client) : Service(client) {
             "url" to url,
             "phrase" to phrase,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1373,7 +1373,7 @@ class Account(client: Client) : Service(client) {
             "failure" to failure,
             "scopes" to scopes,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         return client.redirect(
             "GET",
@@ -1401,7 +1401,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "phone" to phone,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1432,7 +1432,7 @@ class Account(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1466,7 +1466,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1494,7 +1494,7 @@ class Account(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
@@ -1528,7 +1528,7 @@ class Account(client: Client) : Service(client) {
             "userId" to userId,
             "secret" to secret,
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Token = {
