@@ -25,7 +25,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.Locale = {
             io.appwrite.models.Locale.from(map = it as Map<String, Any>)
@@ -52,7 +52,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.LocaleCodeList = {
             io.appwrite.models.LocaleCodeList.from(map = it as Map<String, Any>)
@@ -79,7 +79,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.ContinentList = {
             io.appwrite.models.ContinentList.from(map = it as Map<String, Any>)
@@ -106,7 +106,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.CountryList = {
             io.appwrite.models.CountryList.from(map = it as Map<String, Any>)
@@ -133,7 +133,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.CountryList = {
             io.appwrite.models.CountryList.from(map = it as Map<String, Any>)
@@ -160,7 +160,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.PhoneList = {
             io.appwrite.models.PhoneList.from(map = it as Map<String, Any>)
@@ -187,7 +187,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.CurrencyList = {
             io.appwrite.models.CurrencyList.from(map = it as Map<String, Any>)
@@ -214,7 +214,7 @@ class Locale(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
         )
-        val apiHeaders = mutableMapOf(
+        val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> io.appwrite.models.LanguageList = {
             io.appwrite.models.LanguageList.from(map = it as Map<String, Any>)
