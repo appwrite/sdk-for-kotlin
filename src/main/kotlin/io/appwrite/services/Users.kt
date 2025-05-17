@@ -967,16 +967,23 @@ class Users(client: Client) : Service(client) {
      * Get the user membership list by its unique ID.
      *
      * @param userId User ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, teamId, invited, joined, confirm, roles
+     * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.MembershipList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listMemberships(
         userId: String,
+        queries: List<String>? = null,
+        search: String? = null,
     ): io.appwrite.models.MembershipList {
         val apiPath = "/users/{userId}/memberships"
             .replace("{userId}", userId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "search" to search,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )

@@ -2049,6 +2049,7 @@ class Databases(client: Client) : Service(client) {
      * @param type Index type.
      * @param attributes Array of attributes to index. Maximum of 100 attributes are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
+     * @param lengths Length of index. Maximum of 100
      * @return [io.appwrite.models.Index]
      */
     @JvmOverloads
@@ -2060,6 +2061,7 @@ class Databases(client: Client) : Service(client) {
         type: io.appwrite.enums.IndexType,
         attributes: List<String>,
         orders: List<String>? = null,
+        lengths: List<Long>? = null,
     ): io.appwrite.models.Index {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"
             .replace("{databaseId}", databaseId)
@@ -2070,6 +2072,7 @@ class Databases(client: Client) : Service(client) {
             "type" to type,
             "attributes" to attributes,
             "orders" to orders,
+            "lengths" to lengths,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

@@ -1,18 +1,17 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Functions;
+import io.appwrite.services.Tokens;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Functions functions = new Functions(client);
+Tokens tokens = new Tokens(client);
 
-functions.createBuild(
-    "<FUNCTION_ID>", // functionId
-    "<DEPLOYMENT_ID>", // deploymentId
-    "<BUILD_ID>", // buildId (optional)
+tokens.update(
+    "<TOKEN_ID>", // tokenId
+    "", // expire (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

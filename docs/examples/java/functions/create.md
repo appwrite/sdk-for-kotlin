@@ -28,10 +28,6 @@ functions.create(
     "<PROVIDER_BRANCH>", // providerBranch (optional)
     false, // providerSilentMode (optional)
     "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
-    "<TEMPLATE_REPOSITORY>", // templateRepository (optional)
-    "<TEMPLATE_OWNER>", // templateOwner (optional)
-    "<TEMPLATE_ROOT_DIRECTORY>", // templateRootDirectory (optional)
-    "<TEMPLATE_VERSION>", // templateVersion (optional)
     "", // specification (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

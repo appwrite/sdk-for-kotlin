@@ -18,7 +18,7 @@ class Functions(client: Client) : Service(client) {
     /**
      * Get a list of all the project&#039;s functions. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deployment, schedule, scheduleNext, schedulePrevious, timeout, entrypoint, commands, installationId
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deploymentId, schedule, scheduleNext, schedulePrevious, timeout, entrypoint, commands, installationId
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.FunctionList]
      */
@@ -60,7 +60,7 @@ class Functions(client: Client) : Service(client) {
      * @param schedule Schedule CRON syntax.
      * @param timeout Function maximum execution time in seconds.
      * @param enabled Is function enabled? When set to 'disabled', users cannot access the function but Server SDKs with and API key can still access the function. No data is lost when this is toggled.
-     * @param logging Whether executions will be logged. When set to false, executions will not be logged, but will reduce resource used by your Appwrite project.
+     * @param logging When disabled, executions will exclude logs and errors, and will be slightly faster.
      * @param entrypoint Entrypoint File. This path is relative to the "providerRootDirectory".
      * @param commands Build Commands.
      * @param scopes List of scopes allowed for API key auto-generated for every execution. Maximum of 100 scopes are allowed.
@@ -69,10 +69,6 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
-     * @param templateRepository Repository name of the template.
-     * @param templateOwner The name of the owner of the template.
-     * @param templateRootDirectory Path to function code in the template repo.
-     * @param templateVersion Version (tag) for the repo linked to the function template.
      * @param specification Runtime specification for the function and builds.
      * @return [io.appwrite.models.Function]
      */
@@ -96,10 +92,6 @@ class Functions(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
-        templateRepository: String? = null,
-        templateOwner: String? = null,
-        templateRootDirectory: String? = null,
-        templateVersion: String? = null,
         specification: String? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
@@ -122,10 +114,6 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
-            "templateRepository" to templateRepository,
-            "templateOwner" to templateOwner,
-            "templateRootDirectory" to templateRootDirectory,
-            "templateVersion" to templateVersion,
             "specification" to specification,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -239,7 +227,7 @@ class Functions(client: Client) : Service(client) {
      * @param schedule Schedule CRON syntax.
      * @param timeout Maximum execution time in seconds.
      * @param enabled Is function enabled? When set to 'disabled', users cannot access the function but Server SDKs with and API key can still access the function. No data is lost when this is toggled.
-     * @param logging Whether executions will be logged. When set to false, executions will not be logged, but will reduce resource used by your Appwrite project.
+     * @param logging When disabled, executions will exclude logs and errors, and will be slightly faster.
      * @param entrypoint Entrypoint File. This path is relative to the "providerRootDirectory".
      * @param commands Build Commands.
      * @param scopes List of scopes allowed for API Key auto-generated for every execution. Maximum of 100 scopes are allowed.
@@ -339,10 +327,44 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the project&#039;s code deployments. You can use the query params to filter your results.
+     * Update the function active deployment. Use this endpoint to switch the code deployment that should be used when visitor opens your function.
      *
      * @param functionId Function ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: size, buildId, activate, entrypoint, commands, type, size
+     * @param deploymentId Deployment ID.
+     * @return [io.appwrite.models.Function]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateFunctionDeployment(
+        functionId: String,
+        deploymentId: String,
+    ): io.appwrite.models.Function {
+        val apiPath = "/functions/{functionId}/deployment"
+            .replace("{functionId}", functionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "deploymentId" to deploymentId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Function = {
+            io.appwrite.models.Function.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Function::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a list of all the function&#039;s code deployments. You can use the query params to filter your results.
+     *
+     * @param functionId Function ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: buildSize, sourceSize, totalSize, buildDuration, status, activate, type
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.DeploymentList]
      */
@@ -425,7 +447,133 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get a code deployment by its unique ID.
+     * Create a new build for an existing function deployment. This endpoint allows you to rebuild a deployment with the updated function configuration, including its entrypoint and build commands if they have been modified. The build process will be queued and executed asynchronously. The original deployment&#039;s code will be preserved and used for the new build.
+     *
+     * @param functionId Function ID.
+     * @param deploymentId Deployment ID.
+     * @param buildId Build unique ID.
+     * @return [io.appwrite.models.Deployment]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createDuplicateDeployment(
+        functionId: String,
+        deploymentId: String,
+        buildId: String? = null,
+    ): io.appwrite.models.Deployment {
+        val apiPath = "/functions/{functionId}/deployments/duplicate"
+            .replace("{functionId}", functionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "deploymentId" to deploymentId,
+            "buildId" to buildId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Deployment = {
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Deployment::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a deployment based on a template.Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/functions#listTemplates) to find the template details.
+     *
+     * @param functionId Function ID.
+     * @param repository Repository name of the template.
+     * @param owner The name of the owner of the template.
+     * @param rootDirectory Path to function code in the template repo.
+     * @param version Version (tag) for the repo linked to the function template.
+     * @param activate Automatically activate the deployment when it is finished building.
+     * @return [io.appwrite.models.Deployment]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTemplateDeployment(
+        functionId: String,
+        repository: String,
+        owner: String,
+        rootDirectory: String,
+        version: String,
+        activate: Boolean? = null,
+    ): io.appwrite.models.Deployment {
+        val apiPath = "/functions/{functionId}/deployments/template"
+            .replace("{functionId}", functionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "repository" to repository,
+            "owner" to owner,
+            "rootDirectory" to rootDirectory,
+            "version" to version,
+            "activate" to activate,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Deployment = {
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Deployment::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a deployment when a function is connected to VCS.This endpoint lets you create deployment from a branch, commit, or a tag.
+     *
+     * @param functionId Function ID.
+     * @param type Type of reference passed. Allowed values are: branch, commit
+     * @param reference VCS reference to create deployment from. Depending on type this can be: branch name, commit hash
+     * @param activate Automatically activate the deployment when it is finished building.
+     * @return [io.appwrite.models.Deployment]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createVcsDeployment(
+        functionId: String,
+        type: io.appwrite.enums.VCSDeploymentType,
+        reference: String,
+        activate: Boolean? = null,
+    ): io.appwrite.models.Deployment {
+        val apiPath = "/functions/{functionId}/deployments/vcs"
+            .replace("{functionId}", functionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "type" to type,
+            "reference" to reference,
+            "activate" to activate,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Deployment = {
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Deployment::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a function deployment by its unique ID.
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.
@@ -453,40 +601,6 @@ class Functions(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.Deployment::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Update the function code deployment ID using the unique function ID. Use this endpoint to switch the code deployment that should be executed by the execution endpoint.
-     *
-     * @param functionId Function ID.
-     * @param deploymentId Deployment ID.
-     * @return [io.appwrite.models.Function]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun updateDeployment(
-        functionId: String,
-        deploymentId: String,
-    ): io.appwrite.models.Function {
-        val apiPath = "/functions/{functionId}/deployments/{deploymentId}"
-            .replace("{functionId}", functionId)
-            .replace("{deploymentId}", deploymentId)
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Function = {
-            io.appwrite.models.Function.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Function::class.java,
             converter,
         )
     }
@@ -522,90 +636,26 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new build for an existing function deployment. This endpoint allows you to rebuild a deployment with the updated function configuration, including its entrypoint and build commands if they have been modified The build process will be queued and executed asynchronously. The original deployment&#039;s code will be preserved and used for the new build.
+     * Get a function deployment content by its unique ID. The endpoint response return with a &#039;Content-Disposition: attachment&#039; header that tells the browser to start downloading the file to user downloads directory.
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.
-     * @param buildId Build unique ID.
-     * @return [Any]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createBuild(
-        functionId: String,
-        deploymentId: String,
-        buildId: String? = null,
-    ): Any {
-        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/build"
-            .replace("{functionId}", functionId)
-            .replace("{deploymentId}", deploymentId)
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "buildId" to buildId,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "content-type" to "application/json",
-        )
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * Cancel an ongoing function deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn&#039;t started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status &#039;ready&#039;) or failed. The response includes the final build status and details.
-     *
-     * @param functionId Function ID.
-     * @param deploymentId Deployment ID.
-     * @return [io.appwrite.models.Build]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun updateDeploymentBuild(
-        functionId: String,
-        deploymentId: String,
-    ): io.appwrite.models.Build {
-        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/build"
-            .replace("{functionId}", functionId)
-            .replace("{deploymentId}", deploymentId)
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Build = {
-            io.appwrite.models.Build.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Build::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Get a Deployment&#039;s contents by its unique ID. This endpoint supports range requests for partial or streaming file download.
-     *
-     * @param functionId Function ID.
-     * @param deploymentId Deployment ID.
+     * @param type Deployment file to download. Can be: "source", "output".
      * @return [ByteArray]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getDeploymentDownload(
         functionId: String,
         deploymentId: String,
+        type: io.appwrite.enums.DeploymentDownloadType? = null,
     ): ByteArray {
         val apiPath = "/functions/{functionId}/deployments/{deploymentId}/download"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "type" to type,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -618,11 +668,44 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
+     * Cancel an ongoing function deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn&#039;t started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status &#039;ready&#039;) or failed. The response includes the final build status and details.
+     *
+     * @param functionId Function ID.
+     * @param deploymentId Deployment ID.
+     * @return [io.appwrite.models.Deployment]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDeploymentStatus(
+        functionId: String,
+        deploymentId: String,
+    ): io.appwrite.models.Deployment {
+        val apiPath = "/functions/{functionId}/deployments/{deploymentId}/status"
+            .replace("{functionId}", functionId)
+            .replace("{deploymentId}", deploymentId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Deployment = {
+            io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Deployment::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get a list of all the current user function execution logs. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: trigger, status, responseStatusCode, duration, requestMethod, requestPath, deploymentId
-     * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.ExecutionList]
      */
     @JvmOverloads
@@ -630,14 +713,12 @@ class Functions(client: Client) : Service(client) {
     suspend fun listExecutions(
         functionId: String,
         queries: List<String>? = null,
-        search: String? = null,
     ): io.appwrite.models.ExecutionList {
         val apiPath = "/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
-            "search" to search,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -803,13 +884,16 @@ class Functions(client: Client) : Service(client) {
      * @param functionId Function unique ID.
      * @param key Variable key. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
+     * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
      * @return [io.appwrite.models.Variable]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createVariable(
         functionId: String,
         key: String,
         value: String,
+        secret: Boolean? = null,
     ): io.appwrite.models.Variable {
         val apiPath = "/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
@@ -817,6 +901,7 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
+            "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -874,6 +959,7 @@ class Functions(client: Client) : Service(client) {
      * @param variableId Variable unique ID.
      * @param key Variable key. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
+     * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -883,6 +969,7 @@ class Functions(client: Client) : Service(client) {
         variableId: String,
         key: String,
         value: String? = null,
+        secret: Boolean? = null,
     ): io.appwrite.models.Variable {
         val apiPath = "/functions/{functionId}/variables/{variableId}"
             .replace("{functionId}", functionId)
@@ -891,6 +978,7 @@ class Functions(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
+            "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

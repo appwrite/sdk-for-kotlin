@@ -14,6 +14,7 @@ functions.updateVariable(
     "<VARIABLE_ID>", // variableId
     "<KEY>", // key
     "<VALUE>", // value (optional)
+    false, // secret (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -12,5 +12,6 @@ val functions = Functions(client)
 val response = functions.createVariable(
     functionId = "<FUNCTION_ID>",
     key = "<KEY>",
-    value = "<VALUE>"
+    value = "<VALUE>",
+    secret = false // optional
 )
