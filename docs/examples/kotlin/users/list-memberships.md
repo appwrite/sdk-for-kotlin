@@ -10,5 +10,7 @@ val client = Client()
 val users = Users(client)
 
 val response = users.listMemberships(
-    userId = "<USER_ID>"
+    userId = "<USER_ID>",
+    queries = listOf(), // optional
+    search = "<SEARCH>" // optional
 )

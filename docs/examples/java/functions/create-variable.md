@@ -13,6 +13,7 @@ functions.createVariable(
     "<FUNCTION_ID>", // functionId
     "<KEY>", // key
     "<VALUE>", // value
+    false, // secret (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

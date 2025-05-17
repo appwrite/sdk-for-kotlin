@@ -38,6 +38,12 @@ data class Index(
     val attributes: List<String>,
 
     /**
+     * Index attributes length.
+     */
+    @SerializedName("lengths")
+    val lengths: List<Long>,
+
+    /**
      * Index orders.
      */
     @SerializedName("orders")
@@ -62,6 +68,7 @@ data class Index(
         "status" to status as Any,
         "error" to error as Any,
         "attributes" to attributes as Any,
+        "lengths" to lengths as Any,
         "orders" to orders as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -78,6 +85,7 @@ data class Index(
             status = map["status"] as String,
             error = map["error"] as String,
             attributes = map["attributes"] as List<String>,
+            lengths = map["lengths"] as List<Long>,
             orders = map["orders"] as? List<String>?,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,

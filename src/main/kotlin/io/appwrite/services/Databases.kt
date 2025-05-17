@@ -1590,6 +1590,250 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
+     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
+     * @param documents Array of documents data as JSON objects.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> createDocuments(
+        databaseId: String,
+        collectionId: String,
+        documents: List<Any>,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "documents" to documents,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
+     * @param documents Array of documents data as JSON objects.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createDocuments(
+        databaseId: String,
+        collectionId: String,
+        documents: List<Any>,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = createDocuments(
+        databaseId,
+        collectionId,
+        documents,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documents Array of document data as JSON objects. May contain partial documents.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> upsertDocuments(
+        databaseId: String,
+        collectionId: String,
+        documents: List<Any>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "documents" to documents,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documents Array of document data as JSON objects. May contain partial documents.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun upsertDocuments(
+        databaseId: String,
+        collectionId: String,
+        documents: List<Any>? = null,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = upsertDocuments(
+        databaseId,
+        collectionId,
+        documents,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param data Document data as JSON object. Include only attribute and value pairs to be updated.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateDocuments(
+        databaseId: String,
+        collectionId: String,
+        data: Any? = null,
+        queries: List<String>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "data" to data,
+            "queries" to queries,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param data Document data as JSON object. Include only attribute and value pairs to be updated.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateDocuments(
+        databaseId: String,
+        collectionId: String,
+        data: Any? = null,
+        queries: List<String>? = null,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = updateDocuments(
+        databaseId,
+        collectionId,
+        data,
+        queries,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> deleteDocuments(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun deleteDocuments(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = deleteDocuments(
+        databaseId,
+        collectionId,
+        queries,
+        nestedType = classOf(),
+    )
+
+    /**
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
      *
      * @param databaseId Database ID.
@@ -1805,6 +2049,7 @@ class Databases(client: Client) : Service(client) {
      * @param type Index type.
      * @param attributes Array of attributes to index. Maximum of 100 attributes are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
+     * @param lengths Length of index. Maximum of 100
      * @return [io.appwrite.models.Index]
      */
     @JvmOverloads
@@ -1816,6 +2061,7 @@ class Databases(client: Client) : Service(client) {
         type: io.appwrite.enums.IndexType,
         attributes: List<String>,
         orders: List<String>? = null,
+        lengths: List<Long>? = null,
     ): io.appwrite.models.Index {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"
             .replace("{databaseId}", databaseId)
@@ -1826,6 +2072,7 @@ class Databases(client: Client) : Service(client) {
             "type" to type,
             "attributes" to attributes,
             "orders" to orders,
+            "lengths" to lengths,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

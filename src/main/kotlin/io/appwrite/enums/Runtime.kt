@@ -45,6 +45,8 @@ enum class Runtime(val value: String) {
     PYTHON_3_12("python-3.12"),
     @SerializedName("python-ml-3.11")
     PYTHON_ML_3_11("python-ml-3.11"),
+    @SerializedName("python-ml-3.12")
+    PYTHON_ML_3_12("python-ml-3.12"),
     @SerializedName("deno-1.21")
     DENO_1_21("deno-1.21"),
     @SerializedName("deno-1.24")
@@ -65,6 +67,8 @@ enum class Runtime(val value: String) {
     DART_2_17("dart-2.17"),
     @SerializedName("dart-2.18")
     DART_2_18("dart-2.18"),
+    @SerializedName("dart-2.19")
+    DART_2_19("dart-2.19"),
     @SerializedName("dart-3.0")
     DART_3_0("dart-3.0"),
     @SerializedName("dart-3.1")
@@ -120,7 +124,11 @@ enum class Runtime(val value: String) {
     @SerializedName("static-1")
     STATIC_1("static-1"),
     @SerializedName("flutter-3.24")
-    FLUTTER_3_24("flutter-3.24");
+    FLUTTER_3_24("flutter-3.24"),
+    @SerializedName("flutter-3.27")
+    FLUTTER_3_27("flutter-3.27"),
+    @SerializedName("flutter-3.29")
+    FLUTTER_3_29("flutter-3.29");
 
     override fun toString() = value
 }

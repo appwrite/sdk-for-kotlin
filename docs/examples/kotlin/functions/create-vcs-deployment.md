@@ -1,6 +1,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Functions
+import io.appwrite.enums.VCSDeploymentType
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -9,8 +10,9 @@ val client = Client()
 
 val functions = Functions(client)
 
-val response = functions.createBuild(
+val response = functions.createVcsDeployment(
     functionId = "<FUNCTION_ID>",
-    deploymentId = "<DEPLOYMENT_ID>",
-    buildId = "<BUILD_ID>" // optional
+    type =  VCSDeploymentType.BRANCH,
+    reference = "<REFERENCE>",
+    activate = false // optional
 )
