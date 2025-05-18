@@ -52,14 +52,20 @@ data class Deployment(
     /**
      * The code size in bytes.
      */
-    @SerializedName("size")
-    val size: Long,
+    @SerializedName("sourceSize")
+    val sourceSize: Long,
 
     /**
      * The build output size in bytes.
      */
     @SerializedName("buildSize")
     val buildSize: Long,
+
+    /**
+     * The total size in bytes (source and build output).
+     */
+    @SerializedName("totalSize")
+    val totalSize: Long,
 
     /**
      * The current build ID.
@@ -74,7 +80,19 @@ data class Deployment(
     val activate: Boolean,
 
     /**
-     * The deployment status. Possible values are &quot;processing&quot;, &quot;building&quot;, &quot;waiting&quot;, &quot;ready&quot;, and &quot;failed&quot;.
+     * Screenshot with light theme preference file ID.
+     */
+    @SerializedName("screenshotLight")
+    val screenshotLight: String,
+
+    /**
+     * Screenshot with dark theme preference file ID.
+     */
+    @SerializedName("screenshotDark")
+    val screenshotDark: String,
+
+    /**
+     * The deployment status. Possible values are &quot;waiting&quot;, &quot;processing&quot;, &quot;building&quot;, &quot;ready&quot;, and &quot;failed&quot;.
      */
     @SerializedName("status")
     val status: String,
@@ -88,8 +106,8 @@ data class Deployment(
     /**
      * The current build time in seconds.
      */
-    @SerializedName("buildTime")
-    val buildTime: Long,
+    @SerializedName("buildDuration")
+    val buildDuration: Long,
 
     /**
      * The name of the vcs provider repository
@@ -160,13 +178,16 @@ data class Deployment(
         "resourceId" to resourceId as Any,
         "resourceType" to resourceType as Any,
         "entrypoint" to entrypoint as Any,
-        "size" to size as Any,
+        "sourceSize" to sourceSize as Any,
         "buildSize" to buildSize as Any,
+        "totalSize" to totalSize as Any,
         "buildId" to buildId as Any,
         "activate" to activate as Any,
+        "screenshotLight" to screenshotLight as Any,
+        "screenshotDark" to screenshotDark as Any,
         "status" to status as Any,
         "buildLogs" to buildLogs as Any,
-        "buildTime" to buildTime as Any,
+        "buildDuration" to buildDuration as Any,
         "providerRepositoryName" to providerRepositoryName as Any,
         "providerRepositoryOwner" to providerRepositoryOwner as Any,
         "providerRepositoryUrl" to providerRepositoryUrl as Any,
@@ -192,13 +213,16 @@ data class Deployment(
             resourceId = map["resourceId"] as String,
             resourceType = map["resourceType"] as String,
             entrypoint = map["entrypoint"] as String,
-            size = (map["size"] as Number).toLong(),
+            sourceSize = (map["sourceSize"] as Number).toLong(),
             buildSize = (map["buildSize"] as Number).toLong(),
+            totalSize = (map["totalSize"] as Number).toLong(),
             buildId = map["buildId"] as String,
             activate = map["activate"] as Boolean,
+            screenshotLight = map["screenshotLight"] as String,
+            screenshotDark = map["screenshotDark"] as String,
             status = map["status"] as String,
             buildLogs = map["buildLogs"] as String,
-            buildTime = (map["buildTime"] as Number).toLong(),
+            buildDuration = (map["buildDuration"] as Number).toLong(),
             providerRepositoryName = map["providerRepositoryName"] as String,
             providerRepositoryOwner = map["providerRepositoryOwner"] as String,
             providerRepositoryUrl = map["providerRepositoryUrl"] as String,

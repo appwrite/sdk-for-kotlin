@@ -50,13 +50,13 @@ data class Function(
     val live: Boolean,
 
     /**
-     * Whether executions will be logged. When set to false, executions will not be logged, but will reduce resource used by your Appwrite project.
+     * When disabled, executions will exclude logs and errors, and will be slightly faster.
      */
     @SerializedName("logging")
     val logging: Boolean,
 
     /**
-     * Function execution runtime.
+     * Function execution and build runtime.
      */
     @SerializedName("runtime")
     val runtime: String,
@@ -64,8 +64,32 @@ data class Function(
     /**
      * Function&#039;s active deployment ID.
      */
-    @SerializedName("deployment")
-    val deployment: String,
+    @SerializedName("deploymentId")
+    val deploymentId: String,
+
+    /**
+     * Active deployment creation date in ISO 8601 format.
+     */
+    @SerializedName("deploymentCreatedAt")
+    val deploymentCreatedAt: String,
+
+    /**
+     * Function&#039;s latest deployment ID.
+     */
+    @SerializedName("latestDeploymentId")
+    val latestDeploymentId: String,
+
+    /**
+     * Latest deployment creation date in ISO 8601 format.
+     */
+    @SerializedName("latestDeploymentCreatedAt")
+    val latestDeploymentCreatedAt: String,
+
+    /**
+     * Status of latest deployment. Possible values are &quot;waiting&quot;, &quot;processing&quot;, &quot;building&quot;, &quot;ready&quot;, and &quot;failed&quot;.
+     */
+    @SerializedName("latestDeploymentStatus")
+    val latestDeploymentStatus: String,
 
     /**
      * Allowed permission scopes.
@@ -162,7 +186,11 @@ data class Function(
         "live" to live as Any,
         "logging" to logging as Any,
         "runtime" to runtime as Any,
-        "deployment" to deployment as Any,
+        "deploymentId" to deploymentId as Any,
+        "deploymentCreatedAt" to deploymentCreatedAt as Any,
+        "latestDeploymentId" to latestDeploymentId as Any,
+        "latestDeploymentCreatedAt" to latestDeploymentCreatedAt as Any,
+        "latestDeploymentStatus" to latestDeploymentStatus as Any,
         "scopes" to scopes as Any,
         "vars" to vars.map { it.toMap() } as Any,
         "events" to events as Any,
@@ -194,7 +222,11 @@ data class Function(
             live = map["live"] as Boolean,
             logging = map["logging"] as Boolean,
             runtime = map["runtime"] as String,
-            deployment = map["deployment"] as String,
+            deploymentId = map["deploymentId"] as String,
+            deploymentCreatedAt = map["deploymentCreatedAt"] as String,
+            latestDeploymentId = map["latestDeploymentId"] as String,
+            latestDeploymentCreatedAt = map["latestDeploymentCreatedAt"] as String,
+            latestDeploymentStatus = map["latestDeploymentStatus"] as String,
             scopes = map["scopes"] as List<String>,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
             events = map["events"] as List<String>,
