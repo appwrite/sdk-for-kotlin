@@ -1590,7 +1590,7 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
@@ -1628,7 +1628,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
@@ -1648,19 +1648,18 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param documents Array of document data as JSON objects. May contain partial documents.
      * @return [io.appwrite.models.DocumentList<T>]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> upsertDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>? = null,
+        documents: List<Any>,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
@@ -1687,19 +1686,18 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param documents Array of document data as JSON objects. May contain partial documents.
      * @return [io.appwrite.models.DocumentList<T>]
      */
-    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun upsertDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>? = null,
+        documents: List<Any>,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = upsertDocuments(
         databaseId,
         collectionId,
@@ -1708,7 +1706,7 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1750,7 +1748,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1774,7 +1772,7 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Bulk delete documents using queries, if no queries are passed then all documents are deleted.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1813,7 +1811,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Bulk delete documents using queries, if no queries are passed then all documents are deleted.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1895,6 +1893,78 @@ class Databases(client: Client) : Service(client) {
         collectionId,
         documentId,
         queries,
+        nestedType = classOf(),
+    )
+
+    /**
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param data Document data as JSON object. Include all required attributes of the document to be created or updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> upsertDocument(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        data: Any,
+        permissions: List<String>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Document<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{documentId}", documentId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "data" to data,
+            "permissions" to permissions,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Document<T> = {
+            io.appwrite.models.Document.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param data Document data as JSON object. Include all required attributes of the document to be created or updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun upsertDocument(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        data: Any,
+        permissions: List<String>? = null,
+    ): io.appwrite.models.Document<Map<String, Any>> = upsertDocument(
+        databaseId,
+        collectionId,
+        documentId,
+        data,
+        permissions,
         nestedType = classOf(),
     )
 
@@ -2002,6 +2072,162 @@ class Databases(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
+
+    /**
+     * Decrement a specific attribute of a document by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param attribute Attribute key.
+     * @param value Value to decrement the attribute by. The value must be a number.
+     * @param min Minimum value for the attribute. If the current value is lesser than this value, an exception will be thrown.
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> decrementDocumentAttribute(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        attribute: String,
+        value: Double? = null,
+        min: Double? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Document<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/decrement"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{documentId}", documentId)
+            .replace("{attribute}", attribute)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "value" to value,
+            "min" to min,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Document<T> = {
+            io.appwrite.models.Document.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Decrement a specific attribute of a document by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param attribute Attribute key.
+     * @param value Value to decrement the attribute by. The value must be a number.
+     * @param min Minimum value for the attribute. If the current value is lesser than this value, an exception will be thrown.
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun decrementDocumentAttribute(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        attribute: String,
+        value: Double? = null,
+        min: Double? = null,
+    ): io.appwrite.models.Document<Map<String, Any>> = decrementDocumentAttribute(
+        databaseId,
+        collectionId,
+        documentId,
+        attribute,
+        value,
+        min,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Increment a specific attribute of a document by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param attribute Attribute key.
+     * @param value Value to increment the attribute by. The value must be a number.
+     * @param max Maximum value for the attribute. If the current value is greater than this value, an error will be thrown.
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> incrementDocumentAttribute(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        attribute: String,
+        value: Double? = null,
+        max: Double? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Document<T> {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/increment"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{documentId}", documentId)
+            .replace("{attribute}", attribute)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "value" to value,
+            "max" to max,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Document<T> = {
+            io.appwrite.models.Document.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Increment a specific attribute of a document by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param documentId Document ID.
+     * @param attribute Attribute key.
+     * @param value Value to increment the attribute by. The value must be a number.
+     * @param max Maximum value for the attribute. If the current value is greater than this value, an error will be thrown.
+     * @return [io.appwrite.models.Document<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun incrementDocumentAttribute(
+        databaseId: String,
+        collectionId: String,
+        documentId: String,
+        attribute: String,
+        value: Double? = null,
+        max: Double? = null,
+    ): io.appwrite.models.Document<Map<String, Any>> = incrementDocumentAttribute(
+        databaseId,
+        collectionId,
+        documentId,
+        attribute,
+        value,
+        max,
+        nestedType = classOf(),
+    )
 
     /**
      * List indexes in the collection.

@@ -67,6 +67,12 @@ data class AttributeString(
     @SerializedName("default")
     var default: String?,
 
+    /**
+     * Defines whether this attribute is encrypted or not.
+     */
+    @SerializedName("encrypt")
+    var encrypt: Boolean?,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "key" to key as Any,
@@ -79,6 +85,7 @@ data class AttributeString(
         "\$updatedAt" to updatedAt as Any,
         "size" to size as Any,
         "default" to default as Any,
+        "encrypt" to encrypt as Any,
     )
 
     companion object {
@@ -97,6 +104,7 @@ data class AttributeString(
             updatedAt = map["\$updatedAt"] as String,
             size = (map["size"] as Number).toLong(),
             default = map["default"] as? String?,
+            encrypt = map["encrypt"] as? Boolean?,
         )
     }
 }
