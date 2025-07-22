@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class VariableList(
     /**
-     * Total number of variables documents that matched your query.
+     * Total number of variables rows that matched your query.
      */
     @SerializedName("total")
     val total: Long,
