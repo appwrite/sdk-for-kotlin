@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class IndexList(
     /**
-     * Total number of indexes rows that matched your query.
+     * Total number of indexes documents that matched your query.
      */
     @SerializedName("total")
     val total: Long,

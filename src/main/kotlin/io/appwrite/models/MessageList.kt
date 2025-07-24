@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class MessageList(
     /**
-     * Total number of messages rows that matched your query.
+     * Total number of messages documents that matched your query.
      */
     @SerializedName("total")
     val total: Long,
