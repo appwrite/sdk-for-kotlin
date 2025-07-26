@@ -9,8 +9,11 @@ val client = Client()
 
 val databases = Databases(client)
 
-val response = databases.createDocuments(
+val response = databases.incrementDocumentAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    documents = listOf()
+    documentId = "<DOCUMENT_ID>",
+    attribute = "",
+    value = 0, // optional
+    max = 0 // optional
 )

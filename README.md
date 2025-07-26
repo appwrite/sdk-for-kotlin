@@ -2,7 +2,7 @@
 
 ![Maven Central](https://img.shields.io/maven-central/v/io.appwrite/sdk-for-kotlin.svg?color=green&style=flat-square)
 ![License](https://img.shields.io/github/license/appwrite/sdk-for-kotlin.svg?style=flat-square)
-![Version](https://img.shields.io/badge/api%20version-1.7.0-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/api%20version-1.7.4-blue.svg?style=flat-square)
 [![Twitter Account](https://img.shields.io/twitter/follow/appwrite?color=00acee&label=twitter&style=flat-square)](https://twitter.com/appwrite)
 [![Discord](https://img.shields.io/discord/564160730845151244?label=discord&style=flat-square)](https://appwrite.io/discord)
 
@@ -39,7 +39,7 @@ repositories {
 Next, add the dependency to your project's `build.gradle(.kts)` file:
 
 ```groovy
-implementation("io.appwrite:sdk-for-kotlin:9.0.0")
+implementation("io.appwrite:sdk-for-kotlin:9.1.0")
 ```
 
 ### Maven
@@ -50,7 +50,7 @@ Add this to your project's `pom.xml` file:
     <dependency>
         <groupId>io.appwrite</groupId>
         <artifactId>sdk-for-kotlin</artifactId>
-        <version>9.0.0</version>
+        <version>9.1.0</version>
     </dependency>
 </dependencies>
 ```
@@ -113,6 +113,77 @@ suspend fun main() {
         name = "Walter O'Brien"
     )
 }
+```
+
+### Type Safety with Models
+
+The Appwrite Kotlin SDK provides type safety when working with database documents through generic methods. Methods like `listDocuments`, `getDocument`, and others accept a `nestedType` parameter that allows you to specify your custom model type for full type safety.
+
+```kotlin
+data class Book(
+    val name: String,
+    val author: String,
+    val releaseYear: String? = null,
+    val category: String? = null,
+    val genre: List<String>? = null,
+    val isCheckedOut: Boolean
+)
+
+val databases = Databases(client)
+
+try {
+    val documents = databases.listDocuments(
+        databaseId = "your-database-id",
+        collectionId = "your-collection-id",
+        nestedType = Book::class.java // Pass in your custom model type
+    )
+    
+    for (book in documents.documents) {
+        Log.d("Appwrite", "Book: ${book.name} by ${book.author}") // Now you have full type safety
+    }
+} catch (e: AppwriteException) {
+    Log.e("Appwrite", e.message ?: "Unknown error")
+}
+```
+
+**Tip**: You can use the `appwrite types` command to automatically generate model definitions based on your Appwrite database schema. Learn more about [type generation](https://appwrite.io/docs/products/databases/type-generation).
+
+### Working with Model Methods
+
+All Appwrite models come with built-in methods for data conversion and manipulation:
+
+**`toMap()`** - Converts a model instance to a Map format, useful for debugging or manual data manipulation:
+```kotlin
+val account = Account(client)
+val user = account.get()
+val userMap = user.toMap()
+Log.d("Appwrite", userMap.toString()) // Prints all user properties as a Map
+```
+
+**`from(map:, nestedType:)`** - Creates a model instance from a Map, useful when working with raw data:
+```kotlin
+val userData: Map<String, Any> = mapOf(
+    "\$id" to "123",
+    "name" to "John",
+    "email" to "john@example.com"
+)
+val user = User.from(userData, User::class.java)
+```
+
+**JSON Serialization** - Models can be easily converted to/from JSON using Gson (which the SDK uses internally):
+```kotlin
+import com.google.gson.Gson
+
+val account = Account(client)
+val user = account.get()
+
+// Convert to JSON
+val gson = Gson()
+val jsonString = gson.toJson(user)
+Log.d("Appwrite", "User JSON: $jsonString")
+
+// Convert from JSON
+val userFromJson = gson.fromJson(jsonString, User::class.java)
 ```
 
 ### Error Handling

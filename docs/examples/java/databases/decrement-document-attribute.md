@@ -9,10 +9,13 @@ Client client = new Client()
 
 Databases databases = new Databases(client);
 
-databases.createDocuments(
+databases.decrementDocumentAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    listOf(), // documents
+    "<DOCUMENT_ID>", // documentId
+    "", // attribute
+    0, // value (optional)
+    0, // min (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
