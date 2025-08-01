@@ -10,7 +10,6 @@ java {
 }
 
 publishing {
-    // Remove the repositories block - it's handled by nexus-publish-plugin in setup.gradle
     publications {
         mavenJava(MavenPublication) {
             from components.java

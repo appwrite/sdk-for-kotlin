@@ -2,8 +2,6 @@
 ext["signing.keyId"] = ''
 ext["signing.password"] = ''
 ext["signing.secretKeyRingFile"] = ''
-// NOTE: These should be Central Portal User Tokens, not OSSRH tokens
-// Generate tokens at: https://central.sonatype.com/account
 ext["ossrhUsername"] = ''
 ext["ossrhPassword"] = ''
 ext["sonatypeStagingProfileId"] = ''
