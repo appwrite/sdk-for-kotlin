@@ -10,18 +10,7 @@ java {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "sonatype"
-            def releaseUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
-            def snapshotUrl = "https://central.sonatype.com/repository/maven-snapshots/"
-            url = version.endsWith('-SNAPSHOT') ? snapshotUrl : releaseUrl
-            credentials {
-                username = rootProject.ext["ossrhUsername"]
-                password = rootProject.ext["ossrhPassword"]
-            }
-        }
-    }
+    // Remove the repositories block - it's handled by nexus-publish-plugin in setup.gradle
     publications {
         mavenJava(MavenPublication) {
             from components.java
