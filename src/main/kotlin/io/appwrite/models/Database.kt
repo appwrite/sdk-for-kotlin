@@ -37,6 +37,12 @@ data class Database(
     @SerializedName("enabled")
     val enabled: Boolean,
 
+    /**
+     * Database type.
+     */
+    @SerializedName("type")
+    val type: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -44,6 +50,7 @@ data class Database(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
+        "type" to type as Any,
     )
 
     companion object {
@@ -57,6 +64,7 @@ data class Database(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
+            type = map["type"] as String,
         )
     }
 }

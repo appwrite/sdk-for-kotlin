@@ -12,5 +12,6 @@ val databases = Databases(client)
 val response = databases.create(
     databaseId = "<DATABASE_ID>",
     name = "<NAME>",
-    enabled = false // optional
+    enabled = false, // optional
+    type = "tablesdb" // optional
 )

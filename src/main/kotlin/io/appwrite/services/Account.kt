@@ -1046,6 +1046,9 @@ class Account(client: Client) : Service(client) {
      * @param secret Valid verification token.
      * @return [io.appwrite.models.Session]
      */
+    @Deprecated(
+        message = "This API has been deprecated."
+    )
     @Throws(AppwriteException::class)
     suspend fun updateMagicURLSession(
         userId: String,
@@ -1080,6 +1083,9 @@ class Account(client: Client) : Service(client) {
      * @param secret Valid verification token.
      * @return [io.appwrite.models.Session]
      */
+    @Deprecated(
+        message = "This API has been deprecated."
+    )
     @Throws(AppwriteException::class)
     suspend fun updatePhoneSession(
         userId: String,
