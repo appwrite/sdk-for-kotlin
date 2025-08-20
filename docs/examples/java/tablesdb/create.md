@@ -13,7 +13,6 @@ tablesDb.create(
     "<DATABASE_ID>", // databaseId
     "<NAME>", // name
     false, // enabled (optional)
-    .TABLESDB, // type (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
