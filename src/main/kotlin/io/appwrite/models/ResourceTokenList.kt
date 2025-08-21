@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class ResourceTokenList(
     /**
-     * Total number of tokens rows that matched your query.
+     * Total number of tokens that matched your query.
      */
     @SerializedName("total")
     val total: Long,

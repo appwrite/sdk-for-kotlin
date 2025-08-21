@@ -1,6 +1,6 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.services.TablesDb
+import io.appwrite.services.TablesDB
 import io.appwrite.enums.IndexType
 
 val client = Client()
@@ -8,9 +8,9 @@ val client = Client()
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>") // Your secret API key
 
-val tablesDb = TablesDb(client)
+val tablesDB = TablesDB(client)
 
-val response = tablesDb.createIndex(
+val response = tablesDB.createIndex(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
     key = "",

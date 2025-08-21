@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class FrameworkList(
     /**
-     * Total number of frameworks rows that matched your query.
+     * Total number of frameworks that matched your query.
      */
     @SerializedName("total")
     val total: Long,

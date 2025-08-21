@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class TargetList(
     /**
-     * Total number of targets rows that matched your query.
+     * Total number of targets that matched your query.
      */
     @SerializedName("total")
     val total: Long,

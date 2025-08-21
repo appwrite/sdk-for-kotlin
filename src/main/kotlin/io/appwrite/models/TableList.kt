@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class TableList(
     /**
-     * Total number of tables rows that matched your query.
+     * Total number of tables that matched your query.
      */
     @SerializedName("total")
     val total: Long,

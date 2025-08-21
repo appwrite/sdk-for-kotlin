@@ -16,7 +16,7 @@ import java.io.File
 class Sites(client: Client) : Service(client) {
 
     /**
-     * Get a list of all the project&#039;s sites. You can use the query params to filter your results.
+     * Get a list of all the project's sites. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, framework, deploymentId, buildCommand, installCommand, outputDirectory, installationId
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -361,7 +361,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the site&#039;s code deployments. You can use the query params to filter your results.
+     * Get a list of all the site's code deployments. You can use the query params to filter your results.
      *
      * @param siteId Site ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: buildSize, sourceSize, totalSize, buildDuration, status, activate, type
@@ -398,7 +398,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new site code deployment. Use this endpoint to upload a new version of your site code. To activate your newly uploaded code, you&#039;ll need to update the function&#039;s deployment to use your new deployment ID.
+     * Create a new site code deployment. Use this endpoint to upload a new version of your site code. To activate your newly uploaded code, you'll need to update the function's deployment to use your new deployment ID.
      *
      * @param siteId Site ID.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
@@ -450,7 +450,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new build for an existing site deployment. This endpoint allows you to rebuild a deployment with the updated site configuration, including its commands and output directory if they have been modified. The build process will be queued and executed asynchronously. The original deployment&#039;s code will be preserved and used for the new build.
+     * Create a new build for an existing site deployment. This endpoint allows you to rebuild a deployment with the updated site configuration, including its commands and output directory if they have been modified. The build process will be queued and executed asynchronously. The original deployment's code will be preserved and used for the new build.
      *
      * @param siteId Site ID.
      * @param deploymentId Deployment ID.
@@ -484,7 +484,9 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Create a deployment based on a template.Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/sites#listTemplates) to find the template details.
+     * Create a deployment based on a template.
+    * 
+    * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/sites#listTemplates) to find the template details.
      *
      * @param siteId Site ID.
      * @param repository Repository name of the template.
@@ -531,7 +533,9 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Create a deployment when a site is connected to VCS.This endpoint lets you create deployment from a branch, commit, or a tag.
+     * Create a deployment when a site is connected to VCS.
+    * 
+    * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param siteId Site ID.
      * @param type Type of reference passed. Allowed values are: branch, commit
@@ -635,7 +639,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Get a site deployment content by its unique ID. The endpoint response return with a &#039;Content-Disposition: attachment&#039; header that tells the browser to start downloading the file to user downloads directory.
+     * Get a site deployment content by its unique ID. The endpoint response return with a 'Content-Disposition: attachment' header that tells the browser to start downloading the file to user downloads directory.
      *
      * @param siteId Site ID.
      * @param deploymentId Deployment ID.
@@ -667,7 +671,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Cancel an ongoing site deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn&#039;t started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status &#039;ready&#039;) or failed. The response includes the final build status and details.
+     * Cancel an ongoing site deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn't started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status 'ready') or failed. The response includes the final build status and details.
      *
      * @param siteId Site ID.
      * @param deploymentId Deployment ID.

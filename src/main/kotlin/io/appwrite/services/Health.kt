@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Health service allows you to both validate and monitor your Appwrite server&#039;s health.
+ * The Health service allows you to both validate and monitor your Appwrite server's health.
 **/
 class Health(client: Client) : Service(client) {
 
@@ -308,6 +308,7 @@ class Health(client: Client) : Service(client) {
 
     /**
      * Returns the amount of failed jobs in a given queue.
+    * 
      *
      * @param name The name of the queue
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.

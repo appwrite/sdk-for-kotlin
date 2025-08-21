@@ -14,7 +14,7 @@ import java.io.File
 class Users(client: Client) : Service(client) {
 
     /**
-     * Get a list of all the project&#039;s users. You can use the query params to filter your results.
+     * Get a list of all the project's users. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -761,7 +761,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Delete a user by its unique ID, thereby releasing it&#039;s ID. Since ID is released and can be reused, all user-related resources like documents or storage files should be deleted before user deletion. If you want to keep ID reserved, use the [updateStatus](https://appwrite.io/docs/server/users#usersUpdateStatus) endpoint instead.
+     * Delete a user by its unique ID, thereby releasing it's ID. Since ID is released and can be reused, all user-related resources like documents or storage files should be deleted before user deletion. If you want to keep ID reserved, use the [updateStatus](https://appwrite.io/docs/server/users#usersUpdateStatus) endpoint instead.
      *
      * @param userId User ID.
      * @return [Any]
@@ -878,7 +878,9 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update the user labels by its unique ID. Labels can be used to grant access to resources. While teams are a way for user&#039;s to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
+     * Update the user labels by its unique ID. 
+    * 
+    * Labels can be used to grant access to resources. While teams are a way for user's to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
      * @param labels Array of user labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
@@ -1007,6 +1009,11 @@ class Users(client: Client) : Service(client) {
      * @param mfa Enable or disable MFA.
      * @return [io.appwrite.models.User<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `UpdateMFA` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.UpdateMFA"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun <T> updateMfa(
         userId: String,
@@ -1042,11 +1049,68 @@ class Users(client: Client) : Service(client) {
      * @param mfa Enable or disable MFA.
      * @return [io.appwrite.models.User<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `UpdateMFA` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.UpdateMFA"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun updateMfa(
         userId: String,
         mfa: Boolean,
     ): io.appwrite.models.User<Map<String, Any>> = updateMfa(
+        userId,
+        mfa,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Enable or disable MFA on a user account.
+     *
+     * @param userId User ID.
+     * @param mfa Enable or disable MFA.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateMFA(
+        userId: String,
+        mfa: Boolean,
+        nestedType: Class<T>,
+    ): io.appwrite.models.User<T> {
+        val apiPath = "/users/{userId}/mfa"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "mfa" to mfa,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Enable or disable MFA on a user account.
+     *
+     * @param userId User ID.
+     * @param mfa Enable or disable MFA.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateMFA(
+        userId: String,
+        mfa: Boolean,
+    ): io.appwrite.models.User<Map<String, Any>> = updateMFA(
         userId,
         mfa,
         nestedType = classOf(),
@@ -1059,8 +1123,43 @@ class Users(client: Client) : Service(client) {
      * @param type Type of authenticator.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `DeleteMFAAuthenticator` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.DeleteMFAAuthenticator"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun deleteMfaAuthenticator(
+        userId: String,
+        type: io.appwrite.enums.AuthenticatorType,
+    ): Any {
+        val apiPath = "/users/{userId}/mfa/authenticators/{type}"
+            .replace("{userId}", userId)
+            .replace("{type}", type.value)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Delete an authenticator app.
+     *
+     * @param userId User ID.
+     * @param type Type of authenticator.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteMFAAuthenticator(
         userId: String,
         type: io.appwrite.enums.AuthenticatorType,
     ): Any {
@@ -1088,8 +1187,43 @@ class Users(client: Client) : Service(client) {
      * @param userId User ID.
      * @return [io.appwrite.models.MfaFactors]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `ListMFAFactors` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.ListMFAFactors"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun listMfaFactors(
+        userId: String,
+    ): io.appwrite.models.MfaFactors {
+        val apiPath = "/users/{userId}/mfa/factors"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.MfaFactors = {
+            io.appwrite.models.MfaFactors.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaFactors::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List the factors available on the account to be used as a MFA challange.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaFactors]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listMFAFactors(
         userId: String,
     ): io.appwrite.models.MfaFactors {
         val apiPath = "/users/{userId}/mfa/factors"
@@ -1118,8 +1252,43 @@ class Users(client: Client) : Service(client) {
      * @param userId User ID.
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `GetMFARecoveryCodes` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.GetMFARecoveryCodes"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun getMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get recovery codes that can be used as backup for MFA flow by User ID. Before getting codes, they must be generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
         val apiPath = "/users/{userId}/mfa/recovery-codes"
@@ -1148,8 +1317,44 @@ class Users(client: Client) : Service(client) {
      * @param userId User ID.
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `UpdateMFARecoveryCodes` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.UpdateMFARecoveryCodes"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun updateMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Regenerate recovery codes that can be used as backup for MFA flow by User ID. Before regenerating codes, they must be first generated using [createMfaRecoveryCodes](/docs/references/cloud/client-web/account#createMfaRecoveryCodes) method.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
         val apiPath = "/users/{userId}/mfa/recovery-codes"
@@ -1179,8 +1384,44 @@ class Users(client: Client) : Service(client) {
      * @param userId User ID.
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `CreateMFARecoveryCodes` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.CreateMFARecoveryCodes"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun createMfaRecoveryCodes(
+        userId: String,
+    ): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/users/{userId}/mfa/recovery-codes"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaRecoveryCodes = {
+            io.appwrite.models.MfaRecoveryCodes.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaRecoveryCodes::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Generate recovery codes used as backup for MFA flow for User ID. Recovery codes can be used as a MFA verification type in [createMfaChallenge](/docs/references/cloud/client-web/account#createMfaChallenge) method by client SDK.
+     *
+     * @param userId User ID.
+     * @return [io.appwrite.models.MfaRecoveryCodes]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
         val apiPath = "/users/{userId}/mfa/recovery-codes"
@@ -1488,7 +1729,9 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Creates a session for a user. Returns an immediately usable session object.If you want to generate a token for a custom authentication flow, use the [POST /users/{userId}/tokens](https://appwrite.io/docs/server/users#createToken) endpoint.
+     * Creates a session for a user. Returns an immediately usable session object.
+    * 
+    * If you want to generate a token for a custom authentication flow, use the [POST /users/{userId}/tokens](https://appwrite.io/docs/server/users#createToken) endpoint.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @return [io.appwrite.models.Session]
@@ -1519,7 +1762,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Delete all user&#039;s sessions by using the user&#039;s unique ID.
+     * Delete all user's sessions by using the user's unique ID.
      *
      * @param userId User ID.
      * @return [Any]
@@ -1576,7 +1819,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update the user status by its unique ID. Use this endpoint as an alternative to deleting a user if you want to keep user&#039;s ID reserved.
+     * Update the user status by its unique ID. Use this endpoint as an alternative to deleting a user if you want to keep user's ID reserved.
      *
      * @param userId User ID.
      * @param status User Status. To activate the user pass `true` and to block the user pass `false`.
@@ -1709,7 +1952,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Get a user&#039;s push notification target by ID.
+     * Get a user's push notification target by ID.
      *
      * @param userId User ID.
      * @param targetId Target ID.
@@ -1817,6 +2060,7 @@ class Users(client: Client) : Service(client) {
 
     /**
      * Returns a token with a secret key for creating a session. Use the user ID and secret and submit a request to the [PUT /account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process.
+    * 
      *
      * @param userId User ID.
      * @param length Token length in characters. The default length is 6 characters

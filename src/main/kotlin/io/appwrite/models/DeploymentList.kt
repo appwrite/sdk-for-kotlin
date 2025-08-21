@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class DeploymentList(
     /**
-     * Total number of deployments rows that matched your query.
+     * Total number of deployments that matched your query.
      */
     @SerializedName("total")
     val total: Long,

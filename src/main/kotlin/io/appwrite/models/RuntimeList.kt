@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class RuntimeList(
     /**
-     * Total number of runtimes rows that matched your query.
+     * Total number of runtimes that matched your query.
      */
     @SerializedName("total")
     val total: Long,

@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class SubscriberList(
     /**
-     * Total number of subscribers rows that matched your query.
+     * Total number of subscribers that matched your query.
      */
     @SerializedName("total")
     val total: Long,
