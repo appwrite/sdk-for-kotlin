@@ -308,7 +308,7 @@ class Health(client: Client) : Service(client) {
 
     /**
      * Returns the amount of failed jobs in a given queue.
-    * 
+     * 
      *
      * @param name The name of the queue
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.

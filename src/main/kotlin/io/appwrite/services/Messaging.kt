@@ -114,7 +114,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an email message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-    * 
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -266,7 +266,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a push notification by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-    * 
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -364,8 +364,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Message]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `CreateSMS` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.CreateSMS"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMS` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMS"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -458,7 +458,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-    * 
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -470,8 +470,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Message]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `UpdateSMS` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.UpdateSMS"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMS` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMS"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -514,7 +514,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-    * 
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -565,7 +565,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a message by its unique ID.
-    * 
+     * 
      *
      * @param messageId Message ID.
      * @return [io.appwrite.models.Message]
@@ -737,8 +737,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `CreateAPNSProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.CreateAPNSProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createAPNSProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createAPNSProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -848,8 +848,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `UpdateAPNSProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.UpdateAPNSProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateAPNSProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateAPNSProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -955,8 +955,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `CreateFCMProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.CreateFCMProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createFCMProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createFCMProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -1042,8 +1042,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `UpdateFCMProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.UpdateFCMProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateFCMProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateFCMProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -1457,8 +1457,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `CreateSMTPProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.CreateSMTPProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMTPProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMTPProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -1604,8 +1604,8 @@ class Messaging(client: Client) : Service(client) {
      * @return [io.appwrite.models.Provider]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `UpdateSMTPProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.UpdateSMTPProvider"),
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMTPProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMTPProvider"),
         since = "1.8.0"
     )
     @JvmOverloads
@@ -2109,7 +2109,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a provider by its unique ID.
-    * 
+     * 
      *
      * @param providerId Provider ID.
      * @return [io.appwrite.models.Provider]
@@ -2307,7 +2307,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a topic by its unique ID.
-    * 
+     * 
      *
      * @param topicId Topic ID.
      * @return [io.appwrite.models.Topic]
@@ -2338,7 +2338,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a topic by its unique ID.
-    * 
+     * 
      *
      * @param topicId Topic ID.
      * @param name Topic Name.
@@ -2512,7 +2512,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a subscriber by its unique ID.
-    * 
+     * 
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param subscriberId Subscriber ID.

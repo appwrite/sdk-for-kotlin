@@ -32,7 +32,7 @@ data class Database(
     val updatedAt: String,
 
     /**
-     * If database is enabled. Can be &#039;enabled&#039; or &#039;disabled&#039;. When disabled, the database is inaccessible to users, but remains accessible to Server SDKs using API keys.
+     * If database is enabled. Can be 'enabled' or 'disabled'. When disabled, the database is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
     val enabled: Boolean,

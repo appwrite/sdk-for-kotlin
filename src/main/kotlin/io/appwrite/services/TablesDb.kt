@@ -16,7 +16,7 @@ class TablesDB(client: Client) : Service(client) {
     /**
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: name
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.DatabaseList]
      */
@@ -49,7 +49,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a new Database.
-    * 
+     * 
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
@@ -185,7 +185,7 @@ class TablesDB(client: Client) : Service(client) {
      * Get a list of all tables that belong to the provided databaseId. You can use the search parameter to filter your results.
      *
      * @param databaseId Database ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, rowSecurity
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: name, enabled, rowSecurity
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.TableList]
      */
@@ -380,7 +380,7 @@ class TablesDB(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, size, required, array, status, error
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: key, type, size, required, array, status, error
      * @return [io.appwrite.models.ColumnList]
      */
     @JvmOverloads
@@ -414,7 +414,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a boolean column.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -603,7 +603,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create an email column.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -651,7 +651,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an email column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -749,7 +749,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an enum column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -800,7 +800,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a float column. Optionally, minimum and maximum values can be provided.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -854,7 +854,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a float column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -908,7 +908,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create an integer column. Optionally, minimum and maximum values can be provided.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -962,7 +962,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an integer column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1016,7 +1016,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create IP address column.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1064,7 +1064,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an ip column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1112,7 +1112,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1166,12 +1166,12 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a string column.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
-     * @param size Attribute size for text attributes, in number of characters.
+     * @param size Column size for text columns, in number of characters.
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
@@ -1220,7 +1220,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a string column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1271,7 +1271,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a URL column.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1319,7 +1319,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an url column. Changing the `default` value will not update already existing rows.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1432,7 +1432,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1480,7 +1480,7 @@ class TablesDB(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, status, attributes, error
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: key, type, status, attributes, error
      * @return [io.appwrite.models.ColumnIndexList]
      */
     @JvmOverloads
@@ -1514,7 +1514,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Creates an index on the columns listed. Your index should include all the columns you will query in a single request.
-    * Type can be `key`, `fulltext`, or `unique`.
+     * Type can be `key`, `fulltext`, or `unique`.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1671,7 +1671,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the user&#039;s rows in a given table. You can use the query params to filter your results.
+     * Get a list of all the user's rows in a given table. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TableDB service [server integration](https://appwrite.io/docs/server/tablesdbdb#tablesdbCreate).
@@ -1823,7 +1823,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreateTable) API or directly from your database console.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1862,6 +1862,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreateTable) API or directly from your database console.
+     * 
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.

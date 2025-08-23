@@ -62,7 +62,7 @@ data class ColumnDatetime(
     val format: String,
 
     /**
-     * Default value for attribute when not provided. Only null is optional
+     * Default value for column when not provided. Only null is optional
      */
     @SerializedName("default")
     var default: String?,

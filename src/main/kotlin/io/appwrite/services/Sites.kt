@@ -485,8 +485,8 @@ class Sites(client: Client) : Service(client) {
 
     /**
      * Create a deployment based on a template.
-    * 
-    * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/sites#listTemplates) to find the template details.
+     * 
+     * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/sites#listTemplates) to find the template details.
      *
      * @param siteId Site ID.
      * @param repository Repository name of the template.
@@ -534,8 +534,8 @@ class Sites(client: Client) : Service(client) {
 
     /**
      * Create a deployment when a site is connected to VCS.
-    * 
-    * This endpoint lets you create deployment from a branch, commit, or a tag.
+     * 
+     * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param siteId Site ID.
      * @param type Type of reference passed. Allowed values are: branch, commit

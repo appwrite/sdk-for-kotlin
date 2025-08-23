@@ -399,10 +399,10 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a new function code deployment. Use this endpoint to upload a new version of your code function. To execute your newly uploaded code, you'll need to update the function's deployment to use your new deployment UID.
-    * 
-    * This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).
-    * 
-    * Use the "command" param to set the entrypoint used to execute your code.
+     * 
+     * This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).
+     * 
+     * Use the "command" param to set the entrypoint used to execute your code.
      *
      * @param functionId Function ID.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
@@ -490,8 +490,8 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a deployment based on a template.
-    * 
-    * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/functions#listTemplates) to find the template details.
+     * 
+     * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/functions#listTemplates) to find the template details.
      *
      * @param functionId Function ID.
      * @param repository Repository name of the template.
@@ -539,8 +539,8 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a deployment when a function is connected to VCS.
-    * 
-    * This endpoint lets you create deployment from a branch, commit, or a tag.
+     * 
+     * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param functionId Function ID.
      * @param type Type of reference passed. Allowed values are: branch, commit

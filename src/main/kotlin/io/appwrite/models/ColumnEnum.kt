@@ -68,7 +68,7 @@ data class ColumnEnum(
     val format: String,
 
     /**
-     * Default value for attribute when not provided. Cannot be set when attribute is required.
+     * Default value for column when not provided. Cannot be set when column is required.
      */
     @SerializedName("default")
     var default: String?,

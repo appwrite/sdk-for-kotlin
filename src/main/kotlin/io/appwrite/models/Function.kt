@@ -44,7 +44,7 @@ data class Function(
     val enabled: Boolean,
 
     /**
-     * Is the function deployed with the latest configuration? This is set to false if you&#039;ve changed an environment variables, entrypoint, commands, or other settings that needs redeploy to be applied. When the value is false, redeploy the function to update it with the latest configuration.
+     * Is the function deployed with the latest configuration? This is set to false if you've changed an environment variables, entrypoint, commands, or other settings that needs redeploy to be applied. When the value is false, redeploy the function to update it with the latest configuration.
      */
     @SerializedName("live")
     val live: Boolean,
@@ -62,7 +62,7 @@ data class Function(
     val runtime: String,
 
     /**
-     * Function&#039;s active deployment ID.
+     * Function's active deployment ID.
      */
     @SerializedName("deploymentId")
     val deploymentId: String,
@@ -74,7 +74,7 @@ data class Function(
     val deploymentCreatedAt: String,
 
     /**
-     * Function&#039;s latest deployment ID.
+     * Function's latest deployment ID.
      */
     @SerializedName("latestDeploymentId")
     val latestDeploymentId: String,
@@ -86,7 +86,7 @@ data class Function(
     val latestDeploymentCreatedAt: String,
 
     /**
-     * Status of latest deployment. Possible values are &quot;waiting&quot;, &quot;processing&quot;, &quot;building&quot;, &quot;ready&quot;, and &quot;failed&quot;.
+     * Status of latest deployment. Possible values are "waiting", "processing", "building", "ready", and "failed".
      */
     @SerializedName("latestDeploymentStatus")
     val latestDeploymentStatus: String,

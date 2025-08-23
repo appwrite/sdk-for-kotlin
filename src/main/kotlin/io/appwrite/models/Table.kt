@@ -44,7 +44,7 @@ data class Table(
     val name: String,
 
     /**
-     * Table enabled. Can be &#039;enabled&#039; or &#039;disabled&#039;. When disabled, the table is inaccessible to users, but remains accessible to Server SDKs using API keys.
+     * Table enabled. Can be 'enabled' or 'disabled'. When disabled, the table is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
     val enabled: Boolean,

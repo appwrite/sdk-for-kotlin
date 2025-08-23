@@ -54,7 +54,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a new Database.
-    * 
+     * 
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
@@ -469,7 +469,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a boolean attribute.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -678,7 +678,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an email attribute.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -731,7 +731,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an email attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -784,7 +784,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an enum attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -840,7 +840,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an enum attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -896,7 +896,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a float attribute. Optionally, minimum and maximum values can be provided.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -955,7 +955,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a float attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1014,7 +1014,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an integer attribute. Optionally, minimum and maximum values can be provided.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1073,7 +1073,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an integer attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1132,7 +1132,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create IP address attribute.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1185,7 +1185,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an ip attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1238,7 +1238,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1297,7 +1297,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a string attribute.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1356,7 +1356,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a string attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1412,7 +1412,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a URL attribute.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1465,7 +1465,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an url attribute. Changing the `default` value will not update already existing documents.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1593,7 +1593,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1685,7 +1685,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
+     * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1862,7 +1862,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
-    * 
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1906,6 +1906,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -2572,7 +2573,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.
-    * Attributes can be `key`, `fulltext`, and `unique`.
+     * Attributes can be `key`, `fulltext`, and `unique`.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
