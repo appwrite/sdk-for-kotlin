@@ -44,13 +44,13 @@ data class Variable(
     val secret: Boolean,
 
     /**
-     * Service to which the variable belongs. Possible values are &quot;project&quot;, &quot;function&quot;
+     * Service to which the variable belongs. Possible values are "project", "function"
      */
     @SerializedName("resourceType")
     val resourceType: String,
 
     /**
-     * ID of resource to which the variable belongs. If resourceType is &quot;project&quot;, it is empty. If resourceType is &quot;function&quot;, it is ID of the function.
+     * ID of resource to which the variable belongs. If resourceType is "project", it is empty. If resourceType is "function", it is ID of the function.
      */
     @SerializedName("resourceId")
     val resourceId: String,

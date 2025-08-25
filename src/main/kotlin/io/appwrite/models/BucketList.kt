@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class BucketList(
     /**
-     * Total number of buckets documents that matched your query.
+     * Total number of buckets that matched your query.
      */
     @SerializedName("total")
     val total: Long,

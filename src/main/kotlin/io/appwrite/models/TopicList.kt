@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class TopicList(
     /**
-     * Total number of topics documents that matched your query.
+     * Total number of topics that matched your query.
      */
     @SerializedName("total")
     val total: Long,

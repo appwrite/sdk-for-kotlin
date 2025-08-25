@@ -119,7 +119,7 @@ class Tokens(client: Client) : Service(client) {
     }
 
     /**
-     * Update a token by its unique ID. Use this endpoint to update a token&#039;s expiry date.
+     * Update a token by its unique ID. Use this endpoint to update a token's expiry date.
      *
      * @param tokenId Token unique ID.
      * @param expire File token expiry date

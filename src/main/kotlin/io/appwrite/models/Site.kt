@@ -38,7 +38,7 @@ data class Site(
     val enabled: Boolean,
 
     /**
-     * Is the site deployed with the latest configuration? This is set to false if you&#039;ve changed an environment variables, entrypoint, commands, or other settings that needs redeploy to be applied. When the value is false, redeploy the site to update it with the latest configuration.
+     * Is the site deployed with the latest configuration? This is set to false if you've changed an environment variables, entrypoint, commands, or other settings that needs redeploy to be applied. When the value is false, redeploy the site to update it with the latest configuration.
      */
     @SerializedName("live")
     val live: Boolean,
@@ -56,7 +56,7 @@ data class Site(
     val framework: String,
 
     /**
-     * Site&#039;s active deployment ID.
+     * Site's active deployment ID.
      */
     @SerializedName("deploymentId")
     val deploymentId: String,
@@ -80,7 +80,7 @@ data class Site(
     val deploymentScreenshotDark: String,
 
     /**
-     * Site&#039;s latest deployment ID.
+     * Site's latest deployment ID.
      */
     @SerializedName("latestDeploymentId")
     val latestDeploymentId: String,
@@ -92,7 +92,7 @@ data class Site(
     val latestDeploymentCreatedAt: String,
 
     /**
-     * Status of latest deployment. Possible values are &quot;waiting&quot;, &quot;processing&quot;, &quot;building&quot;, &quot;ready&quot;, and &quot;failed&quot;.
+     * Status of latest deployment. Possible values are "waiting", "processing", "building", "ready", and "failed".
      */
     @SerializedName("latestDeploymentStatus")
     val latestDeploymentStatus: String,

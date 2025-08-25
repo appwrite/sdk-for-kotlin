@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class SiteList(
     /**
-     * Total number of sites documents that matched your query.
+     * Total number of sites that matched your query.
      */
     @SerializedName("total")
     val total: Long,

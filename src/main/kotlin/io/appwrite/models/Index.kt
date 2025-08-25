@@ -8,7 +8,25 @@ import io.appwrite.extensions.jsonCast
  */
 data class Index(
     /**
-     * Index Key.
+     * Index ID.
+     */
+    @SerializedName("\$id")
+    val id: String,
+
+    /**
+     * Index creation date in ISO 8601 format.
+     */
+    @SerializedName("\$createdAt")
+    val createdAt: String,
+
+    /**
+     * Index update date in ISO 8601 format.
+     */
+    @SerializedName("\$updatedAt")
+    val updatedAt: String,
+
+    /**
+     * Index key.
      */
     @SerializedName("key")
     val key: String,
@@ -49,20 +67,11 @@ data class Index(
     @SerializedName("orders")
     var orders: List<String>?,
 
-    /**
-     * Index creation date in ISO 8601 format.
-     */
-    @SerializedName("\$createdAt")
-    val createdAt: String,
-
-    /**
-     * Index update date in ISO 8601 format.
-     */
-    @SerializedName("\$updatedAt")
-    val updatedAt: String,
-
 ) {
     fun toMap(): Map<String, Any> = mapOf(
+        "\$id" to id as Any,
+        "\$createdAt" to createdAt as Any,
+        "\$updatedAt" to updatedAt as Any,
         "key" to key as Any,
         "type" to type as Any,
         "status" to status as Any,
@@ -70,8 +79,6 @@ data class Index(
         "attributes" to attributes as Any,
         "lengths" to lengths as Any,
         "orders" to orders as Any,
-        "\$createdAt" to createdAt as Any,
-        "\$updatedAt" to updatedAt as Any,
     )
 
     companion object {
@@ -80,6 +87,9 @@ data class Index(
         fun from(
             map: Map<String, Any>,
         ) = Index(
+            id = map["\$id"] as String,
+            createdAt = map["\$createdAt"] as String,
+            updatedAt = map["\$updatedAt"] as String,
             key = map["key"] as String,
             type = map["type"] as String,
             status = map["status"] as String,
@@ -87,8 +97,6 @@ data class Index(
             attributes = map["attributes"] as List<String>,
             lengths = map["lengths"] as List<Long>,
             orders = map["orders"] as? List<String>?,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
         )
     }
 }

@@ -32,10 +32,16 @@ data class Database(
     val updatedAt: String,
 
     /**
-     * If database is enabled. Can be &#039;enabled&#039; or &#039;disabled&#039;. When disabled, the database is inaccessible to users, but remains accessible to Server SDKs using API keys.
+     * If database is enabled. Can be 'enabled' or 'disabled'. When disabled, the database is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
     val enabled: Boolean,
+
+    /**
+     * Database type.
+     */
+    @SerializedName("type")
+    val type: String,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -44,6 +50,7 @@ data class Database(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
+        "type" to type as Any,
     )
 
     companion object {
@@ -57,6 +64,7 @@ data class Database(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
+            type = map["type"] as String,
         )
     }
 }

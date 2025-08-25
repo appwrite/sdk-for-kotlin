@@ -114,6 +114,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an email message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -265,6 +266,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a push notification by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -361,6 +363,11 @@ class Messaging(client: Client) : Service(client) {
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMS` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMS"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createSms(
@@ -400,7 +407,58 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
+     * Create a new SMS message.
+     *
+     * @param messageId Message ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param content SMS Content.
+     * @param topics List of Topic IDs.
+     * @param users List of User IDs.
+     * @param targets List of Targets IDs.
+     * @param draft Is message a draft
+     * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @return [io.appwrite.models.Message]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createSMS(
+        messageId: String,
+        content: String,
+        topics: List<String>? = null,
+        users: List<String>? = null,
+        targets: List<String>? = null,
+        draft: Boolean? = null,
+        scheduledAt: String? = null,
+    ): io.appwrite.models.Message {
+        val apiPath = "/messaging/messages/sms"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "messageId" to messageId,
+            "content" to content,
+            "topics" to topics,
+            "users" to users,
+            "targets" to targets,
+            "draft" to draft,
+            "scheduledAt" to scheduledAt,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Message = {
+            io.appwrite.models.Message.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Message::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
+     * 
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -411,6 +469,11 @@ class Messaging(client: Client) : Service(client) {
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMS` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMS"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateSms(
@@ -450,7 +513,59 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
+     * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
+     * 
+     *
+     * @param messageId Message ID.
+     * @param topics List of Topic IDs.
+     * @param users List of User IDs.
+     * @param targets List of Targets IDs.
+     * @param content Email Content.
+     * @param draft Is message a draft
+     * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
+     * @return [io.appwrite.models.Message]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateSMS(
+        messageId: String,
+        topics: List<String>? = null,
+        users: List<String>? = null,
+        targets: List<String>? = null,
+        content: String? = null,
+        draft: Boolean? = null,
+        scheduledAt: String? = null,
+    ): io.appwrite.models.Message {
+        val apiPath = "/messaging/messages/sms/{messageId}"
+            .replace("{messageId}", messageId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "topics" to topics,
+            "users" to users,
+            "targets" to targets,
+            "content" to content,
+            "draft" to draft,
+            "scheduledAt" to scheduledAt,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Message = {
+            io.appwrite.models.Message.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Message::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get a message by its unique ID.
+     * 
      *
      * @param messageId Message ID.
      * @return [io.appwrite.models.Message]
@@ -621,9 +736,67 @@ class Messaging(client: Client) : Service(client) {
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createAPNSProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createAPNSProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createApnsProvider(
+        providerId: String,
+        name: String,
+        authKey: String? = null,
+        authKeyId: String? = null,
+        teamId: String? = null,
+        bundleId: String? = null,
+        sandbox: Boolean? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/apns"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "authKey" to authKey,
+            "authKeyId" to authKeyId,
+            "teamId" to teamId,
+            "bundleId" to bundleId,
+            "sandbox" to sandbox,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Apple Push Notification service provider.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param authKey APNS authentication key.
+     * @param authKeyId APNS authentication key ID.
+     * @param teamId APNS team ID.
+     * @param bundleId APNS bundle ID.
+     * @param sandbox Use APNS sandbox environment.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createAPNSProvider(
         providerId: String,
         name: String,
         authKey: String? = null,
@@ -674,9 +847,67 @@ class Messaging(client: Client) : Service(client) {
      * @param sandbox Use APNS sandbox environment.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateAPNSProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateAPNSProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateApnsProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        authKey: String? = null,
+        authKeyId: String? = null,
+        teamId: String? = null,
+        bundleId: String? = null,
+        sandbox: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/apns/{providerId}"
+            .replace("{providerId}", providerId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "authKey" to authKey,
+            "authKeyId" to authKeyId,
+            "teamId" to teamId,
+            "bundleId" to bundleId,
+            "sandbox" to sandbox,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a Apple Push Notification service provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param authKey APNS authentication key.
+     * @param authKeyId APNS authentication key ID.
+     * @param teamId APNS team ID.
+     * @param bundleId APNS bundle ID.
+     * @param sandbox Use APNS sandbox environment.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateAPNSProvider(
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
@@ -723,9 +954,55 @@ class Messaging(client: Client) : Service(client) {
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createFCMProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createFCMProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createFcmProvider(
+        providerId: String,
+        name: String,
+        serviceAccountJSON: Any? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/fcm"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "serviceAccountJSON" to serviceAccountJSON,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Firebase Cloud Messaging provider.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param serviceAccountJSON FCM service account JSON.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createFCMProvider(
         providerId: String,
         name: String,
         serviceAccountJSON: Any? = null,
@@ -764,9 +1041,55 @@ class Messaging(client: Client) : Service(client) {
      * @param serviceAccountJSON FCM service account JSON.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateFCMProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateFCMProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateFcmProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        serviceAccountJSON: Any? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/fcm/{providerId}"
+            .replace("{providerId}", providerId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "serviceAccountJSON" to serviceAccountJSON,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a Firebase Cloud Messaging provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param serviceAccountJSON FCM service account JSON.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateFCMProvider(
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
@@ -1133,9 +1456,85 @@ class Messaging(client: Client) : Service(client) {
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMTPProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMTPProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createSmtpProvider(
+        providerId: String,
+        name: String,
+        host: String,
+        port: Long? = null,
+        username: String? = null,
+        password: String? = null,
+        encryption: io.appwrite.enums.SmtpEncryption? = null,
+        autoTLS: Boolean? = null,
+        mailer: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/smtp"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "host" to host,
+            "port" to port,
+            "username" to username,
+            "password" to password,
+            "encryption" to encryption,
+            "autoTLS" to autoTLS,
+            "mailer" to mailer,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new SMTP provider.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls://smtp1.example.com:587;ssl://smtp2.example.com:465"`. Hosts will be tried in order.
+     * @param port The default SMTP server port.
+     * @param username Authentication username.
+     * @param password Authentication password.
+     * @param encryption Encryption type. Can be omitted, 'ssl', or 'tls'
+     * @param autoTLS Enable SMTP AutoTLS feature.
+     * @param mailer The value to use for the X-Mailer header.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address.
+     * @param replyToName Name set in the reply to field for the mail. Default value is sender name.
+     * @param replyToEmail Email set in the reply to field for the mail. Default value is sender email.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createSMTPProvider(
         providerId: String,
         name: String,
         host: String,
@@ -1204,9 +1603,85 @@ class Messaging(client: Client) : Service(client) {
      * @param enabled Set as enabled.
      * @return [io.appwrite.models.Provider]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMTPProvider` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMTPProvider"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateSmtpProvider(
+        providerId: String,
+        name: String? = null,
+        host: String? = null,
+        port: Long? = null,
+        username: String? = null,
+        password: String? = null,
+        encryption: io.appwrite.enums.SmtpEncryption? = null,
+        autoTLS: Boolean? = null,
+        mailer: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/smtp/{providerId}"
+            .replace("{providerId}", providerId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "host" to host,
+            "port" to port,
+            "username" to username,
+            "password" to password,
+            "encryption" to encryption,
+            "autoTLS" to autoTLS,
+            "mailer" to mailer,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a SMTP provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param host SMTP hosts. Either a single hostname or multiple semicolon-delimited hostnames. You can also specify a different port for each host such as `smtp1.example.com:25;smtp2.example.com`. You can also specify encryption type, for example: `tls://smtp1.example.com:587;ssl://smtp2.example.com:465"`. Hosts will be tried in order.
+     * @param port SMTP port.
+     * @param username Authentication username.
+     * @param password Authentication password.
+     * @param encryption Encryption type. Can be 'ssl' or 'tls'
+     * @param autoTLS Enable SMTP AutoTLS feature.
+     * @param mailer The value to use for the X-Mailer header.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address.
+     * @param replyToName Name set in the Reply To field for the mail. Default value is Sender Name.
+     * @param replyToEmail Email set in the Reply To field for the mail. Default value is Sender Email.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateSMTPProvider(
         providerId: String,
         name: String? = null,
         host: String? = null,
@@ -1634,6 +2109,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a provider by its unique ID.
+     * 
      *
      * @param providerId Provider ID.
      * @return [io.appwrite.models.Provider]
@@ -1831,6 +2307,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a topic by its unique ID.
+     * 
      *
      * @param topicId Topic ID.
      * @return [io.appwrite.models.Topic]
@@ -1861,6 +2338,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a topic by its unique ID.
+     * 
      *
      * @param topicId Topic ID.
      * @param name Topic Name.
@@ -2034,6 +2512,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a subscriber by its unique ID.
+     * 
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param subscriberId Subscriber ID.
