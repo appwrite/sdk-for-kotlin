@@ -365,8 +365,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMS` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMS"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMS")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -471,8 +470,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMS` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMS"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMS")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -738,8 +736,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.createAPNSProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createAPNSProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createAPNSProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -849,8 +846,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateAPNSProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateAPNSProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateAPNSProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -956,8 +952,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.createFCMProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createFCMProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createFCMProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1043,8 +1038,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateFCMProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateFCMProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateFCMProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1458,8 +1452,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.createSMTPProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMTPProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.createSMTPProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1605,8 +1598,7 @@ class Messaging(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Messaging.updateSMTPProvider` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMTPProvider"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Messaging.updateSMTPProvider")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
