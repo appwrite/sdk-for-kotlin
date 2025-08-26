@@ -1013,8 +1013,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.updateMFA` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFA"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFA")
     )
     @Throws(AppwriteException::class)
     suspend fun <T> updateMfa(
@@ -1053,8 +1052,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.updateMFA` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFA"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFA")
     )
     @Throws(AppwriteException::class)
     suspend fun updateMfa(
@@ -1127,8 +1125,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.deleteMFAAuthenticator` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.deleteMFAAuthenticator"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.deleteMFAAuthenticator")
     )
     @Throws(AppwriteException::class)
     suspend fun deleteMfaAuthenticator(
@@ -1191,8 +1188,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.listMFAFactors` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.listMFAFactors"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.listMFAFactors")
     )
     @Throws(AppwriteException::class)
     suspend fun listMfaFactors(
@@ -1256,8 +1252,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.getMFARecoveryCodes` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.getMFARecoveryCodes"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.getMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
     suspend fun getMfaRecoveryCodes(
@@ -1321,8 +1316,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.updateMFARecoveryCodes` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFARecoveryCodes"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.updateMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
     suspend fun updateMfaRecoveryCodes(
@@ -1388,8 +1382,7 @@ class Users(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `Users.createMFARecoveryCodes` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.Users.createMFARecoveryCodes"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.Users.createMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
     suspend fun createMfaRecoveryCodes(

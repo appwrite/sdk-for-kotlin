@@ -22,8 +22,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.list` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.list"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.list")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -63,8 +62,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createDatabase` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatabase"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatabase")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -104,8 +102,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.get` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.get"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.get")
     )
     @Throws(AppwriteException::class)
     suspend fun get(
@@ -141,8 +138,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.update` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.update"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.update")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -182,8 +178,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.delete` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.delete"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.delete")
     )
     @Throws(AppwriteException::class)
     suspend fun delete(
@@ -216,8 +211,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listTables` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listTables"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listTables")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -261,8 +255,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createTable` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createTable"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createTable")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -309,8 +302,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getTable` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getTable"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getTable")
     )
     @Throws(AppwriteException::class)
     suspend fun getCollection(
@@ -351,8 +343,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateTable` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateTable"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateTable")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -399,8 +390,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteTable` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteTable"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteTable")
     )
     @Throws(AppwriteException::class)
     suspend fun deleteCollection(
@@ -435,8 +425,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listColumns` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listColumns"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listColumns")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -481,8 +470,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createBooleanColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createBooleanColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createBooleanColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -533,8 +521,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateBooleanColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateBooleanColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateBooleanColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -585,8 +572,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createDatetimeColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatetimeColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatetimeColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -637,8 +623,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateDatetimeColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateDatetimeColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateDatetimeColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -690,8 +675,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createEmailColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEmailColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEmailColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -743,8 +727,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateEmailColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEmailColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEmailColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -797,8 +780,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createEnumColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEnumColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEnumColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -853,8 +835,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateEnumColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEnumColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEnumColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -910,8 +891,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createFloatColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createFloatColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createFloatColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -969,8 +949,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateFloatColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateFloatColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateFloatColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1028,8 +1007,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIntegerColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIntegerColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIntegerColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1087,8 +1065,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateIntegerColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIntegerColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIntegerColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1144,8 +1121,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIpColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIpColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIpColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1197,8 +1173,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateIpColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIpColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIpColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1252,8 +1227,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRelationshipColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRelationshipColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRelationshipColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1311,8 +1285,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createStringColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createStringColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createStringColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1369,8 +1342,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateStringColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateStringColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateStringColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1424,8 +1396,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createUrlColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createUrlColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createUrlColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1477,8 +1448,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateUrlColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateUrlColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateUrlColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1526,8 +1496,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getColumn")
     )
     @Throws(AppwriteException::class)
     suspend fun getAttribute(
@@ -1563,8 +1532,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteColumn")
     )
     @Throws(AppwriteException::class)
     suspend fun deleteAttribute(
@@ -1604,8 +1572,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRelationshipColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRelationshipColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRelationshipColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1651,8 +1618,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1694,8 +1660,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1722,8 +1687,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1772,8 +1736,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1802,8 +1765,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows")
     )
     @Throws(AppwriteException::class)
     suspend fun <T> createDocuments(
@@ -1845,8 +1807,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows")
     )
     @Throws(AppwriteException::class)
     suspend fun createDocuments(
@@ -1871,8 +1832,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows")
     )
     @Throws(AppwriteException::class)
     suspend fun <T> upsertDocuments(
@@ -1915,8 +1875,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows")
     )
     @Throws(AppwriteException::class)
     suspend fun upsertDocuments(
@@ -1941,8 +1900,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1988,8 +1946,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2016,8 +1973,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2060,8 +2016,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRows` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2087,8 +2042,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2133,8 +2087,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2163,8 +2116,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2213,8 +2165,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2245,8 +2196,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2295,8 +2245,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2325,8 +2274,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRow` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRow"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRow")
     )
     @Throws(AppwriteException::class)
     suspend fun deleteDocument(
@@ -2366,8 +2314,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.decrementRowColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2419,8 +2366,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.decrementRowColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2454,8 +2400,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.incrementRowColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2507,8 +2452,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.incrementRowColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2539,8 +2483,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listIndexes` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listIndexes"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listIndexes")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2586,8 +2529,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIndex` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIndex"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIndex")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -2637,8 +2579,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getIndex` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getIndex"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getIndex")
     )
     @Throws(AppwriteException::class)
     suspend fun getIndex(
@@ -2678,8 +2619,7 @@ class Databases(client: Client) : Service(client) {
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteIndex` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteIndex"),
-        since = "1.8.0"
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteIndex")
     )
     @Throws(AppwriteException::class)
     suspend fun deleteIndex(
