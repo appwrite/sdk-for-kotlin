@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class ProviderList(
     /**
-     * Total number of providers documents that matched your query.
+     * Total number of providers that matched your query.
      */
     @SerializedName("total")
     val total: Long,

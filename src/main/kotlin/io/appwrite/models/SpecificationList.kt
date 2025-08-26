@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class SpecificationList(
     /**
-     * Total number of specifications documents that matched your query.
+     * Total number of specifications that matched your query.
      */
     @SerializedName("total")
     val total: Long,

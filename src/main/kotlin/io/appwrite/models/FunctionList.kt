@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class FunctionList(
     /**
-     * Total number of functions documents that matched your query.
+     * Total number of functions that matched your query.
      */
     @SerializedName("total")
     val total: Long,

@@ -16,7 +16,7 @@ import java.io.File
 class Functions(client: Client) : Service(client) {
 
     /**
-     * Get a list of all the project&#039;s functions. You can use the query params to filter your results.
+     * Get a list of all the project's functions. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, enabled, runtime, deploymentId, schedule, scheduleNext, schedulePrevious, timeout, entrypoint, commands, installationId
      * @param search Search term to filter your list results. Max length: 256 chars.
@@ -361,7 +361,7 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the function&#039;s code deployments. You can use the query params to filter your results.
+     * Get a list of all the function's code deployments. You can use the query params to filter your results.
      *
      * @param functionId Function ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: buildSize, sourceSize, totalSize, buildDuration, status, activate, type
@@ -398,7 +398,11 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new function code deployment. Use this endpoint to upload a new version of your code function. To execute your newly uploaded code, you&#039;ll need to update the function&#039;s deployment to use your new deployment UID.This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).Use the &quot;command&quot; param to set the entrypoint used to execute your code.
+     * Create a new function code deployment. Use this endpoint to upload a new version of your code function. To execute your newly uploaded code, you'll need to update the function's deployment to use your new deployment UID.
+     * 
+     * This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).
+     * 
+     * Use the "command" param to set the entrypoint used to execute your code.
      *
      * @param functionId Function ID.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
@@ -447,7 +451,7 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new build for an existing function deployment. This endpoint allows you to rebuild a deployment with the updated function configuration, including its entrypoint and build commands if they have been modified. The build process will be queued and executed asynchronously. The original deployment&#039;s code will be preserved and used for the new build.
+     * Create a new build for an existing function deployment. This endpoint allows you to rebuild a deployment with the updated function configuration, including its entrypoint and build commands if they have been modified. The build process will be queued and executed asynchronously. The original deployment's code will be preserved and used for the new build.
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.
@@ -485,7 +489,9 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create a deployment based on a template.Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/functions#listTemplates) to find the template details.
+     * Create a deployment based on a template.
+     * 
+     * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/server/functions#listTemplates) to find the template details.
      *
      * @param functionId Function ID.
      * @param repository Repository name of the template.
@@ -532,7 +538,9 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Create a deployment when a function is connected to VCS.This endpoint lets you create deployment from a branch, commit, or a tag.
+     * Create a deployment when a function is connected to VCS.
+     * 
+     * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param functionId Function ID.
      * @param type Type of reference passed. Allowed values are: branch, commit
@@ -636,7 +644,7 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Get a function deployment content by its unique ID. The endpoint response return with a &#039;Content-Disposition: attachment&#039; header that tells the browser to start downloading the file to user downloads directory.
+     * Get a function deployment content by its unique ID. The endpoint response return with a 'Content-Disposition: attachment' header that tells the browser to start downloading the file to user downloads directory.
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.
@@ -668,7 +676,7 @@ class Functions(client: Client) : Service(client) {
     }
 
     /**
-     * Cancel an ongoing function deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn&#039;t started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status &#039;ready&#039;) or failed. The response includes the final build status and details.
+     * Cancel an ongoing function deployment build. If the build is already in progress, it will be stopped and marked as canceled. If the build hasn't started yet, it will be marked as canceled without executing. You cannot cancel builds that have already completed (status 'ready') or failed. The response includes the final build status and details.
      *
      * @param functionId Function ID.
      * @param deploymentId Deployment ID.

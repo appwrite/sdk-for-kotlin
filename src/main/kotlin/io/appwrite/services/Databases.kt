@@ -20,6 +20,11 @@ class Databases(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.DatabaseList]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.list` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.list"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun list(
@@ -49,12 +54,18 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a new Database.
+     * 
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @return [io.appwrite.models.Database]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createDatabase` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatabase"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun create(
@@ -91,6 +102,11 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @return [io.appwrite.models.Database]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.get` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.get"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun get(
         databaseId: String,
@@ -123,6 +139,11 @@ class Databases(client: Client) : Service(client) {
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @return [io.appwrite.models.Database]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.update` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.update"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun update(
@@ -159,6 +180,11 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.delete` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.delete"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun delete(
         databaseId: String,
@@ -188,6 +214,11 @@ class Databases(client: Client) : Service(client) {
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @return [io.appwrite.models.CollectionList]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listTables` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listTables"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listCollections(
@@ -228,6 +259,11 @@ class Databases(client: Client) : Service(client) {
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createTable` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createTable"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createCollection(
@@ -271,6 +307,11 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID.
      * @return [io.appwrite.models.Collection]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getTable` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getTable"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun getCollection(
         databaseId: String,
@@ -308,6 +349,11 @@ class Databases(client: Client) : Service(client) {
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @return [io.appwrite.models.Collection]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateTable` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateTable"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateCollection(
@@ -351,6 +397,11 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteTable` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteTable"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun deleteCollection(
         databaseId: String,
@@ -378,10 +429,15 @@ class Databases(client: Client) : Service(client) {
      * List attributes in the collection.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, size, required, array, status, error
      * @return [io.appwrite.models.AttributeList]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listColumns` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listColumns"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listAttributes(
@@ -413,15 +469,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a boolean attribute.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeBoolean]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createBooleanColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createBooleanColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createBooleanAttribute(
@@ -462,13 +524,18 @@ class Databases(client: Client) : Service(client) {
      * Update a boolean attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeBoolean]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateBooleanColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateBooleanColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateBooleanAttribute(
@@ -509,13 +576,18 @@ class Databases(client: Client) : Service(client) {
      * Create a date time attribute according to the ISO 8601 standard.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for the attribute in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeDatetime]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createDatetimeColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatetimeColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createDatetimeAttribute(
@@ -556,13 +628,18 @@ class Databases(client: Client) : Service(client) {
      * Update a date time attribute. Changing the `default` value will not update already existing documents.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeDatetime]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateDatetimeColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateDatetimeColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateDatetimeAttribute(
@@ -601,15 +678,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an email attribute.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeEmail]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createEmailColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEmailColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createEmailAttribute(
@@ -648,15 +731,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an email attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param newKey New attribute key.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeEmail]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateEmailColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEmailColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEmailAttribute(
@@ -694,17 +783,23 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create an enumeration attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
+     * Create an enum attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
-     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 255 characters long.
+     * @param elements Array of enum values.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeEnum]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createEnumColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createEnumColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createEnumAttribute(
@@ -745,16 +840,22 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an enum attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
-     * @param elements Array of elements in enumerated type. Uses length of longest element to determine size. Maximum of 100 elements are allowed, each 255 characters long.
+     * @param elements Updated list of enum values.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param newKey New attribute key.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeEnum]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateEnumColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateEnumColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEnumAttribute(
@@ -795,17 +896,23 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a float attribute. Optionally, minimum and maximum values can be provided.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param min Minimum value to enforce on new documents
-     * @param max Maximum value to enforce on new documents
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param min Minimum value.
+     * @param max Maximum value.
+     * @param default Default value. Cannot be set when required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeFloat]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createFloatColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createFloatColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createFloatAttribute(
@@ -848,17 +955,23 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a float attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param min Minimum value to enforce on new documents
-     * @param max Maximum value to enforce on new documents
-     * @param newKey New attribute key.
+     * @param default Default value. Cannot be set when required.
+     * @param min Minimum value.
+     * @param max Maximum value.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeFloat]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateFloatColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateFloatColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateFloatAttribute(
@@ -901,17 +1014,23 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an integer attribute. Optionally, minimum and maximum values can be provided.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param min Minimum value to enforce on new documents
-     * @param max Maximum value to enforce on new documents
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param default Default value. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeInteger]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIntegerColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIntegerColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createIntegerAttribute(
@@ -954,17 +1073,23 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an integer attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param min Minimum value to enforce on new documents
-     * @param max Maximum value to enforce on new documents
-     * @param newKey New attribute key.
+     * @param default Default value. Cannot be set when attribute is required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeInteger]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateIntegerColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIntegerColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateIntegerAttribute(
@@ -1007,15 +1132,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create IP address attribute.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param default Default value. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeIp]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIpColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIpColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createIpAttribute(
@@ -1054,15 +1185,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an ip attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param newKey New attribute key.
+     * @param default Default value. Cannot be set when attribute is required.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeIp]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateIpColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateIpColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateIpAttribute(
@@ -1101,10 +1238,11 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
-     * @param relatedCollectionId Related Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
+     * @param relatedCollectionId Related Collection ID.
      * @param type Relation type
      * @param twoWay Is Two Way?
      * @param key Attribute Key.
@@ -1112,6 +1250,11 @@ class Databases(client: Client) : Service(client) {
      * @param onDelete Constraints option
      * @return [io.appwrite.models.AttributeRelationship]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRelationshipColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRelationshipColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createRelationshipAttribute(
@@ -1154,9 +1297,10 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a string attribute.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param size Attribute size for text attributes, in number of characters.
      * @param required Is attribute required?
@@ -1165,6 +1309,11 @@ class Databases(client: Client) : Service(client) {
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeString]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createStringColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createStringColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createStringAttribute(
@@ -1207,16 +1356,22 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a string attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param size Maximum size of the string attribute.
-     * @param newKey New attribute key.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeString]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateStringColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateStringColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateStringAttribute(
@@ -1257,15 +1412,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a URL attribute.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @return [io.appwrite.models.AttributeUrl]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createUrlColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createUrlColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createUrlAttribute(
@@ -1304,15 +1465,21 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an url attribute. Changing the `default` value will not update already existing documents.
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
-     * @param newKey New attribute key.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeUrl]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateUrlColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateUrlColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateUrlAttribute(
@@ -1353,10 +1520,15 @@ class Databases(client: Client) : Service(client) {
      * Get attribute by ID.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getColumn"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun getAttribute(
         databaseId: String,
@@ -1385,10 +1557,15 @@ class Databases(client: Client) : Service(client) {
      * Deletes an attribute.
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteColumn"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun deleteAttribute(
         databaseId: String,
@@ -1416,14 +1593,20 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
+     * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID.
      * @param key Attribute Key.
      * @param onDelete Constraints option
-     * @param newKey New attribute key.
+     * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeRelationship]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRelationshipColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRelationshipColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateRelationshipAttribute(
@@ -1459,13 +1642,18 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
+     * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> listDocuments(
@@ -1497,13 +1685,18 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
+     * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listDocuments(
@@ -1527,6 +1720,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> createDocument(
@@ -1572,6 +1770,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createDocument(
@@ -1590,13 +1793,18 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documents Array of documents data as JSON objects.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun <T> createDocuments(
         databaseId: String,
@@ -1628,13 +1836,18 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create new Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documents Array of documents data as JSON objects.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createRows"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun createDocuments(
         databaseId: String,
@@ -1648,13 +1861,19 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param documents Array of document data as JSON objects. May contain partial documents.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun <T> upsertDocuments(
         databaseId: String,
@@ -1686,13 +1905,19 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * 
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param documents Array of document data as JSON objects. May contain partial documents.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRows"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun upsertDocuments(
         databaseId: String,
@@ -1706,7 +1931,7 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1714,6 +1939,11 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> updateDocuments(
@@ -1748,7 +1978,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
+     * Update all documents that match your queries, if no queries are submitted then all documents are updated. You can pass only specific fields to be updated.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1756,6 +1986,11 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateDocuments(
@@ -1772,13 +2007,18 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> deleteDocuments(
@@ -1811,13 +2051,18 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Bulk delete documents using queries, if no queries are passed then all documents are deleted.
+     * Bulk delete documents using queries, if no queries are passed then all documents are deleted.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRows` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRows"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteDocuments(
@@ -1840,6 +2085,11 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> getDocument(
@@ -1881,6 +2131,11 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getDocument(
@@ -1897,7 +2152,7 @@ class Databases(client: Client) : Service(client) {
     )
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1906,6 +2161,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> upsertDocument(
@@ -1942,7 +2202,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * **WARNING: Experimental Feature** - This endpoint is experimental and not yet officially supported. It may be subject to breaking changes or removal in future versions.Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
+     * Create or update a Document. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1951,6 +2211,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.upsertRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.upsertRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun upsertDocument(
@@ -1978,6 +2243,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> updateDocument(
@@ -2023,6 +2293,11 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRow"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateDocument(
@@ -2048,6 +2323,11 @@ class Databases(client: Client) : Service(client) {
      * @param documentId Document ID.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteRow` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteRow"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun deleteDocument(
         databaseId: String,
@@ -2080,10 +2360,15 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID.
      * @param documentId Document ID.
      * @param attribute Attribute key.
-     * @param value Value to decrement the attribute by. The value must be a number.
+     * @param value Value to increment the attribute by. The value must be a number.
      * @param min Minimum value for the attribute. If the current value is lesser than this value, an exception will be thrown.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.decrementRowColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> decrementDocumentAttribute(
@@ -2128,10 +2413,15 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID.
      * @param documentId Document ID.
      * @param attribute Attribute key.
-     * @param value Value to decrement the attribute by. The value must be a number.
+     * @param value Value to increment the attribute by. The value must be a number.
      * @param min Minimum value for the attribute. If the current value is lesser than this value, an exception will be thrown.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.decrementRowColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.decrementRowColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun decrementDocumentAttribute(
@@ -2162,6 +2452,11 @@ class Databases(client: Client) : Service(client) {
      * @param max Maximum value for the attribute. If the current value is greater than this value, an error will be thrown.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.incrementRowColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> incrementDocumentAttribute(
@@ -2210,6 +2505,11 @@ class Databases(client: Client) : Service(client) {
      * @param max Maximum value for the attribute. If the current value is greater than this value, an error will be thrown.
      * @return [io.appwrite.models.Document<T>]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.incrementRowColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.incrementRowColumn"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun incrementDocumentAttribute(
@@ -2237,6 +2537,11 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, type, status, attributes, error
      * @return [io.appwrite.models.IndexList]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.listIndexes` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.listIndexes"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listIndexes(
@@ -2267,7 +2572,8 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.Attributes can be `key`, `fulltext`, and `unique`.
+     * Creates an index on the attributes listed. Your index should include all the attributes you will query in a single request.
+     * Attributes can be `key`, `fulltext`, and `unique`.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2278,6 +2584,11 @@ class Databases(client: Client) : Service(client) {
      * @param lengths Length of index. Maximum of 100
      * @return [io.appwrite.models.Index]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createIndex` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createIndex"),
+        since = "1.8.0"
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createIndex(
@@ -2324,6 +2635,11 @@ class Databases(client: Client) : Service(client) {
      * @param key Index Key.
      * @return [io.appwrite.models.Index]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getIndex` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.getIndex"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun getIndex(
         databaseId: String,
@@ -2360,6 +2676,11 @@ class Databases(client: Client) : Service(client) {
      * @param key Index Key.
      * @return [Any]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.deleteIndex` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.deleteIndex"),
+        since = "1.8.0"
+    )
     @Throws(AppwriteException::class)
     suspend fun deleteIndex(
         databaseId: String,

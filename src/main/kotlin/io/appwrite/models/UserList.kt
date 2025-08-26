@@ -8,7 +8,7 @@ import io.appwrite.extensions.jsonCast
  */
 data class UserList<T>(
     /**
-     * Total number of users documents that matched your query.
+     * Total number of users that matched your query.
      */
     @SerializedName("total")
     val total: Long,
