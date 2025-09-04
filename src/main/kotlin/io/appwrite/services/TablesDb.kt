@@ -1111,6 +1111,279 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
+     * Create a geometric line attribute.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnLine]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLineColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+    ): io.appwrite.models.ColumnLine {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLine = {
+            io.appwrite.models.ColumnLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a line column. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnLine]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLineColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnLine {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLine = {
+            io.appwrite.models.ColumnLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric point attribute.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnPoint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPointColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+    ): io.appwrite.models.ColumnPoint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPoint = {
+            io.appwrite.models.ColumnPoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a point column. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnPoint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePointColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnPoint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPoint = {
+            io.appwrite.models.ColumnPoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric polygon attribute.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnPolygon]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPolygonColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+    ): io.appwrite.models.ColumnPolygon {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPolygon = {
+            io.appwrite.models.ColumnPolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPolygon::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a polygon column. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnPolygon]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePolygonColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnPolygon {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPolygon = {
+            io.appwrite.models.ColumnPolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPolygon::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
      * 
      *
