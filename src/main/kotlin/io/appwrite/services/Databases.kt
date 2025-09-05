@@ -1218,7 +1218,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
      * @return [io.appwrite.models.AttributeLine]
      */
     @Deprecated(
@@ -1232,7 +1232,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.AttributeLine {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/line"
             .replace("{databaseId}", databaseId)
@@ -1266,7 +1266,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributeLine]
      */
@@ -1281,7 +1281,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.AttributeLine {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/line/{key}"
@@ -1317,7 +1317,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
      * @return [io.appwrite.models.AttributePoint]
      */
     @Deprecated(
@@ -1331,7 +1331,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.AttributePoint {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/point"
             .replace("{databaseId}", databaseId)
@@ -1365,7 +1365,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributePoint]
      */
@@ -1380,7 +1380,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.AttributePoint {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/point/{key}"
@@ -1416,7 +1416,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
      * @return [io.appwrite.models.AttributePolygon]
      */
     @Deprecated(
@@ -1430,7 +1430,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.AttributePolygon {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/polygon"
             .replace("{databaseId}", databaseId)
@@ -1464,7 +1464,7 @@ class Databases(client: Client) : Service(client) {
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
-     * @param default Default value for attribute when not provided, as JSON string. Cannot be set when attribute is required.
+     * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
      * @param newKey New attribute key.
      * @return [io.appwrite.models.AttributePolygon]
      */
@@ -1479,7 +1479,7 @@ class Databases(client: Client) : Service(client) {
         collectionId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.AttributePolygon {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/polygon/{key}"

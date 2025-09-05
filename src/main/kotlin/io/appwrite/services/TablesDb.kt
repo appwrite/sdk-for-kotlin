@@ -1117,7 +1117,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
      * @return [io.appwrite.models.ColumnLine]
      */
     @JvmOverloads
@@ -1127,7 +1127,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.ColumnLine {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line"
             .replace("{databaseId}", databaseId)
@@ -1161,7 +1161,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
      * @param newKey New Column Key.
      * @return [io.appwrite.models.ColumnLine]
      */
@@ -1172,7 +1172,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnLine {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line/{key}"
@@ -1208,7 +1208,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
      * @return [io.appwrite.models.ColumnPoint]
      */
     @JvmOverloads
@@ -1218,7 +1218,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.ColumnPoint {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point"
             .replace("{databaseId}", databaseId)
@@ -1252,7 +1252,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
      * @param newKey New Column Key.
      * @return [io.appwrite.models.ColumnPoint]
      */
@@ -1263,7 +1263,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnPoint {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point/{key}"
@@ -1299,7 +1299,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
      * @return [io.appwrite.models.ColumnPolygon]
      */
     @JvmOverloads
@@ -1309,7 +1309,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
     ): io.appwrite.models.ColumnPolygon {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon"
             .replace("{databaseId}", databaseId)
@@ -1343,7 +1343,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
      * @param key Column Key.
      * @param required Is column required?
-     * @param default Default value for column when not provided, as JSON string. Cannot be set when column is required.
+     * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
      * @param newKey New Column Key.
      * @return [io.appwrite.models.ColumnPolygon]
      */
@@ -1354,7 +1354,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
         required: Boolean,
-        default: String? = null,
+        default: List<Any>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnPolygon {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon/{key}"

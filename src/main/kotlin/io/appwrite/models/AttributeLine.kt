@@ -59,7 +59,7 @@ data class AttributeLine(
      * Default value for attribute when not provided. Cannot be set when attribute is required.
      */
     @SerializedName("default")
-    var default: Any?,
+    var default: List<Any>?,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -88,7 +88,7 @@ data class AttributeLine(
             array = map["array"] as? Boolean?,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            default = map["default"] as? Any?,
+            default = map["default"] as? List<Any>?,
         )
     }
 }

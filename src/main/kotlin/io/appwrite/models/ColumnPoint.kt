@@ -59,7 +59,7 @@ data class ColumnPoint(
      * Default value for column when not provided. Cannot be set when column is required.
      */
     @SerializedName("default")
-    var default: Any?,
+    var default: List<Any>?,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -88,7 +88,7 @@ data class ColumnPoint(
             array = map["array"] as? Boolean?,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            default = map["default"] as? Any?,
+            default = map["default"] as? List<Any>?,
         )
     }
 }
