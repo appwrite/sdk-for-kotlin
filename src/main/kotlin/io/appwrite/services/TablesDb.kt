@@ -1111,7 +1111,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Create a geometric line attribute.
+     * Create a geometric line column.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1155,7 +1155,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Update a line column. Changing the `default` value will not update already existing documents.
+     * Update a line column. Changing the `default` value will not update already existing rows.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1202,7 +1202,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Create a geometric point attribute.
+     * Create a geometric point column.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1246,7 +1246,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Update a point column. Changing the `default` value will not update already existing documents.
+     * Update a point column. Changing the `default` value will not update already existing rows.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1293,7 +1293,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Create a geometric polygon attribute.
+     * Create a geometric polygon column.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).
@@ -1337,7 +1337,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Update a polygon column. Changing the `default` value will not update already existing documents.
+     * Update a polygon column. Changing the `default` value will not update already existing rows.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate).

@@ -1311,7 +1311,7 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create a geometric 2d point attribute.
+     * Create a geometric point attribute.
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
