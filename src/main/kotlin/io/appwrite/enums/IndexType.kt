@@ -8,7 +8,9 @@ enum class IndexType(val value: String) {
     @SerializedName("fulltext")
     FULLTEXT("fulltext"),
     @SerializedName("unique")
-    UNIQUE("unique");
+    UNIQUE("unique"),
+    @SerializedName("spatial")
+    SPATIAL("spatial");
 
     override fun toString() = value
 }

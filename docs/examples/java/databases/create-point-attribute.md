@@ -1,20 +1,20 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Account;
+import io.appwrite.services.Databases;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
-    .setSession(""); // The user session to authenticate with
+    .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Account account = new Account(client);
+Databases databases = new Databases(client);
 
-account.updatePrefs(
-    mapOf(
-        "language" to "en",
-        "timezone" to "UTC",
-        "darkTheme" to true
-    ), // prefs
+databases.createPointAttribute(
+    "<DATABASE_ID>", // databaseId
+    "<COLLECTION_ID>", // collectionId
+    "", // key
+    false, // required
+    listOf([1,2], [3, 4]), // default (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -61,8 +61,8 @@ class Databases(client: Client) : Service(client) {
      * @return [io.appwrite.models.Database]
      */
     @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createDatabase` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createDatabase")
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.create` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.create")
     )
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -1207,6 +1207,303 @@ class Databases(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.AttributeIp::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric line attribute.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
+     * @return [io.appwrite.models.AttributeLine]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createLineColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createLineColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLineAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.AttributeLine {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/line"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeLine = {
+            io.appwrite.models.AttributeLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a line attribute. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
+     * @return [io.appwrite.models.AttributeLine]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateLineColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateLineColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLineAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeLine {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/line/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeLine = {
+            io.appwrite.models.AttributeLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric point attribute.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
+     * @return [io.appwrite.models.AttributePoint]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createPointColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createPointColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPointAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.AttributePoint {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/point"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributePoint = {
+            io.appwrite.models.AttributePoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributePoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a point attribute. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
+     * @return [io.appwrite.models.AttributePoint]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updatePointColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updatePointColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePointAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributePoint {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/point/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributePoint = {
+            io.appwrite.models.AttributePoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributePoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric polygon attribute.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
+     * @return [io.appwrite.models.AttributePolygon]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createPolygonColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createPolygonColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPolygonAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.AttributePolygon {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/polygon"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributePolygon = {
+            io.appwrite.models.AttributePolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributePolygon::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a polygon attribute. Changing the `default` value will not update already existing documents.
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#createCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
+     * @param newKey New attribute key.
+     * @return [io.appwrite.models.AttributePolygon]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updatePolygonColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updatePolygonColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePolygonAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributePolygon {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/polygon/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributePolygon = {
+            io.appwrite.models.AttributePolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributePolygon::class.java,
             converter,
         )
     }
