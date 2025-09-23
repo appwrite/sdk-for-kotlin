@@ -128,12 +128,6 @@ data class Deployment(
     val providerRepositoryUrl: String,
 
     /**
-     * The branch of the vcs repository
-     */
-    @SerializedName("providerBranch")
-    val providerBranch: String,
-
-    /**
      * The commit hash of the vcs commit
      */
     @SerializedName("providerCommitHash")
@@ -166,6 +160,12 @@ data class Deployment(
     /**
      * The branch of the vcs repository
      */
+    @SerializedName("providerBranch")
+    val providerBranch: String,
+
+    /**
+     * The branch of the vcs repository
+     */
     @SerializedName("providerBranchUrl")
     val providerBranchUrl: String,
 
@@ -191,12 +191,12 @@ data class Deployment(
         "providerRepositoryName" to providerRepositoryName as Any,
         "providerRepositoryOwner" to providerRepositoryOwner as Any,
         "providerRepositoryUrl" to providerRepositoryUrl as Any,
-        "providerBranch" to providerBranch as Any,
         "providerCommitHash" to providerCommitHash as Any,
         "providerCommitAuthorUrl" to providerCommitAuthorUrl as Any,
         "providerCommitAuthor" to providerCommitAuthor as Any,
         "providerCommitMessage" to providerCommitMessage as Any,
         "providerCommitUrl" to providerCommitUrl as Any,
+        "providerBranch" to providerBranch as Any,
         "providerBranchUrl" to providerBranchUrl as Any,
     )
 
@@ -226,12 +226,12 @@ data class Deployment(
             providerRepositoryName = map["providerRepositoryName"] as String,
             providerRepositoryOwner = map["providerRepositoryOwner"] as String,
             providerRepositoryUrl = map["providerRepositoryUrl"] as String,
-            providerBranch = map["providerBranch"] as String,
             providerCommitHash = map["providerCommitHash"] as String,
             providerCommitAuthorUrl = map["providerCommitAuthorUrl"] as String,
             providerCommitAuthor = map["providerCommitAuthor"] as String,
             providerCommitMessage = map["providerCommitMessage"] as String,
             providerCommitUrl = map["providerCommitUrl"] as String,
+            providerBranch = map["providerBranch"] as String,
             providerBranchUrl = map["providerBranchUrl"] as String,
         )
     }

@@ -20,7 +20,7 @@ data class HealthStatus(
     val ping: Long,
 
     /**
-     * Service status. Possible values can are: `pass`, `fail`
+     * Service status. Possible values are: `pass`, `fail`
      */
     @SerializedName("status")
     val status: String,
