@@ -2041,7 +2041,7 @@ class TablesDB(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate). Make sure to define columns before creating rows.
-     * @param rows Array of documents data as JSON objects.
+     * @param rows Array of rows data as JSON objects.
      * @return [io.appwrite.models.RowList<T>]
      */
     @Throws(AppwriteException::class)
@@ -2079,7 +2079,7 @@ class TablesDB(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/tablesdb#tablesDBCreate). Make sure to define columns before creating rows.
-     * @param rows Array of documents data as JSON objects.
+     * @param rows Array of rows data as JSON objects.
      * @return [io.appwrite.models.RowList<T>]
      */
     @Throws(AppwriteException::class)
