@@ -96,7 +96,7 @@ data class ColumnIndex(
             error = map["error"] as String,
             columns = map["columns"] as List<String>,
             lengths = map["lengths"] as List<Long>,
-            orders = map["orders"] as? List<String>?,
+            orders = map["orders"] as? List<String>,
         )
     }
 }

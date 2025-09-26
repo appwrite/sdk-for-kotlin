@@ -88,7 +88,7 @@ data class Provider(
             enabled = map["enabled"] as Boolean,
             type = map["type"] as String,
             credentials = map["credentials"] as Any,
-            options = map["options"] as? Any?,
+            options = map["options"] as? Any,
         )
     }
 }

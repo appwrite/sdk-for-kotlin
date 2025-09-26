@@ -99,12 +99,12 @@ data class ColumnEnum(
             status = map["status"] as String,
             error = map["error"] as String,
             required = map["required"] as Boolean,
-            array = map["array"] as? Boolean?,
+            array = map["array"] as? Boolean,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             elements = map["elements"] as List<String>,
             format = map["format"] as String,
-            default = map["default"] as? String?,
+            default = map["default"] as? String,
         )
     }
 }

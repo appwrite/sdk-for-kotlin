@@ -2,6 +2,7 @@ package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
+import io.appwrite.enums.DeploymentStatus
 
 /**
  * Deployment
@@ -95,7 +96,7 @@ data class Deployment(
      * The deployment status. Possible values are "waiting", "processing", "building", "ready", and "failed".
      */
     @SerializedName("status")
-    val status: String,
+    val status: DeploymentStatus,
 
     /**
      * The build logs.
@@ -185,7 +186,7 @@ data class Deployment(
         "activate" to activate as Any,
         "screenshotLight" to screenshotLight as Any,
         "screenshotDark" to screenshotDark as Any,
-        "status" to status as Any,
+        "status" to status.value as Any,
         "buildLogs" to buildLogs as Any,
         "buildDuration" to buildDuration as Any,
         "providerRepositoryName" to providerRepositoryName as Any,
@@ -220,7 +221,7 @@ data class Deployment(
             activate = map["activate"] as Boolean,
             screenshotLight = map["screenshotLight"] as String,
             screenshotDark = map["screenshotDark"] as String,
-            status = map["status"] as String,
+            status = DeploymentStatus.values().find { it.value == map["status"] as String }!!,
             buildLogs = map["buildLogs"] as String,
             buildDuration = (map["buildDuration"] as Number).toLong(),
             providerRepositoryName = map["providerRepositoryName"] as String,

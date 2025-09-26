@@ -2,6 +2,7 @@ package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
+import io.appwrite.enums.HealthCheckStatus
 
 /**
  * Health Status
@@ -23,13 +24,13 @@ data class HealthStatus(
      * Service status. Possible values are: `pass`, `fail`
      */
     @SerializedName("status")
-    val status: String,
+    val status: HealthCheckStatus,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "name" to name as Any,
         "ping" to ping as Any,
-        "status" to status as Any,
+        "status" to status.value as Any,
     )
 
     companion object {
@@ -40,7 +41,7 @@ data class HealthStatus(
         ) = HealthStatus(
             name = map["name"] as String,
             ping = (map["ping"] as Number).toLong(),
-            status = map["status"] as String,
+            status = HealthCheckStatus.values().find { it.value == map["status"] as String }!!,
         )
     }
 }

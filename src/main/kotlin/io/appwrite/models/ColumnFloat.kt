@@ -99,7 +99,7 @@ data class ColumnFloat(
             status = map["status"] as String,
             error = map["error"] as String,
             required = map["required"] as Boolean,
-            array = map["array"] as? Boolean?,
+            array = map["array"] as? Boolean,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             min = (map["min"] as? Number)?.toDouble(),

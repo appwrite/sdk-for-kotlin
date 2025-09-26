@@ -99,12 +99,12 @@ data class ColumnString(
             status = map["status"] as String,
             error = map["error"] as String,
             required = map["required"] as Boolean,
-            array = map["array"] as? Boolean?,
+            array = map["array"] as? Boolean,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             size = (map["size"] as Number).toLong(),
-            default = map["default"] as? String?,
-            encrypt = map["encrypt"] as? Boolean?,
+            default = map["default"] as? String,
+            encrypt = map["encrypt"] as? Boolean,
         )
     }
 }

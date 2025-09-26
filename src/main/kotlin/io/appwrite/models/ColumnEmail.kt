@@ -92,11 +92,11 @@ data class ColumnEmail(
             status = map["status"] as String,
             error = map["error"] as String,
             required = map["required"] as Boolean,
-            array = map["array"] as? Boolean?,
+            array = map["array"] as? Boolean,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             format = map["format"] as String,
-            default = map["default"] as? String?,
+            default = map["default"] as? String,
         )
     }
 }
