@@ -2,6 +2,7 @@ package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
+import io.appwrite.enums.ColumnStatus
 
 /**
  * ColumnRelationship
@@ -23,7 +24,7 @@ data class ColumnRelationship(
      * Column status. Possible values: `available`, `processing`, `deleting`, `stuck`, or `failed`
      */
     @SerializedName("status")
-    val status: String,
+    val status: ColumnStatus,
 
     /**
      * Error message. Displays error generated on failure of creating or deleting an column.
@@ -95,7 +96,7 @@ data class ColumnRelationship(
     fun toMap(): Map<String, Any> = mapOf(
         "key" to key as Any,
         "type" to type as Any,
-        "status" to status as Any,
+        "status" to status.value as Any,
         "error" to error as Any,
         "required" to required as Any,
         "array" to array as Any,
@@ -117,7 +118,7 @@ data class ColumnRelationship(
         ) = ColumnRelationship(
             key = map["key"] as String,
             type = map["type"] as String,
-            status = map["status"] as String,
+            status = ColumnStatus.values().find { it.value == map["status"] as String }!!,
             error = map["error"] as String,
             required = map["required"] as Boolean,
             array = map["array"] as? Boolean,
