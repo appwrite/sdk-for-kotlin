@@ -58,11 +58,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/11.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/12.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "11.1.0",
+            "x-sdk-version" to "12.0.0",
             "x-appwrite-response-format" to "1.8.0",
         )
 
@@ -617,7 +617,7 @@ class Client @JvmOverloads constructor(
                 val warnings = response.headers["x-appwrite-warning"]
                 if (warnings != null) {
                     warnings.split(";").forEach { warning ->
-                        println("Warning: $warning")
+                        System.err.println("Warning: $warning")
                     }
                 }
 

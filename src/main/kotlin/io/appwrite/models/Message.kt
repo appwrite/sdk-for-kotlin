@@ -2,6 +2,7 @@ package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
+import io.appwrite.enums.MessageStatus
 
 /**
  * Message
@@ -83,7 +84,7 @@ data class Message(
      * Status of delivery.
      */
     @SerializedName("status")
-    val status: String,
+    val status: MessageStatus,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -99,7 +100,7 @@ data class Message(
         "deliveryErrors" to deliveryErrors as Any,
         "deliveredTotal" to deliveredTotal as Any,
         "data" to data as Any,
-        "status" to status as Any,
+        "status" to status.value as Any,
     )
 
     companion object {
@@ -115,12 +116,12 @@ data class Message(
             topics = map["topics"] as List<String>,
             users = map["users"] as List<String>,
             targets = map["targets"] as List<String>,
-            scheduledAt = map["scheduledAt"] as? String?,
-            deliveredAt = map["deliveredAt"] as? String?,
-            deliveryErrors = map["deliveryErrors"] as? List<String>?,
+            scheduledAt = map["scheduledAt"] as? String,
+            deliveredAt = map["deliveredAt"] as? String,
+            deliveryErrors = map["deliveryErrors"] as? List<String>,
             deliveredTotal = (map["deliveredTotal"] as Number).toLong(),
             data = map["data"] as Any,
-            status = map["status"] as String,
+            status = MessageStatus.values().find { it.value == map["status"] as String }!!,
         )
     }
 }
