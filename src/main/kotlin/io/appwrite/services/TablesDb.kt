@@ -87,6 +87,199 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
+     * List transactions across all databases.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries).
+     * @return [io.appwrite.models.TransactionList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listTransactions(
+        queries: List<String>? = null,
+    ): io.appwrite.models.TransactionList {
+        val apiPath = "/tablesdb/transactions"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.TransactionList = {
+            io.appwrite.models.TransactionList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.TransactionList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new transaction.
+     *
+     * @param ttl Seconds before the transaction expires.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTransaction(
+        ttl: Long? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "ttl" to ttl,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a transaction by its unique ID.
+     *
+     * @param transactionId Transaction ID.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getTransaction(
+        transactionId: String,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a transaction, to either commit or roll back its operations.
+     *
+     * @param transactionId Transaction ID.
+     * @param commit Commit transaction?
+     * @param rollback Rollback transaction?
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTransaction(
+        transactionId: String,
+        commit: Boolean? = null,
+        rollback: Boolean? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "commit" to commit,
+            "rollback" to rollback,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a transaction by its unique ID.
+     *
+     * @param transactionId Transaction ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteTransaction(
+        transactionId: String,
+    ): Any {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Create multiple operations in a single transaction.
+     *
+     * @param transactionId Transaction ID.
+     * @param operations Array of staged operations.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createOperations(
+        transactionId: String,
+        operations: List<Any>? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}/operations"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "operations" to operations,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get a database by its unique ID. This endpoint response returns a JSON object with the database metadata.
      *
      * @param databaseId Database ID.
@@ -1911,6 +2104,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -1919,6 +2113,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -1927,6 +2122,7 @@ class TablesDB(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -1949,6 +2145,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -1957,10 +2154,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = listRows(
         databaseId,
         tableId,
         queries,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -1972,6 +2171,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Row data as JSON object.
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -1982,6 +2182,7 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any,
         permissions: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -1992,6 +2193,7 @@ class TablesDB(client: Client) : Service(client) {
             "rowId" to rowId,
             "data" to data,
             "permissions" to permissions,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2017,6 +2219,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Row data as JSON object.
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2027,12 +2230,14 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any,
         permissions: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = createRow(
         databaseId,
         tableId,
         rowId,
         data,
         permissions,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2042,13 +2247,16 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
      * @param rows Array of rows data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> createRows(
         databaseId: String,
         tableId: String,
         rows: List<Any>,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -2057,6 +2265,7 @@ class TablesDB(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2080,17 +2289,21 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
      * @param rows Array of rows data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createRows(
         databaseId: String,
         tableId: String,
         rows: List<Any>,
+        transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = createRows(
         databaseId,
         tableId,
         rows,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2101,13 +2314,16 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID.
      * @param rows Array of row data as JSON objects. May contain partial rows.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> upsertRows(
         databaseId: String,
         tableId: String,
         rows: List<Any>,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -2116,6 +2332,7 @@ class TablesDB(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2140,17 +2357,21 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID.
      * @param rows Array of row data as JSON objects. May contain partial rows.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun upsertRows(
         databaseId: String,
         tableId: String,
         rows: List<Any>,
+        transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = upsertRows(
         databaseId,
         tableId,
         rows,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2161,6 +2382,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID.
      * @param data Row data as JSON object. Include only column and value pairs to be updated.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -2170,6 +2392,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         data: Any? = null,
         queries: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -2179,6 +2402,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "queries" to queries,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2203,6 +2427,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID.
      * @param data Row data as JSON object. Include only column and value pairs to be updated.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -2212,11 +2437,13 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         data: Any? = null,
         queries: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = updateRows(
         databaseId,
         tableId,
         data,
         queries,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2226,6 +2453,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -2234,6 +2462,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
@@ -2242,6 +2471,7 @@ class TablesDB(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2265,6 +2495,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -2273,10 +2504,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = deleteRows(
         databaseId,
         tableId,
         queries,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2287,6 +2520,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
      * @param rowId Row ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2296,6 +2530,7 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         rowId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
@@ -2305,6 +2540,7 @@ class TablesDB(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2328,6 +2564,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
      * @param rowId Row ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2337,11 +2574,13 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         rowId: String,
         queries: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = getRow(
         databaseId,
         tableId,
         rowId,
         queries,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2353,6 +2592,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID.
      * @param data Row data as JSON object. Include all required columns of the row to be created or updated.
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2363,6 +2603,7 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any? = null,
         permissions: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
@@ -2373,6 +2614,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2398,6 +2640,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID.
      * @param data Row data as JSON object. Include all required columns of the row to be created or updated.
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2408,12 +2651,14 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any? = null,
         permissions: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = upsertRow(
         databaseId,
         tableId,
         rowId,
         data,
         permissions,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2425,6 +2670,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID.
      * @param data Row data as JSON object. Include only columns and value pairs to be updated.
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2435,6 +2681,7 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any? = null,
         permissions: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
@@ -2445,6 +2692,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2470,6 +2718,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowId Row ID.
      * @param data Row data as JSON object. Include only columns and value pairs to be updated.
      * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2480,12 +2729,14 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         data: Any? = null,
         permissions: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = updateRow(
         databaseId,
         tableId,
         rowId,
         data,
         permissions,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2495,13 +2746,16 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
      * @param rowId Row ID.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [Any]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun deleteRow(
         databaseId: String,
         tableId: String,
         rowId: String,
+        transactionId: String? = null,
     ): Any {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
             .replace("{databaseId}", databaseId)
@@ -2509,6 +2763,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{rowId}", rowId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2531,6 +2786,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param column Column key.
      * @param value Value to increment the column by. The value must be a number.
      * @param min Minimum value for the column. If the current value is lesser than this value, an exception will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2542,6 +2798,7 @@ class TablesDB(client: Client) : Service(client) {
         column: String,
         value: Double? = null,
         min: Double? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/decrement"
@@ -2553,6 +2810,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "min" to min,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2579,6 +2837,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param column Column key.
      * @param value Value to increment the column by. The value must be a number.
      * @param min Minimum value for the column. If the current value is lesser than this value, an exception will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2590,6 +2849,7 @@ class TablesDB(client: Client) : Service(client) {
         column: String,
         value: Double? = null,
         min: Double? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = decrementRowColumn(
         databaseId,
         tableId,
@@ -2597,6 +2857,7 @@ class TablesDB(client: Client) : Service(client) {
         column,
         value,
         min,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -2609,6 +2870,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param column Column key.
      * @param value Value to increment the column by. The value must be a number.
      * @param max Maximum value for the column. If the current value is greater than this value, an error will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2620,6 +2882,7 @@ class TablesDB(client: Client) : Service(client) {
         column: String,
         value: Double? = null,
         max: Double? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/increment"
@@ -2631,6 +2894,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "max" to max,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2657,6 +2921,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param column Column key.
      * @param value Value to increment the column by. The value must be a number.
      * @param max Maximum value for the column. If the current value is greater than this value, an error will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Row<T>]
      */
     @JvmOverloads
@@ -2668,6 +2933,7 @@ class TablesDB(client: Client) : Service(client) {
         column: String,
         value: Double? = null,
         max: Double? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = incrementRowColumn(
         databaseId,
         tableId,
@@ -2675,6 +2941,7 @@ class TablesDB(client: Client) : Service(client) {
         column,
         value,
         max,
+        transactionId,
         nestedType = classOf(),
     )
 
