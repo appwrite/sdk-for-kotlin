@@ -18,6 +18,7 @@ class Users(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
      */
     @JvmOverloads
@@ -25,6 +26,7 @@ class Users(client: Client) : Service(client) {
     suspend fun <T> list(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.UserList<T> {
         val apiPath = "/users"
@@ -32,6 +34,7 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -53,6 +56,7 @@ class Users(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
      */
     @JvmOverloads
@@ -60,9 +64,11 @@ class Users(client: Client) : Service(client) {
     suspend fun list(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.UserList<Map<String, Any>> = list(
         queries,
         search,
+        total,
         nestedType = classOf(),
     )
 
@@ -275,6 +281,7 @@ class Users(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, provider, providerUid, providerEmail, providerAccessTokenExpiry
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.IdentityList]
      */
     @JvmOverloads
@@ -282,12 +289,14 @@ class Users(client: Client) : Service(client) {
     suspend fun listIdentities(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.IdentityList {
         val apiPath = "/users/identities"
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -938,6 +947,7 @@ class Users(client: Client) : Service(client) {
      *
      * @param userId User ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -945,12 +955,14 @@ class Users(client: Client) : Service(client) {
     suspend fun listLogs(
         userId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.LogList {
         val apiPath = "/users/{userId}/logs"
             .replace("{userId}", userId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -973,6 +985,7 @@ class Users(client: Client) : Service(client) {
      * @param userId User ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, teamId, invited, joined, confirm, roles
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.MembershipList]
      */
     @JvmOverloads
@@ -981,6 +994,7 @@ class Users(client: Client) : Service(client) {
         userId: String,
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.MembershipList {
         val apiPath = "/users/{userId}/memberships"
             .replace("{userId}", userId)
@@ -988,6 +1002,7 @@ class Users(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -1697,16 +1712,20 @@ class Users(client: Client) : Service(client) {
      * Get the user sessions list by its unique ID.
      *
      * @param userId User ID.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.SessionList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listSessions(
         userId: String,
+        total: Boolean? = null,
     ): io.appwrite.models.SessionList {
         val apiPath = "/users/{userId}/sessions"
             .replace("{userId}", userId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -1870,6 +1889,7 @@ class Users(client: Client) : Service(client) {
      *
      * @param userId User ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, providerId, identifier, providerType
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.TargetList]
      */
     @JvmOverloads
@@ -1877,12 +1897,14 @@ class Users(client: Client) : Service(client) {
     suspend fun listTargets(
         userId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.TargetList {
         val apiPath = "/users/{userId}/targets"
             .replace("{userId}", userId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )

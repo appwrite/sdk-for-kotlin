@@ -19,6 +19,8 @@ enum class Framework(val value: String) {
     SVELTEKIT("sveltekit"),
     @SerializedName("astro")
     ASTRO("astro"),
+    @SerializedName("tanstack-start")
+    TANSTACK_START("tanstack-start"),
     @SerializedName("remix")
     REMIX("remix"),
     @SerializedName("lynx")
