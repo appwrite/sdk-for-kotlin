@@ -19,6 +19,7 @@ class Tokens(client: Client) : Service(client) {
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](https://appwrite.io/docs/server/storage#createBucket).
      * @param fileId File unique ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: expire
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.ResourceTokenList]
      */
     @JvmOverloads
@@ -27,6 +28,7 @@ class Tokens(client: Client) : Service(client) {
         bucketId: String,
         fileId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.ResourceTokenList {
         val apiPath = "/tokens/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
@@ -34,6 +36,7 @@ class Tokens(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )

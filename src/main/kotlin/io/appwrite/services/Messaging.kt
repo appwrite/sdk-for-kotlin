@@ -18,6 +18,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: scheduledAt, deliveredAt, deliveredTotal, status, description, providerType
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.MessageList]
      */
     @JvmOverloads
@@ -25,12 +26,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listMessages(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.MessageList {
         val apiPath = "/messaging/messages"
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -624,6 +627,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param messageId Message ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -631,12 +635,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listMessageLogs(
         messageId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.LogList {
         val apiPath = "/messaging/messages/{messageId}/logs"
             .replace("{messageId}", messageId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -658,6 +664,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param messageId Message ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, providerId, identifier, providerType
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.TargetList]
      */
     @JvmOverloads
@@ -665,12 +672,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listTargets(
         messageId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.TargetList {
         val apiPath = "/messaging/messages/{messageId}/targets"
             .replace("{messageId}", messageId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -692,6 +701,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, provider, type, enabled
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.ProviderList]
      */
     @JvmOverloads
@@ -699,12 +709,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listProviders(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.ProviderList {
         val apiPath = "/messaging/providers"
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -1308,6 +1320,112 @@ class Messaging(client: Client) : Service(client) {
             "templateId" to templateId,
             "senderId" to senderId,
             "authKey" to authKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Resend provider.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param apiKey Resend API key.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address.
+     * @param replyToName Name set in the reply to field for the mail. Default value is sender name.
+     * @param replyToEmail Email set in the reply to field for the mail. Default value is sender email.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createResendProvider(
+        providerId: String,
+        name: String,
+        apiKey: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/resend"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "apiKey" to apiKey,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a Resend provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param apiKey Resend API key.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address.
+     * @param replyToName Name set in the Reply To field for the mail. Default value is Sender Name.
+     * @param replyToEmail Email set in the Reply To field for the mail. Default value is Sender Email.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateResendProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        apiKey: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/resend/{providerId}"
+            .replace("{providerId}", providerId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "apiKey" to apiKey,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2162,6 +2280,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param providerId Provider ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -2169,12 +2288,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listProviderLogs(
         providerId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.LogList {
         val apiPath = "/messaging/providers/{providerId}/logs"
             .replace("{providerId}", providerId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2196,6 +2317,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param subscriberId Subscriber ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -2203,12 +2325,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listSubscriberLogs(
         subscriberId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.LogList {
         val apiPath = "/messaging/subscribers/{subscriberId}/logs"
             .replace("{subscriberId}", subscriberId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2230,6 +2354,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, description, emailTotal, smsTotal, pushTotal
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.TopicList]
      */
     @JvmOverloads
@@ -2237,12 +2362,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listTopics(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.TopicList {
         val apiPath = "/messaging/topics"
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2399,6 +2526,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param topicId Topic ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.LogList]
      */
     @JvmOverloads
@@ -2406,12 +2534,14 @@ class Messaging(client: Client) : Service(client) {
     suspend fun listTopicLogs(
         topicId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.LogList {
         val apiPath = "/messaging/topics/{topicId}/logs"
             .replace("{topicId}", topicId)
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2434,6 +2564,7 @@ class Messaging(client: Client) : Service(client) {
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, provider, type, enabled
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.SubscriberList]
      */
     @JvmOverloads
@@ -2442,6 +2573,7 @@ class Messaging(client: Client) : Service(client) {
         topicId: String,
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.SubscriberList {
         val apiPath = "/messaging/topics/{topicId}/subscribers"
             .replace("{topicId}", topicId)
@@ -2449,6 +2581,7 @@ class Messaging(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )

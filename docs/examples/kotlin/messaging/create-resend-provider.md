@@ -9,8 +9,13 @@ val client = Client()
 
 val messaging = Messaging(client)
 
-val response = messaging.listProviderLogs(
+val response = messaging.createResendProvider(
     providerId = "<PROVIDER_ID>",
-    queries = listOf(), // optional
-    total = false // optional
+    name = "<NAME>",
+    apiKey = "<API_KEY>", // optional
+    fromName = "<FROM_NAME>", // optional
+    fromEmail = "email@example.com", // optional
+    replyToName = "<REPLY_TO_NAME>", // optional
+    replyToEmail = "email@example.com", // optional
+    enabled = false // optional
 )
