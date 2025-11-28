@@ -404,7 +404,7 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new site code deployment. Use this endpoint to upload a new version of your site code. To activate your newly uploaded code, you'll need to update the function's deployment to use your new deployment ID.
+     * Create a new site code deployment. Use this endpoint to upload a new version of your site code. To activate your newly uploaded code, you'll need to update the site's deployment to use your new deployment ID.
      *
      * @param siteId Site ID.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
@@ -498,7 +498,8 @@ class Sites(client: Client) : Service(client) {
      * @param repository Repository name of the template.
      * @param owner The name of the owner of the template.
      * @param rootDirectory Path to site code in the template repo.
-     * @param version Version (tag) for the repo linked to the site template.
+     * @param type Type for the reference provided. Can be commit, branch, or tag
+     * @param reference Reference value, can be a commit hash, branch name, or release tag
      * @param activate Automatically activate the deployment when it is finished building.
      * @return [io.appwrite.models.Deployment]
      */
@@ -509,7 +510,8 @@ class Sites(client: Client) : Service(client) {
         repository: String,
         owner: String,
         rootDirectory: String,
-        version: String,
+        type: io.appwrite.enums.TemplateReferenceType,
+        reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
         val apiPath = "/sites/{siteId}/deployments/template"
@@ -519,7 +521,8 @@ class Sites(client: Client) : Service(client) {
             "repository" to repository,
             "owner" to owner,
             "rootDirectory" to rootDirectory,
-            "version" to version,
+            "type" to type,
+            "reference" to reference,
             "activate" to activate,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -553,7 +556,7 @@ class Sites(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createVcsDeployment(
         siteId: String,
-        type: io.appwrite.enums.VCSDeploymentType,
+        type: io.appwrite.enums.VCSReferenceType,
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {

@@ -79,6 +79,12 @@ data class Bucket(
     @SerializedName("antivirus")
     val antivirus: Boolean,
 
+    /**
+     * Image transformations are enabled.
+     */
+    @SerializedName("transformations")
+    val transformations: Boolean,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -93,6 +99,7 @@ data class Bucket(
         "compression" to compression as Any,
         "encryption" to encryption as Any,
         "antivirus" to antivirus as Any,
+        "transformations" to transformations as Any,
     )
 
     companion object {
@@ -113,6 +120,7 @@ data class Bucket(
             compression = map["compression"] as String,
             encryption = map["encryption"] as Boolean,
             antivirus = map["antivirus"] as Boolean,
+            transformations = map["transformations"] as Boolean,
         )
     }
 }

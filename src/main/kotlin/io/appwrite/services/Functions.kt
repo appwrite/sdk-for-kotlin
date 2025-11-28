@@ -503,7 +503,8 @@ class Functions(client: Client) : Service(client) {
      * @param repository Repository name of the template.
      * @param owner The name of the owner of the template.
      * @param rootDirectory Path to function code in the template repo.
-     * @param version Version (tag) for the repo linked to the function template.
+     * @param type Type for the reference provided. Can be commit, branch, or tag
+     * @param reference Reference value, can be a commit hash, branch name, or release tag
      * @param activate Automatically activate the deployment when it is finished building.
      * @return [io.appwrite.models.Deployment]
      */
@@ -514,7 +515,8 @@ class Functions(client: Client) : Service(client) {
         repository: String,
         owner: String,
         rootDirectory: String,
-        version: String,
+        type: io.appwrite.enums.TemplateReferenceType,
+        reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
         val apiPath = "/functions/{functionId}/deployments/template"
@@ -524,7 +526,8 @@ class Functions(client: Client) : Service(client) {
             "repository" to repository,
             "owner" to owner,
             "rootDirectory" to rootDirectory,
-            "version" to version,
+            "type" to type,
+            "reference" to reference,
             "activate" to activate,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -558,7 +561,7 @@ class Functions(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createVcsDeployment(
         functionId: String,
-        type: io.appwrite.enums.VCSDeploymentType,
+        type: io.appwrite.enums.VCSReferenceType,
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
