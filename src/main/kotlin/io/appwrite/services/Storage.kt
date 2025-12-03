@@ -18,7 +18,7 @@ class Storage(client: Client) : Service(client) {
     /**
      * Get a list of all the storage buckets. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus, transformations
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BucketList]
@@ -65,6 +65,7 @@ class Storage(client: Client) : Service(client) {
      * @param compression Compression algorithm choosen for compression. Can be one of none,  [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
+     * @param transformations Are image transformations enabled?
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -80,6 +81,7 @@ class Storage(client: Client) : Service(client) {
         compression: io.appwrite.enums.Compression? = null,
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
+        transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
         val apiPath = "/storage/buckets"
 
@@ -94,6 +96,7 @@ class Storage(client: Client) : Service(client) {
             "compression" to compression,
             "encryption" to encryption,
             "antivirus" to antivirus,
+            "transformations" to transformations,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -154,6 +157,7 @@ class Storage(client: Client) : Service(client) {
      * @param compression Compression algorithm choosen for compression. Can be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
+     * @param transformations Are image transformations enabled?
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -169,6 +173,7 @@ class Storage(client: Client) : Service(client) {
         compression: io.appwrite.enums.Compression? = null,
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
+        transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
         val apiPath = "/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
@@ -183,6 +188,7 @@ class Storage(client: Client) : Service(client) {
             "compression" to compression,
             "encryption" to encryption,
             "antivirus" to antivirus,
+            "transformations" to transformations,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

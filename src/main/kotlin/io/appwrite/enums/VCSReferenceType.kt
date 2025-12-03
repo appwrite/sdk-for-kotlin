@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class VCSDeploymentType(val value: String) {
+enum class VCSReferenceType(val value: String) {
     @SerializedName("branch")
     BRANCH("branch"),
     @SerializedName("commit")
