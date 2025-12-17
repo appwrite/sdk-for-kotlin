@@ -426,6 +426,8 @@ class TablesDB(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
+     * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, integer, float, boolean, datetime, relationship), size (integer, required for string type), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
+     * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
      * @return [io.appwrite.models.Table]
      */
     @JvmOverloads
@@ -437,6 +439,8 @@ class TablesDB(client: Client) : Service(client) {
         permissions: List<String>? = null,
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
+        columns: List<Any>? = null,
+        indexes: List<Any>? = null,
     ): io.appwrite.models.Table {
         val apiPath = "/tablesdb/{databaseId}/tables"
             .replace("{databaseId}", databaseId)
@@ -447,6 +451,8 @@ class TablesDB(client: Client) : Service(client) {
             "permissions" to permissions,
             "rowSecurity" to rowSecurity,
             "enabled" to enabled,
+            "columns" to columns,
+            "indexes" to indexes,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
