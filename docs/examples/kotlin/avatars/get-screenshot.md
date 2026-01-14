@@ -3,7 +3,7 @@ import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Avatars
 import io.appwrite.enums.Theme
 import io.appwrite.enums.Timezone
-import io.appwrite.enums.Output
+import io.appwrite.enums.ImageFormat
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint

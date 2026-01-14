@@ -3,7 +3,7 @@ import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Avatars;
 import io.appwrite.enums.Theme;
 import io.appwrite.enums.Timezone;
-import io.appwrite.enums.Output;
+import io.appwrite.enums.ImageFormat;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -35,7 +35,7 @@ avatars.getScreenshot(
     800, // width (optional)
     600, // height (optional)
     85, // quality (optional)
-    Output.JPG, // output (optional)
+    ImageFormat.JPG, // output (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

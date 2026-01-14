@@ -1,15 +1,8 @@
 # Change Log
 
-## 13.1.0
+## 13.1.1
 
-* Added ability to create columns and indexes synchronously while creating a table
-
-## 13.0.0
-
-* Rename `VCSDeploymentType` enum to `VCSReferenceType`
-* Change `createTemplateDeployment` method signature: replace `version` parameter with `type` (TemplateReferenceType) and `reference` parameters
-* Add `getScreenshot` method to `Avatars` service
-* Add `Theme`, `Timezone` and `Output` enums
+* Update SDK as per latest server specs
 
 ## 12.3.0
 

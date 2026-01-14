@@ -1,0 +1,2976 @@
+package io.appwrite.services
+
+import io.appwrite.Client
+import io.appwrite.models.*
+import io.appwrite.enums.*
+import io.appwrite.exceptions.AppwriteException
+import io.appwrite.extensions.classOf
+import okhttp3.Cookie
+import java.io.File
+
+/**
+ * 
+**/
+class TablesDB(client: Client) : Service(client) {
+
+    /**
+     * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: name
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.DatabaseList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun list(
+        queries: List<String>? = null,
+        search: String? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.DatabaseList {
+        val apiPath = "/tablesdb"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "search" to search,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseList = {
+            io.appwrite.models.DatabaseList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Database.
+     * 
+     *
+     * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Database name. Max length: 128 chars.
+     * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @return [io.appwrite.models.Database]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun create(
+        databaseId: String,
+        name: String,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Database {
+        val apiPath = "/tablesdb"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "databaseId" to databaseId,
+            "name" to name,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Database = {
+            io.appwrite.models.Database.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Database::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List transactions across all databases.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries).
+     * @return [io.appwrite.models.TransactionList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listTransactions(
+        queries: List<String>? = null,
+    ): io.appwrite.models.TransactionList {
+        val apiPath = "/tablesdb/transactions"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.TransactionList = {
+            io.appwrite.models.TransactionList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.TransactionList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new transaction.
+     *
+     * @param ttl Seconds before the transaction expires.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTransaction(
+        ttl: Long? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "ttl" to ttl,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a transaction by its unique ID.
+     *
+     * @param transactionId Transaction ID.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getTransaction(
+        transactionId: String,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a transaction, to either commit or roll back its operations.
+     *
+     * @param transactionId Transaction ID.
+     * @param commit Commit transaction?
+     * @param rollback Rollback transaction?
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTransaction(
+        transactionId: String,
+        commit: Boolean? = null,
+        rollback: Boolean? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "commit" to commit,
+            "rollback" to rollback,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a transaction by its unique ID.
+     *
+     * @param transactionId Transaction ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteTransaction(
+        transactionId: String,
+    ): Any {
+        val apiPath = "/tablesdb/transactions/{transactionId}"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Create multiple operations in a single transaction.
+     *
+     * @param transactionId Transaction ID.
+     * @param operations Array of staged operations.
+     * @return [io.appwrite.models.Transaction]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createOperations(
+        transactionId: String,
+        operations: List<Any>? = null,
+    ): io.appwrite.models.Transaction {
+        val apiPath = "/tablesdb/transactions/{transactionId}/operations"
+            .replace("{transactionId}", transactionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "operations" to operations,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Transaction = {
+            io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Transaction::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a database by its unique ID. This endpoint response returns a JSON object with the database metadata.
+     *
+     * @param databaseId Database ID.
+     * @return [io.appwrite.models.Database]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun get(
+        databaseId: String,
+    ): io.appwrite.models.Database {
+        val apiPath = "/tablesdb/{databaseId}"
+            .replace("{databaseId}", databaseId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Database = {
+            io.appwrite.models.Database.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Database::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a database by its unique ID.
+     *
+     * @param databaseId Database ID.
+     * @param name Database name. Max length: 128 chars.
+     * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @return [io.appwrite.models.Database]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun update(
+        databaseId: String,
+        name: String,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Database {
+        val apiPath = "/tablesdb/{databaseId}"
+            .replace("{databaseId}", databaseId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Database = {
+            io.appwrite.models.Database.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Database::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a database by its unique ID. Only API keys with with databases.write scope can delete a database.
+     *
+     * @param databaseId Database ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun delete(
+        databaseId: String,
+    ): Any {
+        val apiPath = "/tablesdb/{databaseId}"
+            .replace("{databaseId}", databaseId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Get a list of all tables that belong to the provided databaseId. You can use the search parameter to filter your results.
+     *
+     * @param databaseId Database ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: name, enabled, rowSecurity
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.TableList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listTables(
+        databaseId: String,
+        queries: List<String>? = null,
+        search: String? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.TableList {
+        val apiPath = "/tablesdb/{databaseId}/tables"
+            .replace("{databaseId}", databaseId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "search" to search,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.TableList = {
+            io.appwrite.models.TableList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.TableList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Table. Before using this route, you should create a new database resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Table name. Max length: 128 chars.
+     * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
+     * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, integer, float, boolean, datetime, relationship), size (integer, required for string type), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
+     * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
+     * @return [io.appwrite.models.Table]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTable(
+        databaseId: String,
+        tableId: String,
+        name: String,
+        permissions: List<String>? = null,
+        rowSecurity: Boolean? = null,
+        enabled: Boolean? = null,
+        columns: List<Any>? = null,
+        indexes: List<Any>? = null,
+    ): io.appwrite.models.Table {
+        val apiPath = "/tablesdb/{databaseId}/tables"
+            .replace("{databaseId}", databaseId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "tableId" to tableId,
+            "name" to name,
+            "permissions" to permissions,
+            "rowSecurity" to rowSecurity,
+            "enabled" to enabled,
+            "columns" to columns,
+            "indexes" to indexes,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Table = {
+            io.appwrite.models.Table.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Table::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a table by its unique ID. This endpoint response returns a JSON object with the table metadata.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @return [io.appwrite.models.Table]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getTable(
+        databaseId: String,
+        tableId: String,
+    ): io.appwrite.models.Table {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Table = {
+            io.appwrite.models.Table.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Table::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a table by its unique ID.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param name Table name. Max length: 128 chars.
+     * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table-level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
+     * @return [io.appwrite.models.Table]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTable(
+        databaseId: String,
+        tableId: String,
+        name: String,
+        permissions: List<String>? = null,
+        rowSecurity: Boolean? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Table {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "permissions" to permissions,
+            "rowSecurity" to rowSecurity,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Table = {
+            io.appwrite.models.Table.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Table::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a table by its unique ID. Only users with write permissions have access to delete this resource.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteTable(
+        databaseId: String,
+        tableId: String,
+    ): Any {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * List columns in the table.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: key, type, size, required, array, status, error
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.ColumnList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listColumns(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.ColumnList {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnList = {
+            io.appwrite.models.ColumnList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a boolean column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnBoolean]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBooleanColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: Boolean? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnBoolean {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/boolean"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnBoolean = {
+            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnBoolean::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a boolean column. Changing the `default` value will not update already existing rows.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnBoolean]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateBooleanColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: Boolean? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnBoolean {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/boolean/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnBoolean = {
+            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnBoolean::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a date time column according to the ISO 8601 standard.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for the column in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnDatetime]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createDatetimeColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnDatetime {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/datetime"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnDatetime = {
+            io.appwrite.models.ColumnDatetime.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnDatetime::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a date time column. Changing the `default` value will not update already existing rows.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnDatetime]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateDatetimeColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnDatetime {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/datetime/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnDatetime = {
+            io.appwrite.models.ColumnDatetime.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnDatetime::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create an email column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnEmail]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createEmailColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnEmail {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/email"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnEmail = {
+            io.appwrite.models.ColumnEmail.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnEmail::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an email column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnEmail]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateEmailColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnEmail {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/email/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnEmail = {
+            io.appwrite.models.ColumnEmail.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnEmail::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create an enumeration column. The `elements` param acts as a white-list of accepted values for this column.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param elements Array of enum values.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnEnum]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createEnumColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        elements: List<String>,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnEnum {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/enum"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "elements" to elements,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnEnum = {
+            io.appwrite.models.ColumnEnum.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnEnum::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an enum column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param elements Updated list of enum values.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnEnum]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateEnumColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        elements: List<String>,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnEnum {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/enum/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "elements" to elements,
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnEnum = {
+            io.appwrite.models.ColumnEnum.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnEnum::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a float column. Optionally, minimum and maximum values can be provided.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param default Default value. Cannot be set when required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnFloat]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createFloatColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        min: Double? = null,
+        max: Double? = null,
+        default: Double? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnFloat {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/float"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnFloat = {
+            io.appwrite.models.ColumnFloat.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnFloat::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a float column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value. Cannot be set when required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnFloat]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateFloatColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: Double? = null,
+        min: Double? = null,
+        max: Double? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnFloat {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/float/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnFloat = {
+            io.appwrite.models.ColumnFloat.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnFloat::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create an integer column. Optionally, minimum and maximum values can be provided.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param default Default value. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnInteger]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIntegerColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        min: Long? = null,
+        max: Long? = null,
+        default: Long? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnInteger {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/integer"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnInteger = {
+            io.appwrite.models.ColumnInteger.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnInteger::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an integer column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value. Cannot be set when column is required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnInteger]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateIntegerColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: Long? = null,
+        min: Long? = null,
+        max: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnInteger {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/integer/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnInteger = {
+            io.appwrite.models.ColumnInteger.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnInteger::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create IP address column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnIp]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIpColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnIp {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/ip"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnIp = {
+            io.appwrite.models.ColumnIp.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnIp::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an ip column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnIp]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateIpColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnIp {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/ip/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnIp = {
+            io.appwrite.models.ColumnIp.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnIp::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric line column.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnLine]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLineColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.ColumnLine {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLine = {
+            io.appwrite.models.ColumnLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a line column. Changing the `default` value will not update already existing rows.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnLine]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLineColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnLine {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/line/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLine = {
+            io.appwrite.models.ColumnLine.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLine::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric point column.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnPoint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPointColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.ColumnPoint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPoint = {
+            io.appwrite.models.ColumnPoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a point column. Changing the `default` value will not update already existing rows.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnPoint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePointColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnPoint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/point/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPoint = {
+            io.appwrite.models.ColumnPoint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPoint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a geometric polygon column.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
+     * @return [io.appwrite.models.ColumnPolygon]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createPolygonColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+    ): io.appwrite.models.ColumnPolygon {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPolygon = {
+            io.appwrite.models.ColumnPolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPolygon::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a polygon column. Changing the `default` value will not update already existing rows.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnPolygon]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePolygonColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: List<Any>? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnPolygon {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/polygon/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnPolygon = {
+            io.appwrite.models.ColumnPolygon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnPolygon::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param relatedTableId Related Table ID.
+     * @param type Relation type
+     * @param twoWay Is Two Way?
+     * @param key Column Key.
+     * @param twoWayKey Two Way Column Key.
+     * @param onDelete Constraints option
+     * @return [io.appwrite.models.ColumnRelationship]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createRelationshipColumn(
+        databaseId: String,
+        tableId: String,
+        relatedTableId: String,
+        type: io.appwrite.enums.RelationshipType,
+        twoWay: Boolean? = null,
+        key: String? = null,
+        twoWayKey: String? = null,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
+    ): io.appwrite.models.ColumnRelationship {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/relationship"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "relatedTableId" to relatedTableId,
+            "type" to type,
+            "twoWay" to twoWay,
+            "key" to key,
+            "twoWayKey" to twoWayKey,
+            "onDelete" to onDelete,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnRelationship = {
+            io.appwrite.models.ColumnRelationship.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnRelationship::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a string column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param size Column size for text columns, in number of characters.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @return [io.appwrite.models.ColumnString]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createStringColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        size: Long,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+        encrypt: Boolean? = null,
+    ): io.appwrite.models.ColumnString {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/string"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "size" to size,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+            "encrypt" to encrypt,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnString = {
+            io.appwrite.models.ColumnString.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnString::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a string column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param size Maximum size of the string column.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnString]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateStringColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        size: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnString {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/string/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "size" to size,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnString = {
+            io.appwrite.models.ColumnString.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnString::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a URL column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnUrl]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createUrlColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnUrl {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/url"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnUrl = {
+            io.appwrite.models.ColumnUrl.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnUrl::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an url column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnUrl]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateUrlColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnUrl {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/url/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnUrl = {
+            io.appwrite.models.ColumnUrl.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnUrl::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get column by ID.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @return [io.appwrite.models.ColumnBoolean]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+    ): io.appwrite.models.ColumnBoolean {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnBoolean = {
+            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnBoolean::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Deletes a column.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+    ): Any {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Update relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param onDelete Constraints option
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnRelationship]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateRelationshipColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnRelationship {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/{key}/relationship"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "onDelete" to onDelete,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnRelationship = {
+            io.appwrite.models.ColumnRelationship.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnRelationship::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List indexes on the table.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following columns: key, type, status, attributes, error
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.ColumnIndexList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listIndexes(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.ColumnIndexList {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnIndexList = {
+            io.appwrite.models.ColumnIndexList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnIndexList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Creates an index on the columns listed. Your index should include all the columns you will query in a single request.
+     * Type can be `key`, `fulltext`, or `unique`.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Index Key.
+     * @param type Index type.
+     * @param columns Array of columns to index. Maximum of 100 columns are allowed, each 32 characters long.
+     * @param orders Array of index orders. Maximum of 100 orders are allowed.
+     * @param lengths Length of index. Maximum of 100
+     * @return [io.appwrite.models.ColumnIndex]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createIndex(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        type: io.appwrite.enums.IndexType,
+        columns: List<String>,
+        orders: List<String>? = null,
+        lengths: List<Long>? = null,
+    ): io.appwrite.models.ColumnIndex {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "type" to type,
+            "columns" to columns,
+            "orders" to orders,
+            "lengths" to lengths,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnIndex = {
+            io.appwrite.models.ColumnIndex.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnIndex::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get index by ID.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Index Key.
+     * @return [io.appwrite.models.ColumnIndex]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getIndex(
+        databaseId: String,
+        tableId: String,
+        key: String,
+    ): io.appwrite.models.ColumnIndex {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnIndex = {
+            io.appwrite.models.ColumnIndex.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnIndex::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete an index.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Index Key.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteIndex(
+        databaseId: String,
+        tableId: String,
+        key: String,
+    ): Any {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Get a list of all the user's rows in a given table. You can use the query params to filter your results.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> listRows(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get a list of all the user's rows in a given table. You can use the query params to filter your results.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listRows(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = listRows(
+        databaseId,
+        tableId,
+        queries,
+        transactionId,
+        total,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Create a new Row. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
+     * @param rowId Row ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param data Row data as JSON object.
+     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> createRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "rowId" to rowId,
+            "data" to data,
+            "permissions" to permissions,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Row. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
+     * @param rowId Row ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param data Row data as JSON object.
+     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = createRow(
+        databaseId,
+        tableId,
+        rowId,
+        data,
+        permissions,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Create new Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
+     * @param rows Array of rows data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> createRows(
+        databaseId: String,
+        tableId: String,
+        rows: List<Any>,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "rows" to rows,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create new Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable). Make sure to define columns before creating rows.
+     * @param rows Array of rows data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createRows(
+        databaseId: String,
+        tableId: String,
+        rows: List<Any>,
+        transactionId: String? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = createRows(
+        databaseId,
+        tableId,
+        rows,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rows Array of row data as JSON objects. May contain partial rows.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> upsertRows(
+        databaseId: String,
+        tableId: String,
+        rows: List<Any>,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "rows" to rows,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rows Array of row data as JSON objects. May contain partial rows.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun upsertRows(
+        databaseId: String,
+        tableId: String,
+        rows: List<Any>,
+        transactionId: String? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = upsertRows(
+        databaseId,
+        tableId,
+        rows,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Update all rows that match your queries, if no queries are submitted then all rows are updated. You can pass only specific fields to be updated.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param data Row data as JSON object. Include only column and value pairs to be updated.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateRows(
+        databaseId: String,
+        tableId: String,
+        data: Any? = null,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "data" to data,
+            "queries" to queries,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update all rows that match your queries, if no queries are submitted then all rows are updated. You can pass only specific fields to be updated.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param data Row data as JSON object. Include only column and value pairs to be updated.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateRows(
+        databaseId: String,
+        tableId: String,
+        data: Any? = null,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = updateRows(
+        databaseId,
+        tableId,
+        data,
+        queries,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Bulk delete rows using queries, if no queries are passed then all rows are deleted.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> deleteRows(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Bulk delete rows using queries, if no queries are passed then all rows are deleted.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun deleteRows(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = deleteRows(
+        databaseId,
+        tableId,
+        queries,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Get a row by its unique ID. This endpoint response returns a JSON object with the row data.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param rowId Row ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> getRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get a row by its unique ID. This endpoint response returns a JSON object with the row data.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param rowId Row ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = getRow(
+        databaseId,
+        tableId,
+        rowId,
+        queries,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Create or update a Row. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param data Row data as JSON object. Include all required columns of the row to be created or updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> upsertRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any? = null,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "data" to data,
+            "permissions" to permissions,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Create or update a Row. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param data Row data as JSON object. Include all required columns of the row to be created or updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun upsertRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any? = null,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = upsertRow(
+        databaseId,
+        tableId,
+        rowId,
+        data,
+        permissions,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Update a row by its unique ID. Using the patch method you can pass only specific fields that will get updated.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param data Row data as JSON object. Include only columns and value pairs to be updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any? = null,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "data" to data,
+            "permissions" to permissions,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update a row by its unique ID. Using the patch method you can pass only specific fields that will get updated.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param data Row data as JSON object. Include only columns and value pairs to be updated.
+     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        data: Any? = null,
+        permissions: List<String>? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = updateRow(
+        databaseId,
+        tableId,
+        rowId,
+        data,
+        permissions,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Delete a row by its unique ID.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param rowId Row ID.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [Any]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun deleteRow(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        transactionId: String? = null,
+    ): Any {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Decrement a specific column of a row by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param column Column key.
+     * @param value Value to increment the column by. The value must be a number.
+     * @param min Minimum value for the column. If the current value is lesser than this value, an exception will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> decrementRowColumn(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        column: String,
+        value: Double? = null,
+        min: Double? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/decrement"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+            .replace("{column}", column)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "value" to value,
+            "min" to min,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Decrement a specific column of a row by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param column Column key.
+     * @param value Value to increment the column by. The value must be a number.
+     * @param min Minimum value for the column. If the current value is lesser than this value, an exception will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun decrementRowColumn(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        column: String,
+        value: Double? = null,
+        min: Double? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = decrementRowColumn(
+        databaseId,
+        tableId,
+        rowId,
+        column,
+        value,
+        min,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Increment a specific column of a row by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param column Column key.
+     * @param value Value to increment the column by. The value must be a number.
+     * @param max Maximum value for the column. If the current value is greater than this value, an error will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> incrementRowColumn(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        column: String,
+        value: Double? = null,
+        max: Double? = null,
+        transactionId: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Row<T> {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/increment"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{rowId}", rowId)
+            .replace("{column}", column)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "value" to value,
+            "max" to max,
+            "transactionId" to transactionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Row<T> = {
+            io.appwrite.models.Row.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Increment a specific column of a row by a given value.
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param rowId Row ID.
+     * @param column Column key.
+     * @param value Value to increment the column by. The value must be a number.
+     * @param max Maximum value for the column. If the current value is greater than this value, an error will be thrown.
+     * @param transactionId Transaction ID for staging the operation.
+     * @return [io.appwrite.models.Row<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun incrementRowColumn(
+        databaseId: String,
+        tableId: String,
+        rowId: String,
+        column: String,
+        value: Double? = null,
+        max: Double? = null,
+        transactionId: String? = null,
+    ): io.appwrite.models.Row<Map<String, Any>> = incrementRowColumn(
+        databaseId,
+        tableId,
+        rowId,
+        column,
+        value,
+        max,
+        transactionId,
+        nestedType = classOf(),
+    )
+
+}
