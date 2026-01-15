@@ -1997,7 +1997,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param key Attribute Key.
-     * @return [io.appwrite.models.AttributeBoolean]
+     * @return [Any]
      */
     @Deprecated(
         message = "This API has been deprecated since 1.8.0. Please use `TablesDB.getColumn` instead.",
@@ -2008,7 +2008,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-    ): io.appwrite.models.AttributeBoolean {
+    ): Any {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
@@ -2018,7 +2018,7 @@ class Databases(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
-        val converter: (Any) -> io.appwrite.models.AttributeBoolean = {
+        val converter: (Any) -> Any = {
             io.appwrite.models.AttributeBoolean.from(map = it as Map<String, Any>)
         }
         return client.call(
@@ -2026,7 +2026,7 @@ class Databases(client: Client) : Service(client) {
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.AttributeBoolean::class.java,
+            responseType = Any::class.java,
             converter,
         )
     }

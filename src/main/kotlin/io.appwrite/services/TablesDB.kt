@@ -1852,14 +1852,14 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID.
      * @param key Column Key.
-     * @return [io.appwrite.models.ColumnBoolean]
+     * @return [Any]
      */
     @Throws(AppwriteException::class)
     suspend fun getColumn(
         databaseId: String,
         tableId: String,
         key: String,
-    ): io.appwrite.models.ColumnBoolean {
+    ): Any {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1869,7 +1869,7 @@ class TablesDB(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
-        val converter: (Any) -> io.appwrite.models.ColumnBoolean = {
+        val converter: (Any) -> Any = {
             io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
         }
         return client.call(
@@ -1877,7 +1877,7 @@ class TablesDB(client: Client) : Service(client) {
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.ColumnBoolean::class.java,
+            responseType = Any::class.java,
             converter,
         )
     }
