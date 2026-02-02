@@ -93,7 +93,7 @@ data class Deployment(
     val screenshotDark: String,
 
     /**
-     * The deployment status. Possible values are "waiting", "processing", "building", "ready", and "failed".
+     * The deployment status. Possible values are "waiting", "processing", "building", "ready", "canceled" and "failed".
      */
     @SerializedName("status")
     val status: DeploymentStatus,

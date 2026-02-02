@@ -70,26 +70,26 @@ class Health(client: Client) : Service(client) {
     /**
      * Check the Appwrite in-memory cache servers are up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]
+     * @return [io.appwrite.models.HealthStatusList]
      */
     @Throws(AppwriteException::class)
     suspend fun getCache(
-    ): io.appwrite.models.HealthStatus {
+    ): io.appwrite.models.HealthStatusList {
         val apiPath = "/health/cache"
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
-        val converter: (Any) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.HealthStatusList = {
+            io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.HealthStatus::class.java,
+            responseType = io.appwrite.models.HealthStatusList::class.java,
             converter,
         )
     }
@@ -128,26 +128,26 @@ class Health(client: Client) : Service(client) {
     /**
      * Check the Appwrite database servers are up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]
+     * @return [io.appwrite.models.HealthStatusList]
      */
     @Throws(AppwriteException::class)
     suspend fun getDB(
-    ): io.appwrite.models.HealthStatus {
+    ): io.appwrite.models.HealthStatusList {
         val apiPath = "/health/db"
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
-        val converter: (Any) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.HealthStatusList = {
+            io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.HealthStatus::class.java,
+            responseType = io.appwrite.models.HealthStatusList::class.java,
             converter,
         )
     }
@@ -155,26 +155,57 @@ class Health(client: Client) : Service(client) {
     /**
      * Check the Appwrite pub-sub servers are up and connection is successful.
      *
-     * @return [io.appwrite.models.HealthStatus]
+     * @return [io.appwrite.models.HealthStatusList]
      */
     @Throws(AppwriteException::class)
     suspend fun getPubSub(
-    ): io.appwrite.models.HealthStatus {
+    ): io.appwrite.models.HealthStatusList {
         val apiPath = "/health/pubsub"
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
-        val converter: (Any) -> io.appwrite.models.HealthStatus = {
-            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.HealthStatusList = {
+            io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.HealthStatus::class.java,
+            responseType = io.appwrite.models.HealthStatusList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get the number of audit logs that are waiting to be processed in the Appwrite internal queue server.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueAudits(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/audits"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
             converter,
         )
     }

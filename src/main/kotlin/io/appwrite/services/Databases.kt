@@ -340,7 +340,7 @@ class Databases(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun update(
         databaseId: String,
-        name: String,
+        name: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Database {
         val apiPath = "/databases/{databaseId}"
@@ -555,7 +555,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun updateCollection(
         databaseId: String,
         collectionId: String,
-        name: String,
+        name: String? = null,
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
@@ -1519,6 +1519,198 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
+     * Create a longtext attribute.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeLongtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLongtextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.AttributeLongtext {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/longtext"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeLongtext = {
+            io.appwrite.models.AttributeLongtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeLongtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a longtext attribute. Changing the `default` value will not update already existing documents.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeLongtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLongtextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeLongtext {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/longtext/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeLongtext = {
+            io.appwrite.models.AttributeLongtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeLongtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a mediumtext attribute.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeMediumtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createMediumtextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.AttributeMediumtext {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/mediumtext"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeMediumtext = {
+            io.appwrite.models.AttributeMediumtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeMediumtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a mediumtext attribute. Changing the `default` value will not update already existing documents.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeMediumtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateMediumtextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeMediumtext {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/mediumtext/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeMediumtext = {
+            io.appwrite.models.AttributeMediumtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeMediumtext::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a geometric point attribute.
      *
      * @param databaseId Database ID.
@@ -1888,6 +2080,102 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
+     * Create a text attribute.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeText]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.AttributeText {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/text"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeText = {
+            io.appwrite.models.AttributeText.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeText::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a text attribute. Changing the `default` value will not update already existing documents.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeText]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTextAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeText {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/text/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeText = {
+            io.appwrite.models.AttributeText.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeText::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a URL attribute.
      * 
      *
@@ -1992,6 +2280,108 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
+     * Create a varchar attribute.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param size Attribute size for varchar attributes, in number of characters. Maximum size is 16381.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeVarchar]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createVarcharAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        size: Long,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.AttributeVarchar {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/varchar"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "size" to size,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeVarchar = {
+            io.appwrite.models.AttributeVarchar.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeVarchar::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a varchar attribute. Changing the `default` value will not update already existing documents.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
+     * @param size Maximum size of the varchar attribute.
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeVarchar]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateVarcharAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        size: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeVarchar {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/varchar/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "size" to size,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeVarchar = {
+            io.appwrite.models.AttributeVarchar.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeVarchar::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get attribute by ID.
      *
      * @param databaseId Database ID.
@@ -2018,12 +2408,16 @@ class Databases(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
+        val converter: (Any) -> Any = {
+            io.appwrite.models.AttributeBoolean.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+            converter,
         )
     }
 
@@ -2682,7 +3076,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Any? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -2734,7 +3128,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Any? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = upsertDocument(
@@ -3127,7 +3521,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         type: io.appwrite.enums.IndexType,
         attributes: List<String>,
-        orders: List<String>? = null,
+        orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
     ): io.appwrite.models.Index {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"

@@ -324,7 +324,7 @@ class TablesDB(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun update(
         databaseId: String,
-        name: String,
+        name: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Database {
         val apiPath = "/tablesdb/{databaseId}"
@@ -519,7 +519,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun updateTable(
         databaseId: String,
         tableId: String,
-        name: String,
+        name: String? = null,
         permissions: List<String>? = null,
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
@@ -1410,6 +1410,198 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
+     * Create a longtext column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnLongtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLongtextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnLongtext {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/longtext"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLongtext = {
+            io.appwrite.models.ColumnLongtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLongtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a longtext column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnLongtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLongtextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnLongtext {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/longtext/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnLongtext = {
+            io.appwrite.models.ColumnLongtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnLongtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a mediumtext column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnMediumtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createMediumtextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnMediumtext {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnMediumtext = {
+            io.appwrite.models.ColumnMediumtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnMediumtext::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a mediumtext column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnMediumtext]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateMediumtextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnMediumtext {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnMediumtext = {
+            io.appwrite.models.ColumnMediumtext.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnMediumtext::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a geometric point column.
      *
      * @param databaseId Database ID.
@@ -1659,6 +1851,10 @@ class TablesDB(client: Client) : Service(client) {
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @return [io.appwrite.models.ColumnString]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.9.0. Please use `TablesDB.createTextColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createTextColumn")
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createStringColumn(
@@ -1712,6 +1908,10 @@ class TablesDB(client: Client) : Service(client) {
      * @param newKey New Column Key.
      * @return [io.appwrite.models.ColumnString]
      */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateTextColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateTextColumn")
+    )
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateStringColumn(
@@ -1746,6 +1946,102 @@ class TablesDB(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.ColumnString::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a text column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnText]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createTextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnText {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/text"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnText = {
+            io.appwrite.models.ColumnText.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnText::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a text column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnText]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateTextColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnText {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/text/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnText = {
+            io.appwrite.models.ColumnText.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnText::class.java,
             converter,
         )
     }
@@ -1847,6 +2143,108 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
+     * Create a varchar column.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param size Column size for varchar columns, in number of characters. Maximum size is 16381.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnVarchar]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createVarcharColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        size: Long,
+        required: Boolean,
+        default: String? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnVarchar {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/varchar"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "size" to size,
+            "required" to required,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnVarchar = {
+            io.appwrite.models.ColumnVarchar.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnVarchar::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a varchar column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value for column when not provided. Cannot be set when column is required.
+     * @param size Maximum size of the varchar column.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnVarchar]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateVarcharColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: String? = null,
+        size: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnVarchar {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/varchar/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "default" to default,
+            "size" to size,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnVarchar = {
+            io.appwrite.models.ColumnVarchar.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnVarchar::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get column by ID.
      *
      * @param databaseId Database ID.
@@ -1869,12 +2267,16 @@ class TablesDB(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
+        val converter: (Any) -> Any = {
+            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+            converter,
         )
     }
 
@@ -2017,7 +2419,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         type: io.appwrite.enums.IndexType,
         columns: List<String>,
-        orders: List<String>? = null,
+        orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
     ): io.appwrite.models.ColumnIndex {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes"

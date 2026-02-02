@@ -23,6 +23,8 @@ enum class Name(val value: String) {
     V1_CERTIFICATES("v1-certificates"),
     @SerializedName("v1-builds")
     V1_BUILDS("v1-builds"),
+    @SerializedName("v1-screenshots")
+    V1_SCREENSHOTS("v1-screenshots"),
     @SerializedName("v1-messaging")
     V1_MESSAGING("v1-messaging"),
     @SerializedName("v1-migrations")

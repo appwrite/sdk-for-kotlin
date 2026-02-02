@@ -62,7 +62,7 @@ data class Bucket(
     val allowedFileExtensions: List<String>,
 
     /**
-     * Compression algorithm choosen for compression. Will be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd).
+     * Compression algorithm chosen for compression. Will be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd).
      */
     @SerializedName("compression")
     val compression: String,
@@ -85,6 +85,12 @@ data class Bucket(
     @SerializedName("transformations")
     val transformations: Boolean,
 
+    /**
+     * Total size of this bucket in bytes.
+     */
+    @SerializedName("totalSize")
+    val totalSize: Long,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -100,6 +106,7 @@ data class Bucket(
         "encryption" to encryption as Any,
         "antivirus" to antivirus as Any,
         "transformations" to transformations as Any,
+        "totalSize" to totalSize as Any,
     )
 
     companion object {
@@ -121,6 +128,7 @@ data class Bucket(
             encryption = map["encryption"] as Boolean,
             antivirus = map["antivirus"] as Boolean,
             transformations = map["transformations"] as Boolean,
+            totalSize = (map["totalSize"] as Number).toLong(),
         )
     }
 }
