@@ -324,7 +324,7 @@ class TablesDB(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun update(
         databaseId: String,
-        name: String,
+        name: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Database {
         val apiPath = "/tablesdb/{databaseId}"
@@ -519,7 +519,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun updateTable(
         databaseId: String,
         tableId: String,
-        name: String,
+        name: String? = null,
         permissions: List<String>? = null,
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
@@ -1869,12 +1869,16 @@ class TablesDB(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
+        val converter: (Any) -> Any = {
+            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+            converter,
         )
     }
 
@@ -2017,7 +2021,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         type: io.appwrite.enums.IndexType,
         columns: List<String>,
-        orders: List<String>? = null,
+        orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
     ): io.appwrite.models.ColumnIndex {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/indexes"

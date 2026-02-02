@@ -1,23 +1,16 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.Permission;
-import io.appwrite.Role;
-import io.appwrite.services.Databases;
+import io.appwrite.services.Health;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Databases databases = new Databases(client);
+Health health = new Health(client);
 
-databases.updateCollection(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    "<NAME>", // name (optional)
-    List.of(Permission.read(Role.any())), // permissions (optional)
-    false, // documentSecurity (optional)
-    false, // enabled (optional)
+health.getQueueAudits(
+    0, // threshold (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

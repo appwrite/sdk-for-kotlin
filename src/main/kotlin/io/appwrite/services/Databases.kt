@@ -340,7 +340,7 @@ class Databases(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun update(
         databaseId: String,
-        name: String,
+        name: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Database {
         val apiPath = "/databases/{databaseId}"
@@ -555,7 +555,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun updateCollection(
         databaseId: String,
         collectionId: String,
-        name: String,
+        name: String? = null,
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
@@ -2018,12 +2018,16 @@ class Databases(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
+        val converter: (Any) -> Any = {
+            io.appwrite.models.AttributeBoolean.from(map = it as Map<String, Any>)
+        }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+            converter,
         )
     }
 
@@ -2682,7 +2686,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Any? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -2734,7 +2738,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Any? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = upsertDocument(
@@ -3127,7 +3131,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         type: io.appwrite.enums.IndexType,
         attributes: List<String>,
-        orders: List<String>? = null,
+        orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
     ): io.appwrite.models.Index {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/indexes"

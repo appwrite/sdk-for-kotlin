@@ -11,6 +11,8 @@ enum class DeploymentStatus(val value: String) {
     BUILDING("building"),
     @SerializedName("ready")
     READY("ready"),
+    @SerializedName("canceled")
+    CANCELED("canceled"),
     @SerializedName("failed")
     FAILED("failed");
 
