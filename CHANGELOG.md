@@ -1,8 +1,9 @@
 # Change Log
 
-## 14.0.1
+## 14.1.0
 
 * Fix doc examples with proper formatting
+* Add support for the new `Backups` service
 
 ## 14.0.0
 
