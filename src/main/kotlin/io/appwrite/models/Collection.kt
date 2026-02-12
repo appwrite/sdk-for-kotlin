@@ -67,6 +67,18 @@ data class Collection(
     @SerializedName("indexes")
     val indexes: List<Index>,
 
+    /**
+     * Maximum document size in bytes. Returns 0 when no limit applies.
+     */
+    @SerializedName("bytesMax")
+    val bytesMax: Long,
+
+    /**
+     * Currently used document size in bytes based on defined attributes.
+     */
+    @SerializedName("bytesUsed")
+    val bytesUsed: Long,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -79,6 +91,8 @@ data class Collection(
         "documentSecurity" to documentSecurity as Any,
         "attributes" to attributes as Any,
         "indexes" to indexes.map { it.toMap() } as Any,
+        "bytesMax" to bytesMax as Any,
+        "bytesUsed" to bytesUsed as Any,
     )
 
     companion object {
@@ -97,6 +111,8 @@ data class Collection(
             documentSecurity = map["documentSecurity"] as Boolean,
             attributes = map["attributes"] as List<Any>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { Index.from(map = it) },
+            bytesMax = (map["bytesMax"] as Number).toLong(),
+            bytesUsed = (map["bytesUsed"] as Number).toLong(),
         )
     }
 }
