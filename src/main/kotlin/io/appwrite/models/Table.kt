@@ -67,6 +67,18 @@ data class Table(
     @SerializedName("indexes")
     val indexes: List<ColumnIndex>,
 
+    /**
+     * Maximum row size in bytes. Returns 0 when no limit applies.
+     */
+    @SerializedName("bytesMax")
+    val bytesMax: Long,
+
+    /**
+     * Currently used row size in bytes based on defined columns.
+     */
+    @SerializedName("bytesUsed")
+    val bytesUsed: Long,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -79,6 +91,8 @@ data class Table(
         "rowSecurity" to rowSecurity as Any,
         "columns" to columns as Any,
         "indexes" to indexes.map { it.toMap() } as Any,
+        "bytesMax" to bytesMax as Any,
+        "bytesUsed" to bytesUsed as Any,
     )
 
     companion object {
@@ -97,6 +111,8 @@ data class Table(
             rowSecurity = map["rowSecurity"] as Boolean,
             columns = map["columns"] as List<Any>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { ColumnIndex.from(map = it) },
+            bytesMax = (map["bytesMax"] as Number).toLong(),
+            bytesUsed = (map["bytesUsed"] as Number).toLong(),
         )
     }
 }
