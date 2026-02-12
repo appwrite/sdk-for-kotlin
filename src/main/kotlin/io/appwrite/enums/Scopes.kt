@@ -112,7 +112,23 @@ enum class Scopes(val value: String) {
     @SerializedName("tokens.read")
     TOKENS_READ("tokens.read"),
     @SerializedName("tokens.write")
-    TOKENS_WRITE("tokens.write");
+    TOKENS_WRITE("tokens.write"),
+    @SerializedName("policies.write")
+    POLICIES_WRITE("policies.write"),
+    @SerializedName("policies.read")
+    POLICIES_READ("policies.read"),
+    @SerializedName("archives.read")
+    ARCHIVES_READ("archives.read"),
+    @SerializedName("archives.write")
+    ARCHIVES_WRITE("archives.write"),
+    @SerializedName("restorations.read")
+    RESTORATIONS_READ("restorations.read"),
+    @SerializedName("restorations.write")
+    RESTORATIONS_WRITE("restorations.write"),
+    @SerializedName("domains.read")
+    DOMAINS_READ("domains.read"),
+    @SerializedName("domains.write")
+    DOMAINS_WRITE("domains.write");
 
     override fun toString() = value
 }

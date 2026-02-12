@@ -268,6 +268,173 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
+     * Get a list of all API keys from the current account. 
+     *
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.KeyList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listKeys(
+        total: Boolean? = null,
+    ): io.appwrite.models.KeyList {
+        val apiPath = "/account/keys"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.KeyList = {
+            io.appwrite.models.KeyList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.KeyList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new account API key.
+     *
+     * @param name Key name. Max length: 128 chars.
+     * @param scopes Key scopes list. Maximum of 100 scopes are allowed.
+     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
+     * @return [io.appwrite.models.Key]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createKey(
+        name: String,
+        scopes: List<io.appwrite.enums.Scopes>,
+        expire: String? = null,
+    ): io.appwrite.models.Key {
+        val apiPath = "/account/keys"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "scopes" to scopes,
+            "expire" to expire,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Key = {
+            io.appwrite.models.Key.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Key::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a key by its unique ID. This endpoint returns details about a specific API key in your account including it's scopes.
+     *
+     * @param keyId Key unique ID.
+     * @return [io.appwrite.models.Key]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getKey(
+        keyId: String,
+    ): io.appwrite.models.Key {
+        val apiPath = "/account/keys/{keyId}"
+            .replace("{keyId}", keyId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Key = {
+            io.appwrite.models.Key.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Key::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a key by its unique ID. Use this endpoint to update the name, scopes, or expiration time of an API key.
+     *
+     * @param keyId Key unique ID.
+     * @param name Key name. Max length: 128 chars.
+     * @param scopes Key scopes list. Maximum of 100 scopes are allowed.
+     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
+     * @return [io.appwrite.models.Key]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateKey(
+        keyId: String,
+        name: String,
+        scopes: List<io.appwrite.enums.Scopes>,
+        expire: String? = null,
+    ): io.appwrite.models.Key {
+        val apiPath = "/account/keys/{keyId}"
+            .replace("{keyId}", keyId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "scopes" to scopes,
+            "expire" to expire,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Key = {
+            io.appwrite.models.Key.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Key::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a key by its unique ID. Once deleted, the key can no longer be used to authenticate API calls.
+     *
+     * @param keyId Key unique ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteKey(
+        keyId: String,
+    ): Any {
+        val apiPath = "/account/keys/{keyId}"
+            .replace("{keyId}", keyId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Get the list of latest security activity logs for the currently logged in user. Each log returns user IP address, location and date and time of log.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -1712,7 +1879,7 @@ class Account(client: Client) : Service(client) {
      * 
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom.
+     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, github, gitlab, google, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, yahoo, yammer, yandex, zoho, zoom, githubImagine, googleImagine.
      * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
