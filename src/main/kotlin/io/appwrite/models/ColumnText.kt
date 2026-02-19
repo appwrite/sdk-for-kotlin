@@ -62,6 +62,12 @@ data class ColumnText(
     @SerializedName("default")
     var default: String?,
 
+    /**
+     * Defines whether this column is encrypted or not.
+     */
+    @SerializedName("encrypt")
+    var encrypt: Boolean?,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "key" to key as Any,
@@ -73,6 +79,7 @@ data class ColumnText(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "default" to default as Any,
+        "encrypt" to encrypt as Any,
     )
 
     companion object {
@@ -90,6 +97,7 @@ data class ColumnText(
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
             default = map["default"] as? String,
+            encrypt = map["encrypt"] as? Boolean,
         )
     }
 }

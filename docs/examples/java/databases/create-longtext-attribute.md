@@ -17,6 +17,7 @@ databases.createLongtextAttribute(
     false, // required
     "<DEFAULT>", // default (optional)
     false, // array (optional)
+    false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

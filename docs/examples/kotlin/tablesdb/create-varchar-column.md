@@ -17,6 +17,7 @@ val response = tablesDB.createVarcharColumn(
     size = 1,
     required = false,
     default = "<DEFAULT>", // optional
-    array = false // optional
+    array = false, // optional
+    encrypt = false // optional
 )
 ```

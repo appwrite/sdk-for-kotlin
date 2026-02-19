@@ -1419,6 +1419,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @return [io.appwrite.models.ColumnLongtext]
      */
     @JvmOverloads
@@ -1430,6 +1431,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnLongtext {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/longtext"
             .replace("{databaseId}", databaseId)
@@ -1440,6 +1442,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -1515,6 +1518,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @return [io.appwrite.models.ColumnMediumtext]
      */
     @JvmOverloads
@@ -1526,6 +1530,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnMediumtext {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext"
             .replace("{databaseId}", databaseId)
@@ -1536,6 +1541,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -1960,6 +1966,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @return [io.appwrite.models.ColumnText]
      */
     @JvmOverloads
@@ -1971,6 +1978,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnText {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/text"
             .replace("{databaseId}", databaseId)
@@ -1981,6 +1989,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2153,6 +2162,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
      * @return [io.appwrite.models.ColumnVarchar]
      */
     @JvmOverloads
@@ -2165,6 +2175,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnVarchar {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/varchar"
             .replace("{databaseId}", databaseId)
@@ -2176,6 +2187,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

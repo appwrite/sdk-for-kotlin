@@ -17,6 +17,12 @@ enum class BuildRuntime(val value: String) {
     NODE_21_0("node-21.0"),
     @SerializedName("node-22")
     NODE_22("node-22"),
+    @SerializedName("node-23")
+    NODE_23("node-23"),
+    @SerializedName("node-24")
+    NODE_24("node-24"),
+    @SerializedName("node-25")
+    NODE_25("node-25"),
     @SerializedName("php-8.0")
     PHP_8_0("php-8.0"),
     @SerializedName("php-8.1")
@@ -25,6 +31,8 @@ enum class BuildRuntime(val value: String) {
     PHP_8_2("php-8.2"),
     @SerializedName("php-8.3")
     PHP_8_3("php-8.3"),
+    @SerializedName("php-8.4")
+    PHP_8_4("php-8.4"),
     @SerializedName("ruby-3.0")
     RUBY_3_0("ruby-3.0"),
     @SerializedName("ruby-3.1")
@@ -33,6 +41,10 @@ enum class BuildRuntime(val value: String) {
     RUBY_3_2("ruby-3.2"),
     @SerializedName("ruby-3.3")
     RUBY_3_3("ruby-3.3"),
+    @SerializedName("ruby-3.4")
+    RUBY_3_4("ruby-3.4"),
+    @SerializedName("ruby-4.0")
+    RUBY_4_0("ruby-4.0"),
     @SerializedName("python-3.8")
     PYTHON_3_8("python-3.8"),
     @SerializedName("python-3.9")
@@ -43,16 +55,26 @@ enum class BuildRuntime(val value: String) {
     PYTHON_3_11("python-3.11"),
     @SerializedName("python-3.12")
     PYTHON_3_12("python-3.12"),
+    @SerializedName("python-3.13")
+    PYTHON_3_13("python-3.13"),
+    @SerializedName("python-3.14")
+    PYTHON_3_14("python-3.14"),
     @SerializedName("python-ml-3.11")
     PYTHON_ML_3_11("python-ml-3.11"),
     @SerializedName("python-ml-3.12")
     PYTHON_ML_3_12("python-ml-3.12"),
+    @SerializedName("python-ml-3.13")
+    PYTHON_ML_3_13("python-ml-3.13"),
     @SerializedName("deno-1.40")
     DENO_1_40("deno-1.40"),
     @SerializedName("deno-1.46")
     DENO_1_46("deno-1.46"),
     @SerializedName("deno-2.0")
     DENO_2_0("deno-2.0"),
+    @SerializedName("deno-2.5")
+    DENO_2_5("deno-2.5"),
+    @SerializedName("deno-2.6")
+    DENO_2_6("deno-2.6"),
     @SerializedName("dart-2.15")
     DART_2_15("dart-2.15"),
     @SerializedName("dart-2.16")
@@ -83,6 +105,8 @@ enum class BuildRuntime(val value: String) {
     DOTNET_7_0("dotnet-7.0"),
     @SerializedName("dotnet-8.0")
     DOTNET_8_0("dotnet-8.0"),
+    @SerializedName("dotnet-10")
+    DOTNET_10("dotnet-10"),
     @SerializedName("java-8.0")
     JAVA_8_0("java-8.0"),
     @SerializedName("java-11.0")
@@ -95,6 +119,8 @@ enum class BuildRuntime(val value: String) {
     JAVA_21_0("java-21.0"),
     @SerializedName("java-22")
     JAVA_22("java-22"),
+    @SerializedName("java-25")
+    JAVA_25("java-25"),
     @SerializedName("swift-5.5")
     SWIFT_5_5("swift-5.5"),
     @SerializedName("swift-5.8")
@@ -103,6 +129,8 @@ enum class BuildRuntime(val value: String) {
     SWIFT_5_9("swift-5.9"),
     @SerializedName("swift-5.10")
     SWIFT_5_10("swift-5.10"),
+    @SerializedName("swift-6.2")
+    SWIFT_6_2("swift-6.2"),
     @SerializedName("kotlin-1.6")
     KOTLIN_1_6("kotlin-1.6"),
     @SerializedName("kotlin-1.8")
@@ -111,6 +139,8 @@ enum class BuildRuntime(val value: String) {
     KOTLIN_1_9("kotlin-1.9"),
     @SerializedName("kotlin-2.0")
     KOTLIN_2_0("kotlin-2.0"),
+    @SerializedName("kotlin-2.3")
+    KOTLIN_2_3("kotlin-2.3"),
     @SerializedName("cpp-17")
     CPP_17("cpp-17"),
     @SerializedName("cpp-20")
@@ -119,8 +149,18 @@ enum class BuildRuntime(val value: String) {
     BUN_1_0("bun-1.0"),
     @SerializedName("bun-1.1")
     BUN_1_1("bun-1.1"),
+    @SerializedName("bun-1.2")
+    BUN_1_2("bun-1.2"),
+    @SerializedName("bun-1.3")
+    BUN_1_3("bun-1.3"),
     @SerializedName("go-1.23")
     GO_1_23("go-1.23"),
+    @SerializedName("go-1.24")
+    GO_1_24("go-1.24"),
+    @SerializedName("go-1.25")
+    GO_1_25("go-1.25"),
+    @SerializedName("go-1.26")
+    GO_1_26("go-1.26"),
     @SerializedName("static-1")
     STATIC_1("static-1"),
     @SerializedName("flutter-3.24")
