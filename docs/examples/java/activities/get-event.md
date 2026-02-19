@@ -1,17 +1,17 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Health;
+import io.appwrite.services.Activities;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Health health = new Health(client);
+Activities activities = new Activities(client);
 
-health.getQueueBillingTeamAggregation(
-    0, // threshold (optional)
+activities.getEvent(
+    "<EVENT_ID>", // eventId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

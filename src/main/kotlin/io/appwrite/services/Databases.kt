@@ -1528,6 +1528,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeLongtext]
      */
     @JvmOverloads
@@ -1539,6 +1540,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.AttributeLongtext {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/longtext"
             .replace("{databaseId}", databaseId)
@@ -1549,6 +1551,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -1624,6 +1627,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeMediumtext]
      */
     @JvmOverloads
@@ -1635,6 +1639,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.AttributeMediumtext {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/mediumtext"
             .replace("{databaseId}", databaseId)
@@ -1645,6 +1650,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2089,6 +2095,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeText]
      */
     @JvmOverloads
@@ -2100,6 +2107,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.AttributeText {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/text"
             .replace("{databaseId}", databaseId)
@@ -2110,6 +2118,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2290,6 +2299,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
      * @return [io.appwrite.models.AttributeVarchar]
      */
     @JvmOverloads
@@ -2302,6 +2312,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        encrypt: Boolean? = null,
     ): io.appwrite.models.AttributeVarchar {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/varchar"
             .replace("{databaseId}", databaseId)
@@ -2313,6 +2324,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

@@ -16,6 +16,7 @@ val response = databases.createTextAttribute(
     key = "",
     required = false,
     default = "<DEFAULT>", // optional
-    array = false // optional
+    array = false, // optional
+    encrypt = false // optional
 )
 ```

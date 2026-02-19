@@ -99,6 +99,10 @@ enum class Scopes(val value: String) {
     RULES_READ("rules.read"),
     @SerializedName("rules.write")
     RULES_WRITE("rules.write"),
+    @SerializedName("schedules.read")
+    SCHEDULES_READ("schedules.read"),
+    @SerializedName("schedules.write")
+    SCHEDULES_WRITE("schedules.write"),
     @SerializedName("migrations.read")
     MIGRATIONS_READ("migrations.read"),
     @SerializedName("migrations.write")
@@ -128,7 +132,9 @@ enum class Scopes(val value: String) {
     @SerializedName("domains.read")
     DOMAINS_READ("domains.read"),
     @SerializedName("domains.write")
-    DOMAINS_WRITE("domains.write");
+    DOMAINS_WRITE("domains.write"),
+    @SerializedName("events.read")
+    EVENTS_READ("events.read");
 
     override fun toString() = value
 }
