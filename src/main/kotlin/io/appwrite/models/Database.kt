@@ -44,6 +44,18 @@ data class Database(
     @SerializedName("type")
     val type: DatabaseType,
 
+    /**
+     * Database backup policies.
+     */
+    @SerializedName("policies")
+    val policies: List<Index>,
+
+    /**
+     * Database backup archives.
+     */
+    @SerializedName("archives")
+    val archives: List<Collection>,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -52,6 +64,8 @@ data class Database(
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
         "type" to type.value as Any,
+        "policies" to policies.map { it.toMap() } as Any,
+        "archives" to archives.map { it.toMap() } as Any,
     )
 
     companion object {
@@ -66,6 +80,8 @@ data class Database(
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
             type = DatabaseType.values().find { it.value == map["type"] as String }!!,
+            policies = (map["policies"] as List<Map<String, Any>>).map { Index.from(map = it) },
+            archives = (map["archives"] as List<Map<String, Any>>).map { Collection.from(map = it) },
         )
     }
 }

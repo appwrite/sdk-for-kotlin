@@ -126,6 +126,41 @@ class Health(client: Client) : Service(client) {
     }
 
     /**
+     * Get console pausing health status. Monitors projects approaching the pause threshold to detect potential issues with console access tracking.
+     * 
+     *
+     * @param threshold Percentage threshold of projects approaching pause. When hit (equal or higher), endpoint returns server error. Default value is 10.
+     * @param inactivityDays Number of days of inactivity before a project is paused. Should match the plan's projectInactivityDays setting. Default value is 7.
+     * @return [io.appwrite.models.HealthStatus]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getConsolePausing(
+        threshold: Long? = null,
+        inactivityDays: Long? = null,
+    ): io.appwrite.models.HealthStatus {
+        val apiPath = "/health/console-pausing"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+            "inactivityDays" to inactivityDays,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Check the Appwrite database servers are up and connection is successful.
      *
      * @return [io.appwrite.models.HealthStatusList]
@@ -211,6 +246,68 @@ class Health(client: Client) : Service(client) {
     }
 
     /**
+     * Get billing project aggregation queue.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueBillingProjectAggregation(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/billing-project-aggregation"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get billing team aggregation queue.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueBillingTeamAggregation(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/billing-team-aggregation"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get the number of builds that are waiting to be processed in the Appwrite internal queue server.
      *
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
@@ -222,6 +319,37 @@ class Health(client: Client) : Service(client) {
         threshold: Long? = null,
     ): io.appwrite.models.HealthQueue {
         val apiPath = "/health/queue/builds"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get the priority builds queue size.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 500.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueuePriorityBuilds(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/builds-priority"
 
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
@@ -528,6 +656,37 @@ class Health(client: Client) : Service(client) {
     }
 
     /**
+     * Get region manager queue.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 100.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueRegionManager(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/region-manager"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get the number of metrics that are waiting to be processed in the Appwrite stats resources queue.
      *
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
@@ -570,6 +729,37 @@ class Health(client: Client) : Service(client) {
         threshold: Long? = null,
     ): io.appwrite.models.HealthQueue {
         val apiPath = "/health/queue/stats-usage"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthQueue = {
+            io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthQueue::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get threats queue.
+     *
+     * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 100.
+     * @return [io.appwrite.models.HealthQueue]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getQueueThreats(
+        threshold: Long? = null,
+    ): io.appwrite.models.HealthQueue {
+        val apiPath = "/health/queue/threats"
 
         val apiParams = mutableMapOf<String, Any?>(
             "threshold" to threshold,
