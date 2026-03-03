@@ -408,10 +408,10 @@ class Sites(client: Client) : Service(client) {
      *
      * @param siteId Site ID.
      * @param code Gzip file with your code package. When used with the Appwrite CLI, pass the path to your code directory, and the CLI will automatically package your code. Use a path that is within the current directory.
-     * @param activate Automatically activate the deployment when it is finished building.
      * @param installCommand Install Commands.
      * @param buildCommand Build Commands.
      * @param outputDirectory Output Directory.
+     * @param activate Automatically activate the deployment when it is finished building.
      * @return [io.appwrite.models.Deployment]
      */
     @JvmOverloads
@@ -419,10 +419,10 @@ class Sites(client: Client) : Service(client) {
     suspend fun createDeployment(
         siteId: String,
         code: InputFile,
-        activate: Boolean,
         installCommand: String? = null,
         buildCommand: String? = null,
         outputDirectory: String? = null,
+        activate: Boolean? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.Deployment {
         val apiPath = "/sites/{siteId}/deployments"

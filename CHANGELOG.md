@@ -1,5 +1,14 @@
 # Change Log
 
+## 14.1.0
+
+* Added getConsolePausing health status endpoint
+* Added `ttl` parameter for cached list results (0-86400s)
+* Added optional `activate` parameter to Sites.createDeployment
+* Updated Document and Row sequence ID descriptions
+* Updated Databases docs to refer to collections, not tables
+* Added deprecated updateRelationshipAttribute public API; use TablesDB.updateRelationshipColumn instead
+
 ## 14.0.1
 
 * Documentation updates: Added new encrypt (optional) parameter to attribute and column creation examples in Java and Kotlin docs to support encryption for database fields.

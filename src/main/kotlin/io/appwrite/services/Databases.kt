@@ -669,7 +669,7 @@ class Databases(client: Client) : Service(client) {
      * 
      *
      * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
@@ -1973,6 +1973,55 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
+     * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param key Attribute Key.
+     * @param onDelete Constraints option
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeRelationship]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRelationshipColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRelationshipColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateRelationshipAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeRelationship {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/relationship/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "onDelete" to onDelete,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeRelationship = {
+            io.appwrite.models.AttributeRelationship.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeRelationship::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a string attribute.
      * 
      *
@@ -2471,55 +2520,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
-     * 
-     *
-     * @param databaseId Database ID.
-     * @param collectionId Collection ID.
-     * @param key Attribute Key.
-     * @param onDelete Constraints option
-     * @param newKey New Attribute Key.
-     * @return [io.appwrite.models.AttributeRelationship]
-     */
-    @Deprecated(
-        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateRelationshipColumn` instead.",
-        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateRelationshipColumn")
-    )
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun updateRelationshipAttribute(
-        databaseId: String,
-        collectionId: String,
-        key: String,
-        onDelete: io.appwrite.enums.RelationMutate? = null,
-        newKey: String? = null,
-    ): io.appwrite.models.AttributeRelationship {
-        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/{key}/relationship"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "onDelete" to onDelete,
-            "newKey" to newKey,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "content-type" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.AttributeRelationship = {
-            io.appwrite.models.AttributeRelationship.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.AttributeRelationship::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
      * @param databaseId Database ID.
@@ -2527,6 +2527,7 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(
@@ -2541,6 +2542,7 @@ class Databases(client: Client) : Service(client) {
         queries: List<String>? = null,
         transactionId: String? = null,
         total: Boolean? = null,
+        ttl: Long? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}/documents"
@@ -2551,6 +2553,7 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
             "transactionId" to transactionId,
             "total" to total,
+            "ttl" to ttl,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -2575,6 +2578,7 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(
@@ -2589,12 +2593,14 @@ class Databases(client: Client) : Service(client) {
         queries: List<String>? = null,
         transactionId: String? = null,
         total: Boolean? = null,
+        ttl: Long? = null,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = listDocuments(
         databaseId,
         collectionId,
         queries,
         transactionId,
         total,
+        ttl,
         nestedType = classOf(),
     )
 

@@ -126,6 +126,41 @@ class Health(client: Client) : Service(client) {
     }
 
     /**
+     * Get console pausing health status. Monitors projects approaching the pause threshold to detect potential issues with console access tracking.
+     * 
+     *
+     * @param threshold Percentage threshold of projects approaching pause. When hit (equal or higher), endpoint returns server error. Default value is 10.
+     * @param inactivityDays Number of days of inactivity before a project is paused. Should match the plan's projectInactivityDays setting. Default value is 7.
+     * @return [io.appwrite.models.HealthStatus]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun getConsolePausing(
+        threshold: Long? = null,
+        inactivityDays: Long? = null,
+    ): io.appwrite.models.HealthStatus {
+        val apiPath = "/health/console-pausing"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "threshold" to threshold,
+            "inactivityDays" to inactivityDays,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.HealthStatus = {
+            io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthStatus::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Check the Appwrite database servers are up and connection is successful.
      *
      * @return [io.appwrite.models.HealthStatusList]

@@ -1,23 +1,18 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.models.InputFile;
-import io.appwrite.services.Sites;
+import io.appwrite.services.Health;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Sites sites = new Sites(client);
+Health health = new Health(client);
 
-sites.createDeployment(
-    "<SITE_ID>", // siteId
-    InputFile.fromPath("file.png"), // code
-    "<INSTALL_COMMAND>", // installCommand (optional)
-    "<BUILD_COMMAND>", // buildCommand (optional)
-    "<OUTPUT_DIRECTORY>", // outputDirectory (optional)
-    false, // activate (optional)
+health.getConsolePausing(
+    0, // threshold (optional)
+    0, // inactivityDays (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
