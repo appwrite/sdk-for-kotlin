@@ -2,10 +2,7 @@
 
 ## 14.0.1
 
-* Documentation updates: Added new encrypt (optional) parameter to attribute and column creation examples in Java and Kotlin docs to support encryption for database fields.
-* Updated README to reflect compatibility with Appwrite server version 1.8.x and aligned the Kotlin SDK dependency examples to version 14.0.0.
-* Misc: Removed obsolete GitHub workflows from the repository as part of cleanup.
-* Add support for the new `Backups` service
+* Fix doc examples with proper formatting
 
 ## 14.0.0
 

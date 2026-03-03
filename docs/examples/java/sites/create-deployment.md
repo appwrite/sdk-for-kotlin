@@ -14,10 +14,10 @@ Sites sites = new Sites(client);
 sites.createDeployment(
     "<SITE_ID>", // siteId
     InputFile.fromPath("file.png"), // code
-    false, // activate
     "<INSTALL_COMMAND>", // installCommand (optional)
     "<BUILD_COMMAND>", // buildCommand (optional)
     "<OUTPUT_DIRECTORY>", // outputDirectory (optional)
+    false, // activate (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
