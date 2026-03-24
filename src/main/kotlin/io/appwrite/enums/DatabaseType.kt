@@ -6,7 +6,11 @@ enum class DatabaseType(val value: String) {
     @SerializedName("legacy")
     LEGACY("legacy"),
     @SerializedName("tablesdb")
-    TABLESDB("tablesdb");
+    TABLESDB("tablesdb"),
+    @SerializedName("documentsdb")
+    DOCUMENTSDB("documentsdb"),
+    @SerializedName("vectorsdb")
+    VECTORSDB("vectorsdb");
 
     override fun toString() = value
 }

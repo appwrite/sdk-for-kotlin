@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Databases;
-import io.appwrite.enums.IndexType;
+import io.appwrite.enums.DatabasesIndexType;
 import io.appwrite.enums.OrderBy;
 
 Client client = new Client()
@@ -16,7 +16,7 @@ databases.createIndex(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
     "", // key
-    IndexType.KEY, // type
+    DatabasesIndexType.KEY, // type
     List.of(), // attributes
     List.of(OrderBy.ASC), // orders (optional)
     List.of(), // lengths (optional)

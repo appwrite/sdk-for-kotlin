@@ -56,6 +56,12 @@ data class Site(
     val framework: String,
 
     /**
+     * How many days to keep the non-active deployments before they will be automatically deleted.
+     */
+    @SerializedName("deploymentRetention")
+    val deploymentRetention: Long,
+
+    /**
      * Site's active deployment ID.
      */
     @SerializedName("deploymentId")
@@ -122,6 +128,12 @@ data class Site(
     val buildCommand: String,
 
     /**
+     * Custom command to use when starting site runtime.
+     */
+    @SerializedName("startCommand")
+    val startCommand: String,
+
+    /**
      * The directory where the site build output is located.
      */
     @SerializedName("outputDirectory")
@@ -158,10 +170,16 @@ data class Site(
     val providerSilentMode: Boolean,
 
     /**
-     * Machine specification for builds and executions.
+     * Machine specification for deployment builds.
      */
-    @SerializedName("specification")
-    val specification: String,
+    @SerializedName("buildSpecification")
+    val buildSpecification: String,
+
+    /**
+     * Machine specification for SSR executions.
+     */
+    @SerializedName("runtimeSpecification")
+    val runtimeSpecification: String,
 
     /**
      * Site build runtime.
@@ -191,6 +209,7 @@ data class Site(
         "live" to live as Any,
         "logging" to logging as Any,
         "framework" to framework as Any,
+        "deploymentRetention" to deploymentRetention as Any,
         "deploymentId" to deploymentId as Any,
         "deploymentCreatedAt" to deploymentCreatedAt as Any,
         "deploymentScreenshotLight" to deploymentScreenshotLight as Any,
@@ -202,13 +221,15 @@ data class Site(
         "timeout" to timeout as Any,
         "installCommand" to installCommand as Any,
         "buildCommand" to buildCommand as Any,
+        "startCommand" to startCommand as Any,
         "outputDirectory" to outputDirectory as Any,
         "installationId" to installationId as Any,
         "providerRepositoryId" to providerRepositoryId as Any,
         "providerBranch" to providerBranch as Any,
         "providerRootDirectory" to providerRootDirectory as Any,
         "providerSilentMode" to providerSilentMode as Any,
-        "specification" to specification as Any,
+        "buildSpecification" to buildSpecification as Any,
+        "runtimeSpecification" to runtimeSpecification as Any,
         "buildRuntime" to buildRuntime as Any,
         "adapter" to adapter as Any,
         "fallbackFile" to fallbackFile as Any,
@@ -228,6 +249,7 @@ data class Site(
             live = map["live"] as Boolean,
             logging = map["logging"] as Boolean,
             framework = map["framework"] as String,
+            deploymentRetention = (map["deploymentRetention"] as Number).toLong(),
             deploymentId = map["deploymentId"] as String,
             deploymentCreatedAt = map["deploymentCreatedAt"] as String,
             deploymentScreenshotLight = map["deploymentScreenshotLight"] as String,
@@ -239,13 +261,15 @@ data class Site(
             timeout = (map["timeout"] as Number).toLong(),
             installCommand = map["installCommand"] as String,
             buildCommand = map["buildCommand"] as String,
+            startCommand = map["startCommand"] as String,
             outputDirectory = map["outputDirectory"] as String,
             installationId = map["installationId"] as String,
             providerRepositoryId = map["providerRepositoryId"] as String,
             providerBranch = map["providerBranch"] as String,
             providerRootDirectory = map["providerRootDirectory"] as String,
             providerSilentMode = map["providerSilentMode"] as Boolean,
-            specification = map["specification"] as String,
+            buildSpecification = map["buildSpecification"] as String,
+            runtimeSpecification = map["runtimeSpecification"] as String,
             buildRuntime = map["buildRuntime"] as String,
             adapter = map["adapter"] as String,
             fallbackFile = map["fallbackFile"] as String,

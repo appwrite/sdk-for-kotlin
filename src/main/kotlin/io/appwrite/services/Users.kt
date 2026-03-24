@@ -16,7 +16,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Get a list of all the project's users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels, impersonator
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
@@ -54,7 +54,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Get a list of all the project's users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels, impersonator
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
@@ -845,6 +845,60 @@ class Users(client: Client) : Service(client) {
     ): io.appwrite.models.User<Map<String, Any>> = updateEmail(
         userId,
         email,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
+     * 
+     *
+     * @param userId User ID.
+     * @param impersonator Whether the user can impersonate other users. When true, the user can browse project users to choose a target and can pass impersonation headers to act as that user. Internal audit logs still attribute impersonated actions to the original impersonator and store the target user details only in internal audit payload data.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateImpersonator(
+        userId: String,
+        impersonator: Boolean,
+        nestedType: Class<T>,
+    ): io.appwrite.models.User<T> {
+        val apiPath = "/users/{userId}/impersonator"
+            .replace("{userId}", userId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "impersonator" to impersonator,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.User<T> = {
+            io.appwrite.models.User.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
+     * 
+     *
+     * @param userId User ID.
+     * @param impersonator Whether the user can impersonate other users. When true, the user can browse project users to choose a target and can pass impersonation headers to act as that user. Internal audit logs still attribute impersonated actions to the original impersonator and store the target user details only in internal audit payload data.
+     * @return [io.appwrite.models.User<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateImpersonator(
+        userId: String,
+        impersonator: Boolean,
+    ): io.appwrite.models.User<Map<String, Any>> = updateImpersonator(
+        userId,
+        impersonator,
         nestedType = classOf(),
     )
 

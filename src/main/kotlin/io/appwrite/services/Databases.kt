@@ -3537,7 +3537,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         key: String,
-        type: io.appwrite.enums.IndexType,
+        type: io.appwrite.enums.DatabasesIndexType,
         attributes: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,

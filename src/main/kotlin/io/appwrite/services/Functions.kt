@@ -72,7 +72,9 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
-     * @param specification Runtime specification for the function and builds.
+     * @param buildSpecification Build specification for the function deployments.
+     * @param runtimeSpecification Runtime specification for the function executions.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -95,7 +97,9 @@ class Functions(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
-        specification: String? = null,
+        buildSpecification: String? = null,
+        runtimeSpecification: String? = null,
+        deploymentRetention: Long? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
 
@@ -117,7 +121,9 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
-            "specification" to specification,
+            "buildSpecification" to buildSpecification,
+            "runtimeSpecification" to runtimeSpecification,
+            "deploymentRetention" to deploymentRetention,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -239,7 +245,9 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
-     * @param specification Runtime specification for the function and builds.
+     * @param buildSpecification Build specification for the function deployments.
+     * @param runtimeSpecification Runtime specification for the function executions.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -262,7 +270,9 @@ class Functions(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
-        specification: String? = null,
+        buildSpecification: String? = null,
+        runtimeSpecification: String? = null,
+        deploymentRetention: Long? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions/{functionId}"
             .replace("{functionId}", functionId)
@@ -284,7 +294,9 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
-            "specification" to specification,
+            "buildSpecification" to buildSpecification,
+            "runtimeSpecification" to runtimeSpecification,
+            "deploymentRetention" to deploymentRetention,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

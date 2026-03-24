@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class IndexType(val value: String) {
+enum class TablesDBIndexType(val value: String) {
     @SerializedName("key")
     KEY("key"),
     @SerializedName("fulltext")

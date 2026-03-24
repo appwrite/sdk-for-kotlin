@@ -1,13 +1,11 @@
 # Change Log
 
-## 14.1.0
+## 15.0.0
 
-* Added getConsolePausing health status endpoint
-* Added `ttl` parameter for cached list results (0-86400s)
-* Added optional `activate` parameter to Sites.createDeployment
-* Updated Document and Row sequence ID descriptions
-* Updated Databases docs to refer to collections, not tables
-* Added deprecated updateRelationshipAttribute public API; use TablesDB.updateRelationshipColumn instead
+* Breaking: Renamed `IndexType` to `DatabasesIndexType` in docs.
+* Breaking: Replaced `.setKey()` with `.setSession()` in docs examples.
+* Added: Added `DocumentsDB` service with document management methods.
+* Updated: Updated docs to reflect new `DatabasesIndexType` and `DocumentsDB` examples.
 
 ## 14.0.1
 

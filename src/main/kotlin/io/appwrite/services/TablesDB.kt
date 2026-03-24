@@ -2429,7 +2429,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         key: String,
-        type: io.appwrite.enums.IndexType,
+        type: io.appwrite.enums.TablesDBIndexType,
         columns: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
