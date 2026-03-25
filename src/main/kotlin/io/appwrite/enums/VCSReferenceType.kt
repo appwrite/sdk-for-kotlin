@@ -6,7 +6,9 @@ enum class VCSReferenceType(val value: String) {
     @SerializedName("branch")
     BRANCH("branch"),
     @SerializedName("commit")
-    COMMIT("commit");
+    COMMIT("commit"),
+    @SerializedName("tag")
+    TAG("tag");
 
     override fun toString() = value
 }
