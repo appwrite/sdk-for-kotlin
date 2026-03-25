@@ -2,10 +2,10 @@
 
 ## 15.0.0
 
+* [BREAKING] Changed `$sequence` type from `int` to `string` for rows and documents
 * Breaking: Renamed `IndexType` to `DatabasesIndexType` in docs.
 * Breaking: Replaced `.setKey()` with `.setSession()` in docs examples.
-* Added: Added `DocumentsDB` service with document management methods.
-* Updated: Updated docs to reflect new `DatabasesIndexType` and `DocumentsDB` examples.
+* Updated: Updated docs to reflect new `DatabasesIndexType` examples.
 
 ## 14.0.1
 
