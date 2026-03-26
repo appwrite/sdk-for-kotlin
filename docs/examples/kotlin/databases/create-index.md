@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Databases
-import io.appwrite.enums.IndexType
+import io.appwrite.enums.DatabasesIndexType
 import io.appwrite.enums.OrderBy
 
 val client = Client()
@@ -16,7 +16,7 @@ val response = databases.createIndex(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
     key = "",
-    type = IndexType.KEY,
+    type = DatabasesIndexType.KEY,
     attributes = listOf(),
     orders = listOf(OrderBy.ASC), // optional
     lengths = listOf() // optional

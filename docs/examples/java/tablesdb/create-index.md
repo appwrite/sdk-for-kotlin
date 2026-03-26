@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.TablesDB;
-import io.appwrite.enums.IndexType;
+import io.appwrite.enums.TablesDBIndexType;
 import io.appwrite.enums.OrderBy;
 
 Client client = new Client()
@@ -16,7 +16,7 @@ tablesDB.createIndex(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
     "", // key
-    IndexType.KEY, // type
+    TablesDBIndexType.KEY, // type
     List.of(), // columns
     List.of(OrderBy.ASC), // orders (optional)
     List.of(), // lengths (optional)

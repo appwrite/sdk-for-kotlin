@@ -1,5 +1,12 @@
 # Change Log
 
+## 15.0.0
+
+* [BREAKING] Changed `$sequence` type from `int` to `string` for rows and documents
+* Breaking: Renamed `IndexType` to `DatabasesIndexType` in docs.
+* Breaking: Replaced `.setKey()` with `.setSession()` in docs examples.
+* Updated: Updated docs to reflect new `DatabasesIndexType` examples.
+
 ## 14.1.0
 
 * Added getConsolePausing health status endpoint

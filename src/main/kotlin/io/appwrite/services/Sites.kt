@@ -64,6 +64,7 @@ class Sites(client: Client) : Service(client) {
      * @param timeout Maximum request time in seconds.
      * @param installCommand Install Command.
      * @param buildCommand Build Command.
+     * @param startCommand Custom start command. Leave empty to use default.
      * @param outputDirectory Output Directory for site.
      * @param adapter Framework adapter defining rendering strategy. Allowed values are: static, ssr
      * @param installationId Appwrite Installation ID for VCS (Version Control System) deployment.
@@ -72,7 +73,9 @@ class Sites(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the site.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the site? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to site code in the linked repo.
-     * @param specification Framework specification for the site and builds.
+     * @param buildSpecification Build specification for the site deployments.
+     * @param runtimeSpecification Runtime specification for the SSR executions.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -87,6 +90,7 @@ class Sites(client: Client) : Service(client) {
         timeout: Long? = null,
         installCommand: String? = null,
         buildCommand: String? = null,
+        startCommand: String? = null,
         outputDirectory: String? = null,
         adapter: io.appwrite.enums.Adapter? = null,
         installationId: String? = null,
@@ -95,7 +99,9 @@ class Sites(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
-        specification: String? = null,
+        buildSpecification: String? = null,
+        runtimeSpecification: String? = null,
+        deploymentRetention: Long? = null,
     ): io.appwrite.models.Site {
         val apiPath = "/sites"
 
@@ -108,6 +114,7 @@ class Sites(client: Client) : Service(client) {
             "timeout" to timeout,
             "installCommand" to installCommand,
             "buildCommand" to buildCommand,
+            "startCommand" to startCommand,
             "outputDirectory" to outputDirectory,
             "buildRuntime" to buildRuntime,
             "adapter" to adapter,
@@ -117,7 +124,9 @@ class Sites(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
-            "specification" to specification,
+            "buildSpecification" to buildSpecification,
+            "runtimeSpecification" to runtimeSpecification,
+            "deploymentRetention" to deploymentRetention,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -230,6 +239,7 @@ class Sites(client: Client) : Service(client) {
      * @param timeout Maximum request time in seconds.
      * @param installCommand Install Command.
      * @param buildCommand Build Command.
+     * @param startCommand Custom start command. Leave empty to use default.
      * @param outputDirectory Output Directory for site.
      * @param buildRuntime Runtime to use during build step.
      * @param adapter Framework adapter defining rendering strategy. Allowed values are: static, ssr
@@ -239,7 +249,9 @@ class Sites(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the site.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the site? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to site code in the linked repo.
-     * @param specification Framework specification for the site and builds.
+     * @param buildSpecification Build specification for the site deployments.
+     * @param runtimeSpecification Runtime specification for the SSR executions.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -253,6 +265,7 @@ class Sites(client: Client) : Service(client) {
         timeout: Long? = null,
         installCommand: String? = null,
         buildCommand: String? = null,
+        startCommand: String? = null,
         outputDirectory: String? = null,
         buildRuntime: io.appwrite.enums.BuildRuntime? = null,
         adapter: io.appwrite.enums.Adapter? = null,
@@ -262,7 +275,9 @@ class Sites(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
-        specification: String? = null,
+        buildSpecification: String? = null,
+        runtimeSpecification: String? = null,
+        deploymentRetention: Long? = null,
     ): io.appwrite.models.Site {
         val apiPath = "/sites/{siteId}"
             .replace("{siteId}", siteId)
@@ -275,6 +290,7 @@ class Sites(client: Client) : Service(client) {
             "timeout" to timeout,
             "installCommand" to installCommand,
             "buildCommand" to buildCommand,
+            "startCommand" to startCommand,
             "outputDirectory" to outputDirectory,
             "buildRuntime" to buildRuntime,
             "adapter" to adapter,
@@ -284,7 +300,9 @@ class Sites(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
-            "specification" to specification,
+            "buildSpecification" to buildSpecification,
+            "runtimeSpecification" to runtimeSpecification,
+            "deploymentRetention" to deploymentRetention,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",

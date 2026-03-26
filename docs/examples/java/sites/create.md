@@ -23,6 +23,7 @@ sites.create(
     1, // timeout (optional)
     "<INSTALL_COMMAND>", // installCommand (optional)
     "<BUILD_COMMAND>", // buildCommand (optional)
+    "<START_COMMAND>", // startCommand (optional)
     "<OUTPUT_DIRECTORY>", // outputDirectory (optional)
     Adapter.STATIC, // adapter (optional)
     "<INSTALLATION_ID>", // installationId (optional)
@@ -31,7 +32,9 @@ sites.create(
     "<PROVIDER_BRANCH>", // providerBranch (optional)
     false, // providerSilentMode (optional)
     "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
-    "", // specification (optional)
+    "", // buildSpecification (optional)
+    "", // runtimeSpecification (optional)
+    0, // deploymentRetention (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

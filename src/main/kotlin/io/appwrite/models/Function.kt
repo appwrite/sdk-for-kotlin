@@ -62,6 +62,12 @@ data class Function(
     val runtime: String,
 
     /**
+     * How many days to keep the non-active deployments before they will be automatically deleted.
+     */
+    @SerializedName("deploymentRetention")
+    val deploymentRetention: Long,
+
+    /**
      * Function's active deployment ID.
      */
     @SerializedName("deploymentId")
@@ -170,10 +176,16 @@ data class Function(
     val providerSilentMode: Boolean,
 
     /**
-     * Machine specification for builds and executions.
+     * Machine specification for deployment builds.
      */
-    @SerializedName("specification")
-    val specification: String,
+    @SerializedName("buildSpecification")
+    val buildSpecification: String,
+
+    /**
+     * Machine specification for executions.
+     */
+    @SerializedName("runtimeSpecification")
+    val runtimeSpecification: String,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -186,6 +198,7 @@ data class Function(
         "live" to live as Any,
         "logging" to logging as Any,
         "runtime" to runtime as Any,
+        "deploymentRetention" to deploymentRetention as Any,
         "deploymentId" to deploymentId as Any,
         "deploymentCreatedAt" to deploymentCreatedAt as Any,
         "latestDeploymentId" to latestDeploymentId as Any,
@@ -204,7 +217,8 @@ data class Function(
         "providerBranch" to providerBranch as Any,
         "providerRootDirectory" to providerRootDirectory as Any,
         "providerSilentMode" to providerSilentMode as Any,
-        "specification" to specification as Any,
+        "buildSpecification" to buildSpecification as Any,
+        "runtimeSpecification" to runtimeSpecification as Any,
     )
 
     companion object {
@@ -222,6 +236,7 @@ data class Function(
             live = map["live"] as Boolean,
             logging = map["logging"] as Boolean,
             runtime = map["runtime"] as String,
+            deploymentRetention = (map["deploymentRetention"] as Number).toLong(),
             deploymentId = map["deploymentId"] as String,
             deploymentCreatedAt = map["deploymentCreatedAt"] as String,
             latestDeploymentId = map["latestDeploymentId"] as String,
@@ -240,7 +255,8 @@ data class Function(
             providerBranch = map["providerBranch"] as String,
             providerRootDirectory = map["providerRootDirectory"] as String,
             providerSilentMode = map["providerSilentMode"] as Boolean,
-            specification = map["specification"] as String,
+            buildSpecification = map["buildSpecification"] as String,
+            runtimeSpecification = map["runtimeSpecification"] as String,
         )
     }
 }

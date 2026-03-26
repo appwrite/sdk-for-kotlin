@@ -117,6 +117,14 @@ enum class Scopes(val value: String) {
     TOKENS_READ("tokens.read"),
     @SerializedName("tokens.write")
     TOKENS_WRITE("tokens.write"),
+    @SerializedName("webhooks.read")
+    WEBHOOKS_READ("webhooks.read"),
+    @SerializedName("webhooks.write")
+    WEBHOOKS_WRITE("webhooks.write"),
+    @SerializedName("project.read")
+    PROJECT_READ("project.read"),
+    @SerializedName("project.write")
+    PROJECT_WRITE("project.write"),
     @SerializedName("policies.write")
     POLICIES_WRITE("policies.write"),
     @SerializedName("policies.read")
