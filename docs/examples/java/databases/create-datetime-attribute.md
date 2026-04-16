@@ -15,7 +15,7 @@ databases.createDatetimeAttribute(
     "<COLLECTION_ID>", // collectionId
     "", // key
     false, // required
-    "", // default (optional)
+    "2020-10-15T06:38:00.000+00:00", // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

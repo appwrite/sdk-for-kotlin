@@ -57,12 +57,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/15.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/16.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "15.0.0",
-            "x-appwrite-response-format" to "1.9.0",
+            "x-sdk-version" to "16.0.0",
+            "x-appwrite-response-format" to "1.9.1",
         )
 
         config = mutableMapOf()
@@ -284,6 +284,13 @@ class Client @JvmOverloads constructor(
         headers[key] = value
         return this
     }
+
+    /**
+     * Get the current request headers used for Appwrite API calls.
+     *
+     * @return a copy of the current request headers
+     */
+    fun getHeaders(): Map<String, String> = headers.toMap()
 
     /**
      * Sends a "ping" request to Appwrite to verify connectivity.

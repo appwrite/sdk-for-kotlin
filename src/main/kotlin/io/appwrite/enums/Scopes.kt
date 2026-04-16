@@ -125,6 +125,14 @@ enum class Scopes(val value: String) {
     PROJECT_READ("project.read"),
     @SerializedName("project.write")
     PROJECT_WRITE("project.write"),
+    @SerializedName("keys.read")
+    KEYS_READ("keys.read"),
+    @SerializedName("keys.write")
+    KEYS_WRITE("keys.write"),
+    @SerializedName("platforms.read")
+    PLATFORMS_READ("platforms.read"),
+    @SerializedName("platforms.write")
+    PLATFORMS_WRITE("platforms.write"),
     @SerializedName("policies.write")
     POLICIES_WRITE("policies.write"),
     @SerializedName("policies.read")

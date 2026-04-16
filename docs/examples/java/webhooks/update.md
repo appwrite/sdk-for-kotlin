@@ -16,9 +16,9 @@ webhooks.update(
     "", // url
     List.of(), // events
     false, // enabled (optional)
-    false, // security (optional)
-    "<HTTP_USER>", // httpUser (optional)
-    "<HTTP_PASS>", // httpPass (optional)
+    false, // tls (optional)
+    "<AUTH_USERNAME>", // authUsername (optional)
+    "<AUTH_PASSWORD>", // authPassword (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

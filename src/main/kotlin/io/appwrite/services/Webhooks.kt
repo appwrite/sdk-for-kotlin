@@ -16,7 +16,7 @@ class Webhooks(client: Client) : Service(client) {
     /**
      * Get a list of all webhooks belonging to the project. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, url, httpUser, security, events, enabled, logs, attempts
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, url, authUsername, tls, events, enabled, logs, attempts
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.WebhookList]
      */
@@ -55,9 +55,10 @@ class Webhooks(client: Client) : Service(client) {
      * @param name Webhook name. Max length: 128 chars.
      * @param events Events list. Maximum of 100 events are allowed.
      * @param enabled Enable or disable a webhook.
-     * @param security Certificate verification, false for disabled or true for enabled.
-     * @param httpUser Webhook HTTP user. Max length: 256 chars.
-     * @param httpPass Webhook HTTP password. Max length: 256 chars.
+     * @param tls Certificate verification, false for disabled or true for enabled.
+     * @param authUsername Webhook HTTP user. Max length: 256 chars.
+     * @param authPassword Webhook HTTP password. Max length: 256 chars.
+     * @param secret Webhook secret key. If not provided, a new key will be generated automatically. Key must be at least 8 characters long, and at max 256 characters.
      * @return [io.appwrite.models.Webhook]
      */
     @JvmOverloads
@@ -68,9 +69,10 @@ class Webhooks(client: Client) : Service(client) {
         name: String,
         events: List<String>,
         enabled: Boolean? = null,
-        security: Boolean? = null,
-        httpUser: String? = null,
-        httpPass: String? = null,
+        tls: Boolean? = null,
+        authUsername: String? = null,
+        authPassword: String? = null,
+        secret: String? = null,
     ): io.appwrite.models.Webhook {
         val apiPath = "/webhooks"
 
@@ -80,9 +82,10 @@ class Webhooks(client: Client) : Service(client) {
             "name" to name,
             "events" to events,
             "enabled" to enabled,
-            "security" to security,
-            "httpUser" to httpUser,
-            "httpPass" to httpPass,
+            "tls" to tls,
+            "authUsername" to authUsername,
+            "authPassword" to authPassword,
+            "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -138,9 +141,9 @@ class Webhooks(client: Client) : Service(client) {
      * @param url Webhook URL.
      * @param events Events list. Maximum of 100 events are allowed.
      * @param enabled Enable or disable a webhook.
-     * @param security Certificate verification, false for disabled or true for enabled.
-     * @param httpUser Webhook HTTP user. Max length: 256 chars.
-     * @param httpPass Webhook HTTP password. Max length: 256 chars.
+     * @param tls Certificate verification, false for disabled or true for enabled.
+     * @param authUsername Webhook HTTP user. Max length: 256 chars.
+     * @param authPassword Webhook HTTP password. Max length: 256 chars.
      * @return [io.appwrite.models.Webhook]
      */
     @JvmOverloads
@@ -151,9 +154,9 @@ class Webhooks(client: Client) : Service(client) {
         url: String,
         events: List<String>,
         enabled: Boolean? = null,
-        security: Boolean? = null,
-        httpUser: String? = null,
-        httpPass: String? = null,
+        tls: Boolean? = null,
+        authUsername: String? = null,
+        authPassword: String? = null,
     ): io.appwrite.models.Webhook {
         val apiPath = "/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
@@ -163,9 +166,9 @@ class Webhooks(client: Client) : Service(client) {
             "url" to url,
             "events" to events,
             "enabled" to enabled,
-            "security" to security,
-            "httpUser" to httpUser,
-            "httpPass" to httpPass,
+            "tls" to tls,
+            "authUsername" to authUsername,
+            "authPassword" to authPassword,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -211,19 +214,23 @@ class Webhooks(client: Client) : Service(client) {
     }
 
     /**
-     * Update the webhook signature key. This endpoint can be used to regenerate the signature key used to sign and validate payload deliveries for a specific webhook.
+     * Update the webhook signing key. This endpoint can be used to regenerate the signing key used to sign and validate payload deliveries for a specific webhook.
      *
      * @param webhookId Webhook ID.
+     * @param secret Webhook secret key. If not provided, a new key will be generated automatically. Key must be at least 8 characters long, and at max 256 characters.
      * @return [io.appwrite.models.Webhook]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateSignature(
+    suspend fun updateSecret(
         webhookId: String,
+        secret: String? = null,
     ): io.appwrite.models.Webhook {
-        val apiPath = "/webhooks/{webhookId}/signature"
+        val apiPath = "/webhooks/{webhookId}/secret"
             .replace("{webhookId}", webhookId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
