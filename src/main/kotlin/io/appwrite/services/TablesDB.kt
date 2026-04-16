@@ -2283,7 +2283,21 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> Any = {
-            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+            val responseMap = it as? Map<String, Any>
+                ?: throw Exception("Unable to match response to any expected response model")
+            when {
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "email" -> io.appwrite.models.ColumnEmail.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "enum" -> io.appwrite.models.ColumnEnum.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "url" -> io.appwrite.models.ColumnUrl.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "ip" -> io.appwrite.models.ColumnIp.from(map = responseMap)
+                responseMap["type"]?.toString() == "boolean" -> io.appwrite.models.ColumnBoolean.from(map = responseMap)
+                responseMap["type"]?.toString() == "integer" -> io.appwrite.models.ColumnInteger.from(map = responseMap)
+                responseMap["type"]?.toString() == "double" -> io.appwrite.models.ColumnFloat.from(map = responseMap)
+                responseMap["type"]?.toString() == "datetime" -> io.appwrite.models.ColumnDatetime.from(map = responseMap)
+                responseMap["type"]?.toString() == "relationship" -> io.appwrite.models.ColumnRelationship.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" -> io.appwrite.models.ColumnString.from(map = responseMap)
+                else -> throw Exception("Unable to match response to any expected response model")
+            }
         }
         return client.call(
             "GET",

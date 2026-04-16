@@ -639,7 +639,16 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> Any = {
-            io.appwrite.models.PlatformWeb.from(map = it as Map<String, Any>)
+            val responseMap = it as? Map<String, Any>
+                ?: throw Exception("Unable to match response to any expected response model")
+            when {
+                responseMap["type"]?.toString() == "web" -> io.appwrite.models.PlatformWeb.from(map = responseMap)
+                responseMap["type"]?.toString() == "apple" -> io.appwrite.models.PlatformApple.from(map = responseMap)
+                responseMap["type"]?.toString() == "android" -> io.appwrite.models.PlatformAndroid.from(map = responseMap)
+                responseMap["type"]?.toString() == "windows" -> io.appwrite.models.PlatformWindows.from(map = responseMap)
+                responseMap["type"]?.toString() == "linux" -> io.appwrite.models.PlatformLinux.from(map = responseMap)
+                else -> throw Exception("Unable to match response to any expected response model")
+            }
         }
         return client.call(
             "GET",
