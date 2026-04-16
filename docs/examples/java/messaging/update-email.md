@@ -21,7 +21,7 @@ messaging.updateEmail(
     false, // html (optional)
     List.of(), // cc (optional)
     List.of(), // bcc (optional)
-    "", // scheduledAt (optional)
+    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     List.of(), // attachments (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

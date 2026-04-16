@@ -15,7 +15,7 @@ tablesDB.updateDatetimeColumn(
     "<TABLE_ID>", // tableId
     "", // key
     false, // required
-    "", // default
+    "2020-10-15T06:38:00.000+00:00", // default
     "", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

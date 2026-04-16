@@ -1,17 +1,19 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Webhooks;
+import io.appwrite.services.Project;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Webhooks webhooks = new Webhooks(client);
+Project project = new Project(client);
 
-webhooks.updateSignature(
-    "<WEBHOOK_ID>", // webhookId
+project.createLinuxPlatform(
+    "<PLATFORM_ID>", // platformId
+    "<NAME>", // name
+    "<PACKAGE_NAME>", // packageName
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

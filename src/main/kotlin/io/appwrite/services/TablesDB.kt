@@ -512,6 +512,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table-level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
+     * @param purge When true, purge all cached list responses for this table as part of the update. Use this to force readers to see fresh data immediately instead of waiting for the cache TTL to expire.
      * @return [io.appwrite.models.Table]
      */
     @JvmOverloads
@@ -523,6 +524,7 @@ class TablesDB(client: Client) : Service(client) {
         permissions: List<String>? = null,
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
+        purge: Boolean? = null,
     ): io.appwrite.models.Table {
         val apiPath = "/tablesdb/{databaseId}/tables/{tableId}"
             .replace("{databaseId}", databaseId)
@@ -533,6 +535,7 @@ class TablesDB(client: Client) : Service(client) {
             "permissions" to permissions,
             "rowSecurity" to rowSecurity,
             "enabled" to enabled,
+            "purge" to purge,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2280,7 +2283,21 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> Any = {
-            io.appwrite.models.ColumnBoolean.from(map = it as Map<String, Any>)
+            val responseMap = it as? Map<String, Any>
+                ?: throw Exception("Unable to match response to any expected response model")
+            when {
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "email" -> io.appwrite.models.ColumnEmail.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "enum" -> io.appwrite.models.ColumnEnum.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "url" -> io.appwrite.models.ColumnUrl.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "ip" -> io.appwrite.models.ColumnIp.from(map = responseMap)
+                responseMap["type"]?.toString() == "boolean" -> io.appwrite.models.ColumnBoolean.from(map = responseMap)
+                responseMap["type"]?.toString() == "integer" -> io.appwrite.models.ColumnInteger.from(map = responseMap)
+                responseMap["type"]?.toString() == "double" -> io.appwrite.models.ColumnFloat.from(map = responseMap)
+                responseMap["type"]?.toString() == "datetime" -> io.appwrite.models.ColumnDatetime.from(map = responseMap)
+                responseMap["type"]?.toString() == "relationship" -> io.appwrite.models.ColumnRelationship.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" -> io.appwrite.models.ColumnString.from(map = responseMap)
+                else -> throw Exception("Unable to match response to any expected response model")
+            }
         }
         return client.call(
             "GET",
@@ -2538,7 +2555,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -2585,7 +2602,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads

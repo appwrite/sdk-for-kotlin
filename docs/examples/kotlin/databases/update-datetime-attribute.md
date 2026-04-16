@@ -15,7 +15,7 @@ val response = databases.updateDatetimeAttribute(
     collectionId = "<COLLECTION_ID>",
     key = "",
     required = false,
-    default = "",
+    default = "2020-10-15T06:38:00.000+00:00",
     newKey = "" // optional
 )
 ```

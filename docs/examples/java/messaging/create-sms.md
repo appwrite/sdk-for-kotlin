@@ -17,7 +17,7 @@ messaging.createSMS(
     List.of(), // users (optional)
     List.of(), // targets (optional)
     false, // draft (optional)
-    "", // scheduledAt (optional)
+    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

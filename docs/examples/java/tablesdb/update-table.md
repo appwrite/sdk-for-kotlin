@@ -19,6 +19,7 @@ tablesDB.updateTable(
     List.of(Permission.read(Role.any())), // permissions (optional)
     false, // rowSecurity (optional)
     false, // enabled (optional)
+    false, // purge (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

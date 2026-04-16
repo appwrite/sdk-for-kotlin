@@ -12,7 +12,7 @@ Tokens tokens = new Tokens(client);
 
 tokens.update(
     "<TOKEN_ID>", // tokenId
-    "", // expire (optional)
+    "2020-10-15T06:38:00.000+00:00", // expire (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

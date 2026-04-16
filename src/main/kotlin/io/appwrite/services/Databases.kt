@@ -544,6 +544,7 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
+     * @param purge When true, purge all cached list responses for this collection as part of the update. Use this to force readers to see fresh data immediately instead of waiting for the cache TTL to expire.
      * @return [io.appwrite.models.Collection]
      */
     @Deprecated(
@@ -559,6 +560,7 @@ class Databases(client: Client) : Service(client) {
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
+        purge: Boolean? = null,
     ): io.appwrite.models.Collection {
         val apiPath = "/databases/{databaseId}/collections/{collectionId}"
             .replace("{databaseId}", databaseId)
@@ -569,6 +571,7 @@ class Databases(client: Client) : Service(client) {
             "permissions" to permissions,
             "documentSecurity" to documentSecurity,
             "enabled" to enabled,
+            "purge" to purge,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "content-type" to "application/json",
@@ -2470,7 +2473,21 @@ class Databases(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
         )
         val converter: (Any) -> Any = {
-            io.appwrite.models.AttributeBoolean.from(map = it as Map<String, Any>)
+            val responseMap = it as? Map<String, Any>
+                ?: throw Exception("Unable to match response to any expected response model")
+            when {
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "email" -> io.appwrite.models.AttributeEmail.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "enum" -> io.appwrite.models.AttributeEnum.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "url" -> io.appwrite.models.AttributeUrl.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "ip" -> io.appwrite.models.AttributeIp.from(map = responseMap)
+                responseMap["type"]?.toString() == "boolean" -> io.appwrite.models.AttributeBoolean.from(map = responseMap)
+                responseMap["type"]?.toString() == "integer" -> io.appwrite.models.AttributeInteger.from(map = responseMap)
+                responseMap["type"]?.toString() == "double" -> io.appwrite.models.AttributeFloat.from(map = responseMap)
+                responseMap["type"]?.toString() == "datetime" -> io.appwrite.models.AttributeDatetime.from(map = responseMap)
+                responseMap["type"]?.toString() == "relationship" -> io.appwrite.models.AttributeRelationship.from(map = responseMap)
+                responseMap["type"]?.toString() == "string" -> io.appwrite.models.AttributeString.from(map = responseMap)
+                else -> throw Exception("Unable to match response to any expected response model")
+            }
         }
         return client.call(
             "GET",
@@ -2527,7 +2544,7 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(
@@ -2578,7 +2595,7 @@ class Databases(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(

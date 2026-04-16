@@ -44,28 +44,28 @@ data class Webhook(
     val events: List<String>,
 
     /**
-     * Indicated if SSL / TLS Certificate verification is enabled.
+     * Indicates if SSL / TLS certificate verification is enabled.
      */
-    @SerializedName("security")
-    val security: Boolean,
+    @SerializedName("tls")
+    val tls: Boolean,
 
     /**
      * HTTP basic authentication username.
      */
-    @SerializedName("httpUser")
-    val httpUser: String,
+    @SerializedName("authUsername")
+    val authUsername: String,
 
     /**
      * HTTP basic authentication password.
      */
-    @SerializedName("httpPass")
-    val httpPass: String,
+    @SerializedName("authPassword")
+    val authPassword: String,
 
     /**
-     * Signature key which can be used to validated incoming
+     * Signature key which can be used to validate incoming webhook payloads. Only returned on creation and secret rotation.
      */
-    @SerializedName("signatureKey")
-    val signatureKey: String,
+    @SerializedName("secret")
+    val secret: String,
 
     /**
      * Indicates if this webhook is enabled.
@@ -93,10 +93,10 @@ data class Webhook(
         "name" to name as Any,
         "url" to url as Any,
         "events" to events as Any,
-        "security" to security as Any,
-        "httpUser" to httpUser as Any,
-        "httpPass" to httpPass as Any,
-        "signatureKey" to signatureKey as Any,
+        "tls" to tls as Any,
+        "authUsername" to authUsername as Any,
+        "authPassword" to authPassword as Any,
+        "secret" to secret as Any,
         "enabled" to enabled as Any,
         "logs" to logs as Any,
         "attempts" to attempts as Any,
@@ -114,10 +114,10 @@ data class Webhook(
             name = map["name"] as String,
             url = map["url"] as String,
             events = map["events"] as List<String>,
-            security = map["security"] as Boolean,
-            httpUser = map["httpUser"] as String,
-            httpPass = map["httpPass"] as String,
-            signatureKey = map["signatureKey"] as String,
+            tls = map["tls"] as Boolean,
+            authUsername = map["authUsername"] as String,
+            authPassword = map["authPassword"] as String,
+            secret = map["secret"] as String,
             enabled = map["enabled"] as Boolean,
             logs = map["logs"] as String,
             attempts = (map["attempts"] as Number).toLong(),

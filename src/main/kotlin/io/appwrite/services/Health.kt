@@ -216,6 +216,7 @@ class Health(client: Client) : Service(client) {
 
     /**
      * Get the number of audit logs that are waiting to be processed in the Appwrite internal queue server.
+     * 
      *
      * @param threshold Queue size threshold. When hit (equal or higher), endpoint returns server error. Default value is 5000.
      * @return [io.appwrite.models.HealthQueue]
