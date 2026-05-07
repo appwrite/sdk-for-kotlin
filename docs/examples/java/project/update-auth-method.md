@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.MethodId;
+import io.appwrite.enums.AuthMethod;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateAuthMethod(
-    MethodId.EMAIL_PASSWORD, // methodId
+    AuthMethod.EMAIL_PASSWORD, // methodId
     false, // enabled
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
