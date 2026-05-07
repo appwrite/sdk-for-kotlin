@@ -3027,7 +3027,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun getPolicy(
-        policyId: io.appwrite.enums.ProjectPolicyId,
+        policyId: io.appwrite.enums.ProjectPolicy,
     ): Any {
         val apiPath = "/project/policies/{policyId}"
             .replace("{policyId}", policyId.value)
