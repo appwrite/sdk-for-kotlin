@@ -2,7 +2,6 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.ServiceId;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,9 +10,10 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateServiceStatus(
-    ServiceId.ACCOUNT, // serviceId
-    false, // enabled
+project.updateOAuth2Dropbox(
+    "<APP_KEY>", // appKey (optional)
+    "<APP_SECRET>", // appSecret (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

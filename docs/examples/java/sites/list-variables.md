@@ -12,6 +12,8 @@ Sites sites = new Sites(client);
 
 sites.listVariables(
     "<SITE_ID>", // siteId
+    List.of(), // queries (optional)
+    false, // total (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -13,7 +13,7 @@ Functions functions = new Functions(client);
 functions.updateVariable(
     "<FUNCTION_ID>", // functionId
     "<VARIABLE_ID>", // variableId
-    "<KEY>", // key
+    "<KEY>", // key (optional)
     "<VALUE>", // value (optional)
     false, // secret (optional)
     new CoroutineCallback<>((result, error) -> {

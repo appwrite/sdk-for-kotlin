@@ -12,6 +12,7 @@ Functions functions = new Functions(client);
 
 functions.createVariable(
     "<FUNCTION_ID>", // functionId
+    "<VARIABLE_ID>", // variableId
     "<KEY>", // key
     "<VALUE>", // value
     false, // secret (optional)

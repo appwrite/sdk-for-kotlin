@@ -24,7 +24,7 @@ functions.update(
     false, // logging (optional)
     "<ENTRYPOINT>", // entrypoint (optional)
     "<COMMANDS>", // commands (optional)
-    List.of(Scopes.SESSIONS_WRITE), // scopes (optional)
+    List.of(Scopes.PROJECT_READ), // scopes (optional)
     "<INSTALLATION_ID>", // installationId (optional)
     "<PROVIDER_REPOSITORY_ID>", // providerRepositoryId (optional)
     "<PROVIDER_BRANCH>", // providerBranch (optional)

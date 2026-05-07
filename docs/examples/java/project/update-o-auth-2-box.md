@@ -2,7 +2,6 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.ProtocolId;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,9 +10,10 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateProtocolStatus(
-    ProtocolId.REST, // protocolId
-    false, // enabled
+project.updateOAuth2Box(
+    "<CLIENT_ID>", // clientId (optional)
+    "<CLIENT_SECRET>", // clientSecret (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
