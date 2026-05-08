@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Project
-import io.appwrite.enums.AuthMethod
+import io.appwrite.enums.MethodId
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ val client = Client()
 val project = Project(client)
 
 val response = project.updateAuthMethod(
-    methodId = AuthMethod.EMAIL_PASSWORD,
+    methodId = MethodId.EMAIL_PASSWORD,
     enabled = false
 )
 ```

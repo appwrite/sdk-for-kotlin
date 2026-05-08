@@ -159,6 +159,10 @@ enum class Scopes(val value: String) {
     VCS_READ("vcs.read"),
     @SerializedName("vcs.write")
     VCS_WRITE("vcs.write"),
+    @SerializedName("presences.read")
+    PRESENCES_READ("presences.read"),
+    @SerializedName("presences.write")
+    PRESENCES_WRITE("presences.write"),
     @SerializedName("backups.policies.read")
     BACKUPS_POLICIES_READ("backups.policies.read"),
     @SerializedName("backups.policies.write")

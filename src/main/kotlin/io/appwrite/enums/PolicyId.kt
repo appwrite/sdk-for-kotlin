@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class ProjectPolicy(val value: String) {
+enum class PolicyId(val value: String) {
     @SerializedName("password-dictionary")
     PASSWORD_DICTIONARY("password-dictionary"),
     @SerializedName("password-history")

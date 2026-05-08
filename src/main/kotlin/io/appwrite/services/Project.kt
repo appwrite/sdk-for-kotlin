@@ -46,7 +46,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun updateAuthMethod(
-        methodId: io.appwrite.enums.AuthMethod,
+        methodId: io.appwrite.enums.MethodId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = "/project/auth-methods/{methodId}"
@@ -514,7 +514,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun getOAuth2Provider(
-        providerId: io.appwrite.enums.OAuthProvider,
+        providerId: io.appwrite.enums.ProviderId,
     ): Any {
         val apiPath = "/project/oauth2/:provider"
 
@@ -3027,7 +3027,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun getPolicy(
-        policyId: io.appwrite.enums.ProjectPolicy,
+        policyId: io.appwrite.enums.PolicyId,
     ): Any {
         val apiPath = "/project/policies/{policyId}"
             .replace("{policyId}", policyId.value)

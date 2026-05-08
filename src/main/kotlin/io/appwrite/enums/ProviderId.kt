@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class OAuthProvider(val value: String) {
+enum class ProviderId(val value: String) {
     @SerializedName("amazon")
     AMAZON("amazon"),
     @SerializedName("apple")
@@ -88,7 +88,15 @@ enum class OAuthProvider(val value: String) {
     @SerializedName("zoho")
     ZOHO("zoho"),
     @SerializedName("zoom")
-    ZOOM("zoom");
+    ZOOM("zoom"),
+    @SerializedName("mock")
+    MOCK("mock"),
+    @SerializedName("mock-unverified")
+    MOCK_UNVERIFIED("mock-unverified"),
+    @SerializedName("githubImagine")
+    GITHUBIMAGINE("githubImagine"),
+    @SerializedName("googleImagine")
+    GOOGLEIMAGINE("googleImagine");
 
     override fun toString() = value
 }
