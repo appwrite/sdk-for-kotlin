@@ -835,16 +835,23 @@ class Sites(client: Client) : Service(client) {
      * Get a list of all variables of a specific site.
      *
      * @param siteId Site unique ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: key, resourceType, resourceId, secret
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.VariableList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listVariables(
         siteId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.VariableList {
         val apiPath = "/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
         )
@@ -865,6 +872,7 @@ class Sites(client: Client) : Service(client) {
      * Create a new site variable. These variables can be accessed during build and runtime (server-side rendering) as environment variables.
      *
      * @param siteId Site unique ID.
+     * @param variableId Variable ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param key Variable key. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only sites can read them during build and runtime.
@@ -874,6 +882,7 @@ class Sites(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createVariable(
         siteId: String,
+        variableId: String,
         key: String,
         value: String,
         secret: Boolean? = null,
@@ -882,6 +891,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
 
         val apiParams = mutableMapOf<String, Any?>(
+            "variableId" to variableId,
             "key" to key,
             "value" to value,
             "secret" to secret,
@@ -950,7 +960,7 @@ class Sites(client: Client) : Service(client) {
     suspend fun updateVariable(
         siteId: String,
         variableId: String,
-        key: String,
+        key: String? = null,
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {

@@ -163,6 +163,8 @@ enum class BuildRuntime(val value: String) {
     GO_1_25("go-1.25"),
     @SerializedName("go-1.26")
     GO_1_26("go-1.26"),
+    @SerializedName("rust-1.83")
+    RUST_1_83("rust-1.83"),
     @SerializedName("static-1")
     STATIC_1("static-1"),
     @SerializedName("flutter-3.24")

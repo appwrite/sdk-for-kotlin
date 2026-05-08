@@ -57,12 +57,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/16.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/16.1.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "16.0.0",
-            "x-appwrite-response-format" to "1.9.1",
+            "x-sdk-version" to "16.1.0",
+            "x-appwrite-response-format" to "1.9.4",
         )
 
         config = mutableMapOf()
@@ -155,6 +155,36 @@ class Client @JvmOverloads constructor(
     fun setForwardedUserAgent(value: String): Client {
         config["forwardedUserAgent"] = value
         addHeader("x-forwarded-user-agent", value)
+        return this
+    }
+
+    /**
+     * Set DevKey
+     *
+     * Your secret dev API key
+     *
+     * @param {string} devkey
+     *
+     * @return this
+     */
+    fun setDevKey(value: String): Client {
+        config["devKey"] = value
+        addHeader("x-appwrite-dev-key", value)
+        return this
+    }
+
+    /**
+     * Set Cookie
+     *
+     * The user cookie to authenticate with. Used by SDKs that forward an incoming Cookie header in server-side runtimes.
+     *
+     * @param {string} cookie
+     *
+     * @return this
+     */
+    fun setCookie(value: String): Client {
+        config["cookie"] = value
+        addHeader("cookie", value)
         return this
     }
 

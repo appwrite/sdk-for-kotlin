@@ -12,6 +12,7 @@ Sites sites = new Sites(client);
 
 sites.createVariable(
     "<SITE_ID>", // siteId
+    "<VARIABLE_ID>", // variableId
     "<KEY>", // key
     "<VALUE>", // value
     false, // secret (optional)
