@@ -11,6 +11,8 @@ val client = Client()
 val functions = Functions(client)
 
 val response = functions.listVariables(
-    functionId = "<FUNCTION_ID>"
+    functionId = "<FUNCTION_ID>",
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

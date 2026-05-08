@@ -624,6 +624,114 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
+     * Create a bigint column. Optionally, minimum and maximum values can be provided.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param default Default value. Cannot be set when column is required.
+     * @param array Is column an array?
+     * @return [io.appwrite.models.ColumnBigint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBigIntColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        min: Long? = null,
+        max: Long? = null,
+        default: Long? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.ColumnBigint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/bigint"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnBigint = {
+            io.appwrite.models.ColumnBigint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnBigint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a bigint column. Changing the `default` value will not update already existing rows.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param required Is column required?
+     * @param default Default value. Cannot be set when column is required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnBigint]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateBigIntColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        required: Boolean,
+        default: Long? = null,
+        min: Long? = null,
+        max: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnBigint {
+        val apiPath = "/tablesdb/{databaseId}/tables/{tableId}/columns/bigint/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnBigint = {
+            io.appwrite.models.ColumnBigint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnBigint::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a boolean column.
      * 
      *

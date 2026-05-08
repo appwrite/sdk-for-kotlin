@@ -37,6 +37,36 @@ data class Block(
     @SerializedName("expiredAt")
     var expiredAt: String?,
 
+    /**
+     * Name of the project this block applies to.
+     */
+    @SerializedName("projectName")
+    val projectName: String,
+
+    /**
+     * Region of the project this block applies to.
+     */
+    @SerializedName("region")
+    val region: String,
+
+    /**
+     * Name of the organization that owns the project.
+     */
+    @SerializedName("organizationName")
+    val organizationName: String,
+
+    /**
+     * ID of the organization that owns the project.
+     */
+    @SerializedName("organizationId")
+    val organizationId: String,
+
+    /**
+     * Billing plan of the organization that owns the project.
+     */
+    @SerializedName("billingPlan")
+    val billingPlan: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$createdAt" to createdAt as Any,
@@ -44,6 +74,11 @@ data class Block(
         "resourceId" to resourceId as Any,
         "reason" to reason as Any,
         "expiredAt" to expiredAt as Any,
+        "projectName" to projectName as Any,
+        "region" to region as Any,
+        "organizationName" to organizationName as Any,
+        "organizationId" to organizationId as Any,
+        "billingPlan" to billingPlan as Any,
     )
 
     companion object {
@@ -57,6 +92,11 @@ data class Block(
             resourceId = map["resourceId"] as String,
             reason = map["reason"] as? String,
             expiredAt = map["expiredAt"] as? String,
+            projectName = map["projectName"] as String,
+            region = map["region"] as String,
+            organizationName = map["organizationName"] as String,
+            organizationId = map["organizationId"] as String,
+            billingPlan = map["billingPlan"] as String,
         )
     }
 }

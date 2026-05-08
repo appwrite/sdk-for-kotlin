@@ -13,7 +13,7 @@ Sites sites = new Sites(client);
 sites.updateVariable(
     "<SITE_ID>", // siteId
     "<VARIABLE_ID>", // variableId
-    "<KEY>", // key
+    "<KEY>", // key (optional)
     "<VALUE>", // value (optional)
     false, // secret (optional)
     new CoroutineCallback<>((result, error) -> {

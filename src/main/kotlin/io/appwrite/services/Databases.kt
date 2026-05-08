@@ -668,6 +668,122 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
+     * Create a bigint attribute. Optionally, minimum and maximum values can be provided.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param default Default value. Cannot be set when attribute is required.
+     * @param array Is attribute an array?
+     * @return [io.appwrite.models.AttributeBigint]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createBigIntColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createBigIntColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBigIntAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        min: Long? = null,
+        max: Long? = null,
+        default: Long? = null,
+        array: Boolean? = null,
+    ): io.appwrite.models.AttributeBigint {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/bigint"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "key" to key,
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "array" to array,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeBigint = {
+            io.appwrite.models.AttributeBigint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeBigint::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a bigint attribute. Changing the `default` value will not update already existing documents.
+     * 
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID.
+     * @param key Attribute Key.
+     * @param required Is attribute required?
+     * @param default Default value. Cannot be set when attribute is required.
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param newKey New Attribute Key.
+     * @return [io.appwrite.models.AttributeBigint]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.updateBigIntColumn` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.updateBigIntColumn")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateBigIntAttribute(
+        databaseId: String,
+        collectionId: String,
+        key: String,
+        required: Boolean,
+        default: Long? = null,
+        min: Long? = null,
+        max: Long? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.AttributeBigint {
+        val apiPath = "/databases/{databaseId}/collections/{collectionId}/attributes/bigint/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+            .replace("{key}", key)
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "required" to required,
+            "min" to min,
+            "max" to max,
+            "default" to default,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.AttributeBigint = {
+            io.appwrite.models.AttributeBigint.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.AttributeBigint::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a boolean attribute.
      * 
      *

@@ -11,6 +11,8 @@ val client = Client()
 val sites = Sites(client)
 
 val response = sites.listVariables(
-    siteId = "<SITE_ID>"
+    siteId = "<SITE_ID>",
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

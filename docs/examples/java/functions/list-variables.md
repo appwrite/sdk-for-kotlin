@@ -12,6 +12,8 @@ Functions functions = new Functions(client);
 
 functions.listVariables(
     "<FUNCTION_ID>", // functionId
+    List.of(), // queries (optional)
+    false, // total (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
