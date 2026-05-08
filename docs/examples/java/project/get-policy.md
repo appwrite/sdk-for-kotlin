@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.PolicyId;
+import io.appwrite.enums.ProjectPolicy;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.getPolicy(
-    PolicyId.PASSWORD_DICTIONARY, // policyId
+    ProjectPolicy.PASSWORD_DICTIONARY, // policyId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

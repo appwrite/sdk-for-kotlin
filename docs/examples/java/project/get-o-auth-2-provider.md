@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.ProviderId;
+import io.appwrite.enums.OAuthProvider;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.getOAuth2Provider(
-    ProviderId.AMAZON, // providerId
+    OAuthProvider.AMAZON, // providerId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
