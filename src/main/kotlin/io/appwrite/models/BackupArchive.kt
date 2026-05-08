@@ -38,7 +38,7 @@ data class BackupArchive(
     val size: Long,
 
     /**
-     * The status of the archive creation. Possible values: pending, processing, uploading, completed, failed.
+     * The status of the archive creation. Possible values: pending, processing, uploading, completed, failed, skipped.
      */
     @SerializedName("status")
     val status: String,

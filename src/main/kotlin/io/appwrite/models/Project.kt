@@ -176,6 +176,18 @@ data class Project(
     val authMembershipsMfa: Boolean,
 
     /**
+     * Whether or not to show user IDs in the teams membership response.
+     */
+    @SerializedName("authMembershipsUserId")
+    val authMembershipsUserId: Boolean,
+
+    /**
+     * Whether or not to show user phone numbers in the teams membership response.
+     */
+    @SerializedName("authMembershipsUserPhone")
+    val authMembershipsUserPhone: Boolean,
+
+    /**
      * Whether or not all existing sessions should be invalidated on password change
      */
     @SerializedName("authInvalidateSessions")
@@ -230,10 +242,16 @@ data class Project(
     val smtpSenderEmail: String,
 
     /**
+     * SMTP reply to name
+     */
+    @SerializedName("smtpReplyToName")
+    val smtpReplyToName: String,
+
+    /**
      * SMTP reply to email
      */
-    @SerializedName("smtpReplyTo")
-    val smtpReplyTo: String,
+    @SerializedName("smtpReplyToEmail")
+    val smtpReplyToEmail: String,
 
     /**
      * SMTP server host name
@@ -254,7 +272,7 @@ data class Project(
     val smtpUsername: String,
 
     /**
-     * SMTP server password
+     * SMTP server password. This property is write-only and always returned empty.
      */
     @SerializedName("smtpPassword")
     val smtpPassword: String,
@@ -505,6 +523,8 @@ data class Project(
         "authMembershipsUserName" to authMembershipsUserName as Any,
         "authMembershipsUserEmail" to authMembershipsUserEmail as Any,
         "authMembershipsMfa" to authMembershipsMfa as Any,
+        "authMembershipsUserId" to authMembershipsUserId as Any,
+        "authMembershipsUserPhone" to authMembershipsUserPhone as Any,
         "authInvalidateSessions" to authInvalidateSessions as Any,
         "oAuthProviders" to oAuthProviders.map { it.toMap() } as Any,
         "platforms" to platforms as Any,
@@ -514,7 +534,8 @@ data class Project(
         "smtpEnabled" to smtpEnabled as Any,
         "smtpSenderName" to smtpSenderName as Any,
         "smtpSenderEmail" to smtpSenderEmail as Any,
-        "smtpReplyTo" to smtpReplyTo as Any,
+        "smtpReplyToName" to smtpReplyToName as Any,
+        "smtpReplyToEmail" to smtpReplyToEmail as Any,
         "smtpHost" to smtpHost as Any,
         "smtpPort" to smtpPort as Any,
         "smtpUsername" to smtpUsername as Any,
@@ -591,6 +612,8 @@ data class Project(
             authMembershipsUserName = map["authMembershipsUserName"] as Boolean,
             authMembershipsUserEmail = map["authMembershipsUserEmail"] as Boolean,
             authMembershipsMfa = map["authMembershipsMfa"] as Boolean,
+            authMembershipsUserId = map["authMembershipsUserId"] as Boolean,
+            authMembershipsUserPhone = map["authMembershipsUserPhone"] as Boolean,
             authInvalidateSessions = map["authInvalidateSessions"] as Boolean,
             oAuthProviders = (map["oAuthProviders"] as List<Map<String, Any>>).map { AuthProvider.from(map = it) },
             platforms = map["platforms"] as List<Any>,
@@ -600,7 +623,8 @@ data class Project(
             smtpEnabled = map["smtpEnabled"] as Boolean,
             smtpSenderName = map["smtpSenderName"] as String,
             smtpSenderEmail = map["smtpSenderEmail"] as String,
-            smtpReplyTo = map["smtpReplyTo"] as String,
+            smtpReplyToName = map["smtpReplyToName"] as String,
+            smtpReplyToEmail = map["smtpReplyToEmail"] as String,
             smtpHost = map["smtpHost"] as String,
             smtpPort = (map["smtpPort"] as Number).toLong(),
             smtpUsername = map["smtpUsername"] as String,
