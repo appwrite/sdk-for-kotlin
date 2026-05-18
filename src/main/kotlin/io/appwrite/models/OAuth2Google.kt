@@ -31,12 +31,19 @@ data class OAuth2Google(
     @SerializedName("clientSecret")
     val clientSecret: String,
 
+    /**
+     * Google OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    val prompt: List<io.appwrite.enums.OAuth2GooglePrompt>,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any,
     )
 
     companion object {
@@ -49,6 +56,7 @@ data class OAuth2Google(
             enabled = map["enabled"] as Boolean,
             clientId = map["clientId"] as String,
             clientSecret = map["clientSecret"] as String,
+            prompt = map["prompt"] as List<io.appwrite.enums.OAuth2GooglePrompt>,
         )
     }
 }

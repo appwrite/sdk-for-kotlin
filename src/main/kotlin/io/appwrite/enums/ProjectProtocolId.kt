@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class ProtocolId(val value: String) {
+enum class ProjectProtocolId(val value: String) {
     @SerializedName("rest")
     REST("rest"),
     @SerializedName("graphql")

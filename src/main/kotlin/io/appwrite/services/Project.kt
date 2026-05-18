@@ -14,6 +14,33 @@ import java.io.File
 class Project(client: Client) : Service(client) {
 
     /**
+     * Get a project.
+     *
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun get(
+    ): io.appwrite.models.Project {
+        val apiPath = "/project"
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Delete a project.
      *
      * @return [Any]
@@ -46,7 +73,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun updateAuthMethod(
-        methodId: io.appwrite.enums.AuthMethod,
+        methodId: io.appwrite.enums.ProjectAuthMethodId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = "/project/auth-methods/{methodId}"
@@ -121,7 +148,7 @@ class Project(client: Client) : Service(client) {
     suspend fun createKey(
         keyId: String,
         name: String,
-        scopes: List<io.appwrite.enums.Scopes>,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
         val apiPath = "/project/keys"
@@ -159,7 +186,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun createEphemeralKey(
-        scopes: List<io.appwrite.enums.Scopes>,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         duration: Long,
     ): io.appwrite.models.EphemeralKey {
         val apiPath = "/project/keys/ephemeral"
@@ -228,7 +255,7 @@ class Project(client: Client) : Service(client) {
     suspend fun updateKey(
         keyId: String,
         name: String,
-        scopes: List<io.appwrite.enums.Scopes>,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
         val apiPath = "/project/keys/{keyId}"
@@ -510,7 +537,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Amazon configuration.
      *
      * @param clientId 'Client ID' of Amazon OAuth2 app. For example: amzn1.application-oa2-client.87400c00000000000000000000063d5b2
-     * @param clientSecret 'Client Secret' of Amazon OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Amazon OAuth2 app. For example: 79ffe4000000000000000000000000000000000000000000000000000002de55
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Amazon]
      */
@@ -592,7 +619,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Auth0 configuration.
      *
      * @param clientId 'Client ID' of Auth0 OAuth2 app. For example: OaOkIA000000000000000000005KLSYq
-     * @param clientSecret 'Client Secret' of Auth0 OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Auth0 OAuth2 app. For example: zXz0000-00000000000000000000000000000-00000000000000000000PJafnF
      * @param endpoint Domain of Auth0 instance. For example: example.us.auth0.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Auth0]
@@ -633,7 +660,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Authentik configuration.
      *
      * @param clientId 'Client ID' of Authentik OAuth2 app. For example: dTKOPa0000000000000000000000000000e7G8hv
-     * @param clientSecret 'Client Secret' of Authentik OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Authentik OAuth2 app. For example: ntQadq000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000Hp5WK
      * @param endpoint Domain of Authentik instance. For example: example.authentik.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Authentik]
@@ -674,7 +701,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Autodesk configuration.
      *
      * @param clientId 'Client ID' of Autodesk OAuth2 app. For example: 5zw90v00000000000000000000kVYXN7
-     * @param clientSecret 'Client Secret' of Autodesk OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Autodesk OAuth2 app. For example: 7I000000000000MW
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Autodesk]
      */
@@ -712,7 +739,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Bitbucket configuration.
      *
      * @param key 'Key' of Bitbucket OAuth2 app. For example: Knt70000000000ByRc
-     * @param secret 'Secret' of Bitbucket OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secret 'Secret' of Bitbucket OAuth2 app. For example: NMfLZJ00000000000000000000TLQdDx
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Bitbucket]
      */
@@ -750,7 +777,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Bitly configuration.
      *
      * @param clientId 'Client ID' of Bitly OAuth2 app. For example: d95151000000000000000000000000000067af9b
-     * @param clientSecret 'Client Secret' of Bitly OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Bitly OAuth2 app. For example: a13e250000000000000000000000000000d73095
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Bitly]
      */
@@ -788,7 +815,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Box configuration.
      *
      * @param clientId 'Client ID' of Box OAuth2 app. For example: deglcs00000000000000000000x2og6y
-     * @param clientSecret 'Client Secret' of Box OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Box OAuth2 app. For example: OKM1f100000000000000000000eshEif
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Box]
      */
@@ -826,7 +853,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Dailymotion configuration.
      *
      * @param apiKey 'API Key' of Dailymotion OAuth2 app. For example: 07a9000000000000067f
-     * @param apiSecret 'API Secret' of Dailymotion OAuth2 app. For example: <CLIENT_SECRET>
+     * @param apiSecret 'API Secret' of Dailymotion OAuth2 app. For example: a399a90000000000000000000000000000d90639
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Dailymotion]
      */
@@ -864,7 +891,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Discord configuration.
      *
      * @param clientId 'Client ID' of Discord OAuth2 app. For example: 950722000000343754
-     * @param clientSecret 'Client Secret' of Discord OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Discord OAuth2 app. For example: YmPXnM000000000000000000002zFg5D
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Discord]
      */
@@ -902,7 +929,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Disqus configuration.
      *
      * @param publicKey 'Public Key, also known as API Key' of Disqus OAuth2 app. For example: cgegH70000000000000000000000000000000000000000000000000000Hr1nYX
-     * @param secretKey 'Secret Key, also known as API Secret' of Disqus OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secretKey 'Secret Key, also known as API Secret' of Disqus OAuth2 app. For example: W7Bykj00000000000000000000000000000000000000000000000000003o43w9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Disqus]
      */
@@ -940,7 +967,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Dropbox configuration.
      *
      * @param appKey 'App Key' of Dropbox OAuth2 app. For example: jl000000000009t
-     * @param appSecret 'App Secret' of Dropbox OAuth2 app. For example: <CLIENT_SECRET>
+     * @param appSecret 'App Secret' of Dropbox OAuth2 app. For example: g200000000000vw
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Dropbox]
      */
@@ -978,7 +1005,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Etsy configuration.
      *
      * @param keyString 'Keystring' of Etsy OAuth2 app. For example: nsgzxh0000000000008j85a2
-     * @param sharedSecret 'Shared Secret' of Etsy OAuth2 app. For example: <CLIENT_SECRET>
+     * @param sharedSecret 'Shared Secret' of Etsy OAuth2 app. For example: tp000000ru
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Etsy]
      */
@@ -1016,7 +1043,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Facebook configuration.
      *
      * @param appId 'App ID' of Facebook OAuth2 app. For example: 260600000007694
-     * @param appSecret 'App Secret' of Facebook OAuth2 app. For example: <CLIENT_SECRET>
+     * @param appSecret 'App Secret' of Facebook OAuth2 app. For example: 2d0b2800000000000000000000d38af4
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Facebook]
      */
@@ -1054,7 +1081,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Figma configuration.
      *
      * @param clientId 'Client ID' of Figma OAuth2 app. For example: byay5H0000000000VtiI40
-     * @param clientSecret 'Client Secret' of Figma OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Figma OAuth2 app. For example: yEpOYn0000000000000000004iIsU5
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Figma]
      */
@@ -1092,7 +1119,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 FusionAuth configuration.
      *
      * @param clientId 'Client ID' of FusionAuth OAuth2 app. For example: b2222c00-0000-0000-0000-000000862097
-     * @param clientSecret 'Client Secret' of FusionAuth OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of FusionAuth OAuth2 app. For example: Jx4s0C0000000000000000000000000000000wGqLsc
      * @param endpoint Domain of FusionAuth instance. For example: example.fusionauth.io
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2FusionAuth]
@@ -1133,7 +1160,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 GitHub configuration.
      *
      * @param clientId 'OAuth2 app Client ID, or App ID' of GitHub OAuth2 app. For example: e4d87900000000540733. Example of wrong value: 370006
-     * @param clientSecret 'Client Secret' of GitHub OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of GitHub OAuth2 app. For example: 5e07c00000000000000000000000000000198bcc
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Github]
      */
@@ -1171,7 +1198,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Gitlab configuration.
      *
      * @param applicationId 'Application ID' of Gitlab OAuth2 app. For example: d41ffe0000000000000000000000000000000000000000000000000000d5e252
-     * @param secret 'Secret' of Gitlab OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secret 'Secret' of Gitlab OAuth2 app. For example: gloas-838cfa0000000000000000000000000000000000000000000000000000ecbb38
      * @param endpoint Endpoint URL of self-hosted GitLab instance. For example: https://gitlab.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Gitlab]
@@ -1212,7 +1239,8 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Google configuration.
      *
      * @param clientId 'Client ID' of Google OAuth2 app. For example: 120000000095-92ifjb00000000000000000000g7ijfb.apps.googleusercontent.com
-     * @param clientSecret 'Client Secret' of Google OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Google OAuth2 app. For example: example-google-client-secret
+     * @param prompt Array of Google OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. Must not be specified with other values. "consent" means: prompt the user for consent. "select_account" means: prompt the user to select an account.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Google]
      */
@@ -1221,6 +1249,7 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2Google(
         clientId: String? = null,
         clientSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2GooglePrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Google {
         val apiPath = "/project/oauth2/google"
@@ -1228,6 +1257,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1250,7 +1280,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Keycloak configuration.
      *
      * @param clientId 'Client ID' of Keycloak OAuth2 app. For example: appwrite-o0000000st-app
-     * @param clientSecret 'Client Secret' of Keycloak OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Keycloak OAuth2 app. For example: jdjrJd00000000000000000000HUsaZO
      * @param endpoint Domain of Keycloak instance. For example: keycloak.example.com
      * @param realmName Keycloak realm name. For example: appwrite-realm
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
@@ -1294,7 +1324,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Kick configuration.
      *
      * @param clientId 'Client ID' of Kick OAuth2 app. For example: 01KQ7C00000000000001MFHS32
-     * @param clientSecret 'Client Secret' of Kick OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Kick OAuth2 app. For example: 34ac5600000000000000000000000000000000000000000000000000e830c8b
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Kick]
      */
@@ -1332,7 +1362,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Linkedin configuration.
      *
      * @param clientId 'Client ID' of Linkedin OAuth2 app. For example: 770000000000dv
-     * @param primaryClientSecret 'Primary Client Secret or Secondary Client Secret' of Linkedin OAuth2 app. For example: <CLIENT_SECRET>
+     * @param primaryClientSecret 'Primary Client Secret or Secondary Client Secret' of Linkedin OAuth2 app. For example: example-linkedin-client-secret
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Linkedin]
      */
@@ -1370,7 +1400,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Microsoft configuration.
      *
      * @param applicationId 'Entra ID Application ID, also known as Client ID' of Microsoft OAuth2 app. For example: 00001111-aaaa-2222-bbbb-3333cccc4444
-     * @param applicationSecret 'Entra ID Application Secret, also known as Client Secret' of Microsoft OAuth2 app. For example: <CLIENT_SECRET>
+     * @param applicationSecret 'Entra ID Application Secret, also known as Client Secret' of Microsoft OAuth2 app. For example: A1bC2dE3fH4iJ5kL6mN7oP8qR9sT0u
      * @param tenant Microsoft Entra ID tenant identifier. Use 'common', 'organizations', 'consumers' or a specific tenant ID. For example: common
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Microsoft]
@@ -1411,7 +1441,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Notion configuration.
      *
      * @param oauthClientId 'OAuth Client ID' of Notion OAuth2 app. For example: 341d8700-0000-0000-0000-000000446ee3
-     * @param oauthClientSecret 'OAuth Client Secret' of Notion OAuth2 app. For example: <CLIENT_SECRET>
+     * @param oauthClientSecret 'OAuth Client Secret' of Notion OAuth2 app. For example: secret_dLUr4b000000000000000000000000000000lFHAa9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Notion]
      */
@@ -1449,7 +1479,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Oidc configuration.
      *
      * @param clientId 'Client ID' of Oidc OAuth2 app. For example: qibI2x0000000000000000000000000006L2YFoG
-     * @param clientSecret 'Client Secret' of Oidc OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Oidc OAuth2 app. For example: Ah68ed000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003qpcHV
      * @param wellKnownURL OpenID Connect well-known configuration URL. When provided, authorization, token, and user info endpoints can be discovered automatically. For example: https://myoauth.com/.well-known/openid-configuration
      * @param authorizationURL OpenID Connect authorization endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/authorize
      * @param tokenURL OpenID Connect token endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/token
@@ -1499,7 +1529,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Okta configuration.
      *
      * @param clientId 'Client ID' of Okta OAuth2 app. For example: 0oa00000000000000698
-     * @param clientSecret 'Client Secret' of Okta OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Okta OAuth2 app. For example: Kiq0000000000000000000000000000000000000-00000000000H2L5-3SJ-vRV
      * @param domain Okta company domain. Required when enabling the provider. For example: trial-6400025.okta.com. Example of wrong value: trial-6400025-admin.okta.com, or https://trial-6400025.okta.com/
      * @param authorizationServerId Custom Authorization Servers. Optional, can be left empty or unconfigured. For example: aus000000000000000h7z
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
@@ -1543,7 +1573,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Paypal configuration.
      *
      * @param clientId 'Client ID' of Paypal OAuth2 app. For example: AdhIEG7-000000000000-0000000000000000000000000000000-0000000000000000000000-2pyB
-     * @param secretKey 'Secret Key 1 or Secret Key 2' of Paypal OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secretKey 'Secret Key 1 or Secret Key 2' of Paypal OAuth2 app. For example: EH8KCXtew--000000000000000000000000000000000000000_C-1_5UP_000000000000000CB7KDp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Paypal]
      */
@@ -1581,7 +1611,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 PaypalSandbox configuration.
      *
      * @param clientId 'Client ID' of PaypalSandbox OAuth2 app. For example: AdhIEG7-000000000000-0000000000000000000000000000000-0000000000000000000000-2pyB
-     * @param secretKey 'Secret Key 1 or Secret Key 2' of PaypalSandbox OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secretKey 'Secret Key 1 or Secret Key 2' of PaypalSandbox OAuth2 app. For example: EH8KCXtew--000000000000000000000000000000000000000_C-1_5UP_000000000000000CB7KDp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Paypal]
      */
@@ -1619,7 +1649,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Podio configuration.
      *
      * @param clientId 'Client ID' of Podio OAuth2 app. For example: appwrite-o0000000st-app
-     * @param clientSecret 'Client Secret' of Podio OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Podio OAuth2 app. For example: Rn247T0000000000000000000000000000000000000000000000000000W2zWTN
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Podio]
      */
@@ -1657,7 +1687,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Salesforce configuration.
      *
      * @param customerKey 'Consumer Key' of Salesforce OAuth2 app. For example: 3MVG9I0000000000000000000000000000000000000000000000000000000000000000000000000C5Aejq
-     * @param customerSecret 'Consumer Secret' of Salesforce OAuth2 app. For example: <CLIENT_SECRET>
+     * @param customerSecret 'Consumer Secret' of Salesforce OAuth2 app. For example: 3w000000000000e2
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Salesforce]
      */
@@ -1695,7 +1725,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Slack configuration.
      *
      * @param clientId 'Client ID' of Slack OAuth2 app. For example: 23000000089.15000000000023
-     * @param clientSecret 'Client Secret' of Slack OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Slack OAuth2 app. For example: 81656000000000000000000000f3d2fd
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Slack]
      */
@@ -1733,7 +1763,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Spotify configuration.
      *
      * @param clientId 'Client ID' of Spotify OAuth2 app. For example: 6ec271000000000000000000009beace
-     * @param clientSecret 'Client Secret' of Spotify OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Spotify OAuth2 app. For example: db068a000000000000000000008b5b9f
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Spotify]
      */
@@ -1771,7 +1801,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Stripe configuration.
      *
      * @param clientId 'Client ID' of Stripe OAuth2 app. For example: ca_UKibXX0000000000000000000006byvR
-     * @param apiSecretKey 'API Secret Key' of Stripe OAuth2 app. For example: <CLIENT_SECRET>
+     * @param apiSecretKey 'API Secret Key' of Stripe OAuth2 app. For example: sk_51SfOd000000000000000000000000000000000000000000000000000000000000000000000000000000000000000QGWYfp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Stripe]
      */
@@ -1809,7 +1839,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Tradeshift configuration.
      *
      * @param oauth2ClientId 'OAuth2 Client ID' of Tradeshift OAuth2 app. For example: appwrite-tes00000.0000000000est-app
-     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift OAuth2 app. For example: <CLIENT_SECRET>
+     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift OAuth2 app. For example: 7cb52700-0000-0000-0000-000000ca5b83
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Tradeshift]
      */
@@ -1847,7 +1877,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Tradeshift Sandbox configuration.
      *
      * @param oauth2ClientId 'OAuth2 Client ID' of Tradeshift Sandbox OAuth2 app. For example: appwrite-tes00000.0000000000est-app
-     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift Sandbox OAuth2 app. For example: <CLIENT_SECRET>
+     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift Sandbox OAuth2 app. For example: 7cb52700-0000-0000-0000-000000ca5b83
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Tradeshift]
      */
@@ -1885,7 +1915,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Twitch configuration.
      *
      * @param clientId 'Client ID' of Twitch OAuth2 app. For example: vvi0in000000000000000000ikmt9p
-     * @param clientSecret 'Client Secret' of Twitch OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Twitch OAuth2 app. For example: pmapue000000000000000000zylw3v
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Twitch]
      */
@@ -1923,7 +1953,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 WordPress configuration.
      *
      * @param clientId 'Client ID' of WordPress OAuth2 app. For example: 130005
-     * @param clientSecret 'Client Secret' of WordPress OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of WordPress OAuth2 app. For example: PlBfJS0000000000000000000000000000000000000000000000000000EdUZJk
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2WordPress]
      */
@@ -1961,7 +1991,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 X configuration.
      *
      * @param customerKey 'Customer Key' of X OAuth2 app. For example: slzZV0000000000000NFLaWT
-     * @param secretKey 'Secret Key' of X OAuth2 app. For example: <CLIENT_SECRET>
+     * @param secretKey 'Secret Key' of X OAuth2 app. For example: tkEPkp00000000000000000000000000000000000000FTxbI9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2X]
      */
@@ -1999,7 +2029,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Yahoo configuration.
      *
      * @param clientId 'Client ID, also known as Customer Key' of Yahoo OAuth2 app. For example: dj0yJm000000000000000000000000000000000000000000000000000000000000000000000000000000000000Z4PWRm
-     * @param clientSecret 'Client Secret, also known as Customer Secret' of Yahoo OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret, also known as Customer Secret' of Yahoo OAuth2 app. For example: cf978f0000000000000000000000000000c5e2e9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Yahoo]
      */
@@ -2037,7 +2067,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Yandex configuration.
      *
      * @param clientId 'Client ID' of Yandex OAuth2 app. For example: 6a8a6a0000000000000000000091483c
-     * @param clientSecret 'Client Secret' of Yandex OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Yandex OAuth2 app. For example: bbf98500000000000000000000c75a63
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Yandex]
      */
@@ -2075,7 +2105,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Zoho configuration.
      *
      * @param clientId 'Client ID' of Zoho OAuth2 app. For example: 1000.83C178000000000000000000RPNX0B
-     * @param clientSecret 'Client Secret' of Zoho OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Zoho OAuth2 app. For example: fb5cac000000000000000000000000000000a68f6e
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Zoho]
      */
@@ -2113,7 +2143,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Zoom configuration.
      *
      * @param clientId 'Client ID' of Zoom OAuth2 app. For example: QMAC00000000000000w0AQ
-     * @param clientSecret 'Client Secret' of Zoom OAuth2 app. For example: <CLIENT_SECRET>
+     * @param clientSecret 'Client Secret' of Zoom OAuth2 app. For example: GAWsG4000000000000000000007U01ON
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Zoom]
      */
@@ -2155,7 +2185,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun getOAuth2Provider(
-        providerId: io.appwrite.enums.OAuthProvider,
+        providerId: io.appwrite.enums.ProjectOAuthProviderId,
     ): Any {
         val apiPath = "/project/oauth2/{providerId}"
             .replace("{providerId}", providerId.value)
@@ -2726,6 +2756,99 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Configures if aliased emails such as subaddresses and emails with suffixes are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block aliased emails during signup and email updates.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyAliasedEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/deny-aliased-email"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Configures if disposable emails from known temporary domains are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block disposable email addresses during signup and email updates.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyDisposableEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/deny-disposable-email"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Configures if emails from free providers such as Gmail or Yahoo are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block free email addresses during signup and email updates.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyFreeEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/deny-free-email"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Updating this policy allows you to control if team members can see other members information. When enabled, all team members can see ID, name, email, phone number, and MFA status of other members..
      *
      * @param userId Set to true if you want make user ID visible to all team members, or false to hide it.
@@ -3027,7 +3150,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun getPolicy(
-        policyId: io.appwrite.enums.ProjectPolicy,
+        policyId: io.appwrite.enums.ProjectPolicyId,
     ): Any {
         val apiPath = "/project/policies/{policyId}"
             .replace("{policyId}", policyId.value)
@@ -3071,7 +3194,7 @@ class Project(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun updateProtocol(
-        protocolId: io.appwrite.enums.ProtocolId,
+        protocolId: io.appwrite.enums.ProjectProtocolId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = "/project/protocols/{protocolId}"
@@ -3099,13 +3222,13 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific service. Use this endpoint to enable or disable a service in your project. 
      *
-     * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging
+     * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging, advisor
      * @param enabled Service status.
      * @return [io.appwrite.models.Project]
      */
     @Throws(AppwriteException::class)
     suspend fun updateService(
-        serviceId: io.appwrite.enums.ServiceId,
+        serviceId: io.appwrite.enums.ProjectServiceId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = "/project/services/{serviceId}"
@@ -3156,7 +3279,7 @@ class Project(client: Client) : Service(client) {
         senderName: String? = null,
         replyToEmail: String? = null,
         replyToName: String? = null,
-        secure: io.appwrite.enums.Secure? = null,
+        secure: io.appwrite.enums.ProjectSMTPSecure? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Project {
         val apiPath = "/project/smtp"
@@ -3266,8 +3389,8 @@ class Project(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEmailTemplate(
-        templateId: io.appwrite.enums.EmailTemplateType,
-        locale: io.appwrite.enums.EmailTemplateLocale? = null,
+        templateId: io.appwrite.enums.ProjectEmailTemplateId,
+        locale: io.appwrite.enums.ProjectEmailTemplateLocale? = null,
         subject: String? = null,
         message: String? = null,
         senderName: String? = null,
@@ -3313,8 +3436,8 @@ class Project(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getEmailTemplate(
-        templateId: io.appwrite.enums.EmailTemplateType,
-        locale: io.appwrite.enums.EmailTemplateLocale? = null,
+        templateId: io.appwrite.enums.ProjectEmailTemplateId,
+        locale: io.appwrite.enums.ProjectEmailTemplateLocale? = null,
     ): io.appwrite.models.EmailTemplate {
         val apiPath = "/project/templates/email/{templateId}"
             .replace("{templateId}", templateId.value)

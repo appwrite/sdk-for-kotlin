@@ -2,8 +2,8 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.EmailTemplateType;
-import io.appwrite.enums.EmailTemplateLocale;
+import io.appwrite.enums.ProjectEmailTemplateId;
+import io.appwrite.enums.ProjectEmailTemplateLocale;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -13,8 +13,8 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.getEmailTemplate(
-    EmailTemplateType.VERIFICATION, // templateId
-    EmailTemplateLocale.AF, // locale (optional)
+    ProjectEmailTemplateId.VERIFICATION, // templateId
+    ProjectEmailTemplateLocale.AF, // locale (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Project
-import io.appwrite.enums.Scopes
+import io.appwrite.enums.ProjectKeyScopes
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,7 +14,7 @@ val project = Project(client)
 val response = project.updateKey(
     keyId = "<KEY_ID>",
     name = "<NAME>",
-    scopes = listOf(Scopes.PROJECT_READ),
+    scopes = listOf(ProjectKeyScopes.PROJECT_READ),
     expire = "2020-10-15T06:38:00.000+00:00" // optional
 )
 ```

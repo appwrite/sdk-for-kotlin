@@ -48,13 +48,13 @@ data class Database(
      * Database backup policies.
      */
     @SerializedName("policies")
-    val policies: List<Index>,
+    val policies: List<BackupPolicy>,
 
     /**
      * Database backup archives.
      */
     @SerializedName("archives")
-    val archives: List<Collection>,
+    val archives: List<BackupArchive>,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -80,8 +80,8 @@ data class Database(
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
             type = DatabaseType.values().find { it.value == map["type"] as String }!!,
-            policies = (map["policies"] as List<Map<String, Any>>).map { Index.from(map = it) },
-            archives = (map["archives"] as List<Map<String, Any>>).map { Collection.from(map = it) },
+            policies = (map["policies"] as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
+            archives = (map["archives"] as List<Map<String, Any>>).map { BackupArchive.from(map = it) },
         )
     }
 }

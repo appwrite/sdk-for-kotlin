@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class ServiceId(val value: String) {
+enum class ProjectServiceId(val value: String) {
     @SerializedName("account")
     ACCOUNT("account"),
     @SerializedName("avatars")
@@ -36,7 +36,9 @@ enum class ServiceId(val value: String) {
     @SerializedName("migrations")
     MIGRATIONS("migrations"),
     @SerializedName("messaging")
-    MESSAGING("messaging");
+    MESSAGING("messaging"),
+    @SerializedName("advisor")
+    ADVISOR("advisor");
 
     override fun toString() = value
 }

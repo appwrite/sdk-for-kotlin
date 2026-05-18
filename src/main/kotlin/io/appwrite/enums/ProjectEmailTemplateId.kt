@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class EmailTemplateType(val value: String) {
+enum class ProjectEmailTemplateId(val value: String) {
     @SerializedName("verification")
     VERIFICATION("verification"),
     @SerializedName("magicSession")
