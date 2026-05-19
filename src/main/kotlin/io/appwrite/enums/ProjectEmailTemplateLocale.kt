@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class EmailTemplateLocale(val value: String) {
+enum class ProjectEmailTemplateLocale(val value: String) {
     @SerializedName("af")
     AF("af"),
     @SerializedName("ar-ae")

@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.Secure;
+import io.appwrite.enums.ProjectSMTPSecure;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -20,7 +20,7 @@ project.updateSMTP(
     "<SENDER_NAME>", // senderName (optional)
     "email@example.com", // replyToEmail (optional)
     "<REPLY_TO_NAME>", // replyToName (optional)
-    Secure.TLS, // secure (optional)
+    ProjectSMTPSecure.TLS, // secure (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

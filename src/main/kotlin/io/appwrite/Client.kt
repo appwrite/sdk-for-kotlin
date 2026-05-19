@@ -57,12 +57,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/16.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/17.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "16.1.0",
-            "x-appwrite-response-format" to "1.9.4",
+            "x-sdk-version" to "17.0.0",
+            "x-appwrite-response-format" to "1.9.5",
         )
 
         config = mutableMapOf()

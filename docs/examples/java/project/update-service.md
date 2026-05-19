@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.ServiceId;
+import io.appwrite.enums.ProjectServiceId;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateService(
-    ServiceId.ACCOUNT, // serviceId
+    ProjectServiceId.ACCOUNT, // serviceId
     false, // enabled
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

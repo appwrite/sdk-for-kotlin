@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Project
-import io.appwrite.enums.Secure
+import io.appwrite.enums.ProjectSMTPSecure
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -20,7 +20,7 @@ val response = project.updateSMTP(
     senderName = "<SENDER_NAME>", // optional
     replyToEmail = "email@example.com", // optional
     replyToName = "<REPLY_TO_NAME>", // optional
-    secure = Secure.TLS, // optional
+    secure = ProjectSMTPSecure.TLS, // optional
     enabled = false // optional
 )
 ```

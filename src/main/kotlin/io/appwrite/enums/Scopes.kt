@@ -159,6 +159,18 @@ enum class Scopes(val value: String) {
     VCS_READ("vcs.read"),
     @SerializedName("vcs.write")
     VCS_WRITE("vcs.write"),
+    @SerializedName("insights.read")
+    INSIGHTS_READ("insights.read"),
+    @SerializedName("insights.write")
+    INSIGHTS_WRITE("insights.write"),
+    @SerializedName("reports.read")
+    REPORTS_READ("reports.read"),
+    @SerializedName("reports.write")
+    REPORTS_WRITE("reports.write"),
+    @SerializedName("presences.read")
+    PRESENCES_READ("presences.read"),
+    @SerializedName("presences.write")
+    PRESENCES_WRITE("presences.write"),
     @SerializedName("backups.policies.read")
     BACKUPS_POLICIES_READ("backups.policies.read"),
     @SerializedName("backups.policies.write")
@@ -176,7 +188,9 @@ enum class Scopes(val value: String) {
     @SerializedName("domains.write")
     DOMAINS_WRITE("domains.write"),
     @SerializedName("events.read")
-    EVENTS_READ("events.read");
+    EVENTS_READ("events.read"),
+    @SerializedName("usage.read")
+    USAGE_READ("usage.read");
 
     override fun toString() = value
 }
