@@ -1,5 +1,13 @@
 # Change Log
 
+## 17.1.0
+
+* Added `DENO_1_21`, `DENO_1_24`, and `DENO_1_35` runtime support
+* Added `sizeActual` property to `File` model for compressed file size
+* Updated `BillingLimits` model properties to be nullable and mutable
+* Updated `Project` model `billingLimits` property to be nullable
+* Updated authentication examples to use API key instead of session
+
 ## 17.0.0
 
 * Breaking: Renamed `AuthMethod` enum to `ProjectAuthMethodId`
