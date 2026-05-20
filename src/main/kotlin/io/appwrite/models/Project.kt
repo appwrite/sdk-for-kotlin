@@ -155,7 +155,7 @@ data class Project(
      * Billing limits reached
      */
     @SerializedName("billingLimits")
-    val billingLimits: BillingLimits,
+    var billingLimits: BillingLimits?,
 
     /**
      * Project blocks information
@@ -195,7 +195,7 @@ data class Project(
         "services" to services.map { it.toMap() } as Any,
         "protocols" to protocols.map { it.toMap() } as Any,
         "region" to region as Any,
-        "billingLimits" to billingLimits.toMap() as Any,
+        "billingLimits" to billingLimits?.toMap() as Any,
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
     )

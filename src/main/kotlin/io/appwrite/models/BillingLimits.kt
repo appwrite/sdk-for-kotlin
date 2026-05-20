@@ -11,49 +11,49 @@ data class BillingLimits(
      * Bandwidth limit
      */
     @SerializedName("bandwidth")
-    val bandwidth: Long,
+    var bandwidth: Long?,
 
     /**
      * Storage limit
      */
     @SerializedName("storage")
-    val storage: Long,
+    var storage: Long?,
 
     /**
      * Users limit
      */
     @SerializedName("users")
-    val users: Long,
+    var users: Long?,
 
     /**
      * Executions limit
      */
     @SerializedName("executions")
-    val executions: Long,
+    var executions: Long?,
 
     /**
      * GBHours limit
      */
     @SerializedName("GBHours")
-    val GBHours: Long,
+    var GBHours: Long?,
 
     /**
      * Image transformations limit
      */
     @SerializedName("imageTransformations")
-    val imageTransformations: Long,
+    var imageTransformations: Long?,
 
     /**
      * Auth phone limit
      */
     @SerializedName("authPhone")
-    val authPhone: Long,
+    var authPhone: Long?,
 
     /**
      * Budget limit percentage
      */
     @SerializedName("budgetLimit")
-    val budgetLimit: Long,
+    var budgetLimit: Long?,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -73,14 +73,14 @@ data class BillingLimits(
         fun from(
             map: Map<String, Any>,
         ) = BillingLimits(
-            bandwidth = (map["bandwidth"] as Number).toLong(),
-            storage = (map["storage"] as Number).toLong(),
-            users = (map["users"] as Number).toLong(),
-            executions = (map["executions"] as Number).toLong(),
-            GBHours = (map["GBHours"] as Number).toLong(),
-            imageTransformations = (map["imageTransformations"] as Number).toLong(),
-            authPhone = (map["authPhone"] as Number).toLong(),
-            budgetLimit = (map["budgetLimit"] as Number).toLong(),
+            bandwidth = (map["bandwidth"] as? Number)?.toLong(),
+            storage = (map["storage"] as? Number)?.toLong(),
+            users = (map["users"] as? Number)?.toLong(),
+            executions = (map["executions"] as? Number)?.toLong(),
+            GBHours = (map["GBHours"] as? Number)?.toLong(),
+            imageTransformations = (map["imageTransformations"] as? Number)?.toLong(),
+            authPhone = (map["authPhone"] as? Number)?.toLong(),
+            budgetLimit = (map["budgetLimit"] as? Number)?.toLong(),
         )
     }
 }
