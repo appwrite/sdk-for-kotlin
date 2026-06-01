@@ -384,7 +384,7 @@ class Health(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun getFailedJobs(
-        name: io.appwrite.enums.Name,
+        name: io.appwrite.enums.HealthQueueName,
         threshold: Long? = null,
     ): io.appwrite.models.HealthQueue {
         val apiPath = "/health/queue/failed/{name}"

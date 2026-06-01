@@ -12,7 +12,7 @@ val client = Client()
 
 val presences = Presences(client)
 
-val response = presences.updatePresence(
+val response = presences.update(
     presenceId = "<PRESENCE_ID>",
     userId = "<USER_ID>",
     status = "<STATUS>", // optional

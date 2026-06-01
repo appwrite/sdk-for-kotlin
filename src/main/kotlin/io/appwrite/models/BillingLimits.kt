@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
 
 /**
- * BillingLimits
+ * Limits
  */
 data class BillingLimits(
     /**

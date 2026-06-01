@@ -20,7 +20,13 @@ enum class ProjectPolicyId(val value: String) {
     @SerializedName("user-limit")
     USER_LIMIT("user-limit"),
     @SerializedName("membership-privacy")
-    MEMBERSHIP_PRIVACY("membership-privacy");
+    MEMBERSHIP_PRIVACY("membership-privacy"),
+    @SerializedName("deny-aliased-email")
+    DENY_ALIASED_EMAIL("deny-aliased-email"),
+    @SerializedName("deny-disposable-email")
+    DENY_DISPOSABLE_EMAIL("deny-disposable-email"),
+    @SerializedName("deny-free-email")
+    DENY_FREE_EMAIL("deny-free-email");
 
     override fun toString() = value
 }

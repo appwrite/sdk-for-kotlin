@@ -2,7 +2,7 @@ package io.appwrite.enums
 
 import com.google.gson.annotations.SerializedName
 
-enum class Name(val value: String) {
+enum class HealthQueueName(val value: String) {
     @SerializedName("v1-database")
     V1_DATABASE("v1-database"),
     @SerializedName("v1-deletes")

@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Avatars
-import io.appwrite.enums.Theme
+import io.appwrite.enums.BrowserTheme
 import io.appwrite.enums.Timezone
 import io.appwrite.enums.BrowserPermission
 import io.appwrite.enums.ImageFormat
@@ -23,11 +23,11 @@ val result = avatars.getScreenshot(
     viewportWidth = 1920, // optional
     viewportHeight = 1080, // optional
     scale = 2, // optional
-    theme = Theme.DARK, // optional
+    theme = BrowserTheme.DARK, // optional
     userAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15", // optional
     fullpage = true, // optional
     locale = "en-US", // optional
-    timezone = Timezone.AMERICA_NEW_YORK, // optional
+    timezone = Timezone.AFRICA_ABIDJAN, // optional
     latitude = 37.7749, // optional
     longitude = -122.4194, // optional
     accuracy = 100, // optional

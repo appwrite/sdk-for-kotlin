@@ -2,7 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Health
-import io.appwrite.enums.Name
+import io.appwrite.enums.HealthQueueName
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ val client = Client()
 val health = Health(client)
 
 val response = health.getFailedJobs(
-    name = Name.V1_DATABASE,
+    name = HealthQueueName.V1_DATABASE,
     threshold = 0 // optional
 )
 ```

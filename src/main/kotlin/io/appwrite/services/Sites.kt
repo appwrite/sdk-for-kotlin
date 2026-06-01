@@ -73,6 +73,8 @@ class Sites(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the site.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the site? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to site code in the linked repo.
+     * @param providerBranches List of branch name patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all branches.
+     * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
@@ -99,6 +101,8 @@ class Sites(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
+        providerBranches: List<String>? = null,
+        providerPaths: List<String>? = null,
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
@@ -124,6 +128,8 @@ class Sites(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
+            "providerBranches" to providerBranches,
+            "providerPaths" to providerPaths,
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
@@ -249,6 +255,8 @@ class Sites(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the site.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the site? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to site code in the linked repo.
+     * @param providerBranches List of branch name patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all branches.
+     * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
@@ -275,6 +283,8 @@ class Sites(client: Client) : Service(client) {
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
+        providerBranches: List<String>? = null,
+        providerPaths: List<String>? = null,
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
@@ -300,6 +310,8 @@ class Sites(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
+            "providerBranches" to providerBranches,
+            "providerPaths" to providerPaths,
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,

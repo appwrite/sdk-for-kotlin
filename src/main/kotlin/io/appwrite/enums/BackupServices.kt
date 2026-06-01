@@ -11,6 +11,8 @@ enum class BackupServices(val value: String) {
     DOCUMENTSDB("documentsdb"),
     @SerializedName("vectorsdb")
     VECTORSDB("vectorsdb"),
+    @SerializedName("dedicatedDatabases")
+    DEDICATEDDATABASES("dedicatedDatabases"),
     @SerializedName("functions")
     FUNCTIONS("functions"),
     @SerializedName("storage")
