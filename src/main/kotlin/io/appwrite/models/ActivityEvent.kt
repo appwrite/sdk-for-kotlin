@@ -14,28 +14,28 @@ data class ActivityEvent(
     val id: String,
 
     /**
-     * User type.
+     * Actor type.
      */
-    @SerializedName("userType")
-    val userType: String,
+    @SerializedName("actorType")
+    val actorType: String,
 
     /**
-     * User ID.
+     * Actor ID.
      */
-    @SerializedName("userId")
-    val userId: String,
+    @SerializedName("actorId")
+    val actorId: String,
 
     /**
-     * User Email.
+     * Actor Email.
      */
-    @SerializedName("userEmail")
-    val userEmail: String,
+    @SerializedName("actorEmail")
+    val actorEmail: String,
 
     /**
-     * User Name.
+     * Actor Name.
      */
-    @SerializedName("userName")
-    val userName: String,
+    @SerializedName("actorName")
+    val actorName: String,
 
     /**
      * Resource parent.
@@ -202,10 +202,10 @@ data class ActivityEvent(
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
-        "userType" to userType as Any,
-        "userId" to userId as Any,
-        "userEmail" to userEmail as Any,
-        "userName" to userName as Any,
+        "actorType" to actorType as Any,
+        "actorId" to actorId as Any,
+        "actorEmail" to actorEmail as Any,
+        "actorName" to actorName as Any,
         "resourceParent" to resourceParent as Any,
         "resourceType" to resourceType as Any,
         "resourceId" to resourceId as Any,
@@ -242,10 +242,10 @@ data class ActivityEvent(
             map: Map<String, Any>,
         ) = ActivityEvent(
             id = map["\$id"] as String,
-            userType = map["userType"] as String,
-            userId = map["userId"] as String,
-            userEmail = map["userEmail"] as String,
-            userName = map["userName"] as String,
+            actorType = map["actorType"] as String,
+            actorId = map["actorId"] as String,
+            actorEmail = map["actorEmail"] as String,
+            actorName = map["actorName"] as String,
             resourceParent = map["resourceParent"] as String,
             resourceType = map["resourceType"] as String,
             resourceId = map["resourceId"] as String,

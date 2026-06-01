@@ -72,6 +72,8 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function.
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
+     * @param providerBranches List of branch name patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all branches.
+     * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the function deployments.
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
@@ -91,12 +93,14 @@ class Functions(client: Client) : Service(client) {
         logging: Boolean? = null,
         entrypoint: String? = null,
         commands: String? = null,
-        scopes: List<io.appwrite.enums.Scopes>? = null,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
         installationId: String? = null,
         providerRepositoryId: String? = null,
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
+        providerBranches: List<String>? = null,
+        providerPaths: List<String>? = null,
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
@@ -121,6 +125,8 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
+            "providerBranches" to providerBranches,
+            "providerPaths" to providerPaths,
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
@@ -245,6 +251,8 @@ class Functions(client: Client) : Service(client) {
      * @param providerBranch Production branch for the repo linked to the function
      * @param providerSilentMode Is the VCS (Version Control System) connection in silent mode for the repo linked to the function? In silent mode, comments will not be made on commits and pull requests.
      * @param providerRootDirectory Path to function code in the linked repo.
+     * @param providerBranches List of branch name patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all branches.
+     * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the function deployments.
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
@@ -264,12 +272,14 @@ class Functions(client: Client) : Service(client) {
         logging: Boolean? = null,
         entrypoint: String? = null,
         commands: String? = null,
-        scopes: List<io.appwrite.enums.Scopes>? = null,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
         installationId: String? = null,
         providerRepositoryId: String? = null,
         providerBranch: String? = null,
         providerSilentMode: Boolean? = null,
         providerRootDirectory: String? = null,
+        providerBranches: List<String>? = null,
+        providerPaths: List<String>? = null,
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
@@ -294,6 +304,8 @@ class Functions(client: Client) : Service(client) {
             "providerBranch" to providerBranch,
             "providerSilentMode" to providerSilentMode,
             "providerRootDirectory" to providerRootDirectory,
+            "providerBranches" to providerBranches,
+            "providerPaths" to providerPaths,
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,

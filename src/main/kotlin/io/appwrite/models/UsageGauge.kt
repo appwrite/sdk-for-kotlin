@@ -25,11 +25,25 @@ data class UsageGauge(
     @SerializedName("time")
     val time: String,
 
+    /**
+     * The resource type.
+     */
+    @SerializedName("resourceType")
+    val resourceType: String,
+
+    /**
+     * The resource ID.
+     */
+    @SerializedName("resourceId")
+    val resourceId: String,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "metric" to metric as Any,
         "value" to value as Any,
         "time" to time as Any,
+        "resourceType" to resourceType as Any,
+        "resourceId" to resourceId as Any,
     )
 
     companion object {
@@ -41,6 +55,8 @@ data class UsageGauge(
             metric = map["metric"] as String,
             value = (map["value"] as Number).toLong(),
             time = map["time"] as String,
+            resourceType = map["resourceType"] as String,
+            resourceId = map["resourceId"] as String,
         )
     }
 }

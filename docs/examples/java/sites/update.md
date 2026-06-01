@@ -32,6 +32,8 @@ sites.update(
     "<PROVIDER_BRANCH>", // providerBranch (optional)
     false, // providerSilentMode (optional)
     "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
+    List.of(), // providerBranches (optional)
+    List.of(), // providerPaths (optional)
     "", // buildSpecification (optional)
     "", // runtimeSpecification (optional)
     0, // deploymentRetention (optional)

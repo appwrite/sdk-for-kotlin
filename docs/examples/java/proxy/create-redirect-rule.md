@@ -15,7 +15,7 @@ Proxy proxy = new Proxy(client);
 proxy.createRedirectRule(
     "", // domain
     "https://example.com", // url
-    StatusCode.MOVED_PERMANENTLY_301, // statusCode
+    StatusCode.MOVEDPERMANENTLY, // statusCode
     "<RESOURCE_ID>", // resourceId
     ProxyResourceType.SITE, // resourceType
     new CoroutineCallback<>((result, error) -> {

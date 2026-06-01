@@ -176,6 +176,18 @@ data class Function(
     val providerSilentMode: Boolean,
 
     /**
+     * List of branch name patterns that trigger automatic deployments. Supports glob wildcards. Empty list deploys on all branches.
+     */
+    @SerializedName("providerBranches")
+    val providerBranches: List<String>,
+
+    /**
+     * List of file path patterns that trigger automatic deployments. Supports glob wildcards. Empty list deploys on all file changes.
+     */
+    @SerializedName("providerPaths")
+    val providerPaths: List<String>,
+
+    /**
      * Machine specification for deployment builds.
      */
     @SerializedName("buildSpecification")
@@ -217,6 +229,8 @@ data class Function(
         "providerBranch" to providerBranch as Any,
         "providerRootDirectory" to providerRootDirectory as Any,
         "providerSilentMode" to providerSilentMode as Any,
+        "providerBranches" to providerBranches as Any,
+        "providerPaths" to providerPaths as Any,
         "buildSpecification" to buildSpecification as Any,
         "runtimeSpecification" to runtimeSpecification as Any,
     )
@@ -255,6 +269,8 @@ data class Function(
             providerBranch = map["providerBranch"] as String,
             providerRootDirectory = map["providerRootDirectory"] as String,
             providerSilentMode = map["providerSilentMode"] as Boolean,
+            providerBranches = map["providerBranches"] as List<String>,
+            providerPaths = map["providerPaths"] as List<String>,
             buildSpecification = map["buildSpecification"] as String,
             runtimeSpecification = map["runtimeSpecification"] as String,
         )

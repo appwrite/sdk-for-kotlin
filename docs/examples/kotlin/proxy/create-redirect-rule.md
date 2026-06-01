@@ -15,7 +15,7 @@ val proxy = Proxy(client)
 val response = proxy.createRedirectRule(
     domain = "",
     url = "https://example.com",
-    statusCode = StatusCode.MOVED_PERMANENTLY_301,
+    statusCode = StatusCode.MOVEDPERMANENTLY,
     resourceId = "<RESOURCE_ID>",
     resourceType = ProxyResourceType.SITE
 )

@@ -2,7 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Health;
-import io.appwrite.enums.Name;
+import io.appwrite.enums.HealthQueueName;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,7 +12,7 @@ Client client = new Client()
 Health health = new Health(client);
 
 health.getFailedJobs(
-    Name.V1_DATABASE, // name
+    HealthQueueName.V1_DATABASE, // name
     0, // threshold (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
