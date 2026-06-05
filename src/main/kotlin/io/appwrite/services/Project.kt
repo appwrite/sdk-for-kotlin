@@ -26,6 +26,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -53,6 +54,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -83,6 +85,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -118,6 +121,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.KeyList = {
             io.appwrite.models.KeyList.from(map = it as Map<String, Any>)
@@ -160,6 +164,7 @@ class Project(client: Client) : Service(client) {
             "expire" to expire,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Key = {
@@ -196,6 +201,7 @@ class Project(client: Client) : Service(client) {
             "duration" to duration,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EphemeralKey = {
@@ -227,6 +233,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Key = {
             io.appwrite.models.Key.from(map = it as Map<String, Any>)
@@ -267,6 +274,7 @@ class Project(client: Client) : Service(client) {
             "expire" to expire,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Key = {
@@ -298,6 +306,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -325,6 +334,7 @@ class Project(client: Client) : Service(client) {
             "labels" to labels,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -360,6 +370,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.MockNumberList = {
             io.appwrite.models.MockNumberList.from(map = it as Map<String, Any>)
@@ -393,6 +404,7 @@ class Project(client: Client) : Service(client) {
             "otp" to otp,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
@@ -424,6 +436,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
             io.appwrite.models.MockNumber.from(map = it as Map<String, Any>)
@@ -457,6 +470,7 @@ class Project(client: Client) : Service(client) {
             "otp" to otp,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
@@ -488,6 +502,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -519,6 +534,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.OAuth2ProviderList = {
             io.appwrite.models.OAuth2ProviderList.from(map = it as Map<String, Any>)
@@ -534,10 +550,64 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the OAuth2 server (OIDC provider) configuration.
+     *
+     * @param enabled Enable or disable the OAuth2 server.
+     * @param authorizationUrl URL to your application with consent screen.
+     * @param scopes List of allowed OAuth2 scopes. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @param accessTokenDuration Access token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 8 hours.
+     * @param refreshTokenDuration Refresh token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 1 year.
+     * @param publicAccessTokenDuration Access token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 1 hour.
+     * @param publicRefreshTokenDuration Refresh token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 30 days.
+     * @param confidentialPkce When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
+     * @return [io.appwrite.models.Project]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Server(
+        enabled: Boolean,
+        authorizationUrl: String,
+        scopes: List<String>? = null,
+        accessTokenDuration: Long? = null,
+        refreshTokenDuration: Long? = null,
+        publicAccessTokenDuration: Long? = null,
+        publicRefreshTokenDuration: Long? = null,
+        confidentialPkce: Boolean? = null,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/oauth2-server"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+            "authorizationUrl" to authorizationUrl,
+            "scopes" to scopes,
+            "accessTokenDuration" to accessTokenDuration,
+            "refreshTokenDuration" to refreshTokenDuration,
+            "publicAccessTokenDuration" to publicAccessTokenDuration,
+            "publicRefreshTokenDuration" to publicRefreshTokenDuration,
+            "confidentialPkce" to confidentialPkce,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Amazon configuration.
      *
      * @param clientId 'Client ID' of Amazon OAuth2 app. For example: amzn1.application-oa2-client.87400c00000000000000000000063d5b2
-     * @param clientSecret 'Client Secret' of Amazon OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Amazon OAuth2 app. For example: 79ffe4000000000000000000000000000000000000000000000000000002de55
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Amazon]
      */
@@ -556,6 +626,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Amazon = {
@@ -600,6 +671,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Apple = {
@@ -619,7 +691,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Auth0 configuration.
      *
      * @param clientId 'Client ID' of Auth0 OAuth2 app. For example: OaOkIA000000000000000000005KLSYq
-     * @param clientSecret 'Client Secret' of Auth0 OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Auth0 OAuth2 app. For example: zXz0000-00000000000000000000000000000-00000000000000000000PJafnF
      * @param endpoint Domain of Auth0 instance. For example: example.us.auth0.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Auth0]
@@ -641,6 +713,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Auth0 = {
@@ -660,7 +733,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Authentik configuration.
      *
      * @param clientId 'Client ID' of Authentik OAuth2 app. For example: dTKOPa0000000000000000000000000000e7G8hv
-     * @param clientSecret 'Client Secret' of Authentik OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Authentik OAuth2 app. For example: ntQadq000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000Hp5WK
      * @param endpoint Domain of Authentik instance. For example: example.authentik.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Authentik]
@@ -682,6 +755,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Authentik = {
@@ -701,7 +775,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Autodesk configuration.
      *
      * @param clientId 'Client ID' of Autodesk OAuth2 app. For example: 5zw90v00000000000000000000kVYXN7
-     * @param clientSecret 'Client Secret' of Autodesk OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Autodesk OAuth2 app. For example: 7I000000000000MW
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Autodesk]
      */
@@ -720,6 +794,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Autodesk = {
@@ -739,7 +814,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Bitbucket configuration.
      *
      * @param key 'Key' of Bitbucket OAuth2 app. For example: Knt70000000000ByRc
-     * @param secret 'Secret' of Bitbucket OAuth2 app. For example: your-oauth2-client-secret
+     * @param secret 'Secret' of Bitbucket OAuth2 app. For example: NMfLZJ00000000000000000000TLQdDx
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Bitbucket]
      */
@@ -758,6 +833,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Bitbucket = {
@@ -777,7 +853,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Bitly configuration.
      *
      * @param clientId 'Client ID' of Bitly OAuth2 app. For example: d95151000000000000000000000000000067af9b
-     * @param clientSecret 'Client Secret' of Bitly OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Bitly OAuth2 app. For example: a13e250000000000000000000000000000d73095
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Bitly]
      */
@@ -796,6 +872,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Bitly = {
@@ -815,7 +892,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Box configuration.
      *
      * @param clientId 'Client ID' of Box OAuth2 app. For example: deglcs00000000000000000000x2og6y
-     * @param clientSecret 'Client Secret' of Box OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Box OAuth2 app. For example: OKM1f100000000000000000000eshEif
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Box]
      */
@@ -834,6 +911,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Box = {
@@ -853,7 +931,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Dailymotion configuration.
      *
      * @param apiKey 'API Key' of Dailymotion OAuth2 app. For example: 07a9000000000000067f
-     * @param apiSecret 'API Secret' of Dailymotion OAuth2 app. For example: your-oauth2-client-secret
+     * @param apiSecret 'API Secret' of Dailymotion OAuth2 app. For example: a399a90000000000000000000000000000d90639
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Dailymotion]
      */
@@ -872,6 +950,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Dailymotion = {
@@ -891,7 +970,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Discord configuration.
      *
      * @param clientId 'Client ID' of Discord OAuth2 app. For example: 950722000000343754
-     * @param clientSecret 'Client Secret' of Discord OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Discord OAuth2 app. For example: YmPXnM000000000000000000002zFg5D
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Discord]
      */
@@ -910,6 +989,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Discord = {
@@ -929,7 +1009,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Disqus configuration.
      *
      * @param publicKey 'Public Key, also known as API Key' of Disqus OAuth2 app. For example: cgegH70000000000000000000000000000000000000000000000000000Hr1nYX
-     * @param secretKey 'Secret Key, also known as API Secret' of Disqus OAuth2 app. For example: your-oauth2-client-secret
+     * @param secretKey 'Secret Key, also known as API Secret' of Disqus OAuth2 app. For example: W7Bykj00000000000000000000000000000000000000000000000000003o43w9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Disqus]
      */
@@ -948,6 +1028,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Disqus = {
@@ -967,7 +1048,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Dropbox configuration.
      *
      * @param appKey 'App Key' of Dropbox OAuth2 app. For example: jl000000000009t
-     * @param appSecret 'App Secret' of Dropbox OAuth2 app. For example: your-oauth2-client-secret
+     * @param appSecret 'App Secret' of Dropbox OAuth2 app. For example: g200000000000vw
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Dropbox]
      */
@@ -986,6 +1067,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Dropbox = {
@@ -1005,7 +1087,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Etsy configuration.
      *
      * @param keyString 'Keystring' of Etsy OAuth2 app. For example: nsgzxh0000000000008j85a2
-     * @param sharedSecret 'Shared Secret' of Etsy OAuth2 app. For example: your-oauth2-client-secret
+     * @param sharedSecret 'Shared Secret' of Etsy OAuth2 app. For example: tp000000ru
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Etsy]
      */
@@ -1024,6 +1106,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Etsy = {
@@ -1043,7 +1126,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Facebook configuration.
      *
      * @param appId 'App ID' of Facebook OAuth2 app. For example: 260600000007694
-     * @param appSecret 'App Secret' of Facebook OAuth2 app. For example: your-oauth2-client-secret
+     * @param appSecret 'App Secret' of Facebook OAuth2 app. For example: 2d0b2800000000000000000000d38af4
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Facebook]
      */
@@ -1062,6 +1145,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Facebook = {
@@ -1081,7 +1165,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Figma configuration.
      *
      * @param clientId 'Client ID' of Figma OAuth2 app. For example: byay5H0000000000VtiI40
-     * @param clientSecret 'Client Secret' of Figma OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Figma OAuth2 app. For example: yEpOYn0000000000000000004iIsU5
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Figma]
      */
@@ -1100,6 +1184,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Figma = {
@@ -1119,7 +1204,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 FusionAuth configuration.
      *
      * @param clientId 'Client ID' of FusionAuth OAuth2 app. For example: b2222c00-0000-0000-0000-000000862097
-     * @param clientSecret 'Client Secret' of FusionAuth OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of FusionAuth OAuth2 app. For example: Jx4s0C0000000000000000000000000000000wGqLsc
      * @param endpoint Domain of FusionAuth instance. For example: example.fusionauth.io
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2FusionAuth]
@@ -1141,6 +1226,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2FusionAuth = {
@@ -1160,7 +1246,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 GitHub configuration.
      *
      * @param clientId 'OAuth2 app Client ID, or App ID' of GitHub OAuth2 app. For example: e4d87900000000540733. Example of wrong value: 370006
-     * @param clientSecret 'Client Secret' of GitHub OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of GitHub OAuth2 app. For example: 5e07c00000000000000000000000000000198bcc
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Github]
      */
@@ -1179,6 +1265,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Github = {
@@ -1198,7 +1285,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Gitlab configuration.
      *
      * @param applicationId 'Application ID' of Gitlab OAuth2 app. For example: d41ffe0000000000000000000000000000000000000000000000000000d5e252
-     * @param secret 'Secret' of Gitlab OAuth2 app. For example: your-oauth2-client-secret
+     * @param secret 'Secret' of Gitlab OAuth2 app. For example: gloas-838cfa0000000000000000000000000000000000000000000000000000ecbb38
      * @param endpoint Endpoint URL of self-hosted GitLab instance. For example: https://gitlab.com
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Gitlab]
@@ -1220,6 +1307,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Gitlab = {
@@ -1239,7 +1327,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Google configuration.
      *
      * @param clientId 'Client ID' of Google OAuth2 app. For example: 120000000095-92ifjb00000000000000000000g7ijfb.apps.googleusercontent.com
-     * @param clientSecret 'Client Secret' of Google OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Google OAuth2 app. For example: GOCSPX-2k8gsR0000000000000000VNahJj
      * @param prompt Array of Google OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. Must not be specified with other values. "consent" means: prompt the user for consent. "select_account" means: prompt the user to select an account.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Google]
@@ -1261,6 +1349,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Google = {
@@ -1280,7 +1369,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Keycloak configuration.
      *
      * @param clientId 'Client ID' of Keycloak OAuth2 app. For example: appwrite-o0000000st-app
-     * @param clientSecret 'Client Secret' of Keycloak OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Keycloak OAuth2 app. For example: jdjrJd00000000000000000000HUsaZO
      * @param endpoint Domain of Keycloak instance. For example: keycloak.example.com
      * @param realmName Keycloak realm name. For example: appwrite-realm
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
@@ -1305,6 +1394,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Keycloak = {
@@ -1324,7 +1414,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Kick configuration.
      *
      * @param clientId 'Client ID' of Kick OAuth2 app. For example: 01KQ7C00000000000001MFHS32
-     * @param clientSecret 'Client Secret' of Kick OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Kick OAuth2 app. For example: 34ac5600000000000000000000000000000000000000000000000000e830c8b
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Kick]
      */
@@ -1343,6 +1433,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Kick = {
@@ -1362,7 +1453,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Linkedin configuration.
      *
      * @param clientId 'Client ID' of Linkedin OAuth2 app. For example: 770000000000dv
-     * @param primaryClientSecret 'Primary Client Secret or Secondary Client Secret' of Linkedin OAuth2 app. For example: your-oauth2-client-secret
+     * @param primaryClientSecret 'Primary Client Secret or Secondary Client Secret' of Linkedin OAuth2 app. For example: WPL_AP1.2Bf0000000000000./HtlYw==
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Linkedin]
      */
@@ -1381,6 +1472,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Linkedin = {
@@ -1400,7 +1492,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Microsoft configuration.
      *
      * @param applicationId 'Entra ID Application ID, also known as Client ID' of Microsoft OAuth2 app. For example: 00001111-aaaa-2222-bbbb-3333cccc4444
-     * @param applicationSecret 'Entra ID Application Secret, also known as Client Secret' of Microsoft OAuth2 app. For example: your-oauth2-client-secret
+     * @param applicationSecret 'Entra ID Application Secret, also known as Client Secret' of Microsoft OAuth2 app. For example: A1bC2dE3fH4iJ5kL6mN7oP8qR9sT0u
      * @param tenant Microsoft Entra ID tenant identifier. Use 'common', 'organizations', 'consumers' or a specific tenant ID. For example: common
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Microsoft]
@@ -1422,6 +1514,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Microsoft = {
@@ -1441,7 +1534,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Notion configuration.
      *
      * @param oauthClientId 'OAuth Client ID' of Notion OAuth2 app. For example: 341d8700-0000-0000-0000-000000446ee3
-     * @param oauthClientSecret 'OAuth Client Secret' of Notion OAuth2 app. For example: your-oauth2-client-secret
+     * @param oauthClientSecret 'OAuth Client Secret' of Notion OAuth2 app. For example: secret_dLUr4b000000000000000000000000000000lFHAa9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Notion]
      */
@@ -1460,6 +1553,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Notion = {
@@ -1479,7 +1573,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Oidc configuration.
      *
      * @param clientId 'Client ID' of Oidc OAuth2 app. For example: qibI2x0000000000000000000000000006L2YFoG
-     * @param clientSecret 'Client Secret' of Oidc OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Oidc OAuth2 app. For example: Ah68ed000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003qpcHV
      * @param wellKnownURL OpenID Connect well-known configuration URL. When provided, authorization, token, and user info endpoints can be discovered automatically. For example: https://myoauth.com/.well-known/openid-configuration
      * @param authorizationURL OpenID Connect authorization endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/authorize
      * @param tokenURL OpenID Connect token endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/token
@@ -1510,6 +1604,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Oidc = {
@@ -1529,7 +1624,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Okta configuration.
      *
      * @param clientId 'Client ID' of Okta OAuth2 app. For example: 0oa00000000000000698
-     * @param clientSecret 'Client Secret' of Okta OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Okta OAuth2 app. For example: Kiq0000000000000000000000000000000000000-00000000000H2L5-3SJ-vRV
      * @param domain Okta company domain. Required when enabling the provider. For example: trial-6400025.okta.com. Example of wrong value: trial-6400025-admin.okta.com, or https://trial-6400025.okta.com/
      * @param authorizationServerId Custom Authorization Servers. Optional, can be left empty or unconfigured. For example: aus000000000000000h7z
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
@@ -1554,6 +1649,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Okta = {
@@ -1573,7 +1669,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Paypal configuration.
      *
      * @param clientId 'Client ID' of Paypal OAuth2 app. For example: AdhIEG7-000000000000-0000000000000000000000000000000-0000000000000000000000-2pyB
-     * @param secretKey 'Secret Key 1 or Secret Key 2' of Paypal OAuth2 app. For example: your-oauth2-client-secret
+     * @param secretKey 'Secret Key 1 or Secret Key 2' of Paypal OAuth2 app. For example: EH8KCXtew--000000000000000000000000000000000000000_C-1_5UP_000000000000000CB7KDp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Paypal]
      */
@@ -1592,6 +1688,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Paypal = {
@@ -1611,7 +1708,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 PaypalSandbox configuration.
      *
      * @param clientId 'Client ID' of PaypalSandbox OAuth2 app. For example: AdhIEG7-000000000000-0000000000000000000000000000000-0000000000000000000000-2pyB
-     * @param secretKey 'Secret Key 1 or Secret Key 2' of PaypalSandbox OAuth2 app. For example: your-oauth2-client-secret
+     * @param secretKey 'Secret Key 1 or Secret Key 2' of PaypalSandbox OAuth2 app. For example: EH8KCXtew--000000000000000000000000000000000000000_C-1_5UP_000000000000000CB7KDp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Paypal]
      */
@@ -1630,6 +1727,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Paypal = {
@@ -1649,7 +1747,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Podio configuration.
      *
      * @param clientId 'Client ID' of Podio OAuth2 app. For example: appwrite-o0000000st-app
-     * @param clientSecret 'Client Secret' of Podio OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Podio OAuth2 app. For example: Rn247T0000000000000000000000000000000000000000000000000000W2zWTN
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Podio]
      */
@@ -1668,6 +1766,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Podio = {
@@ -1687,7 +1786,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Salesforce configuration.
      *
      * @param customerKey 'Consumer Key' of Salesforce OAuth2 app. For example: 3MVG9I0000000000000000000000000000000000000000000000000000000000000000000000000C5Aejq
-     * @param customerSecret 'Consumer Secret' of Salesforce OAuth2 app. For example: your-oauth2-client-secret
+     * @param customerSecret 'Consumer Secret' of Salesforce OAuth2 app. For example: 3w000000000000e2
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Salesforce]
      */
@@ -1706,6 +1805,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Salesforce = {
@@ -1725,7 +1825,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Slack configuration.
      *
      * @param clientId 'Client ID' of Slack OAuth2 app. For example: 23000000089.15000000000023
-     * @param clientSecret 'Client Secret' of Slack OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Slack OAuth2 app. For example: 81656000000000000000000000f3d2fd
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Slack]
      */
@@ -1744,6 +1844,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Slack = {
@@ -1763,7 +1864,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Spotify configuration.
      *
      * @param clientId 'Client ID' of Spotify OAuth2 app. For example: 6ec271000000000000000000009beace
-     * @param clientSecret 'Client Secret' of Spotify OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Spotify OAuth2 app. For example: db068a000000000000000000008b5b9f
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Spotify]
      */
@@ -1782,6 +1883,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Spotify = {
@@ -1801,7 +1903,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Stripe configuration.
      *
      * @param clientId 'Client ID' of Stripe OAuth2 app. For example: ca_UKibXX0000000000000000000006byvR
-     * @param apiSecretKey 'API Secret Key' of Stripe OAuth2 app. For example: your-oauth2-client-secret
+     * @param apiSecretKey 'API Secret Key' of Stripe OAuth2 app. For example: sk_51SfOd000000000000000000000000000000000000000000000000000000000000000000000000000000000000000QGWYfp
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Stripe]
      */
@@ -1820,6 +1922,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Stripe = {
@@ -1839,7 +1942,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Tradeshift configuration.
      *
      * @param oauth2ClientId 'OAuth2 Client ID' of Tradeshift OAuth2 app. For example: appwrite-tes00000.0000000000est-app
-     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift OAuth2 app. For example: your-oauth2-client-secret
+     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift OAuth2 app. For example: 7cb52700-0000-0000-0000-000000ca5b83
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Tradeshift]
      */
@@ -1858,6 +1961,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Tradeshift = {
@@ -1877,7 +1981,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Tradeshift Sandbox configuration.
      *
      * @param oauth2ClientId 'OAuth2 Client ID' of Tradeshift Sandbox OAuth2 app. For example: appwrite-tes00000.0000000000est-app
-     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift Sandbox OAuth2 app. For example: your-oauth2-client-secret
+     * @param oauth2ClientSecret 'OAuth2 Client Secret' of Tradeshift Sandbox OAuth2 app. For example: 7cb52700-0000-0000-0000-000000ca5b83
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Tradeshift]
      */
@@ -1896,6 +2000,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Tradeshift = {
@@ -1915,7 +2020,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Twitch configuration.
      *
      * @param clientId 'Client ID' of Twitch OAuth2 app. For example: vvi0in000000000000000000ikmt9p
-     * @param clientSecret 'Client Secret' of Twitch OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Twitch OAuth2 app. For example: pmapue000000000000000000zylw3v
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Twitch]
      */
@@ -1934,6 +2039,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Twitch = {
@@ -1953,7 +2059,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 WordPress configuration.
      *
      * @param clientId 'Client ID' of WordPress OAuth2 app. For example: 130005
-     * @param clientSecret 'Client Secret' of WordPress OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of WordPress OAuth2 app. For example: PlBfJS0000000000000000000000000000000000000000000000000000EdUZJk
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2WordPress]
      */
@@ -1972,6 +2078,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2WordPress = {
@@ -1991,7 +2098,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 X configuration.
      *
      * @param customerKey 'Customer Key' of X OAuth2 app. For example: slzZV0000000000000NFLaWT
-     * @param secretKey 'Secret Key' of X OAuth2 app. For example: your-oauth2-client-secret
+     * @param secretKey 'Secret Key' of X OAuth2 app. For example: tkEPkp00000000000000000000000000000000000000FTxbI9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2X]
      */
@@ -2010,6 +2117,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2X = {
@@ -2029,7 +2137,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Yahoo configuration.
      *
      * @param clientId 'Client ID, also known as Customer Key' of Yahoo OAuth2 app. For example: dj0yJm000000000000000000000000000000000000000000000000000000000000000000000000000000000000Z4PWRm
-     * @param clientSecret 'Client Secret, also known as Customer Secret' of Yahoo OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret, also known as Customer Secret' of Yahoo OAuth2 app. For example: cf978f0000000000000000000000000000c5e2e9
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Yahoo]
      */
@@ -2048,6 +2156,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Yahoo = {
@@ -2067,7 +2176,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Yandex configuration.
      *
      * @param clientId 'Client ID' of Yandex OAuth2 app. For example: 6a8a6a0000000000000000000091483c
-     * @param clientSecret 'Client Secret' of Yandex OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Yandex OAuth2 app. For example: bbf98500000000000000000000c75a63
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Yandex]
      */
@@ -2086,6 +2195,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Yandex = {
@@ -2105,7 +2215,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Zoho configuration.
      *
      * @param clientId 'Client ID' of Zoho OAuth2 app. For example: 1000.83C178000000000000000000RPNX0B
-     * @param clientSecret 'Client Secret' of Zoho OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Zoho OAuth2 app. For example: fb5cac000000000000000000000000000000a68f6e
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Zoho]
      */
@@ -2124,6 +2234,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Zoho = {
@@ -2143,7 +2254,7 @@ class Project(client: Client) : Service(client) {
      * Update the project OAuth2 Zoom configuration.
      *
      * @param clientId 'Client ID' of Zoom OAuth2 app. For example: QMAC00000000000000w0AQ
-     * @param clientSecret 'Client Secret' of Zoom OAuth2 app. For example: your-oauth2-client-secret
+     * @param clientSecret 'Client Secret' of Zoom OAuth2 app. For example: GAWsG4000000000000000000007U01ON
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Zoom]
      */
@@ -2162,6 +2273,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Zoom = {
@@ -2193,6 +2305,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -2271,6 +2384,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.PlatformList = {
             io.appwrite.models.PlatformList.from(map = it as Map<String, Any>)
@@ -2307,6 +2421,7 @@ class Project(client: Client) : Service(client) {
             "applicationId" to applicationId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformAndroid = {
@@ -2344,6 +2459,7 @@ class Project(client: Client) : Service(client) {
             "applicationId" to applicationId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformAndroid = {
@@ -2381,6 +2497,7 @@ class Project(client: Client) : Service(client) {
             "bundleIdentifier" to bundleIdentifier,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformApple = {
@@ -2418,6 +2535,7 @@ class Project(client: Client) : Service(client) {
             "bundleIdentifier" to bundleIdentifier,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformApple = {
@@ -2455,6 +2573,7 @@ class Project(client: Client) : Service(client) {
             "packageName" to packageName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformLinux = {
@@ -2492,6 +2611,7 @@ class Project(client: Client) : Service(client) {
             "packageName" to packageName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformLinux = {
@@ -2529,6 +2649,7 @@ class Project(client: Client) : Service(client) {
             "hostname" to hostname,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWeb = {
@@ -2566,6 +2687,7 @@ class Project(client: Client) : Service(client) {
             "hostname" to hostname,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWeb = {
@@ -2603,6 +2725,7 @@ class Project(client: Client) : Service(client) {
             "packageIdentifierName" to packageIdentifierName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWindows = {
@@ -2640,6 +2763,7 @@ class Project(client: Client) : Service(client) {
             "packageIdentifierName" to packageIdentifierName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWindows = {
@@ -2671,6 +2795,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -2710,6 +2835,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -2741,6 +2867,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.PolicyList = {
             io.appwrite.models.PolicyList.from(map = it as Map<String, Any>)
@@ -2771,6 +2898,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2802,6 +2930,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2833,6 +2962,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2877,6 +3007,7 @@ class Project(client: Client) : Service(client) {
             "userMFA" to userMFA,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2908,6 +3039,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2941,6 +3073,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2972,6 +3105,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -2983,6 +3117,51 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the password strength requirements for users in the project.
+     *
+     * @param min Minimum password length. Value must be between 8 and 256. Default is 8.
+     * @param uppercase Whether passwords must include at least one uppercase letter.
+     * @param lowercase Whether passwords must include at least one lowercase letter.
+     * @param number Whether passwords must include at least one number.
+     * @param symbols Whether passwords must include at least one symbol.
+     * @return [io.appwrite.models.PolicyPasswordStrength]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePasswordStrengthPolicy(
+        min: Long? = null,
+        uppercase: Boolean? = null,
+        lowercase: Boolean? = null,
+        number: Boolean? = null,
+        symbols: Boolean? = null,
+    ): io.appwrite.models.PolicyPasswordStrength {
+        val apiPath = "/project/policies/password-strength"
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "min" to min,
+            "uppercase" to uppercase,
+            "lowercase" to lowercase,
+            "number" to number,
+            "symbols" to symbols,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.PolicyPasswordStrength = {
+            io.appwrite.models.PolicyPasswordStrength.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.PolicyPasswordStrength::class.java,
             converter,
         )
     }
@@ -3003,6 +3182,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3034,6 +3214,7 @@ class Project(client: Client) : Service(client) {
             "duration" to duration,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3065,6 +3246,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3096,6 +3278,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3127,6 +3310,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3145,7 +3329,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, deny-aliased-email, deny-disposable-email, deny-free-email.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, deny-aliased-email, deny-disposable-email, deny-free-email.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -3158,6 +3342,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -3165,6 +3350,7 @@ class Project(client: Client) : Service(client) {
             when {
                 responseMap["\$id"]?.toString() == "password-dictionary" -> io.appwrite.models.PolicyPasswordDictionary.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "password-history" -> io.appwrite.models.PolicyPasswordHistory.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "password-strength" -> io.appwrite.models.PolicyPasswordStrength.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "password-personal-data" -> io.appwrite.models.PolicyPasswordPersonalData.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "session-alert" -> io.appwrite.models.PolicySessionAlert.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "session-duration" -> io.appwrite.models.PolicySessionDuration.from(map = responseMap)
@@ -3207,6 +3393,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3241,6 +3428,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3300,6 +3488,7 @@ class Project(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
@@ -3331,6 +3520,7 @@ class Project(client: Client) : Service(client) {
             "emails" to emails,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -3362,6 +3552,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplateList = {
             io.appwrite.models.EmailTemplateList.from(map = it as Map<String, Any>)
@@ -3414,6 +3605,7 @@ class Project(client: Client) : Service(client) {
             "replyToName" to replyToName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplate = {
@@ -3449,6 +3641,7 @@ class Project(client: Client) : Service(client) {
             "locale" to locale,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplate = {
             io.appwrite.models.EmailTemplate.from(map = it as Map<String, Any>)
@@ -3483,6 +3676,7 @@ class Project(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
             io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
@@ -3523,6 +3717,7 @@ class Project(client: Client) : Service(client) {
             "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
@@ -3554,6 +3749,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -3594,6 +3790,7 @@ class Project(client: Client) : Service(client) {
             "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
@@ -3625,6 +3822,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(

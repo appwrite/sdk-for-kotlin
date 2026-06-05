@@ -189,6 +189,10 @@ enum class ProjectKeyScopes(val value: String) {
     DOMAINS_WRITE("domains.write"),
     @SerializedName("events.read")
     EVENTS_READ("events.read"),
+    @SerializedName("apps.read")
+    APPS_READ("apps.read"),
+    @SerializedName("apps.write")
+    APPS_WRITE("apps.write"),
     @SerializedName("usage.read")
     USAGE_READ("usage.read");
 

@@ -26,6 +26,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
@@ -53,6 +54,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthAntivirus = {
             io.appwrite.models.HealthAntivirus.from(map = it as Map<String, Any>)
@@ -63,6 +65,35 @@ class Health(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.HealthAntivirus::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Check the database that backs the audit and activity store. When the connection is reachable the endpoint returns a passing status with its response time.
+     * 
+     *
+     * @return [io.appwrite.models.HealthStatusList]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getAuditsDB(
+    ): io.appwrite.models.HealthStatusList {
+        val apiPath = "/health/audits-db"
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+        )
+        val converter: (Any) -> io.appwrite.models.HealthStatusList = {
+            io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.HealthStatusList::class.java,
             converter,
         )
     }
@@ -80,6 +111,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatusList = {
             io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
@@ -111,6 +143,7 @@ class Health(client: Client) : Service(client) {
             "domain" to domain,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthCertificate = {
             io.appwrite.models.HealthCertificate.from(map = it as Map<String, Any>)
@@ -146,6 +179,7 @@ class Health(client: Client) : Service(client) {
             "inactivityDays" to inactivityDays,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
@@ -173,6 +207,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatusList = {
             io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
@@ -200,6 +235,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatusList = {
             io.appwrite.models.HealthStatusList.from(map = it as Map<String, Any>)
@@ -232,6 +268,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -263,6 +300,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -294,6 +332,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -328,6 +367,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -359,6 +399,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -394,6 +435,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -425,6 +467,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -456,6 +499,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -487,6 +531,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -518,6 +563,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -549,6 +595,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -580,6 +627,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -611,6 +659,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -642,6 +691,7 @@ class Health(client: Client) : Service(client) {
             "threshold" to threshold,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthQueue = {
             io.appwrite.models.HealthQueue.from(map = it as Map<String, Any>)
@@ -669,6 +719,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
@@ -696,6 +747,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthStatus = {
             io.appwrite.models.HealthStatus.from(map = it as Map<String, Any>)
@@ -723,6 +775,7 @@ class Health(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.HealthTime = {
             io.appwrite.models.HealthTime.from(map = it as Map<String, Any>)

@@ -43,6 +43,7 @@ class Avatars(client: Client) : Service(client) {
             "quality" to quality,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -81,6 +82,7 @@ class Avatars(client: Client) : Service(client) {
             "quality" to quality,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -108,6 +110,7 @@ class Avatars(client: Client) : Service(client) {
             "url" to url,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -146,6 +149,7 @@ class Avatars(client: Client) : Service(client) {
             "quality" to quality,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -182,6 +186,7 @@ class Avatars(client: Client) : Service(client) {
             "height" to height,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -222,6 +227,7 @@ class Avatars(client: Client) : Service(client) {
             "background" to background,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -258,6 +264,7 @@ class Avatars(client: Client) : Service(client) {
             "download" to download,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -345,6 +352,7 @@ class Avatars(client: Client) : Service(client) {
             "output" to output,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",

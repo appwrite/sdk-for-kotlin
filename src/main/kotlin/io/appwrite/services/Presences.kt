@@ -37,6 +37,7 @@ class Presences(client: Client) : Service(client) {
             "ttl" to ttl,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.PresenceList = {
             io.appwrite.models.PresenceList.from(map = it as Map<String, Any>)
@@ -68,6 +69,7 @@ class Presences(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Presence = {
             io.appwrite.models.Presence.from(map = it as Map<String, Any>)
@@ -115,6 +117,7 @@ class Presences(client: Client) : Service(client) {
             "metadata" to metadata,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Presence = {
@@ -166,6 +169,7 @@ class Presences(client: Client) : Service(client) {
             "purge" to purge,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Presence = {
@@ -198,6 +202,7 @@ class Presences(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(

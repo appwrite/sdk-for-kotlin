@@ -30,6 +30,7 @@ class Backups(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupArchiveList = {
             io.appwrite.models.BackupArchiveList.from(map = it as Map<String, Any>)
@@ -64,6 +65,7 @@ class Backups(client: Client) : Service(client) {
             "resourceId" to resourceId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BackupArchive = {
@@ -95,6 +97,7 @@ class Backups(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupArchive = {
             io.appwrite.models.BackupArchive.from(map = it as Map<String, Any>)
@@ -125,6 +128,7 @@ class Backups(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -153,6 +157,7 @@ class Backups(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupPolicyList = {
             io.appwrite.models.BackupPolicyList.from(map = it as Map<String, Any>)
@@ -202,6 +207,7 @@ class Backups(client: Client) : Service(client) {
             "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BackupPolicy = {
@@ -233,6 +239,7 @@ class Backups(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupPolicy = {
             io.appwrite.models.BackupPolicy.from(map = it as Map<String, Any>)
@@ -276,6 +283,7 @@ class Backups(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BackupPolicy = {
@@ -307,6 +315,7 @@ class Backups(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -344,6 +353,7 @@ class Backups(client: Client) : Service(client) {
             "newResourceName" to newResourceName,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BackupRestoration = {
@@ -376,6 +386,7 @@ class Backups(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupRestorationList = {
             io.appwrite.models.BackupRestorationList.from(map = it as Map<String, Any>)
@@ -406,6 +417,7 @@ class Backups(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BackupRestoration = {
             io.appwrite.models.BackupRestoration.from(map = it as Map<String, Any>)
