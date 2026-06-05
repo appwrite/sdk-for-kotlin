@@ -7,6 +7,8 @@ enum class ProjectPolicyId(val value: String) {
     PASSWORD_DICTIONARY("password-dictionary"),
     @SerializedName("password-history")
     PASSWORD_HISTORY("password-history"),
+    @SerializedName("password-strength")
+    PASSWORD_STRENGTH("password-strength"),
     @SerializedName("password-personal-data")
     PASSWORD_PERSONAL_DATA("password-personal-data"),
     @SerializedName("session-alert")

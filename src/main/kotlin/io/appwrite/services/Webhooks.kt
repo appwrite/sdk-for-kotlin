@@ -33,6 +33,7 @@ class Webhooks(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.WebhookList = {
             io.appwrite.models.WebhookList.from(map = it as Map<String, Any>)
@@ -88,6 +89,7 @@ class Webhooks(client: Client) : Service(client) {
             "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
@@ -119,6 +121,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
             io.appwrite.models.Webhook.from(map = it as Map<String, Any>)
@@ -171,6 +174,7 @@ class Webhooks(client: Client) : Service(client) {
             "authPassword" to authPassword,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
@@ -202,6 +206,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -233,6 +238,7 @@ class Webhooks(client: Client) : Service(client) {
             "secret" to secret,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {

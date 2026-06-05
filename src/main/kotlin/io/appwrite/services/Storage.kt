@@ -38,6 +38,7 @@ class Storage(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.BucketList = {
             io.appwrite.models.BucketList.from(map = it as Map<String, Any>)
@@ -99,6 +100,7 @@ class Storage(client: Client) : Service(client) {
             "transformations" to transformations,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
@@ -130,6 +132,7 @@ class Storage(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
             io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
@@ -191,6 +194,7 @@ class Storage(client: Client) : Service(client) {
             "transformations" to transformations,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
@@ -222,6 +226,7 @@ class Storage(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -259,6 +264,7 @@ class Storage(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.FileList = {
             io.appwrite.models.FileList.from(map = it as Map<String, Any>)
@@ -307,6 +313,7 @@ class Storage(client: Client) : Service(client) {
             "permissions" to permissions,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "multipart/form-data",
         )
         val converter: (Any) -> io.appwrite.models.File = {
@@ -345,6 +352,7 @@ class Storage(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.File = {
             io.appwrite.models.File.from(map = it as Map<String, Any>)
@@ -385,6 +393,7 @@ class Storage(client: Client) : Service(client) {
             "permissions" to permissions,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
@@ -419,6 +428,7 @@ class Storage(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -453,6 +463,7 @@ class Storage(client: Client) : Service(client) {
             "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -518,6 +529,7 @@ class Storage(client: Client) : Service(client) {
             "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",
@@ -550,6 +562,7 @@ class Storage(client: Client) : Service(client) {
             "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         return client.call(
             "GET",

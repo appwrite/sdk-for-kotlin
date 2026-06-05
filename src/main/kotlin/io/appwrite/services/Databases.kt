@@ -40,6 +40,7 @@ class Databases(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.DatabaseList = {
             io.appwrite.models.DatabaseList.from(map = it as Map<String, Any>)
@@ -82,6 +83,7 @@ class Databases(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Database = {
@@ -114,6 +116,7 @@ class Databases(client: Client) : Service(client) {
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.TransactionList = {
             io.appwrite.models.TransactionList.from(map = it as Map<String, Any>)
@@ -145,6 +148,7 @@ class Databases(client: Client) : Service(client) {
             "ttl" to ttl,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Transaction = {
@@ -176,6 +180,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Transaction = {
             io.appwrite.models.Transaction.from(map = it as Map<String, Any>)
@@ -213,6 +218,7 @@ class Databases(client: Client) : Service(client) {
             "rollback" to rollback,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Transaction = {
@@ -244,6 +250,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -275,6 +282,7 @@ class Databases(client: Client) : Service(client) {
             "operations" to operations,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Transaction = {
@@ -310,6 +318,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Database = {
             io.appwrite.models.Database.from(map = it as Map<String, Any>)
@@ -351,6 +360,7 @@ class Databases(client: Client) : Service(client) {
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Database = {
@@ -386,6 +396,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -427,6 +438,7 @@ class Databases(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.CollectionList = {
             io.appwrite.models.CollectionList.from(map = it as Map<String, Any>)
@@ -483,6 +495,7 @@ class Databases(client: Client) : Service(client) {
             "indexes" to indexes,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Collection = {
@@ -521,6 +534,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Collection = {
             io.appwrite.models.Collection.from(map = it as Map<String, Any>)
@@ -574,6 +588,7 @@ class Databases(client: Client) : Service(client) {
             "purge" to purge,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Collection = {
@@ -612,6 +627,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -653,6 +669,7 @@ class Databases(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.AttributeList = {
             io.appwrite.models.AttributeList.from(map = it as Map<String, Any>)
@@ -710,6 +727,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeBigint = {
@@ -768,6 +786,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeBigint = {
@@ -820,6 +839,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeBoolean = {
@@ -871,6 +891,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeBoolean = {
@@ -922,6 +943,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeDatetime = {
@@ -973,6 +995,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeDatetime = {
@@ -1025,6 +1048,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeEmail = {
@@ -1077,6 +1101,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeEmail = {
@@ -1132,6 +1157,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeEnum = {
@@ -1187,6 +1213,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeEnum = {
@@ -1245,6 +1272,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeFloat = {
@@ -1303,6 +1331,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeFloat = {
@@ -1361,6 +1390,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeInteger = {
@@ -1419,6 +1449,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeInteger = {
@@ -1471,6 +1502,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeIp = {
@@ -1523,6 +1555,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeIp = {
@@ -1571,6 +1604,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeLine = {
@@ -1622,6 +1656,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeLine = {
@@ -1673,6 +1708,7 @@ class Databases(client: Client) : Service(client) {
             "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeLongtext = {
@@ -1721,6 +1757,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeLongtext = {
@@ -1772,6 +1809,7 @@ class Databases(client: Client) : Service(client) {
             "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeMediumtext = {
@@ -1820,6 +1858,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeMediumtext = {
@@ -1868,6 +1907,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributePoint = {
@@ -1919,6 +1959,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributePoint = {
@@ -1967,6 +2008,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributePolygon = {
@@ -2018,6 +2060,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributePolygon = {
@@ -2076,6 +2119,7 @@ class Databases(client: Client) : Service(client) {
             "onDelete" to onDelete,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeRelationship = {
@@ -2125,6 +2169,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeRelationship = {
@@ -2183,6 +2228,7 @@ class Databases(client: Client) : Service(client) {
             "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeString = {
@@ -2238,6 +2284,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeString = {
@@ -2289,6 +2336,7 @@ class Databases(client: Client) : Service(client) {
             "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeText = {
@@ -2337,6 +2385,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeText = {
@@ -2389,6 +2438,7 @@ class Databases(client: Client) : Service(client) {
             "array" to array,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeUrl = {
@@ -2441,6 +2491,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeUrl = {
@@ -2495,6 +2546,7 @@ class Databases(client: Client) : Service(client) {
             "encrypt" to encrypt,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeVarchar = {
@@ -2546,6 +2598,7 @@ class Databases(client: Client) : Service(client) {
             "newKey" to newKey,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.AttributeVarchar = {
@@ -2587,6 +2640,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -2641,6 +2695,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -2689,6 +2744,7 @@ class Databases(client: Client) : Service(client) {
             "ttl" to ttl,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
             io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
@@ -2774,6 +2830,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
@@ -2854,6 +2911,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
@@ -2929,6 +2987,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
@@ -3007,6 +3066,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
@@ -3084,6 +3144,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
@@ -3161,6 +3222,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
             io.appwrite.models.Document.from(map = it as Map<String, Any>, nestedType)
@@ -3243,6 +3305,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
@@ -3329,6 +3392,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
@@ -3408,6 +3472,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(
@@ -3459,6 +3524,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
@@ -3551,6 +3617,7 @@ class Databases(client: Client) : Service(client) {
             "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Document<T> = {
@@ -3633,6 +3700,7 @@ class Databases(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.IndexList = {
             io.appwrite.models.IndexList.from(map = it as Map<String, Any>)
@@ -3687,6 +3755,7 @@ class Databases(client: Client) : Service(client) {
             "lengths" to lengths,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Index = {
@@ -3728,6 +3797,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.Index = {
             io.appwrite.models.Index.from(map = it as Map<String, Any>)
@@ -3768,6 +3838,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
         )
         return client.call(

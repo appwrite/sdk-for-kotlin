@@ -1,18 +1,21 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Account;
+import io.appwrite.services.Project;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
-    .setSession(""); // The user session to authenticate with
+    .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Account account = new Account(client);
+Project project = new Project(client);
 
-account.updatePassword(
-    "", // password
-    "<OLD_PASSWORD>", // oldPassword (optional)
+project.updatePasswordStrengthPolicy(
+    8, // min (optional)
+    false, // uppercase (optional)
+    false, // lowercase (optional)
+    false, // number (optional)
+    false, // symbols (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

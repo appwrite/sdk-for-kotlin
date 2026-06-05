@@ -33,6 +33,7 @@ class Usage(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.UsageEventList = {
             io.appwrite.models.UsageEventList.from(map = it as Map<String, Any>)
@@ -67,6 +68,7 @@ class Usage(client: Client) : Service(client) {
             "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
         val converter: (Any) -> io.appwrite.models.UsageGaugeList = {
             io.appwrite.models.UsageGaugeList.from(map = it as Map<String, Any>)

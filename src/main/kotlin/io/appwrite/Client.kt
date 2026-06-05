@@ -64,11 +64,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/18.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/18.1.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "18.0.0",
+            "x-sdk-version" to "18.1.0",
             "x-appwrite-response-format" to "1.9.5",
         )
 
@@ -88,7 +88,6 @@ class Client @JvmOverloads constructor(
      */
     fun setProject(value: String): Client {
         config["project"] = value
-        addHeader("x-appwrite-project", value)
         return this
     }
 
@@ -337,7 +336,10 @@ class Client @JvmOverloads constructor(
     suspend fun ping(): String {
         val apiPath = "/ping"
         val apiParams = mutableMapOf<String, Any?>()
-        val apiHeaders = mutableMapOf("content-type" to "application/json")
+        val apiHeaders = mutableMapOf(
+            "content-type" to "application/json",
+            "X-Appwrite-Project" to config["project"].orEmpty(),
+        )
 
         return call(
             "GET",
