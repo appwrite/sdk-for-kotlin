@@ -133,7 +133,7 @@ data class ProxyRule(
             redirectUrl = map["redirectUrl"] as String,
             redirectStatusCode = (map["redirectStatusCode"] as Number).toLong(),
             deploymentId = map["deploymentId"] as String,
-            deploymentResourceType = ProxyRuleDeploymentResourceType.values().find { it.value == (map["deploymentResourceType"] as? String) } ?: null,
+            deploymentResourceType = ProxyRuleDeploymentResourceType.values().find { it.value == (map["deploymentResourceType"] as? String) },
             deploymentResourceId = map["deploymentResourceId"] as String,
             deploymentVcsProviderBranch = map["deploymentVcsProviderBranch"] as String,
             status = ProxyRuleStatus.values().find { it.value == map["status"] as String }!!,

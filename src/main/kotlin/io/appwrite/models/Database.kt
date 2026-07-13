@@ -88,7 +88,7 @@ data class Database(
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
             type = DatabaseType.values().find { it.value == map["type"] as String }!!,
-            status = DatabaseStatus.values().find { it.value == (map["status"] as? String) } ?: null,
+            status = DatabaseStatus.values().find { it.value == (map["status"] as? String) },
             policies = (map["policies"] as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
             archives = (map["archives"] as List<Map<String, Any>>).map { BackupArchive.from(map = it) },
         )

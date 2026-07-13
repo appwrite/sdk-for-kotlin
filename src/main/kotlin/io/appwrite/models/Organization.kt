@@ -365,7 +365,7 @@ data class Organization<T>(
             programManagerCalendar = map["programManagerCalendar"] as String,
             programDiscordChannelName = map["programDiscordChannelName"] as String,
             programDiscordChannelUrl = map["programDiscordChannelUrl"] as String,
-            billingLimits = BillingLimits.from(map = map["billingLimits"] as Map<String, Any>),
+            billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             billingPlanDowngrade = map["billingPlanDowngrade"] as String,
             billingTaxId = map["billingTaxId"] as String,
             markedForDeletion = map["markedForDeletion"] as Boolean,

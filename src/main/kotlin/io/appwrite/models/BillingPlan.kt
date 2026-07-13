@@ -558,10 +558,10 @@ data class BillingPlan(
             deploymentSize = (map["deploymentSize"] as Number).toLong(),
             buildSize = (map["buildSize"] as Number).toLong(),
             databasesAllowEncrypt = map["databasesAllowEncrypt"] as Boolean,
-            limits = BillingPlanLimits.from(map = map["limits"] as Map<String, Any>),
+            limits = (map["limits"] as? Map<String, Any>)?.let { BillingPlanLimits.from(map = it) },
             group = BillingPlanGroup.values().find { it.value == map["group"] as String }!!,
-            program = Program.from(map = map["program"] as Map<String, Any>),
-            dedicatedDatabases = BillingPlanDedicatedDatabaseLimits.from(map = map["dedicatedDatabases"] as Map<String, Any>),
+            program = (map["program"] as? Map<String, Any>)?.let { Program.from(map = it) },
+            dedicatedDatabases = (map["dedicatedDatabases"] as? Map<String, Any>)?.let { BillingPlanDedicatedDatabaseLimits.from(map = it) },
         )
     }
 }

@@ -345,7 +345,7 @@ data class Project(
             protocols = (map["protocols"] as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
             blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
             consoleAccessedAt = map["consoleAccessedAt"] as String,
-            billingLimits = BillingLimits.from(map = map["billingLimits"] as Map<String, Any>),
+            billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as? Boolean,
             oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,
             oAuth2ServerScopes = map["oAuth2ServerScopes"] as? List<String>,
