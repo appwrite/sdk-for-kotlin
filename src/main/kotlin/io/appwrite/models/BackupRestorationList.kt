@@ -20,7 +20,7 @@ data class BackupRestorationList(
     val restorations: List<BackupRestoration>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "restorations" to restorations.map { it.toMap() } as Any,
     )

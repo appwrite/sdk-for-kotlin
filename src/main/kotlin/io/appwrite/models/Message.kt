@@ -87,7 +87,7 @@ data class Message(
     val status: MessageStatus,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -95,9 +95,9 @@ data class Message(
         "topics" to topics as Any,
         "users" to users as Any,
         "targets" to targets as Any,
-        "scheduledAt" to scheduledAt as Any,
-        "deliveredAt" to deliveredAt as Any,
-        "deliveryErrors" to deliveryErrors as Any,
+        "scheduledAt" to scheduledAt as Any?,
+        "deliveredAt" to deliveredAt as Any?,
+        "deliveryErrors" to deliveryErrors as Any?,
         "deliveredTotal" to deliveredTotal as Any,
         "data" to data as Any,
         "status" to status.value as Any,

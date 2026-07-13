@@ -12,7 +12,7 @@ Users users = new Users(client);
 
 users.updatePassword(
     "<USER_ID>", // userId
-    "", // password
+    "password", // password
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

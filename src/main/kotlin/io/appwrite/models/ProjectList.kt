@@ -20,7 +20,7 @@ data class ProjectList(
     val projects: List<Project>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "projects" to projects.map { it.toMap() } as Any,
     )

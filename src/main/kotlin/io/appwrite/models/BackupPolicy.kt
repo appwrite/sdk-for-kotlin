@@ -68,23 +68,30 @@ data class BackupPolicy(
     val schedule: String,
 
     /**
+     * Backup type. Possible values: full (complete database snapshot), incremental (changes since last backup).
+     */
+    @SerializedName("type")
+    val type: String,
+
+    /**
      * Is this policy enabled.
      */
     @SerializedName("enabled")
     val enabled: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "name" to name as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "services" to services as Any,
         "resources" to resources as Any,
-        "resourceId" to resourceId as Any,
-        "resourceType" to resourceType as Any,
+        "resourceId" to resourceId as Any?,
+        "resourceType" to resourceType as Any?,
         "retention" to retention as Any,
         "schedule" to schedule as Any,
+        "type" to type as Any,
         "enabled" to enabled as Any,
     )
 
@@ -104,6 +111,7 @@ data class BackupPolicy(
             resourceType = map["resourceType"] as? String,
             retention = (map["retention"] as Number).toLong(),
             schedule = map["schedule"] as String,
+            type = map["type"] as String,
             enabled = map["enabled"] as Boolean,
         )
     }

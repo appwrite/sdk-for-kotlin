@@ -16,6 +16,7 @@ backups.createRestoration(
     List.of(BackupServices.DATABASES), // services
     "<NEW_RESOURCE_ID>", // newResourceId (optional)
     "<NEW_RESOURCE_NAME>", // newResourceName (optional)
+    "serverless", // newSpecification (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

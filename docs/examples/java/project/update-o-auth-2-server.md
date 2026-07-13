@@ -14,11 +14,17 @@ project.updateOAuth2Server(
     false, // enabled
     "https://example.com", // authorizationUrl
     List.of(), // scopes (optional)
+    List.of(), // authorizationDetailsTypes (optional)
     60, // accessTokenDuration (optional)
     60, // refreshTokenDuration (optional)
     60, // publicAccessTokenDuration (optional)
     60, // publicRefreshTokenDuration (optional)
     false, // confidentialPkce (optional)
+    "https://example.com", // verificationUrl (optional)
+    6, // userCodeLength (optional)
+    "numeric", // userCodeFormat (optional)
+    60, // deviceCodeDuration (optional)
+    List.of(), // defaultScopes (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

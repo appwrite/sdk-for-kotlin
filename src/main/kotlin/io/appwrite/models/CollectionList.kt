@@ -20,7 +20,7 @@ data class CollectionList(
     val collections: List<Collection>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "collections" to collections.map { it.toMap() } as Any,
     )

@@ -20,7 +20,7 @@ data class PlatformList(
     val platforms: List<Any>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "platforms" to platforms as Any,
     )

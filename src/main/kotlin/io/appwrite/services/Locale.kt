@@ -23,12 +23,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun get(
     ): io.appwrite.models.Locale {
-        val apiPath = "/locale"
+        val apiPath = ("/locale"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Locale = {
             io.appwrite.models.Locale.from(map = it as Map<String, Any>)
@@ -51,12 +53,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listCodes(
     ): io.appwrite.models.LocaleCodeList {
-        val apiPath = "/locale/codes"
+        val apiPath = ("/locale/codes"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LocaleCodeList = {
             io.appwrite.models.LocaleCodeList.from(map = it as Map<String, Any>)
@@ -79,12 +83,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listContinents(
     ): io.appwrite.models.ContinentList {
-        val apiPath = "/locale/continents"
+        val apiPath = ("/locale/continents"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ContinentList = {
             io.appwrite.models.ContinentList.from(map = it as Map<String, Any>)
@@ -107,12 +113,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listCountries(
     ): io.appwrite.models.CountryList {
-        val apiPath = "/locale/countries"
+        val apiPath = ("/locale/countries"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.CountryList = {
             io.appwrite.models.CountryList.from(map = it as Map<String, Any>)
@@ -135,12 +143,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listCountriesEU(
     ): io.appwrite.models.CountryList {
-        val apiPath = "/locale/countries/eu"
+        val apiPath = ("/locale/countries/eu"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.CountryList = {
             io.appwrite.models.CountryList.from(map = it as Map<String, Any>)
@@ -163,12 +173,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listCountriesPhones(
     ): io.appwrite.models.PhoneList {
-        val apiPath = "/locale/countries/phones"
+        val apiPath = ("/locale/countries/phones"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PhoneList = {
             io.appwrite.models.PhoneList.from(map = it as Map<String, Any>)
@@ -191,12 +203,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listCurrencies(
     ): io.appwrite.models.CurrencyList {
-        val apiPath = "/locale/currencies"
+        val apiPath = ("/locale/currencies"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.CurrencyList = {
             io.appwrite.models.CurrencyList.from(map = it as Map<String, Any>)
@@ -219,12 +233,14 @@ class Locale(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listLanguages(
     ): io.appwrite.models.LanguageList {
-        val apiPath = "/locale/languages"
+        val apiPath = ("/locale/languages"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.LanguageList = {
             io.appwrite.models.LanguageList.from(map = it as Map<String, Any>)

@@ -110,7 +110,7 @@ data class Insight(
     var dismissedBy: String?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -125,9 +125,9 @@ data class Insight(
         "title" to title as Any,
         "summary" to summary as Any,
         "ctas" to ctas.map { it.toMap() } as Any,
-        "analyzedAt" to analyzedAt as Any,
-        "dismissedAt" to dismissedAt as Any,
-        "dismissedBy" to dismissedBy as Any,
+        "analyzedAt" to analyzedAt as Any?,
+        "dismissedAt" to dismissedAt as Any?,
+        "dismissedBy" to dismissedBy as Any?,
     )
 
     companion object {

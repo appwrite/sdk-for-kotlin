@@ -20,7 +20,7 @@ data class AttributeList(
     val attributes: List<Any>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "attributes" to attributes as Any,
     )

@@ -10,12 +10,16 @@ Client client = new Client()
 
 Sites sites = new Sites(client);
 
-sites.listSpecifications(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+sites.listSpecifications(
+    "runtimes", // type (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
 ```

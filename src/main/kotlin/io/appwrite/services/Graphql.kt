@@ -23,7 +23,8 @@ class Graphql(client: Client) : Service(client) {
     suspend fun query(
         query: Any,
     ): Any {
-        val apiPath = "/graphql"
+        val apiPath = ("/graphql"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "query" to query,
@@ -32,6 +33,7 @@ class Graphql(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "x-sdk-graphql" to "true",
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> Any = {
             it
@@ -56,7 +58,8 @@ class Graphql(client: Client) : Service(client) {
     suspend fun mutation(
         query: Any,
     ): Any {
-        val apiPath = "/graphql/mutation"
+        val apiPath = ("/graphql/mutation"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "query" to query,
@@ -65,6 +68,7 @@ class Graphql(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "x-sdk-graphql" to "true",
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> Any = {
             it

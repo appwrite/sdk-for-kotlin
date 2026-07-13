@@ -24,13 +24,15 @@ class Activities(client: Client) : Service(client) {
     suspend fun listEvents(
         queries: String? = null,
     ): io.appwrite.models.ActivityEventList {
-        val apiPath = "/activities/events"
+        val apiPath = ("/activities/events"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ActivityEventList = {
             io.appwrite.models.ActivityEventList.from(map = it as Map<String, Any>)
@@ -56,13 +58,15 @@ class Activities(client: Client) : Service(client) {
     suspend fun getEvent(
         eventId: String,
     ): io.appwrite.models.ActivityEvent {
-        val apiPath = "/activities/events/{eventId}"
+        val apiPath = ("/activities/events/{eventId}"
             .replace("{eventId}", eventId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ActivityEvent = {
             io.appwrite.models.ActivityEvent.from(map = it as Map<String, Any>)

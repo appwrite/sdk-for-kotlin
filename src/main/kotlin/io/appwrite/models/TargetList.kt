@@ -20,7 +20,7 @@ data class TargetList(
     val targets: List<Target>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "targets" to targets.map { it.toMap() } as Any,
     )

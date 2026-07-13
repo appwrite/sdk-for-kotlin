@@ -17,7 +17,7 @@ messaging.updateSMTPProvider(
     "<HOST>", // host (optional)
     1, // port (optional)
     "<USERNAME>", // username (optional)
-    "<PASSWORD>", // password (optional)
+    "password", // password (optional)
     SmtpEncryption.NONE, // encryption (optional)
     false, // autoTLS (optional)
     "<MAILER>", // mailer (optional)

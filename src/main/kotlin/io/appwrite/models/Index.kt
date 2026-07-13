@@ -69,7 +69,7 @@ data class Index(
     var orders: List<String>?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -79,7 +79,7 @@ data class Index(
         "error" to error as Any,
         "attributes" to attributes as Any,
         "lengths" to lengths as Any,
-        "orders" to orders as Any,
+        "orders" to orders as Any?,
     )
 
     companion object {

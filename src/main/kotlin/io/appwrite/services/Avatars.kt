@@ -34,8 +34,9 @@ class Avatars(client: Client) : Service(client) {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val apiPath = "/avatars/browsers/{code}"
+        val apiPath = ("/avatars/browsers/{code}"
             .replace("{code}", code.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -44,6 +45,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",
@@ -73,8 +75,9 @@ class Avatars(client: Client) : Service(client) {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val apiPath = "/avatars/credit-cards/{code}"
+        val apiPath = ("/avatars/credit-cards/{code}"
             .replace("{code}", code.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -83,6 +86,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",
@@ -104,13 +108,15 @@ class Avatars(client: Client) : Service(client) {
     suspend fun getFavicon(
         url: String,
     ): ByteArray {
-        val apiPath = "/avatars/favicon"
+        val apiPath = ("/avatars/favicon"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/*",
         )
         return client.call(
             "GET",
@@ -140,8 +146,9 @@ class Avatars(client: Client) : Service(client) {
         height: Long? = null,
         quality: Long? = null,
     ): ByteArray {
-        val apiPath = "/avatars/flags/{code}"
+        val apiPath = ("/avatars/flags/{code}"
             .replace("{code}", code.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -150,6 +157,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",
@@ -178,7 +186,8 @@ class Avatars(client: Client) : Service(client) {
         width: Long? = null,
         height: Long? = null,
     ): ByteArray {
-        val apiPath = "/avatars/image"
+        val apiPath = ("/avatars/image"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
@@ -187,6 +196,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/*",
         )
         return client.call(
             "GET",
@@ -218,7 +228,8 @@ class Avatars(client: Client) : Service(client) {
         height: Long? = null,
         background: String? = null,
     ): ByteArray {
-        val apiPath = "/avatars/initials"
+        val apiPath = ("/avatars/initials"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -228,6 +239,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",
@@ -255,7 +267,8 @@ class Avatars(client: Client) : Service(client) {
         margin: Long? = null,
         download: Boolean? = null,
     ): ByteArray {
-        val apiPath = "/avatars/qr"
+        val apiPath = ("/avatars/qr"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "text" to text,
@@ -265,6 +278,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",
@@ -327,7 +341,8 @@ class Avatars(client: Client) : Service(client) {
         quality: Long? = null,
         output: io.appwrite.enums.ImageFormat? = null,
     ): ByteArray {
-        val apiPath = "/avatars/screenshots"
+        val apiPath = ("/avatars/screenshots"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
@@ -353,6 +368,7 @@ class Avatars(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/png",
         )
         return client.call(
             "GET",

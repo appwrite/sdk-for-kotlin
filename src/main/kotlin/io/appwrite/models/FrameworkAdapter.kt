@@ -38,7 +38,7 @@ data class FrameworkAdapter(
     val fallbackFile: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "key" to key as Any,
         "installCommand" to installCommand as Any,
         "buildCommand" to buildCommand as Any,

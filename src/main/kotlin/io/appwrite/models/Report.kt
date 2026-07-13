@@ -80,7 +80,7 @@ data class Report(
     var analyzedAt: String?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -92,7 +92,7 @@ data class Report(
         "target" to target as Any,
         "categories" to categories as Any,
         "insights" to insights.map { it.toMap() } as Any,
-        "analyzedAt" to analyzedAt as Any,
+        "analyzedAt" to analyzedAt as Any?,
     )
 
     companion object {

@@ -20,7 +20,7 @@ data class InsightList(
     val insights: List<Insight>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "insights" to insights.map { it.toMap() } as Any,
     )

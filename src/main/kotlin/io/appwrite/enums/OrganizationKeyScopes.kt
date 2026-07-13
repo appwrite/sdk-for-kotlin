@@ -15,6 +15,14 @@ enum class OrganizationKeyScopes(val value: String) {
     ORGANIZATION_KEYS_READ("organization.keys.read"),
     @SerializedName("organization.keys.write")
     ORGANIZATION_KEYS_WRITE("organization.keys.write"),
+    @SerializedName("organization.memberships.read")
+    ORGANIZATION_MEMBERSHIPS_READ("organization.memberships.read"),
+    @SerializedName("organization.memberships.write")
+    ORGANIZATION_MEMBERSHIPS_WRITE("organization.memberships.write"),
+    @SerializedName("organization.read")
+    ORGANIZATION_READ("organization.read"),
+    @SerializedName("organization.write")
+    ORGANIZATION_WRITE("organization.write"),
     @SerializedName("domains.read")
     DOMAINS_READ("domains.read"),
     @SerializedName("domains.write")

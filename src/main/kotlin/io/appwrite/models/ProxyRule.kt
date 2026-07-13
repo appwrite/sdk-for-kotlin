@@ -100,7 +100,7 @@ data class ProxyRule(
     val renewAt: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -110,7 +110,7 @@ data class ProxyRule(
         "redirectUrl" to redirectUrl as Any,
         "redirectStatusCode" to redirectStatusCode as Any,
         "deploymentId" to deploymentId as Any,
-        "deploymentResourceType" to deploymentResourceType?.value as Any,
+        "deploymentResourceType" to deploymentResourceType?.value as Any?,
         "deploymentResourceId" to deploymentResourceId as Any,
         "deploymentVcsProviderBranch" to deploymentVcsProviderBranch as Any,
         "status" to status.value as Any,
@@ -133,7 +133,7 @@ data class ProxyRule(
             redirectUrl = map["redirectUrl"] as String,
             redirectStatusCode = (map["redirectStatusCode"] as Number).toLong(),
             deploymentId = map["deploymentId"] as String,
-            deploymentResourceType = ProxyRuleDeploymentResourceType.values().find { it.value == (map["deploymentResourceType"] as? String) } ?: null,
+            deploymentResourceType = ProxyRuleDeploymentResourceType.values().find { it.value == (map["deploymentResourceType"] as? String) },
             deploymentResourceId = map["deploymentResourceId"] as String,
             deploymentVcsProviderBranch = map["deploymentVcsProviderBranch"] as String,
             status = ProxyRuleStatus.values().find { it.value == map["status"] as String }!!,

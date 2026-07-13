@@ -32,7 +32,7 @@ data class OAuth2Discord(
     val clientSecret: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,

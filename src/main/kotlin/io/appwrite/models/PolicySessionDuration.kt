@@ -20,7 +20,7 @@ data class PolicySessionDuration(
     val duration: Long,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "duration" to duration as Any,
     )

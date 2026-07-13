@@ -21,7 +21,8 @@ class Project(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun get(
     ): io.appwrite.models.Project {
-        val apiPath = "/project"
+        val apiPath = ("/project"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -49,7 +50,8 @@ class Project(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun delete(
     ): Any {
-        val apiPath = "/project"
+        val apiPath = ("/project"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -78,8 +80,9 @@ class Project(client: Client) : Service(client) {
         methodId: io.appwrite.enums.ProjectAuthMethodId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/auth-methods/{methodId}"
+        val apiPath = ("/project/auth-methods/{methodId}"
             .replace("{methodId}", methodId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -87,6 +90,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -114,7 +118,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.KeyList {
-        val apiPath = "/project/keys"
+        val apiPath = ("/project/keys"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -122,6 +127,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.KeyList = {
             io.appwrite.models.KeyList.from(map = it as Map<String, Any>)
@@ -143,7 +149,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param keyId Key ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Key name. Max length: 128 chars.
-     * @param scopes Key scopes list. Maximum of 100 scopes are allowed.
+     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
      * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
      * @return [io.appwrite.models.Key]
      */
@@ -155,7 +161,8 @@ class Project(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
-        val apiPath = "/project/keys"
+        val apiPath = ("/project/keys"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "keyId" to keyId,
@@ -166,6 +173,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Key = {
             io.appwrite.models.Key.from(map = it as Map<String, Any>)
@@ -185,7 +193,7 @@ class Project(client: Client) : Service(client) {
      * 
      * You can also create a standard API key if you need a longer-lived key instead.
      *
-     * @param scopes Key scopes list. Maximum of 100 scopes are allowed.
+     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
      * @param duration Time in seconds before ephemeral key expires. Maximum duration is 3600 seconds.
      * @return [io.appwrite.models.EphemeralKey]
      */
@@ -194,7 +202,8 @@ class Project(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         duration: Long,
     ): io.appwrite.models.EphemeralKey {
-        val apiPath = "/project/keys/ephemeral"
+        val apiPath = ("/project/keys/ephemeral"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "scopes" to scopes,
@@ -203,6 +212,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EphemeralKey = {
             io.appwrite.models.EphemeralKey.from(map = it as Map<String, Any>)
@@ -227,13 +237,15 @@ class Project(client: Client) : Service(client) {
     suspend fun getKey(
         keyId: String,
     ): io.appwrite.models.Key {
-        val apiPath = "/project/keys/{keyId}"
+        val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Key = {
             io.appwrite.models.Key.from(map = it as Map<String, Any>)
@@ -253,7 +265,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param keyId Key ID.
      * @param name Key name. Max length: 128 chars.
-     * @param scopes Key scopes list. Maximum of 100 scopes are allowed.
+     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
      * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
      * @return [io.appwrite.models.Key]
      */
@@ -265,8 +277,9 @@ class Project(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
-        val apiPath = "/project/keys/{keyId}"
+        val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -276,6 +289,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Key = {
             io.appwrite.models.Key.from(map = it as Map<String, Any>)
@@ -300,8 +314,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteKey(
         keyId: String,
     ): Any {
-        val apiPath = "/project/keys/{keyId}"
+        val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -328,7 +343,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateLabels(
         labels: List<String>,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/labels"
+        val apiPath = ("/project/labels"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "labels" to labels,
@@ -336,6 +352,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -363,7 +380,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.MockNumberList {
-        val apiPath = "/project/mock-phones"
+        val apiPath = ("/project/mock-phones"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -371,6 +389,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumberList = {
             io.appwrite.models.MockNumberList.from(map = it as Map<String, Any>)
@@ -397,7 +416,8 @@ class Project(client: Client) : Service(client) {
         number: String,
         otp: String,
     ): io.appwrite.models.MockNumber {
-        val apiPath = "/project/mock-phones"
+        val apiPath = ("/project/mock-phones"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "number" to number,
@@ -406,6 +426,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
             io.appwrite.models.MockNumber.from(map = it as Map<String, Any>)
@@ -430,13 +451,15 @@ class Project(client: Client) : Service(client) {
     suspend fun getMockPhone(
         number: String,
     ): io.appwrite.models.MockNumber {
-        val apiPath = "/project/mock-phones/{number}"
+        val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
             io.appwrite.models.MockNumber.from(map = it as Map<String, Any>)
@@ -463,8 +486,9 @@ class Project(client: Client) : Service(client) {
         number: String,
         otp: String,
     ): io.appwrite.models.MockNumber {
-        val apiPath = "/project/mock-phones/{number}"
+        val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "otp" to otp,
@@ -472,6 +496,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MockNumber = {
             io.appwrite.models.MockNumber.from(map = it as Map<String, Any>)
@@ -496,8 +521,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteMockPhone(
         number: String,
     ): Any {
-        val apiPath = "/project/mock-phones/{number}"
+        val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -527,7 +553,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.OAuth2ProviderList {
-        val apiPath = "/project/oauth2"
+        val apiPath = ("/project/oauth2"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -535,6 +562,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2ProviderList = {
             io.appwrite.models.OAuth2ProviderList.from(map = it as Map<String, Any>)
@@ -555,11 +583,17 @@ class Project(client: Client) : Service(client) {
      * @param enabled Enable or disable the OAuth2 server.
      * @param authorizationUrl URL to your application with consent screen.
      * @param scopes List of allowed OAuth2 scopes. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @param authorizationDetailsTypes List of accepted `authorization_details` types. Maximum of 100 types are allowed, each up to 128 characters long.
      * @param accessTokenDuration Access token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 8 hours.
      * @param refreshTokenDuration Refresh token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 1 year.
      * @param publicAccessTokenDuration Access token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 1 hour.
      * @param publicRefreshTokenDuration Refresh token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 30 days.
      * @param confidentialPkce When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
+     * @param verificationUrl URL to your application page where users enter the device flow user code. Required to enable the Device Authorization Grant.
+     * @param userCodeLength Number of characters in the device flow user code, excluding the formatting separator. Shorter codes are easier to type but weaker; pair short codes with short expiry. Leave empty to use default 8.
+     * @param userCodeFormat Character set for device flow user codes: `numeric` (digits only — best for numeric keypads and TV remotes), `alphabetic` (letters only), or `alphanumeric` (letters and digits — highest entropy per character). Defaults to `alphanumeric`.
+     * @param deviceCodeDuration Lifetime in seconds of device flow device codes and user codes. Device codes are intentionally short-lived. Leave empty to use default 600.
+     * @param defaultScopes List of OAuth2 scopes used when an authorization request omits the scope parameter. Every default scope must also be allowed by the OAuth2 server. Maximum of 100 scopes are allowed, each up to 128 characters long.
      * @return [io.appwrite.models.Project]
      */
     @JvmOverloads
@@ -568,27 +602,41 @@ class Project(client: Client) : Service(client) {
         enabled: Boolean,
         authorizationUrl: String,
         scopes: List<String>? = null,
+        authorizationDetailsTypes: List<String>? = null,
         accessTokenDuration: Long? = null,
         refreshTokenDuration: Long? = null,
         publicAccessTokenDuration: Long? = null,
         publicRefreshTokenDuration: Long? = null,
         confidentialPkce: Boolean? = null,
+        verificationUrl: String? = null,
+        userCodeLength: Long? = null,
+        userCodeFormat: String? = null,
+        deviceCodeDuration: Long? = null,
+        defaultScopes: List<String>? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/oauth2-server"
+        val apiPath = ("/project/oauth2-server"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
             "authorizationUrl" to authorizationUrl,
             "scopes" to scopes,
+            "authorizationDetailsTypes" to authorizationDetailsTypes,
             "accessTokenDuration" to accessTokenDuration,
             "refreshTokenDuration" to refreshTokenDuration,
             "publicAccessTokenDuration" to publicAccessTokenDuration,
             "publicRefreshTokenDuration" to publicRefreshTokenDuration,
             "confidentialPkce" to confidentialPkce,
+            "verificationUrl" to verificationUrl,
+            "userCodeLength" to userCodeLength,
+            "userCodeFormat" to userCodeFormat,
+            "deviceCodeDuration" to deviceCodeDuration,
+            "defaultScopes" to defaultScopes,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -618,7 +666,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Amazon {
-        val apiPath = "/project/oauth2/amazon"
+        val apiPath = ("/project/oauth2/amazon"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -628,6 +677,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Amazon = {
             io.appwrite.models.OAuth2Amazon.from(map = it as Map<String, Any>)
@@ -661,7 +711,8 @@ class Project(client: Client) : Service(client) {
         p8File: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Apple {
-        val apiPath = "/project/oauth2/apple"
+        val apiPath = ("/project/oauth2/apple"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "serviceId" to serviceId,
@@ -673,6 +724,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Apple = {
             io.appwrite.models.OAuth2Apple.from(map = it as Map<String, Any>)
@@ -683,6 +735,47 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2Apple::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Appwrite configuration.
+     *
+     * @param clientId 'Client ID' of Appwrite OAuth2 app. For example: 6a42000000000000b5a0
+     * @param clientSecret 'Client Secret' of Appwrite OAuth2 app. For example: b86afd000000000000000000000000000000000000000000000000000ced5f93
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Appwrite]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Appwrite(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Appwrite {
+        val apiPath = ("/project/oauth2/appwrite"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Appwrite = {
+            io.appwrite.models.OAuth2Appwrite.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Appwrite::class.java,
             converter,
         )
     }
@@ -704,7 +797,8 @@ class Project(client: Client) : Service(client) {
         endpoint: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Auth0 {
-        val apiPath = "/project/oauth2/auth0"
+        val apiPath = ("/project/oauth2/auth0"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -715,6 +809,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Auth0 = {
             io.appwrite.models.OAuth2Auth0.from(map = it as Map<String, Any>)
@@ -746,7 +841,8 @@ class Project(client: Client) : Service(client) {
         endpoint: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Authentik {
-        val apiPath = "/project/oauth2/authentik"
+        val apiPath = ("/project/oauth2/authentik"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -757,6 +853,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Authentik = {
             io.appwrite.models.OAuth2Authentik.from(map = it as Map<String, Any>)
@@ -786,7 +883,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Autodesk {
-        val apiPath = "/project/oauth2/autodesk"
+        val apiPath = ("/project/oauth2/autodesk"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -796,6 +894,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Autodesk = {
             io.appwrite.models.OAuth2Autodesk.from(map = it as Map<String, Any>)
@@ -825,7 +924,8 @@ class Project(client: Client) : Service(client) {
         secret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Bitbucket {
-        val apiPath = "/project/oauth2/bitbucket"
+        val apiPath = ("/project/oauth2/bitbucket"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -835,6 +935,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Bitbucket = {
             io.appwrite.models.OAuth2Bitbucket.from(map = it as Map<String, Any>)
@@ -864,7 +965,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Bitly {
-        val apiPath = "/project/oauth2/bitly"
+        val apiPath = ("/project/oauth2/bitly"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -874,6 +976,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Bitly = {
             io.appwrite.models.OAuth2Bitly.from(map = it as Map<String, Any>)
@@ -903,7 +1006,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Box {
-        val apiPath = "/project/oauth2/box"
+        val apiPath = ("/project/oauth2/box"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -913,6 +1017,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Box = {
             io.appwrite.models.OAuth2Box.from(map = it as Map<String, Any>)
@@ -942,7 +1047,8 @@ class Project(client: Client) : Service(client) {
         apiSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Dailymotion {
-        val apiPath = "/project/oauth2/dailymotion"
+        val apiPath = ("/project/oauth2/dailymotion"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "apiKey" to apiKey,
@@ -952,6 +1058,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Dailymotion = {
             io.appwrite.models.OAuth2Dailymotion.from(map = it as Map<String, Any>)
@@ -981,7 +1088,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Discord {
-        val apiPath = "/project/oauth2/discord"
+        val apiPath = ("/project/oauth2/discord"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -991,6 +1099,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Discord = {
             io.appwrite.models.OAuth2Discord.from(map = it as Map<String, Any>)
@@ -1020,7 +1129,8 @@ class Project(client: Client) : Service(client) {
         secretKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Disqus {
-        val apiPath = "/project/oauth2/disqus"
+        val apiPath = ("/project/oauth2/disqus"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "publicKey" to publicKey,
@@ -1030,6 +1140,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Disqus = {
             io.appwrite.models.OAuth2Disqus.from(map = it as Map<String, Any>)
@@ -1059,7 +1170,8 @@ class Project(client: Client) : Service(client) {
         appSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Dropbox {
-        val apiPath = "/project/oauth2/dropbox"
+        val apiPath = ("/project/oauth2/dropbox"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "appKey" to appKey,
@@ -1069,6 +1181,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Dropbox = {
             io.appwrite.models.OAuth2Dropbox.from(map = it as Map<String, Any>)
@@ -1098,7 +1211,8 @@ class Project(client: Client) : Service(client) {
         sharedSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Etsy {
-        val apiPath = "/project/oauth2/etsy"
+        val apiPath = ("/project/oauth2/etsy"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "keyString" to keyString,
@@ -1108,6 +1222,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Etsy = {
             io.appwrite.models.OAuth2Etsy.from(map = it as Map<String, Any>)
@@ -1137,7 +1252,8 @@ class Project(client: Client) : Service(client) {
         appSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Facebook {
-        val apiPath = "/project/oauth2/facebook"
+        val apiPath = ("/project/oauth2/facebook"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "appId" to appId,
@@ -1147,6 +1263,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Facebook = {
             io.appwrite.models.OAuth2Facebook.from(map = it as Map<String, Any>)
@@ -1176,7 +1293,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Figma {
-        val apiPath = "/project/oauth2/figma"
+        val apiPath = ("/project/oauth2/figma"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1186,6 +1304,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Figma = {
             io.appwrite.models.OAuth2Figma.from(map = it as Map<String, Any>)
@@ -1217,7 +1336,8 @@ class Project(client: Client) : Service(client) {
         endpoint: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2FusionAuth {
-        val apiPath = "/project/oauth2/fusionauth"
+        val apiPath = ("/project/oauth2/fusionauth"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1228,6 +1348,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2FusionAuth = {
             io.appwrite.models.OAuth2FusionAuth.from(map = it as Map<String, Any>)
@@ -1257,7 +1378,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Github {
-        val apiPath = "/project/oauth2/github"
+        val apiPath = ("/project/oauth2/github"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1267,6 +1389,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Github = {
             io.appwrite.models.OAuth2Github.from(map = it as Map<String, Any>)
@@ -1298,7 +1421,8 @@ class Project(client: Client) : Service(client) {
         endpoint: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Gitlab {
-        val apiPath = "/project/oauth2/gitlab"
+        val apiPath = ("/project/oauth2/gitlab"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "applicationId" to applicationId,
@@ -1309,6 +1433,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Gitlab = {
             io.appwrite.models.OAuth2Gitlab.from(map = it as Map<String, Any>)
@@ -1340,7 +1465,8 @@ class Project(client: Client) : Service(client) {
         prompt: List<io.appwrite.enums.ProjectOAuth2GooglePrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Google {
-        val apiPath = "/project/oauth2/google"
+        val apiPath = ("/project/oauth2/google"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1351,6 +1477,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Google = {
             io.appwrite.models.OAuth2Google.from(map = it as Map<String, Any>)
@@ -1384,7 +1511,8 @@ class Project(client: Client) : Service(client) {
         realmName: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Keycloak {
-        val apiPath = "/project/oauth2/keycloak"
+        val apiPath = ("/project/oauth2/keycloak"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1396,6 +1524,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Keycloak = {
             io.appwrite.models.OAuth2Keycloak.from(map = it as Map<String, Any>)
@@ -1425,7 +1554,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Kick {
-        val apiPath = "/project/oauth2/kick"
+        val apiPath = ("/project/oauth2/kick"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1435,6 +1565,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Kick = {
             io.appwrite.models.OAuth2Kick.from(map = it as Map<String, Any>)
@@ -1464,7 +1595,8 @@ class Project(client: Client) : Service(client) {
         primaryClientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Linkedin {
-        val apiPath = "/project/oauth2/linkedin"
+        val apiPath = ("/project/oauth2/linkedin"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1474,6 +1606,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Linkedin = {
             io.appwrite.models.OAuth2Linkedin.from(map = it as Map<String, Any>)
@@ -1505,7 +1638,8 @@ class Project(client: Client) : Service(client) {
         tenant: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Microsoft {
-        val apiPath = "/project/oauth2/microsoft"
+        val apiPath = ("/project/oauth2/microsoft"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "applicationId" to applicationId,
@@ -1516,6 +1650,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Microsoft = {
             io.appwrite.models.OAuth2Microsoft.from(map = it as Map<String, Any>)
@@ -1545,7 +1680,8 @@ class Project(client: Client) : Service(client) {
         oauthClientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Notion {
-        val apiPath = "/project/oauth2/notion"
+        val apiPath = ("/project/oauth2/notion"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "oauthClientId" to oauthClientId,
@@ -1555,6 +1691,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Notion = {
             io.appwrite.models.OAuth2Notion.from(map = it as Map<String, Any>)
@@ -1578,6 +1715,8 @@ class Project(client: Client) : Service(client) {
      * @param authorizationURL OpenID Connect authorization endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/authorize
      * @param tokenURL OpenID Connect token endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/token
      * @param userInfoURL OpenID Connect user info endpoint URL. Required when wellKnownURL is not provided. For example: https://myoauth.com/oauth2/userinfo
+     * @param prompt Array of OpenID Connect prompt values controlling the authentication and consent screens. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "consent" means: prompt the user for consent. "select_account" means: prompt the user to select an account.
+     * @param maxAge Maximum authentication age in seconds. When set, the user must have authenticated within this many seconds, otherwise they are prompted to re-authenticate.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Oidc]
      */
@@ -1590,9 +1729,12 @@ class Project(client: Client) : Service(client) {
         authorizationURL: String? = null,
         tokenURL: String? = null,
         userInfoURL: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2OidcPrompt>? = null,
+        maxAge: Long? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Oidc {
-        val apiPath = "/project/oauth2/oidc"
+        val apiPath = ("/project/oauth2/oidc"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1601,11 +1743,14 @@ class Project(client: Client) : Service(client) {
             "authorizationURL" to authorizationURL,
             "tokenURL" to tokenURL,
             "userInfoURL" to userInfoURL,
+            "prompt" to prompt,
+            "maxAge" to maxAge,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Oidc = {
             io.appwrite.models.OAuth2Oidc.from(map = it as Map<String, Any>)
@@ -1639,7 +1784,8 @@ class Project(client: Client) : Service(client) {
         authorizationServerId: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Okta {
-        val apiPath = "/project/oauth2/okta"
+        val apiPath = ("/project/oauth2/okta"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1651,6 +1797,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Okta = {
             io.appwrite.models.OAuth2Okta.from(map = it as Map<String, Any>)
@@ -1680,7 +1827,8 @@ class Project(client: Client) : Service(client) {
         secretKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Paypal {
-        val apiPath = "/project/oauth2/paypal"
+        val apiPath = ("/project/oauth2/paypal"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1690,6 +1838,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Paypal = {
             io.appwrite.models.OAuth2Paypal.from(map = it as Map<String, Any>)
@@ -1719,7 +1868,8 @@ class Project(client: Client) : Service(client) {
         secretKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Paypal {
-        val apiPath = "/project/oauth2/paypalSandbox"
+        val apiPath = ("/project/oauth2/paypalSandbox"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1729,6 +1879,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Paypal = {
             io.appwrite.models.OAuth2Paypal.from(map = it as Map<String, Any>)
@@ -1758,7 +1909,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Podio {
-        val apiPath = "/project/oauth2/podio"
+        val apiPath = ("/project/oauth2/podio"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1768,6 +1920,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Podio = {
             io.appwrite.models.OAuth2Podio.from(map = it as Map<String, Any>)
@@ -1797,7 +1950,8 @@ class Project(client: Client) : Service(client) {
         customerSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Salesforce {
-        val apiPath = "/project/oauth2/salesforce"
+        val apiPath = ("/project/oauth2/salesforce"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "customerKey" to customerKey,
@@ -1807,6 +1961,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Salesforce = {
             io.appwrite.models.OAuth2Salesforce.from(map = it as Map<String, Any>)
@@ -1836,7 +1991,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Slack {
-        val apiPath = "/project/oauth2/slack"
+        val apiPath = ("/project/oauth2/slack"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1846,6 +2002,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Slack = {
             io.appwrite.models.OAuth2Slack.from(map = it as Map<String, Any>)
@@ -1875,7 +2032,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Spotify {
-        val apiPath = "/project/oauth2/spotify"
+        val apiPath = ("/project/oauth2/spotify"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1885,6 +2043,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Spotify = {
             io.appwrite.models.OAuth2Spotify.from(map = it as Map<String, Any>)
@@ -1914,7 +2073,8 @@ class Project(client: Client) : Service(client) {
         apiSecretKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Stripe {
-        val apiPath = "/project/oauth2/stripe"
+        val apiPath = ("/project/oauth2/stripe"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -1924,6 +2084,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Stripe = {
             io.appwrite.models.OAuth2Stripe.from(map = it as Map<String, Any>)
@@ -1953,7 +2114,8 @@ class Project(client: Client) : Service(client) {
         oauth2ClientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Tradeshift {
-        val apiPath = "/project/oauth2/tradeshift"
+        val apiPath = ("/project/oauth2/tradeshift"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "oauth2ClientId" to oauth2ClientId,
@@ -1963,6 +2125,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Tradeshift = {
             io.appwrite.models.OAuth2Tradeshift.from(map = it as Map<String, Any>)
@@ -1992,7 +2155,8 @@ class Project(client: Client) : Service(client) {
         oauth2ClientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Tradeshift {
-        val apiPath = "/project/oauth2/tradeshiftBox"
+        val apiPath = ("/project/oauth2/tradeshiftBox"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "oauth2ClientId" to oauth2ClientId,
@@ -2002,6 +2166,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Tradeshift = {
             io.appwrite.models.OAuth2Tradeshift.from(map = it as Map<String, Any>)
@@ -2031,7 +2196,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Twitch {
-        val apiPath = "/project/oauth2/twitch"
+        val apiPath = ("/project/oauth2/twitch"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2041,6 +2207,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Twitch = {
             io.appwrite.models.OAuth2Twitch.from(map = it as Map<String, Any>)
@@ -2070,7 +2237,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2WordPress {
-        val apiPath = "/project/oauth2/wordpress"
+        val apiPath = ("/project/oauth2/wordpress"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2080,6 +2248,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2WordPress = {
             io.appwrite.models.OAuth2WordPress.from(map = it as Map<String, Any>)
@@ -2109,7 +2278,8 @@ class Project(client: Client) : Service(client) {
         secretKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2X {
-        val apiPath = "/project/oauth2/x"
+        val apiPath = ("/project/oauth2/x"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "customerKey" to customerKey,
@@ -2119,6 +2289,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2X = {
             io.appwrite.models.OAuth2X.from(map = it as Map<String, Any>)
@@ -2148,7 +2319,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Yahoo {
-        val apiPath = "/project/oauth2/yahoo"
+        val apiPath = ("/project/oauth2/yahoo"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2158,6 +2330,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Yahoo = {
             io.appwrite.models.OAuth2Yahoo.from(map = it as Map<String, Any>)
@@ -2187,7 +2360,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Yandex {
-        val apiPath = "/project/oauth2/yandex"
+        val apiPath = ("/project/oauth2/yandex"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2197,6 +2371,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Yandex = {
             io.appwrite.models.OAuth2Yandex.from(map = it as Map<String, Any>)
@@ -2226,7 +2401,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Zoho {
-        val apiPath = "/project/oauth2/zoho"
+        val apiPath = ("/project/oauth2/zoho"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2236,6 +2412,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Zoho = {
             io.appwrite.models.OAuth2Zoho.from(map = it as Map<String, Any>)
@@ -2265,7 +2442,8 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Zoom {
-        val apiPath = "/project/oauth2/zoom"
+        val apiPath = ("/project/oauth2/zoom"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
@@ -2275,6 +2453,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.OAuth2Zoom = {
             io.appwrite.models.OAuth2Zoom.from(map = it as Map<String, Any>)
@@ -2299,13 +2478,15 @@ class Project(client: Client) : Service(client) {
     suspend fun getOAuth2Provider(
         providerId: io.appwrite.enums.ProjectOAuthProviderId,
     ): Any {
-        val apiPath = "/project/oauth2/{providerId}"
+        val apiPath = ("/project/oauth2/{providerId}"
             .replace("{providerId}", providerId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -2377,7 +2558,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.PlatformList {
-        val apiPath = "/project/platforms"
+        val apiPath = ("/project/platforms"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -2385,6 +2567,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformList = {
             io.appwrite.models.PlatformList.from(map = it as Map<String, Any>)
@@ -2413,7 +2596,8 @@ class Project(client: Client) : Service(client) {
         name: String,
         applicationId: String,
     ): io.appwrite.models.PlatformAndroid {
-        val apiPath = "/project/platforms/android"
+        val apiPath = ("/project/platforms/android"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
@@ -2423,6 +2607,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformAndroid = {
             io.appwrite.models.PlatformAndroid.from(map = it as Map<String, Any>)
@@ -2451,8 +2636,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         applicationId: String,
     ): io.appwrite.models.PlatformAndroid {
-        val apiPath = "/project/platforms/android/{platformId}"
+        val apiPath = ("/project/platforms/android/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -2461,6 +2647,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformAndroid = {
             io.appwrite.models.PlatformAndroid.from(map = it as Map<String, Any>)
@@ -2489,7 +2676,8 @@ class Project(client: Client) : Service(client) {
         name: String,
         bundleIdentifier: String,
     ): io.appwrite.models.PlatformApple {
-        val apiPath = "/project/platforms/apple"
+        val apiPath = ("/project/platforms/apple"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
@@ -2499,6 +2687,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformApple = {
             io.appwrite.models.PlatformApple.from(map = it as Map<String, Any>)
@@ -2527,8 +2716,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         bundleIdentifier: String,
     ): io.appwrite.models.PlatformApple {
-        val apiPath = "/project/platforms/apple/{platformId}"
+        val apiPath = ("/project/platforms/apple/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -2537,6 +2727,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformApple = {
             io.appwrite.models.PlatformApple.from(map = it as Map<String, Any>)
@@ -2565,7 +2756,8 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageName: String,
     ): io.appwrite.models.PlatformLinux {
-        val apiPath = "/project/platforms/linux"
+        val apiPath = ("/project/platforms/linux"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
@@ -2575,6 +2767,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformLinux = {
             io.appwrite.models.PlatformLinux.from(map = it as Map<String, Any>)
@@ -2603,8 +2796,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageName: String,
     ): io.appwrite.models.PlatformLinux {
-        val apiPath = "/project/platforms/linux/{platformId}"
+        val apiPath = ("/project/platforms/linux/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -2613,6 +2807,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformLinux = {
             io.appwrite.models.PlatformLinux.from(map = it as Map<String, Any>)
@@ -2641,7 +2836,8 @@ class Project(client: Client) : Service(client) {
         name: String,
         hostname: String,
     ): io.appwrite.models.PlatformWeb {
-        val apiPath = "/project/platforms/web"
+        val apiPath = ("/project/platforms/web"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
@@ -2651,6 +2847,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWeb = {
             io.appwrite.models.PlatformWeb.from(map = it as Map<String, Any>)
@@ -2679,8 +2876,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         hostname: String,
     ): io.appwrite.models.PlatformWeb {
-        val apiPath = "/project/platforms/web/{platformId}"
+        val apiPath = ("/project/platforms/web/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -2689,6 +2887,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWeb = {
             io.appwrite.models.PlatformWeb.from(map = it as Map<String, Any>)
@@ -2717,7 +2916,8 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageIdentifierName: String,
     ): io.appwrite.models.PlatformWindows {
-        val apiPath = "/project/platforms/windows"
+        val apiPath = ("/project/platforms/windows"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
@@ -2727,6 +2927,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWindows = {
             io.appwrite.models.PlatformWindows.from(map = it as Map<String, Any>)
@@ -2755,8 +2956,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageIdentifierName: String,
     ): io.appwrite.models.PlatformWindows {
-        val apiPath = "/project/platforms/windows/{platformId}"
+        val apiPath = ("/project/platforms/windows/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -2765,6 +2967,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PlatformWindows = {
             io.appwrite.models.PlatformWindows.from(map = it as Map<String, Any>)
@@ -2789,13 +2992,15 @@ class Project(client: Client) : Service(client) {
     suspend fun getPlatform(
         platformId: String,
     ): Any {
-        val apiPath = "/project/platforms/{platformId}"
+        val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -2829,8 +3034,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deletePlatform(
         platformId: String,
     ): Any {
-        val apiPath = "/project/platforms/{platformId}"
+        val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -2860,7 +3066,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.PolicyList {
-        val apiPath = "/project/policies"
+        val apiPath = ("/project/policies"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -2868,6 +3075,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PolicyList = {
             io.appwrite.models.PolicyList.from(map = it as Map<String, Any>)
@@ -2892,7 +3100,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateDenyAliasedEmailPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/deny-aliased-email"
+        val apiPath = ("/project/policies/deny-aliased-email"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -2900,6 +3109,41 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Configures if only corporate email addresses (non-free and non-disposable domains) are allowed during new user sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to restrict sign-ups and email updates to corporate email addresses only.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyCorporateEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project {
+        val apiPath = ("/project/policies/deny-corporate-email"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -2924,7 +3168,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateDenyDisposableEmailPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/deny-disposable-email"
+        val apiPath = ("/project/policies/deny-disposable-email"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -2932,6 +3177,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -2956,7 +3202,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateDenyFreeEmailPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/deny-free-email"
+        val apiPath = ("/project/policies/deny-free-email"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -2964,6 +3211,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -2986,6 +3234,7 @@ class Project(client: Client) : Service(client) {
      * @param userPhone Set to true if you want make user phone number visible to all team members, or false to hide it.
      * @param userName Set to true if you want make user name visible to all team members, or false to hide it.
      * @param userMFA Set to true if you want make user MFA status visible to all team members, or false to hide it.
+     * @param userAccessedAt Set to true if you want make user last access time visible to all team members, or false to hide it.
      * @return [io.appwrite.models.Project]
      */
     @JvmOverloads
@@ -2996,8 +3245,10 @@ class Project(client: Client) : Service(client) {
         userPhone: Boolean? = null,
         userName: Boolean? = null,
         userMFA: Boolean? = null,
+        userAccessedAt: Boolean? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/membership-privacy"
+        val apiPath = ("/project/policies/membership-privacy"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -3005,10 +3256,12 @@ class Project(client: Client) : Service(client) {
             "userPhone" to userPhone,
             "userName" to userName,
             "userMFA" to userMFA,
+            "userAccessedAt" to userAccessedAt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3033,7 +3286,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updatePasswordDictionaryPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-dictionary"
+        val apiPath = ("/project/policies/password-dictionary"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3041,6 +3295,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3067,7 +3322,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updatePasswordHistoryPolicy(
         total: Long? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-history"
+        val apiPath = ("/project/policies/password-history"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
@@ -3075,6 +3331,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3099,7 +3356,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updatePasswordPersonalDataPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-personal-data"
+        val apiPath = ("/project/policies/password-personal-data"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3107,6 +3365,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3140,7 +3399,8 @@ class Project(client: Client) : Service(client) {
         number: Boolean? = null,
         symbols: Boolean? = null,
     ): io.appwrite.models.PolicyPasswordStrength {
-        val apiPath = "/project/policies/password-strength"
+        val apiPath = ("/project/policies/password-strength"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "min" to min,
@@ -3152,6 +3412,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.PolicyPasswordStrength = {
             io.appwrite.models.PolicyPasswordStrength.from(map = it as Map<String, Any>)
@@ -3176,7 +3437,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateSessionAlertPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/session-alert"
+        val apiPath = ("/project/policies/session-alert"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3184,6 +3446,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3208,7 +3471,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateSessionDurationPolicy(
         duration: Long,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/session-duration"
+        val apiPath = ("/project/policies/session-duration"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "duration" to duration,
@@ -3216,6 +3480,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3240,7 +3505,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateSessionInvalidationPolicy(
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/session-invalidation"
+        val apiPath = ("/project/policies/session-invalidation"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3248,6 +3514,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3272,7 +3539,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateSessionLimitPolicy(
         total: Long? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/session-limit"
+        val apiPath = ("/project/policies/session-limit"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
@@ -3280,6 +3548,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3304,7 +3573,8 @@ class Project(client: Client) : Service(client) {
     suspend fun updateUserLimitPolicy(
         total: Long? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/user-limit"
+        val apiPath = ("/project/policies/user-limit"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
@@ -3312,6 +3582,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3329,20 +3600,22 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, deny-aliased-email, deny-disposable-email, deny-free-email.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
     suspend fun getPolicy(
         policyId: io.appwrite.enums.ProjectPolicyId,
     ): Any {
-        val apiPath = "/project/policies/{policyId}"
+        val apiPath = ("/project/policies/{policyId}"
             .replace("{policyId}", policyId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> Any = {
             val responseMap = it as? Map<String, Any>
@@ -3361,6 +3634,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "deny-aliased-email" -> io.appwrite.models.PolicyDenyAliasedEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-disposable-email" -> io.appwrite.models.PolicyDenyDisposableEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-free-email" -> io.appwrite.models.PolicyDenyFreeEmail.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "deny-corporate-email" -> io.appwrite.models.PolicyDenyCorporateEmail.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }
@@ -3386,8 +3660,9 @@ class Project(client: Client) : Service(client) {
         protocolId: io.appwrite.enums.ProjectProtocolId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/protocols/{protocolId}"
+        val apiPath = ("/project/protocols/{protocolId}"
             .replace("{protocolId}", protocolId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3395,6 +3670,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3412,7 +3688,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific service. Use this endpoint to enable or disable a service in your project. 
      *
-     * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging, advisor
+     * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging, advisor, oauth2
      * @param enabled Service status.
      * @return [io.appwrite.models.Project]
      */
@@ -3421,8 +3697,9 @@ class Project(client: Client) : Service(client) {
         serviceId: io.appwrite.enums.ProjectServiceId,
         enabled: Boolean,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/services/{serviceId}"
+        val apiPath = ("/project/services/{serviceId}"
             .replace("{serviceId}", serviceId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3430,6 +3707,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3473,7 +3751,8 @@ class Project(client: Client) : Service(client) {
         secure: io.appwrite.enums.ProjectSMTPSecure? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Project {
-        val apiPath = "/project/smtp"
+        val apiPath = ("/project/smtp"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "host" to host,
@@ -3490,6 +3769,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -3514,7 +3794,8 @@ class Project(client: Client) : Service(client) {
     suspend fun createSMTPTest(
         emails: List<String>,
     ): Any {
-        val apiPath = "/project/smtp/tests"
+        val apiPath = ("/project/smtp/tests"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "emails" to emails,
@@ -3545,7 +3826,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.EmailTemplateList {
-        val apiPath = "/project/templates/email"
+        val apiPath = ("/project/templates/email"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3553,6 +3835,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplateList = {
             io.appwrite.models.EmailTemplateList.from(map = it as Map<String, Any>)
@@ -3592,7 +3875,8 @@ class Project(client: Client) : Service(client) {
         replyToEmail: String? = null,
         replyToName: String? = null,
     ): io.appwrite.models.EmailTemplate {
-        val apiPath = "/project/templates/email"
+        val apiPath = ("/project/templates/email"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "templateId" to templateId,
@@ -3607,6 +3891,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplate = {
             io.appwrite.models.EmailTemplate.from(map = it as Map<String, Any>)
@@ -3634,14 +3919,16 @@ class Project(client: Client) : Service(client) {
         templateId: io.appwrite.enums.ProjectEmailTemplateId,
         locale: io.appwrite.enums.ProjectEmailTemplateLocale? = null,
     ): io.appwrite.models.EmailTemplate {
-        val apiPath = "/project/templates/email/{templateId}"
+        val apiPath = ("/project/templates/email/{templateId}"
             .replace("{templateId}", templateId.value)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "locale" to locale,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.EmailTemplate = {
             io.appwrite.models.EmailTemplate.from(map = it as Map<String, Any>)
@@ -3669,7 +3956,8 @@ class Project(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.VariableList {
-        val apiPath = "/project/variables"
+        val apiPath = ("/project/variables"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3677,6 +3965,7 @@ class Project(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
             io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
@@ -3708,7 +3997,8 @@ class Project(client: Client) : Service(client) {
         value: String,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
-        val apiPath = "/project/variables"
+        val apiPath = ("/project/variables"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "variableId" to variableId,
@@ -3719,6 +4009,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -3743,13 +4034,15 @@ class Project(client: Client) : Service(client) {
     suspend fun getVariable(
         variableId: String,
     ): io.appwrite.models.Variable {
-        val apiPath = "/project/variables/{variableId}"
+        val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -3781,8 +4074,9 @@ class Project(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
-        val apiPath = "/project/variables/{variableId}"
+        val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3792,6 +4086,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -3816,8 +4111,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteVariable(
         variableId: String,
     ): Any {
-        val apiPath = "/project/variables/{variableId}"
+        val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )

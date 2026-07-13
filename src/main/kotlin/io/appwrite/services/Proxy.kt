@@ -26,7 +26,8 @@ class Proxy(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ProxyRuleList {
-        val apiPath = "/proxy/rules"
+        val apiPath = ("/proxy/rules"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -34,6 +35,7 @@ class Proxy(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRuleList = {
             io.appwrite.models.ProxyRuleList.from(map = it as Map<String, Any>)
@@ -60,7 +62,8 @@ class Proxy(client: Client) : Service(client) {
     suspend fun createAPIRule(
         domain: String,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/api"
+        val apiPath = ("/proxy/rules/api"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
@@ -68,6 +71,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
@@ -99,7 +103,8 @@ class Proxy(client: Client) : Service(client) {
         functionId: String,
         branch: String? = null,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/function"
+        val apiPath = ("/proxy/rules/function"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
@@ -109,6 +114,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
@@ -143,7 +149,8 @@ class Proxy(client: Client) : Service(client) {
         resourceId: String,
         resourceType: io.appwrite.enums.ProxyResourceType,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/redirect"
+        val apiPath = ("/proxy/rules/redirect"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
@@ -155,6 +162,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
@@ -186,7 +194,8 @@ class Proxy(client: Client) : Service(client) {
         siteId: String,
         branch: String? = null,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/site"
+        val apiPath = ("/proxy/rules/site"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
@@ -196,6 +205,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
@@ -220,13 +230,15 @@ class Proxy(client: Client) : Service(client) {
     suspend fun getRule(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/{ruleId}"
+        val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
@@ -251,8 +263,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun deleteRule(
         ruleId: String,
     ): Any {
-        val apiPath = "/proxy/rules/{ruleId}"
+        val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -279,14 +292,16 @@ class Proxy(client: Client) : Service(client) {
     suspend fun updateRuleStatus(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = "/proxy/rules/{ruleId}/status"
+        val apiPath = ("/proxy/rules/{ruleId}/status"
             .replace("{ruleId}", ruleId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ProxyRule = {
             io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)

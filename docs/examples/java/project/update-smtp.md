@@ -15,7 +15,7 @@ project.updateSMTP(
     "", // host (optional)
     0, // port (optional)
     "<USERNAME>", // username (optional)
-    "<PASSWORD>", // password (optional)
+    "password", // password (optional)
     "email@example.com", // senderEmail (optional)
     "<SENDER_NAME>", // senderName (optional)
     "email@example.com", // replyToEmail (optional)

@@ -20,7 +20,7 @@ data class RuntimeList(
     val runtimes: List<Runtime>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "runtimes" to runtimes.map { it.toMap() } as Any,
     )

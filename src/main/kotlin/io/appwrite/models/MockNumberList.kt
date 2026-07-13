@@ -20,7 +20,7 @@ data class MockNumberList(
     val mockNumbers: List<MockNumber>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "mockNumbers" to mockNumbers.map { it.toMap() } as Any,
     )

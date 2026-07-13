@@ -56,15 +56,15 @@ data class BillingLimits(
     var budgetLimit: Long?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
-        "bandwidth" to bandwidth as Any,
-        "storage" to storage as Any,
-        "users" to users as Any,
-        "executions" to executions as Any,
-        "GBHours" to GBHours as Any,
-        "imageTransformations" to imageTransformations as Any,
-        "authPhone" to authPhone as Any,
-        "budgetLimit" to budgetLimit as Any,
+    fun toMap(): Map<String, Any?> = mapOf(
+        "bandwidth" to bandwidth as Any?,
+        "storage" to storage as Any?,
+        "users" to users as Any?,
+        "executions" to executions as Any?,
+        "GBHours" to GBHours as Any?,
+        "imageTransformations" to imageTransformations as Any?,
+        "authPhone" to authPhone as Any?,
+        "budgetLimit" to budgetLimit as Any?,
     )
 
     companion object {

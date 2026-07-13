@@ -68,7 +68,7 @@ data class ColumnIndex(
     var orders: List<String>?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -78,7 +78,7 @@ data class ColumnIndex(
         "error" to error as Any,
         "columns" to columns as Any,
         "lengths" to lengths as Any,
-        "orders" to orders as Any,
+        "orders" to orders as Any?,
     )
 
     companion object {

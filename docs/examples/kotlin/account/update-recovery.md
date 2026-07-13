@@ -13,6 +13,6 @@ val account = Account(client)
 val response = account.updateRecovery(
     userId = "<USER_ID>",
     secret = "<SECRET>",
-    password = ""
+    password = "password"
 )
 ```

@@ -20,7 +20,7 @@ data class VariableList(
     val variables: List<Variable>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "variables" to variables.map { it.toMap() } as Any,
     )

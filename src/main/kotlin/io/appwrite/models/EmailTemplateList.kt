@@ -20,7 +20,7 @@ data class EmailTemplateList(
     val templates: List<EmailTemplate>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "templates" to templates.map { it.toMap() } as Any,
     )

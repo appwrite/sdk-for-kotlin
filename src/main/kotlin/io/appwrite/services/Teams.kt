@@ -29,7 +29,8 @@ class Teams(client: Client) : Service(client) {
         total: Boolean? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.TeamList<T> {
-        val apiPath = "/teams"
+        val apiPath = ("/teams"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -38,6 +39,7 @@ class Teams(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.TeamList<T> = {
             io.appwrite.models.TeamList.from(map = it as Map<String, Any>, nestedType)
@@ -89,7 +91,8 @@ class Teams(client: Client) : Service(client) {
         roles: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Team<T> {
-        val apiPath = "/teams"
+        val apiPath = ("/teams"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "teamId" to teamId,
@@ -99,6 +102,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Team<T> = {
             io.appwrite.models.Team.from(map = it as Map<String, Any>, nestedType)
@@ -145,13 +149,15 @@ class Teams(client: Client) : Service(client) {
         teamId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Team<T> {
-        val apiPath = "/teams/{teamId}"
+        val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Team<T> = {
             io.appwrite.models.Team.from(map = it as Map<String, Any>, nestedType)
@@ -193,8 +199,9 @@ class Teams(client: Client) : Service(client) {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Team<T> {
-        val apiPath = "/teams/{teamId}"
+        val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -202,6 +209,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Team<T> = {
             io.appwrite.models.Team.from(map = it as Map<String, Any>, nestedType)
@@ -243,8 +251,9 @@ class Teams(client: Client) : Service(client) {
     suspend fun delete(
         teamId: String,
     ): Any {
-        val apiPath = "/teams/{teamId}"
+        val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -278,8 +287,9 @@ class Teams(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.MembershipList {
-        val apiPath = "/teams/{teamId}/memberships"
+        val apiPath = ("/teams/{teamId}/memberships"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -288,6 +298,7 @@ class Teams(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.MembershipList = {
             io.appwrite.models.MembershipList.from(map = it as Map<String, Any>)
@@ -332,8 +343,9 @@ class Teams(client: Client) : Service(client) {
         url: String? = null,
         name: String? = null,
     ): io.appwrite.models.Membership {
-        val apiPath = "/teams/{teamId}/memberships"
+        val apiPath = ("/teams/{teamId}/memberships"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
@@ -346,6 +358,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it as Map<String, Any>)
@@ -372,14 +385,16 @@ class Teams(client: Client) : Service(client) {
         teamId: String,
         membershipId: String,
     ): io.appwrite.models.Membership {
-        val apiPath = "/teams/{teamId}/memberships/{membershipId}"
+        val apiPath = ("/teams/{teamId}/memberships/{membershipId}"
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it as Map<String, Any>)
@@ -409,9 +424,10 @@ class Teams(client: Client) : Service(client) {
         membershipId: String,
         roles: List<String>,
     ): io.appwrite.models.Membership {
-        val apiPath = "/teams/{teamId}/memberships/{membershipId}"
+        val apiPath = ("/teams/{teamId}/memberships/{membershipId}"
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "roles" to roles,
@@ -419,6 +435,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it as Map<String, Any>)
@@ -445,9 +462,10 @@ class Teams(client: Client) : Service(client) {
         teamId: String,
         membershipId: String,
     ): Any {
-        val apiPath = "/teams/{teamId}/memberships/{membershipId}"
+        val apiPath = ("/teams/{teamId}/memberships/{membershipId}"
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -483,9 +501,10 @@ class Teams(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Membership {
-        val apiPath = "/teams/{teamId}/memberships/{membershipId}/status"
+        val apiPath = ("/teams/{teamId}/memberships/{membershipId}/status"
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -494,6 +513,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Membership = {
             io.appwrite.models.Membership.from(map = it as Map<String, Any>)
@@ -519,13 +539,15 @@ class Teams(client: Client) : Service(client) {
         teamId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val apiPath = "/teams/{teamId}/prefs"
+        val apiPath = ("/teams/{teamId}/prefs"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Preferences<T> = {
             io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
@@ -567,8 +589,9 @@ class Teams(client: Client) : Service(client) {
         prefs: Any,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val apiPath = "/teams/{teamId}/prefs"
+        val apiPath = ("/teams/{teamId}/prefs"
             .replace("{teamId}", teamId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "prefs" to prefs,
@@ -576,6 +599,7 @@ class Teams(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Preferences<T> = {
             io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)

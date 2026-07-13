@@ -20,7 +20,7 @@ data class DeploymentList(
     val deployments: List<Deployment>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "deployments" to deployments.map { it.toMap() } as Any,
     )

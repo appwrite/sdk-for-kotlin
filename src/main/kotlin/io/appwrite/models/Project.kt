@@ -134,6 +134,12 @@ data class Project(
     val status: String,
 
     /**
+     * Stage progress (completed or skipped) with timestamps and actor types, keyed by stage id.
+     */
+    @SerializedName("onboarding")
+    val onboarding: Any,
+
+    /**
      * List of auth methods.
      */
     @SerializedName("authMethods")
@@ -173,58 +179,94 @@ data class Project(
      * OAuth2 server status
      */
     @SerializedName("oAuth2ServerEnabled")
-    val oAuth2ServerEnabled: Boolean,
+    var oAuth2ServerEnabled: Boolean?,
 
     /**
      * OAuth2 server authorization URL
      */
     @SerializedName("oAuth2ServerAuthorizationUrl")
-    val oAuth2ServerAuthorizationUrl: String,
+    var oAuth2ServerAuthorizationUrl: String?,
 
     /**
      * OAuth2 server allowed scopes
      */
     @SerializedName("oAuth2ServerScopes")
-    val oAuth2ServerScopes: List<String>,
+    var oAuth2ServerScopes: List<String>?,
+
+    /**
+     * OAuth2 server scopes used when an authorization request omits the scope parameter
+     */
+    @SerializedName("oAuth2ServerDefaultScopes")
+    var oAuth2ServerDefaultScopes: List<String>?,
+
+    /**
+     * OAuth2 server accepted RFC 9396 authorization_details types
+     */
+    @SerializedName("oAuth2ServerAuthorizationDetailsTypes")
+    var oAuth2ServerAuthorizationDetailsTypes: List<String>?,
 
     /**
      * OAuth2 server access token duration in seconds for confidential clients
      */
     @SerializedName("oAuth2ServerAccessTokenDuration")
-    val oAuth2ServerAccessTokenDuration: Long,
+    var oAuth2ServerAccessTokenDuration: Long?,
 
     /**
      * OAuth2 server refresh token duration in seconds for confidential clients
      */
     @SerializedName("oAuth2ServerRefreshTokenDuration")
-    val oAuth2ServerRefreshTokenDuration: Long,
+    var oAuth2ServerRefreshTokenDuration: Long?,
 
     /**
      * OAuth2 server access token duration in seconds for public clients (SPAs, mobile, native)
      */
     @SerializedName("oAuth2ServerPublicAccessTokenDuration")
-    val oAuth2ServerPublicAccessTokenDuration: Long,
+    var oAuth2ServerPublicAccessTokenDuration: Long?,
 
     /**
      * OAuth2 server refresh token duration in seconds for public clients (SPAs, mobile, native)
      */
     @SerializedName("oAuth2ServerPublicRefreshTokenDuration")
-    val oAuth2ServerPublicRefreshTokenDuration: Long,
+    var oAuth2ServerPublicRefreshTokenDuration: Long?,
 
     /**
      * When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
      */
     @SerializedName("oAuth2ServerConfidentialPkce")
-    val oAuth2ServerConfidentialPkce: Boolean,
+    var oAuth2ServerConfidentialPkce: Boolean?,
+
+    /**
+     * URL to your application page where users enter the device flow user code. Empty when the Device Authorization Grant is not configured.
+     */
+    @SerializedName("oAuth2ServerVerificationUrl")
+    var oAuth2ServerVerificationUrl: String?,
+
+    /**
+     * Number of characters in the device flow user code, excluding the formatting separator.
+     */
+    @SerializedName("oAuth2ServerUserCodeLength")
+    var oAuth2ServerUserCodeLength: Long?,
+
+    /**
+     * Character set for device flow user codes: `numeric`, `alphabetic`, or `alphanumeric`.
+     */
+    @SerializedName("oAuth2ServerUserCodeFormat")
+    var oAuth2ServerUserCodeFormat: String?,
+
+    /**
+     * Lifetime in seconds of device flow device codes and user codes.
+     */
+    @SerializedName("oAuth2ServerDeviceCodeDuration")
+    var oAuth2ServerDeviceCodeDuration: Long?,
 
     /**
      * OAuth2 server discovery URL
      */
     @SerializedName("oAuth2ServerDiscoveryUrl")
-    val oAuth2ServerDiscoveryUrl: String,
+    var oAuth2ServerDiscoveryUrl: String?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -246,21 +288,28 @@ data class Project(
         "pingedAt" to pingedAt as Any,
         "labels" to labels as Any,
         "status" to status as Any,
+        "onboarding" to onboarding as Any,
         "authMethods" to authMethods.map { it.toMap() } as Any,
         "services" to services.map { it.toMap() } as Any,
         "protocols" to protocols.map { it.toMap() } as Any,
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
-        "billingLimits" to billingLimits?.toMap() as Any,
-        "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any,
-        "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any,
-        "oAuth2ServerScopes" to oAuth2ServerScopes as Any,
-        "oAuth2ServerAccessTokenDuration" to oAuth2ServerAccessTokenDuration as Any,
-        "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any,
-        "oAuth2ServerPublicAccessTokenDuration" to oAuth2ServerPublicAccessTokenDuration as Any,
-        "oAuth2ServerPublicRefreshTokenDuration" to oAuth2ServerPublicRefreshTokenDuration as Any,
-        "oAuth2ServerConfidentialPkce" to oAuth2ServerConfidentialPkce as Any,
-        "oAuth2ServerDiscoveryUrl" to oAuth2ServerDiscoveryUrl as Any,
+        "billingLimits" to billingLimits?.toMap() as Any?,
+        "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any?,
+        "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
+        "oAuth2ServerScopes" to oAuth2ServerScopes as Any?,
+        "oAuth2ServerDefaultScopes" to oAuth2ServerDefaultScopes as Any?,
+        "oAuth2ServerAuthorizationDetailsTypes" to oAuth2ServerAuthorizationDetailsTypes as Any?,
+        "oAuth2ServerAccessTokenDuration" to oAuth2ServerAccessTokenDuration as Any?,
+        "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any?,
+        "oAuth2ServerPublicAccessTokenDuration" to oAuth2ServerPublicAccessTokenDuration as Any?,
+        "oAuth2ServerPublicRefreshTokenDuration" to oAuth2ServerPublicRefreshTokenDuration as Any?,
+        "oAuth2ServerConfidentialPkce" to oAuth2ServerConfidentialPkce as Any?,
+        "oAuth2ServerVerificationUrl" to oAuth2ServerVerificationUrl as Any?,
+        "oAuth2ServerUserCodeLength" to oAuth2ServerUserCodeLength as Any?,
+        "oAuth2ServerUserCodeFormat" to oAuth2ServerUserCodeFormat as Any?,
+        "oAuth2ServerDeviceCodeDuration" to oAuth2ServerDeviceCodeDuration as Any?,
+        "oAuth2ServerDiscoveryUrl" to oAuth2ServerDiscoveryUrl as Any?,
     )
 
     companion object {
@@ -290,21 +339,28 @@ data class Project(
             pingedAt = map["pingedAt"] as String,
             labels = map["labels"] as List<String>,
             status = map["status"] as String,
+            onboarding = map["onboarding"] as Any,
             authMethods = (map["authMethods"] as List<Map<String, Any>>).map { ProjectAuthMethod.from(map = it) },
             services = (map["services"] as List<Map<String, Any>>).map { ProjectService.from(map = it) },
             protocols = (map["protocols"] as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
             blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
             consoleAccessedAt = map["consoleAccessedAt"] as String,
-            billingLimits = BillingLimits.from(map = map["billingLimits"] as Map<String, Any>),
-            oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as Boolean,
-            oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as String,
-            oAuth2ServerScopes = map["oAuth2ServerScopes"] as List<String>,
-            oAuth2ServerAccessTokenDuration = (map["oAuth2ServerAccessTokenDuration"] as Number).toLong(),
-            oAuth2ServerRefreshTokenDuration = (map["oAuth2ServerRefreshTokenDuration"] as Number).toLong(),
-            oAuth2ServerPublicAccessTokenDuration = (map["oAuth2ServerPublicAccessTokenDuration"] as Number).toLong(),
-            oAuth2ServerPublicRefreshTokenDuration = (map["oAuth2ServerPublicRefreshTokenDuration"] as Number).toLong(),
-            oAuth2ServerConfidentialPkce = map["oAuth2ServerConfidentialPkce"] as Boolean,
-            oAuth2ServerDiscoveryUrl = map["oAuth2ServerDiscoveryUrl"] as String,
+            billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
+            oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as? Boolean,
+            oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,
+            oAuth2ServerScopes = map["oAuth2ServerScopes"] as? List<String>,
+            oAuth2ServerDefaultScopes = map["oAuth2ServerDefaultScopes"] as? List<String>,
+            oAuth2ServerAuthorizationDetailsTypes = map["oAuth2ServerAuthorizationDetailsTypes"] as? List<String>,
+            oAuth2ServerAccessTokenDuration = (map["oAuth2ServerAccessTokenDuration"] as? Number)?.toLong(),
+            oAuth2ServerRefreshTokenDuration = (map["oAuth2ServerRefreshTokenDuration"] as? Number)?.toLong(),
+            oAuth2ServerPublicAccessTokenDuration = (map["oAuth2ServerPublicAccessTokenDuration"] as? Number)?.toLong(),
+            oAuth2ServerPublicRefreshTokenDuration = (map["oAuth2ServerPublicRefreshTokenDuration"] as? Number)?.toLong(),
+            oAuth2ServerConfidentialPkce = map["oAuth2ServerConfidentialPkce"] as? Boolean,
+            oAuth2ServerVerificationUrl = map["oAuth2ServerVerificationUrl"] as? String,
+            oAuth2ServerUserCodeLength = (map["oAuth2ServerUserCodeLength"] as? Number)?.toLong(),
+            oAuth2ServerUserCodeFormat = map["oAuth2ServerUserCodeFormat"] as? String,
+            oAuth2ServerDeviceCodeDuration = (map["oAuth2ServerDeviceCodeDuration"] as? Number)?.toLong(),
+            oAuth2ServerDiscoveryUrl = map["oAuth2ServerDiscoveryUrl"] as? String,
         )
     }
 }

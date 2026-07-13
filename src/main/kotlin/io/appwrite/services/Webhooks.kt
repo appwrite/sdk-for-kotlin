@@ -26,7 +26,8 @@ class Webhooks(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.WebhookList {
-        val apiPath = "/webhooks"
+        val apiPath = ("/webhooks"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -34,6 +35,7 @@ class Webhooks(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.WebhookList = {
             io.appwrite.models.WebhookList.from(map = it as Map<String, Any>)
@@ -75,7 +77,8 @@ class Webhooks(client: Client) : Service(client) {
         authPassword: String? = null,
         secret: String? = null,
     ): io.appwrite.models.Webhook {
-        val apiPath = "/webhooks"
+        val apiPath = ("/webhooks"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "webhookId" to webhookId,
@@ -91,6 +94,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
             io.appwrite.models.Webhook.from(map = it as Map<String, Any>)
@@ -115,13 +119,15 @@ class Webhooks(client: Client) : Service(client) {
     suspend fun get(
         webhookId: String,
     ): io.appwrite.models.Webhook {
-        val apiPath = "/webhooks/{webhookId}"
+        val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
             io.appwrite.models.Webhook.from(map = it as Map<String, Any>)
@@ -161,8 +167,9 @@ class Webhooks(client: Client) : Service(client) {
         authUsername: String? = null,
         authPassword: String? = null,
     ): io.appwrite.models.Webhook {
-        val apiPath = "/webhooks/{webhookId}"
+        val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -176,6 +183,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
             io.appwrite.models.Webhook.from(map = it as Map<String, Any>)
@@ -200,8 +208,9 @@ class Webhooks(client: Client) : Service(client) {
     suspend fun delete(
         webhookId: String,
     ): Any {
-        val apiPath = "/webhooks/{webhookId}"
+        val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -231,8 +240,9 @@ class Webhooks(client: Client) : Service(client) {
         webhookId: String,
         secret: String? = null,
     ): io.appwrite.models.Webhook {
-        val apiPath = "/webhooks/{webhookId}/secret"
+        val apiPath = ("/webhooks/{webhookId}/secret"
             .replace("{webhookId}", webhookId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "secret" to secret,
@@ -240,6 +250,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Webhook = {
             io.appwrite.models.Webhook.from(map = it as Map<String, Any>)

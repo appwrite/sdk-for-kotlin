@@ -20,7 +20,7 @@ data class SubscriberList(
     val subscribers: List<Subscriber>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "subscribers" to subscribers.map { it.toMap() } as Any,
     )

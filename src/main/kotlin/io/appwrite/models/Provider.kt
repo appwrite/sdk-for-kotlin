@@ -62,7 +62,7 @@ data class Provider(
     var options: Any?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -71,7 +71,7 @@ data class Provider(
         "enabled" to enabled as Any,
         "type" to type as Any,
         "credentials" to credentials as Any,
-        "options" to options as Any,
+        "options" to options as Any?,
     )
 
     companion object {

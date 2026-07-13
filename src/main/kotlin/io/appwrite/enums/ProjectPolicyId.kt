@@ -28,7 +28,9 @@ enum class ProjectPolicyId(val value: String) {
     @SerializedName("deny-disposable-email")
     DENY_DISPOSABLE_EMAIL("deny-disposable-email"),
     @SerializedName("deny-free-email")
-    DENY_FREE_EMAIL("deny-free-email");
+    DENY_FREE_EMAIL("deny-free-email"),
+    @SerializedName("deny-corporate-email")
+    DENY_CORPORATE_EMAIL("deny-corporate-email");
 
     override fun toString() = value
 }

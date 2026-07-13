@@ -20,7 +20,7 @@ data class ColumnList(
     val columns: List<Any>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "columns" to columns as Any,
     )

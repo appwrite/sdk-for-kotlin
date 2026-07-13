@@ -38,7 +38,7 @@ data class Framework(
     val adapters: List<FrameworkAdapter>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "key" to key as Any,
         "name" to name as Any,
         "buildRuntime" to buildRuntime as Any,

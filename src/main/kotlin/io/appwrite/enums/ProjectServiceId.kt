@@ -38,7 +38,9 @@ enum class ProjectServiceId(val value: String) {
     @SerializedName("messaging")
     MESSAGING("messaging"),
     @SerializedName("advisor")
-    ADVISOR("advisor");
+    ADVISOR("advisor"),
+    @SerializedName("oauth2")
+    OAUTH2("oauth2");
 
     override fun toString() = value
 }

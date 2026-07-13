@@ -32,7 +32,7 @@ data class OAuth2Salesforce(
     val customerSecret: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "customerKey" to customerKey as Any,

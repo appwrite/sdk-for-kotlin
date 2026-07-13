@@ -30,9 +30,10 @@ class Tokens(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ResourceTokenList {
-        val apiPath = "/tokens/buckets/{bucketId}/files/{fileId}"
+        val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -40,6 +41,7 @@ class Tokens(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ResourceTokenList = {
             io.appwrite.models.ResourceTokenList.from(map = it as Map<String, Any>)
@@ -69,9 +71,10 @@ class Tokens(client: Client) : Service(client) {
         fileId: String,
         expire: String? = null,
     ): io.appwrite.models.ResourceToken {
-        val apiPath = "/tokens/buckets/{bucketId}/files/{fileId}"
+        val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
@@ -79,6 +82,7 @@ class Tokens(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ResourceToken = {
             io.appwrite.models.ResourceToken.from(map = it as Map<String, Any>)
@@ -103,13 +107,15 @@ class Tokens(client: Client) : Service(client) {
     suspend fun get(
         tokenId: String,
     ): io.appwrite.models.ResourceToken {
-        val apiPath = "/tokens/{tokenId}"
+        val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ResourceToken = {
             io.appwrite.models.ResourceToken.from(map = it as Map<String, Any>)
@@ -137,8 +143,9 @@ class Tokens(client: Client) : Service(client) {
         tokenId: String,
         expire: String? = null,
     ): io.appwrite.models.ResourceToken {
-        val apiPath = "/tokens/{tokenId}"
+        val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
@@ -146,6 +153,7 @@ class Tokens(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ResourceToken = {
             io.appwrite.models.ResourceToken.from(map = it as Map<String, Any>)
@@ -170,8 +178,9 @@ class Tokens(client: Client) : Service(client) {
     suspend fun delete(
         tokenId: String,
     ): Any {
-        val apiPath = "/tokens/{tokenId}"
+        val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )

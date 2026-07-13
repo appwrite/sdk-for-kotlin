@@ -12,6 +12,6 @@ val users = Users(client)
 
 val response = users.updatePassword(
     userId = "<USER_ID>",
-    password = ""
+    password = "password"
 )
 ```

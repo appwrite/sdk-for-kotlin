@@ -44,7 +44,7 @@ data class PolicyPasswordStrength(
     val symbols: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "min" to min as Any,
         "uppercase" to uppercase as Any,
