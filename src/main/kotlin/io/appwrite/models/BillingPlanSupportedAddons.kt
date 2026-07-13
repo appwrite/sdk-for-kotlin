@@ -26,7 +26,7 @@ data class BillingPlanSupportedAddons(
     val premiumGeoDBOrg: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "baa" to baa as Any,
         "premiumGeoDB" to premiumGeoDB as Any,
         "premiumGeoDBOrg" to premiumGeoDBOrg as Any,

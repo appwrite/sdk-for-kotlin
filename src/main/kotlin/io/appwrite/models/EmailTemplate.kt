@@ -56,7 +56,7 @@ data class EmailTemplate(
     val subject: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "templateId" to templateId as Any,
         "locale" to locale as Any,
         "message" to message as Any,

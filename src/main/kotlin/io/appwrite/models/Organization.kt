@@ -218,7 +218,7 @@ data class Organization<T>(
     val projects: List<String>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -248,7 +248,7 @@ data class Organization<T>(
         "programManagerCalendar" to programManagerCalendar as Any,
         "programDiscordChannelName" to programDiscordChannelName as Any,
         "programDiscordChannelUrl" to programDiscordChannelUrl as Any,
-        "billingLimits" to billingLimits?.toMap() as Any,
+        "billingLimits" to billingLimits?.toMap() as Any?,
         "billingPlanDowngrade" to billingPlanDowngrade as Any,
         "billingTaxId" to billingTaxId as Any,
         "markedForDeletion" to markedForDeletion as Any,

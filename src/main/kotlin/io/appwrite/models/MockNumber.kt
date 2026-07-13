@@ -32,7 +32,7 @@ data class MockNumber(
     val updatedAt: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "number" to number as Any,
         "otp" to otp as Any,
         "\$createdAt" to createdAt as Any,

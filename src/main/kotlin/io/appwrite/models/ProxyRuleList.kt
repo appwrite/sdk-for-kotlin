@@ -20,7 +20,7 @@ data class ProxyRuleList(
     val rules: List<ProxyRule>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "rules" to rules.map { it.toMap() } as Any,
     )

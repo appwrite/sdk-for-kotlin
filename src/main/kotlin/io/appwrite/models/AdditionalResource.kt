@@ -44,7 +44,7 @@ data class AdditionalResource(
     val invoiceDesc: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "name" to name as Any,
         "unit" to unit as Any,
         "currency" to currency as Any,

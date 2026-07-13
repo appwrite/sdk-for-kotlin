@@ -80,15 +80,15 @@ data class BackupPolicy(
     val enabled: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "name" to name as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "services" to services as Any,
         "resources" to resources as Any,
-        "resourceId" to resourceId as Any,
-        "resourceType" to resourceType as Any,
+        "resourceId" to resourceId as Any?,
+        "resourceType" to resourceType as Any?,
         "retention" to retention as Any,
         "schedule" to schedule as Any,
         "type" to type as Any,

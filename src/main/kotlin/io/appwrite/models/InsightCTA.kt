@@ -32,7 +32,7 @@ data class InsightCTA(
     val params: Any,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "label" to label as Any,
         "service" to service as Any,
         "method" to method as Any,

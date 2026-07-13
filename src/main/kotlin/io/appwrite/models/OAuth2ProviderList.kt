@@ -20,7 +20,7 @@ data class OAuth2ProviderList(
     val providers: List<Any>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "providers" to providers as Any,
     )

@@ -20,7 +20,7 @@ data class BillingPlanAddon(
     val projects: BillingPlanAddonDetails,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "seats" to seats.toMap() as Any,
         "projects" to projects.toMap() as Any,
     )

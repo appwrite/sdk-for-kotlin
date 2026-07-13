@@ -50,7 +50,7 @@ data class PolicyMembershipPrivacy(
     val userAccessedAt: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "userId" to userId as Any,
         "userEmail" to userEmail as Any,

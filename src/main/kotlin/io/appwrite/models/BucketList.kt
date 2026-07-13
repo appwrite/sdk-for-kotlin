@@ -20,7 +20,7 @@ data class BucketList(
     val buckets: List<Bucket>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "buckets" to buckets.map { it.toMap() } as Any,
     )

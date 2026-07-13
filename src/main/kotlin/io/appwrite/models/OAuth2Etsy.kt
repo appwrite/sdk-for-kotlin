@@ -32,7 +32,7 @@ data class OAuth2Etsy(
     val sharedSecret: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "keyString" to keyString as Any,

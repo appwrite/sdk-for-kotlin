@@ -62,7 +62,7 @@ data class Program(
     val billingPlanId: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "title" to title as Any,
         "description" to description as Any,

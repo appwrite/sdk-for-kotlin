@@ -417,7 +417,7 @@ data class BillingPlan(
     var dedicatedDatabases: BillingPlanDedicatedDatabaseLimits?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "name" to name as Any,
         "desc" to desc as Any,
@@ -453,7 +453,7 @@ data class BillingPlan(
         "domains" to domains as Any,
         "activityLogs" to activityLogs as Any,
         "usageLogs" to usageLogs as Any,
-        "usageLogsIntervals" to usageLogsIntervals as Any,
+        "usageLogsIntervals" to usageLogsIntervals as Any?,
         "projectInactivityDays" to projectInactivityDays as Any,
         "alertLimit" to alertLimit as Any,
         "usage" to usage.toMap() as Any,
@@ -482,10 +482,10 @@ data class BillingPlan(
         "deploymentSize" to deploymentSize as Any,
         "buildSize" to buildSize as Any,
         "databasesAllowEncrypt" to databasesAllowEncrypt as Any,
-        "limits" to limits?.toMap() as Any,
+        "limits" to limits?.toMap() as Any?,
         "group" to group.value as Any,
-        "program" to program?.toMap() as Any,
-        "dedicatedDatabases" to dedicatedDatabases?.toMap() as Any,
+        "program" to program?.toMap() as Any?,
+        "dedicatedDatabases" to dedicatedDatabases?.toMap() as Any?,
     )
 
     companion object {

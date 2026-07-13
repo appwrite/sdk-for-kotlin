@@ -20,9 +20,9 @@ data class BillingPlanLimits(
     var dailyCredits: Long?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
-        "credits" to credits as Any,
-        "dailyCredits" to dailyCredits as Any,
+    fun toMap(): Map<String, Any?> = mapOf(
+        "credits" to credits as Any?,
+        "dailyCredits" to dailyCredits as Any?,
     )
 
     companion object {

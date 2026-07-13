@@ -20,7 +20,7 @@ data class PolicyDenyDisposableEmail(
     val enabled: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
     )

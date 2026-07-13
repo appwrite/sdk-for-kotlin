@@ -21,7 +21,7 @@ data class ProjectService(
     val enabled: Boolean,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id.value as Any,
         "enabled" to enabled as Any,
     )

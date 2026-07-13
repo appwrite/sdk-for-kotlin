@@ -20,7 +20,7 @@ data class ResourceTokenList(
     val tokens: List<ResourceToken>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "tokens" to tokens.map { it.toMap() } as Any,
     )

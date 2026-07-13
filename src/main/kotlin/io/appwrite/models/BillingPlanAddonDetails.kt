@@ -56,7 +56,7 @@ data class BillingPlanAddonDetails(
     val invoiceDesc: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "supported" to supported as Any,
         "planIncluded" to planIncluded as Any,
         "limit" to limit as Any,

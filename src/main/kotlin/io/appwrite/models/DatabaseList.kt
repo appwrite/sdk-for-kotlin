@@ -20,7 +20,7 @@ data class DatabaseList(
     val databases: List<Database>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "databases" to databases.map { it.toMap() } as Any,
     )

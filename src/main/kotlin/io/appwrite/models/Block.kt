@@ -74,13 +74,13 @@ data class Block(
     val billingPlan: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$createdAt" to createdAt as Any,
         "resourceType" to resourceType as Any,
         "resourceId" to resourceId as Any,
         "mode" to mode as Any,
-        "reason" to reason as Any,
-        "expiredAt" to expiredAt as Any,
+        "reason" to reason as Any?,
+        "expiredAt" to expiredAt as Any?,
         "projectName" to projectName as Any,
         "region" to region as Any,
         "organizationName" to organizationName as Any,

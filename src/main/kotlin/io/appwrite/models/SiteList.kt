@@ -20,7 +20,7 @@ data class SiteList(
     val sites: List<Site>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "sites" to sites.map { it.toMap() } as Any,
     )

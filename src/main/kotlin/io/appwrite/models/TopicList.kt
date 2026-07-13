@@ -20,7 +20,7 @@ data class TopicList(
     val topics: List<Topic>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "topics" to topics.map { it.toMap() } as Any,
     )

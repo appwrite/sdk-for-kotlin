@@ -20,7 +20,7 @@ data class PolicyList(
     val policies: List<Any>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "policies" to policies as Any,
     )

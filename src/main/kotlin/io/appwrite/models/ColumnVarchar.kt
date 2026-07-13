@@ -75,18 +75,18 @@ data class ColumnVarchar(
     var encrypt: Boolean?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "key" to key as Any,
         "type" to type as Any,
         "status" to status.value as Any,
         "error" to error as Any,
         "required" to required as Any,
-        "array" to array as Any,
+        "array" to array as Any?,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "size" to size as Any,
-        "default" to default as Any,
-        "encrypt" to encrypt as Any,
+        "default" to default as Any?,
+        "encrypt" to encrypt as Any?,
     )
 
     companion object {

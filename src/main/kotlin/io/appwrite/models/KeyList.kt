@@ -20,7 +20,7 @@ data class KeyList(
     val keys: List<Key>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "keys" to keys.map { it.toMap() } as Any,
     )

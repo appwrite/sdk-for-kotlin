@@ -20,7 +20,7 @@ data class TableList(
     val tables: List<Table>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "tables" to tables.map { it.toMap() } as Any,
     )

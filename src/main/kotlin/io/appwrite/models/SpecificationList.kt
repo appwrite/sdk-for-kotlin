@@ -20,7 +20,7 @@ data class SpecificationList(
     val specifications: List<Specification>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "specifications" to specifications.map { it.toMap() } as Any,
     )

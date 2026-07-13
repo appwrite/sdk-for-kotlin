@@ -20,7 +20,7 @@ data class PolicyPasswordHistory(
     val total: Long,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "total" to total as Any,
     )

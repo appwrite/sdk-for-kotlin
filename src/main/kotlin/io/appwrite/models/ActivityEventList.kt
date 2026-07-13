@@ -20,7 +20,7 @@ data class ActivityEventList(
     val events: List<ActivityEvent>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "events" to events.map { it.toMap() } as Any,
     )

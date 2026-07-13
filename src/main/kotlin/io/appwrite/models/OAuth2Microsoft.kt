@@ -38,7 +38,7 @@ data class OAuth2Microsoft(
     val tenant: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "applicationId" to applicationId as Any,

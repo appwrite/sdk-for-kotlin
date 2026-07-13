@@ -56,7 +56,7 @@ data class Runtime(
     val supports: List<String>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "key" to key as Any,
         "name" to name as Any,

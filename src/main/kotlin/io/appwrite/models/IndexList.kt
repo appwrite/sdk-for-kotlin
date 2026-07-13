@@ -20,7 +20,7 @@ data class IndexList(
     val indexes: List<Index>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "indexes" to indexes.map { it.toMap() } as Any,
     )

@@ -74,7 +74,7 @@ data class UsageBillingPlan(
     val credits: AdditionalResource,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "bandwidth" to bandwidth.toMap() as Any,
         "executions" to executions.toMap() as Any,
         "member" to member.toMap() as Any,

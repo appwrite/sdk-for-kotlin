@@ -68,7 +68,7 @@ data class OAuth2Oidc(
     var maxAge: Long?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
@@ -78,7 +78,7 @@ data class OAuth2Oidc(
         "tokenURL" to tokenURL as Any,
         "userInfoURL" to userInfoURL as Any,
         "prompt" to prompt as Any,
-        "maxAge" to maxAge as Any,
+        "maxAge" to maxAge as Any?,
     )
 
     companion object {

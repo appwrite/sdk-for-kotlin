@@ -115,8 +115,20 @@ data class ActivityEvent(
     @SerializedName("hostname")
     val hostname: String,
 
+    /**
+     * Name of the SDK that triggered the event.
+     */
+    @SerializedName("sdk")
+    val sdk: String,
+
+    /**
+     * Version of the SDK that triggered the event.
+     */
+    @SerializedName("sdkVersion")
+    val sdkVersion: String,
+
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "actorType" to actorType as Any,
         "actorId" to actorId as Any,
@@ -135,6 +147,8 @@ data class ActivityEvent(
         "projectId" to projectId as Any,
         "teamId" to teamId as Any,
         "hostname" to hostname as Any,
+        "sdk" to sdk as Any,
+        "sdkVersion" to sdkVersion as Any,
     )
 
     companion object {
@@ -161,6 +175,8 @@ data class ActivityEvent(
             projectId = map["projectId"] as String,
             teamId = map["teamId"] as String,
             hostname = map["hostname"] as String,
+            sdk = map["sdk"] as String,
+            sdkVersion = map["sdkVersion"] as String,
         )
     }
 }

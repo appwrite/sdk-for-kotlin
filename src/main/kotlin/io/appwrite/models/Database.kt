@@ -64,14 +64,14 @@ data class Database(
     val archives: List<BackupArchive>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "name" to name as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
         "type" to type.value as Any,
-        "status" to status?.value as Any,
+        "status" to status?.value as Any?,
         "policies" to policies.map { it.toMap() } as Any,
         "archives" to archives.map { it.toMap() } as Any,
     )

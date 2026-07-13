@@ -80,7 +80,7 @@ data class BackupArchive(
     var resourceType: String?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -91,8 +91,8 @@ data class BackupArchive(
         "migrationId" to migrationId as Any,
         "services" to services as Any,
         "resources" to resources as Any,
-        "resourceId" to resourceId as Any,
-        "resourceType" to resourceType as Any,
+        "resourceId" to resourceId as Any?,
+        "resourceType" to resourceType as Any?,
     )
 
     companion object {

@@ -20,7 +20,7 @@ data class FunctionList(
     val functions: List<Function>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "functions" to functions.map { it.toMap() } as Any,
     )

@@ -32,7 +32,7 @@ data class OAuth2Tradeshift(
     val oauth2ClientSecret: String,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "oauth2ClientId" to oauth2ClientId as Any,

@@ -20,7 +20,7 @@ data class WebhookList(
     val webhooks: List<Webhook>,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "total" to total as Any,
         "webhooks" to webhooks.map { it.toMap() } as Any,
     )

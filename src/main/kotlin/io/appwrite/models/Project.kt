@@ -266,7 +266,7 @@ data class Project(
     var oAuth2ServerDiscoveryUrl: String?,
 
 ) {
-    fun toMap(): Map<String, Any> = mapOf(
+    fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
@@ -294,22 +294,22 @@ data class Project(
         "protocols" to protocols.map { it.toMap() } as Any,
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
-        "billingLimits" to billingLimits?.toMap() as Any,
-        "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any,
-        "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any,
-        "oAuth2ServerScopes" to oAuth2ServerScopes as Any,
-        "oAuth2ServerDefaultScopes" to oAuth2ServerDefaultScopes as Any,
-        "oAuth2ServerAuthorizationDetailsTypes" to oAuth2ServerAuthorizationDetailsTypes as Any,
-        "oAuth2ServerAccessTokenDuration" to oAuth2ServerAccessTokenDuration as Any,
-        "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any,
-        "oAuth2ServerPublicAccessTokenDuration" to oAuth2ServerPublicAccessTokenDuration as Any,
-        "oAuth2ServerPublicRefreshTokenDuration" to oAuth2ServerPublicRefreshTokenDuration as Any,
-        "oAuth2ServerConfidentialPkce" to oAuth2ServerConfidentialPkce as Any,
-        "oAuth2ServerVerificationUrl" to oAuth2ServerVerificationUrl as Any,
-        "oAuth2ServerUserCodeLength" to oAuth2ServerUserCodeLength as Any,
-        "oAuth2ServerUserCodeFormat" to oAuth2ServerUserCodeFormat as Any,
-        "oAuth2ServerDeviceCodeDuration" to oAuth2ServerDeviceCodeDuration as Any,
-        "oAuth2ServerDiscoveryUrl" to oAuth2ServerDiscoveryUrl as Any,
+        "billingLimits" to billingLimits?.toMap() as Any?,
+        "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any?,
+        "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
+        "oAuth2ServerScopes" to oAuth2ServerScopes as Any?,
+        "oAuth2ServerDefaultScopes" to oAuth2ServerDefaultScopes as Any?,
+        "oAuth2ServerAuthorizationDetailsTypes" to oAuth2ServerAuthorizationDetailsTypes as Any?,
+        "oAuth2ServerAccessTokenDuration" to oAuth2ServerAccessTokenDuration as Any?,
+        "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any?,
+        "oAuth2ServerPublicAccessTokenDuration" to oAuth2ServerPublicAccessTokenDuration as Any?,
+        "oAuth2ServerPublicRefreshTokenDuration" to oAuth2ServerPublicRefreshTokenDuration as Any?,
+        "oAuth2ServerConfidentialPkce" to oAuth2ServerConfidentialPkce as Any?,
+        "oAuth2ServerVerificationUrl" to oAuth2ServerVerificationUrl as Any?,
+        "oAuth2ServerUserCodeLength" to oAuth2ServerUserCodeLength as Any?,
+        "oAuth2ServerUserCodeFormat" to oAuth2ServerUserCodeFormat as Any?,
+        "oAuth2ServerDeviceCodeDuration" to oAuth2ServerDeviceCodeDuration as Any?,
+        "oAuth2ServerDiscoveryUrl" to oAuth2ServerDiscoveryUrl as Any?,
     )
 
     companion object {
