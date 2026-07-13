@@ -60,7 +60,7 @@ data class ColumnLine(
      * Default value for column when not provided. Cannot be set when column is required.
      */
     @SerializedName("default")
-    var default: List<Any>?,
+    var default: List<List<Double>>?,
 
 ) {
     fun toMap(): Map<String, Any> = mapOf(
@@ -89,7 +89,7 @@ data class ColumnLine(
             array = map["array"] as? Boolean,
             createdAt = map["\$createdAt"] as String,
             updatedAt = map["\$updatedAt"] as String,
-            default = map["default"] as? List<Any>,
+            default = map["default"] as? List<List<Double>>,
         )
     }
 }

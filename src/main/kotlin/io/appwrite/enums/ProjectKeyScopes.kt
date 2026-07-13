@@ -27,14 +27,18 @@ enum class ProjectKeyScopes(val value: String) {
     PROJECT_POLICIES_READ("project.policies.read"),
     @SerializedName("project.policies.write")
     PROJECT_POLICIES_WRITE("project.policies.write"),
+    @SerializedName("project.oauth2.read")
+    PROJECT_OAUTH2_READ("project.oauth2.read"),
+    @SerializedName("project.oauth2.write")
+    PROJECT_OAUTH2_WRITE("project.oauth2.write"),
     @SerializedName("templates.read")
     TEMPLATES_READ("templates.read"),
     @SerializedName("templates.write")
     TEMPLATES_WRITE("templates.write"),
-    @SerializedName("oauth2.read")
-    OAUTH2_READ("oauth2.read"),
-    @SerializedName("oauth2.write")
-    OAUTH2_WRITE("oauth2.write"),
+    @SerializedName("stages.read")
+    STAGES_READ("stages.read"),
+    @SerializedName("stages.write")
+    STAGES_WRITE("stages.write"),
     @SerializedName("users.read")
     USERS_READ("users.read"),
     @SerializedName("users.write")
@@ -183,6 +187,8 @@ enum class ProjectKeyScopes(val value: String) {
     RESTORATIONS_READ("restorations.read"),
     @SerializedName("restorations.write")
     RESTORATIONS_WRITE("restorations.write"),
+    @SerializedName("dedicatedDatabases.execute")
+    DEDICATEDDATABASES_EXECUTE("dedicatedDatabases.execute"),
     @SerializedName("domains.read")
     DOMAINS_READ("domains.read"),
     @SerializedName("domains.write")
@@ -193,6 +199,10 @@ enum class ProjectKeyScopes(val value: String) {
     APPS_READ("apps.read"),
     @SerializedName("apps.write")
     APPS_WRITE("apps.write"),
+    @SerializedName("oauth2.read")
+    OAUTH2_READ("oauth2.read"),
+    @SerializedName("oauth2.write")
+    OAUTH2_WRITE("oauth2.write"),
     @SerializedName("usage.read")
     USAGE_READ("usage.read");
 

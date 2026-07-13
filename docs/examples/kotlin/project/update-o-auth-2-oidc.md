@@ -2,6 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Project
+import io.appwrite.enums.ProjectOAuth2OidcPrompt
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -17,6 +18,8 @@ val response = project.updateOAuth2Oidc(
     authorizationURL = "https://example.com", // optional
     tokenURL = "https://example.com", // optional
     userInfoURL = "https://example.com", // optional
+    prompt = listOf(ProjectOAuth2OidcPrompt.NONE), // optional
+    maxAge = 0, // optional
     enabled = false // optional
 )
 ```

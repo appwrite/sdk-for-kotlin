@@ -43,6 +43,12 @@ data class PolicyMembershipPrivacy(
     @SerializedName("userMFA")
     val userMFA: Boolean,
 
+    /**
+     * Whether user last access time is visible in memberships.
+     */
+    @SerializedName("userAccessedAt")
+    val userAccessedAt: Boolean,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -51,6 +57,7 @@ data class PolicyMembershipPrivacy(
         "userPhone" to userPhone as Any,
         "userName" to userName as Any,
         "userMFA" to userMFA as Any,
+        "userAccessedAt" to userAccessedAt as Any,
     )
 
     companion object {
@@ -65,6 +72,7 @@ data class PolicyMembershipPrivacy(
             userPhone = map["userPhone"] as Boolean,
             userName = map["userName"] as Boolean,
             userMFA = map["userMFA"] as Boolean,
+            userAccessedAt = map["userAccessedAt"] as Boolean,
         )
     }
 }

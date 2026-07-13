@@ -10,5 +10,7 @@ val client = Client()
 
 val functions = Functions(client)
 
-val response = functions.listSpecifications()
+val response = functions.listSpecifications(
+    type = "runtimes" // optional
+)
 ```

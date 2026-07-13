@@ -16,6 +16,7 @@ project.updateMembershipPrivacyPolicy(
     false, // userPhone (optional)
     false, // userName (optional)
     false, // userMFA (optional)
+    false, // userAccessedAt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

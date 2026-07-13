@@ -14,7 +14,7 @@ users.create(
     "<USER_ID>", // userId
     "email@example.com", // email (optional)
     "+12065550100", // phone (optional)
-    "", // password (optional)
+    "password", // password (optional)
     "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

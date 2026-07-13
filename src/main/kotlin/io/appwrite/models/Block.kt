@@ -26,6 +26,12 @@ data class Block(
     val resourceId: String,
 
     /**
+     * Block mode. full blocks reads and writes; readOnly blocks writes only.
+     */
+    @SerializedName("mode")
+    val mode: String,
+
+    /**
      * Reason for the block. Can be null if no reason was provided.
      */
     @SerializedName("reason")
@@ -72,6 +78,7 @@ data class Block(
         "\$createdAt" to createdAt as Any,
         "resourceType" to resourceType as Any,
         "resourceId" to resourceId as Any,
+        "mode" to mode as Any,
         "reason" to reason as Any,
         "expiredAt" to expiredAt as Any,
         "projectName" to projectName as Any,
@@ -90,6 +97,7 @@ data class Block(
             createdAt = map["\$createdAt"] as String,
             resourceType = map["resourceType"] as String,
             resourceId = map["resourceId"] as String,
+            mode = map["mode"] as String,
             reason = map["reason"] as? String,
             expiredAt = map["expiredAt"] as? String,
             projectName = map["projectName"] as String,

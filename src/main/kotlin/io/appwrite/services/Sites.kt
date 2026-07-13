@@ -30,7 +30,8 @@ class Sites(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.SiteList {
-        val apiPath = "/sites"
+        val apiPath = ("/sites"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -39,6 +40,7 @@ class Sites(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SiteList = {
             io.appwrite.models.SiteList.from(map = it as Map<String, Any>)
@@ -108,7 +110,8 @@ class Sites(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
     ): io.appwrite.models.Site {
-        val apiPath = "/sites"
+        val apiPath = ("/sites"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "siteId" to siteId,
@@ -138,6 +141,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Site = {
             io.appwrite.models.Site.from(map = it as Map<String, Any>)
@@ -160,12 +164,14 @@ class Sites(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun listFrameworks(
     ): io.appwrite.models.FrameworkList {
-        val apiPath = "/sites/frameworks"
+        val apiPath = ("/sites/frameworks"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FrameworkList = {
             io.appwrite.models.FrameworkList.from(map = it as Map<String, Any>)
@@ -183,17 +189,23 @@ class Sites(client: Client) : Service(client) {
     /**
      * List allowed site specifications for this instance.
      *
+     * @param type Specification type to list. Can be one of: runtimes, builds.
      * @return [io.appwrite.models.SpecificationList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listSpecifications(
+        type: String? = null,
     ): io.appwrite.models.SpecificationList {
-        val apiPath = "/sites/specifications"
+        val apiPath = ("/sites/specifications"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
+            "type" to type,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.SpecificationList = {
             io.appwrite.models.SpecificationList.from(map = it as Map<String, Any>)
@@ -218,13 +230,15 @@ class Sites(client: Client) : Service(client) {
     suspend fun get(
         siteId: String,
     ): io.appwrite.models.Site {
-        val apiPath = "/sites/{siteId}"
+        val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Site = {
             io.appwrite.models.Site.from(map = it as Map<String, Any>)
@@ -294,8 +308,9 @@ class Sites(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
     ): io.appwrite.models.Site {
-        val apiPath = "/sites/{siteId}"
+        val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -324,6 +339,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Site = {
             io.appwrite.models.Site.from(map = it as Map<String, Any>)
@@ -348,8 +364,9 @@ class Sites(client: Client) : Service(client) {
     suspend fun delete(
         siteId: String,
     ): Any {
-        val apiPath = "/sites/{siteId}"
+        val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -378,8 +395,9 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Site {
-        val apiPath = "/sites/{siteId}/deployment"
+        val apiPath = ("/sites/{siteId}/deployment"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
@@ -387,6 +405,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Site = {
             io.appwrite.models.Site.from(map = it as Map<String, Any>)
@@ -418,8 +437,9 @@ class Sites(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.DeploymentList {
-        val apiPath = "/sites/{siteId}/deployments"
+        val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -428,6 +448,7 @@ class Sites(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.DeploymentList = {
             io.appwrite.models.DeploymentList.from(map = it as Map<String, Any>)
@@ -464,8 +485,9 @@ class Sites(client: Client) : Service(client) {
         activate: Boolean? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments"
+        val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "installCommand" to installCommand,
@@ -477,6 +499,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "multipart/form-data",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -507,8 +530,9 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments/duplicate"
+        val apiPath = ("/sites/{siteId}/deployments/duplicate"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
@@ -516,6 +540,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -555,8 +580,9 @@ class Sites(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments/template"
+        val apiPath = ("/sites/{siteId}/deployments/template"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "repository" to repository,
@@ -569,6 +595,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -602,8 +629,9 @@ class Sites(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments/vcs"
+        val apiPath = ("/sites/{siteId}/deployments/vcs"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -613,6 +641,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -639,14 +668,16 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments/{deploymentId}"
+        val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -673,9 +704,10 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): Any {
-        val apiPath = "/sites/{siteId}/deployments/{deploymentId}"
+        val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -707,15 +739,17 @@ class Sites(client: Client) : Service(client) {
         deploymentId: String,
         type: io.appwrite.enums.DeploymentDownloadType? = null,
     ): ByteArray {
-        val apiPath = "/sites/{siteId}/deployments/{deploymentId}/download"
+        val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/download"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "*/*",
         )
         return client.call(
             "GET",
@@ -737,15 +771,17 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
-        val apiPath = "/sites/{siteId}/deployments/{deploymentId}/status"
+        val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/status"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Deployment = {
             io.appwrite.models.Deployment.from(map = it as Map<String, Any>)
@@ -775,8 +811,9 @@ class Sites(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ExecutionList {
-        val apiPath = "/sites/{siteId}/logs"
+        val apiPath = ("/sites/{siteId}/logs"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -784,6 +821,7 @@ class Sites(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ExecutionList = {
             io.appwrite.models.ExecutionList.from(map = it as Map<String, Any>)
@@ -810,14 +848,16 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         logId: String,
     ): io.appwrite.models.Execution {
-        val apiPath = "/sites/{siteId}/logs/{logId}"
+        val apiPath = ("/sites/{siteId}/logs/{logId}"
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Execution = {
             io.appwrite.models.Execution.from(map = it as Map<String, Any>)
@@ -844,15 +884,17 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         logId: String,
     ): Any {
-        val apiPath = "/sites/{siteId}/logs/{logId}"
+        val apiPath = ("/sites/{siteId}/logs/{logId}"
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -878,8 +920,9 @@ class Sites(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.VariableList {
-        val apiPath = "/sites/{siteId}/variables"
+        val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -887,6 +930,7 @@ class Sites(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.VariableList = {
             io.appwrite.models.VariableList.from(map = it as Map<String, Any>)
@@ -920,8 +964,9 @@ class Sites(client: Client) : Service(client) {
         value: String,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
-        val apiPath = "/sites/{siteId}/variables"
+        val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "variableId" to variableId,
@@ -932,6 +977,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -958,14 +1004,16 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         variableId: String,
     ): io.appwrite.models.Variable {
-        val apiPath = "/sites/{siteId}/variables/{variableId}"
+        val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -999,9 +1047,10 @@ class Sites(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
-        val apiPath = "/sites/{siteId}/variables/{variableId}"
+        val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1011,6 +1060,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Variable = {
             io.appwrite.models.Variable.from(map = it as Map<String, Any>)
@@ -1037,9 +1087,10 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         variableId: String,
     ): Any {
-        val apiPath = "/sites/{siteId}/variables/{variableId}"
+        val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )

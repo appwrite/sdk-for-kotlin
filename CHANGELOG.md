@@ -1,5 +1,24 @@
 # Change Log
 
+## 19.0.0
+
+* Breaking: Removed `Health` and `Usage` services with their models and enums
+* Breaking: Removed `Messaging` methods `listMessageLogs`, `listProviderLogs`, `listSubscriberLogs`, `listTopicLogs`
+* Breaking: Removed OS, client, and device fields from `ActivityEvent` model
+* Breaking: Changed geometry `default` parameter types from `List<Any>` to typed nested lists
+* Breaking: Made `Project` OAuth2 server model fields nullable
+* Added: `Organization` `get`, `update`, `delete`, and membership management methods
+* Added: `Project.updateOAuth2Appwrite` and `Project.updateDenyCorporateEmailPolicy` methods
+* Added: `Client.setBearer` for bearer token authentication
+* Added: `Query.vectorDot`, `Query.vectorCosine`, `Query.vectorEuclidean` vector query helpers
+* Added: `BillingPlan` models and `BillingPlanGroup`, `DatabaseStatus`, `OAuth2OidcPrompt` enums
+* Added: `appwrite` OAuth provider and organization, `stages`, `oauth2`, `dedicatedDatabases` key scopes
+* Added: geolocation fields (`city`, `timeZone`, `latitude`, ISP) to `Locale` model
+* Added: email classification fields (`emailIsFree`, `emailIsDisposable`, `emailIsCorporate`) to `User` model
+* Added: OIDC `prompt`/`maxAge` and device-code OAuth2 server parameters on `Project`
+* Added: `newSpecification` to `Backups.createRestoration`; `type`, `token` parameters in `Functions`
+* Updated: deprecated `Databases` transaction and text-column methods in favor of `TablesDB`
+
 ## 18.1.0
 
 * Added: `createSesProvider` and `updateSesProvider` to `messaging`

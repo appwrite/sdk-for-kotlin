@@ -15,6 +15,7 @@ val response = project.updateMembershipPrivacyPolicy(
     userEmail = false, // optional
     userPhone = false, // optional
     userName = false, // optional
-    userMFA = false // optional
+    userMFA = false, // optional
+    userAccessedAt = false // optional
 )
 ```

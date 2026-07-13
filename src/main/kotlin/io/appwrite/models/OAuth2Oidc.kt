@@ -55,6 +55,18 @@ data class OAuth2Oidc(
     @SerializedName("userInfoURL")
     val userInfoURL: String,
 
+    /**
+     * OpenID Connect prompt values controlling the authentication and consent screens.
+     */
+    @SerializedName("prompt")
+    val prompt: List<io.appwrite.enums.OAuth2OidcPrompt>,
+
+    /**
+     * Maximum authentication age in seconds. When set, the user must have authenticated within this many seconds.
+     */
+    @SerializedName("maxAge")
+    var maxAge: Long?,
+
 ) {
     fun toMap(): Map<String, Any> = mapOf(
         "\$id" to id as Any,
@@ -65,6 +77,8 @@ data class OAuth2Oidc(
         "authorizationURL" to authorizationURL as Any,
         "tokenURL" to tokenURL as Any,
         "userInfoURL" to userInfoURL as Any,
+        "prompt" to prompt as Any,
+        "maxAge" to maxAge as Any,
     )
 
     companion object {
@@ -81,6 +95,8 @@ data class OAuth2Oidc(
             authorizationURL = map["authorizationURL"] as String,
             tokenURL = map["tokenURL"] as String,
             userInfoURL = map["userInfoURL"] as String,
+            prompt = map["prompt"] as List<io.appwrite.enums.OAuth2OidcPrompt>,
+            maxAge = (map["maxAge"] as? Number)?.toLong(),
         )
     }
 }

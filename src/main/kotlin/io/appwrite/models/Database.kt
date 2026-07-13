@@ -3,6 +3,7 @@ package io.appwrite.models
 import com.google.gson.annotations.SerializedName
 import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.DatabaseType
+import io.appwrite.enums.DatabaseStatus
 
 /**
  * Database
@@ -45,6 +46,12 @@ data class Database(
     val type: DatabaseType,
 
     /**
+     * Database status. Possible values: `provisioning`, `ready` or `failed`
+     */
+    @SerializedName("status")
+    var status: DatabaseStatus?,
+
+    /**
      * Database backup policies.
      */
     @SerializedName("policies")
@@ -64,6 +71,7 @@ data class Database(
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
         "type" to type.value as Any,
+        "status" to status?.value as Any,
         "policies" to policies.map { it.toMap() } as Any,
         "archives" to archives.map { it.toMap() } as Any,
     )
@@ -80,6 +88,7 @@ data class Database(
             updatedAt = map["\$updatedAt"] as String,
             enabled = map["enabled"] as Boolean,
             type = DatabaseType.values().find { it.value == map["type"] as String }!!,
+            status = DatabaseStatus.values().find { it.value == (map["status"] as? String) } ?: null,
             policies = (map["policies"] as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
             archives = (map["archives"] as List<Map<String, Any>>).map { BackupArchive.from(map = it) },
         )

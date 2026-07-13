@@ -30,7 +30,8 @@ class Storage(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.BucketList {
-        val apiPath = "/storage/buckets"
+        val apiPath = ("/storage/buckets"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -39,6 +40,7 @@ class Storage(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.BucketList = {
             io.appwrite.models.BucketList.from(map = it as Map<String, Any>)
@@ -84,7 +86,8 @@ class Storage(client: Client) : Service(client) {
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
-        val apiPath = "/storage/buckets"
+        val apiPath = ("/storage/buckets"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "bucketId" to bucketId,
@@ -102,6 +105,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
             io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
@@ -126,13 +130,15 @@ class Storage(client: Client) : Service(client) {
     suspend fun getBucket(
         bucketId: String,
     ): io.appwrite.models.Bucket {
-        val apiPath = "/storage/buckets/{bucketId}"
+        val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
             io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
@@ -178,8 +184,9 @@ class Storage(client: Client) : Service(client) {
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
-        val apiPath = "/storage/buckets/{bucketId}"
+        val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -196,6 +203,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Bucket = {
             io.appwrite.models.Bucket.from(map = it as Map<String, Any>)
@@ -220,8 +228,9 @@ class Storage(client: Client) : Service(client) {
     suspend fun deleteBucket(
         bucketId: String,
     ): Any {
-        val apiPath = "/storage/buckets/{bucketId}"
+        val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -255,8 +264,9 @@ class Storage(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.FileList {
-        val apiPath = "/storage/buckets/{bucketId}/files"
+        val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -265,6 +275,7 @@ class Storage(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.FileList = {
             io.appwrite.models.FileList.from(map = it as Map<String, Any>)
@@ -304,8 +315,9 @@ class Storage(client: Client) : Service(client) {
         permissions: List<String>? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.File {
-        val apiPath = "/storage/buckets/{bucketId}/files"
+        val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "fileId" to fileId,
@@ -315,6 +327,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "multipart/form-data",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
             io.appwrite.models.File.from(map = it as Map<String, Any>)
@@ -345,14 +358,16 @@ class Storage(client: Client) : Service(client) {
         bucketId: String,
         fileId: String,
     ): io.appwrite.models.File {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
             io.appwrite.models.File.from(map = it as Map<String, Any>)
@@ -384,9 +399,10 @@ class Storage(client: Client) : Service(client) {
         name: String? = null,
         permissions: List<String>? = null,
     ): io.appwrite.models.File {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -395,6 +411,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.File = {
             io.appwrite.models.File.from(map = it as Map<String, Any>)
@@ -421,9 +438,10 @@ class Storage(client: Client) : Service(client) {
         bucketId: String,
         fileId: String,
     ): Any {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -455,15 +473,17 @@ class Storage(client: Client) : Service(client) {
         fileId: String,
         token: String? = null,
     ): ByteArray {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/download"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/download"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "*/*",
         )
         return client.call(
             "GET",
@@ -510,9 +530,10 @@ class Storage(client: Client) : Service(client) {
         output: io.appwrite.enums.ImageFormat? = null,
         token: String? = null,
     ): ByteArray {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/preview"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/preview"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
@@ -530,6 +551,7 @@ class Storage(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "image/*",
         )
         return client.call(
             "GET",
@@ -554,15 +576,17 @@ class Storage(client: Client) : Service(client) {
         fileId: String,
         token: String? = null,
     ): ByteArray {
-        val apiPath = "/storage/buckets/{bucketId}/files/{fileId}/view"
+        val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/view"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "*/*",
         )
         return client.call(
             "GET",

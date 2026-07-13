@@ -15,6 +15,7 @@ functions.getDeploymentDownload(
     "<FUNCTION_ID>", // functionId
     "<DEPLOYMENT_ID>", // deploymentId
     DeploymentDownloadType.SOURCE, // type (optional)
+    "<TOKEN>", // token (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

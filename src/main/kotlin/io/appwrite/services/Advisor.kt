@@ -27,7 +27,8 @@ class Advisor(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ReportList {
-        val apiPath = "/reports"
+        val apiPath = ("/reports"
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -35,6 +36,7 @@ class Advisor(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.ReportList = {
             io.appwrite.models.ReportList.from(map = it as Map<String, Any>)
@@ -60,13 +62,15 @@ class Advisor(client: Client) : Service(client) {
     suspend fun getReport(
         reportId: String,
     ): io.appwrite.models.Report {
-        val apiPath = "/reports/{reportId}"
+        val apiPath = ("/reports/{reportId}"
             .replace("{reportId}", reportId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Report = {
             io.appwrite.models.Report.from(map = it as Map<String, Any>)
@@ -92,8 +96,9 @@ class Advisor(client: Client) : Service(client) {
     suspend fun deleteReport(
         reportId: String,
     ): Any {
-        val apiPath = "/reports/{reportId}"
+        val apiPath = ("/reports/{reportId}"
             .replace("{reportId}", reportId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
@@ -126,8 +131,9 @@ class Advisor(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.InsightList {
-        val apiPath = "/reports/{reportId}/insights"
+        val apiPath = ("/reports/{reportId}/insights"
             .replace("{reportId}", reportId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -135,6 +141,7 @@ class Advisor(client: Client) : Service(client) {
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.InsightList = {
             io.appwrite.models.InsightList.from(map = it as Map<String, Any>)
@@ -162,14 +169,16 @@ class Advisor(client: Client) : Service(client) {
         reportId: String,
         insightId: String,
     ): io.appwrite.models.Insight {
-        val apiPath = "/reports/{reportId}/insights/{insightId}"
+        val apiPath = ("/reports/{reportId}/insights/{insightId}"
             .replace("{reportId}", reportId)
             .replace("{insightId}", insightId)
+        )
 
         val apiParams = mutableMapOf<String, Any?>(
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Insight = {
             io.appwrite.models.Insight.from(map = it as Map<String, Any>)
