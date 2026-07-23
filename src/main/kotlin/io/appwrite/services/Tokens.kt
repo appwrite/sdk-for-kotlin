@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The Tokens service allows you to create and manage resource tokens for secure file access.
 **/
 class Tokens(client: Client) : Service(client) {
 

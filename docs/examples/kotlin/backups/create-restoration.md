@@ -15,7 +15,6 @@ val response = backups.createRestoration(
     archiveId = "<ARCHIVE_ID>",
     services = listOf(BackupServices.DATABASES),
     newResourceId = "<NEW_RESOURCE_ID>", // optional
-    newResourceName = "<NEW_RESOURCE_NAME>", // optional
-    newSpecification = "serverless" // optional
+    newResourceName = "<NEW_RESOURCE_NAME>" // optional
 )
 ```

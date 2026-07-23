@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The Webhooks service allows you to manage your project webhooks.
 **/
 class Webhooks(client: Client) : Service(client) {
 

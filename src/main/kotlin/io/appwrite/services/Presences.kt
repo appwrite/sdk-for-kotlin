@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The Presences service allows you to track and manage real-time user presence in your project.
 **/
 class Presences(client: Client) : Service(client) {
 

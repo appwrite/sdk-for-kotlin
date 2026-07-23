@@ -125,6 +125,215 @@ class Account(client: Client) : Service(client) {
     )
 
     /**
+     * Get a list of the OAuth2 consents the current user has given to third-party apps.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.Oauth2ConsentList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listConsents(
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.Oauth2ConsentList {
+        val apiPath = ("/account/consents"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2ConsentList = {
+            io.appwrite.models.Oauth2ConsentList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2ConsentList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get an OAuth2 consent the current user has given to a third-party app by its unique ID.
+     *
+     * @param consentId Consent unique ID.
+     * @return [io.appwrite.models.Oauth2Consent]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getConsent(
+        consentId: String,
+    ): io.appwrite.models.Oauth2Consent {
+        val apiPath = ("/account/consents/{consentId}"
+            .replace("{consentId}", consentId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2Consent = {
+            io.appwrite.models.Oauth2Consent.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2Consent::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete an OAuth2 consent by its unique ID. All token families issued under the consent are revoked, and the app must ask for consent again to regain access.
+     *
+     * @param consentId Consent unique ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteConsent(
+        consentId: String,
+    ): Any {
+        val apiPath = ("/account/consents/{consentId}"
+            .replace("{consentId}", consentId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Get a list of the token families issued under an OAuth2 consent. Each entry represents one authorized device or session; the token secrets themselves are never returned.
+     *
+     * @param consentId Consent unique ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.Oauth2ConsentTokenList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listConsentTokens(
+        consentId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.Oauth2ConsentTokenList {
+        val apiPath = ("/account/consents/{consentId}/tokens"
+            .replace("{consentId}", consentId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2ConsentTokenList = {
+            io.appwrite.models.Oauth2ConsentTokenList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2ConsentTokenList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a token family issued under an OAuth2 consent by its unique ID. The token secrets themselves are never returned.
+     *
+     * @param consentId Consent unique ID.
+     * @param tokenId Token unique ID.
+     * @return [io.appwrite.models.Oauth2ConsentToken]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getConsentToken(
+        consentId: String,
+        tokenId: String,
+    ): io.appwrite.models.Oauth2ConsentToken {
+        val apiPath = ("/account/consents/{consentId}/tokens/{tokenId}"
+            .replace("{consentId}", consentId)
+            .replace("{tokenId}", tokenId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2ConsentToken = {
+            io.appwrite.models.Oauth2ConsentToken.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2ConsentToken::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a token family issued under an OAuth2 consent by its unique ID. The access and refresh tokens of the family stop working immediately; other token families and the consent itself are unaffected.
+     *
+     * @param consentId Consent unique ID.
+     * @param tokenId Token unique ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteConsentToken(
+        consentId: String,
+        tokenId: String,
+    ): Any {
+        val apiPath = ("/account/consents/{consentId}/tokens/{tokenId}"
+            .replace("{consentId}", consentId)
+            .replace("{tokenId}", tokenId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Update currently logged in user account email address. After changing user address, the user confirmation status will get reset. A new confirmation email is not sent automatically however you can use the send confirmation email endpoint again to send the confirmation email. For security measures, user password is required to complete this request.
      * This endpoint can also be used to convert an anonymous account to a normal one, by passing an email address and a new password.
      * 

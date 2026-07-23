@@ -92,6 +92,60 @@ data class ActivityEvent(
     val country: String,
 
     /**
+     * Continent code.
+     */
+    @SerializedName("continentCode")
+    val continentCode: String,
+
+    /**
+     * City name.
+     */
+    @SerializedName("city")
+    val city: String,
+
+    /**
+     * Region/state chain.
+     */
+    @SerializedName("subdivisions")
+    val subdivisions: String,
+
+    /**
+     * Internet service provider.
+     */
+    @SerializedName("isp")
+    val isp: String,
+
+    /**
+     * Autonomous System Number (ASN).
+     */
+    @SerializedName("autonomousSystemNumber")
+    val autonomousSystemNumber: String,
+
+    /**
+     * Organization that owns the ASN.
+     */
+    @SerializedName("autonomousSystemOrganization")
+    val autonomousSystemOrganization: String,
+
+    /**
+     * Connection type (e.g. cable, cellular, corporate).
+     */
+    @SerializedName("connectionType")
+    val connectionType: String,
+
+    /**
+     * User type (e.g. residential, business, hosting).
+     */
+    @SerializedName("connectionUsageType")
+    val connectionUsageType: String,
+
+    /**
+     * Registered organization of the IP.
+     */
+    @SerializedName("connectionOrganization")
+    val connectionOrganization: String,
+
+    /**
      * Log creation date in ISO 8601 format.
      */
     @SerializedName("time")
@@ -143,6 +197,15 @@ data class ActivityEvent(
         "ip" to ip as Any,
         "mode" to mode as Any,
         "country" to country as Any,
+        "continentCode" to continentCode as Any,
+        "city" to city as Any,
+        "subdivisions" to subdivisions as Any,
+        "isp" to isp as Any,
+        "autonomousSystemNumber" to autonomousSystemNumber as Any,
+        "autonomousSystemOrganization" to autonomousSystemOrganization as Any,
+        "connectionType" to connectionType as Any,
+        "connectionUsageType" to connectionUsageType as Any,
+        "connectionOrganization" to connectionOrganization as Any,
         "time" to time as Any,
         "projectId" to projectId as Any,
         "teamId" to teamId as Any,
@@ -171,6 +234,15 @@ data class ActivityEvent(
             ip = map["ip"] as String,
             mode = map["mode"] as String,
             country = map["country"] as String,
+            continentCode = map["continentCode"] as String,
+            city = map["city"] as String,
+            subdivisions = map["subdivisions"] as String,
+            isp = map["isp"] as String,
+            autonomousSystemNumber = map["autonomousSystemNumber"] as String,
+            autonomousSystemOrganization = map["autonomousSystemOrganization"] as String,
+            connectionType = map["connectionType"] as String,
+            connectionUsageType = map["connectionUsageType"] as String,
+            connectionOrganization = map["connectionOrganization"] as String,
             time = map["time"] as String,
             projectId = map["projectId"] as String,
             teamId = map["teamId"] as String,

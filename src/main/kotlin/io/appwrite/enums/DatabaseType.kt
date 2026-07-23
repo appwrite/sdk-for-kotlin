@@ -10,7 +10,13 @@ enum class DatabaseType(val value: String) {
     @SerializedName("documentsdb")
     DOCUMENTSDB("documentsdb"),
     @SerializedName("vectorsdb")
-    VECTORSDB("vectorsdb");
+    VECTORSDB("vectorsdb"),
+    @SerializedName("mysql")
+    MYSQL("mysql"),
+    @SerializedName("postgresql")
+    POSTGRESQL("postgresql"),
+    @SerializedName("mongodb")
+    MONGODB("mongodb");
 
     override fun toString() = value
 }

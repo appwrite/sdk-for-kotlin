@@ -46,22 +46,40 @@ data class Database(
     val type: DatabaseType,
 
     /**
-     * Database status. Possible values: `provisioning`, `ready` or `failed`
+     * Dedicated database lifecycle status. Null when the database has no valid dedicated backing.
      */
     @SerializedName("status")
     var status: DatabaseStatus?,
 
     /**
+     * Underlying engine of the dedicated backing: postgresql, mysql, mariadb, or mongodb. A managed product (tablesdb, documentsdb, vectorsdb) reports the engine it runs on, so its type and engine can differ. Null when the database has no dedicated backing.
+     */
+    @SerializedName("engine")
+    var engine: String?,
+
+    /**
+     * Compute specification identifier of the dedicated backing, e.g. s-2vcpu-2gb. Null when the database has no dedicated backing.
+     */
+    @SerializedName("specification")
+    var specification: String?,
+
+    /**
+     * Number of secondary high availability replicas, excluding the primary. Null when backing configuration is unavailable.
+     */
+    @SerializedName("replicas")
+    var replicas: Long?,
+
+    /**
      * Database backup policies.
      */
     @SerializedName("policies")
-    val policies: List<BackupPolicy>,
+    var policies: List<BackupPolicy>?,
 
     /**
      * Database backup archives.
      */
     @SerializedName("archives")
-    val archives: List<BackupArchive>,
+    var archives: List<BackupArchive>?,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -72,8 +90,11 @@ data class Database(
         "enabled" to enabled as Any,
         "type" to type.value as Any,
         "status" to status?.value as Any?,
-        "policies" to policies.map { it.toMap() } as Any,
-        "archives" to archives.map { it.toMap() } as Any,
+        "engine" to engine as Any?,
+        "specification" to specification as Any?,
+        "replicas" to replicas as Any?,
+        "policies" to policies?.map { it.toMap() } as Any?,
+        "archives" to archives?.map { it.toMap() } as Any?,
     )
 
     companion object {
@@ -89,8 +110,11 @@ data class Database(
             enabled = map["enabled"] as Boolean,
             type = DatabaseType.values().find { it.value == map["type"] as String }!!,
             status = DatabaseStatus.values().find { it.value == (map["status"] as? String) },
-            policies = (map["policies"] as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
-            archives = (map["archives"] as List<Map<String, Any>>).map { BackupArchive.from(map = it) },
+            engine = map["engine"] as? String,
+            specification = map["specification"] as? String,
+            replicas = (map["replicas"] as? Number)?.toLong(),
+            policies = (map["policies"] as? List<Map<String, Any>>)?.map { BackupPolicy.from(map = it) },
+            archives = (map["archives"] as? List<Map<String, Any>>)?.map { BackupArchive.from(map = it) },
         )
     }
 }
