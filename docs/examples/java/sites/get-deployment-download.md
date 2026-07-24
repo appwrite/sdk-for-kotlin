@@ -15,6 +15,7 @@ sites.getDeploymentDownload(
     "<SITE_ID>", // siteId
     "<DEPLOYMENT_ID>", // deploymentId
     DeploymentDownloadType.SOURCE, // type (optional)
+    "<TOKEN>", // token (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

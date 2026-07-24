@@ -730,6 +730,7 @@ class Sites(client: Client) : Service(client) {
      * @param siteId Site ID.
      * @param deploymentId Deployment ID.
      * @param type Deployment file to download. Can be: "source", "output".
+     * @param token Presigned source-download token for accessing this deployment without a session (jobs-service).
      * @return [ByteArray]
      */
     @JvmOverloads
@@ -738,6 +739,7 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
         type: io.appwrite.enums.DeploymentDownloadType? = null,
+        token: String? = null,
     ): ByteArray {
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/download"
             .replace("{siteId}", siteId)
@@ -746,6 +748,7 @@ class Sites(client: Client) : Service(client) {
 
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
+            "token" to token,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

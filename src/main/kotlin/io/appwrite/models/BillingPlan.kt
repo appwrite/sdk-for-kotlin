@@ -81,6 +81,12 @@ data class BillingPlan(
     val webhooks: Long,
 
     /**
+     * Maximum WAF rules per project
+     */
+    @SerializedName("wafRules")
+    val wafRules: Long,
+
+    /**
      * Projects
      */
     @SerializedName("projects")
@@ -430,6 +436,7 @@ data class BillingPlan(
         "screenshotsGenerated" to screenshotsGenerated as Any,
         "members" to members as Any,
         "webhooks" to webhooks as Any,
+        "wafRules" to wafRules as Any,
         "projects" to projects as Any,
         "platforms" to platforms as Any,
         "users" to users as Any,
@@ -506,6 +513,7 @@ data class BillingPlan(
             screenshotsGenerated = (map["screenshotsGenerated"] as Number).toLong(),
             members = (map["members"] as Number).toLong(),
             webhooks = (map["webhooks"] as Number).toLong(),
+            wafRules = (map["wafRules"] as Number).toLong(),
             projects = (map["projects"] as Number).toLong(),
             platforms = (map["platforms"] as Number).toLong(),
             users = (map["users"] as Number).toLong(),

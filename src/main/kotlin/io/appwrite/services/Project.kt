@@ -588,6 +588,7 @@ class Project(client: Client) : Service(client) {
      * @param refreshTokenDuration Refresh token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 1 year.
      * @param publicAccessTokenDuration Access token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 1 hour.
      * @param publicRefreshTokenDuration Refresh token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 30 days.
+     * @param installationAccessTokenDuration Access token duration in seconds for app installation access tokens. Leave empty to use default 1 hour.
      * @param confidentialPkce When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
      * @param verificationUrl URL to your application page where users enter the device flow user code. Required to enable the Device Authorization Grant.
      * @param userCodeLength Number of characters in the device flow user code, excluding the formatting separator. Shorter codes are easier to type but weaker; pair short codes with short expiry. Leave empty to use default 8.
@@ -607,6 +608,7 @@ class Project(client: Client) : Service(client) {
         refreshTokenDuration: Long? = null,
         publicAccessTokenDuration: Long? = null,
         publicRefreshTokenDuration: Long? = null,
+        installationAccessTokenDuration: Long? = null,
         confidentialPkce: Boolean? = null,
         verificationUrl: String? = null,
         userCodeLength: Long? = null,
@@ -626,6 +628,7 @@ class Project(client: Client) : Service(client) {
             "refreshTokenDuration" to refreshTokenDuration,
             "publicAccessTokenDuration" to publicAccessTokenDuration,
             "publicRefreshTokenDuration" to publicRefreshTokenDuration,
+            "installationAccessTokenDuration" to installationAccessTokenDuration,
             "confidentialPkce" to confidentialPkce,
             "verificationUrl" to verificationUrl,
             "userCodeLength" to userCodeLength,

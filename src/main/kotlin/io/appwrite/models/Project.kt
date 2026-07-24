@@ -170,6 +170,12 @@ data class Project(
     val consoleAccessedAt: String,
 
     /**
+     * Whether WAF enforcement is enabled for the project.
+     */
+    @SerializedName("wafEnabled")
+    val wafEnabled: Boolean,
+
+    /**
      * Billing limits reached
      */
     @SerializedName("billingLimits")
@@ -228,6 +234,12 @@ data class Project(
      */
     @SerializedName("oAuth2ServerPublicRefreshTokenDuration")
     var oAuth2ServerPublicRefreshTokenDuration: Long?,
+
+    /**
+     * OAuth2 server access token duration in seconds for app installation access tokens
+     */
+    @SerializedName("oAuth2ServerInstallationAccessTokenDuration")
+    var oAuth2ServerInstallationAccessTokenDuration: Long?,
 
     /**
      * When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
@@ -294,6 +306,7 @@ data class Project(
         "protocols" to protocols.map { it.toMap() } as Any,
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
+        "wafEnabled" to wafEnabled as Any,
         "billingLimits" to billingLimits?.toMap() as Any?,
         "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any?,
         "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
@@ -304,6 +317,7 @@ data class Project(
         "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any?,
         "oAuth2ServerPublicAccessTokenDuration" to oAuth2ServerPublicAccessTokenDuration as Any?,
         "oAuth2ServerPublicRefreshTokenDuration" to oAuth2ServerPublicRefreshTokenDuration as Any?,
+        "oAuth2ServerInstallationAccessTokenDuration" to oAuth2ServerInstallationAccessTokenDuration as Any?,
         "oAuth2ServerConfidentialPkce" to oAuth2ServerConfidentialPkce as Any?,
         "oAuth2ServerVerificationUrl" to oAuth2ServerVerificationUrl as Any?,
         "oAuth2ServerUserCodeLength" to oAuth2ServerUserCodeLength as Any?,
@@ -345,6 +359,7 @@ data class Project(
             protocols = (map["protocols"] as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
             blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
             consoleAccessedAt = map["consoleAccessedAt"] as String,
+            wafEnabled = map["wafEnabled"] as Boolean,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as? Boolean,
             oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,
@@ -355,6 +370,7 @@ data class Project(
             oAuth2ServerRefreshTokenDuration = (map["oAuth2ServerRefreshTokenDuration"] as? Number)?.toLong(),
             oAuth2ServerPublicAccessTokenDuration = (map["oAuth2ServerPublicAccessTokenDuration"] as? Number)?.toLong(),
             oAuth2ServerPublicRefreshTokenDuration = (map["oAuth2ServerPublicRefreshTokenDuration"] as? Number)?.toLong(),
+            oAuth2ServerInstallationAccessTokenDuration = (map["oAuth2ServerInstallationAccessTokenDuration"] as? Number)?.toLong(),
             oAuth2ServerConfidentialPkce = map["oAuth2ServerConfidentialPkce"] as? Boolean,
             oAuth2ServerVerificationUrl = map["oAuth2ServerVerificationUrl"] as? String,
             oAuth2ServerUserCodeLength = (map["oAuth2ServerUserCodeLength"] as? Number)?.toLong(),

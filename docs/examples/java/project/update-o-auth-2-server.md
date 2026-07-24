@@ -19,6 +19,7 @@ project.updateOAuth2Server(
     60, // refreshTokenDuration (optional)
     60, // publicAccessTokenDuration (optional)
     60, // publicRefreshTokenDuration (optional)
+    60, // installationAccessTokenDuration (optional)
     false, // confidentialPkce (optional)
     "https://example.com", // verificationUrl (optional)
     6, // userCodeLength (optional)

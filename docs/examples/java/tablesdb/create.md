@@ -15,6 +15,7 @@ tablesDB.create(
     "<NAME>", // name
     false, // enabled (optional)
     "serverless", // specification (optional)
+    0, // replicas (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

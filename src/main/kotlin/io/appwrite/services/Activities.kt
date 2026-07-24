@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The Activities service allows you to list and inspect project activity events.
 **/
 class Activities(client: Client) : Service(client) {
 

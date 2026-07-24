@@ -193,6 +193,10 @@ enum class ProjectKeyScopes(val value: String) {
     DOMAINS_READ("domains.read"),
     @SerializedName("domains.write")
     DOMAINS_WRITE("domains.write"),
+    @SerializedName("wafRules.read")
+    WAFRULES_READ("wafRules.read"),
+    @SerializedName("wafRules.write")
+    WAFRULES_WRITE("wafRules.write"),
     @SerializedName("events.read")
     EVENTS_READ("events.read"),
     @SerializedName("apps.read")
@@ -203,6 +207,8 @@ enum class ProjectKeyScopes(val value: String) {
     OAUTH2_READ("oauth2.read"),
     @SerializedName("oauth2.write")
     OAUTH2_WRITE("oauth2.write"),
+    @SerializedName("oauth2.introspect")
+    OAUTH2_INTROSPECT("oauth2.introspect"),
     @SerializedName("usage.read")
     USAGE_READ("usage.read");
 

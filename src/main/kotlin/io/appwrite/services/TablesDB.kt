@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The TablesDB service allows you to create structured tables of columns, query and filter lists of rows
 **/
 class TablesDB(client: Client) : Service(client) {
 
@@ -61,6 +61,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @param specification Database specification. Defaults to `serverless`, which creates the database on the shared pool. Any other value provisions a dedicated database on that specification.
+     * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Requires a dedicated `specification`; must be 0 for a serverless database. High availability is enabled when greater than 0.
      * @return [io.appwrite.models.Database]
      */
     @JvmOverloads
@@ -70,6 +71,7 @@ class TablesDB(client: Client) : Service(client) {
         name: String,
         enabled: Boolean? = null,
         specification: String? = null,
+        replicas: Long? = null,
     ): io.appwrite.models.Database {
         val apiPath = ("/tablesdb"
         )
@@ -79,6 +81,7 @@ class TablesDB(client: Client) : Service(client) {
             "name" to name,
             "enabled" to enabled,
             "specification" to specification,
+            "replicas" to replicas,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -94,6 +97,36 @@ class TablesDB(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.Database::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, pricing, and whether it is enabled for the organization.
+     *
+     * @return [io.appwrite.models.DedicatedDatabaseSpecificationList]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listSpecifications(
+    ): io.appwrite.models.DedicatedDatabaseSpecificationList {
+        val apiPath = ("/tablesdb/specifications"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabaseSpecificationList = {
+            io.appwrite.models.DedicatedDatabaseSpecificationList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DedicatedDatabaseSpecificationList::class.java,
             converter,
         )
     }
@@ -347,6 +380,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification. High availability is enabled when greater than 0.
      * @return [io.appwrite.models.Database]
      */
     @JvmOverloads
@@ -355,6 +389,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         name: String? = null,
         enabled: Boolean? = null,
+        replicas: Long? = null,
     ): io.appwrite.models.Database {
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
@@ -363,6 +398,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "replicas" to replicas,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -408,6 +444,110 @@ class TablesDB(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Trigger a manual failover for a dedicated database with high availability enabled. Promotes a replica to primary. The failover runs asynchronously; poll the database document for status updates.
+     *
+     * @param databaseId Database ID.
+     * @param targetReplicaId Target replica ID to promote. If not specified, the healthiest replica is selected.
+     * @return [io.appwrite.models.DedicatedDatabase]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createFailover(
+        databaseId: String,
+        targetReplicaId: String? = null,
+    ): io.appwrite.models.DedicatedDatabase {
+        val apiPath = ("/tablesdb/{databaseId}/failovers"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "targetReplicaId" to targetReplicaId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabase = {
+            io.appwrite.models.DedicatedDatabase.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DedicatedDatabase::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get high availability status for a dedicated database. Returns replica statuses, replication lag, and sync mode.
+     *
+     * @param databaseId Database ID.
+     * @return [io.appwrite.models.DedicatedDatabaseReplicas]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getReplicas(
+        databaseId: String,
+    ): io.appwrite.models.DedicatedDatabaseReplicas {
+        val apiPath = ("/tablesdb/{databaseId}/replicas"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabaseReplicas = {
+            io.appwrite.models.DedicatedDatabaseReplicas.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DedicatedDatabaseReplicas::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get real-time health and status information for a dedicated database. Returns health status, readiness, uptime, connection info, replica status, and volume information.
+     *
+     * @param databaseId Database ID.
+     * @return [io.appwrite.models.DatabaseStatus]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getStatus(
+        databaseId: String,
+    ): io.appwrite.models.DatabaseStatus {
+        val apiPath = ("/tablesdb/{databaseId}/status"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseStatus = {
+            io.appwrite.models.DatabaseStatus.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseStatus::class.java,
+            converter,
         )
     }
 
