@@ -26,12 +26,6 @@ data class DedicatedDatabaseSpecificationPricing(
     val replicaRate: Double,
 
     /**
-     * Cross-region replica price as a fraction of the specification cost.
-     */
-    @SerializedName("crossRegionReplicaRate")
-    val crossRegionReplicaRate: Double,
-
-    /**
      * Point-in-time recovery price as a fraction of the specification cost.
      */
     @SerializedName("pitrRate")
@@ -42,7 +36,6 @@ data class DedicatedDatabaseSpecificationPricing(
         "storageOverageRate" to storageOverageRate as Any,
         "bandwidthOverageRate" to bandwidthOverageRate as Any,
         "replicaRate" to replicaRate as Any,
-        "crossRegionReplicaRate" to crossRegionReplicaRate as Any,
         "pitrRate" to pitrRate as Any,
     )
 
@@ -55,7 +48,6 @@ data class DedicatedDatabaseSpecificationPricing(
             storageOverageRate = (map["storageOverageRate"] as Number).toDouble(),
             bandwidthOverageRate = (map["bandwidthOverageRate"] as Number).toDouble(),
             replicaRate = (map["replicaRate"] as Number).toDouble(),
-            crossRegionReplicaRate = (map["crossRegionReplicaRate"] as Number).toDouble(),
             pitrRate = (map["pitrRate"] as Number).toDouble(),
         )
     }

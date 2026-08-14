@@ -11,7 +11,7 @@ Client client = new Client()
 Activities activities = new Activities(client);
 
 activities.listEvents(
-    "", // queries (optional)
+    List.of(), // queries (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

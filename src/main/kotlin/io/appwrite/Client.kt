@@ -64,12 +64,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/19.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/20.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "19.1.0",
-            "x-appwrite-response-format" to "1.9.5",
+            "x-sdk-version" to "20.0.0",
+            "x-appwrite-response-format" to "1.9.6",
         )
 
         config = mutableMapOf()
@@ -103,6 +103,21 @@ class Client @JvmOverloads constructor(
     fun setKey(value: String): Client {
         config["key"] = value
         addHeader("x-appwrite-key", value)
+        return this
+    }
+
+    /**
+     * Set Organization
+     *
+     * Your organization ID
+     *
+     * @param {string} organization
+     *
+     * @return this
+     */
+    fun setOrganization(value: String): Client {
+        config["organization"] = value
+        addHeader("x-appwrite-organization", value)
         return this
     }
 

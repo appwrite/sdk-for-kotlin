@@ -44,7 +44,7 @@ data class DedicatedDatabase(
     val api: String,
 
     /**
-     * Database engine: postgresql, mysql, mariadb, or mongodb.
+     * Database engine: postgresql, mysql, or mongodb. Null until the backing reports one.
      */
     @SerializedName("engine")
     val engine: String,
@@ -74,7 +74,7 @@ data class DedicatedDatabase(
     val hostname: String,
 
     /**
-     * Database port for connections.
+     * Database port for connections. Derived from the engine when the backing has not reported one yet.
      */
     @SerializedName("connectionPort")
     val connectionPort: Long,
@@ -188,13 +188,7 @@ data class DedicatedDatabase(
     val syncMode: String,
 
     /**
-     * Number of cross-region replicas. Cross-region availability is enabled when greater than 0.
-     */
-    @SerializedName("crossRegionReplicas")
-    val crossRegionReplicas: Long,
-
-    /**
-     * Maximum concurrent connections.
+     * Maximum concurrent client connections. This is the limit a client pool may reach; the engine's own max_connections reported by the status endpoint is a smaller backend limit the pooler multiplexes onto and does not constrain a client pool.
      */
     @SerializedName("networkMaxConnections")
     val networkMaxConnections: Long,
@@ -333,7 +327,6 @@ data class DedicatedDatabase(
         "nodePool" to nodePool as Any,
         "replicas" to replicas as Any,
         "syncMode" to syncMode as Any,
-        "crossRegionReplicas" to crossRegionReplicas as Any,
         "networkMaxConnections" to networkMaxConnections as Any,
         "networkIdleTimeoutSeconds" to networkIdleTimeoutSeconds as Any,
         "networkIPAllowlist" to networkIPAllowlist as Any,
@@ -390,7 +383,6 @@ data class DedicatedDatabase(
             nodePool = map["nodePool"] as String,
             replicas = (map["replicas"] as Number).toLong(),
             syncMode = map["syncMode"] as String,
-            crossRegionReplicas = (map["crossRegionReplicas"] as Number).toLong(),
             networkMaxConnections = (map["networkMaxConnections"] as Number).toLong(),
             networkIdleTimeoutSeconds = (map["networkIdleTimeoutSeconds"] as Number).toLong(),
             networkIPAllowlist = map["networkIPAllowlist"] as List<String>,

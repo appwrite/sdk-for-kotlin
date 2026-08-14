@@ -22,7 +22,7 @@ class Activities(client: Client) : Service(client) {
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listEvents(
-        queries: String? = null,
+        queries: List<String>? = null,
     ): io.appwrite.models.ActivityEventList {
         val apiPath = ("/activities/events"
         )

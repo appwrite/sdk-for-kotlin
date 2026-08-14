@@ -206,6 +206,12 @@ data class Project(
     var oAuth2ServerDefaultScopes: List<String>?,
 
     /**
+     * Scopes an application may request when installed on a team
+     */
+    @SerializedName("oAuth2ServerInstallationScopes")
+    var oAuth2ServerInstallationScopes: List<String>?,
+
+    /**
      * OAuth2 server accepted RFC 9396 authorization_details types
      */
     @SerializedName("oAuth2ServerAuthorizationDetailsTypes")
@@ -312,6 +318,7 @@ data class Project(
         "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
         "oAuth2ServerScopes" to oAuth2ServerScopes as Any?,
         "oAuth2ServerDefaultScopes" to oAuth2ServerDefaultScopes as Any?,
+        "oAuth2ServerInstallationScopes" to oAuth2ServerInstallationScopes as Any?,
         "oAuth2ServerAuthorizationDetailsTypes" to oAuth2ServerAuthorizationDetailsTypes as Any?,
         "oAuth2ServerAccessTokenDuration" to oAuth2ServerAccessTokenDuration as Any?,
         "oAuth2ServerRefreshTokenDuration" to oAuth2ServerRefreshTokenDuration as Any?,
@@ -365,6 +372,7 @@ data class Project(
             oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,
             oAuth2ServerScopes = map["oAuth2ServerScopes"] as? List<String>,
             oAuth2ServerDefaultScopes = map["oAuth2ServerDefaultScopes"] as? List<String>,
+            oAuth2ServerInstallationScopes = map["oAuth2ServerInstallationScopes"] as? List<String>,
             oAuth2ServerAuthorizationDetailsTypes = map["oAuth2ServerAuthorizationDetailsTypes"] as? List<String>,
             oAuth2ServerAccessTokenDuration = (map["oAuth2ServerAccessTokenDuration"] as? Number)?.toLong(),
             oAuth2ServerRefreshTokenDuration = (map["oAuth2ServerRefreshTokenDuration"] as? Number)?.toLong(),

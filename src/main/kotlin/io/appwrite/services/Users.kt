@@ -1315,6 +1315,42 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
+     * Get a custom MFA challenge for a user, including the code to be delivered through your own channel.
+     *
+     * @param userId User ID.
+     * @param challengeId ID of the challenge.
+     * @return [io.appwrite.models.MfaChallengeSecret]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getMFAChallenge(
+        userId: String,
+        challengeId: String,
+    ): io.appwrite.models.MfaChallengeSecret {
+        val apiPath = ("/users/{userId}/mfa/challenges/{challengeId}"
+            .replace("{userId}", userId)
+            .replace("{challengeId}", challengeId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MfaChallengeSecret = {
+            io.appwrite.models.MfaChallengeSecret.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MfaChallengeSecret::class.java,
+            converter,
+        )
+    }
+
+    /**
      * List the factors available on the account to be used as a MFA challange.
      *
      * @param userId User ID.

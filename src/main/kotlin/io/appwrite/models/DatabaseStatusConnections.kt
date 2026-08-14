@@ -14,7 +14,7 @@ data class DatabaseStatusConnections(
     val current: Long,
 
     /**
-     * Maximum allowed connections.
+     * The engine's own max_connections. On a pooled database this is the backend limit the pooler multiplexes onto, not the ceiling a client pool may reach — that is networkMaxConnections on the database resource.
      */
     @SerializedName("max")
     val max: Long,

@@ -9,7 +9,7 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
+ * The Apps service allows you to manage OAuth2 applications, their keys, secrets, scopes, and installations.
 **/
 class Apps(client: Client) : Service(client) {
 
@@ -202,7 +202,7 @@ class Apps(client: Client) : Service(client) {
     /**
      * Get an application by its unique ID.
      *
-     * @param appId Application unique ID or HTTPS client ID metadata document URL.
+     * @param appId Application unique ID.
      * @return [io.appwrite.models.App]
      */
     @Throws(AppwriteException::class)
@@ -253,7 +253,7 @@ class Apps(client: Client) : Service(client) {
      * @param postLogoutRedirectUris Post-logout redirect URIs for OpenID Connect RP-Initiated Logout. Each must be an https URL, an http loopback URL, or a private-use scheme URI, and must not contain a fragment. After ending the user session, the logout endpoint only redirects to URIs in this list.
      * @param type OAuth2 client type. Use `public` for SPAs, mobile, and native apps that cannot keep a `client_secret` — PKCE is then required at the token endpoint. Use `confidential` for server-side clients that present a `client_secret`. Defaults to `confidential`.
      * @param deviceFlow Allow this client to use the OAuth2 Device Authorization Grant (RFC 8628) for input-constrained devices such as TVs and CLIs. Defaults to false.
-     * @param installationScopes Scopes the application requests when installed on a team. Organization-level and project-level scopes only; use the list scopes endpoint with `type=installation` to discover available values. Maximum of 100 scopes are allowed.
+     * @param installationScopes Scopes the application requests when installed on a team. Only scopes allowed by the project's OAuth2 server installation scopes configuration are accepted; use the list installation scopes endpoint to discover available values. Maximum of 100 scopes are allowed.
      * @param installationRedirectUrl URL users are redirected to after creating or updating an installation of this application. Must be an https URL, an http loopback URL (localhost, 127.0.0.1, [::1]), or a private-use scheme URI, and must not contain a fragment. Leave empty for no redirect.
      * @return [io.appwrite.models.App]
      */
@@ -355,7 +355,7 @@ class Apps(client: Client) : Service(client) {
     }
 
     /**
-     * List installations of an application. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header.
+     * List installations of an application. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header, or a caller with update access to the app.
      *
      * @param appId Application unique ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
@@ -395,7 +395,7 @@ class Apps(client: Client) : Service(client) {
     }
 
     /**
-     * Get an installation of an application by its unique ID. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header.
+     * Get an installation of an application by its unique ID. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header, or a caller with update access to the app.
      *
      * @param appId Application unique ID.
      * @param installationId Installation unique ID.
@@ -431,7 +431,40 @@ class Apps(client: Client) : Service(client) {
     }
 
     /**
-     * Create a token for an installation of an application. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header. The returned token carries the scopes and authorization details granted to the installation, and can be used as an `Authorization: Bearer` header everywhere OAuth2 access tokens are accepted. Multiple tokens can be active for the same installation at once; each token stays valid until it expires or the installation is updated or deleted.
+     * Delete an installation of an application by its unique ID. Requires a caller with update access to the app. Previously issued installation access tokens are revoked.
+     *
+     * @param appId Application unique ID.
+     * @param installationId Installation unique ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteInstallation(
+        appId: String,
+        installationId: String,
+    ): Any {
+        val apiPath = ("/apps/{appId}/installations/{installationId}"
+            .replace("{appId}", appId)
+            .replace("{installationId}", installationId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Create a token for an installation of an application. Requires an app key sent in the `X-Appwrite-Key` header alongside the `X-Appwrite-App` header, or a caller with update access to the app. The returned token carries the scopes and authorization details granted to the installation, and can be used as an `Authorization: Bearer` header everywhere OAuth2 access tokens are accepted. Multiple tokens can be active for the same installation at once; each token stays valid until it expires or the installation is updated or deleted.
      *
      * @param appId Application unique ID.
      * @param installationId Installation unique ID.

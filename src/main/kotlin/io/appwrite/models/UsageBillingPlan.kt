@@ -23,7 +23,7 @@ data class UsageBillingPlan(
      * Member additional resources
      */
     @SerializedName("member")
-    val member: AdditionalResource,
+    var member: AdditionalResource?,
 
     /**
      * Realtime additional resources
@@ -41,7 +41,7 @@ data class UsageBillingPlan(
      * Realtime bandwidth additional resources
      */
     @SerializedName("realtimeBandwidth")
-    val realtimeBandwidth: AdditionalResource,
+    var realtimeBandwidth: AdditionalResource?,
 
     /**
      * Storage additional resources
@@ -71,21 +71,21 @@ data class UsageBillingPlan(
      * Credits additional resources
      */
     @SerializedName("credits")
-    val credits: AdditionalResource,
+    var credits: AdditionalResource?,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "bandwidth" to bandwidth.toMap() as Any,
         "executions" to executions.toMap() as Any,
-        "member" to member.toMap() as Any,
+        "member" to member?.toMap() as Any?,
         "realtime" to realtime.toMap() as Any,
         "realtimeMessages" to realtimeMessages.toMap() as Any,
-        "realtimeBandwidth" to realtimeBandwidth.toMap() as Any,
+        "realtimeBandwidth" to realtimeBandwidth?.toMap() as Any?,
         "storage" to storage.toMap() as Any,
         "users" to users.toMap() as Any,
         "GBHours" to GBHours.toMap() as Any,
         "imageTransformations" to imageTransformations.toMap() as Any,
-        "credits" to credits.toMap() as Any,
+        "credits" to credits?.toMap() as Any?,
     )
 
     companion object {
@@ -96,15 +96,15 @@ data class UsageBillingPlan(
         ) = UsageBillingPlan(
             bandwidth = AdditionalResource.from(map = map["bandwidth"] as Map<String, Any>),
             executions = AdditionalResource.from(map = map["executions"] as Map<String, Any>),
-            member = AdditionalResource.from(map = map["member"] as Map<String, Any>),
+            member = (map["member"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
             realtime = AdditionalResource.from(map = map["realtime"] as Map<String, Any>),
             realtimeMessages = AdditionalResource.from(map = map["realtimeMessages"] as Map<String, Any>),
-            realtimeBandwidth = AdditionalResource.from(map = map["realtimeBandwidth"] as Map<String, Any>),
+            realtimeBandwidth = (map["realtimeBandwidth"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
             storage = AdditionalResource.from(map = map["storage"] as Map<String, Any>),
             users = AdditionalResource.from(map = map["users"] as Map<String, Any>),
             GBHours = AdditionalResource.from(map = map["GBHours"] as Map<String, Any>),
             imageTransformations = AdditionalResource.from(map = map["imageTransformations"] as Map<String, Any>),
-            credits = AdditionalResource.from(map = map["credits"] as Map<String, Any>),
+            credits = (map["credits"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
         )
     }
 }

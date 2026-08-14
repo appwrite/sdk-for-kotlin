@@ -23,6 +23,8 @@ enum class Runtime(val value: String) {
     NODE_24("node-24"),
     @SerializedName("node-25")
     NODE_25("node-25"),
+    @SerializedName("node-26")
+    NODE_26("node-26"),
     @SerializedName("php-8.0")
     PHP_8_0("php-8.0"),
     @SerializedName("php-8.1")

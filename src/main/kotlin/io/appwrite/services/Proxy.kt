@@ -14,6 +14,49 @@ import java.io.File
 class Proxy(client: Client) : Service(client) {
 
     /**
+     * Create a new CDN cache invalidation for a domain. Executes a hard purge of cached content.
+     * 
+     * Depending on type, the invalidation purges a single cache tag, a single URL path, or all cached content for the domain.
+     *
+     * @param domain Domain name.
+     * @param type Type of reference passed. Allowed values are: tag, path, all
+     * @param reference Reference to invalidate. Depending on type this can be: cache tag name (up to 128 characters), URL path (up to 2048 characters). Not required when type is all.
+     * @return [io.appwrite.models.ProxyInvalidation]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createInvalidation(
+        domain: String,
+        type: io.appwrite.enums.InvalidationType,
+        reference: String? = null,
+    ): io.appwrite.models.ProxyInvalidation {
+        val apiPath = ("/proxy/invalidations"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "domain" to domain,
+            "type" to type,
+            "reference" to reference,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ProxyInvalidation = {
+            io.appwrite.models.ProxyInvalidation.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ProxyInvalidation::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get a list of all the proxy rules. You can use the query params to filter your results.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: domain, type, trigger, deploymentResourceType, deploymentResourceId, deploymentId, deploymentVcsProviderBranch

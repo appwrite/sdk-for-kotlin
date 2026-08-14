@@ -1,20 +1,18 @@
 ```kotlin
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.services.Project
-import io.appwrite.enums.ProjectKeyScopes
+import io.appwrite.services.TablesDB
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>") // Your secret API key
 
-val project = Project(client)
+val tablesDB = TablesDB(client)
 
-val response = project.createKey(
-    keyId = "<KEY_ID>",
-    name = "<NAME>",
-    scopes = listOf(ProjectKeyScopes.PROJECT_READ),
-    expire = "2020-10-15T06:38:00.000+00:00" // optional
+val response = tablesDB.createMigration(
+    databaseId = "<DATABASE_ID>",
+    specification = "s-1vcpu-1gb",
+    autoCutover = false // optional
 )
 ```

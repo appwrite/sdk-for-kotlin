@@ -25,6 +25,7 @@ val response = project.updateOAuth2Server(
     userCodeLength = 6, // optional
     userCodeFormat = "numeric", // optional
     deviceCodeDuration = 60, // optional
-    defaultScopes = listOf() // optional
+    defaultScopes = listOf(), // optional
+    installationScopes = listOf() // optional
 )
 ```

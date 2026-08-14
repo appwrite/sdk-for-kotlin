@@ -11,6 +11,6 @@ val client = Client()
 val project = Project(client)
 
 val response = project.updateSessionDurationPolicy(
-    duration = 5
+    duration = 60
 )
 ```

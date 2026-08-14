@@ -71,6 +71,8 @@ enum class ProjectKeyScopes(val value: String) {
     ROWS_READ("rows.read"),
     @SerializedName("rows.write")
     ROWS_WRITE("rows.write"),
+    @SerializedName("embeddings.write")
+    EMBEDDINGS_WRITE("embeddings.write"),
     @SerializedName("collections.read")
     COLLECTIONS_READ("collections.read"),
     @SerializedName("collections.write")
@@ -199,6 +201,8 @@ enum class ProjectKeyScopes(val value: String) {
     WAFRULES_WRITE("wafRules.write"),
     @SerializedName("events.read")
     EVENTS_READ("events.read"),
+    @SerializedName("proxy.invalidations.write")
+    PROXY_INVALIDATIONS_WRITE("proxy.invalidations.write"),
     @SerializedName("apps.read")
     APPS_READ("apps.read"),
     @SerializedName("apps.write")

@@ -11,6 +11,6 @@ val client = Client()
 val project = Project(client)
 
 val response = project.updateUserLimitPolicy(
-    total = 1
+    total = 0
 )
 ```
