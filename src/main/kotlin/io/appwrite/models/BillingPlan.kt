@@ -72,7 +72,7 @@ data class BillingPlan(
      * Members
      */
     @SerializedName("members")
-    val members: Long,
+    var members: Long?,
 
     /**
      * Webhooks
@@ -216,7 +216,7 @@ data class BillingPlan(
      * Activity log days
      */
     @SerializedName("activityLogs")
-    val activityLogs: Long,
+    var activityLogs: Long?,
 
     /**
      * Usage history days
@@ -360,7 +360,7 @@ data class BillingPlan(
      * Does plan support backup policies.
      */
     @SerializedName("backupsEnabled")
-    val backupsEnabled: Boolean,
+    var backupsEnabled: Boolean?,
 
     /**
      * Whether usage addons are calculated per project.
@@ -378,7 +378,7 @@ data class BillingPlan(
      * How many policies does plan support
      */
     @SerializedName("backupPolicies")
-    val backupPolicies: Long,
+    var backupPolicies: Long?,
 
     /**
      * Maximum function and site deployment size in MB
@@ -434,7 +434,7 @@ data class BillingPlan(
         "storage" to storage as Any,
         "imageTransformations" to imageTransformations as Any,
         "screenshotsGenerated" to screenshotsGenerated as Any,
-        "members" to members as Any,
+        "members" to members as Any?,
         "webhooks" to webhooks as Any,
         "wafRules" to wafRules as Any,
         "projects" to projects as Any,
@@ -458,7 +458,7 @@ data class BillingPlan(
         "topics" to topics as Any,
         "authPhone" to authPhone as Any,
         "domains" to domains as Any,
-        "activityLogs" to activityLogs as Any,
+        "activityLogs" to activityLogs as Any?,
         "usageLogs" to usageLogs as Any,
         "usageLogsIntervals" to usageLogsIntervals as Any?,
         "projectInactivityDays" to projectInactivityDays as Any,
@@ -482,10 +482,10 @@ data class BillingPlan(
         "supportsFreeEmailValidation" to supportsFreeEmailValidation as Any,
         "supportsCorporateEmailValidation" to supportsCorporateEmailValidation as Any,
         "supportsProjectSpecificRoles" to supportsProjectSpecificRoles as Any,
-        "backupsEnabled" to backupsEnabled as Any,
+        "backupsEnabled" to backupsEnabled as Any?,
         "usagePerProject" to usagePerProject as Any,
         "supportedAddons" to supportedAddons.toMap() as Any,
-        "backupPolicies" to backupPolicies as Any,
+        "backupPolicies" to backupPolicies as Any?,
         "deploymentSize" to deploymentSize as Any,
         "buildSize" to buildSize as Any,
         "databasesAllowEncrypt" to databasesAllowEncrypt as Any,
@@ -511,7 +511,7 @@ data class BillingPlan(
             storage = (map["storage"] as Number).toLong(),
             imageTransformations = (map["imageTransformations"] as Number).toLong(),
             screenshotsGenerated = (map["screenshotsGenerated"] as Number).toLong(),
-            members = (map["members"] as Number).toLong(),
+            members = (map["members"] as? Number)?.toLong(),
             webhooks = (map["webhooks"] as Number).toLong(),
             wafRules = (map["wafRules"] as Number).toLong(),
             projects = (map["projects"] as Number).toLong(),
@@ -535,7 +535,7 @@ data class BillingPlan(
             topics = (map["topics"] as Number).toLong(),
             authPhone = (map["authPhone"] as Number).toLong(),
             domains = (map["domains"] as Number).toLong(),
-            activityLogs = (map["activityLogs"] as Number).toLong(),
+            activityLogs = (map["activityLogs"] as? Number)?.toLong(),
             usageLogs = (map["usageLogs"] as Number).toLong(),
             usageLogsIntervals = map["usageLogsIntervals"] as? List<String>,
             projectInactivityDays = (map["projectInactivityDays"] as Number).toLong(),
@@ -559,10 +559,10 @@ data class BillingPlan(
             supportsFreeEmailValidation = map["supportsFreeEmailValidation"] as Boolean,
             supportsCorporateEmailValidation = map["supportsCorporateEmailValidation"] as Boolean,
             supportsProjectSpecificRoles = map["supportsProjectSpecificRoles"] as Boolean,
-            backupsEnabled = map["backupsEnabled"] as Boolean,
+            backupsEnabled = map["backupsEnabled"] as? Boolean,
             usagePerProject = map["usagePerProject"] as Boolean,
             supportedAddons = BillingPlanSupportedAddons.from(map = map["supportedAddons"] as Map<String, Any>),
-            backupPolicies = (map["backupPolicies"] as Number).toLong(),
+            backupPolicies = (map["backupPolicies"] as? Number)?.toLong(),
             deploymentSize = (map["deploymentSize"] as Number).toLong(),
             buildSize = (map["buildSize"] as Number).toLong(),
             databasesAllowEncrypt = map["databasesAllowEncrypt"] as Boolean,

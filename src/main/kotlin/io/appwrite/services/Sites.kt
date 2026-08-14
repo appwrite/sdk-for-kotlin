@@ -189,7 +189,7 @@ class Sites(client: Client) : Service(client) {
     /**
      * List allowed site specifications for this instance.
      *
-     * @param type Specification type to list. Can be one of: runtimes, builds.
+     * @param type Specification type to list. Can be one of: runtimes, builds. Defaults to runtimes.
      * @return [io.appwrite.models.SpecificationList]
      */
     @JvmOverloads
@@ -757,6 +757,7 @@ class Sites(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )

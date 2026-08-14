@@ -14,7 +14,9 @@ tablesDB.update(
     "<DATABASE_ID>", // databaseId
     "<NAME>", // name (optional)
     false, // enabled (optional)
+    "serverless", // specification (optional)
     0, // replicas (optional)
+    "async", // syncMode (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

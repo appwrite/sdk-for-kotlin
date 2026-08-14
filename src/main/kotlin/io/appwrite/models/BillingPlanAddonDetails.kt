@@ -35,7 +35,7 @@ data class BillingPlanAddonDetails(
      * Price currency
      */
     @SerializedName("currency")
-    val currency: String,
+    var currency: String?,
 
     /**
      * Price
@@ -61,7 +61,7 @@ data class BillingPlanAddonDetails(
         "planIncluded" to planIncluded as Any,
         "limit" to limit as Any,
         "type" to type as Any,
-        "currency" to currency as Any,
+        "currency" to currency as Any?,
         "price" to price as Any,
         "value" to value as Any,
         "invoiceDesc" to invoiceDesc as Any,
@@ -77,7 +77,7 @@ data class BillingPlanAddonDetails(
             planIncluded = (map["planIncluded"] as Number).toLong(),
             limit = (map["limit"] as Number).toLong(),
             type = map["type"] as String,
-            currency = map["currency"] as String,
+            currency = map["currency"] as? String,
             price = (map["price"] as Number).toDouble(),
             value = (map["value"] as Number).toLong(),
             invoiceDesc = map["invoiceDesc"] as String,

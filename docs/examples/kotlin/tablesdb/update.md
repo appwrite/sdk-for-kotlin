@@ -14,6 +14,8 @@ val response = tablesDB.update(
     databaseId = "<DATABASE_ID>",
     name = "<NAME>", // optional
     enabled = false, // optional
-    replicas = 0 // optional
+    specification = "serverless", // optional
+    replicas = 0, // optional
+    syncMode = "async" // optional
 )
 ```

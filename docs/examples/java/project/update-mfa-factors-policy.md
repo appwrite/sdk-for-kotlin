@@ -2,7 +2,6 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
-import io.appwrite.enums.ProjectKeyScopes;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,11 +10,11 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.createKey(
-    "<KEY_ID>", // keyId
-    "<NAME>", // name
-    List.of(ProjectKeyScopes.PROJECT_READ), // scopes
-    "2020-10-15T06:38:00.000+00:00", // expire (optional)
+project.updateMFAFactorsPolicy(
+    false, // totp (optional)
+    false, // email (optional)
+    false, // phone (optional)
+    false, // custom (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

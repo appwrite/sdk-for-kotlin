@@ -8,13 +8,13 @@ import io.appwrite.extensions.jsonCast
  */
 data class DatabaseStatusReplica(
     /**
-     * StatefulSet pod index (0 = primary, 1+ = replicas).
+     * Member index within the database. Read `role` for which member accepts writes: a failover moves the primary without renumbering the indexes.
      */
     @SerializedName("index")
     val index: Long,
 
     /**
-     * Replica role: primary or replica.
+     * Member role. Possible values: primary (accepts reads and writes), replica (read-only follower), unknown (placement not established; reported while a transition is moving or restarting the topology, so no member can be named the write target).
      */
     @SerializedName("role")
     val role: String,

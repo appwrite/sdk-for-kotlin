@@ -62,6 +62,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
      * @param specification Database specification. Defaults to `serverless`, which creates the database on the shared pool. Any other value provisions a dedicated database on that specification.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Requires a dedicated `specification`; must be 0 for a serverless database. High availability is enabled when greater than 0.
+     * @param syncMode Replication sync mode for the dedicated database backing this database. Requires a dedicated `specification`; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
      * @return [io.appwrite.models.Database]
      */
     @JvmOverloads
@@ -72,6 +73,7 @@ class TablesDB(client: Client) : Service(client) {
         enabled: Boolean? = null,
         specification: String? = null,
         replicas: Long? = null,
+        syncMode: String? = null,
     ): io.appwrite.models.Database {
         val apiPath = ("/tablesdb"
         )
@@ -82,6 +84,7 @@ class TablesDB(client: Client) : Service(client) {
             "enabled" to enabled,
             "specification" to specification,
             "replicas" to replicas,
+            "syncMode" to syncMode,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -380,7 +383,9 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param specification Database specification. Resizing between dedicated specifications changes cpu, memory, storage and the connection ceiling via a rolling cutover with zero downtime. Moving a `serverless` database onto a dedicated specification is a data migration, not a resize.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification. High availability is enabled when greater than 0.
+     * @param syncMode Replication sync mode for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
      * @return [io.appwrite.models.Database]
      */
     @JvmOverloads
@@ -389,7 +394,9 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         name: String? = null,
         enabled: Boolean? = null,
+        specification: String? = null,
         replicas: Long? = null,
+        syncMode: String? = null,
     ): io.appwrite.models.Database {
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
@@ -398,7 +405,9 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "specification" to specification,
             "replicas" to replicas,
+            "syncMode" to syncMode,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -448,7 +457,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Trigger a manual failover for a dedicated database with high availability enabled. Promotes a replica to primary. The failover runs asynchronously; poll the database document for status updates.
+     * Trigger a manual failover for a dedicated database with high availability enabled. Promotes a replica to primary. The failover runs asynchronously; poll the database document for status updates. A database left mid-operation by a failover that did not finish also accepts this call as a repair, provided `targetReplicaId` names the member to promote.
      *
      * @param databaseId Database ID.
      * @param targetReplicaId Target replica ID to promote. If not specified, the healthiest replica is selected.
@@ -481,6 +490,229 @@ class TablesDB(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.DedicatedDatabase::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List the dedicated migrations for a TablesDB database. A database has at most one in-flight migration.
+     *
+     * @param databaseId Database ID.
+     * @return [io.appwrite.models.DatabaseMigrationList]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun listMigrations(
+        databaseId: String,
+    ): io.appwrite.models.DatabaseMigrationList {
+        val apiPath = ("/tablesdb/{databaseId}/migrations"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseMigrationList = {
+            io.appwrite.models.DatabaseMigrationList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseMigrationList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Start migrating a serverless TablesDB database onto a dedicated MySQL compute. Data is copied to the target while the source stays live, with a brief read-only window during cutover.
+     *
+     * @param databaseId Database ID.
+     * @param specification Dedicated compute specification to provision as the migration target (e.g. s-2vcpu-4gb). The migration always targets a dedicated compute, so `serverless` is not accepted.
+     * @param autoCutover Whether to cut over automatically once the copy is verified. When disabled the migration parks at ready_to_cutover and holds there until the cutover is performed manually.
+     * @return [io.appwrite.models.DatabaseMigration]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createMigration(
+        databaseId: String,
+        specification: String,
+        autoCutover: Boolean? = null,
+    ): io.appwrite.models.DatabaseMigration {
+        val apiPath = ("/tablesdb/{databaseId}/migrations"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "specification" to specification,
+            "autoCutover" to autoCutover,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseMigration = {
+            io.appwrite.models.DatabaseMigration.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseMigration::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a single dedicated migration for a TablesDB database by its ID.
+     *
+     * @param databaseId Database ID.
+     * @param migrationId Migration ID.
+     * @return [io.appwrite.models.DatabaseMigration]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getMigration(
+        databaseId: String,
+        migrationId: String,
+    ): io.appwrite.models.DatabaseMigration {
+        val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{migrationId}", migrationId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseMigration = {
+            io.appwrite.models.DatabaseMigration.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseMigration::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Abort an in-flight TablesDB dedicated migration. Only allowed before cutover; once the migration has cut over it cannot be aborted.
+     *
+     * @param databaseId Database ID.
+     * @param migrationId Migration ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteMigration(
+        databaseId: String,
+        migrationId: String,
+    ): Any {
+        val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
+            .replace("{databaseId}", databaseId)
+            .replace("{migrationId}", migrationId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Cut a verified TablesDB migration over to its dedicated compute. Only applies to a migration created with `autoCutover` disabled, which waits at `ready_to_cutover` until this is called. The routing flip happens shortly after this returns, with a brief read-only window. One call buys one attempt: a cutover that fails a check returns the migration to `verifying` and parks it again, so call this once more to retry.
+     *
+     * @param databaseId Database ID.
+     * @param migrationId Migration ID.
+     * @return [io.appwrite.models.DatabaseMigration]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun cutoverMigration(
+        databaseId: String,
+        migrationId: String,
+    ): io.appwrite.models.DatabaseMigration {
+        val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}/cutover"
+            .replace("{databaseId}", databaseId)
+            .replace("{migrationId}", migrationId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DatabaseMigration = {
+            io.appwrite.models.DatabaseMigration.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DatabaseMigration::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * List the lifecycle operations recorded for a dedicated database, newest first. Every provision, update, restore, backup and replication action is recorded here with its outcome, including an attempt that was abandoned because another worker took over the database.
+     *
+     * @param databaseId Database ID.
+     * @param status Filter by operation status.
+     * @param limit Maximum number of operations to return.
+     * @param offset Number of operations to skip.
+     * @return [io.appwrite.models.DedicatedDatabaseOperationList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listOperations(
+        databaseId: String,
+        status: String? = null,
+        limit: Long? = null,
+        offset: Long? = null,
+    ): io.appwrite.models.DedicatedDatabaseOperationList {
+        val apiPath = ("/tablesdb/{databaseId}/operations"
+            .replace("{databaseId}", databaseId)
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "status" to status,
+            "limit" to limit,
+            "offset" to offset,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabaseOperationList = {
+            io.appwrite.models.DedicatedDatabaseOperationList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DedicatedDatabaseOperationList::class.java,
             converter,
         )
     }
@@ -603,7 +835,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
-     * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, integer, float, boolean, datetime, relationship), size (integer, required for string type), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
+     * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
      * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
      * @return [io.appwrite.models.Table]
      */
@@ -2176,11 +2408,11 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID.
      * @param relatedTableId Related Table ID.
-     * @param type Relation type
+     * @param type Relationship type. Possible values are: oneToOne, oneToMany, manyToOne, manyToMany.
      * @param twoWay Is Two Way?
      * @param key Column Key.
      * @param twoWayKey Two Way Column Key.
-     * @param onDelete Constraints option
+     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @return [io.appwrite.models.ColumnRelationship]
      */
     @JvmOverloads
@@ -2758,7 +2990,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param tableId Table ID.
      * @param key Column Key.
-     * @param onDelete Constraints option
+     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @param newKey New Column Key.
      * @return [io.appwrite.models.ColumnRelationship]
      */

@@ -508,7 +508,7 @@ class Databases(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
-     * @param attributes Array of attribute definitions to create. Each attribute should contain: key (string), type (string: string, integer, float, boolean, datetime), size (integer, required for string type), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
+     * @param attributes Array of attribute definitions to create. Each attribute should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
      * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of attribute keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
      * @return [io.appwrite.models.Collection]
      */
@@ -2206,11 +2206,11 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param relatedCollectionId Related Collection ID.
-     * @param type Relation type
+     * @param type Relationship type. Possible values are: oneToOne, oneToMany, manyToOne, manyToMany.
      * @param twoWay Is Two Way?
      * @param key Attribute Key.
      * @param twoWayKey Two Way Attribute Key.
-     * @param onDelete Constraints option
+     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @return [io.appwrite.models.AttributeRelationship]
      */
     @Deprecated(
@@ -2267,7 +2267,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
      * @param key Attribute Key.
-     * @param onDelete Constraints option
+     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @param newKey New Attribute Key.
      * @return [io.appwrite.models.AttributeRelationship]
      */

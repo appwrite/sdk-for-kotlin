@@ -143,52 +143,6 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
-     * Create a new API key. It's recommended to have multiple API keys with strict scopes for separate functions within your project.
-     * 
-     * You can also create an ephemeral API key if you need a short-lived key instead.
-     *
-     * @param keyId Key ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param name Key name. Max length: 128 chars.
-     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
-     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
-     * @return [io.appwrite.models.Key]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createKey(
-        keyId: String,
-        name: String,
-        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
-        expire: String? = null,
-    ): io.appwrite.models.Key {
-        val apiPath = ("/project/keys"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "keyId" to keyId,
-            "name" to name,
-            "scopes" to scopes,
-            "expire" to expire,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Key = {
-            io.appwrite.models.Key.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Key::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Create a new ephemeral API key. It's recommended to have multiple API keys with strict scopes for separate functions within your project.
      * 
      * You can also create a standard API key if you need a longer-lived key instead.
@@ -595,6 +549,7 @@ class Project(client: Client) : Service(client) {
      * @param userCodeFormat Character set for device flow user codes: `numeric` (digits only — best for numeric keypads and TV remotes), `alphabetic` (letters only), or `alphanumeric` (letters and digits — highest entropy per character). Defaults to `alphanumeric`.
      * @param deviceCodeDuration Lifetime in seconds of device flow device codes and user codes. Device codes are intentionally short-lived. Leave empty to use default 600.
      * @param defaultScopes List of OAuth2 scopes used when an authorization request omits the scope parameter. Every default scope must also be allowed by the OAuth2 server. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @param installationScopes List of scopes an application may request when installed on a team. Omitting the parameter clears the list, so no installation scopes can be granted. Maximum of 100 scopes are allowed, each up to 128 characters long.
      * @return [io.appwrite.models.Project]
      */
     @JvmOverloads
@@ -615,6 +570,7 @@ class Project(client: Client) : Service(client) {
         userCodeFormat: String? = null,
         deviceCodeDuration: Long? = null,
         defaultScopes: List<String>? = null,
+        installationScopes: List<String>? = null,
     ): io.appwrite.models.Project {
         val apiPath = ("/project/oauth2-server"
         )
@@ -635,6 +591,7 @@ class Project(client: Client) : Service(client) {
             "userCodeFormat" to userCodeFormat,
             "deviceCodeDuration" to deviceCodeDuration,
             "defaultScopes" to defaultScopes,
+            "installationScopes" to installationScopes,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3280,6 +3237,50 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Updating this policy allows you to control which factors users can use to complete an MFA challenge. Disabled factors cannot be used to create a challenge and are reported as unavailable when listing factors. The custom factor is disabled by default; enable it to deliver challenge codes through your own channel. Recovery codes always remain available as a fallback.
+     *
+     * @param totp Set to true to allow TOTP to complete an MFA challenge, or false to disable it.
+     * @param email Set to true to allow email to complete an MFA challenge, or false to disable it.
+     * @param phone Set to true to allow phone (SMS) to complete an MFA challenge, or false to disable it.
+     * @param custom Set to true to allow the custom factor to complete an MFA challenge, or false to disable it.
+     * @return [io.appwrite.models.Project]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateMFAFactorsPolicy(
+        totp: Boolean? = null,
+        email: Boolean? = null,
+        phone: Boolean? = null,
+        custom: Boolean? = null,
+    ): io.appwrite.models.Project {
+        val apiPath = ("/project/policies/mfa-factors"
+        )
+
+        val apiParams = mutableMapOf<String, Any?>(
+            "totp" to totp,
+            "email" to email,
+            "phone" to phone,
+            "custom" to custom,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
      *
      * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
@@ -3318,7 +3319,7 @@ class Project(client: Client) : Service(client) {
      * 
      * Keep in mind, while password history policy is disabled, the history is not being stored. Enabling the policy will not have any history on existing users, and it will only start to collect and enforce the policy on password changes since the policy is enabled.
      *
-     * @param total Set the password history length per user. Value can be between 1 and 5000, or null to disable the limit.
+     * @param total Set the password history length per user. Value can be between 1 and 20, or null to disable the limit.
      * @return [io.appwrite.models.Project]
      */
     @Throws(AppwriteException::class)
@@ -3467,7 +3468,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update maximum duration how long sessions created within a project should stay active for.
      *
-     * @param duration Maximum session length in seconds. Minium allowed value is 5 second, and maximum is 1 year, which is 31536000 seconds.
+     * @param duration Maximum session length in seconds. Minium allowed value is 60 seconds, and maximum is 1 year, which is 31536000 seconds.
      * @return [io.appwrite.models.Project]
      */
     @Throws(AppwriteException::class)
@@ -3535,12 +3536,12 @@ class Project(client: Client) : Service(client) {
     /**
      * Update the maximum number of sessions allowed per user. When the limit is hit, the oldest session will be deleted to make room for new one.
      *
-     * @param total Set the maximum number of sessions allowed per user. Value can be between 1 and 5000, or null to disable the limit.
+     * @param total Set the maximum number of sessions allowed per user. Value can be between 1 and 100.
      * @return [io.appwrite.models.Project]
      */
     @Throws(AppwriteException::class)
     suspend fun updateSessionLimitPolicy(
-        total: Long? = null,
+        total: Long,
     ): io.appwrite.models.Project {
         val apiPath = ("/project/policies/session-limit"
         )
@@ -3569,7 +3570,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update the maximum number of users in the project. When the limit is hit or amount of existing users already exceeded the limit, all users remain active, but new user sign up will be prohibited.
      *
-     * @param total Set the maximum number of users allowed in the project. Value can be between 1 and 5000, or null to disable the limit.
+     * @param total Set the maximum number of users allowed in the project. Value can be between 0 and 10000. Use 0 or null to disable the limit.
      * @return [io.appwrite.models.Project]
      */
     @Throws(AppwriteException::class)
@@ -3603,7 +3604,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -3634,6 +3635,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "session-limit" -> io.appwrite.models.PolicySessionLimit.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "user-limit" -> io.appwrite.models.PolicyUserLimit.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "membership-privacy" -> io.appwrite.models.PolicyMembershipPrivacy.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "mfa-factors" -> io.appwrite.models.PolicyMfaFactors.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-aliased-email" -> io.appwrite.models.PolicyDenyAliasedEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-disposable-email" -> io.appwrite.models.PolicyDenyDisposableEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-free-email" -> io.appwrite.models.PolicyDenyFreeEmail.from(map = responseMap)

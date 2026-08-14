@@ -23,6 +23,8 @@ enum class ProjectPolicyId(val value: String) {
     USER_LIMIT("user-limit"),
     @SerializedName("membership-privacy")
     MEMBERSHIP_PRIVACY("membership-privacy"),
+    @SerializedName("mfa-factors")
+    MFA_FACTORS("mfa-factors"),
     @SerializedName("deny-aliased-email")
     DENY_ALIASED_EMAIL("deny-aliased-email"),
     @SerializedName("deny-disposable-email")

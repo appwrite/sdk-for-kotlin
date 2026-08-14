@@ -459,41 +459,6 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Use this endpoint to create a JSON Web Token. You can use the resulting JWT to authenticate on behalf of the current user when working with the Appwrite server-side API and SDKs. The JWT secret is valid for 15 minutes from its creation and will be invalid if the user will logout in that time frame.
-     *
-     * @param duration Time in seconds before JWT expires. Default duration is 900 seconds, and maximum is 3600 seconds.
-     * @return [io.appwrite.models.Jwt]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createJWT(
-        duration: Long? = null,
-    ): io.appwrite.models.Jwt {
-        val apiPath = ("/account/jwts"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-            "duration" to duration,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Jwt = {
-            io.appwrite.models.Jwt.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Jwt::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Get the list of latest security activity logs for the currently logged in user. Each log returns user IP address, location and date and time of log.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
@@ -834,7 +799,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Begin the process of MFA verification after sign-in. Finish the flow with [updateMfaChallenge](/docs/references/cloud/client-web/account#updateMfaChallenge) method.
      *
-     * @param factor Factor used for verification. Must be one of following: `email`, `phone`, `totp`, `recoveryCode`.
+     * @param factor Factor used for verification. Must be one of following: `email`, `phone`, `totp`, `recoveryCode`, `custom`.
      * @return [io.appwrite.models.MfaChallenge]
      */
     @Deprecated(
@@ -872,7 +837,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Begin the process of MFA verification after sign-in. Finish the flow with [updateMfaChallenge](/docs/references/cloud/client-web/account#updateMfaChallenge) method.
      *
-     * @param factor Factor used for verification. Must be one of following: `email`, `phone`, `totp`, `recoveryCode`.
+     * @param factor Factor used for verification. Must be one of following: `email`, `phone`, `totp`, `recoveryCode`, `custom`.
      * @return [io.appwrite.models.MfaChallenge]
      */
     @Throws(AppwriteException::class)

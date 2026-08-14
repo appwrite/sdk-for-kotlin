@@ -50,6 +50,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -91,6 +92,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -121,6 +123,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -162,6 +165,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -201,6 +205,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -244,6 +249,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -283,6 +289,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
@@ -373,6 +380,7 @@ class Avatars(client: Client) : Service(client) {
         return client.call(
             "GET",
             apiPath,
+            headers = apiHeaders,
             params = apiParams,
             responseType = ByteArray::class.java
         )
