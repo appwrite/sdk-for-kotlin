@@ -1,21 +1,19 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * 
-**/
+ ***/
 class Embeddings(client: Client) : Service(client) {
-
     /**
      * Generate vector embeddings for an array of text using the selected embedding model. Use the returned vectors to power semantic search and similarity queries against your vector collections.
-     * 
+     *
      *
      * @param texts Array of text to generate embeddings.
      * @param model The embedding model to use for generating vector embeddings.
@@ -27,9 +25,7 @@ class Embeddings(client: Client) : Service(client) {
         texts: List<String>,
         model: io.appwrite.enums.EmbeddingModel? = null,
     ): io.appwrite.models.EmbeddingList {
-        val apiPath = ("/embeddings/text"
-        )
-
+        val apiPath = "/embeddings/text"
         val apiParams = mutableMapOf<String, Any?>(
             "texts" to texts,
             "model" to model,
@@ -51,5 +47,4 @@ class Embeddings(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

@@ -1,20 +1,18 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Sites Service allows you view, create and manage your web applications.
-**/
+ * The Sites Service allows you view, create and manage your web applications.**/
 class Sites(client: Client) : Service(client) {
-
     /**
      * Get a list of all the project's sites. You can use the query params to filter your results.
      *
@@ -30,9 +28,7 @@ class Sites(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.SiteList {
-        val apiPath = ("/sites"
-        )
-
+        val apiPath = "/sites"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -81,6 +77,7 @@ class Sites(client: Client) : Service(client) {
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -109,10 +106,9 @@ class Sites(client: Client) : Service(client) {
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
     ): io.appwrite.models.Site {
-        val apiPath = ("/sites"
-        )
-
+        val apiPath = "/sites"
         val apiParams = mutableMapOf<String, Any?>(
             "siteId" to siteId,
             "name" to name,
@@ -137,6 +133,7 @@ class Sites(client: Client) : Service(client) {
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
+            "scopes" to scopes,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -162,13 +159,9 @@ class Sites(client: Client) : Service(client) {
      * @return [io.appwrite.models.FrameworkList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listFrameworks(
-    ): io.appwrite.models.FrameworkList {
-        val apiPath = ("/sites/frameworks"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listFrameworks(): io.appwrite.models.FrameworkList {
+        val apiPath = "/sites/frameworks"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -197,9 +190,7 @@ class Sites(client: Client) : Service(client) {
     suspend fun listSpecifications(
         type: String? = null,
     ): io.appwrite.models.SpecificationList {
-        val apiPath = ("/sites/specifications"
-        )
-
+        val apiPath = "/sites/specifications"
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
         )
@@ -233,9 +224,7 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -279,6 +268,7 @@ class Sites(client: Client) : Service(client) {
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -307,11 +297,11 @@ class Sites(client: Client) : Service(client) {
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
     ): io.appwrite.models.Site {
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "framework" to framework,
@@ -335,6 +325,7 @@ class Sites(client: Client) : Service(client) {
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
+            "scopes" to scopes,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -367,9 +358,7 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -398,7 +387,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployment"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
         )
@@ -440,7 +428,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -488,7 +475,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "installCommand" to installCommand,
             "buildCommand" to buildCommand,
@@ -533,7 +519,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployments/duplicate"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
         )
@@ -557,7 +542,7 @@ class Sites(client: Client) : Service(client) {
 
     /**
      * Create a deployment based on a template.
-     * 
+     *
      * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/products/sites/templates) to find the template details.
      *
      * @param siteId Site ID.
@@ -583,7 +568,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployments/template"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "repository" to repository,
             "owner" to owner,
@@ -612,7 +596,7 @@ class Sites(client: Client) : Service(client) {
 
     /**
      * Create a deployment when a site is connected to VCS.
-     * 
+     *
      * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param siteId Site ID.
@@ -632,7 +616,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/deployments/vcs"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
             "reference" to reference,
@@ -672,9 +655,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -708,9 +689,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -745,7 +724,6 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
             "token" to token,
@@ -779,9 +757,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -818,7 +794,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/logs"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -856,9 +831,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -892,9 +865,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -927,7 +898,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -971,7 +941,6 @@ class Sites(client: Client) : Service(client) {
         val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "variableId" to variableId,
             "key" to key,
@@ -1012,9 +981,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1055,7 +1022,6 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
@@ -1095,9 +1061,7 @@ class Sites(client: Client) : Service(client) {
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1110,5 +1074,4 @@ class Sites(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

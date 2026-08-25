@@ -59,7 +59,7 @@ data class Collection(
      * Collection attributes.
      */
     @SerializedName("attributes")
-    val attributes: List<Any>,
+    val attributes: List<Map<String, Any?>>,
 
     /**
      * Collection indexes.
@@ -96,7 +96,6 @@ data class Collection(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -109,7 +108,7 @@ data class Collection(
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             documentSecurity = map["documentSecurity"] as Boolean,
-            attributes = map["attributes"] as List<Any>,
+            attributes = map["attributes"] as List<Map<String, Any?>>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { Index.from(map = it) },
             bytesMax = (map["bytesMax"] as Number).toLong(),
             bytesUsed = (map["bytesUsed"] as Number).toLong(),

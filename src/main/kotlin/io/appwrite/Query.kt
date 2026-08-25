@@ -1,7 +1,7 @@
 package io.appwrite
 
-import io.appwrite.extensions.toJson
 import io.appwrite.extensions.fromJson
+import io.appwrite.extensions.toJson
 
 class Query(
     val method: String,

@@ -68,7 +68,7 @@ data class BackupRestoration(
     val resources: List<String>,
 
     /**
-     * Optional data in key-value object. 
+     * Optional data in key-value object.
      */
     @SerializedName("options")
     val options: String,
@@ -89,7 +89,6 @@ data class BackupRestoration(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

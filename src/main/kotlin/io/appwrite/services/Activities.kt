@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Activities service allows you to list and inspect project activity events.
-**/
+ * The Activities service allows you to list and inspect project activity events.**/
 class Activities(client: Client) : Service(client) {
-
     /**
      * List all events for selected filters.
      *
@@ -24,9 +22,7 @@ class Activities(client: Client) : Service(client) {
     suspend fun listEvents(
         queries: List<String>? = null,
     ): io.appwrite.models.ActivityEventList {
-        val apiPath = ("/activities/events"
-        )
-
+        val apiPath = "/activities/events"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -49,7 +45,7 @@ class Activities(client: Client) : Service(client) {
 
     /**
      * Get event by ID.
-     * 
+     *
      *
      * @param eventId Event ID.
      * @return [io.appwrite.models.ActivityEvent]
@@ -61,9 +57,7 @@ class Activities(client: Client) : Service(client) {
         val apiPath = ("/activities/events/{eventId}"
             .replace("{eventId}", eventId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -80,5 +74,4 @@ class Activities(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

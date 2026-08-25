@@ -47,7 +47,7 @@ data class AppInstallation(
      * Authorization details granted to the application. Rich authorization request (RFC 9396) style entries; the Appwrite Console stores authorized project IDs here.
      */
     @SerializedName("authorizationDetails")
-    val authorizationDetails: Any,
+    val authorizationDetails: List<Map<String, Any?>>,
 
     /**
      * ID of the user who created the installation.
@@ -82,7 +82,6 @@ data class AppInstallation(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -93,7 +92,7 @@ data class AppInstallation(
             appId = map["appId"] as String,
             teamId = map["teamId"] as String,
             scopes = map["scopes"] as List<String>,
-            authorizationDetails = map["authorizationDetails"] as Any,
+            authorizationDetails = map["authorizationDetails"] as List<Map<String, Any?>>,
             createdById = map["createdById"] as String,
             createdByName = map["createdByName"] as String,
             lastAccessedAt = map["lastAccessedAt"] as? String,

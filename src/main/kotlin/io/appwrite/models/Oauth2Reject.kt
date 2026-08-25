@@ -19,7 +19,6 @@ data class Oauth2Reject(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

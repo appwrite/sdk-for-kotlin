@@ -5,6 +5,7 @@ import io.appwrite.services.Sites
 import io.appwrite.enums.Framework
 import io.appwrite.enums.BuildRuntime
 import io.appwrite.enums.Adapter
+import io.appwrite.enums.ProjectKeyScopes
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -36,6 +37,7 @@ val response = sites.update(
     providerPaths = listOf(), // optional
     buildSpecification = "", // optional
     runtimeSpecification = "", // optional
-    deploymentRetention = 0 // optional
+    deploymentRetention = 0, // optional
+    scopes = listOf(ProjectKeyScopes.PROJECT_READ) // optional
 )
 ```

@@ -5,6 +5,7 @@ import io.appwrite.services.Sites;
 import io.appwrite.enums.Framework;
 import io.appwrite.enums.BuildRuntime;
 import io.appwrite.enums.Adapter;
+import io.appwrite.enums.ProjectKeyScopes;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -37,6 +38,7 @@ sites.create(
     "", // buildSpecification (optional)
     "", // runtimeSpecification (optional)
     0, // deploymentRetention (optional)
+    List.of(ProjectKeyScopes.PROJECT_READ), // scopes (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

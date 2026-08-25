@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Databases service allows you to create structured collections of documents, query and filter lists of documents
-**/
+ * The Databases service allows you to create structured collections of documents, query and filter lists of documents**/
 class Databases(client: Client) : Service(client) {
-
     /**
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
      *
@@ -32,9 +30,7 @@ class Databases(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.DatabaseList {
-        val apiPath = ("/databases"
-        )
-
+        val apiPath = "/databases"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -59,7 +55,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a new Database.
-     * 
+     *
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
@@ -77,9 +73,7 @@ class Databases(client: Client) : Service(client) {
         name: String,
         enabled: Boolean? = null,
     ): io.appwrite.models.Database {
-        val apiPath = ("/databases"
-        )
-
+        val apiPath = "/databases"
         val apiParams = mutableMapOf<String, Any?>(
             "databaseId" to databaseId,
             "name" to name,
@@ -118,9 +112,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun listTransactions(
         queries: List<String>? = null,
     ): io.appwrite.models.TransactionList {
-        val apiPath = ("/databases/transactions"
-        )
-
+        val apiPath = "/databases/transactions"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -156,9 +148,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun createTransaction(
         ttl: Long? = null,
     ): io.appwrite.models.Transaction {
-        val apiPath = ("/databases/transactions"
-        )
-
+        val apiPath = "/databases/transactions"
         val apiParams = mutableMapOf<String, Any?>(
             "ttl" to ttl,
         )
@@ -197,9 +187,7 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -239,7 +227,6 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "commit" to commit,
             "rollback" to rollback,
@@ -279,9 +266,7 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -310,12 +295,11 @@ class Databases(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createOperations(
         transactionId: String,
-        operations: List<Any>? = null,
+        operations: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Transaction {
         val apiPath = ("/databases/transactions/{transactionId}/operations"
             .replace("{transactionId}", transactionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "operations" to operations,
         )
@@ -354,9 +338,7 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -396,7 +378,6 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -436,9 +417,7 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -476,7 +455,6 @@ class Databases(client: Client) : Service(client) {
         val apiPath = ("/databases/{databaseId}/collections"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -525,13 +503,12 @@ class Databases(client: Client) : Service(client) {
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
-        attributes: List<Any>? = null,
-        indexes: List<Any>? = null,
+        attributes: List<Map<String, Any?>>? = null,
+        indexes: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Collection {
         val apiPath = ("/databases/{databaseId}/collections"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "collectionId" to collectionId,
             "name" to name,
@@ -579,9 +556,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -630,7 +605,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "permissions" to permissions,
@@ -676,9 +650,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -717,7 +689,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -741,7 +712,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a bigint attribute. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -773,7 +744,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -802,7 +772,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a bigint attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -835,7 +805,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -863,7 +832,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a boolean attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -891,7 +860,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -946,7 +914,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -999,7 +966,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1054,7 +1020,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1080,7 +1045,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an email attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1108,7 +1073,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1135,7 +1099,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an email attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1164,7 +1128,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1189,8 +1152,8 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create an enum attribute. The `elements` param acts as a white-list of accepted values for this attribute. 
-     * 
+     * Create an enum attribute. The `elements` param acts as a white-list of accepted values for this attribute.
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1220,7 +1183,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "elements" to elements,
@@ -1248,7 +1210,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an enum attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1279,7 +1241,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "elements" to elements,
             "required" to required,
@@ -1306,7 +1267,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a float attribute. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1338,7 +1299,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1367,7 +1327,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a float attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1400,7 +1360,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -1428,7 +1387,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create an integer attribute. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1460,7 +1419,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1489,7 +1447,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an integer attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1522,7 +1480,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -1550,7 +1507,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create IP address attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1578,7 +1535,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1605,7 +1561,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an ip attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -1634,7 +1590,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1685,7 +1640,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1739,7 +1693,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1765,7 +1718,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a longtext attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1795,7 +1748,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1823,7 +1775,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a longtext attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1852,7 +1804,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1878,7 +1829,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a mediumtext attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1908,7 +1859,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1936,7 +1886,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a mediumtext attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -1965,7 +1915,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2016,7 +1965,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2070,7 +2018,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2121,7 +2068,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2175,7 +2121,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2201,7 +2146,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -2233,7 +2178,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "relatedCollectionId" to relatedCollectionId,
             "type" to type,
@@ -2262,7 +2206,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update relationship attribute. [Learn more about relationship attributes](https://appwrite.io/docs/databases-relationships#relationship-attributes).
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -2289,7 +2233,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
             "newKey" to newKey,
@@ -2314,7 +2257,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a string attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2346,7 +2289,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "size" to size,
@@ -2375,7 +2317,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a string attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2406,7 +2348,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2433,7 +2374,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a text attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2463,7 +2404,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2491,7 +2431,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a text attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2520,7 +2460,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2546,7 +2485,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a URL attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -2574,7 +2513,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2601,7 +2539,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update an url attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -2630,7 +2568,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2656,7 +2593,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create a varchar attribute.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2688,7 +2625,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "size" to size,
@@ -2717,7 +2653,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Update a varchar attribute. Changing the `default` value will not update already existing documents.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
@@ -2748,7 +2684,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2796,9 +2731,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2853,9 +2786,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2899,7 +2830,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -2978,7 +2908,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Map<String, Any?>,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -2987,7 +2917,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "documentId" to documentId,
             "data" to data,
@@ -3033,7 +2962,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any,
+        data: Map<String, Any?>,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = createDocument(
@@ -3064,7 +2993,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun <T> createDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>,
+        documents: List<Map<String, Any?>>,
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
@@ -3072,7 +3001,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "documents" to documents,
             "transactionId" to transactionId,
@@ -3113,7 +3041,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun createDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>,
+        documents: List<Map<String, Any?>>,
         transactionId: String? = null,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = createDocuments(
         databaseId,
@@ -3125,7 +3053,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -3142,7 +3070,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun <T> upsertDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>,
+        documents: List<Map<String, Any?>>,
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
@@ -3150,7 +3078,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "documents" to documents,
             "transactionId" to transactionId,
@@ -3175,7 +3102,7 @@ class Databases(client: Client) : Service(client) {
 
     /**
      * Create or update Documents. Before using this route, you should create a new collection resource using either a [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection) API or directly from your database console.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param collectionId Collection ID.
@@ -3192,7 +3119,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun upsertDocuments(
         databaseId: String,
         collectionId: String,
-        documents: List<Any>,
+        documents: List<Map<String, Any?>>,
         transactionId: String? = null,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = upsertDocuments(
         databaseId,
@@ -3221,7 +3148,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun <T> updateDocuments(
         databaseId: String,
         collectionId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         queries: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3230,7 +3157,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "queries" to queries,
@@ -3273,7 +3199,7 @@ class Databases(client: Client) : Service(client) {
     suspend fun updateDocuments(
         databaseId: String,
         collectionId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         queries: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = updateDocuments(
@@ -3311,7 +3237,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -3391,7 +3316,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -3465,7 +3389,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3475,7 +3399,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
@@ -3520,7 +3443,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = upsertDocument(
@@ -3554,7 +3477,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3564,7 +3487,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
@@ -3609,7 +3531,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         collectionId: String,
         documentId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = updateDocument(
@@ -3648,7 +3570,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{documentId}", documentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "transactionId" to transactionId,
         )
@@ -3699,7 +3620,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{documentId}", documentId)
             .replace("{attribute}", attribute)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "min" to min,
@@ -3794,7 +3714,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{documentId}", documentId)
             .replace("{attribute}", attribute)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "max" to max,
@@ -3880,7 +3799,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -3934,7 +3852,6 @@ class Databases(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{collectionId}", collectionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "type" to type,
@@ -3983,9 +3900,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -4026,9 +3941,7 @@ class Databases(client: Client) : Service(client) {
             .replace("{collectionId}", collectionId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -4041,5 +3954,4 @@ class Databases(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

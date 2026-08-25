@@ -47,7 +47,6 @@ data class OAuth2Auth0(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

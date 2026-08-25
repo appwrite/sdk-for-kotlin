@@ -1,8 +1,8 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.DeploymentStatus
+import io.appwrite.extensions.jsonCast
 
 /**
  * Deployment
@@ -202,7 +202,6 @@ data class Deployment(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

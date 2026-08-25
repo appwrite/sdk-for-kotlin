@@ -59,7 +59,7 @@ data class Table(
      * Table columns.
      */
     @SerializedName("columns")
-    val columns: List<Any>,
+    val columns: List<Map<String, Any?>>,
 
     /**
      * Table indexes.
@@ -96,7 +96,6 @@ data class Table(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -109,7 +108,7 @@ data class Table(
             name = map["name"] as String,
             enabled = map["enabled"] as Boolean,
             rowSecurity = map["rowSecurity"] as Boolean,
-            columns = map["columns"] as List<Any>,
+            columns = map["columns"] as List<Map<String, Any?>>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { ColumnIndex.from(map = it) },
             bytesMax = (map["bytesMax"] as Number).toLong(),
             bytesUsed = (map["bytesUsed"] as Number).toLong(),

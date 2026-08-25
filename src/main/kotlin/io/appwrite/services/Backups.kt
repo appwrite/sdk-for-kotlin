@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Backups service allows you to manage backup policies, archives, and restorations for your project.
-**/
+ * The Backups service allows you to manage backup policies, archives, and restorations for your project.**/
 class Backups(client: Client) : Service(client) {
-
     /**
      * List all archives for a project.
      *
@@ -24,9 +22,7 @@ class Backups(client: Client) : Service(client) {
     suspend fun listArchives(
         queries: List<String>? = null,
     ): io.appwrite.models.BackupArchiveList {
-        val apiPath = ("/backups/archives"
-        )
-
+        val apiPath = "/backups/archives"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -60,9 +56,7 @@ class Backups(client: Client) : Service(client) {
         services: List<io.appwrite.enums.BackupServices>,
         resourceId: String? = null,
     ): io.appwrite.models.BackupArchive {
-        val apiPath = ("/backups/archives"
-        )
-
+        val apiPath = "/backups/archives"
         val apiParams = mutableMapOf<String, Any?>(
             "services" to services,
             "resourceId" to resourceId,
@@ -98,9 +92,7 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/archives/{archiveId}"
             .replace("{archiveId}", archiveId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -131,9 +123,7 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/archives/{archiveId}"
             .replace("{archiveId}", archiveId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -159,9 +149,7 @@ class Backups(client: Client) : Service(client) {
     suspend fun listPolicies(
         queries: List<String>? = null,
     ): io.appwrite.models.BackupPolicyList {
-        val apiPath = ("/backups/policies"
-        )
-
+        val apiPath = "/backups/policies"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -205,9 +193,7 @@ class Backups(client: Client) : Service(client) {
         resourceId: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
-        val apiPath = ("/backups/policies"
-        )
-
+        val apiPath = "/backups/policies"
         val apiParams = mutableMapOf<String, Any?>(
             "policyId" to policyId,
             "name" to name,
@@ -248,9 +234,7 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -290,7 +274,6 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "retention" to retention,
@@ -328,9 +311,7 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -347,15 +328,15 @@ class Backups(client: Client) : Service(client) {
 
     /**
      * Create and trigger a new restoration for a backup on a project.
-     * 
+     *
      * For a backup of one database, the restoration resolves its destination before it is queued. When `newResourceId` is omitted, the archived database is restored in place and its own ID is returned in `options`. Pass a different `newResourceId` to restore alongside it as a new database instead.
-     * 
+     *
      * The restoration migration records the archived database in `resourceId` and `resourceType`, and the resolved database in `destinationResourceId` and `destinationResourceType`. Database types are stored canonically as `database`, `documentsdb`, or `vectorsdb`. Project-wide restorations leave these fields empty because they do not have a single source or destination database.
-     * 
+     *
      * To list every migration related to one database, use its canonical type in a nested `OR(AND(...), AND(...), AND(...))` across the root, parent, and destination relation pairs: `(resourceType, resourceId)`, `(parentResourceType, parentResourceId)`, and `(destinationResourceType, destinationResourceId)`. Legacy and TablesDB databases use `database`; the operational `resourceType` of a table migration is not rewritten to `tablesdb`.
-     * 
+     *
      * When restoring a DocumentsDB or VectorsDB database from a dedicated source, the restore provisions a fresh dedicated backing database at the source database's own specification and lands the data there. An in-place restore swaps the database onto that backing only once the restore has succeeded, and retires the backing it displaced only once that swap is confirmed, so the source keeps serving its own data until the restored data is in place and any failure leaves it untouched. A serverless source has no dedicated backing to clone and restores onto the archived database instead.
-     * 
+     *
      *
      * @param archiveId Backup archive ID to restore
      * @param services Array of services to restore
@@ -371,9 +352,7 @@ class Backups(client: Client) : Service(client) {
         newResourceId: String? = null,
         newResourceName: String? = null,
     ): io.appwrite.models.BackupRestoration {
-        val apiPath = ("/backups/restoration"
-        )
-
+        val apiPath = "/backups/restoration"
         val apiParams = mutableMapOf<String, Any?>(
             "archiveId" to archiveId,
             "services" to services,
@@ -409,9 +388,7 @@ class Backups(client: Client) : Service(client) {
     suspend fun listRestorations(
         queries: List<String>? = null,
     ): io.appwrite.models.BackupRestorationList {
-        val apiPath = ("/backups/restorations"
-        )
-
+        val apiPath = "/backups/restorations"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -445,9 +422,7 @@ class Backups(client: Client) : Service(client) {
         val apiPath = ("/backups/restorations/{restorationId}"
             .replace("{restorationId}", restorationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -464,5 +439,4 @@ class Backups(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

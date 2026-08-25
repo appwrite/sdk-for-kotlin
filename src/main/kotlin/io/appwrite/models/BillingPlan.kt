@@ -1,8 +1,8 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.BillingPlanGroup
+import io.appwrite.extensions.jsonCast
 
 /**
  * billingPlan
@@ -327,6 +327,12 @@ data class BillingPlan(
     val supportsCredits: Boolean,
 
     /**
+     * Does plan support dedicated databases.
+     */
+    @SerializedName("supportsDedicatedDatabases")
+    val supportsDedicatedDatabases: Boolean,
+
+    /**
      * Does plan support blocking disposable email addresses.
      */
     @SerializedName("supportsDisposableEmailValidation")
@@ -417,6 +423,12 @@ data class BillingPlan(
     var program: Program?,
 
     /**
+     * Included monthly dedicated-database compute credit in USD. Resets each billing cycle with no roll-over.
+     */
+    @SerializedName("databaseComputeCredit")
+    val databaseComputeCredit: Double,
+
+    /**
      * Dedicated database limits available to this plan.
      */
     @SerializedName("dedicatedDatabases")
@@ -477,6 +489,7 @@ data class BillingPlan(
         "supportsMockNumbers" to supportsMockNumbers as Any,
         "supportsOrganizationRoles" to supportsOrganizationRoles as Any,
         "supportsCredits" to supportsCredits as Any,
+        "supportsDedicatedDatabases" to supportsDedicatedDatabases as Any,
         "supportsDisposableEmailValidation" to supportsDisposableEmailValidation as Any,
         "supportsCanonicalEmailValidation" to supportsCanonicalEmailValidation as Any,
         "supportsFreeEmailValidation" to supportsFreeEmailValidation as Any,
@@ -492,11 +505,11 @@ data class BillingPlan(
         "limits" to limits?.toMap() as Any?,
         "group" to group.value as Any,
         "program" to program?.toMap() as Any?,
+        "databaseComputeCredit" to databaseComputeCredit as Any,
         "dedicatedDatabases" to dedicatedDatabases?.toMap() as Any?,
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -554,6 +567,7 @@ data class BillingPlan(
             supportsMockNumbers = map["supportsMockNumbers"] as Boolean,
             supportsOrganizationRoles = map["supportsOrganizationRoles"] as Boolean,
             supportsCredits = map["supportsCredits"] as Boolean,
+            supportsDedicatedDatabases = map["supportsDedicatedDatabases"] as Boolean,
             supportsDisposableEmailValidation = map["supportsDisposableEmailValidation"] as Boolean,
             supportsCanonicalEmailValidation = map["supportsCanonicalEmailValidation"] as Boolean,
             supportsFreeEmailValidation = map["supportsFreeEmailValidation"] as Boolean,
@@ -569,6 +583,7 @@ data class BillingPlan(
             limits = (map["limits"] as? Map<String, Any>)?.let { BillingPlanLimits.from(map = it) },
             group = BillingPlanGroup.values().find { it.value == map["group"] as String }!!,
             program = (map["program"] as? Map<String, Any>)?.let { Program.from(map = it) },
+            databaseComputeCredit = (map["databaseComputeCredit"] as Number).toDouble(),
             dedicatedDatabases = (map["dedicatedDatabases"] as? Map<String, Any>)?.let { BillingPlanDedicatedDatabaseLimits.from(map = it) },
         )
     }

@@ -43,6 +43,8 @@ enum class ProjectOAuthProviderId(val value: String) {
     GITLAB("gitlab"),
     @SerializedName("google")
     GOOGLE("google"),
+    @SerializedName("huggingface")
+    HUGGINGFACE("huggingface"),
     @SerializedName("keycloak")
     KEYCLOAK("keycloak"),
     @SerializedName("kick")

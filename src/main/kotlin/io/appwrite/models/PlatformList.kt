@@ -17,7 +17,7 @@ data class PlatformList(
      * List of platforms.
      */
     @SerializedName("platforms")
-    val platforms: List<Any>,
+    val platforms: List<Map<String, Any?>>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -26,13 +26,12 @@ data class PlatformList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
         ) = PlatformList(
             total = (map["total"] as Number).toLong(),
-            platforms = map["platforms"] as List<Any>,
+            platforms = map["platforms"] as List<Map<String, Any?>>,
         )
     }
 }

@@ -29,7 +29,7 @@ data class InsightCTA(
      * Parameter map the client should pass to the service method when this CTA is triggered. Keys match the target API's parameter names (e.g. databaseId/tableId/columns for tablesDB, databaseId/collectionId/attributes for the legacy Databases API).
      */
     @SerializedName("params")
-    val params: Any,
+    val params: Map<String, Any?>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -40,7 +40,6 @@ data class InsightCTA(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -48,7 +47,7 @@ data class InsightCTA(
             label = map["label"] as String,
             service = map["service"] as String,
             method = map["method"] as String,
-            params = map["params"] as Any,
+            params = map["params"] as Map<String, Any?>,
         )
     }
 }

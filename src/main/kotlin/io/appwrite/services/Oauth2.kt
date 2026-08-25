@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.
-**/
+ * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.**/
 class Oauth2(client: Client) : Service(client) {
-
     /**
      * Approve an OAuth2 grant after the user gives consent. Returns the `redirectUrl` the end user should be sent to. The consent screen may optionally pass enriched `authorization_details` to record the concrete resources the user selected. You can pass Accept header of `application/json` to receive a JSON response instead of a redirect.
      *
@@ -31,7 +29,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/approve"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "grant_id" to grantId,
             "authorization_details" to authorizationDetails,
@@ -94,7 +91,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/authorize"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "client_id" to clientId,
             "redirect_uri" to redirectUri,
@@ -167,7 +163,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/authorize"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "client_id" to clientId,
             "redirect_uri" to redirectUri,
@@ -223,7 +218,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/device_authorization"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "client_id" to clientId,
             "scope" to scope,
@@ -261,7 +255,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/grants"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "user_code" to userCode,
         )
@@ -296,9 +289,7 @@ class Oauth2(client: Client) : Service(client) {
             .replace("{project_id}", client.config["project"].orEmpty())
             .replace("{grant_id}", grantId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "accept" to "application/json",
         )
@@ -333,7 +324,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/organizations"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "limit" to limit,
             "offset" to offset,
@@ -393,7 +383,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/par"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "client_id" to clientId,
             "redirect_uri" to redirectUri,
@@ -444,7 +433,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/projects"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "limit" to limit,
             "offset" to offset,
@@ -479,7 +467,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/reject"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "grant_id" to grantId,
         )
@@ -520,7 +507,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/revoke"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "token" to token,
             "token_type_hint" to tokenTypeHint,
@@ -572,7 +558,6 @@ class Oauth2(client: Client) : Service(client) {
         val apiPath = ("/oauth2/{project_id}/token"
             .replace("{project_id}", client.config["project"].orEmpty())
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "grant_type" to grantType,
             "code" to code,
@@ -601,5 +586,4 @@ class Oauth2(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

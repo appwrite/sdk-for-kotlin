@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Messaging service allows you to send messages to any provider type (SMTP, push notification, SMS, etc.).
-**/
+ * The Messaging service allows you to send messages to any provider type (SMTP, push notification, SMS, etc.).**/
 class Messaging(client: Client) : Service(client) {
-
     /**
      * Get a list of all messages from the current Appwrite project.
      *
@@ -28,9 +26,7 @@ class Messaging(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.MessageList {
-        val apiPath = ("/messaging/messages"
-        )
-
+        val apiPath = "/messaging/messages"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -86,9 +82,7 @@ class Messaging(client: Client) : Service(client) {
         html: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
-        val apiPath = ("/messaging/messages/email"
-        )
-
+        val apiPath = "/messaging/messages/email"
         val apiParams = mutableMapOf<String, Any?>(
             "messageId" to messageId,
             "subject" to subject,
@@ -123,7 +117,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an email message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-     * 
+     *
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -158,7 +152,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/email/{messageId}"
             .replace("{messageId}", messageId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "topics" to topics,
             "users" to users,
@@ -223,7 +216,7 @@ class Messaging(client: Client) : Service(client) {
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         action: String? = null,
         image: String? = null,
         icon: String? = null,
@@ -237,9 +230,7 @@ class Messaging(client: Client) : Service(client) {
         critical: Boolean? = null,
         priority: io.appwrite.enums.MessagePriority? = null,
     ): io.appwrite.models.Message {
-        val apiPath = ("/messaging/messages/push"
-        )
-
+        val apiPath = "/messaging/messages/push"
         val apiParams = mutableMapOf<String, Any?>(
             "messageId" to messageId,
             "title" to title,
@@ -281,7 +272,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a push notification by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-     * 
+     *
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -313,7 +304,7 @@ class Messaging(client: Client) : Service(client) {
         targets: List<String>? = null,
         title: String? = null,
         body: String? = null,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         action: String? = null,
         image: String? = null,
         icon: String? = null,
@@ -330,7 +321,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/push/{messageId}"
             .replace("{messageId}", messageId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "topics" to topics,
             "users" to users,
@@ -396,9 +386,7 @@ class Messaging(client: Client) : Service(client) {
         draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
-        val apiPath = ("/messaging/messages/sms"
-        )
-
+        val apiPath = "/messaging/messages/sms"
         val apiParams = mutableMapOf<String, Any?>(
             "messageId" to messageId,
             "content" to content,
@@ -449,9 +437,7 @@ class Messaging(client: Client) : Service(client) {
         draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
-        val apiPath = ("/messaging/messages/sms"
-        )
-
+        val apiPath = "/messaging/messages/sms"
         val apiParams = mutableMapOf<String, Any?>(
             "messageId" to messageId,
             "content" to content,
@@ -481,7 +467,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-     * 
+     *
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -510,7 +496,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/sms/{messageId}"
             .replace("{messageId}", messageId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "topics" to topics,
             "users" to users,
@@ -539,7 +524,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update an SMS message by its unique ID. This endpoint only works on messages that are in draft status. Messages that are already processing, sent, or failed cannot be updated.
-     * 
+     *
      *
      * @param messageId Message ID.
      * @param topics List of Topic IDs.
@@ -564,7 +549,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/sms/{messageId}"
             .replace("{messageId}", messageId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "topics" to topics,
             "users" to users,
@@ -593,7 +577,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a message by its unique ID.
-     * 
+     *
      *
      * @param messageId Message ID.
      * @return [io.appwrite.models.Message]
@@ -605,9 +589,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/{messageId}"
             .replace("{messageId}", messageId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -638,9 +620,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/{messageId}"
             .replace("{messageId}", messageId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -672,7 +652,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/messages/{messageId}/targets"
             .replace("{messageId}", messageId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -709,9 +688,7 @@ class Messaging(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ProviderList {
-        val apiPath = ("/messaging/providers"
-        )
-
+        val apiPath = "/messaging/providers"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -763,9 +740,7 @@ class Messaging(client: Client) : Service(client) {
         sandbox: Boolean? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/apns"
-        )
-
+        val apiPath = "/messaging/providers/apns"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -819,9 +794,7 @@ class Messaging(client: Client) : Service(client) {
         sandbox: Boolean? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/apns"
-        )
-
+        val apiPath = "/messaging/providers/apns"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -882,7 +855,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/apns/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -938,7 +910,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/apns/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -984,12 +955,10 @@ class Messaging(client: Client) : Service(client) {
     suspend fun createFcmProvider(
         providerId: String,
         name: String,
-        serviceAccountJSON: Any? = null,
+        serviceAccountJSON: Map<String, Any?>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/fcm"
-        )
-
+        val apiPath = "/messaging/providers/fcm"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1028,12 +997,10 @@ class Messaging(client: Client) : Service(client) {
     suspend fun createFCMProvider(
         providerId: String,
         name: String,
-        serviceAccountJSON: Any? = null,
+        serviceAccountJSON: Map<String, Any?>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/fcm"
-        )
-
+        val apiPath = "/messaging/providers/fcm"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1077,12 +1044,11 @@ class Messaging(client: Client) : Service(client) {
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
-        serviceAccountJSON: Any? = null,
+        serviceAccountJSON: Map<String, Any?>? = null,
     ): io.appwrite.models.Provider {
         val apiPath = ("/messaging/providers/fcm/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1121,12 +1087,11 @@ class Messaging(client: Client) : Service(client) {
         providerId: String,
         name: String? = null,
         enabled: Boolean? = null,
-        serviceAccountJSON: Any? = null,
+        serviceAccountJSON: Map<String, Any?>? = null,
     ): io.appwrite.models.Provider {
         val apiPath = ("/messaging/providers/fcm/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1179,9 +1144,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/mailgun"
-        )
-
+        val apiPath = "/messaging/providers/mailgun"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1244,7 +1207,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/mailgun/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "apiKey" to apiKey,
@@ -1295,9 +1257,7 @@ class Messaging(client: Client) : Service(client) {
         authKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/msg91"
-        )
-
+        val apiPath = "/messaging/providers/msg91"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1348,7 +1308,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/msg91/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1399,9 +1358,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/resend"
-        )
-
+        val apiPath = "/messaging/providers/resend"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1458,7 +1415,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/resend/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1511,9 +1467,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/sendgrid"
-        )
-
+        val apiPath = "/messaging/providers/sendgrid"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1570,7 +1524,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/sendgrid/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1627,9 +1580,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/ses"
-        )
-
+        val apiPath = "/messaging/providers/ses"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1692,7 +1643,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/ses/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -1763,9 +1713,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/smtp"
-        )
-
+        val apiPath = "/messaging/providers/smtp"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1837,9 +1785,7 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/smtp"
-        )
-
+        val apiPath = "/messaging/providers/smtp"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -1918,7 +1864,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/smtp/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "host" to host,
@@ -1992,7 +1937,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/smtp/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "host" to host,
@@ -2047,9 +1991,7 @@ class Messaging(client: Client) : Service(client) {
         apiKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/telesign"
-        )
-
+        val apiPath = "/messaging/providers/telesign"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -2100,7 +2042,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/telesign/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -2147,9 +2088,7 @@ class Messaging(client: Client) : Service(client) {
         apiKey: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/textmagic"
-        )
-
+        val apiPath = "/messaging/providers/textmagic"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -2200,7 +2139,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/textmagic/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -2247,9 +2185,7 @@ class Messaging(client: Client) : Service(client) {
         authToken: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/twilio"
-        )
-
+        val apiPath = "/messaging/providers/twilio"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -2300,7 +2236,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/twilio/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -2347,9 +2282,7 @@ class Messaging(client: Client) : Service(client) {
         apiSecret: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
-        val apiPath = ("/messaging/providers/vonage"
-        )
-
+        val apiPath = "/messaging/providers/vonage"
         val apiParams = mutableMapOf<String, Any?>(
             "providerId" to providerId,
             "name" to name,
@@ -2400,7 +2333,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/vonage/{providerId}"
             .replace("{providerId}", providerId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -2428,7 +2360,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a provider by its unique ID.
-     * 
+     *
      *
      * @param providerId Provider ID.
      * @return [io.appwrite.models.Provider]
@@ -2440,9 +2372,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/{providerId}"
             .replace("{providerId}", providerId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2473,9 +2403,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/providers/{providerId}"
             .replace("{providerId}", providerId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2504,9 +2432,7 @@ class Messaging(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.TopicList {
-        val apiPath = ("/messaging/topics"
-        )
-
+        val apiPath = "/messaging/topics"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -2544,9 +2470,7 @@ class Messaging(client: Client) : Service(client) {
         name: String,
         subscribe: List<String>? = null,
     ): io.appwrite.models.Topic {
-        val apiPath = ("/messaging/topics"
-        )
-
+        val apiPath = "/messaging/topics"
         val apiParams = mutableMapOf<String, Any?>(
             "topicId" to topicId,
             "name" to name,
@@ -2572,7 +2496,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a topic by its unique ID.
-     * 
+     *
      *
      * @param topicId Topic ID.
      * @return [io.appwrite.models.Topic]
@@ -2584,9 +2508,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2606,7 +2528,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Update a topic by its unique ID.
-     * 
+     *
      *
      * @param topicId Topic ID.
      * @param name Topic Name.
@@ -2623,7 +2545,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "subscribe" to subscribe,
@@ -2659,9 +2580,7 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2695,7 +2614,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/topics/{topicId}/subscribers"
             .replace("{topicId}", topicId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -2735,7 +2653,6 @@ class Messaging(client: Client) : Service(client) {
         val apiPath = ("/messaging/topics/{topicId}/subscribers"
             .replace("{topicId}", topicId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "subscriberId" to subscriberId,
             "targetId" to targetId,
@@ -2760,7 +2677,7 @@ class Messaging(client: Client) : Service(client) {
 
     /**
      * Get a subscriber by its unique ID.
-     * 
+     *
      *
      * @param topicId Topic ID. The topic ID subscribed to.
      * @param subscriberId Subscriber ID.
@@ -2775,9 +2692,7 @@ class Messaging(client: Client) : Service(client) {
             .replace("{topicId}", topicId)
             .replace("{subscriberId}", subscriberId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2811,9 +2726,7 @@ class Messaging(client: Client) : Service(client) {
             .replace("{topicId}", topicId)
             .replace("{subscriberId}", subscriberId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2826,5 +2739,4 @@ class Messaging(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

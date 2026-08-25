@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Webhooks service allows you to manage your project webhooks.
-**/
+ * The Webhooks service allows you to manage your project webhooks.**/
 class Webhooks(client: Client) : Service(client) {
-
     /**
      * Get a list of all webhooks belonging to the project. You can use the query params to filter your results.
      *
@@ -26,9 +24,7 @@ class Webhooks(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.WebhookList {
-        val apiPath = ("/webhooks"
-        )
-
+        val apiPath = "/webhooks"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -77,9 +73,7 @@ class Webhooks(client: Client) : Service(client) {
         authPassword: String? = null,
         secret: String? = null,
     ): io.appwrite.models.Webhook {
-        val apiPath = ("/webhooks"
-        )
-
+        val apiPath = "/webhooks"
         val apiParams = mutableMapOf<String, Any?>(
             "webhookId" to webhookId,
             "url" to url,
@@ -110,7 +104,7 @@ class Webhooks(client: Client) : Service(client) {
     }
 
     /**
-     * Get a webhook by its unique ID. This endpoint returns details about a specific webhook configured for a project. 
+     * Get a webhook by its unique ID. This endpoint returns details about a specific webhook configured for a project.
      *
      * @param webhookId Webhook ID.
      * @return [io.appwrite.models.Webhook]
@@ -122,9 +116,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -170,7 +162,6 @@ class Webhooks(client: Client) : Service(client) {
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "url" to url,
@@ -199,7 +190,7 @@ class Webhooks(client: Client) : Service(client) {
     }
 
     /**
-     * Delete a webhook by its unique ID. Once deleted, the webhook will no longer receive project events. 
+     * Delete a webhook by its unique ID. Once deleted, the webhook will no longer receive project events.
      *
      * @param webhookId Webhook ID.
      * @return [Any]
@@ -211,9 +202,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -243,7 +232,6 @@ class Webhooks(client: Client) : Service(client) {
         val apiPath = ("/webhooks/{webhookId}/secret"
             .replace("{webhookId}", webhookId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "secret" to secret,
         )
@@ -264,5 +252,4 @@ class Webhooks(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

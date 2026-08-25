@@ -1,5 +1,13 @@
 # Change Log
 
+## 21.0.0
+
+* Breaking: object parameters and model fields are now typed `Map<String, Any?>` instead of `Any`
+* Fixed: passing `null` in `data` now clears the attribute instead of being dropped from the request
+* Added: `project.updateOAuth2HuggingFace` and the `OAuth2HuggingFace` model
+* Added: `avatars.getPhoto`
+* Added: `ExecutionResourceType` enum
+
 ## 20.0.0
 
 * Breaking: removed `account.createJWT`; use `users.createJWT` instead. A leaked JWT could mint further JWTs, letting a credential outlive its own expiry — a session cannot duplicate itself to live forever either

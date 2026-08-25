@@ -53,13 +53,13 @@ data class Provider(
      * Provider credentials.
      */
     @SerializedName("credentials")
-    val credentials: Any,
+    val credentials: Map<String, Any?>,
 
     /**
      * Provider options.
      */
     @SerializedName("options")
-    var options: Any?,
+    var options: Map<String, Any?>?,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -75,7 +75,6 @@ data class Provider(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -87,8 +86,8 @@ data class Provider(
             provider = map["provider"] as String,
             enabled = map["enabled"] as Boolean,
             type = map["type"] as String,
-            credentials = map["credentials"] as Any,
-            options = map["options"] as? Any,
+            credentials = map["credentials"] as Map<String, Any?>,
+            options = map["options"] as? Map<String, Any?>,
         )
     }
 }

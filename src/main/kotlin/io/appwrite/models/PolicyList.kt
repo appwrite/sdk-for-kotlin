@@ -17,7 +17,7 @@ data class PolicyList(
      * List of policies.
      */
     @SerializedName("policies")
-    val policies: List<Any>,
+    val policies: List<Map<String, Any?>>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -26,13 +26,12 @@ data class PolicyList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
         ) = PolicyList(
             total = (map["total"] as Number).toLong(),
-            policies = map["policies"] as List<Any>,
+            policies = map["policies"] as List<Map<String, Any?>>,
         )
     }
 }

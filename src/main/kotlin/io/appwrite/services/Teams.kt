@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Teams service allows you to group users of your project and to enable them to share read and write access to your project resources
-**/
+ * The Teams service allows you to group users of your project and to enable them to share read and write access to your project resources**/
 class Teams(client: Client) : Service(client) {
-
     /**
      * Get a list of all the teams in which the current user is a member. You can use the parameters to filter your results.
      *
@@ -29,9 +27,7 @@ class Teams(client: Client) : Service(client) {
         total: Boolean? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.TeamList<T> {
-        val apiPath = ("/teams"
-        )
-
+        val apiPath = "/teams"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -91,9 +87,7 @@ class Teams(client: Client) : Service(client) {
         roles: List<String>? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Team<T> {
-        val apiPath = ("/teams"
-        )
-
+        val apiPath = "/teams"
         val apiParams = mutableMapOf<String, Any?>(
             "teamId" to teamId,
             "name" to name,
@@ -152,9 +146,7 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -202,7 +194,6 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
@@ -254,9 +245,7 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}"
             .replace("{teamId}", teamId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -288,7 +277,6 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}/installations"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -328,7 +316,6 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}/installations"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "appId" to appId,
             "authorizationDetails" to authorizationDetails,
@@ -367,9 +354,7 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -406,7 +391,6 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{installationId}", installationId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "authorizationDetails" to authorizationDetails,
         )
@@ -444,9 +428,7 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -481,7 +463,6 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}/memberships"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -506,13 +487,13 @@ class Teams(client: Client) : Service(client) {
 
     /**
      * Invite a new member to join your team. Provide an ID for existing users, or invite unregistered users using an email or phone number. If initiated from a Client SDK, Appwrite will send an email or sms with a link to join the team to the invited user, and an account will be created for them if one doesn't exist. If initiated from a Server SDK, the new member will be added automatically to the team.
-     * 
+     *
      * You only need to provide one of a user ID, email, or phone number. Appwrite will prioritize accepting the user ID > email > phone number if you provide more than one of these parameters.
-     * 
-     * Use the `url` parameter to redirect the user from the invitation email to your app. After the user is redirected, use the [Update Team Membership Status](https://appwrite.io/docs/references/cloud/client-web/teams#updateMembershipStatus) endpoint to allow the user to accept the invitation to the team. 
-     * 
+     *
+     * Use the `url` parameter to redirect the user from the invitation email to your app. After the user is redirected, use the [Update Team Membership Status](https://appwrite.io/docs/references/cloud/client-web/teams#updateMembershipStatus) endpoint to allow the user to accept the invitation to the team.
+     *
      * Please note that to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md) Appwrite will accept the only redirect URLs under the domains you have added as a platform on the Appwrite Console.
-     * 
+     *
      *
      * @param teamId Team ID.
      * @param roles Array of strings. Use this param to set the user roles in the team. A role can be any string. Learn more about [roles and permissions](https://appwrite.io/docs/permissions). Maximum of 100 roles are allowed, each 81 characters long.
@@ -537,7 +518,6 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}/memberships"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
             "userId" to userId,
@@ -580,9 +560,7 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -602,7 +580,7 @@ class Teams(client: Client) : Service(client) {
 
     /**
      * Modify the roles of a team member. Only team members with the owner role have access to this endpoint. Learn more about [roles and permissions](https://appwrite.io/docs/permissions).
-     * 
+     *
      *
      * @param teamId Team ID.
      * @param membershipId Membership ID.
@@ -619,7 +597,6 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "roles" to roles,
         )
@@ -657,9 +634,7 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -675,9 +650,9 @@ class Teams(client: Client) : Service(client) {
 
     /**
      * Use this endpoint to allow a user to accept an invitation to join a team after being redirected back to your app from the invitation email received by the user.
-     * 
+     *
      * If the request is successful, a session for the user is automatically created.
-     * 
+     *
      *
      * @param teamId Team ID.
      * @param membershipId Membership ID.
@@ -696,7 +671,6 @@ class Teams(client: Client) : Service(client) {
             .replace("{teamId}", teamId)
             .replace("{membershipId}", membershipId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -733,9 +707,7 @@ class Teams(client: Client) : Service(client) {
         val apiPath = ("/teams/{teamId}/prefs"
             .replace("{teamId}", teamId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -777,13 +749,12 @@ class Teams(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun <T> updatePrefs(
         teamId: String,
-        prefs: Any,
+        prefs: Map<String, Any?>,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
         val apiPath = ("/teams/{teamId}/prefs"
             .replace("{teamId}", teamId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "prefs" to prefs,
         )
@@ -815,11 +786,10 @@ class Teams(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun updatePrefs(
         teamId: String,
-        prefs: Any,
+        prefs: Map<String, Any?>,
     ): io.appwrite.models.Preferences<Map<String, Any>> = updatePrefs(
         teamId,
         prefs,
         nestedType = classOf(),
     )
-
 }

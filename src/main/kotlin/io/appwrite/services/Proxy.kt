@@ -1,21 +1,19 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.
-**/
+ * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.**/
 class Proxy(client: Client) : Service(client) {
-
     /**
      * Create a new CDN cache invalidation for a domain. Executes a hard purge of cached content.
-     * 
+     *
      * Depending on type, the invalidation purges a single cache tag, a single URL path, or all cached content for the domain.
      *
      * @param domain Domain name.
@@ -30,9 +28,7 @@ class Proxy(client: Client) : Service(client) {
         type: io.appwrite.enums.InvalidationType,
         reference: String? = null,
     ): io.appwrite.models.ProxyInvalidation {
-        val apiPath = ("/proxy/invalidations"
-        )
-
+        val apiPath = "/proxy/invalidations"
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
             "type" to type,
@@ -69,9 +65,7 @@ class Proxy(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ProxyRuleList {
-        val apiPath = ("/proxy/rules"
-        )
-
+        val apiPath = "/proxy/rules"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -95,7 +89,7 @@ class Proxy(client: Client) : Service(client) {
 
     /**
      * Create a new proxy rule for serving Appwrite's API on custom domain.
-     * 
+     *
      * Rule ID is automatically generated as MD5 hash of a rule domain for performance purposes.
      *
      * @param domain Domain name.
@@ -105,9 +99,7 @@ class Proxy(client: Client) : Service(client) {
     suspend fun createAPIRule(
         domain: String,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = ("/proxy/rules/api"
-        )
-
+        val apiPath = "/proxy/rules/api"
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
         )
@@ -131,7 +123,7 @@ class Proxy(client: Client) : Service(client) {
 
     /**
      * Create a new proxy rule for executing Appwrite Function on custom domain.
-     * 
+     *
      * Rule ID is automatically generated as MD5 hash of a rule domain for performance purposes.
      *
      * @param domain Domain name.
@@ -146,9 +138,7 @@ class Proxy(client: Client) : Service(client) {
         functionId: String,
         branch: String? = null,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = ("/proxy/rules/function"
-        )
-
+        val apiPath = "/proxy/rules/function"
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
             "functionId" to functionId,
@@ -174,7 +164,7 @@ class Proxy(client: Client) : Service(client) {
 
     /**
      * Create a new proxy rule for to redirect from custom domain to another domain.
-     * 
+     *
      * Rule ID is automatically generated as MD5 hash of a rule domain for performance purposes.
      *
      * @param domain Domain name.
@@ -192,9 +182,7 @@ class Proxy(client: Client) : Service(client) {
         resourceId: String,
         resourceType: io.appwrite.enums.ProxyResourceType,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = ("/proxy/rules/redirect"
-        )
-
+        val apiPath = "/proxy/rules/redirect"
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
             "url" to url,
@@ -222,7 +210,7 @@ class Proxy(client: Client) : Service(client) {
 
     /**
      * Create a new proxy rule for serving Appwrite Site on custom domain.
-     * 
+     *
      * Rule ID is automatically generated as MD5 hash of a rule domain for performance purposes.
      *
      * @param domain Domain name.
@@ -237,9 +225,7 @@ class Proxy(client: Client) : Service(client) {
         siteId: String,
         branch: String? = null,
     ): io.appwrite.models.ProxyRule {
-        val apiPath = ("/proxy/rules/site"
-        )
-
+        val apiPath = "/proxy/rules/site"
         val apiParams = mutableMapOf<String, Any?>(
             "domain" to domain,
             "siteId" to siteId,
@@ -276,9 +262,7 @@ class Proxy(client: Client) : Service(client) {
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -309,9 +293,7 @@ class Proxy(client: Client) : Service(client) {
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -338,9 +320,7 @@ class Proxy(client: Client) : Service(client) {
         val apiPath = ("/proxy/rules/{ruleId}/status"
             .replace("{ruleId}", ruleId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -358,5 +338,4 @@ class Proxy(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

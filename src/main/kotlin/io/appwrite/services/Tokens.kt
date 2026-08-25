@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Tokens service allows you to create and manage resource tokens for secure file access.
-**/
+ * The Tokens service allows you to create and manage resource tokens for secure file access.**/
 class Tokens(client: Client) : Service(client) {
-
     /**
      * List all the tokens created for a specific file or bucket. You can use the query params to filter your results.
      *
@@ -34,7 +32,6 @@ class Tokens(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -75,7 +72,6 @@ class Tokens(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
         )
@@ -110,9 +106,7 @@ class Tokens(client: Client) : Service(client) {
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -146,7 +140,6 @@ class Tokens(client: Client) : Service(client) {
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
         )
@@ -181,9 +174,7 @@ class Tokens(client: Client) : Service(client) {
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -196,5 +187,4 @@ class Tokens(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

@@ -2,7 +2,7 @@ package io.appwrite
 
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.fromJson
-import io.appwrite.extensions.toJson
+import io.appwrite.extensions.toJsonRequestBody
 import io.appwrite.models.InputFile
 import io.appwrite.models.UploadProgress
 import kotlinx.coroutines.CoroutineScope
@@ -22,8 +22,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.File
-import java.io.RandomAccessFile
 import java.io.IOException
+import java.io.RandomAccessFile
 import java.lang.IllegalArgumentException
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -44,7 +44,7 @@ class Client @JvmOverloads constructor(
 ) : CoroutineScope {
 
     companion object {
-        const val CHUNK_SIZE = 5*1024*1024; // 5MB
+        const val CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
         const val MAX_CONCURRENT_UPLOADS = 8
     }
 
@@ -64,11 +64,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/20.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/21.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "20.0.0",
+            "x-sdk-version" to "21.0.0",
             "x-appwrite-response-format" to "1.9.6",
         )
 
@@ -322,12 +322,12 @@ class Client @JvmOverloads constructor(
     }
 
     /**
-    * Set endpoint.
-    *
-    * @param endpoint
-    *
-    * @return this
-    */
+     * Set endpoint.
+     *
+     * @param endpoint
+     *
+     * @return this
+     */
     @Throws(IllegalArgumentException::class)
     fun setEndpoint(endPoint: String): Client {
         require(endPoint.startsWith("http://") || endPoint.startsWith("https://")) {
@@ -394,7 +394,7 @@ class Client @JvmOverloads constructor(
     suspend fun prepareRequest(
         method: String,
         path: String,
-        headers:  Map<String, String> = mapOf(),
+        headers: Map<String, String> = mapOf(),
         params: Map<String, Any?> = mapOf(),
     ): Request {
         val filteredParams = params.filterValues { it != null }
@@ -457,8 +457,8 @@ class Client @JvmOverloads constructor(
             }
             builder.build()
         } else {
-            filteredParams
-                .toJson()
+            params
+                .toJsonRequestBody()
                 .toRequestBody("application/json".toMediaType())
         }
 
@@ -483,7 +483,7 @@ class Client @JvmOverloads constructor(
     suspend fun <T> call(
         method: String,
         path: String,
-        headers:  Map<String, String> = mapOf(),
+        headers: Map<String, String> = mapOf(),
         params: Map<String, Any?> = mapOf(),
         responseType: Class<T>,
         converter: ((Any) -> T)? = null
@@ -506,7 +506,7 @@ class Client @JvmOverloads constructor(
     suspend fun redirect(
         method: String,
         path: String,
-        headers:  Map<String, String> = mapOf(),
+        headers: Map<String, String> = mapOf(),
         params: Map<String, Any?> = mapOf(),
     ): String {
         val request = prepareRequest(method, path, headers, params)
@@ -526,7 +526,7 @@ class Client @JvmOverloads constructor(
     @Throws(AppwriteException::class)
     suspend fun <T> chunkedUpload(
         path: String,
-        headers:  MutableMap<String, String>,
+        headers: MutableMap<String, String>,
         params: MutableMap<String, Any?>,
         responseType: Class<T>,
         converter: ((Any) -> T),
@@ -535,7 +535,7 @@ class Client @JvmOverloads constructor(
         onProgress: ((UploadProgress) -> Unit)? = null,
     ): T {
         val input = params[paramName] as InputFile
-        val size: Long = when(input.sourceType) {
+        val size: Long = when (input.sourceType) {
             "path", "file" -> {
                 File(input.path).length()
             }
@@ -546,7 +546,7 @@ class Client @JvmOverloads constructor(
         }
 
         if (size < CHUNK_SIZE) {
-            val data = when(input.sourceType) {
+            val data = when (input.sourceType) {
                 "file", "path" -> File(input.path).asRequestBody()
                 "bytes" -> (input.data as ByteArray).toRequestBody(input.mimeType.toMediaType())
                 else -> throw UnsupportedOperationException()
@@ -570,24 +570,25 @@ class Client @JvmOverloads constructor(
         var result: Map<*, *>? = null
         var uploadId: String? = null
 
-        if (idParamName?.isNotEmpty() == true) {
+        val providedUploadId = idParamName?.let { params[it]?.toString() }
+        if (!providedUploadId.isNullOrEmpty()) {
             // Make a request to check if a file already exists
             val current = call(
                 method = "GET",
-                path = "$path/${params[idParamName]}",
+                path = "$path/$providedUploadId",
                 headers = headers,
                 params = emptyMap(),
                 responseType = Map::class.java,
             )
             val chunksUploaded = current["chunksUploaded"] as Long
             offset = chunksUploaded * CHUNK_SIZE
-            uploadId = params[idParamName]?.toString()
+            uploadId = providedUploadId
             result = current
         }
 
         fun readChunk(start: Long, end: Long): ByteArray {
             val length = (end - start).toInt()
-            return when(input.sourceType) {
+            return when (input.sourceType) {
                 "file", "path" -> {
                     RandomAccessFile(input.path, "r").use { chunkFile ->
                         val chunk = ByteArray(length)

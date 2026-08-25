@@ -17,7 +17,7 @@ data class AttributeList(
      * List of attributes.
      */
     @SerializedName("attributes")
-    val attributes: List<Any>,
+    val attributes: List<Map<String, Any?>>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -26,13 +26,12 @@ data class AttributeList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
         ) = AttributeList(
             total = (map["total"] as Number).toLong(),
-            attributes = map["attributes"] as List<Any>,
+            attributes = map["attributes"] as List<Map<String, Any?>>,
         )
     }
 }

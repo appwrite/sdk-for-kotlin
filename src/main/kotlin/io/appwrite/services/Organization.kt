@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Organization service allows you to manage organization-level projects.
-**/
+ * The Organization service allows you to manage organization-level projects.**/
 class Organization(client: Client) : Service(client) {
-
     /**
      * Get the current organization.
      *
@@ -22,11 +20,8 @@ class Organization(client: Client) : Service(client) {
     suspend fun <T> get(
         nestedType: Class<T>,
     ): io.appwrite.models.Organization<T> {
-        val apiPath = ("/organization"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiPath = "/organization"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -50,8 +45,7 @@ class Organization(client: Client) : Service(client) {
      * @return [io.appwrite.models.Organization<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun get(
-    ): io.appwrite.models.Organization<Map<String, Any>> = get(
+    suspend fun get(): io.appwrite.models.Organization<Map<String, Any>> = get(
         nestedType = classOf(),
     )
 
@@ -66,9 +60,7 @@ class Organization(client: Client) : Service(client) {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Organization<T> {
-        val apiPath = ("/organization"
-        )
-
+        val apiPath = "/organization"
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
@@ -110,13 +102,9 @@ class Organization(client: Client) : Service(client) {
      * @return [Any]
      */
     @Throws(AppwriteException::class)
-    suspend fun delete(
-    ): Any {
-        val apiPath = ("/organization"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun delete(): Any {
+        val apiPath = "/organization"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -143,9 +131,7 @@ class Organization(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.AppInstallationList {
-        val apiPath = ("/organization/installations"
-        )
-
+        val apiPath = "/organization/installations"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -180,9 +166,7 @@ class Organization(client: Client) : Service(client) {
         appId: String,
         authorizationDetails: String? = null,
     ): io.appwrite.models.AppInstallation {
-        val apiPath = ("/organization/installations"
-        )
-
+        val apiPath = "/organization/installations"
         val apiParams = mutableMapOf<String, Any?>(
             "appId" to appId,
             "authorizationDetails" to authorizationDetails,
@@ -218,9 +202,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -254,7 +236,6 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "authorizationDetails" to authorizationDetails,
         )
@@ -289,9 +270,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -319,9 +298,7 @@ class Organization(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.KeyList {
-        val apiPath = ("/organization/keys"
-        )
-
+        val apiPath = "/organization/keys"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -360,9 +337,7 @@ class Organization(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.OrganizationKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
-        val apiPath = ("/organization/keys"
-        )
-
+        val apiPath = "/organization/keys"
         val apiParams = mutableMapOf<String, Any?>(
             "keyId" to keyId,
             "name" to name,
@@ -400,9 +375,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -440,7 +413,6 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "scopes" to scopes,
@@ -477,9 +449,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -508,9 +478,7 @@ class Organization(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.MembershipList {
-        val apiPath = ("/organization/memberships"
-        )
-
+        val apiPath = "/organization/memberships"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -554,9 +522,7 @@ class Organization(client: Client) : Service(client) {
         url: String? = null,
         name: String? = null,
     ): io.appwrite.models.Membership {
-        val apiPath = ("/organization/memberships"
-        )
-
+        val apiPath = "/organization/memberships"
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
             "userId" to userId,
@@ -596,9 +562,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -631,7 +595,6 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "roles" to roles,
         )
@@ -666,9 +629,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -697,9 +658,7 @@ class Organization(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ProjectList {
-        val apiPath = ("/organization/projects"
-        )
-
+        val apiPath = "/organization/projects"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -737,9 +696,7 @@ class Organization(client: Client) : Service(client) {
         name: String,
         region: io.appwrite.enums.Region? = null,
     ): io.appwrite.models.Project {
-        val apiPath = ("/organization/projects"
-        )
-
+        val apiPath = "/organization/projects"
         val apiParams = mutableMapOf<String, Any?>(
             "projectId" to projectId,
             "name" to name,
@@ -776,9 +733,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
         )
@@ -810,7 +765,6 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
@@ -845,9 +799,7 @@ class Organization(client: Client) : Service(client) {
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -860,5 +812,4 @@ class Organization(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

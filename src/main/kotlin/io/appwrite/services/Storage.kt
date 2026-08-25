@@ -1,20 +1,18 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Storage service allows you to manage your project files.
-**/
+ * The Storage service allows you to manage your project files.**/
 class Storage(client: Client) : Service(client) {
-
     /**
      * Get a list of all the storage buckets. You can use the query params to filter your results.
      *
@@ -30,9 +28,7 @@ class Storage(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.BucketList {
-        val apiPath = ("/storage/buckets"
-        )
-
+        val apiPath = "/storage/buckets"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -86,9 +82,7 @@ class Storage(client: Client) : Service(client) {
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
-        val apiPath = ("/storage/buckets"
-        )
-
+        val apiPath = "/storage/buckets"
         val apiParams = mutableMapOf<String, Any?>(
             "bucketId" to bucketId,
             "name" to name,
@@ -133,9 +127,7 @@ class Storage(client: Client) : Service(client) {
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -187,7 +179,6 @@ class Storage(client: Client) : Service(client) {
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "permissions" to permissions,
@@ -231,9 +222,7 @@ class Storage(client: Client) : Service(client) {
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -267,7 +256,6 @@ class Storage(client: Client) : Service(client) {
         val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -292,13 +280,13 @@ class Storage(client: Client) : Service(client) {
 
     /**
      * Create a new file. Before using this route, you should create a new bucket resource using either a [server integration](https://appwrite.io/docs/server/storage#storageCreateBucket) API or directly from your Appwrite console.
-     * 
+     *
      * Larger files should be uploaded using multiple requests with the [content-range](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Range) header to send a partial request with a maximum supported chunk of `5MB`. The `content-range` header values should always be in bytes.
-     * 
+     *
      * When the first request is sent, the server will return the **File** object, and the subsequent part request must include the file's **id** in `x-appwrite-id` header to allow the server to know that the partial upload is for the existing file and not for a new one.
-     * 
+     *
      * If you're creating a new file using one of the Appwrite SDKs, all the chunking logic will be managed by the SDK internally.
-     * 
+     *
      *
      * @param bucketId Storage bucket unique ID. You can create a new storage bucket using the Storage service [server integration](https://appwrite.io/docs/server/storage#createBucket).
      * @param fileId File ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -320,7 +308,6 @@ class Storage(client: Client) : Service(client) {
         val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "fileId" to fileId,
             "file" to file,
@@ -365,9 +352,7 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -406,7 +391,6 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "permissions" to permissions,
@@ -445,9 +429,7 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -480,7 +462,6 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "token" to token,
         )
@@ -538,7 +519,6 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "width" to width,
             "height" to height,
@@ -585,7 +565,6 @@ class Storage(client: Client) : Service(client) {
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "token" to token,
         )
@@ -601,5 +580,4 @@ class Storage(client: Client) : Service(client) {
             responseType = ByteArray::class.java
         )
     }
-
 }

@@ -159,6 +159,8 @@ enum class BuildRuntime(val value: String) {
     BUN_1_2("bun-1.2"),
     @SerializedName("bun-1.3")
     BUN_1_3("bun-1.3"),
+    @SerializedName("bun-1.4")
+    BUN_1_4("bun-1.4"),
     @SerializedName("go-1.23")
     GO_1_23("go-1.23"),
     @SerializedName("go-1.24")
