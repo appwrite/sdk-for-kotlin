@@ -1,9 +1,9 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.DatabaseType
 import io.appwrite.enums.DatabaseStatus
+import io.appwrite.extensions.jsonCast
 
 /**
  * Database
@@ -70,6 +70,24 @@ data class Database(
     var replicas: Long?,
 
     /**
+     * Error message when the dedicated backing failed. Null when the database has no dedicated backing or has not failed.
+     */
+    @SerializedName("error")
+    var error: String?,
+
+    /**
+     * Container status of the dedicated backing: active or inactive. Null when the database has no dedicated backing or the runtime has not reported one.
+     */
+    @SerializedName("containerStatus")
+    var containerStatus: String?,
+
+    /**
+     * Idle-lifecycle state of the dedicated backing: active, warm, cold, or hibernated. Null when the database has no dedicated backing or the runtime has not reported one.
+     */
+    @SerializedName("lifecycleState")
+    var lifecycleState: String?,
+
+    /**
      * Database backup policies.
      */
     @SerializedName("policies")
@@ -93,12 +111,14 @@ data class Database(
         "engine" to engine as Any?,
         "specification" to specification as Any?,
         "replicas" to replicas as Any?,
+        "error" to error as Any?,
+        "containerStatus" to containerStatus as Any?,
+        "lifecycleState" to lifecycleState as Any?,
         "policies" to policies?.map { it.toMap() } as Any?,
         "archives" to archives?.map { it.toMap() } as Any?,
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -113,6 +133,9 @@ data class Database(
             engine = map["engine"] as? String,
             specification = map["specification"] as? String,
             replicas = (map["replicas"] as? Number)?.toLong(),
+            error = map["error"] as? String,
+            containerStatus = map["containerStatus"] as? String,
+            lifecycleState = map["lifecycleState"] as? String,
             policies = (map["policies"] as? List<Map<String, Any>>)?.map { BackupPolicy.from(map = it) },
             archives = (map["archives"] as? List<Map<String, Any>>)?.map { BackupArchive.from(map = it) },
         )

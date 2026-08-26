@@ -68,6 +68,12 @@ data class DatabaseMigration(
     val lagDocuments: Long,
 
     /**
+     * Highest source changelog sequence applied to the target so far.
+     */
+    @SerializedName("changelogWatermark")
+    val changelogWatermark: Long,
+
+    /**
      * Time the migrated data was verified against the source in ISO 8601 format.
      */
     @SerializedName("verifiedAt")
@@ -115,6 +121,7 @@ data class DatabaseMigration(
         "attempt" to attempt as Any,
         "lastError" to lastError as Any,
         "lagDocuments" to lagDocuments as Any,
+        "changelogWatermark" to changelogWatermark as Any,
         "verifiedAt" to verifiedAt as Any,
         "cutoverAt" to cutoverAt as Any,
         "soakUntil" to soakUntil as Any,
@@ -124,7 +131,6 @@ data class DatabaseMigration(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -139,6 +145,7 @@ data class DatabaseMigration(
             attempt = (map["attempt"] as Number).toLong(),
             lastError = map["lastError"] as String,
             lagDocuments = (map["lagDocuments"] as Number).toLong(),
+            changelogWatermark = (map["changelogWatermark"] as Number).toLong(),
             verifiedAt = map["verifiedAt"] as String,
             cutoverAt = map["cutoverAt"] as String,
             soakUntil = map["soakUntil"] as String,

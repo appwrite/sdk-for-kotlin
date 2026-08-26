@@ -40,7 +40,6 @@ data class OAuth2Amazon(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

@@ -14,7 +14,7 @@ data class MockNumber(
     val number: String,
 
     /**
-     * Mock OTP for the number. 
+     * Mock OTP for the number.
      */
     @SerializedName("otp")
     val otp: String,
@@ -40,7 +40,6 @@ data class MockNumber(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

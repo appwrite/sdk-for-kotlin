@@ -26,7 +26,13 @@ data class DedicatedDatabaseMember(
     val status: String,
 
     /**
-     * Replication lag in seconds. Null when the lag is not known: a primary has none to report, and a member the backend has not probed has none yet.
+     * Whether the engine reports this member's replication stream as up. Null when no reading was taken: a primary has no stream to report, and a member that is not active, or whose probe did not answer, has none yet. False is a reading and null is the absence of one, so the two are not interchangeable. Read it beside lagSeconds before expecting a failover that names no target to find a promotable standby: a member streaming at a known lag is one, and a member reporting null is not evidence either way.
+     */
+    @SerializedName("replicating")
+    var replicating: Boolean?,
+
+    /**
+     * Replication lag in seconds. Null when the lag is not known: a primary has none to report, and a member the backend has not probed has none yet. Also null against `replicating: true`, for a member that is streaming but whose engine printed no numeric lag.
      */
     @SerializedName("lagSeconds")
     var lagSeconds: Double?,
@@ -36,11 +42,11 @@ data class DedicatedDatabaseMember(
         "\$id" to id as Any,
         "role" to role as Any,
         "status" to status as Any,
+        "replicating" to replicating as Any?,
         "lagSeconds" to lagSeconds as Any?,
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -48,6 +54,7 @@ data class DedicatedDatabaseMember(
             id = map["\$id"] as String,
             role = map["role"] as String,
             status = map["status"] as String,
+            replicating = map["replicating"] as? Boolean,
             lagSeconds = (map["lagSeconds"] as? Number)?.toDouble(),
         )
     }

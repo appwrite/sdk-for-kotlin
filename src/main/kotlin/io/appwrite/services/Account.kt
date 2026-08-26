@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Account service allows you to authenticate and manage a user account.
-**/
+ * The Account service allows you to authenticate and manage a user account.**/
 class Account(client: Client) : Service(client) {
-
     /**
      * Get the currently logged in user.
      *
@@ -22,11 +20,8 @@ class Account(client: Client) : Service(client) {
     suspend fun <T> get(
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiPath = "/account"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -50,8 +45,7 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun get(
-    ): io.appwrite.models.User<Map<String, Any>> = get(
+    suspend fun get(): io.appwrite.models.User<Map<String, Any>> = get(
         nestedType = classOf(),
     )
 
@@ -73,9 +67,7 @@ class Account(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account"
-        )
-
+        val apiPath = "/account"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -137,9 +129,7 @@ class Account(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.Oauth2ConsentList {
-        val apiPath = ("/account/consents"
-        )
-
+        val apiPath = "/account/consents"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -174,9 +164,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/consents/{consentId}"
             .replace("{consentId}", consentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -207,9 +195,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/consents/{consentId}"
             .replace("{consentId}", consentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -242,7 +228,6 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/consents/{consentId}/tokens"
             .replace("{consentId}", consentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -280,9 +265,7 @@ class Account(client: Client) : Service(client) {
             .replace("{consentId}", consentId)
             .replace("{tokenId}", tokenId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -316,9 +299,7 @@ class Account(client: Client) : Service(client) {
             .replace("{consentId}", consentId)
             .replace("{tokenId}", tokenId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -336,7 +317,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Update currently logged in user account email address. After changing user address, the user confirmation status will get reset. A new confirmation email is not sent automatically however you can use the send confirmation email endpoint again to send the confirmation email. For security measures, user password is required to complete this request.
      * This endpoint can also be used to convert an anonymous account to a normal one, by passing an email address and a new password.
-     * 
+     *
      *
      * @param email User email.
      * @param password User password. Must be at least 8 chars.
@@ -348,9 +329,7 @@ class Account(client: Client) : Service(client) {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/email"
-        )
-
+        val apiPath = "/account/email"
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
             "password" to password,
@@ -376,7 +355,7 @@ class Account(client: Client) : Service(client) {
     /**
      * Update currently logged in user account email address. After changing user address, the user confirmation status will get reset. A new confirmation email is not sent automatically however you can use the send confirmation email endpoint again to send the confirmation email. For security measures, user password is required to complete this request.
      * This endpoint can also be used to convert an anonymous account to a normal one, by passing an email address and a new password.
-     * 
+     *
      *
      * @param email User email.
      * @param password User password. Must be at least 8 chars.
@@ -405,9 +384,7 @@ class Account(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.IdentityList {
-        val apiPath = ("/account/identities"
-        )
-
+        val apiPath = "/account/identities"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -442,9 +419,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/identities/{identityId}"
             .replace("{identityId}", identityId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -471,9 +446,7 @@ class Account(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.LogList {
-        val apiPath = ("/account/logs"
-        )
-
+        val apiPath = "/account/logs"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -506,9 +479,7 @@ class Account(client: Client) : Service(client) {
         mfa: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/mfa"
-        )
-
+        val apiPath = "/account/mfa"
         val apiParams = mutableMapOf<String, Any?>(
             "mfa" to mfa,
         )
@@ -561,9 +532,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -595,9 +564,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -636,7 +603,6 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "otp" to otp,
         )
@@ -695,7 +661,6 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "otp" to otp,
         )
@@ -751,9 +716,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -780,9 +743,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/mfa/authenticators/{type}"
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -810,9 +771,7 @@ class Account(client: Client) : Service(client) {
     suspend fun createMfaChallenge(
         factor: io.appwrite.enums.AuthenticationFactor,
     ): io.appwrite.models.MfaChallenge {
-        val apiPath = ("/account/mfa/challenges"
-        )
-
+        val apiPath = "/account/mfa/challenges"
         val apiParams = mutableMapOf<String, Any?>(
             "factor" to factor,
         )
@@ -844,9 +803,7 @@ class Account(client: Client) : Service(client) {
     suspend fun createMFAChallenge(
         factor: io.appwrite.enums.AuthenticationFactor,
     ): io.appwrite.models.MfaChallenge {
-        val apiPath = ("/account/mfa/challenges"
-        )
-
+        val apiPath = "/account/mfa/challenges"
         val apiParams = mutableMapOf<String, Any?>(
             "factor" to factor,
         )
@@ -884,9 +841,7 @@ class Account(client: Client) : Service(client) {
         challengeId: String,
         otp: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/mfa/challenges"
-        )
-
+        val apiPath = "/account/mfa/challenges"
         val apiParams = mutableMapOf<String, Any?>(
             "challengeId" to challengeId,
             "otp" to otp,
@@ -921,9 +876,7 @@ class Account(client: Client) : Service(client) {
         challengeId: String,
         otp: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/mfa/challenges"
-        )
-
+        val apiPath = "/account/mfa/challenges"
         val apiParams = mutableMapOf<String, Any?>(
             "challengeId" to challengeId,
             "otp" to otp,
@@ -956,13 +909,9 @@ class Account(client: Client) : Service(client) {
         replaceWith = ReplaceWith("io.appwrite.services.Account.listMFAFactors")
     )
     @Throws(AppwriteException::class)
-    suspend fun listMfaFactors(
-    ): io.appwrite.models.MfaFactors {
-        val apiPath = ("/account/mfa/factors"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listMfaFactors(): io.appwrite.models.MfaFactors {
+        val apiPath = "/account/mfa/factors"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -986,13 +935,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.MfaFactors]
      */
     @Throws(AppwriteException::class)
-    suspend fun listMFAFactors(
-    ): io.appwrite.models.MfaFactors {
-        val apiPath = ("/account/mfa/factors"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listMFAFactors(): io.appwrite.models.MfaFactors {
+        val apiPath = "/account/mfa/factors"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1020,13 +965,9 @@ class Account(client: Client) : Service(client) {
         replaceWith = ReplaceWith("io.appwrite.services.Account.getMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
-    suspend fun getMfaRecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun getMfaRecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1050,13 +991,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
     @Throws(AppwriteException::class)
-    suspend fun getMFARecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun getMFARecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1084,13 +1021,9 @@ class Account(client: Client) : Service(client) {
         replaceWith = ReplaceWith("io.appwrite.services.Account.createMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
-    suspend fun createMfaRecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun createMfaRecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1115,13 +1048,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
     @Throws(AppwriteException::class)
-    suspend fun createMFARecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun createMFARecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1150,13 +1079,9 @@ class Account(client: Client) : Service(client) {
         replaceWith = ReplaceWith("io.appwrite.services.Account.updateMFARecoveryCodes")
     )
     @Throws(AppwriteException::class)
-    suspend fun updateMfaRecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun updateMfaRecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1181,13 +1106,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.MfaRecoveryCodes]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateMFARecoveryCodes(
-    ): io.appwrite.models.MfaRecoveryCodes {
-        val apiPath = ("/account/mfa/recovery-codes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun updateMFARecoveryCodes(): io.appwrite.models.MfaRecoveryCodes {
+        val apiPath = "/account/mfa/recovery-codes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1217,9 +1138,7 @@ class Account(client: Client) : Service(client) {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/name"
-        )
-
+        val apiPath = "/account/name"
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
@@ -1269,9 +1188,7 @@ class Account(client: Client) : Service(client) {
         oldPassword: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/password"
-        )
-
+        val apiPath = "/account/password"
         val apiParams = mutableMapOf<String, Any?>(
             "password" to password,
             "oldPassword" to oldPassword,
@@ -1325,9 +1242,7 @@ class Account(client: Client) : Service(client) {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/phone"
-        )
-
+        val apiPath = "/account/phone"
         val apiParams = mutableMapOf<String, Any?>(
             "phone" to phone,
             "password" to password,
@@ -1376,11 +1291,8 @@ class Account(client: Client) : Service(client) {
     suspend fun <T> getPrefs(
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
-        val apiPath = ("/account/prefs"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiPath = "/account/prefs"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1404,8 +1316,7 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.Preferences<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun getPrefs(
-    ): io.appwrite.models.Preferences<Map<String, Any>> = getPrefs(
+    suspend fun getPrefs(): io.appwrite.models.Preferences<Map<String, Any>> = getPrefs(
         nestedType = classOf(),
     )
 
@@ -1417,12 +1328,10 @@ class Account(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun <T> updatePrefs(
-        prefs: Any,
+        prefs: Map<String, Any?>,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/prefs"
-        )
-
+        val apiPath = "/account/prefs"
         val apiParams = mutableMapOf<String, Any?>(
             "prefs" to prefs,
         )
@@ -1452,7 +1361,7 @@ class Account(client: Client) : Service(client) {
      */
     @Throws(AppwriteException::class)
     suspend fun updatePrefs(
-        prefs: Any,
+        prefs: Map<String, Any?>,
     ): io.appwrite.models.User<Map<String, Any>> = updatePrefs(
         prefs,
         nestedType = classOf(),
@@ -1470,9 +1379,7 @@ class Account(client: Client) : Service(client) {
         email: String,
         url: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/recovery"
-        )
-
+        val apiPath = "/account/recovery"
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
             "url" to url,
@@ -1497,7 +1404,7 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Use this endpoint to complete the user account password reset. Both the **userId** and **secret** arguments will be passed as query parameters to the redirect URL you have provided when sending your request to the [POST /account/recovery](https://appwrite.io/docs/references/cloud/client-web/account#createRecovery) endpoint.
-     * 
+     *
      * Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md) the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
      *
      * @param userId User ID.
@@ -1511,9 +1418,7 @@ class Account(client: Client) : Service(client) {
         secret: String,
         password: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/recovery"
-        )
-
+        val apiPath = "/account/recovery"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -1543,13 +1448,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.SessionList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listSessions(
-    ): io.appwrite.models.SessionList {
-        val apiPath = ("/account/sessions"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listSessions(): io.appwrite.models.SessionList {
+        val apiPath = "/account/sessions"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1573,13 +1474,9 @@ class Account(client: Client) : Service(client) {
      * @return [Any]
      */
     @Throws(AppwriteException::class)
-    suspend fun deleteSessions(
-    ): Any {
-        val apiPath = ("/account/sessions"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun deleteSessions(): Any {
+        val apiPath = "/account/sessions"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1599,13 +1496,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.Session]
      */
     @Throws(AppwriteException::class)
-    suspend fun createAnonymousSession(
-    ): io.appwrite.models.Session {
-        val apiPath = ("/account/sessions/anonymous"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun createAnonymousSession(): io.appwrite.models.Session {
+        val apiPath = "/account/sessions/anonymous"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1626,7 +1519,7 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user.
-     * 
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
      * @param email User email.
@@ -1638,9 +1531,7 @@ class Account(client: Client) : Service(client) {
         email: String,
         password: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/sessions/email"
-        )
-
+        val apiPath = "/account/sessions/email"
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
             "password" to password,
@@ -1679,9 +1570,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/sessions/magic-url"
-        )
-
+        val apiPath = "/account/sessions/magic-url"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -1720,9 +1609,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/sessions/phone"
-        )
-
+        val apiPath = "/account/sessions/phone"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -1757,9 +1644,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Session {
-        val apiPath = ("/account/sessions/token"
-        )
-
+        val apiPath = "/account/sessions/token"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -1795,9 +1680,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1828,9 +1711,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1862,9 +1743,7 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1887,11 +1766,8 @@ class Account(client: Client) : Service(client) {
     suspend fun <T> updateStatus(
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/account/status"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiPath = "/account/status"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1916,16 +1792,15 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.User<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateStatus(
-    ): io.appwrite.models.User<Map<String, Any>> = updateStatus(
+    suspend fun updateStatus(): io.appwrite.models.User<Map<String, Any>> = updateStatus(
         nestedType = classOf(),
     )
 
     /**
      * Sends the user an email with a secret key for creating a session. If the email address has never been used, a **new account is created** using the provided `userId`. Otherwise, if the email address is already attached to an account, the **user ID is ignored**. Then, the user will receive an email with the one-time password. Use the returned user ID and secret and submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The secret sent to the user's email is valid for 15 minutes.
-     * 
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     * 
+     *
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars. If the email address has never been used, a new account is created using the provided userId. Otherwise, if the email address is already attached to an account, the user ID is ignored.
      * @param email User email.
@@ -1939,9 +1814,7 @@ class Account(client: Client) : Service(client) {
         email: String,
         phrase: Boolean? = null,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/tokens/email"
-        )
-
+        val apiPath = "/account/tokens/email"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -1967,9 +1840,9 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Sends the user an email with a secret key for creating a session. If the provided user ID has not been registered, a new user will be created. When the user clicks the link in the email, the user is redirected back to the URL you provided with the secret key and userId values attached to the URL query string. Use the query string parameters to submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The link sent to the user's email address is valid for 1 hour.
-     * 
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
-     * 
+     *
      *
      * @param userId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars. If the email address has never been used, a new account is created using the provided userId. Otherwise, if the email address is already attached to an account, the user ID is ignored.
      * @param email User email.
@@ -1985,9 +1858,7 @@ class Account(client: Client) : Service(client) {
         url: String? = null,
         phrase: Boolean? = null,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/tokens/magic-url"
-        )
-
+        val apiPath = "/account/tokens/magic-url"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -2013,13 +1884,13 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL's back to your app when login is completed. 
-     * 
+     * Allow the user to login to their account using the OAuth2 provider of their choice. Each OAuth2 provider should be enabled from the Appwrite console first. Use the success and failure arguments to provide a redirect URL's back to your app when login is completed.
+     *
      * If authentication succeeds, `userId` and `secret` of a token will be appended to the success URL as query parameters. These can be used to create a new session using the [Create session](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint.
-     * 
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
+     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, huggingface, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
      * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.
@@ -2036,7 +1907,6 @@ class Account(client: Client) : Service(client) {
         val apiPath = ("/account/tokens/oauth2/{provider}"
             .replace("{provider}", provider.value)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "success" to success,
             "failure" to failure,
@@ -2056,7 +1926,7 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Sends the user an SMS with a secret key for creating a session. If the provided user ID has not be registered, a new user will be created. Use the returned user ID and secret and submit a request to the [POST /v1/account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process. The secret sent to the user's phone is valid for 15 minutes.
-     * 
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
      * @param userId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars. If the phone number has never been used, a new account is created using the provided userId. Otherwise, if the phone number is already attached to an account, the user ID is ignored.
@@ -2068,9 +1938,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         phone: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/tokens/phone"
-        )
-
+        val apiPath = "/account/tokens/phone"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "phone" to phone,
@@ -2095,9 +1963,9 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Use this endpoint to send a verification message to your user email address to confirm they are the valid owners of that address. Both the **userId** and **secret** arguments will be passed as query parameters to the URL you have provided to be attached to the verification email. The provided URL should redirect the user back to your app and allow you to complete the verification process by verifying both the **userId** and **secret** parameters. Learn more about how to [complete the verification process](https://appwrite.io/docs/references/cloud/client-web/account#updateVerification). The verification link sent to the user's email address is valid for 7 days.
-     * 
+     *
      * Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md), the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
-     * 
+     *
      *
      * @param url URL to redirect the user back to your app from the verification email. Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @return [io.appwrite.models.Token]
@@ -2106,9 +1974,7 @@ class Account(client: Client) : Service(client) {
     suspend fun createEmailVerification(
         url: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/email"
-        )
-
+        val apiPath = "/account/verifications/email"
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
         )
@@ -2132,9 +1998,9 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Use this endpoint to send a verification message to your user email address to confirm they are the valid owners of that address. Both the **userId** and **secret** arguments will be passed as query parameters to the URL you have provided to be attached to the verification email. The provided URL should redirect the user back to your app and allow you to complete the verification process by verifying both the **userId** and **secret** parameters. Learn more about how to [complete the verification process](https://appwrite.io/docs/references/cloud/client-web/account#updateVerification). The verification link sent to the user's email address is valid for 7 days.
-     * 
+     *
      * Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md), the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
-     * 
+     *
      *
      * @param url URL to redirect the user back to your app from the verification email. Only URLs from hostnames in your project platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @return [io.appwrite.models.Token]
@@ -2147,9 +2013,7 @@ class Account(client: Client) : Service(client) {
     suspend fun createVerification(
         url: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/email"
-        )
-
+        val apiPath = "/account/verifications/email"
         val apiParams = mutableMapOf<String, Any?>(
             "url" to url,
         )
@@ -2183,9 +2047,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/email"
-        )
-
+        val apiPath = "/account/verifications/email"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -2224,9 +2086,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/email"
-        )
-
+        val apiPath = "/account/verifications/email"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -2255,13 +2115,9 @@ class Account(client: Client) : Service(client) {
      * @return [io.appwrite.models.Token]
      */
     @Throws(AppwriteException::class)
-    suspend fun createPhoneVerification(
-    ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/phone"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun createPhoneVerification(): io.appwrite.models.Token {
+        val apiPath = "/account/verifications/phone"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2292,9 +2148,7 @@ class Account(client: Client) : Service(client) {
         userId: String,
         secret: String,
     ): io.appwrite.models.Token {
-        val apiPath = ("/account/verifications/phone"
-        )
-
+        val apiPath = "/account/verifications/phone"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "secret" to secret,
@@ -2316,5 +2170,4 @@ class Account(client: Client) : Service(client) {
             converter,
         )
     }
-
 }

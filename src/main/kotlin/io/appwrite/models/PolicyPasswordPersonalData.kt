@@ -26,7 +26,6 @@ data class PolicyPasswordPersonalData(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

@@ -137,7 +137,7 @@ data class Project(
      * Stage progress (completed or skipped) with timestamps and actor types, keyed by stage id.
      */
     @SerializedName("onboarding")
-    val onboarding: Any,
+    val onboarding: Map<String, Any?>,
 
     /**
      * List of auth methods.
@@ -173,7 +173,7 @@ data class Project(
      * Whether WAF enforcement is enabled for the project.
      */
     @SerializedName("wafEnabled")
-    val wafEnabled: Boolean,
+    var wafEnabled: Boolean?,
 
     /**
      * Billing limits reached
@@ -312,7 +312,7 @@ data class Project(
         "protocols" to protocols.map { it.toMap() } as Any,
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
-        "wafEnabled" to wafEnabled as Any,
+        "wafEnabled" to wafEnabled as Any?,
         "billingLimits" to billingLimits?.toMap() as Any?,
         "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any?,
         "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
@@ -334,7 +334,6 @@ data class Project(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -360,13 +359,13 @@ data class Project(
             pingedAt = map["pingedAt"] as String,
             labels = map["labels"] as List<String>,
             status = map["status"] as String,
-            onboarding = map["onboarding"] as Any,
+            onboarding = map["onboarding"] as Map<String, Any?>,
             authMethods = (map["authMethods"] as List<Map<String, Any>>).map { ProjectAuthMethod.from(map = it) },
             services = (map["services"] as List<Map<String, Any>>).map { ProjectService.from(map = it) },
             protocols = (map["protocols"] as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
             blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
             consoleAccessedAt = map["consoleAccessedAt"] as String,
-            wafEnabled = map["wafEnabled"] as Boolean,
+            wafEnabled = map["wafEnabled"] as? Boolean,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as? Boolean,
             oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,

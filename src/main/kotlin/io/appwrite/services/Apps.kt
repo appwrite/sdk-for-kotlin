@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Apps service allows you to manage OAuth2 applications, their keys, secrets, scopes, and installations.
-**/
+ * The Apps service allows you to manage OAuth2 applications, their keys, secrets, scopes, and installations.**/
 class Apps(client: Client) : Service(client) {
-
     /**
      * List applications.
      *
@@ -26,9 +24,7 @@ class Apps(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.AppsList {
-        val apiPath = ("/apps"
-        )
-
+        val apiPath = "/apps"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -97,9 +93,7 @@ class Apps(client: Client) : Service(client) {
         deviceFlow: Boolean? = null,
         teamId: String? = null,
     ): io.appwrite.models.App {
-        val apiPath = ("/apps"
-        )
-
+        val apiPath = "/apps"
         val apiParams = mutableMapOf<String, Any?>(
             "appId" to appId,
             "name" to name,
@@ -145,13 +139,9 @@ class Apps(client: Client) : Service(client) {
      * @return [io.appwrite.models.AppScopeList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listInstallationScopes(
-    ): io.appwrite.models.AppScopeList {
-        val apiPath = ("/apps/scopes/installations"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listInstallationScopes(): io.appwrite.models.AppScopeList {
+        val apiPath = "/apps/scopes/installations"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -175,13 +165,9 @@ class Apps(client: Client) : Service(client) {
      * @return [io.appwrite.models.AppScopeList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listOAuth2Scopes(
-    ): io.appwrite.models.AppScopeList {
-        val apiPath = ("/apps/scopes/oauth2"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listOAuth2Scopes(): io.appwrite.models.AppScopeList {
+        val apiPath = "/apps/scopes/oauth2"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -212,9 +198,7 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -284,7 +268,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "description" to description,
@@ -337,9 +320,7 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -372,7 +353,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/installations"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -410,9 +390,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -446,9 +424,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -479,9 +455,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -518,7 +492,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/keys"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -553,9 +526,7 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/keys"
             .replace("{appId}", appId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -590,9 +561,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{keyId}", keyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -626,9 +595,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{keyId}", keyId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -658,7 +625,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/labels"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "labels" to labels,
         )
@@ -698,7 +664,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/secrets"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -733,9 +698,7 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/secrets"
             .replace("{appId}", appId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -770,9 +733,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{secretId}", secretId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -806,9 +767,7 @@ class Apps(client: Client) : Service(client) {
             .replace("{appId}", appId)
             .replace("{secretId}", secretId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -838,7 +797,6 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/team"
             .replace("{appId}", appId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "teamId" to teamId,
         )
@@ -873,9 +831,7 @@ class Apps(client: Client) : Service(client) {
         val apiPath = ("/apps/{appId}/tokens"
             .replace("{appId}", appId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -889,5 +845,4 @@ class Apps(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

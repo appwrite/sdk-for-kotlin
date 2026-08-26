@@ -7,6 +7,8 @@ enum class ProjectKeyScopes(val value: String) {
     PROJECT_READ("project.read"),
     @SerializedName("project.write")
     PROJECT_WRITE("project.write"),
+    @SerializedName("usage.read")
+    USAGE_READ("usage.read"),
     @SerializedName("keys.read")
     KEYS_READ("keys.read"),
     @SerializedName("keys.write")
@@ -189,8 +191,6 @@ enum class ProjectKeyScopes(val value: String) {
     RESTORATIONS_READ("restorations.read"),
     @SerializedName("restorations.write")
     RESTORATIONS_WRITE("restorations.write"),
-    @SerializedName("dedicatedDatabases.execute")
-    DEDICATEDDATABASES_EXECUTE("dedicatedDatabases.execute"),
     @SerializedName("domains.read")
     DOMAINS_READ("domains.read"),
     @SerializedName("domains.write")
@@ -212,9 +212,7 @@ enum class ProjectKeyScopes(val value: String) {
     @SerializedName("oauth2.write")
     OAUTH2_WRITE("oauth2.write"),
     @SerializedName("oauth2.introspect")
-    OAUTH2_INTROSPECT("oauth2.introspect"),
-    @SerializedName("usage.read")
-    USAGE_READ("usage.read");
+    OAUTH2_INTROSPECT("oauth2.introspect");
 
     override fun toString() = value
 }

@@ -1,8 +1,8 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.AttributeStatus
+import io.appwrite.extensions.jsonCast
 
 /**
  * AttributeURL
@@ -83,7 +83,6 @@ data class AttributeUrl(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

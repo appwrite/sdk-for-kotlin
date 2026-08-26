@@ -1,20 +1,18 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Functions Service allows you view, create and manage your Cloud Functions.
-**/
+ * The Functions Service allows you view, create and manage your Cloud Functions.**/
 class Functions(client: Client) : Service(client) {
-
     /**
      * Get a list of all the project's functions. You can use the query params to filter your results.
      *
@@ -30,9 +28,7 @@ class Functions(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.FunctionList {
-        val apiPath = ("/functions"
-        )
-
+        val apiPath = "/functions"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -108,9 +104,7 @@ class Functions(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
     ): io.appwrite.models.Function {
-        val apiPath = ("/functions"
-        )
-
+        val apiPath = "/functions"
         val apiParams = mutableMapOf<String, Any?>(
             "functionId" to functionId,
             "name" to name,
@@ -159,13 +153,9 @@ class Functions(client: Client) : Service(client) {
      * @return [io.appwrite.models.RuntimeList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listRuntimes(
-    ): io.appwrite.models.RuntimeList {
-        val apiPath = ("/functions/runtimes"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listRuntimes(): io.appwrite.models.RuntimeList {
+        val apiPath = "/functions/runtimes"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -194,9 +184,7 @@ class Functions(client: Client) : Service(client) {
     suspend fun listSpecifications(
         type: String? = null,
     ): io.appwrite.models.SpecificationList {
-        val apiPath = ("/functions/specifications"
-        )
-
+        val apiPath = "/functions/specifications"
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
         )
@@ -230,9 +218,7 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -306,7 +292,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "runtime" to runtime,
@@ -361,9 +346,7 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -392,7 +375,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployment"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
         )
@@ -434,7 +416,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -459,9 +440,9 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a new function code deployment. Use this endpoint to upload a new version of your code function. To execute your newly uploaded code, you'll need to update the function's deployment to use your new deployment UID.
-     * 
+     *
      * This endpoint accepts a tar.gz file compressed with your code. Make sure to include any dependencies your code has within the compressed file. You can learn more about code packaging in the [Appwrite Cloud Functions tutorial](https://appwrite.io/docs/functions).
-     * 
+     *
      * Use the "command" param to set the entrypoint used to execute your code.
      *
      * @param functionId Function ID.
@@ -484,7 +465,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "entrypoint" to entrypoint,
             "commands" to commands,
@@ -531,7 +511,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployments/duplicate"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
             "buildId" to buildId,
@@ -556,7 +535,7 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a deployment based on a template.
-     * 
+     *
      * Use this endpoint with combination of [listTemplates](https://appwrite.io/docs/products/functions/templates) to find the template details.
      *
      * @param functionId Function ID.
@@ -582,7 +561,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployments/template"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "repository" to repository,
             "owner" to owner,
@@ -611,7 +589,7 @@ class Functions(client: Client) : Service(client) {
 
     /**
      * Create a deployment when a function is connected to VCS.
-     * 
+     *
      * This endpoint lets you create deployment from a branch, commit, or a tag.
      *
      * @param functionId Function ID.
@@ -631,7 +609,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/deployments/vcs"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
             "reference" to reference,
@@ -671,9 +648,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -707,9 +682,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -744,7 +717,6 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
             "token" to token,
@@ -778,9 +750,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -817,7 +787,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -859,13 +828,12 @@ class Functions(client: Client) : Service(client) {
         async: Boolean? = null,
         path: String? = null,
         method: io.appwrite.enums.ExecutionMethod? = null,
-        headers: Any? = null,
+        headers: Map<String, Any?>? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Execution {
         val apiPath = ("/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "body" to body,
             "async" to async,
@@ -908,9 +876,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{executionId}", executionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -944,9 +910,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{executionId}", executionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -978,7 +942,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -1022,7 +985,6 @@ class Functions(client: Client) : Service(client) {
         val apiPath = ("/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "variableId" to variableId,
             "key" to key,
@@ -1063,9 +1025,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1106,7 +1066,6 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "value" to value,
@@ -1146,9 +1105,7 @@ class Functions(client: Client) : Service(client) {
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1161,5 +1118,4 @@ class Functions(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

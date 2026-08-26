@@ -17,7 +17,7 @@ data class OAuth2ProviderList(
      * List of OAuth2 providers.
      */
     @SerializedName("providers")
-    val providers: List<Any>,
+    val providers: List<Map<String, Any?>>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -26,13 +26,12 @@ data class OAuth2ProviderList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
         ) = OAuth2ProviderList(
             total = (map["total"] as Number).toLong(),
-            providers = map["providers"] as List<Any>,
+            providers = map["providers"] as List<Map<String, Any?>>,
         )
     }
 }

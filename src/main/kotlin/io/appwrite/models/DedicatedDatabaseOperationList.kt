@@ -26,7 +26,6 @@ data class DedicatedDatabaseOperationList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

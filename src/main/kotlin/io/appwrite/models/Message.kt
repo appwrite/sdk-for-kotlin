@@ -1,8 +1,8 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.MessageStatus
+import io.appwrite.extensions.jsonCast
 
 /**
  * Message
@@ -78,7 +78,7 @@ data class Message(
      * Data of the message.
      */
     @SerializedName("data")
-    val data: Any,
+    val data: Map<String, Any?>,
 
     /**
      * Status of delivery.
@@ -104,7 +104,6 @@ data class Message(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -120,7 +119,7 @@ data class Message(
             deliveredAt = map["deliveredAt"] as? String,
             deliveryErrors = map["deliveryErrors"] as? List<String>,
             deliveredTotal = (map["deliveredTotal"] as Number).toLong(),
-            data = map["data"] as Any,
+            data = map["data"] as Map<String, Any?>,
             status = MessageStatus.values().find { it.value == map["status"] as String }!!,
         )
     }

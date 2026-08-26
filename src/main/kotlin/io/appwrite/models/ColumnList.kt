@@ -17,7 +17,7 @@ data class ColumnList(
      * List of columns.
      */
     @SerializedName("columns")
-    val columns: List<Any>,
+    val columns: List<Map<String, Any?>>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -26,13 +26,12 @@ data class ColumnList(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
         ) = ColumnList(
             total = (map["total"] as Number).toLong(),
-            columns = map["columns"] as List<Any>,
+            columns = map["columns"] as List<Map<String, Any?>>,
         )
     }
 }

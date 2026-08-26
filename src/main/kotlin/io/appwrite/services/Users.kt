@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Users service allows you to manage your project users.
-**/
+ * The Users service allows you to manage your project users.**/
 class Users(client: Client) : Service(client) {
-
     /**
      * Get a list of all the project's users. You can use the query params to filter your results.
      *
@@ -29,9 +27,7 @@ class Users(client: Client) : Service(client) {
         total: Boolean? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.UserList<T> {
-        val apiPath = ("/users"
-        )
-
+        val apiPath = "/users"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -95,9 +91,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users"
-        )
-
+        val apiPath = "/users"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -168,9 +162,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/argon2"
-        )
-
+        val apiPath = "/users/argon2"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -237,9 +229,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/bcrypt"
-        )
-
+        val apiPath = "/users/bcrypt"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -303,9 +293,7 @@ class Users(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.IdentityList {
-        val apiPath = ("/users/identities"
-        )
-
+        val apiPath = "/users/identities"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -341,9 +329,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/identities/{identityId}"
             .replace("{identityId}", identityId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -375,9 +361,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/md5"
-        )
-
+        val apiPath = "/users/md5"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -444,9 +428,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/phpass"
-        )
-
+        val apiPath = "/users/phpass"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -523,9 +505,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/scrypt"
-        )
-
+        val apiPath = "/users/scrypt"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -618,9 +598,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/scrypt-modified"
-        )
-
+        val apiPath = "/users/scrypt-modified"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -701,9 +679,7 @@ class Users(client: Client) : Service(client) {
         name: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
-        val apiPath = ("/users/sha"
-        )
-
+        val apiPath = "/users/sha"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "email" to email,
@@ -770,9 +746,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -817,9 +791,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -849,7 +821,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/email"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "email" to email,
         )
@@ -890,7 +861,7 @@ class Users(client: Client) : Service(client) {
 
     /**
      * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
-     * 
+     *
      *
      * @param userId User ID.
      * @param impersonator Whether the user can impersonate other users. When true, the user can browse project users to choose a target and can pass impersonation headers to act as that user. Internal audit logs still attribute impersonated actions to the original impersonator and store the target user details only in internal audit payload data.
@@ -905,7 +876,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/impersonator"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "impersonator" to impersonator,
         )
@@ -929,7 +899,7 @@ class Users(client: Client) : Service(client) {
 
     /**
      * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
-     * 
+     *
      *
      * @param userId User ID.
      * @param impersonator Whether the user can impersonate other users. When true, the user can browse project users to choose a target and can pass impersonation headers to act as that user. Internal audit logs still attribute impersonated actions to the original impersonator and store the target user details only in internal audit payload data.
@@ -963,7 +933,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/jwts"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "sessionId" to sessionId,
             "duration" to duration,
@@ -987,8 +956,8 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update the user labels by its unique ID. 
-     * 
+     * Update the user labels by its unique ID.
+     *
      * Labels can be used to grant access to resources. While teams are a way for user's to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
@@ -1004,7 +973,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/labels"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "labels" to labels,
         )
@@ -1027,8 +995,8 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Update the user labels by its unique ID. 
-     * 
+     * Update the user labels by its unique ID.
+     *
      * Labels can be used to grant access to resources. While teams are a way for user's to share access to a resource, labels can be defined by the developer to grant access without an invitation. See the [Permissions docs](https://appwrite.io/docs/permissions) for more info.
      *
      * @param userId User ID.
@@ -1063,7 +1031,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/logs"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -1105,7 +1072,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/memberships"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -1148,7 +1114,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "mfa" to mfa,
         )
@@ -1207,7 +1172,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "mfa" to mfa,
         )
@@ -1266,9 +1230,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1298,9 +1260,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{type}", type.value)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1330,9 +1290,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{challengeId}", challengeId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1367,9 +1325,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/factors"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1400,9 +1356,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/factors"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1437,9 +1391,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1470,9 +1422,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1507,9 +1457,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1541,9 +1489,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1579,9 +1525,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1613,9 +1557,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1650,7 +1592,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/name"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
         )
@@ -1705,7 +1646,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/password"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "password" to password,
         )
@@ -1760,7 +1700,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/phone"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "number" to number,
         )
@@ -1813,9 +1752,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/prefs"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -1857,13 +1794,12 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun <T> updatePrefs(
         userId: String,
-        prefs: Any,
+        prefs: Map<String, Any?>,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
         val apiPath = ("/users/{userId}/prefs"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "prefs" to prefs,
         )
@@ -1895,7 +1831,7 @@ class Users(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun updatePrefs(
         userId: String,
-        prefs: Any,
+        prefs: Map<String, Any?>,
     ): io.appwrite.models.Preferences<Map<String, Any>> = updatePrefs(
         userId,
         prefs,
@@ -1918,7 +1854,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
         )
@@ -1941,7 +1876,7 @@ class Users(client: Client) : Service(client) {
 
     /**
      * Creates a session for a user. Returns an immediately usable session object.
-     * 
+     *
      * If you want to generate a token for a custom authentication flow, use the [POST /users/{userId}/tokens](https://appwrite.io/docs/server/users#createToken) endpoint.
      *
      * @param userId User ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
@@ -1954,9 +1889,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1988,9 +1921,7 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2020,9 +1951,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{sessionId}", sessionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2052,7 +1981,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/status"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
         )
@@ -2109,7 +2037,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/targets"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -2155,7 +2082,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/targets"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "targetId" to targetId,
             "providerType" to providerType,
@@ -2197,9 +2123,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2240,7 +2164,6 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "identifier" to identifier,
             "providerId" to providerId,
@@ -2280,9 +2203,7 @@ class Users(client: Client) : Service(client) {
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2298,7 +2219,7 @@ class Users(client: Client) : Service(client) {
 
     /**
      * Returns a token with a secret key for creating a session. Use the user ID and secret and submit a request to the [PUT /account/sessions/token](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint to complete the login process.
-     * 
+     *
      *
      * @param userId User ID.
      * @param length Token length in characters. The default length is 6 characters
@@ -2315,7 +2236,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/tokens"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "length" to length,
             "expire" to expire,
@@ -2354,7 +2274,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/verification"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "emailVerification" to emailVerification,
         )
@@ -2409,7 +2328,6 @@ class Users(client: Client) : Service(client) {
         val apiPath = ("/users/{userId}/verification/phone"
             .replace("{userId}", userId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "phoneVerification" to phoneVerification,
         )
@@ -2447,5 +2365,4 @@ class Users(client: Client) : Service(client) {
         phoneVerification,
         nestedType = classOf(),
     )
-
 }

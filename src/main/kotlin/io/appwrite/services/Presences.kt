@@ -1,21 +1,19 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Presences service allows you to track and manage real-time user presence in your project.
-**/
+ * The Presences service allows you to track and manage real-time user presence in your project.**/
 class Presences(client: Client) : Service(client) {
-
     /**
      * List presence logs. Expired entries are filtered out automatically.
-     * 
+     *
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
@@ -29,9 +27,7 @@ class Presences(client: Client) : Service(client) {
         total: Boolean? = null,
         ttl: Long? = null,
     ): io.appwrite.models.PresenceList {
-        val apiPath = ("/presences"
-        )
-
+        val apiPath = "/presences"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -56,7 +52,7 @@ class Presences(client: Client) : Service(client) {
 
     /**
      * Get a presence log by its unique ID. Entries whose `expiresAt` is in the past are treated as not found.
-     * 
+     *
      *
      * @param presenceId Presence unique ID.
      * @return [io.appwrite.models.Presence]
@@ -68,9 +64,7 @@ class Presences(client: Client) : Service(client) {
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -90,7 +84,7 @@ class Presences(client: Client) : Service(client) {
 
     /**
      * Create or update a presence log by its user ID.
-     * 
+     *
      *
      * @param presenceId Presence unique ID.
      * @param userId User ID.
@@ -108,12 +102,11 @@ class Presences(client: Client) : Service(client) {
         status: String,
         permissions: List<String>? = null,
         expiresAt: String? = null,
-        metadata: Any? = null,
+        metadata: Map<String, Any?>? = null,
     ): io.appwrite.models.Presence {
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "status" to status,
@@ -141,7 +134,7 @@ class Presences(client: Client) : Service(client) {
 
     /**
      * Update a presence log by its unique ID. Using the patch method you can pass only specific fields that will get updated.
-     * 
+     *
      *
      * @param presenceId Presence unique ID.
      * @param userId User ID.
@@ -159,14 +152,13 @@ class Presences(client: Client) : Service(client) {
         userId: String,
         status: String? = null,
         expiresAt: String? = null,
-        metadata: Any? = null,
+        metadata: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         purge: Boolean? = null,
     ): io.appwrite.models.Presence {
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
             "status" to status,
@@ -195,7 +187,7 @@ class Presences(client: Client) : Service(client) {
 
     /**
      * Delete a presence log by its unique ID.
-     * 
+     *
      *
      * @param presenceId Presence unique ID.
      * @return [Any]
@@ -207,9 +199,7 @@ class Presences(client: Client) : Service(client) {
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -222,5 +212,4 @@ class Presences(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
-
 }

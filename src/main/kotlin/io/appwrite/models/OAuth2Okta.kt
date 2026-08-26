@@ -54,7 +54,6 @@ data class OAuth2Okta(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

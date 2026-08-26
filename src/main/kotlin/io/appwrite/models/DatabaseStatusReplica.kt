@@ -26,7 +26,13 @@ data class DatabaseStatusReplica(
     val healthy: Boolean,
 
     /**
-     * Replication lag in seconds (null for primary).
+     * Whether the engine reports this member's replication stream as up. Null when no reading was taken: a primary has no stream to report, and a member that is not healthy, or whose probe did not answer, has none yet. `healthy` is a reachability probe of the member itself and says nothing about replication, so a healthy member may still not be replicating.
+     */
+    @SerializedName("replicating")
+    var replicating: Boolean?,
+
+    /**
+     * Replication lag in seconds (null for primary). Also null against `replicating: true`, for a member that is streaming but whose engine printed no numeric lag.
      */
     @SerializedName("lagSeconds")
     var lagSeconds: Double?,
@@ -36,11 +42,11 @@ data class DatabaseStatusReplica(
         "index" to index as Any,
         "role" to role as Any,
         "healthy" to healthy as Any,
+        "replicating" to replicating as Any?,
         "lagSeconds" to lagSeconds as Any?,
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -48,6 +54,7 @@ data class DatabaseStatusReplica(
             index = (map["index"] as Number).toLong(),
             role = map["role"] as String,
             healthy = map["healthy"] as Boolean,
+            replicating = map["replicating"] as? Boolean,
             lagSeconds = (map["lagSeconds"] as? Number)?.toDouble(),
         )
     }

@@ -1,9 +1,9 @@
 package io.appwrite.models
 
 import com.google.gson.annotations.SerializedName
-import io.appwrite.extensions.jsonCast
 import io.appwrite.enums.ProxyRuleDeploymentResourceType
 import io.appwrite.enums.ProxyRuleStatus
+import io.appwrite.extensions.jsonCast
 
 /**
  * Rule
@@ -119,7 +119,6 @@ data class ProxyRule(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,

@@ -1,18 +1,16 @@
 package io.appwrite.services
 
 import io.appwrite.Client
-import io.appwrite.models.*
 import io.appwrite.enums.*
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.classOf
+import io.appwrite.models.*
 import okhttp3.Cookie
 import java.io.File
 
 /**
- * The TablesDB service allows you to create structured tables of columns, query and filter lists of rows
-**/
+ * The TablesDB service allows you to create structured tables of columns, query and filter lists of rows**/
 class TablesDB(client: Client) : Service(client) {
-
     /**
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
      *
@@ -28,9 +26,7 @@ class TablesDB(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.DatabaseList {
-        val apiPath = ("/tablesdb"
-        )
-
+        val apiPath = "/tablesdb"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -55,7 +51,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a new Database.
-     * 
+     *
      *
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
@@ -75,9 +71,7 @@ class TablesDB(client: Client) : Service(client) {
         replicas: Long? = null,
         syncMode: String? = null,
     ): io.appwrite.models.Database {
-        val apiPath = ("/tablesdb"
-        )
-
+        val apiPath = "/tablesdb"
         val apiParams = mutableMapOf<String, Any?>(
             "databaseId" to databaseId,
             "name" to name,
@@ -110,13 +104,9 @@ class TablesDB(client: Client) : Service(client) {
      * @return [io.appwrite.models.DedicatedDatabaseSpecificationList]
      */
     @Throws(AppwriteException::class)
-    suspend fun listSpecifications(
-    ): io.appwrite.models.DedicatedDatabaseSpecificationList {
-        val apiPath = ("/tablesdb/specifications"
-        )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+    suspend fun listSpecifications(): io.appwrite.models.DedicatedDatabaseSpecificationList {
+        val apiPath = "/tablesdb/specifications"
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -145,9 +135,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun listTransactions(
         queries: List<String>? = null,
     ): io.appwrite.models.TransactionList {
-        val apiPath = ("/tablesdb/transactions"
-        )
-
+        val apiPath = "/tablesdb/transactions"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
         )
@@ -179,9 +167,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun createTransaction(
         ttl: Long? = null,
     ): io.appwrite.models.Transaction {
-        val apiPath = ("/tablesdb/transactions"
-        )
-
+        val apiPath = "/tablesdb/transactions"
         val apiParams = mutableMapOf<String, Any?>(
             "ttl" to ttl,
         )
@@ -216,9 +202,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -254,7 +238,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "commit" to commit,
             "rollback" to rollback,
@@ -290,9 +273,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -317,12 +298,11 @@ class TablesDB(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun createOperations(
         transactionId: String,
-        operations: List<Any>? = null,
+        operations: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Transaction {
         val apiPath = ("/tablesdb/transactions/{transactionId}/operations"
             .replace("{transactionId}", transactionId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "operations" to operations,
         )
@@ -357,9 +337,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -401,7 +379,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
@@ -440,9 +417,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -457,7 +432,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * Trigger a manual failover for a dedicated database with high availability enabled. Promotes a replica to primary. The failover runs asynchronously; poll the database document for status updates. A database left mid-operation by a failover that did not finish also accepts this call as a repair, provided `targetReplicaId` names the member to promote.
+     * Trigger a manual failover for a dedicated database with high availability enabled. Promotes a replica to primary. The failover runs asynchronously; poll the database document for status updates. A database left mid-operation also accepts this call as a repair once nothing is driving the operation it is stuck in. Repairing a failover that did not finish, a `failed` database, a stranded upgrade or migrate, or a stranded compute resize additionally requires `targetReplicaId` to name the member to promote, because the default target may be the member that operation already promoted.
      *
      * @param databaseId Database ID.
      * @param targetReplicaId Target replica ID to promote. If not specified, the healthiest replica is selected.
@@ -472,7 +447,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/failovers"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "targetReplicaId" to targetReplicaId,
         )
@@ -507,9 +481,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -545,7 +517,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "specification" to specification,
             "autoCutover" to autoCutover,
@@ -584,9 +555,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -620,9 +589,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -653,9 +620,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -694,7 +659,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/operations"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
             "limit" to limit,
@@ -730,9 +694,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/replicas"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -763,9 +725,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/status"
             .replace("{databaseId}", databaseId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -803,7 +763,6 @@ class TablesDB(client: Client) : Service(client) {
         val apiPath = ("/tablesdb/{databaseId}/tables"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
@@ -848,13 +807,12 @@ class TablesDB(client: Client) : Service(client) {
         permissions: List<String>? = null,
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
-        columns: List<Any>? = null,
-        indexes: List<Any>? = null,
+        columns: List<Map<String, Any?>>? = null,
+        indexes: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Table {
         val apiPath = ("/tablesdb/{databaseId}/tables"
             .replace("{databaseId}", databaseId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "tableId" to tableId,
             "name" to name,
@@ -898,9 +856,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -945,7 +901,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "permissions" to permissions,
@@ -987,9 +942,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -1024,7 +977,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -1048,7 +1000,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a bigint column. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1076,7 +1028,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1105,7 +1056,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a bigint column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1134,7 +1085,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -1162,7 +1112,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a boolean column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -1186,7 +1136,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1237,7 +1186,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1286,7 +1234,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1337,7 +1284,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1363,7 +1309,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create an email column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1387,7 +1333,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1414,7 +1359,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an email column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1439,7 +1384,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1490,7 +1434,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "elements" to elements,
@@ -1518,7 +1461,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an enum column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1545,7 +1488,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "elements" to elements,
             "required" to required,
@@ -1572,7 +1514,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a float column. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1600,7 +1542,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1629,7 +1570,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a float column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1658,7 +1599,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -1686,7 +1626,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create an integer column. Optionally, minimum and maximum values can be provided.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1714,7 +1654,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1743,7 +1682,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an integer column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1772,7 +1711,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "min" to min,
@@ -1800,7 +1738,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create IP address column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1824,7 +1762,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1851,7 +1788,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an ip column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -1876,7 +1813,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1923,7 +1859,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -1973,7 +1908,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -1999,7 +1933,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a longtext column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2025,7 +1959,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2053,7 +1986,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a longtext column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2078,7 +2011,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2104,7 +2036,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a mediumtext column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2130,7 +2062,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2158,7 +2089,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a mediumtext column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2183,7 +2114,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2230,7 +2160,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2280,7 +2209,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2327,7 +2255,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2377,7 +2304,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2403,7 +2329,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -2431,7 +2357,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "relatedTableId" to relatedTableId,
             "type" to type,
@@ -2460,7 +2385,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a string column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2492,7 +2417,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "size" to size,
@@ -2521,7 +2445,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a string column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2552,7 +2476,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2579,7 +2502,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a text column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2605,7 +2528,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2633,7 +2555,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a text column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2658,7 +2580,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2684,7 +2605,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a URL column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -2708,7 +2629,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "required" to required,
@@ -2735,7 +2655,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update an url column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -2760,7 +2680,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2786,7 +2705,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create a varchar column.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2814,7 +2733,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "size" to size,
@@ -2843,7 +2761,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update a varchar column. Changing the `default` value will not update already existing rows.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -2870,7 +2788,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
             "default" to default,
@@ -2914,9 +2831,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -2967,9 +2882,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -2985,7 +2898,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Update relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -3008,7 +2921,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
             "newKey" to newKey,
@@ -3052,7 +2964,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "total" to total,
@@ -3102,7 +3013,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
             "type" to type,
@@ -3147,9 +3057,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -3186,9 +3094,7 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{key}", key)
         )
-
-        val apiParams = mutableMapOf<String, Any?>(
-        )
+        val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
@@ -3228,7 +3134,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -3299,7 +3204,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any,
+        data: Map<String, Any?>,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3308,7 +3213,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "rowId" to rowId,
             "data" to data,
@@ -3350,7 +3254,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any,
+        data: Map<String, Any?>,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = createRow(
@@ -3377,7 +3281,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun <T> createRows(
         databaseId: String,
         tableId: String,
-        rows: List<Any>,
+        rows: List<Map<String, Any?>>,
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
@@ -3385,7 +3289,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
             "transactionId" to transactionId,
@@ -3422,7 +3325,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun createRows(
         databaseId: String,
         tableId: String,
-        rows: List<Any>,
+        rows: List<Map<String, Any?>>,
         transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = createRows(
         databaseId,
@@ -3434,7 +3337,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -3447,7 +3350,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun <T> upsertRows(
         databaseId: String,
         tableId: String,
-        rows: List<Any>,
+        rows: List<Map<String, Any?>>,
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
@@ -3455,7 +3358,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
             "transactionId" to transactionId,
@@ -3480,7 +3382,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Create or update Rows. Before using this route, you should create a new table resource using either a [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable) API or directly from your database console.
-     * 
+     *
      *
      * @param databaseId Database ID.
      * @param tableId Table ID.
@@ -3493,7 +3395,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun upsertRows(
         databaseId: String,
         tableId: String,
-        rows: List<Any>,
+        rows: List<Map<String, Any?>>,
         transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = upsertRows(
         databaseId,
@@ -3518,7 +3420,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun <T> updateRows(
         databaseId: String,
         tableId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         queries: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3527,7 +3429,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "queries" to queries,
@@ -3566,7 +3467,7 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun updateRows(
         databaseId: String,
         tableId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         queries: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.RowList<Map<String, Any>> = updateRows(
@@ -3600,7 +3501,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -3672,7 +3572,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{rowId}", rowId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "transactionId" to transactionId,
@@ -3738,7 +3637,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3748,7 +3647,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{rowId}", rowId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
@@ -3789,7 +3687,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = upsertRow(
@@ -3819,7 +3717,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
         nestedType: Class<T>,
@@ -3829,7 +3727,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{rowId}", rowId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
             "permissions" to permissions,
@@ -3870,7 +3767,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
         rowId: String,
-        data: Any? = null,
+        data: Map<String, Any?>? = null,
         permissions: List<String>? = null,
         transactionId: String? = null,
     ): io.appwrite.models.Row<Map<String, Any>> = updateRow(
@@ -3905,7 +3802,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{tableId}", tableId)
             .replace("{rowId}", rowId)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "transactionId" to transactionId,
         )
@@ -3952,7 +3848,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{rowId}", rowId)
             .replace("{column}", column)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "min" to min,
@@ -4039,7 +3934,6 @@ class TablesDB(client: Client) : Service(client) {
             .replace("{rowId}", rowId)
             .replace("{column}", column)
         )
-
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
             "max" to max,
@@ -4095,5 +3989,4 @@ class TablesDB(client: Client) : Service(client) {
         transactionId,
         nestedType = classOf(),
     )
-
 }

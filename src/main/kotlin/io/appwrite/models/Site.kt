@@ -104,6 +104,12 @@ data class Site(
     val latestDeploymentStatus: String,
 
     /**
+     * Allowed permission scopes.
+     */
+    @SerializedName("scopes")
+    val scopes: List<String>,
+
+    /**
      * Site variables.
      */
     @SerializedName("vars")
@@ -229,6 +235,7 @@ data class Site(
         "latestDeploymentId" to latestDeploymentId as Any,
         "latestDeploymentCreatedAt" to latestDeploymentCreatedAt as Any,
         "latestDeploymentStatus" to latestDeploymentStatus as Any,
+        "scopes" to scopes as Any,
         "vars" to vars.map { it.toMap() } as Any,
         "timeout" to timeout as Any,
         "installCommand" to installCommand as Any,
@@ -250,7 +257,6 @@ data class Site(
     )
 
     companion object {
-
         @Suppress("UNCHECKED_CAST")
         fun from(
             map: Map<String, Any>,
@@ -271,6 +277,7 @@ data class Site(
             latestDeploymentId = map["latestDeploymentId"] as String,
             latestDeploymentCreatedAt = map["latestDeploymentCreatedAt"] as String,
             latestDeploymentStatus = map["latestDeploymentStatus"] as String,
+            scopes = map["scopes"] as List<String>,
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
             timeout = (map["timeout"] as Number).toLong(),
             installCommand = map["installCommand"] as String,
