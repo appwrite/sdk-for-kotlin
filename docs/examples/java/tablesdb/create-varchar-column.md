@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createVarcharColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     1, // size
     false, // required
-    "<DEFAULT>", // default (optional)
+    "Hello World", // default (optional)
     false, // array (optional)
     false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {

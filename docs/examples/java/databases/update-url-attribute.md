@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.updateUrlAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     "https://example.com", // default
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

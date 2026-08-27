@@ -18,7 +18,7 @@ val response = functions.update(
     runtime = Runtime.NODE_14_5, // optional
     execute = listOf("any"), // optional
     events = listOf(), // optional
-    schedule = "", // optional
+    schedule = "0 0 * * *", // optional
     timeout = 1, // optional
     enabled = false, // optional
     logging = false, // optional
@@ -32,8 +32,8 @@ val response = functions.update(
     providerRootDirectory = "<PROVIDER_ROOT_DIRECTORY>", // optional
     providerBranches = listOf(), // optional
     providerPaths = listOf(), // optional
-    buildSpecification = "", // optional
-    runtimeSpecification = "", // optional
+    buildSpecification = "s-1vcpu-512mb", // optional
+    runtimeSpecification = "s-1vcpu-512mb", // optional
     deploymentRetention = 0 // optional
 )
 ```

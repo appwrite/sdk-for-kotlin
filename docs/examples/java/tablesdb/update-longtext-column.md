@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateLongtextColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default
-    "", // newKey (optional)
+    "Hello World", // default
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

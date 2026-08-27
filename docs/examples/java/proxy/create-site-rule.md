@@ -11,7 +11,7 @@ Client client = new Client()
 Proxy proxy = new Proxy(client);
 
 proxy.createSiteRule(
-    "", // domain
+    "example.com", // domain
     "<SITE_ID>", // siteId
     "<BRANCH>", // branch (optional)
     new CoroutineCallback<>((result, error) -> {

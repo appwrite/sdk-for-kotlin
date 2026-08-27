@@ -13,12 +13,12 @@ Databases databases = new Databases(client);
 databases.updateBigIntAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     0, // default
     0, // min (optional)
-    0, // max (optional)
-    "", // newKey (optional)
+    1000000, // max (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

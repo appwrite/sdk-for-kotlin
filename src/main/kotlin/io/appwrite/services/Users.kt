@@ -919,7 +919,7 @@ class Users(client: Client) : Service(client) {
      * Use this endpoint to create a JSON Web Token for user by its unique ID. You can use the resulting JWT to authenticate on behalf of the user. The JWT secret will become invalid if the session it uses gets deleted.
      *
      * @param userId User ID.
-     * @param sessionId Session ID. Use the string 'recent' to use the most recent session. Defaults to the most recent session.
+     * @param sessionId Session ID. Use the string 'recent()' to use the most recent session, which is also the default.
      * @param duration Time in seconds before JWT expires. Default duration is 900 seconds, and maximum is 3600 seconds.
      * @return [io.appwrite.models.Jwt]
      */

@@ -15,7 +15,7 @@ Databases databases = new Databases(client);
 databases.createIndex(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     DatabasesIndexType.KEY, // type
     List.of(), // attributes
     List.of(OrderBy.ASC), // orders (optional)

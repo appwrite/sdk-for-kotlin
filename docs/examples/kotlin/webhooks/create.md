@@ -12,7 +12,7 @@ val webhooks = Webhooks(client)
 
 val response = webhooks.create(
     webhookId = "<WEBHOOK_ID>",
-    url = "",
+    url = "https://example.com/webhook",
     name = "<NAME>",
     events = listOf(),
     enabled = false, // optional

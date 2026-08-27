@@ -13,7 +13,7 @@ val databases = Databases(client)
 val response = databases.createPolygonAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = listOf(listOf(listOf(1, 2), listOf(3, 4), listOf(5, 6), listOf(1, 2))) // optional
 )

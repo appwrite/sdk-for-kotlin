@@ -11,7 +11,7 @@ Client client = new Client()
 Proxy proxy = new Proxy(client);
 
 proxy.createAPIRule(
-    "", // domain
+    "example.com", // domain
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

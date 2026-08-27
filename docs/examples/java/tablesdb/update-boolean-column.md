@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateBooleanColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     false, // default
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

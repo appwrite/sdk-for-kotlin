@@ -12,7 +12,7 @@ val users = Users(client)
 
 val response = users.createJWT(
     userId = "<USER_ID>",
-    sessionId = "<SESSION_ID>", // optional
+    sessionId = "recent()", // optional
     duration = 0 // optional
 )
 ```

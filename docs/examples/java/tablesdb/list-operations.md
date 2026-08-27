@@ -12,7 +12,7 @@ TablesDB tablesDB = new TablesDB(client);
 
 tablesDB.listOperations(
     "<DATABASE_ID>", // databaseId
-    "running", // status (optional)
+    "queued", // status (optional)
     1, // limit (optional)
     0, // offset (optional)
     new CoroutineCallback<>((result, error) -> {

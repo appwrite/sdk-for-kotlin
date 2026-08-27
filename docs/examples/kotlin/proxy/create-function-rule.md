@@ -11,7 +11,7 @@ val client = Client()
 val proxy = Proxy(client)
 
 val response = proxy.createFunctionRule(
-    domain = "",
+    domain = "example.com",
     functionId = "<FUNCTION_ID>",
     branch = "<BRANCH>" // optional
 )

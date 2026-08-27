@@ -13,7 +13,7 @@ Databases databases = new Databases(client);
 databases.createDatetimeAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     "2020-10-15T06:38:00.000+00:00", // default (optional)
     false, // array (optional)

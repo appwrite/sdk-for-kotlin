@@ -13,7 +13,7 @@ Client client = new Client()
 Proxy proxy = new Proxy(client);
 
 proxy.createRedirectRule(
-    "", // domain
+    "example.com", // domain
     "https://example.com", // url
     StatusCode.MOVEDPERMANENTLY, // statusCode
     "<RESOURCE_ID>", // resourceId

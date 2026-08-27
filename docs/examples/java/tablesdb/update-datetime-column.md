@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateDatetimeColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     "2020-10-15T06:38:00.000+00:00", // default
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -13,9 +13,9 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.updateEmailColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = "email@example.com",
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

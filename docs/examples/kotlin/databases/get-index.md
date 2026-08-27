@@ -13,6 +13,6 @@ val databases = Databases(client)
 val response = databases.getIndex(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = ""
+    key = "<KEY>"
 )
 ```

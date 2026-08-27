@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.createBigIntAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     0, // min (optional)
-    0, // max (optional)
+    1000000, // max (optional)
     0, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {

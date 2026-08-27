@@ -13,7 +13,7 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createEmailColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     "email@example.com", // default (optional)
     false, // array (optional)

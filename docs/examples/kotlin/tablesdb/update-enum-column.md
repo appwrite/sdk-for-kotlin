@@ -13,10 +13,10 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.updateEnumColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
-    elements = listOf(),
+    key = "<KEY>",
+    elements = listOf("active", "inactive"),
     required = false,
-    default = "<DEFAULT>",
-    newKey = "" // optional
+    default = "active",
+    newKey = "<NEW_KEY>" // optional
 )
 ```

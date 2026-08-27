@@ -13,9 +13,9 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.createTextColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
-    default = "<DEFAULT>", // optional
+    default = "Hello World", // optional
     array = false, // optional
     encrypt = false // optional
 )

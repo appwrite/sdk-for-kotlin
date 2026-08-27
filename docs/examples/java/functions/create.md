@@ -18,7 +18,7 @@ functions.create(
     Runtime.NODE_14_5, // runtime
     List.of("any"), // execute (optional)
     List.of(), // events (optional)
-    "", // schedule (optional)
+    "0 0 * * *", // schedule (optional)
     1, // timeout (optional)
     false, // enabled (optional)
     false, // logging (optional)
@@ -32,8 +32,8 @@ functions.create(
     "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
     List.of(), // providerBranches (optional)
     List.of(), // providerPaths (optional)
-    "", // buildSpecification (optional)
-    "", // runtimeSpecification (optional)
+    "s-1vcpu-512mb", // buildSpecification (optional)
+    "s-1vcpu-512mb", // runtimeSpecification (optional)
     0, // deploymentRetention (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

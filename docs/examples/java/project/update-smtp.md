@@ -12,8 +12,8 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateSMTP(
-    "", // host (optional)
-    0, // port (optional)
+    "example.com", // host (optional)
+    587, // port (optional)
     "<USERNAME>", // username (optional)
     "password", // password (optional)
     "email@example.com", // senderEmail (optional)

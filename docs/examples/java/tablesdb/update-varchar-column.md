@@ -13,11 +13,11 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateVarcharColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default
+    "Hello World", // default
     1, // size (optional)
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

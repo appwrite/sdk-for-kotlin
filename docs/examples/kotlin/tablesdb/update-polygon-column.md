@@ -13,9 +13,9 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.updatePolygonColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = listOf(listOf(listOf(1, 2), listOf(3, 4), listOf(5, 6), listOf(1, 2))), // optional
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

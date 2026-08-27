@@ -13,7 +13,7 @@ Webhooks webhooks = new Webhooks(client);
 webhooks.update(
     "<WEBHOOK_ID>", // webhookId
     "<NAME>", // name
-    "", // url
+    "https://example.com/webhook", // url
     List.of(), // events
     false, // enabled (optional)
     false, // tls (optional)

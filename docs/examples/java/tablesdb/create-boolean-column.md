@@ -13,7 +13,7 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createBooleanColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     false, // default (optional)
     false, // array (optional)

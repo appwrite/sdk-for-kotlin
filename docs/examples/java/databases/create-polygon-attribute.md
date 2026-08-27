@@ -13,7 +13,7 @@ Databases databases = new Databases(client);
 databases.createPolygonAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     List.of(List.of(List.of(1, 2), List.of(3, 4), List.of(5, 6), List.of(1, 2))), // default (optional)
     new CoroutineCallback<>((result, error) -> {

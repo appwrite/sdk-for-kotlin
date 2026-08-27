@@ -13,9 +13,9 @@ val databases = Databases(client)
 val response = databases.updatePointAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = listOf(1, 2), // optional
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

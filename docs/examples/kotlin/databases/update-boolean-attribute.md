@@ -13,9 +13,9 @@ val databases = Databases(client)
 val response = databases.updateBooleanAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = false,
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

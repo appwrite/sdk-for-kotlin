@@ -18,8 +18,8 @@ databases.createRelationshipAttribute(
     "<RELATED_COLLECTION_ID>", // relatedCollectionId
     RelationshipType.ONETOONE, // type
     false, // twoWay (optional)
-    "", // key (optional)
-    "", // twoWayKey (optional)
+    "<KEY>", // key (optional)
+    "<TWO_WAY_KEY>", // twoWayKey (optional)
     RelationMutate.CASCADE, // onDelete (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

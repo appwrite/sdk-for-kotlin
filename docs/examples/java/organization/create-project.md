@@ -12,7 +12,7 @@ Client client = new Client()
 Organization organization = new Organization(client);
 
 organization.createProject(
-    "", // projectId
+    "<PROJECT_ID>", // projectId
     "<NAME>", // name
     Region.FRA, // region (optional)
     new CoroutineCallback<>((result, error) -> {

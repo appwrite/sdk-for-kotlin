@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.updateIpAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "", // default
-    "", // newKey (optional)
+    "192.0.2.0", // default
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

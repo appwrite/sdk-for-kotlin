@@ -13,11 +13,11 @@ Databases databases = new Databases(client);
 databases.updateEnumAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
-    List.of(), // elements
+    "<KEY>", // key
+    List.of("active", "inactive"), // elements
     false, // required
-    "<DEFAULT>", // default
-    "", // newKey (optional)
+    "active", // default
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

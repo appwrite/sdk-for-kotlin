@@ -18,6 +18,6 @@ val response = storage.createFile(
     fileId = "<FILE_ID>",
     file = InputFile.fromPath("file.png"),
     permissions = listOf(Permission.read(Role.any())), // optional
-    folder = "" // optional
+    folder = "photos/2026" // optional
 )
 ```

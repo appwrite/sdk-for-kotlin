@@ -245,13 +245,18 @@ class Avatars(client: Client) : Service(client) {
     }
 
     /**
-     * Returns the best available profile photo for the currently authenticated user. The endpoint tries each source in priority order and returns the first successful result: Gravatar, Libavatar, Appwrite Initials, built-in static fallback file.
+     * Returns the best available profile photo for a user. The endpoint tries each source in priority order and returns the first successful result: OAuth2 identity photo, Gravatar, Libravatar, Appwrite Initials, built-in static fallback.
+     *
+     * The photo resolves for the currently authenticated user unless `userId` points at another user. Passing `emailHash` and/or `name` resolves the avatar from those values alone: the hash is looked up on Gravatar and Libravatar, the name is rendered as initials, and the user's own identity photos, email, and name leave the chain so they never shadow the avatar being asked for. Emails are only ever accepted pre-hashed, so no address ends up in a URL.
      *
      * @param width Output image width in pixels. Pass an integer between 0 and 2000. Defaults to 256.
      * @param height Output image height in pixels. Pass an integer between 0 and 2000. Defaults to 256.
      * @param quality Output image quality between 0 and 100. Defaults to 100.
      * @param output Output image format. Defaults to 'png'.
      * @param rating Maximum image rating to fetch from Gravatar/Libravatar. Defaults to 'g'.
+     * @param userId User ID to resolve the photo for. Defaults to 'current()' for the currently authenticated user.
+     * @param emailHash SHA256 hash of the lowercase, trimmed email address to look up on Gravatar and Libravatar instead of the user's own photo sources. Pass the hash, never the address itself.
+     * @param name Name to render initials from instead of the user's own photo sources. Max length: 128 chars.
      * @return [ByteArray]
      */
     @JvmOverloads
@@ -262,6 +267,9 @@ class Avatars(client: Client) : Service(client) {
         quality: Long? = null,
         output: String? = null,
         rating: String? = null,
+        userId: String? = null,
+        emailHash: String? = null,
+        name: String? = null,
     ): ByteArray {
         val apiPath = "/avatars/photo"
         val apiParams = mutableMapOf<String, Any?>(
@@ -270,6 +278,9 @@ class Avatars(client: Client) : Service(client) {
             "quality" to quality,
             "output" to output,
             "rating" to rating,
+            "userId" to userId,
+            "emailHash" to emailHash,
+            "name" to name,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

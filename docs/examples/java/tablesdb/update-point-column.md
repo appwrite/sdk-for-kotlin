@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updatePointColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     List.of(1, 2), // default (optional)
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

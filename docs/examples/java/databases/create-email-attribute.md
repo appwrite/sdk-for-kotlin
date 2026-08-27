@@ -13,7 +13,7 @@ Databases databases = new Databases(client);
 databases.createEmailAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     "email@example.com", // default (optional)
     false, // array (optional)

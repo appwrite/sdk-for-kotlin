@@ -13,9 +13,9 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createLongtextColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default (optional)
+    "Hello World", // default (optional)
     false, // array (optional)
     false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {

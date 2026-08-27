@@ -12,7 +12,7 @@ val client = Client()
 val proxy = Proxy(client)
 
 val response = proxy.createInvalidation(
-    domain = "",
+    domain = "example.com",
     type = InvalidationType.TAG,
     reference = "<REFERENCE>" // optional
 )

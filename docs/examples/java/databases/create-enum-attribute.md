@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.createEnumAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
-    List.of(), // elements
+    "<KEY>", // key
+    List.of("active", "inactive"), // elements
     false, // required
-    "<DEFAULT>", // default (optional)
+    "active", // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

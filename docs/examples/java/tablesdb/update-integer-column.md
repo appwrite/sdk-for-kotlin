@@ -13,12 +13,12 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateIntegerColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
-    0, // default
+    10, // default
     0, // min (optional)
-    0, // max (optional)
-    "", // newKey (optional)
+    100, // max (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

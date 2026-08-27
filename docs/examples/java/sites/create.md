@@ -35,8 +35,8 @@ sites.create(
     "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
     List.of(), // providerBranches (optional)
     List.of(), // providerPaths (optional)
-    "", // buildSpecification (optional)
-    "", // runtimeSpecification (optional)
+    "s-1vcpu-512mb", // buildSpecification (optional)
+    "s-1vcpu-512mb", // runtimeSpecification (optional)
     0, // deploymentRetention (optional)
     List.of(ProjectKeyScopes.PROJECT_READ), // scopes (optional)
     new CoroutineCallback<>((result, error) -> {

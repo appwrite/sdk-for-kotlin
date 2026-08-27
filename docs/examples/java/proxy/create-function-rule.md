@@ -11,7 +11,7 @@ Client client = new Client()
 Proxy proxy = new Proxy(client);
 
 proxy.createFunctionRule(
-    "", // domain
+    "example.com", // domain
     "<FUNCTION_ID>", // functionId
     "<BRANCH>", // branch (optional)
     new CoroutineCallback<>((result, error) -> {

@@ -13,6 +13,6 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.getColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = ""
+    key = "<KEY>"
 )
 ```
