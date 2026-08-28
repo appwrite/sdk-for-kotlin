@@ -13,7 +13,7 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.deleteIndex(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

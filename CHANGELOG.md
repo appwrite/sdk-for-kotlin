@@ -1,5 +1,18 @@
 # Change Log
 
+## 22.0.0-rc.1
+
+* Breaking: `EmbeddingModel` no longer offers `embedding-gemma` or `bge-small`
+* Added: `documentsDB`, `vectorsDB`, `mysql`, `postgresql`, and `mongo` services, no longer hidden from server SDKs
+* Added: `DocumentsDBIndexType` and `VectorsDBIndexType` enums
+* Added: dedicated database models for branches, backups, restorations, poolers, PITR windows, extensions, and executions
+* Added: `PostgresExtension`, `VectorsdbCollection`, `AttributeObject`, and `AttributeVector` models
+* Added: `userId`, `emailHash`, and `name` parameters to `avatars.getPhoto`
+* Added: `error`, `containerStatus`, and `lifecycleState` on the `Database` model
+* Added: `changelogWatermark` on the `DatabaseMigration` model
+* Added: `total` on the `DedicatedDatabaseBranchList` model
+* Updated: `DedicatedDatabaseOperation.status` documents the new `queued` state
+
 ## 21.0.0
 
 * Breaking: object parameters and model fields are now typed `Map<String, Any?>` instead of `Any`

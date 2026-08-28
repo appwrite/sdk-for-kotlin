@@ -25,7 +25,7 @@ messaging.updatePush(
     "<SOUND>", // sound (optional)
     "<COLOR>", // color (optional)
     "<TAG>", // tag (optional)
-    0, // badge (optional)
+    1, // badge (optional)
     false, // draft (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     false, // contentAvailable (optional)

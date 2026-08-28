@@ -12,7 +12,7 @@ Client client = new Client()
 Proxy proxy = new Proxy(client);
 
 proxy.createInvalidation(
-    "", // domain
+    "example.com", // domain
     InvalidationType.TAG, // type
     "<REFERENCE>", // reference (optional)
     new CoroutineCallback<>((result, error) -> {

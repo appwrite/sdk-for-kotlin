@@ -13,7 +13,7 @@ Project project = new Project(client);
 project.updateOAuth2Okta(
     "<CLIENT_ID>", // clientId (optional)
     "<CLIENT_SECRET>", // clientSecret (optional)
-    "", // domain (optional)
+    "example.com", // domain (optional)
     "<AUTHORIZATION_SERVER_ID>", // authorizationServerId (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {

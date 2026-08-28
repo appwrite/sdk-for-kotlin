@@ -13,9 +13,9 @@ val databases = Databases(client)
 val response = databases.updateIpAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
-    default = "",
-    newKey = "" // optional
+    default = "192.0.2.0",
+    newKey = "<NEW_KEY>" // optional
 )
 ```

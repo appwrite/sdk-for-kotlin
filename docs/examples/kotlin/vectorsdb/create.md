@@ -1,0 +1,21 @@
+```kotlin
+import io.appwrite.Client
+import io.appwrite.coroutines.CoroutineCallback
+import io.appwrite.services.VectorsDB
+
+val client = Client()
+    .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("<YOUR_PROJECT_ID>") // Your project ID
+    .setKey("<YOUR_API_KEY>") // Your secret API key
+
+val vectorsDB = VectorsDB(client)
+
+val response = vectorsDB.create(
+    databaseId = "<DATABASE_ID>",
+    name = "<NAME>",
+    enabled = false, // optional
+    specification = "serverless", // optional
+    replicas = 0, // optional
+    syncMode = "async" // optional
+)
+```

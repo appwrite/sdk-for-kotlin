@@ -13,10 +13,10 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.updateStringColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
-    default = "<DEFAULT>",
+    default = "Hello World",
     size = 1, // optional
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

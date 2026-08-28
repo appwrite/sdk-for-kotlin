@@ -11,6 +11,6 @@ val client = Client()
 val proxy = Proxy(client)
 
 val response = proxy.createAPIRule(
-    domain = ""
+    domain = "example.com"
 )
 ```

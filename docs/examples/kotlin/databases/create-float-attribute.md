@@ -13,11 +13,11 @@ val databases = Databases(client)
 val response = databases.createFloatAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     min = 0, // optional
-    max = 0, // optional
-    default = 0, // optional
+    max = 100, // optional
+    default = 10.5, // optional
     array = false // optional
 )
 ```

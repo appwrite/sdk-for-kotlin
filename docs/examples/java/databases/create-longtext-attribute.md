@@ -13,9 +13,9 @@ Databases databases = new Databases(client);
 databases.createLongtextAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default (optional)
+    "Hello World", // default (optional)
     false, // array (optional)
     false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {

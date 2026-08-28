@@ -13,7 +13,7 @@ Databases databases = new Databases(client);
 databases.createBooleanAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     false, // default (optional)
     false, // array (optional)

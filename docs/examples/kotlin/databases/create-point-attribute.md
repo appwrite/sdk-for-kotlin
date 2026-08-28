@@ -13,7 +13,7 @@ val databases = Databases(client)
 val response = databases.createPointAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = listOf(1, 2) // optional
 )

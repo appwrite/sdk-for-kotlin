@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.updateMediumtextAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default
-    "", // newKey (optional)
+    "Hello World", // default
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

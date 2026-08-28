@@ -13,10 +13,10 @@ val databases = Databases(client)
 val response = databases.createBigIntAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     min = 0, // optional
-    max = 0, // optional
+    max = 1000000, // optional
     default = 0, // optional
     array = false // optional
 )

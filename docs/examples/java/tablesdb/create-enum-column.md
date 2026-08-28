@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createEnumColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
-    List.of(), // elements
+    "<KEY>", // key
+    List.of("active", "inactive"), // elements
     false, // required
-    "<DEFAULT>", // default (optional)
+    "active", // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

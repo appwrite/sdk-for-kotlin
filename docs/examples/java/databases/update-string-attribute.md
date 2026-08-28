@@ -13,11 +13,11 @@ Databases databases = new Databases(client);
 databases.updateStringAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "<DEFAULT>", // default
+    "Hello World", // default
     1, // size (optional)
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

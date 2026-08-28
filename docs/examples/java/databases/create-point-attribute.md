@@ -13,7 +13,7 @@ Databases databases = new Databases(client);
 databases.createPointAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
     List.of(1, 2), // default (optional)
     new CoroutineCallback<>((result, error) -> {

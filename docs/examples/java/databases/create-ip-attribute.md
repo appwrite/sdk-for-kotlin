@@ -13,9 +13,9 @@ Databases databases = new Databases(client);
 databases.createIpAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     false, // required
-    "", // default (optional)
+    "192.0.2.0", // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

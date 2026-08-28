@@ -13,11 +13,11 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createIntegerColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     0, // min (optional)
-    0, // max (optional)
-    0, // default (optional)
+    100, // max (optional)
+    10, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

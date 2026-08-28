@@ -14,9 +14,9 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.updateRelationshipColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     RelationMutate.CASCADE, // onDelete (optional)
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

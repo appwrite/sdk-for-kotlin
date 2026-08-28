@@ -13,6 +13,6 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.deleteColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = ""
+    key = "<KEY>"
 )
 ```

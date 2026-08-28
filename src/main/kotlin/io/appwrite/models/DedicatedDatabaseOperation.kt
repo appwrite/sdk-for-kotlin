@@ -32,7 +32,7 @@ data class DedicatedDatabaseOperation(
     val type: String,
 
     /**
-     * Operation status. Possible values: running (in progress), completed (finished successfully), failed (ended in an error).
+     * Operation status. Possible values: queued (accepted and waiting to resume), running (in progress), completed (finished successfully), failed (ended in an error).
      */
     @SerializedName("status")
     val status: String,

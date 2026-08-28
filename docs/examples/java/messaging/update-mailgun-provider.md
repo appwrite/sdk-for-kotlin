@@ -14,7 +14,7 @@ messaging.updateMailgunProvider(
     "<PROVIDER_ID>", // providerId
     "<NAME>", // name (optional)
     "<API_KEY>", // apiKey (optional)
-    "<DOMAIN>", // domain (optional)
+    "example.com", // domain (optional)
     false, // isEuRegion (optional)
     false, // enabled (optional)
     "<FROM_NAME>", // fromName (optional)

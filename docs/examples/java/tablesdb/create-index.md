@@ -15,7 +15,7 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createIndex(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     TablesDBIndexType.KEY, // type
     List.of(), // columns
     List.of(OrderBy.ASC), // orders (optional)

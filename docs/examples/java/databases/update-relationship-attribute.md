@@ -14,9 +14,9 @@ Databases databases = new Databases(client);
 databases.updateRelationshipAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     RelationMutate.CASCADE, // onDelete (optional)
-    "", // newKey (optional)
+    "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

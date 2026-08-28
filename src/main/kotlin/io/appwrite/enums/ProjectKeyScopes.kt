@@ -87,6 +87,30 @@ enum class ProjectKeyScopes(val value: String) {
     DOCUMENTS_READ("documents.read"),
     @SerializedName("documents.write")
     DOCUMENTS_WRITE("documents.write"),
+    @SerializedName("documentsdb.read")
+    DOCUMENTSDB_READ("documentsdb.read"),
+    @SerializedName("documentsdb.write")
+    DOCUMENTSDB_WRITE("documentsdb.write"),
+    @SerializedName("documentsdb.collections.read")
+    DOCUMENTSDB_COLLECTIONS_READ("documentsdb.collections.read"),
+    @SerializedName("documentsdb.collections.write")
+    DOCUMENTSDB_COLLECTIONS_WRITE("documentsdb.collections.write"),
+    @SerializedName("documentsdb.documents.read")
+    DOCUMENTSDB_DOCUMENTS_READ("documentsdb.documents.read"),
+    @SerializedName("documentsdb.documents.write")
+    DOCUMENTSDB_DOCUMENTS_WRITE("documentsdb.documents.write"),
+    @SerializedName("vectorsdb.read")
+    VECTORSDB_READ("vectorsdb.read"),
+    @SerializedName("vectorsdb.write")
+    VECTORSDB_WRITE("vectorsdb.write"),
+    @SerializedName("vectorsdb.collections.read")
+    VECTORSDB_COLLECTIONS_READ("vectorsdb.collections.read"),
+    @SerializedName("vectorsdb.collections.write")
+    VECTORSDB_COLLECTIONS_WRITE("vectorsdb.collections.write"),
+    @SerializedName("vectorsdb.documents.read")
+    VECTORSDB_DOCUMENTS_READ("vectorsdb.documents.read"),
+    @SerializedName("vectorsdb.documents.write")
+    VECTORSDB_DOCUMENTS_WRITE("vectorsdb.documents.write"),
     @SerializedName("buckets.read")
     BUCKETS_READ("buckets.read"),
     @SerializedName("buckets.write")

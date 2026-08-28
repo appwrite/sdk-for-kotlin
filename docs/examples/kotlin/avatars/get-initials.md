@@ -14,6 +14,6 @@ val result = avatars.getInitials(
     name = "<NAME>", // optional
     width = 0, // optional
     height = 0, // optional
-    background = "" // optional
+    background = "FFFFFF" // optional
 )
 ```

@@ -13,10 +13,10 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.createBigIntColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    "", // key
+    "<KEY>", // key
     false, // required
     0, // min (optional)
-    0, // max (optional)
+    1000000, // max (optional)
     0, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {

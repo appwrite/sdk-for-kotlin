@@ -13,10 +13,10 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.createEnumColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
-    elements = listOf(),
+    key = "<KEY>",
+    elements = listOf("active", "inactive"),
     required = false,
-    default = "<DEFAULT>", // optional
+    default = "active", // optional
     array = false // optional
 )
 ```

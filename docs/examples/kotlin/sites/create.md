@@ -35,8 +35,8 @@ val response = sites.create(
     providerRootDirectory = "<PROVIDER_ROOT_DIRECTORY>", // optional
     providerBranches = listOf(), // optional
     providerPaths = listOf(), // optional
-    buildSpecification = "", // optional
-    runtimeSpecification = "", // optional
+    buildSpecification = "s-1vcpu-512mb", // optional
+    runtimeSpecification = "s-1vcpu-512mb", // optional
     deploymentRetention = 0, // optional
     scopes = listOf(ProjectKeyScopes.PROJECT_READ) // optional
 )

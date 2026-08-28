@@ -968,7 +968,7 @@ class Functions(client: Client) : Service(client) {
      *
      * @param functionId Function unique ID.
      * @param variableId Variable ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param key Variable key. Max length: 255 chars.
+     * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
      * @return [io.appwrite.models.Variable]
@@ -1048,7 +1048,7 @@ class Functions(client: Client) : Service(client) {
      *
      * @param functionId Function unique ID.
      * @param variableId Variable unique ID.
-     * @param key Variable key. Max length: 255 chars.
+     * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
      * @return [io.appwrite.models.Variable]

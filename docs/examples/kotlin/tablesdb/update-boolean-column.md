@@ -13,9 +13,9 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.updateBooleanColumn(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = false,
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

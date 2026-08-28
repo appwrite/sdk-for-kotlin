@@ -13,9 +13,9 @@ val databases = Databases(client)
 val response = databases.updateUrlAttribute(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    key = "",
+    key = "<KEY>",
     required = false,
     default = "https://example.com",
-    newKey = "" // optional
+    newKey = "<NEW_KEY>" // optional
 )
 ```

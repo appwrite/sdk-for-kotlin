@@ -11,7 +11,7 @@ val client = Client()
 val proxy = Proxy(client)
 
 val response = proxy.createSiteRule(
-    domain = "",
+    domain = "example.com",
     siteId = "<SITE_ID>",
     branch = "<BRANCH>" // optional
 )

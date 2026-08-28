@@ -14,7 +14,7 @@ messaging.createMailgunProvider(
     "<PROVIDER_ID>", // providerId
     "<NAME>", // name
     "<API_KEY>", // apiKey (optional)
-    "<DOMAIN>", // domain (optional)
+    "example.com", // domain (optional)
     false, // isEuRegion (optional)
     "<FROM_NAME>", // fromName (optional)
     "email@example.com", // fromEmail (optional)

@@ -13,10 +13,10 @@ Databases databases = new Databases(client);
 databases.createVarcharAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    "", // key
+    "<KEY>", // key
     1, // size
     false, // required
-    "<DEFAULT>", // default (optional)
+    "Hello World", // default (optional)
     false, // array (optional)
     false, // encrypt (optional)
     new CoroutineCallback<>((result, error) -> {
