@@ -796,15 +796,15 @@ class Postgresql(client: Client) : Service(client) {
     }
 
     /**
-     * Rotate the primary connection credentials for a dedicated database. Generates a new password and updates the database atomically. Previous credentials stop working immediately. Returns the database with a refreshed connection string carrying the new password.
+     * Queue a rotation of the primary connection credentials for a dedicated database. A hibernated database is woken by the worker before rotation. List database operations until the returned operation reaches a terminal status, then fetch the database again for the refreshed connection string.
      *
      * @param databaseId Database ID.
-     * @return [io.appwrite.models.DedicatedDatabase]
+     * @return [io.appwrite.models.DedicatedDatabaseOperation]
      */
     @Throws(AppwriteException::class)
     suspend fun updateCredentials(
         databaseId: String,
-    ): io.appwrite.models.DedicatedDatabase {
+    ): io.appwrite.models.DedicatedDatabaseOperation {
         val apiPath = ("/postgresql/{databaseId}/credentials"
             .replace("{databaseId}", databaseId)
         )
@@ -814,15 +814,15 @@ class Postgresql(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.DedicatedDatabase = {
-            io.appwrite.models.DedicatedDatabase.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabaseOperation = {
+            io.appwrite.models.DedicatedDatabaseOperation.from(map = it as Map<String, Any>)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.DedicatedDatabase::class.java,
+            responseType = io.appwrite.models.DedicatedDatabaseOperation::class.java,
             converter,
         )
     }

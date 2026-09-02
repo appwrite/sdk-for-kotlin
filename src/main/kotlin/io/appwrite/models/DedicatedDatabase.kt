@@ -62,7 +62,7 @@ data class DedicatedDatabase(
     val specification: String,
 
     /**
-     * Database backend provider. Possible values: prisma, edge.
+     * Database backend provider. Possible values: edge.
      */
     @SerializedName("backend")
     val backend: String,
@@ -90,6 +90,12 @@ data class DedicatedDatabase(
      */
     @SerializedName("connectionPassword")
     val connectionPassword: String,
+
+    /**
+     * Committed generation of the primary connection credentials. Null until the rotation contract has been initialized.
+     */
+    @SerializedName("credentialGeneration")
+    val credentialGeneration: Long,
 
     /**
      * Full database connection string (URI format).
@@ -311,6 +317,7 @@ data class DedicatedDatabase(
         "connectionPort" to connectionPort as Any,
         "connectionUser" to connectionUser as Any,
         "connectionPassword" to connectionPassword as Any,
+        "credentialGeneration" to credentialGeneration as Any,
         "connectionString" to connectionString as Any,
         "ssl" to ssl as Any,
         "status" to status as Any,
@@ -366,6 +373,7 @@ data class DedicatedDatabase(
             connectionPort = (map["connectionPort"] as Number).toLong(),
             connectionUser = map["connectionUser"] as String,
             connectionPassword = map["connectionPassword"] as String,
+            credentialGeneration = (map["credentialGeneration"] as Number).toLong(),
             connectionString = map["connectionString"] as String,
             ssl = map["ssl"] as Boolean,
             status = map["status"] as String,

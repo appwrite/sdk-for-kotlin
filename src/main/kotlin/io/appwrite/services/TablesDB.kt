@@ -612,11 +612,11 @@ class TablesDB(client: Client) : Service(client) {
      * @return [io.appwrite.models.DatabaseMigration]
      */
     @Throws(AppwriteException::class)
-    suspend fun cutoverMigration(
+    suspend fun createCutover(
         databaseId: String,
         migrationId: String,
     ): io.appwrite.models.DatabaseMigration {
-        val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}/cutover"
+        val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}/cutovers"
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
         )

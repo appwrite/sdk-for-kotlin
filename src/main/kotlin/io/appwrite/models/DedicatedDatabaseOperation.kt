@@ -26,7 +26,7 @@ data class DedicatedDatabaseOperation(
     val databaseId: String,
 
     /**
-     * Operation type, such as provision, update, restore, pausing, resuming, failover, backup-create or cross-region-enable.
+     * Operation type, such as provision, update, credentials-update, restore, pausing, resuming, failover, backup-create or cross-region-enable.
      */
     @SerializedName("type")
     val type: String,

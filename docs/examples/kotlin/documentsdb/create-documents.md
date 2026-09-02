@@ -13,6 +13,7 @@ val documentsDB = DocumentsDB(client)
 val response = documentsDB.createDocuments(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    documents = listOf()
+    documents = listOf(),
+    transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

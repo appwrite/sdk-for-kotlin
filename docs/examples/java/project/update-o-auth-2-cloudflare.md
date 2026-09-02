@@ -1,18 +1,19 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.TablesDB;
+import io.appwrite.services.Project;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-TablesDB tablesDB = new TablesDB(client);
+Project project = new Project(client);
 
-tablesDB.cutoverMigration(
-    "<DATABASE_ID>", // databaseId
-    "<MIGRATION_ID>", // migrationId
+project.updateOAuth2Cloudflare(
+    "<CLIENT_ID>", // clientId (optional)
+    "<CLIENT_SECRET>", // clientSecret (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

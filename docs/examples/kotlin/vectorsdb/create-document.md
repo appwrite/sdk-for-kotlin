@@ -22,6 +22,7 @@ val response = vectorsDB.createDocument(
             "key" to "value"
         )
     ),
-    permissions = listOf(Permission.read(Role.any())) // optional
+    permissions = listOf(Permission.read(Role.any())), // optional
+    transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

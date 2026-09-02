@@ -35,7 +35,7 @@ data class FrameworkAdapter(
      * Name of fallback file to use instead of 404 page. If null, Appwrite 404 page will be displayed.
      */
     @SerializedName("fallbackFile")
-    val fallbackFile: String,
+    var fallbackFile: String?,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -43,7 +43,7 @@ data class FrameworkAdapter(
         "installCommand" to installCommand as Any,
         "buildCommand" to buildCommand as Any,
         "outputDirectory" to outputDirectory as Any,
-        "fallbackFile" to fallbackFile as Any,
+        "fallbackFile" to fallbackFile as Any?,
     )
 
     companion object {
@@ -55,7 +55,7 @@ data class FrameworkAdapter(
             installCommand = map["installCommand"] as String,
             buildCommand = map["buildCommand"] as String,
             outputDirectory = map["outputDirectory"] as String,
-            fallbackFile = map["fallbackFile"] as String,
+            fallbackFile = map["fallbackFile"] as? String,
         )
     }
 }

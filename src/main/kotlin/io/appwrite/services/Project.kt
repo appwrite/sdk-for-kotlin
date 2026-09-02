@@ -940,6 +940,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Cloudflare configuration.
+     *
+     * @param clientId 'Client ID' of Cloudflare OAuth2 app. For example: 4b866000000000000000000000c9e4e2
+     * @param clientSecret 'Client Secret' of Cloudflare OAuth2 app. For example: cfoc_5Q6YRl0000000000000000000000000000000000003d214f
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Cloudflare]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Cloudflare(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Cloudflare {
+        val apiPath = "/project/oauth2/cloudflare"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Cloudflare = {
+            io.appwrite.models.OAuth2Cloudflare.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Cloudflare::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Dailymotion configuration.
      *
      * @param apiKey 'API Key' of Dailymotion OAuth2 app. For example: 07a9000000000000067f
@@ -1840,6 +1879,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Resend configuration.
+     *
+     * @param clientId 'Client ID' of Resend OAuth2 app. For example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+     * @param clientSecret 'Client Secret' of Resend OAuth2 app. For example: 9c1e4b00000000000000000000000000000000000000000000000000a72d5f4
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Resend]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Resend(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Resend {
+        val apiPath = "/project/oauth2/resend"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Resend = {
+            io.appwrite.models.OAuth2Resend.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Resend::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Salesforce configuration.
      *
      * @param customerKey 'Consumer Key' of Salesforce OAuth2 app. For example: 3MVG9I0000000000000000000000000000000000000000000000000000000000000000000000000C5Aejq
@@ -2392,6 +2470,8 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "salesforce" -> io.appwrite.models.OAuth2Salesforce.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "yahoo" -> io.appwrite.models.OAuth2Yahoo.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "huggingface" -> io.appwrite.models.OAuth2HuggingFace.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "resend" -> io.appwrite.models.OAuth2Resend.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "cloudflare" -> io.appwrite.models.OAuth2Cloudflare.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "linkedin" -> io.appwrite.models.OAuth2Linkedin.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "disqus" -> io.appwrite.models.OAuth2Disqus.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "amazon" -> io.appwrite.models.OAuth2Amazon.from(map = responseMap)

@@ -23,6 +23,7 @@ val response = documentsDB.createDocument(
         "age" to 30,
         "isAdmin" to false
     ),
-    permissions = listOf(Permission.read(Role.any())) // optional
+    permissions = listOf(Permission.read(Role.any())), // optional
+    transactionId = "<TRANSACTION_ID>" // optional
 )
 ```
