@@ -24,6 +24,7 @@ documentsDB.createDocument(
         "isAdmin", false
     ), // data
     List.of(Permission.read(Role.any())), // permissions (optional)
+    "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

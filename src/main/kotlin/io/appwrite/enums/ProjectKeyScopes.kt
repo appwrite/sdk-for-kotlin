@@ -99,6 +99,10 @@ enum class ProjectKeyScopes(val value: String) {
     DOCUMENTSDB_DOCUMENTS_READ("documentsdb.documents.read"),
     @SerializedName("documentsdb.documents.write")
     DOCUMENTSDB_DOCUMENTS_WRITE("documentsdb.documents.write"),
+    @SerializedName("documentsdb.indexes.read")
+    DOCUMENTSDB_INDEXES_READ("documentsdb.indexes.read"),
+    @SerializedName("documentsdb.indexes.write")
+    DOCUMENTSDB_INDEXES_WRITE("documentsdb.indexes.write"),
     @SerializedName("vectorsdb.read")
     VECTORSDB_READ("vectorsdb.read"),
     @SerializedName("vectorsdb.write")
@@ -111,6 +115,10 @@ enum class ProjectKeyScopes(val value: String) {
     VECTORSDB_DOCUMENTS_READ("vectorsdb.documents.read"),
     @SerializedName("vectorsdb.documents.write")
     VECTORSDB_DOCUMENTS_WRITE("vectorsdb.documents.write"),
+    @SerializedName("vectorsdb.indexes.read")
+    VECTORSDB_INDEXES_READ("vectorsdb.indexes.read"),
+    @SerializedName("vectorsdb.indexes.write")
+    VECTORSDB_INDEXES_WRITE("vectorsdb.indexes.write"),
     @SerializedName("buckets.read")
     BUCKETS_READ("buckets.read"),
     @SerializedName("buckets.write")

@@ -231,6 +231,12 @@ data class BillingPlan(
     var usageLogsIntervals: List<String>?,
 
     /**
+     * Metrics this plan only records as a total. They cannot be broken down by dimension or filtered, because the stored events cover a fraction of the real traffic.
+     */
+    @SerializedName("usageAggregateOnlyMetrics")
+    var usageAggregateOnlyMetrics: List<String>?,
+
+    /**
      * Number of days of console inactivity before a project is paused. 0 means pausing is disabled.
      */
     @SerializedName("projectInactivityDays")
@@ -473,6 +479,7 @@ data class BillingPlan(
         "activityLogs" to activityLogs as Any?,
         "usageLogs" to usageLogs as Any,
         "usageLogsIntervals" to usageLogsIntervals as Any?,
+        "usageAggregateOnlyMetrics" to usageAggregateOnlyMetrics as Any?,
         "projectInactivityDays" to projectInactivityDays as Any,
         "alertLimit" to alertLimit as Any,
         "usage" to usage.toMap() as Any,
@@ -551,6 +558,7 @@ data class BillingPlan(
             activityLogs = (map["activityLogs"] as? Number)?.toLong(),
             usageLogs = (map["usageLogs"] as Number).toLong(),
             usageLogsIntervals = map["usageLogsIntervals"] as? List<String>,
+            usageAggregateOnlyMetrics = map["usageAggregateOnlyMetrics"] as? List<String>,
             projectInactivityDays = (map["projectInactivityDays"] as Number).toLong(),
             alertLimit = (map["alertLimit"] as Number).toLong(),
             usage = UsageBillingPlan.from(map = map["usage"] as Map<String, Any>),

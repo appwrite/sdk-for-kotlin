@@ -728,6 +728,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param documentId Document ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -738,6 +739,7 @@ class DocumentsDB(client: Client) : Service(client) {
         documentId: String,
         data: Map<String, Any?>,
         permissions: List<String>? = null,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Document<T> {
         val apiPath = ("/documentsdb/{databaseId}/collections/{collectionId}/documents"
@@ -748,6 +750,7 @@ class DocumentsDB(client: Client) : Service(client) {
             "documentId" to documentId,
             "data" to data,
             "permissions" to permissions,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -775,6 +778,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param documentId Document ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param data Document data as JSON object.
      * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.Document<T>]
      */
     @JvmOverloads
@@ -785,12 +789,14 @@ class DocumentsDB(client: Client) : Service(client) {
         documentId: String,
         data: Map<String, Any?>,
         permissions: List<String>? = null,
+        transactionId: String? = null,
     ): io.appwrite.models.Document<Map<String, Any>> = createDocument(
         databaseId,
         collectionId,
         documentId,
         data,
         permissions,
+        transactionId,
         nestedType = classOf(),
     )
 
@@ -800,13 +806,16 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documents Array of documents data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> createDocuments(
         databaseId: String,
         collectionId: String,
         documents: List<Map<String, Any?>>,
+        transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.DocumentList<T> {
         val apiPath = ("/documentsdb/{databaseId}/collections/{collectionId}/documents"
@@ -815,6 +824,7 @@ class DocumentsDB(client: Client) : Service(client) {
         )
         val apiParams = mutableMapOf<String, Any?>(
             "documents" to documents,
+            "transactionId" to transactionId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -840,17 +850,21 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
      * @param documents Array of documents data as JSON objects.
+     * @param transactionId Transaction ID for staging the operation.
      * @return [io.appwrite.models.DocumentList<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createDocuments(
         databaseId: String,
         collectionId: String,
         documents: List<Map<String, Any?>>,
+        transactionId: String? = null,
     ): io.appwrite.models.DocumentList<Map<String, Any>> = createDocuments(
         databaseId,
         collectionId,
         documents,
+        transactionId,
         nestedType = classOf(),
     )
 

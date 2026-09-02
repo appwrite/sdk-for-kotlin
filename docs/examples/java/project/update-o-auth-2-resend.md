@@ -1,20 +1,19 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.VectorsDB;
+import io.appwrite.services.Project;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-VectorsDB vectorsDB = new VectorsDB(client);
+Project project = new Project(client);
 
-vectorsDB.createDocuments(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    List.of(), // documents
-    "<TRANSACTION_ID>", // transactionId (optional)
+project.updateOAuth2Resend(
+    "<CLIENT_ID>", // clientId (optional)
+    "<CLIENT_SECRET>", // clientSecret (optional)
+    false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
