@@ -15,6 +15,7 @@ account.createOAuth2Token(
     provider = OAuthProvider.AMAZON,
     success = "https://example.com", // optional
     failure = "https://example.com", // optional
-    scopes = listOf() // optional
+    scopes = listOf(), // optional
+    state = "<STATE>" // optional
 )
 ```
