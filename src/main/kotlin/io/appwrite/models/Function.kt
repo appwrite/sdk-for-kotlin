@@ -122,6 +122,12 @@ data class Function(
     val schedule: String,
 
     /**
+     * Minutes between scheduled executions. 0 when the function has no interval.
+     */
+    @SerializedName("interval")
+    var interval: Long?,
+
+    /**
      * Function execution timeout in seconds.
      */
     @SerializedName("timeout")
@@ -220,6 +226,7 @@ data class Function(
         "vars" to vars.map { it.toMap() } as Any,
         "events" to events as Any,
         "schedule" to schedule as Any,
+        "interval" to interval as Any?,
         "timeout" to timeout as Any,
         "entrypoint" to entrypoint as Any,
         "commands" to commands as Any,
@@ -259,6 +266,7 @@ data class Function(
             vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
             events = map["events"] as List<String>,
             schedule = map["schedule"] as String,
+            interval = (map["interval"] as? Number)?.toLong(),
             timeout = (map["timeout"] as Number).toLong(),
             entrypoint = map["entrypoint"] as String,
             commands = map["commands"] as String,

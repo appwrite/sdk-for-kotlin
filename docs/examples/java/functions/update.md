@@ -35,6 +35,7 @@ functions.update(
     "s-1vcpu-512mb", // buildSpecification (optional)
     "s-1vcpu-512mb", // runtimeSpecification (optional)
     0, // deploymentRetention (optional)
+    0, // interval (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
