@@ -59,7 +59,7 @@ class Functions(client: Client) : Service(client) {
      * @param runtime Execution runtime.
      * @param execute An array of role strings with execution permissions. By default no user is granted with any execute permissions. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
      * @param events Events list. Maximum of 100 events are allowed.
-     * @param schedule Schedule CRON syntax.
+     * @param schedule Schedule CRON syntax. Cannot be combined with interval.
      * @param timeout Function maximum execution time in seconds.
      * @param enabled Is function enabled? When set to 'disabled', users cannot access the function but Server SDKs with and API key can still access the function. No data is lost when this is toggled.
      * @param logging When disabled, executions will exclude logs and errors, and will be slightly faster.
@@ -76,6 +76,7 @@ class Functions(client: Client) : Service(client) {
      * @param buildSpecification Build specification for the function deployments.
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param interval Minutes between scheduled executions. Appwrite picks when within each interval the function runs. Use 0 to disable. Cannot be combined with schedule.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -103,6 +104,7 @@ class Functions(client: Client) : Service(client) {
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
+        interval: Long? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
         val apiParams = mutableMapOf<String, Any?>(
@@ -128,6 +130,7 @@ class Functions(client: Client) : Service(client) {
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
+            "interval" to interval,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -244,7 +247,7 @@ class Functions(client: Client) : Service(client) {
      * @param runtime Execution runtime.
      * @param execute An array of role strings with execution permissions. By default no user is granted with any execute permissions. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
      * @param events Events list. Maximum of 100 events are allowed.
-     * @param schedule Schedule CRON syntax.
+     * @param schedule Schedule CRON syntax. Cannot be combined with interval.
      * @param timeout Maximum execution time in seconds.
      * @param enabled Is function enabled? When set to 'disabled', users cannot access the function but Server SDKs with and API key can still access the function. No data is lost when this is toggled.
      * @param logging When disabled, executions will exclude logs and errors, and will be slightly faster.
@@ -261,6 +264,7 @@ class Functions(client: Client) : Service(client) {
      * @param buildSpecification Build specification for the function deployments.
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param interval Minutes between scheduled executions. Appwrite picks when within each interval the function runs. Use 0 to disable. Cannot be combined with schedule. When omitted, the current interval is kept unless schedule is set.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -288,6 +292,7 @@ class Functions(client: Client) : Service(client) {
         buildSpecification: String? = null,
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
+        interval: Long? = null,
     ): io.appwrite.models.Function {
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
@@ -314,6 +319,7 @@ class Functions(client: Client) : Service(client) {
             "buildSpecification" to buildSpecification,
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
+            "interval" to interval,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

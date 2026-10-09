@@ -405,6 +405,12 @@ data class BillingPlan(
     val buildSize: Long,
 
     /**
+     * Shortest function schedule interval allowed, in minutes. 0 allows every interval.
+     */
+    @SerializedName("functionsIntervalMinimum")
+    val functionsIntervalMinimum: Long,
+
+    /**
      * Does the plan support encrypted string attributes or not.
      */
     @SerializedName("databasesAllowEncrypt")
@@ -508,6 +514,7 @@ data class BillingPlan(
         "backupPolicies" to backupPolicies as Any?,
         "deploymentSize" to deploymentSize as Any,
         "buildSize" to buildSize as Any,
+        "functionsIntervalMinimum" to functionsIntervalMinimum as Any,
         "databasesAllowEncrypt" to databasesAllowEncrypt as Any,
         "limits" to limits?.toMap() as Any?,
         "group" to group.value as Any,
@@ -587,6 +594,7 @@ data class BillingPlan(
             backupPolicies = (map["backupPolicies"] as? Number)?.toLong(),
             deploymentSize = (map["deploymentSize"] as Number).toLong(),
             buildSize = (map["buildSize"] as Number).toLong(),
+            functionsIntervalMinimum = (map["functionsIntervalMinimum"] as Number).toLong(),
             databasesAllowEncrypt = map["databasesAllowEncrypt"] as Boolean,
             limits = (map["limits"] as? Map<String, Any>)?.let { BillingPlanLimits.from(map = it) },
             group = BillingPlanGroup.values().find { it.value == map["group"] as String }!!,
