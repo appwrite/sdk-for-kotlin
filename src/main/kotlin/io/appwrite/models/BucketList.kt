@@ -30,7 +30,7 @@ data class BucketList(
         fun from(
             map: Map<String, Any>,
         ) = BucketList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             buckets = (map["buckets"] as List<Map<String, Any>>).map { Bucket.from(map = it) },
         )
     }

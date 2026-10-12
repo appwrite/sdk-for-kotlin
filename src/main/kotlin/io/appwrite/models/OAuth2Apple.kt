@@ -43,6 +43,18 @@ data class OAuth2Apple(
     @SerializedName("p8File")
     val p8File: String,
 
+    /**
+     * Native Sign in with Apple is active and can be used to create sessions from an ID token. Independent of enabled, which only controls the browser-based flow.
+     */
+    @SerializedName("nativeEnabled")
+    val nativeEnabled: Boolean,
+
+    /**
+     * App bundle IDs accepted as ID token audiences for native Sign in with Apple, next to the Services ID.
+     */
+    @SerializedName("nativeClientIds")
+    val nativeClientIds: List<String>,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -51,6 +63,8 @@ data class OAuth2Apple(
         "keyId" to keyId as Any,
         "teamId" to teamId as Any,
         "p8File" to p8File as Any,
+        "nativeEnabled" to nativeEnabled as Any,
+        "nativeClientIds" to nativeClientIds as Any,
     )
 
     companion object {
@@ -58,12 +72,14 @@ data class OAuth2Apple(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Apple(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            serviceId = map["serviceId"] as String,
-            keyId = map["keyId"] as String,
-            teamId = map["teamId"] as String,
-            p8File = map["p8File"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            serviceId = (if (map.containsKey("serviceId")) map["serviceId"] else "") as String,
+            keyId = (if (map.containsKey("keyId")) map["keyId"] else "") as String,
+            teamId = (if (map.containsKey("teamId")) map["teamId"] else "") as String,
+            p8File = (if (map.containsKey("p8File")) map["p8File"] else "") as String,
+            nativeEnabled = (if (map.containsKey("nativeEnabled")) map["nativeEnabled"] else false) as Boolean,
+            nativeClientIds = (if (map.containsKey("nativeClientIds")) map["nativeClientIds"] else listOf<Any?>()) as List<String>,
         )
     }
 }

@@ -13,7 +13,7 @@ DocumentsDB documentsDB = new DocumentsDB(client);
 documentsDB.deleteDocuments(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    List.of(), // queries (optional)
+    List.of("{\"method\":\"equal\", \"attribute\":\"$id\", \"values\":[\"<DOCUMENT_ID>\"]}"), // queries (optional)
     "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

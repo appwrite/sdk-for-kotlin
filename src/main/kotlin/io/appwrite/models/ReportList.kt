@@ -30,7 +30,7 @@ data class ReportList(
         fun from(
             map: Map<String, Any>,
         ) = ReportList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             reports = (map["reports"] as List<Map<String, Any>>).map { Report.from(map = it) },
         )
     }

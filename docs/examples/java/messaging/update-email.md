@@ -12,17 +12,19 @@ Messaging messaging = new Messaging(client);
 
 messaging.updateEmail(
     "<MESSAGE_ID>", // messageId
+    "<SUBJECT>", // subject (optional)
+    "<CONTENT>", // content (optional)
     List.of(), // topics (optional)
     List.of(), // users (optional)
     List.of(), // targets (optional)
-    "<SUBJECT>", // subject (optional)
-    "<CONTENT>", // content (optional)
-    false, // draft (optional)
-    false, // html (optional)
     List.of(), // cc (optional)
     List.of(), // bcc (optional)
-    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     List.of(), // attachments (optional)
+    "email@example.com", // replyToEmail (optional)
+    "<REPLY_TO_NAME>", // replyToName (optional)
+    false, // draft (optional)
+    false, // html (optional)
+    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

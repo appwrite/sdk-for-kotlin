@@ -30,7 +30,7 @@ data class BackupArchiveList(
         fun from(
             map: Map<String, Any>,
         ) = BackupArchiveList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             archives = (map["archives"] as List<Map<String, Any>>).map { BackupArchive.from(map = it) },
         )
     }

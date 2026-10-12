@@ -29,7 +29,7 @@ data class DedicatedDatabaseRestoration(
      * Source database ID when restoring a backup into another database.
      */
     @SerializedName("sourceDatabaseId")
-    val sourceDatabaseId: String,
+    var sourceDatabaseId: String?,
 
     /**
      * Project ID.
@@ -41,7 +41,7 @@ data class DedicatedDatabaseRestoration(
      * Backup ID used for restoration (null for PITR).
      */
     @SerializedName("backupId")
-    val backupId: String,
+    var backupId: String?,
 
     /**
      * Restoration type. Possible values: backup (restore from a specific backup snapshot), pitr (point-in-time recovery to a specific timestamp).
@@ -59,19 +59,19 @@ data class DedicatedDatabaseRestoration(
      * Target time for PITR restoration in ISO 8601 format.
      */
     @SerializedName("targetTime")
-    val targetTime: String,
+    var targetTime: String?,
 
     /**
      * Restoration start time in ISO 8601 format.
      */
     @SerializedName("startedAt")
-    val startedAt: String,
+    var startedAt: String?,
 
     /**
      * Restoration completion time in ISO 8601 format.
      */
     @SerializedName("completedAt")
-    val completedAt: String,
+    var completedAt: String?,
 
     /**
      * Error message if restoration failed.
@@ -84,14 +84,14 @@ data class DedicatedDatabaseRestoration(
         "\$id" to id as Any,
         "\$createdAt" to createdAt as Any,
         "databaseId" to databaseId as Any,
-        "sourceDatabaseId" to sourceDatabaseId as Any,
+        "sourceDatabaseId" to sourceDatabaseId as Any?,
         "projectId" to projectId as Any,
-        "backupId" to backupId as Any,
+        "backupId" to backupId as Any?,
         "type" to type as Any,
         "status" to status as Any,
-        "targetTime" to targetTime as Any,
-        "startedAt" to startedAt as Any,
-        "completedAt" to completedAt as Any,
+        "targetTime" to targetTime as Any?,
+        "startedAt" to startedAt as Any?,
+        "completedAt" to completedAt as Any?,
         "error" to error as Any,
     )
 
@@ -100,18 +100,18 @@ data class DedicatedDatabaseRestoration(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseRestoration(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            databaseId = map["databaseId"] as String,
-            sourceDatabaseId = map["sourceDatabaseId"] as String,
-            projectId = map["projectId"] as String,
-            backupId = map["backupId"] as String,
-            type = map["type"] as String,
-            status = map["status"] as String,
-            targetTime = map["targetTime"] as String,
-            startedAt = map["startedAt"] as String,
-            completedAt = map["completedAt"] as String,
-            error = map["error"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            databaseId = (if (map.containsKey("databaseId")) map["databaseId"] else "") as String,
+            sourceDatabaseId = map["sourceDatabaseId"] as? String,
+            projectId = (if (map.containsKey("projectId")) map["projectId"] else "") as String,
+            backupId = map["backupId"] as? String,
+            type = (if (map.containsKey("type")) map["type"] else "backup") as String,
+            status = (if (map.containsKey("status")) map["status"] else "pending") as String,
+            targetTime = map["targetTime"] as? String,
+            startedAt = map["startedAt"] as? String,
+            completedAt = map["completedAt"] as? String,
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
         )
     }
 }

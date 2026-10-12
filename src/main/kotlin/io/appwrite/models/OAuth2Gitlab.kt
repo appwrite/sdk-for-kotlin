@@ -51,11 +51,11 @@ data class OAuth2Gitlab(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Gitlab(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            applicationId = map["applicationId"] as String,
-            secret = map["secret"] as String,
-            endpoint = map["endpoint"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            applicationId = (if (map.containsKey("applicationId")) map["applicationId"] else "") as String,
+            secret = (if (map.containsKey("secret")) map["secret"] else "") as String,
+            endpoint = (if (map.containsKey("endpoint")) map["endpoint"] else "") as String,
         )
     }
 }

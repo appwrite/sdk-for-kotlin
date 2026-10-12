@@ -100,18 +100,18 @@ data class Collection(
         fun from(
             map: Map<String, Any>,
         ) = Collection(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             permissions = map["\$permissions"] as List<String>,
-            databaseId = map["databaseId"] as String,
-            name = map["name"] as String,
-            enabled = map["enabled"] as Boolean,
-            documentSecurity = map["documentSecurity"] as Boolean,
+            databaseId = (if (map.containsKey("databaseId")) map["databaseId"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
+            documentSecurity = (if (map.containsKey("documentSecurity")) map["documentSecurity"] else false) as Boolean,
             attributes = map["attributes"] as List<Map<String, Any?>>,
             indexes = (map["indexes"] as List<Map<String, Any>>).map { Index.from(map = it) },
-            bytesMax = (map["bytesMax"] as Number).toLong(),
-            bytesUsed = (map["bytesUsed"] as Number).toLong(),
+            bytesMax = ((if (map.containsKey("bytesMax")) map["bytesMax"] else 0) as Number).toLong(),
+            bytesUsed = ((if (map.containsKey("bytesUsed")) map["bytesUsed"] else 0) as Number).toLong(),
         )
     }
 }

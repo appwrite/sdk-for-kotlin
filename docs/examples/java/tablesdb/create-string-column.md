@@ -14,7 +14,7 @@ tablesDB.createStringColumn(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
     "<KEY>", // key
-    1, // size
+    1L, // size
     false, // required
     "Hello World", // default (optional)
     false, // array (optional)

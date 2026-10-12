@@ -30,7 +30,7 @@ data class FunctionList(
         fun from(
             map: Map<String, Any>,
         ) = FunctionList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             functions = (map["functions"] as List<Map<String, Any>>).map { Function.from(map = it) },
         )
     }

@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.**/
+ * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.
+ */
 class Oauth2(client: Client) : Service(client) {
     /**
      * Approve an OAuth2 grant after the user gives consent. Returns the `redirectUrl` the end user should be sent to. The consent screen may optionally pass enriched `authorization_details` to record the concrete resources the user selected. You can pass Accept header of `application/json` to receive a JSON response instead of a redirect.
@@ -84,7 +85,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
         requestUri: String? = null,
     ): io.appwrite.models.Oauth2Authorize {
@@ -156,7 +157,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
         requestUri: String? = null,
     ): io.appwrite.models.Oauth2Authorize {
@@ -212,7 +213,7 @@ class Oauth2(client: Client) : Service(client) {
         clientId: String? = null,
         scope: String? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2DeviceAuthorization {
         val apiPath = ("/oauth2/{project_id}/device_authorization"
@@ -285,6 +286,9 @@ class Oauth2(client: Client) : Service(client) {
     suspend fun getGrant(
         grantId: String,
     ): io.appwrite.models.Oauth2Grant {
+        if (grantId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"grantId\"")
+        }
         val apiPath = ("/oauth2/{project_id}/grants/{grant_id}"
             .replace("{project_id}", client.config["project"].orEmpty())
             .replace("{grant_id}", grantId)
@@ -302,6 +306,49 @@ class Oauth2(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.Oauth2Grant::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Introspect an OAuth2 access token or refresh token. Authenticate with an API key holding the `oauth2.introspect` scope to introspect any token in the project, or with the client credentials of the app the token was issued to.
+     *
+     * @param token The access token or refresh token to introspect.
+     * @param tokenTypeHint Type of token to introspect. Can be one of: `access_token` or `refresh_token`.
+     * @param clientId OAuth2 client ID. Either a registered app ID or an HTTPS client ID metadata document URL.
+     * @param clientSecret OAuth2 client secret.
+     * @return [io.appwrite.models.Oauth2Introspection]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun introspect(
+        token: String,
+        tokenTypeHint: String? = null,
+        clientId: String? = null,
+        clientSecret: String? = null,
+    ): io.appwrite.models.Oauth2Introspection {
+        val apiPath = ("/oauth2/{project_id}/introspect"
+            .replace("{project_id}", client.config["project"].orEmpty())
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "token" to token,
+            "token_type_hint" to tokenTypeHint,
+            "client_id" to clientId,
+            "client_secret" to clientSecret,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2Introspection = {
+            io.appwrite.models.Oauth2Introspection.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2Introspection::class.java,
             converter,
         )
     }
@@ -377,7 +424,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2PAR {
         val apiPath = ("/oauth2/{project_id}/par"
@@ -552,7 +599,7 @@ class Oauth2(client: Client) : Service(client) {
         clientSecret: String? = null,
         codeVerifier: String? = null,
         redirectUri: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2Token {
         val apiPath = ("/oauth2/{project_id}/token"

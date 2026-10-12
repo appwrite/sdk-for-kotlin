@@ -30,7 +30,7 @@ data class FrameworkList(
         fun from(
             map: Map<String, Any>,
         ) = FrameworkList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             frameworks = (map["frameworks"] as List<Map<String, Any>>).map { Framework.from(map = it) },
         )
     }

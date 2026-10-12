@@ -72,13 +72,13 @@ data class Runtime(
         fun from(
             map: Map<String, Any>,
         ) = Runtime(
-            id = map["\$id"] as String,
-            key = map["key"] as String,
-            name = map["name"] as String,
-            version = map["version"] as String,
-            base = map["base"] as String,
-            image = map["image"] as String,
-            logo = map["logo"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            version = (if (map.containsKey("version")) map["version"] else "") as String,
+            base = (if (map.containsKey("base")) map["base"] else "") as String,
+            image = (if (map.containsKey("image")) map["image"] else "") as String,
+            logo = (if (map.containsKey("logo")) map["logo"] else "") as String,
             supports = map["supports"] as List<String>,
         )
     }

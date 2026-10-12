@@ -30,7 +30,7 @@ data class ProjectList(
         fun from(
             map: Map<String, Any>,
         ) = ProjectList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             projects = (map["projects"] as List<Map<String, Any>>).map { Project.from(map = it) },
         )
     }

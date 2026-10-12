@@ -13,7 +13,7 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.deleteRows(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    List.of(), // queries (optional)
+    List.of("{\"method\":\"equal\", \"attribute\":\"$id\", \"values\":[\"<ROW_ID>\"]}"), // queries (optional)
     "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

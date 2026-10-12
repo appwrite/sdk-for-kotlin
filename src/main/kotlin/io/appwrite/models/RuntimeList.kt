@@ -30,7 +30,7 @@ data class RuntimeList(
         fun from(
             map: Map<String, Any>,
         ) = RuntimeList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             runtimes = (map["runtimes"] as List<Map<String, Any>>).map { Runtime.from(map = it) },
         )
     }

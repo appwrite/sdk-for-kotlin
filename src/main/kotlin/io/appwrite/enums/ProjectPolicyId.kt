@@ -11,6 +11,10 @@ enum class ProjectPolicyId(val value: String) {
     PASSWORD_STRENGTH("password-strength"),
     @SerializedName("password-personal-data")
     PASSWORD_PERSONAL_DATA("password-personal-data"),
+    @SerializedName("password-pwned")
+    PASSWORD_PWNED("password-pwned"),
+    @SerializedName("password-rotation")
+    PASSWORD_ROTATION("password-rotation"),
     @SerializedName("session-alert")
     SESSION_ALERT("session-alert"),
     @SerializedName("session-duration")
@@ -32,7 +36,9 @@ enum class ProjectPolicyId(val value: String) {
     @SerializedName("deny-free-email")
     DENY_FREE_EMAIL("deny-free-email"),
     @SerializedName("deny-corporate-email")
-    DENY_CORPORATE_EMAIL("deny-corporate-email");
+    DENY_CORPORATE_EMAIL("deny-corporate-email"),
+    @SerializedName("passkey")
+    PASSKEY("passkey");
 
     override fun toString() = value
 }

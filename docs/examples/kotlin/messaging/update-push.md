@@ -13,11 +13,11 @@ val messaging = Messaging(client)
 
 val response = messaging.updatePush(
     messageId = "<MESSAGE_ID>",
+    title = "<TITLE>", // optional
+    body = "<BODY>", // optional
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional
-    title = "<TITLE>", // optional
-    body = "<BODY>", // optional
     data = mapOf( "a" to "b" ), // optional
     action = "<ACTION>", // optional
     image = "<ID1:ID2>", // optional
@@ -30,6 +30,7 @@ val response = messaging.updatePush(
     scheduledAt = "2020-10-15T06:38:00.000+00:00", // optional
     contentAvailable = false, // optional
     critical = false, // optional
-    priority = MessagePriority.NORMAL // optional
+    priority = MessagePriority.NORMAL, // optional
+    channelId = "<CHANNEL_ID>" // optional
 )
 ```

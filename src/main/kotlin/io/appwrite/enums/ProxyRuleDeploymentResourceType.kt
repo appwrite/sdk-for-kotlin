@@ -6,7 +6,9 @@ enum class ProxyRuleDeploymentResourceType(val value: String) {
     @SerializedName("function")
     FUNCTION("function"),
     @SerializedName("site")
-    SITE("site");
+    SITE("site"),
+    @SerializedName("dedicatedDatabase")
+    DEDICATEDDATABASE("dedicatedDatabase");
 
     override fun toString() = value
 }

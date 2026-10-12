@@ -65,13 +65,13 @@ data class PolicyMembershipPrivacy(
         fun from(
             map: Map<String, Any>,
         ) = PolicyMembershipPrivacy(
-            id = map["\$id"] as String,
-            userId = map["userId"] as Boolean,
-            userEmail = map["userEmail"] as Boolean,
-            userPhone = map["userPhone"] as Boolean,
-            userName = map["userName"] as Boolean,
-            userMFA = map["userMFA"] as Boolean,
-            userAccessedAt = map["userAccessedAt"] as Boolean,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            userId = (if (map.containsKey("userId")) map["userId"] else false) as Boolean,
+            userEmail = (if (map.containsKey("userEmail")) map["userEmail"] else false) as Boolean,
+            userPhone = (if (map.containsKey("userPhone")) map["userPhone"] else false) as Boolean,
+            userName = (if (map.containsKey("userName")) map["userName"] else false) as Boolean,
+            userMFA = (if (map.containsKey("userMFA")) map["userMFA"] else false) as Boolean,
+            userAccessedAt = (if (map.containsKey("userAccessedAt")) map["userAccessedAt"] else false) as Boolean,
         )
     }
 }

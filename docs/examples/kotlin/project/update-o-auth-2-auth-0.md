@@ -2,6 +2,7 @@
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
 import io.appwrite.services.Project
+import io.appwrite.enums.ProjectOAuth2Auth0Prompt
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,6 +15,7 @@ val response = project.updateOAuth2Auth0(
     clientId = "<CLIENT_ID>", // optional
     clientSecret = "<CLIENT_SECRET>", // optional
     endpoint = "<ENDPOINT>", // optional
+    prompt = listOf(ProjectOAuth2Auth0Prompt.NONE), // optional
     enabled = false // optional
 )
 ```

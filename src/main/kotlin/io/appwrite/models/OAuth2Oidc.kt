@@ -32,6 +32,12 @@ data class OAuth2Oidc(
     val clientSecret: String,
 
     /**
+     * OpenID Connect prompt values controlling the authentication and consent screens.
+     */
+    @SerializedName("prompt")
+    val prompt: List<io.appwrite.enums.OAuth2OidcPrompt>,
+
+    /**
      * OpenID Connect well-known configuration URL. When set, authorization, token, and user info endpoints can be discovered automatically.
      */
     @SerializedName("wellKnownURL")
@@ -56,12 +62,6 @@ data class OAuth2Oidc(
     val userInfoURL: String,
 
     /**
-     * OpenID Connect prompt values controlling the authentication and consent screens.
-     */
-    @SerializedName("prompt")
-    val prompt: List<io.appwrite.enums.OAuth2OidcPrompt>,
-
-    /**
      * Maximum authentication age in seconds. When set, the user must have authenticated within this many seconds.
      */
     @SerializedName("maxAge")
@@ -73,11 +73,11 @@ data class OAuth2Oidc(
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any,
         "wellKnownURL" to wellKnownURL as Any,
         "authorizationURL" to authorizationURL as Any,
         "tokenURL" to tokenURL as Any,
         "userInfoURL" to userInfoURL as Any,
-        "prompt" to prompt as Any,
         "maxAge" to maxAge as Any?,
     )
 
@@ -86,15 +86,15 @@ data class OAuth2Oidc(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Oidc(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            clientId = map["clientId"] as String,
-            clientSecret = map["clientSecret"] as String,
-            wellKnownURL = map["wellKnownURL"] as String,
-            authorizationURL = map["authorizationURL"] as String,
-            tokenURL = map["tokenURL"] as String,
-            userInfoURL = map["userInfoURL"] as String,
-            prompt = map["prompt"] as List<io.appwrite.enums.OAuth2OidcPrompt>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
+            clientSecret = (if (map.containsKey("clientSecret")) map["clientSecret"] else "") as String,
+            prompt = (if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<io.appwrite.enums.OAuth2OidcPrompt>,
+            wellKnownURL = (if (map.containsKey("wellKnownURL")) map["wellKnownURL"] else "") as String,
+            authorizationURL = (if (map.containsKey("authorizationURL")) map["authorizationURL"] else "") as String,
+            tokenURL = (if (map.containsKey("tokenURL")) map["tokenURL"] else "") as String,
+            userInfoURL = (if (map.containsKey("userInfoURL")) map["userInfoURL"] else "") as String,
             maxAge = (map["maxAge"] as? Number)?.toLong(),
         )
     }

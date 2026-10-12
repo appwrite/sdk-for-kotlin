@@ -30,7 +30,7 @@ data class DatabaseMigrationList(
         fun from(
             map: Map<String, Any>,
         ) = DatabaseMigrationList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             migrations = (map["migrations"] as List<Map<String, Any>>).map { DatabaseMigration.from(map = it) },
         )
     }

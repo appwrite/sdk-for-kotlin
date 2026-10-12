@@ -20,6 +20,8 @@ messaging.createEmail(
     List.of(), // cc (optional)
     List.of(), // bcc (optional)
     List.of(), // attachments (optional)
+    "email@example.com", // replyToEmail (optional)
+    "<REPLY_TO_NAME>", // replyToName (optional)
     false, // draft (optional)
     false, // html (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)

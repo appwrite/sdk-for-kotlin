@@ -30,7 +30,7 @@ data class EmailTemplateList(
         fun from(
             map: Map<String, Any>,
         ) = EmailTemplateList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             templates = (map["templates"] as List<Map<String, Any>>).map { EmailTemplate.from(map = it) },
         )
     }

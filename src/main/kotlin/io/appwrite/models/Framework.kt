@@ -51,9 +51,9 @@ data class Framework(
         fun from(
             map: Map<String, Any>,
         ) = Framework(
-            key = map["key"] as String,
-            name = map["name"] as String,
-            buildRuntime = map["buildRuntime"] as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            buildRuntime = (if (map.containsKey("buildRuntime")) map["buildRuntime"] else "") as String,
             runtimes = map["runtimes"] as List<String>,
             adapters = (map["adapters"] as List<Map<String, Any>>).map { FrameworkAdapter.from(map = it) },
         )

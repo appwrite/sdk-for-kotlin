@@ -17,7 +17,7 @@ val response = tablesDB.createIndex(
     tableId = "<TABLE_ID>",
     key = "<KEY>",
     type = TablesDBIndexType.KEY,
-    columns = listOf(),
+    columns = listOf("username"),
     orders = listOf(OrderBy.ASC), // optional
     lengths = listOf() // optional
 )

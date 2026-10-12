@@ -30,7 +30,7 @@ data class MessageList(
         fun from(
             map: Map<String, Any>,
         ) = MessageList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             messages = (map["messages"] as List<Map<String, Any>>).map { Message.from(map = it) },
         )
     }

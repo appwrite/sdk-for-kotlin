@@ -10,5 +10,7 @@ val client = Client()
 
 val locale = Locale(client)
 
-val response = locale.listCurrencies()
+val response = locale.listCurrencies(
+    total = false // optional
+)
 ```

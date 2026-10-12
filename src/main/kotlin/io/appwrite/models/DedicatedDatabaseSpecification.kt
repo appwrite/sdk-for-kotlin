@@ -26,6 +26,30 @@ data class DedicatedDatabaseSpecification(
     val price: Double,
 
     /**
+     * Price per GB of storage above the included amount, per month, in USD.
+     */
+    @SerializedName("storageOverageRate")
+    val storageOverageRate: Double,
+
+    /**
+     * Price per GB of bandwidth above the included amount, per month, in USD.
+     */
+    @SerializedName("bandwidthOverageRate")
+    val bandwidthOverageRate: Double,
+
+    /**
+     * High availability replica price as a fraction of the specification price.
+     */
+    @SerializedName("replicaRate")
+    val replicaRate: Double,
+
+    /**
+     * Point-in-time recovery price as a fraction of the specification price.
+     */
+    @SerializedName("pitrRate")
+    val pitrRate: Double,
+
+    /**
      * Allocated CPU in millicores.
      */
     @SerializedName("cpu")
@@ -66,6 +90,10 @@ data class DedicatedDatabaseSpecification(
         "slug" to slug as Any,
         "name" to name as Any,
         "price" to price as Any,
+        "storageOverageRate" to storageOverageRate as Any,
+        "bandwidthOverageRate" to bandwidthOverageRate as Any,
+        "replicaRate" to replicaRate as Any,
+        "pitrRate" to pitrRate as Any,
         "cpu" to cpu as Any,
         "memory" to memory as Any,
         "maxConnections" to maxConnections as Any,
@@ -79,15 +107,19 @@ data class DedicatedDatabaseSpecification(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseSpecification(
-            slug = map["slug"] as String,
-            name = map["name"] as String,
-            price = (map["price"] as Number).toDouble(),
-            cpu = (map["cpu"] as Number).toLong(),
-            memory = (map["memory"] as Number).toLong(),
-            maxConnections = (map["maxConnections"] as Number).toLong(),
-            includedStorage = (map["includedStorage"] as Number).toLong(),
-            includedBandwidth = (map["includedBandwidth"] as Number).toLong(),
-            enabled = map["enabled"] as Boolean,
+            slug = (if (map.containsKey("slug")) map["slug"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            price = ((if (map.containsKey("price")) map["price"] else 0.0) as Number).toDouble(),
+            storageOverageRate = ((if (map.containsKey("storageOverageRate")) map["storageOverageRate"] else 0.0) as Number).toDouble(),
+            bandwidthOverageRate = ((if (map.containsKey("bandwidthOverageRate")) map["bandwidthOverageRate"] else 0.0) as Number).toDouble(),
+            replicaRate = ((if (map.containsKey("replicaRate")) map["replicaRate"] else 0.0) as Number).toDouble(),
+            pitrRate = ((if (map.containsKey("pitrRate")) map["pitrRate"] else 0.0) as Number).toDouble(),
+            cpu = ((if (map.containsKey("cpu")) map["cpu"] else 0) as Number).toLong(),
+            memory = ((if (map.containsKey("memory")) map["memory"] else 0) as Number).toLong(),
+            maxConnections = ((if (map.containsKey("maxConnections")) map["maxConnections"] else 0) as Number).toLong(),
+            includedStorage = ((if (map.containsKey("includedStorage")) map["includedStorage"] else 0) as Number).toLong(),
+            includedBandwidth = ((if (map.containsKey("includedBandwidth")) map["includedBandwidth"] else 0) as Number).toLong(),
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
         )
     }
 }

@@ -12,10 +12,10 @@ Messaging messaging = new Messaging(client);
 
 messaging.updateSMS(
     "<MESSAGE_ID>", // messageId
+    "<CONTENT>", // content (optional)
     List.of(), // topics (optional)
     List.of(), // users (optional)
     List.of(), // targets (optional)
-    "<CONTENT>", // content (optional)
     false, // draft (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     new CoroutineCallback<>((result, error) -> {

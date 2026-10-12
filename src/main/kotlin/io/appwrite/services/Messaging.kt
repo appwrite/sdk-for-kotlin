@@ -9,12 +9,13 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Messaging service allows you to send messages to any provider type (SMTP, push notification, SMS, etc.).**/
+ * The Messaging service allows you to send messages to any provider type (SMTP, push notification, SMS, etc.).
+ */
 class Messaging(client: Client) : Service(client) {
     /**
      * Get a list of all messages from the current Appwrite project.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: scheduledAt, deliveredAt, deliveredTotal, status, description, providerType
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: scheduledAt, deliveredAt, deliveredTotal, status, description, providerType, users, targets
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.MessageList]
@@ -61,6 +62,8 @@ class Messaging(client: Client) : Service(client) {
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
      * @param attachments Array of compound ID strings of bucket IDs and file IDs to be attached to the email. They should be formatted as <BUCKET_ID>:<FILE_ID>.
+     * @param replyToEmail Email address to reply to. If not set, defaults to the sender email address.
+     * @param replyToName Name of the reply to recipient. If not set, defaults to the sender name.
      * @param draft Is message a draft
      * @param html Is content of type HTML
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
@@ -78,6 +81,8 @@ class Messaging(client: Client) : Service(client) {
         cc: List<String>? = null,
         bcc: List<String>? = null,
         attachments: List<String>? = null,
+        replyToEmail: String? = null,
+        replyToName: String? = null,
         draft: Boolean? = null,
         html: Boolean? = null,
         scheduledAt: String? = null,
@@ -93,6 +98,8 @@ class Messaging(client: Client) : Service(client) {
             "cc" to cc,
             "bcc" to bcc,
             "attachments" to attachments,
+            "replyToEmail" to replyToEmail,
+            "replyToName" to replyToName,
             "draft" to draft,
             "html" to html,
             "scheduledAt" to scheduledAt,
@@ -120,50 +127,59 @@ class Messaging(client: Client) : Service(client) {
      *
      *
      * @param messageId Message ID.
+     * @param subject Email Subject.
+     * @param content Email Content.
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param subject Email Subject.
-     * @param content Email Content.
-     * @param draft Is message a draft
-     * @param html Is content of type HTML
      * @param cc Array of target IDs to be added as CC.
      * @param bcc Array of target IDs to be added as BCC.
-     * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @param attachments Array of compound ID strings of bucket IDs and file IDs to be attached to the email. They should be formatted as <BUCKET_ID>:<FILE_ID>.
+     * @param replyToEmail Email address to reply to. Pass an empty string to restore the provider or sender default.
+     * @param replyToName Name of the reply to recipient. Pass an empty string to restore the provider or sender default.
+     * @param draft Is message a draft
+     * @param html Is content of type HTML
+     * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateEmail(
         messageId: String,
+        subject: String? = null,
+        content: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        subject: String? = null,
-        content: String? = null,
-        draft: Boolean? = null,
-        html: Boolean? = null,
         cc: List<String>? = null,
         bcc: List<String>? = null,
-        scheduledAt: String? = null,
         attachments: List<String>? = null,
+        replyToEmail: String? = null,
+        replyToName: String? = null,
+        draft: Boolean? = null,
+        html: Boolean? = null,
+        scheduledAt: String? = null,
     ): io.appwrite.models.Message {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/email/{messageId}"
             .replace("{messageId}", messageId)
         )
         val apiParams = mutableMapOf<String, Any?>(
+            "subject" to subject,
+            "content" to content,
             "topics" to topics,
             "users" to users,
             "targets" to targets,
-            "subject" to subject,
-            "content" to content,
-            "draft" to draft,
-            "html" to html,
             "cc" to cc,
             "bcc" to bcc,
-            "scheduledAt" to scheduledAt,
             "attachments" to attachments,
+            "replyToEmail" to replyToEmail,
+            "replyToName" to replyToName,
+            "draft" to draft,
+            "html" to html,
+            "scheduledAt" to scheduledAt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -205,6 +221,7 @@ class Messaging(client: Client) : Service(client) {
      * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
      * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
      * @param priority Set the notification priority. "normal" will consider device state and may not deliver notifications immediately. "high" will always attempt to immediately deliver the notification.
+     * @param channelId ID of the notification channel to deliver the notification on. The app must have already created a channel with this ID, otherwise the channel from the app manifest is used. Available only for Android Platform.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -229,6 +246,7 @@ class Messaging(client: Client) : Service(client) {
         contentAvailable: Boolean? = null,
         critical: Boolean? = null,
         priority: io.appwrite.enums.MessagePriority? = null,
+        channelId: String? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/push"
         val apiParams = mutableMapOf<String, Any?>(
@@ -251,6 +269,7 @@ class Messaging(client: Client) : Service(client) {
             "contentAvailable" to contentAvailable,
             "critical" to critical,
             "priority" to priority,
+            "channelId" to channelId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -275,11 +294,11 @@ class Messaging(client: Client) : Service(client) {
      *
      *
      * @param messageId Message ID.
+     * @param title Title for push notification.
+     * @param body Body for push notification.
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param title Title for push notification.
-     * @param body Body for push notification.
      * @param data Additional Data for push notification.
      * @param action Action for push notification.
      * @param image Image for push notification. Must be a compound bucket ID to file ID of a jpeg, png, or bmp image in Appwrite Storage. It should be formatted as <BUCKET_ID>:<FILE_ID>.
@@ -293,17 +312,18 @@ class Messaging(client: Client) : Service(client) {
      * @param contentAvailable If set to true, the notification will be delivered in the background. Available only for iOS Platform.
      * @param critical If set to true, the notification will be marked as critical. This requires the app to have the critical notification entitlement. Available only for iOS Platform.
      * @param priority Set the notification priority. "normal" will consider device battery state and may send notifications later. "high" will always attempt to immediately deliver the notification.
+     * @param channelId ID of the notification channel to deliver the notification on. The app must have already created a channel with this ID, otherwise the channel from the app manifest is used. Pass an empty string to clear it. Available only for Android platforms.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePush(
         messageId: String,
+        title: String? = null,
+        body: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        title: String? = null,
-        body: String? = null,
         data: Map<String, Any?>? = null,
         action: String? = null,
         image: String? = null,
@@ -317,16 +337,20 @@ class Messaging(client: Client) : Service(client) {
         contentAvailable: Boolean? = null,
         critical: Boolean? = null,
         priority: io.appwrite.enums.MessagePriority? = null,
+        channelId: String? = null,
     ): io.appwrite.models.Message {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/push/{messageId}"
             .replace("{messageId}", messageId)
         )
         val apiParams = mutableMapOf<String, Any?>(
+            "title" to title,
+            "body" to body,
             "topics" to topics,
             "users" to users,
             "targets" to targets,
-            "title" to title,
-            "body" to body,
             "data" to data,
             "action" to action,
             "image" to image,
@@ -340,6 +364,7 @@ class Messaging(client: Client) : Service(client) {
             "contentAvailable" to contentAvailable,
             "critical" to critical,
             "priority" to priority,
+            "channelId" to channelId,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -470,10 +495,10 @@ class Messaging(client: Client) : Service(client) {
      *
      *
      * @param messageId Message ID.
+     * @param content Email Content.
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param content Email Content.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
@@ -486,21 +511,24 @@ class Messaging(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun updateSms(
         messageId: String,
+        content: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        content: String? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/sms/{messageId}"
             .replace("{messageId}", messageId)
         )
         val apiParams = mutableMapOf<String, Any?>(
+            "content" to content,
             "topics" to topics,
             "users" to users,
             "targets" to targets,
-            "content" to content,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
@@ -527,10 +555,10 @@ class Messaging(client: Client) : Service(client) {
      *
      *
      * @param messageId Message ID.
+     * @param content Email Content.
      * @param topics List of Topic IDs.
      * @param users List of User IDs.
      * @param targets List of Targets IDs.
-     * @param content Email Content.
      * @param draft Is message a draft
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @return [io.appwrite.models.Message]
@@ -539,21 +567,24 @@ class Messaging(client: Client) : Service(client) {
     @Throws(AppwriteException::class)
     suspend fun updateSMS(
         messageId: String,
+        content: String? = null,
         topics: List<String>? = null,
         users: List<String>? = null,
         targets: List<String>? = null,
-        content: String? = null,
         draft: Boolean? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Message {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/sms/{messageId}"
             .replace("{messageId}", messageId)
         )
         val apiParams = mutableMapOf<String, Any?>(
+            "content" to content,
             "topics" to topics,
             "users" to users,
             "targets" to targets,
-            "content" to content,
             "draft" to draft,
             "scheduledAt" to scheduledAt,
         )
@@ -586,6 +617,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun getMessage(
         messageId: String,
     ): io.appwrite.models.Message {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/{messageId}"
             .replace("{messageId}", messageId)
         )
@@ -617,6 +651,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun delete(
         messageId: String,
     ): Any {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/{messageId}"
             .replace("{messageId}", messageId)
         )
@@ -624,6 +661,7 @@ class Messaging(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -649,6 +687,9 @@ class Messaging(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.TargetList {
+        if (messageId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"messageId\"")
+        }
         val apiPath = ("/messaging/messages/{messageId}/targets"
             .replace("{messageId}", messageId)
         )
@@ -852,6 +893,9 @@ class Messaging(client: Client) : Service(client) {
         bundleId: String? = null,
         sandbox: Boolean? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/apns/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -907,6 +951,9 @@ class Messaging(client: Client) : Service(client) {
         bundleId: String? = null,
         sandbox: Boolean? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/apns/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -918,6 +965,100 @@ class Messaging(client: Client) : Service(client) {
             "teamId" to teamId,
             "bundleId" to bundleId,
             "sandbox" to sandbox,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Appwrite push provider.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param qos Default QoS for topics on this provider (0 or 1). Null lets the subscriber choose.
+     * @param expiry Default message retention in seconds for offline delivery. Max 7 days (604800).
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createAppwriteProvider(
+        providerId: String,
+        name: String,
+        enabled: Boolean? = null,
+        qos: Long? = null,
+        expiry: Long? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/appwrite"
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "enabled" to enabled,
+            "qos" to qos,
+            "expiry" to expiry,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an Appwrite push provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param qos Default QoS for topics on this provider (0 or 1). Null lets the subscriber choose.
+     * @param expiry Default message retention in seconds for offline delivery. Max 7 days (604800).
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateAppwriteProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        qos: Long? = null,
+        expiry: Long? = null,
+    ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
+        val apiPath = ("/messaging/providers/appwrite/{providerId}"
+            .replace("{providerId}", providerId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "qos" to qos,
+            "expiry" to expiry,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1046,6 +1187,9 @@ class Messaging(client: Client) : Service(client) {
         enabled: Boolean? = null,
         serviceAccountJSON: Map<String, Any?>? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/fcm/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1089,6 +1233,9 @@ class Messaging(client: Client) : Service(client) {
         enabled: Boolean? = null,
         serviceAccountJSON: Map<String, Any?>? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/fcm/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1204,6 +1351,9 @@ class Messaging(client: Client) : Service(client) {
         replyToName: String? = null,
         replyToEmail: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/mailgun/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1305,6 +1455,9 @@ class Messaging(client: Client) : Service(client) {
         senderId: String? = null,
         authKey: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/msg91/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1412,6 +1565,9 @@ class Messaging(client: Client) : Service(client) {
         replyToName: String? = null,
         replyToEmail: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/resend/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1521,6 +1677,9 @@ class Messaging(client: Client) : Service(client) {
         replyToName: String? = null,
         replyToEmail: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/sendgrid/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1640,6 +1799,9 @@ class Messaging(client: Client) : Service(client) {
         replyToName: String? = null,
         replyToEmail: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/ses/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1861,6 +2023,9 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/smtp/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -1934,6 +2099,9 @@ class Messaging(client: Client) : Service(client) {
         replyToEmail: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/smtp/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2039,6 +2207,9 @@ class Messaging(client: Client) : Service(client) {
         apiKey: String? = null,
         from: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/telesign/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2136,6 +2307,9 @@ class Messaging(client: Client) : Service(client) {
         apiKey: String? = null,
         from: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/textmagic/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2169,7 +2343,7 @@ class Messaging(client: Client) : Service(client) {
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Provider name.
-     * @param from Sender Phone number. Format this number with a leading '+' and a country code, e.g., +16175551212.
+     * @param from Sender phone number or alphanumeric sender ID. Format phone numbers with a leading '+' and a country code, e.g., +16175551212.
      * @param accountSid Twilio account secret ID.
      * @param authToken Twilio authentication token.
      * @param enabled Set as enabled.
@@ -2220,7 +2394,7 @@ class Messaging(client: Client) : Service(client) {
      * @param enabled Set as enabled.
      * @param accountSid Twilio account secret ID.
      * @param authToken Twilio authentication token.
-     * @param from Sender number.
+     * @param from Sender phone number or alphanumeric sender ID. Format phone numbers with a leading '+' and a country code, e.g., +16175551212.
      * @return [io.appwrite.models.Provider]
      */
     @JvmOverloads
@@ -2233,6 +2407,9 @@ class Messaging(client: Client) : Service(client) {
         authToken: String? = null,
         from: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/twilio/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2330,6 +2507,9 @@ class Messaging(client: Client) : Service(client) {
         apiSecret: String? = null,
         from: String? = null,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/vonage/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2369,6 +2549,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun getProvider(
         providerId: String,
     ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2400,6 +2583,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun deleteProvider(
         providerId: String,
     ): Any {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
         val apiPath = ("/messaging/providers/{providerId}"
             .replace("{providerId}", providerId)
         )
@@ -2407,6 +2593,7 @@ class Messaging(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -2461,6 +2648,8 @@ class Messaging(client: Client) : Service(client) {
      * @param topicId Topic ID. Choose a custom Topic ID or a new Topic ID.
      * @param name Topic Name.
      * @param subscribe An array of role strings with subscribe permission. By default all users are granted with any subscribe permission. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
+     * @param qos MQTT delivery quality of service for this topic. 0 is fire-and-forget (delivered only to clients connected at publish time). 1 persists each message and replays it when a client reconnects without having acknowledged it. Null lets the subscriber choose.
+     * @param expiry Message retention in seconds for offline delivery. Max 7 days (604800).
      * @return [io.appwrite.models.Topic]
      */
     @JvmOverloads
@@ -2469,12 +2658,16 @@ class Messaging(client: Client) : Service(client) {
         topicId: String,
         name: String,
         subscribe: List<String>? = null,
+        qos: Long? = null,
+        expiry: Long? = null,
     ): io.appwrite.models.Topic {
         val apiPath = "/messaging/topics"
         val apiParams = mutableMapOf<String, Any?>(
             "topicId" to topicId,
             "name" to name,
             "subscribe" to subscribe,
+            "qos" to qos,
+            "expiry" to expiry,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2505,6 +2698,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun getTopic(
         topicId: String,
     ): io.appwrite.models.Topic {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
@@ -2533,6 +2729,8 @@ class Messaging(client: Client) : Service(client) {
      * @param topicId Topic ID.
      * @param name Topic Name.
      * @param subscribe An array of role strings with subscribe permission. By default all users are granted with any subscribe permission. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
+     * @param qos MQTT delivery quality of service for this topic. 0 is fire-and-forget (delivered only to clients connected at publish time). 1 persists each message and replays it when a client reconnects without having acknowledged it. Null lets the subscriber choose.
+     * @param expiry Message retention in seconds for offline delivery. Max 7 days (604800).
      * @return [io.appwrite.models.Topic]
      */
     @JvmOverloads
@@ -2541,13 +2739,20 @@ class Messaging(client: Client) : Service(client) {
         topicId: String,
         name: String? = null,
         subscribe: List<String>? = null,
+        qos: Long? = null,
+        expiry: Long? = null,
     ): io.appwrite.models.Topic {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "subscribe" to subscribe,
+            "qos" to qos,
+            "expiry" to expiry,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2577,6 +2782,9 @@ class Messaging(client: Client) : Service(client) {
     suspend fun deleteTopic(
         topicId: String,
     ): Any {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}"
             .replace("{topicId}", topicId)
         )
@@ -2584,6 +2792,7 @@ class Messaging(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -2611,6 +2820,9 @@ class Messaging(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.SubscriberList {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}/subscribers"
             .replace("{topicId}", topicId)
         )
@@ -2650,6 +2862,9 @@ class Messaging(client: Client) : Service(client) {
         subscriberId: String,
         targetId: String,
     ): io.appwrite.models.Subscriber {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}/subscribers"
             .replace("{topicId}", topicId)
         )
@@ -2688,6 +2903,12 @@ class Messaging(client: Client) : Service(client) {
         topicId: String,
         subscriberId: String,
     ): io.appwrite.models.Subscriber {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
+        if (subscriberId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"subscriberId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}/subscribers/{subscriberId}"
             .replace("{topicId}", topicId)
             .replace("{subscriberId}", subscriberId)
@@ -2722,6 +2943,12 @@ class Messaging(client: Client) : Service(client) {
         topicId: String,
         subscriberId: String,
     ): Any {
+        if (topicId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"topicId\"")
+        }
+        if (subscriberId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"subscriberId\"")
+        }
         val apiPath = ("/messaging/topics/{topicId}/subscribers/{subscriberId}"
             .replace("{topicId}", topicId)
             .replace("{subscriberId}", subscriberId)
@@ -2730,6 +2957,7 @@ class Messaging(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

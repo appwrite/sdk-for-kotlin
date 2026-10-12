@@ -58,12 +58,12 @@ data class PolicyPasswordStrength(
         fun from(
             map: Map<String, Any>,
         ) = PolicyPasswordStrength(
-            id = map["\$id"] as String,
-            min = (map["min"] as Number).toLong(),
-            uppercase = map["uppercase"] as Boolean,
-            lowercase = map["lowercase"] as Boolean,
-            number = map["number"] as Boolean,
-            symbols = map["symbols"] as Boolean,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            min = ((if (map.containsKey("min")) map["min"] else 8) as Number).toLong(),
+            uppercase = (if (map.containsKey("uppercase")) map["uppercase"] else false) as Boolean,
+            lowercase = (if (map.containsKey("lowercase")) map["lowercase"] else false) as Boolean,
+            number = (if (map.containsKey("number")) map["number"] else false) as Boolean,
+            symbols = (if (map.containsKey("symbols")) map["symbols"] else false) as Boolean,
         )
     }
 }

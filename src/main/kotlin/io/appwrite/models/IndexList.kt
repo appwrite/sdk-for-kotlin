@@ -30,7 +30,7 @@ data class IndexList(
         fun from(
             map: Map<String, Any>,
         ) = IndexList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             indexes = (map["indexes"] as List<Map<String, Any>>).map { Index.from(map = it) },
         )
     }

@@ -32,10 +32,10 @@ data class BackupArchive(
     val policyId: String,
 
     /**
-     * Archive size in bytes.
+     * Archive size in bytes. Null until the size is known.
      */
     @SerializedName("size")
-    val size: Long,
+    var size: Long?,
 
     /**
      * The status of the archive creation. Possible values: pending, processing, uploading, completed, failed, skipped.
@@ -44,10 +44,10 @@ data class BackupArchive(
     val status: String,
 
     /**
-     * The backup start time.
+     * The backup start time. Null until the backup starts.
      */
     @SerializedName("startedAt")
-    val startedAt: String,
+    var startedAt: String?,
 
     /**
      * Migration ID.
@@ -85,9 +85,9 @@ data class BackupArchive(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "policyId" to policyId as Any,
-        "size" to size as Any,
+        "size" to size as Any?,
         "status" to status as Any,
-        "startedAt" to startedAt as Any,
+        "startedAt" to startedAt as Any?,
         "migrationId" to migrationId as Any,
         "services" to services as Any,
         "resources" to resources as Any,
@@ -100,14 +100,14 @@ data class BackupArchive(
         fun from(
             map: Map<String, Any>,
         ) = BackupArchive(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            policyId = map["policyId"] as String,
-            size = (map["size"] as Number).toLong(),
-            status = map["status"] as String,
-            startedAt = map["startedAt"] as String,
-            migrationId = map["migrationId"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            policyId = (if (map.containsKey("policyId")) map["policyId"] else "") as String,
+            size = (map["size"] as? Number)?.toLong(),
+            status = (if (map.containsKey("status")) map["status"] else "") as String,
+            startedAt = map["startedAt"] as? String,
+            migrationId = (if (map.containsKey("migrationId")) map["migrationId"] else "") as String,
             services = map["services"] as List<String>,
             resources = map["resources"] as List<String>,
             resourceId = map["resourceId"] as? String,

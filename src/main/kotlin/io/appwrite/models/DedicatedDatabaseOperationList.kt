@@ -30,7 +30,7 @@ data class DedicatedDatabaseOperationList(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseOperationList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             operations = (map["operations"] as List<Map<String, Any>>).map { DedicatedDatabaseOperation.from(map = it) },
         )
     }

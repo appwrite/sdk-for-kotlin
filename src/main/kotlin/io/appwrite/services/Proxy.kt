@@ -9,12 +9,15 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.**/
+ * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.
+ */
 class Proxy(client: Client) : Service(client) {
     /**
      * Create a new CDN cache invalidation for a domain. Executes a hard purge of cached content.
      *
      * Depending on type, the invalidation purges a single cache tag, a single URL path, or all cached content for the domain.
+     *
+     * Domains that route to a function do not support cache invalidation.
      *
      * @param domain Domain name.
      * @param type Type of reference passed. Allowed values are: tag, path, all
@@ -259,6 +262,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun getRule(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
@@ -290,6 +296,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun deleteRule(
         ruleId: String,
     ): Any {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
@@ -297,6 +306,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -317,6 +327,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun updateRuleStatus(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}/status"
             .replace("{ruleId}", ruleId)
         )

@@ -55,6 +55,18 @@ data class Topic(
     @SerializedName("subscribe")
     val subscribe: List<String>,
 
+    /**
+     * MQTT QoS for delivery on this topic. Null lets the subscriber choose their level.
+     */
+    @SerializedName("qos")
+    var qos: Long?,
+
+    /**
+     * Message retention in seconds for offline delivery.
+     */
+    @SerializedName("expiry")
+    var expiry: Long?,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -65,6 +77,8 @@ data class Topic(
         "smsTotal" to smsTotal as Any,
         "pushTotal" to pushTotal as Any,
         "subscribe" to subscribe as Any,
+        "qos" to qos as Any?,
+        "expiry" to expiry as Any?,
     )
 
     companion object {
@@ -72,14 +86,16 @@ data class Topic(
         fun from(
             map: Map<String, Any>,
         ) = Topic(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            emailTotal = (map["emailTotal"] as Number).toLong(),
-            smsTotal = (map["smsTotal"] as Number).toLong(),
-            pushTotal = (map["pushTotal"] as Number).toLong(),
-            subscribe = map["subscribe"] as List<String>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            emailTotal = ((if (map.containsKey("emailTotal")) map["emailTotal"] else 0) as Number).toLong(),
+            smsTotal = ((if (map.containsKey("smsTotal")) map["smsTotal"] else 0) as Number).toLong(),
+            pushTotal = ((if (map.containsKey("pushTotal")) map["pushTotal"] else 0) as Number).toLong(),
+            subscribe = (if (map.containsKey("subscribe")) map["subscribe"] else listOf<Any?>("users")) as List<String>,
+            qos = (map["qos"] as? Number)?.toLong(),
+            expiry = (map["expiry"] as? Number)?.toLong(),
         )
     }
 }

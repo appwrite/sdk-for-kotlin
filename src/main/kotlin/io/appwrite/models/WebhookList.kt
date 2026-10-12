@@ -30,7 +30,7 @@ data class WebhookList(
         fun from(
             map: Map<String, Any>,
         ) = WebhookList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             webhooks = (map["webhooks"] as List<Map<String, Any>>).map { Webhook.from(map = it) },
         )
     }

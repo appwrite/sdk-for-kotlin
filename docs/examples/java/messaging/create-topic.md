@@ -14,6 +14,8 @@ messaging.createTopic(
     "<TOPIC_ID>", // topicId
     "<NAME>", // name
     List.of("any"), // subscribe (optional)
+    0L, // qos (optional)
+    0L, // expiry (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -30,7 +30,7 @@ data class TopicList(
         fun from(
             map: Map<String, Any>,
         ) = TopicList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             topics = (map["topics"] as List<Map<String, Any>>).map { Topic.from(map = it) },
         )
     }

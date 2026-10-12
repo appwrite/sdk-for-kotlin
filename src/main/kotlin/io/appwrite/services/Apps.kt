@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Apps service allows you to manage OAuth2 applications, their keys, secrets, scopes, and installations.**/
+ * The Apps service allows you to manage OAuth2 applications, their keys, secrets, scopes, and installations.
+ */
 class Apps(client: Client) : Service(client) {
     /**
      * List applications.
@@ -195,6 +196,9 @@ class Apps(client: Client) : Service(client) {
     suspend fun get(
         appId: String,
     ): io.appwrite.models.App {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
@@ -265,6 +269,9 @@ class Apps(client: Client) : Service(client) {
         installationScopes: List<String>? = null,
         installationRedirectUrl: String? = null,
     ): io.appwrite.models.App {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
@@ -317,6 +324,9 @@ class Apps(client: Client) : Service(client) {
     suspend fun delete(
         appId: String,
     ): Any {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}"
             .replace("{appId}", appId)
         )
@@ -350,6 +360,9 @@ class Apps(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.AppInstallationList {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/installations"
             .replace("{appId}", appId)
         )
@@ -386,6 +399,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         installationId: String,
     ): io.appwrite.models.AppInstallation {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/apps/{appId}/installations/{installationId}"
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
@@ -420,6 +439,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         installationId: String,
     ): Any {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/apps/{appId}/installations/{installationId}"
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
@@ -451,6 +476,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         installationId: String,
     ): io.appwrite.models.Oauth2Token {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/apps/{appId}/installations/{installationId}/tokens"
             .replace("{appId}", appId)
             .replace("{installationId}", installationId)
@@ -489,6 +520,9 @@ class Apps(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.AppKeyList {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/keys"
             .replace("{appId}", appId)
         )
@@ -523,6 +557,9 @@ class Apps(client: Client) : Service(client) {
     suspend fun createKey(
         appId: String,
     ): io.appwrite.models.AppKey {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/keys"
             .replace("{appId}", appId)
         )
@@ -557,6 +594,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         keyId: String,
     ): io.appwrite.models.AppKey {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/apps/{appId}/keys/{keyId}"
             .replace("{appId}", appId)
             .replace("{keyId}", keyId)
@@ -591,6 +634,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         keyId: String,
     ): Any {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/apps/{appId}/keys/{keyId}"
             .replace("{appId}", appId)
             .replace("{keyId}", keyId)
@@ -614,7 +663,7 @@ class Apps(client: Client) : Service(client) {
      * Update the labels of an application. Labels are read-only for clients; only a server SDK using a project API key can set them. Replaces the previous labels.
      *
      * @param appId Application unique ID.
-     * @param labels Array of application labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
+     * @param labels Array of application labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long. Reserved labels are rejected.
      * @return [io.appwrite.models.App]
      */
     @Throws(AppwriteException::class)
@@ -622,6 +671,9 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         labels: List<String>,
     ): io.appwrite.models.App {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/labels"
             .replace("{appId}", appId)
         )
@@ -661,6 +713,9 @@ class Apps(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.AppSecretList {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/secrets"
             .replace("{appId}", appId)
         )
@@ -695,6 +750,9 @@ class Apps(client: Client) : Service(client) {
     suspend fun createSecret(
         appId: String,
     ): io.appwrite.models.AppSecretPlaintext {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/secrets"
             .replace("{appId}", appId)
         )
@@ -729,6 +787,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         secretId: String,
     ): io.appwrite.models.AppSecret {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (secretId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"secretId\"")
+        }
         val apiPath = ("/apps/{appId}/secrets/{secretId}"
             .replace("{appId}", appId)
             .replace("{secretId}", secretId)
@@ -763,6 +827,12 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         secretId: String,
     ): Any {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
+        if (secretId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"secretId\"")
+        }
         val apiPath = ("/apps/{appId}/secrets/{secretId}"
             .replace("{appId}", appId)
             .replace("{secretId}", secretId)
@@ -794,6 +864,9 @@ class Apps(client: Client) : Service(client) {
         appId: String,
         teamId: String,
     ): io.appwrite.models.App {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/team"
             .replace("{appId}", appId)
         )
@@ -828,6 +901,9 @@ class Apps(client: Client) : Service(client) {
     suspend fun deleteTokens(
         appId: String,
     ): Any {
+        if (appId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"appId\"")
+        }
         val apiPath = ("/apps/{appId}/tokens"
             .replace("{appId}", appId)
         )

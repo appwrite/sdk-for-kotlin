@@ -32,6 +32,12 @@ data class OAuth2Microsoft(
     val applicationSecret: String,
 
     /**
+     * Microsoft OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    val prompt: List<io.appwrite.enums.OAuth2MicrosoftPrompt>,
+
+    /**
      * Microsoft Entra ID tenant identifier. Use 'common', 'organizations', 'consumers' or a specific tenant ID.
      */
     @SerializedName("tenant")
@@ -43,6 +49,7 @@ data class OAuth2Microsoft(
         "enabled" to enabled as Any,
         "applicationId" to applicationId as Any,
         "applicationSecret" to applicationSecret as Any,
+        "prompt" to prompt as Any,
         "tenant" to tenant as Any,
     )
 
@@ -51,11 +58,12 @@ data class OAuth2Microsoft(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Microsoft(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            applicationId = map["applicationId"] as String,
-            applicationSecret = map["applicationSecret"] as String,
-            tenant = map["tenant"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            applicationId = (if (map.containsKey("applicationId")) map["applicationId"] else "") as String,
+            applicationSecret = (if (map.containsKey("applicationSecret")) map["applicationSecret"] else "") as String,
+            prompt = (if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<io.appwrite.enums.OAuth2MicrosoftPrompt>,
+            tenant = (if (map.containsKey("tenant")) map["tenant"] else "") as String,
         )
     }
 }

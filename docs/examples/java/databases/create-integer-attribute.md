@@ -15,9 +15,9 @@ databases.createIntegerAttribute(
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
     false, // required
-    0, // min (optional)
-    100, // max (optional)
-    10, // default (optional)
+    0L, // min (optional)
+    100L, // max (optional)
+    10L, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

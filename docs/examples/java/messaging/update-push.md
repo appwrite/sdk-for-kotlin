@@ -13,11 +13,11 @@ Messaging messaging = new Messaging(client);
 
 messaging.updatePush(
     "<MESSAGE_ID>", // messageId
+    "<TITLE>", // title (optional)
+    "<BODY>", // body (optional)
     List.of(), // topics (optional)
     List.of(), // users (optional)
     List.of(), // targets (optional)
-    "<TITLE>", // title (optional)
-    "<BODY>", // body (optional)
     Map.of("a", "b"), // data (optional)
     "<ACTION>", // action (optional)
     "<ID1:ID2>", // image (optional)
@@ -25,12 +25,13 @@ messaging.updatePush(
     "<SOUND>", // sound (optional)
     "<COLOR>", // color (optional)
     "<TAG>", // tag (optional)
-    1, // badge (optional)
+    1L, // badge (optional)
     false, // draft (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     false, // contentAvailable (optional)
     false, // critical (optional)
     MessagePriority.NORMAL, // priority (optional)
+    "<CHANNEL_ID>", // channelId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

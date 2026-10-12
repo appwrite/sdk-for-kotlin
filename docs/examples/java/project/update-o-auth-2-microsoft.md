@@ -2,6 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
+import io.appwrite.enums.ProjectOAuth2MicrosoftPrompt;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,6 +15,7 @@ project.updateOAuth2Microsoft(
     "<APPLICATION_ID>", // applicationId (optional)
     "<APPLICATION_SECRET>", // applicationSecret (optional)
     "<TENANT>", // tenant (optional)
+    List.of(ProjectOAuth2MicrosoftPrompt.NONE), // prompt (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

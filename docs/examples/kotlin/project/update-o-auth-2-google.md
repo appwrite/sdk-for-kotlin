@@ -15,6 +15,8 @@ val response = project.updateOAuth2Google(
     clientId = "<CLIENT_ID>", // optional
     clientSecret = "<CLIENT_SECRET>", // optional
     prompt = listOf(ProjectOAuth2GooglePrompt.NONE), // optional
-    enabled = false // optional
+    nativeClientIds = listOf(), // optional
+    enabled = false, // optional
+    nativeEnabled = false // optional
 )
 ```

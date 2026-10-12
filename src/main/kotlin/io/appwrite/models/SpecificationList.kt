@@ -30,7 +30,7 @@ data class SpecificationList(
         fun from(
             map: Map<String, Any>,
         ) = SpecificationList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             specifications = (map["specifications"] as List<Map<String, Any>>).map { Specification.from(map = it) },
         )
     }

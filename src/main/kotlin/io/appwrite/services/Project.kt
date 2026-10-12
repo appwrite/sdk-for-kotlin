@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Project service allows you to manage all the projects in your Appwrite server.**/
+ * The Project service allows you to manage all the projects in your Appwrite server.
+ */
 class Project(client: Client) : Service(client) {
     /**
      * Get a project.
@@ -22,6 +23,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -48,6 +50,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -61,7 +64,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project.
      *
-     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone
+     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
      * @param enabled Auth method status.
      * @return [io.appwrite.models.Project]
      */
@@ -176,6 +179,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getKey(
         keyId: String,
     ): io.appwrite.models.Key {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -214,6 +220,9 @@ class Project(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -250,6 +259,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteKey(
         keyId: String,
     ): Any {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -257,6 +269,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -379,6 +392,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getMockPhone(
         number: String,
     ): io.appwrite.models.MockNumber {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -412,6 +428,9 @@ class Project(client: Client) : Service(client) {
         number: String,
         otp: String,
     ): io.appwrite.models.MockNumber {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -446,6 +465,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteMockPhone(
         number: String,
     ): Any {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -453,6 +475,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -622,7 +645,9 @@ class Project(client: Client) : Service(client) {
      * @param keyId 'Key ID' of Apple OAuth2 app. For example: P4000000N8
      * @param teamId 'Team ID' of Apple OAuth2 app. For example: D4000000R6
      * @param p8File Contents of the Apple OAuth2 app .p8 private key file. The secret key wrapped by the PEM markers is 200 characters long. For example: -----BEGIN PRIVATE KEY-----MIGTAg...jy2Xbna-----END PRIVATE KEY-----
-     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @param nativeClientIds App bundle IDs accepted as ID token audiences for native Sign in with Apple. For example: com.example.app. Together with the Services ID, these are the only client IDs whose tokens are trusted. Pass an empty array to clear the list.
+     * @param enabled Browser-based OAuth2 sign-in status. Set to true to enable new session creation through the redirect flow. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid. Has no effect on native sign-in, which is controlled by nativeEnabled only.
+     * @param nativeEnabled Native Sign in with Apple status. This is the only switch for creating sessions from ID tokens obtained on device and is independent of enabled. Needs a Services ID or at least one native client ID to match tokens against, but no key or team ID: this method verifies a signature rather than redeeming an authorization code.
      * @return [io.appwrite.models.OAuth2Apple]
      */
     @JvmOverloads
@@ -632,7 +657,9 @@ class Project(client: Client) : Service(client) {
         keyId: String? = null,
         teamId: String? = null,
         p8File: String? = null,
+        nativeClientIds: List<String>? = null,
         enabled: Boolean? = null,
+        nativeEnabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Apple {
         val apiPath = "/project/oauth2/apple"
         val apiParams = mutableMapOf<String, Any?>(
@@ -640,7 +667,9 @@ class Project(client: Client) : Service(client) {
             "keyId" to keyId,
             "teamId" to teamId,
             "p8File" to p8File,
+            "nativeClientIds" to nativeClientIds,
             "enabled" to enabled,
+            "nativeEnabled" to nativeEnabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -705,6 +734,7 @@ class Project(client: Client) : Service(client) {
      * @param clientId 'Client ID' of Auth0 OAuth2 app. For example: OaOkIA000000000000000000005KLSYq
      * @param clientSecret 'Client Secret' of Auth0 OAuth2 app. For example: zXz0000-00000000000000000000000000000-00000000000000000000PJafnF
      * @param endpoint Domain of Auth0 instance. For example: example.us.auth0.com
+     * @param prompt Array of Auth0 OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "consent" means: prompt the user for consent. Pass an empty array to use the Auth0 default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Auth0]
      */
@@ -714,6 +744,7 @@ class Project(client: Client) : Service(client) {
         clientId: String? = null,
         clientSecret: String? = null,
         endpoint: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2Auth0Prompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Auth0 {
         val apiPath = "/project/oauth2/auth0"
@@ -721,6 +752,7 @@ class Project(client: Client) : Service(client) {
             "clientId" to clientId,
             "clientSecret" to clientSecret,
             "endpoint" to endpoint,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1022,6 +1054,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param clientId 'Client ID' of Discord OAuth2 app. For example: 950722000000343754
      * @param clientSecret 'Client Secret' of Discord OAuth2 app. For example: YmPXnM000000000000000000002zFg5D
+     * @param prompt Array with at most one Discord OAuth2 prompt value. "none" means: skip the authorization screen for users who already authorized the app with the requested scopes. "consent" means: ask users who already authorized the app to approve it again. Pass an empty array to use the Discord default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Discord]
      */
@@ -1030,12 +1063,14 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2Discord(
         clientId: String? = null,
         clientSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2DiscordPrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Discord {
         val apiPath = "/project/oauth2/discord"
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1298,6 +1333,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param clientId 'OAuth2 app Client ID, or App ID' of GitHub OAuth2 app. For example: e4d87900000000540733. Example of wrong value: 370006
      * @param clientSecret 'Client Secret' of GitHub OAuth2 app. For example: 5e07c00000000000000000000000000000198bcc
+     * @param prompt Array of GitHub OAuth2 prompt values. "select_account" means: prompt the user to select an account. Pass an empty array to use the GitHub default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Github]
      */
@@ -1306,12 +1342,14 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2GitHub(
         clientId: String? = null,
         clientSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2GitHubPrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Github {
         val apiPath = "/project/oauth2/github"
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1380,7 +1418,9 @@ class Project(client: Client) : Service(client) {
      * @param clientId 'Client ID' of Google OAuth2 app. For example: 120000000095-92ifjb00000000000000000000g7ijfb.apps.googleusercontent.com
      * @param clientSecret 'Client Secret' of Google OAuth2 app. For example: GOCSPX-2k8gsR0000000000000000VNahJj
      * @param prompt Array of Google OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. Must not be specified with other values. "consent" means: prompt the user for consent. "select_account" means: prompt the user to select an account.
-     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @param nativeClientIds Additional OAuth2 client IDs accepted as ID token audiences for native sign-in (Android and iOS client IDs). Together with the client ID, which is always accepted, these are the only client IDs whose tokens are trusted. Pass an empty array to clear the list.
+     * @param enabled Browser-based OAuth2 sign-in status. Set to true to enable new session creation through the redirect flow. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid. Has no effect on native sign-in, which is controlled by nativeEnabled only.
+     * @param nativeEnabled Native Google sign-in status. This is the only switch for creating sessions from ID tokens obtained on device and is independent of enabled. Needs a client ID or at least one native client ID to match tokens against, but no client secret: this method verifies a signature rather than redeeming an authorization code.
      * @return [io.appwrite.models.OAuth2Google]
      */
     @JvmOverloads
@@ -1389,14 +1429,18 @@ class Project(client: Client) : Service(client) {
         clientId: String? = null,
         clientSecret: String? = null,
         prompt: List<io.appwrite.enums.ProjectOAuth2GooglePrompt>? = null,
+        nativeClientIds: List<String>? = null,
         enabled: Boolean? = null,
+        nativeEnabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Google {
         val apiPath = "/project/oauth2/google"
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
             "prompt" to prompt,
+            "nativeClientIds" to nativeClientIds,
             "enabled" to enabled,
+            "nativeEnabled" to nativeEnabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1451,6 +1495,48 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2HuggingFace::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Kakao configuration.
+     *
+     * @param clientId 'REST API key' of Kakao OAuth2 app. For example: 839ff5000000000000000000013206de
+     * @param clientSecret 'Client Secret' of Kakao OAuth2 app. For example: jLNVOK00000000000000000000yJebea. Generate it under Kakao Login > Security and set its status to enabled
+     * @param prompt Array of Kakao OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "create" means: prompt the user to sign up. "select_account" means: prompt the user to select an account. Pass an empty array to use the Kakao default.
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Kakao]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Kakao(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2KakaoPrompt>? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Kakao {
+        val apiPath = "/project/oauth2/kakao"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "prompt" to prompt,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Kakao = {
+            io.appwrite.models.OAuth2Kakao.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Kakao::class.java,
             converter,
         )
     }
@@ -1584,6 +1670,7 @@ class Project(client: Client) : Service(client) {
      * @param applicationId 'Entra ID Application ID, also known as Client ID' of Microsoft OAuth2 app. For example: 00001111-aaaa-2222-bbbb-3333cccc4444
      * @param applicationSecret 'Entra ID Application Secret, also known as Client Secret' of Microsoft OAuth2 app. For example: A1bC2dE3fH4iJ5kL6mN7oP8qR9sT0u
      * @param tenant Microsoft Entra ID tenant identifier. Use 'common', 'organizations', 'consumers' or a specific tenant ID. For example: common
+     * @param prompt Array of Microsoft OAuth2 prompt values. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "consent" means: prompt the user for consent. "select_account" means: prompt the user to select an account. Pass an empty array to use the Microsoft default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Microsoft]
      */
@@ -1593,6 +1680,7 @@ class Project(client: Client) : Service(client) {
         applicationId: String? = null,
         applicationSecret: String? = null,
         tenant: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2MicrosoftPrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Microsoft {
         val apiPath = "/project/oauth2/microsoft"
@@ -1600,6 +1688,7 @@ class Project(client: Client) : Service(client) {
             "applicationId" to applicationId,
             "applicationSecret" to applicationSecret,
             "tenant" to tenant,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1723,6 +1812,7 @@ class Project(client: Client) : Service(client) {
      * @param clientSecret 'Client Secret' of Okta OAuth2 app. For example: Kiq0000000000000000000000000000000000000-00000000000H2L5-3SJ-vRV
      * @param domain Okta company domain. Required when enabling the provider. For example: trial-6400025.okta.com. Example of wrong value: trial-6400025-admin.okta.com, or https://trial-6400025.okta.com/
      * @param authorizationServerId Custom Authorization Servers. Optional, can be left empty or unconfigured. For example: aus000000000000000h7z
+     * @param prompt Array of Okta OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "consent" means: prompt the user for consent. Pass an empty array to use the Okta default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Okta]
      */
@@ -1733,6 +1823,7 @@ class Project(client: Client) : Service(client) {
         clientSecret: String? = null,
         domain: String? = null,
         authorizationServerId: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2OktaPrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Okta {
         val apiPath = "/project/oauth2/okta"
@@ -1741,6 +1832,7 @@ class Project(client: Client) : Service(client) {
             "clientSecret" to clientSecret,
             "domain" to domain,
             "authorizationServerId" to authorizationServerId,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1922,6 +2014,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param customerKey 'Consumer Key' of Salesforce OAuth2 app. For example: 3MVG9I0000000000000000000000000000000000000000000000000000000000000000000000000C5Aejq
      * @param customerSecret 'Consumer Secret' of Salesforce OAuth2 app. For example: 3w000000000000e2
+     * @param prompt Array of Salesforce OAuth2 prompt values. "login" means: prompt the user to re-authenticate. "consent" means: prompt the user for consent. Pass an empty array to use the Salesforce default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Salesforce]
      */
@@ -1930,12 +2023,14 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2Salesforce(
         customerKey: String? = null,
         customerSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2SalesforcePrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Salesforce {
         val apiPath = "/project/oauth2/salesforce"
         val apiParams = mutableMapOf<String, Any?>(
             "customerKey" to customerKey,
             "customerSecret" to customerSecret,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -2074,6 +2169,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 TikTok configuration.
+     *
+     * @param clientId 'Client key' of TikTok OAuth2 app. For example: awz000000000tyw0
+     * @param clientSecret 'Client secret' of TikTok OAuth2 app. For example: 6wXewM00000000000000000000yXnite
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2TikTok]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2TikTok(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2TikTok {
+        val apiPath = "/project/oauth2/tiktok"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2TikTok = {
+            io.appwrite.models.OAuth2TikTok.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2TikTok::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Tradeshift configuration.
      *
      * @param oauth2ClientId 'OAuth2 Client ID' of Tradeshift OAuth2 app. For example: appwrite-tes00000.0000000000est-app
@@ -2186,6 +2320,45 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2Twitch::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Webflow configuration.
+     *
+     * @param clientId 'Client ID' of Webflow OAuth2 app. For example: 8bb20000000000000000000000000000000000000000000000000000000040dd
+     * @param clientSecret 'Client Secret' of Webflow OAuth2 app. For example: 59bf00000000000000000000000000000000000000000000000000000000fe59
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Webflow]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Webflow(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Webflow {
+        val apiPath = "/project/oauth2/webflow"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Webflow = {
+            io.appwrite.models.OAuth2Webflow.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Webflow::class.java,
             converter,
         )
     }
@@ -2351,6 +2524,7 @@ class Project(client: Client) : Service(client) {
      *
      * @param clientId 'Client ID' of Zoho OAuth2 app. For example: 1000.83C178000000000000000000RPNX0B
      * @param clientSecret 'Client Secret' of Zoho OAuth2 app. For example: fb5cac000000000000000000000000000000a68f6e
+     * @param prompt Array of Zoho OAuth2 prompt values. "consent" means: prompt the user for consent. Pass an empty array to use the Zoho default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
      * @return [io.appwrite.models.OAuth2Zoho]
      */
@@ -2359,12 +2533,14 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2Zoho(
         clientId: String? = null,
         clientSecret: String? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2ZohoPrompt>? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.OAuth2Zoho {
         val apiPath = "/project/oauth2/zoho"
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
+            "prompt" to prompt,
             "enabled" to enabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -2461,6 +2637,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "yandex" -> io.appwrite.models.OAuth2Yandex.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "x" -> io.appwrite.models.OAuth2X.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "wordpress" -> io.appwrite.models.OAuth2WordPress.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "webflow" -> io.appwrite.models.OAuth2Webflow.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "twitch" -> io.appwrite.models.OAuth2Twitch.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "stripe" -> io.appwrite.models.OAuth2Stripe.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "spotify" -> io.appwrite.models.OAuth2Spotify.from(map = responseMap)
@@ -2489,6 +2666,8 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "okta" -> io.appwrite.models.OAuth2Okta.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "kick" -> io.appwrite.models.OAuth2Kick.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "microsoft" -> io.appwrite.models.OAuth2Microsoft.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "tiktok" -> io.appwrite.models.OAuth2TikTok.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "kakao" -> io.appwrite.models.OAuth2Kakao.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }
@@ -2543,19 +2722,23 @@ class Project(client: Client) : Service(client) {
      * @param platformId Platform ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Platform name. Max length: 128 chars.
      * @param applicationId Android application ID. Max length: 256 chars.
+     * @param fingerprints SHA-256 fingerprints of the certificates your app is signed with, such as "14:6D:E9:...:2B:6A". Passkeys created in the app are accepted when its signature matches one. Find them under App signing in Play Console, or with `./gradlew signingReport`.
      * @return [io.appwrite.models.PlatformAndroid]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun createAndroidPlatform(
         platformId: String,
         name: String,
         applicationId: String,
+        fingerprints: List<String>? = null,
     ): io.appwrite.models.PlatformAndroid {
         val apiPath = "/project/platforms/android"
         val apiParams = mutableMapOf<String, Any?>(
             "platformId" to platformId,
             "name" to name,
             "applicationId" to applicationId,
+            "fingerprints" to fingerprints,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2576,25 +2759,32 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
-     * Update an Android platform by its unique ID. Use this endpoint to update the platform's name or application ID.
+     * Update an Android platform by its unique ID. Use this endpoint to update the platform's name, application ID or signing certificate fingerprints.
      *
      * @param platformId Platform ID.
      * @param name Platform name. Max length: 128 chars.
      * @param applicationId Android application ID. Max length: 256 chars.
+     * @param fingerprints SHA-256 fingerprints of the certificates your app is signed with, such as "14:6D:E9:...:2B:6A". Passkeys created in the app are accepted when its signature matches one. Find them under App signing in Play Console, or with `./gradlew signingReport`. Omit to keep the current list, or pass an empty array to clear it.
      * @return [io.appwrite.models.PlatformAndroid]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updateAndroidPlatform(
         platformId: String,
         name: String,
         applicationId: String,
+        fingerprints: List<String>? = null,
     ): io.appwrite.models.PlatformAndroid {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/android/{platformId}"
             .replace("{platformId}", platformId)
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "applicationId" to applicationId,
+            "fingerprints" to fingerprints,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2666,6 +2856,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         bundleIdentifier: String,
     ): io.appwrite.models.PlatformApple {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/apple/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2743,6 +2936,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageName: String,
     ): io.appwrite.models.PlatformLinux {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/linux/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2820,6 +3016,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         hostname: String,
     ): io.appwrite.models.PlatformWeb {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/web/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2897,6 +3096,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageIdentifierName: String,
     ): io.appwrite.models.PlatformWindows {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/windows/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2932,6 +3134,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getPlatform(
         platformId: String,
     ): Any {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2972,6 +3177,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deletePlatform(
         platformId: String,
     ): Any {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -2979,6 +3187,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -3243,6 +3452,38 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Set the relying party ID passkeys are bound to: the domain of your application. Passkeys work on the project's web platforms on that domain or its subdomains, and on the domain itself for Apple apps. A localhost web platform enables passkeys for local development without a relying party ID. The relying party ID cannot change while users have passkeys, and any change invalidates ceremonies in progress.
+     *
+     * @param rpId Relying party ID: the domain of your application, such as `example.com`. Use `localhost` for local development, or an empty string to unset it.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePasskeyPolicy(
+        rpId: String,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/passkey"
+        val apiParams = mutableMapOf<String, Any?>(
+            "rpId" to rpId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
      *
      * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
@@ -3321,6 +3562,81 @@ class Project(client: Client) : Service(client) {
         val apiPath = "/project/policies/password-personal-data"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Updating this policy allows you to control if passwords are checked against the Have I Been Pwned breach database. When enabled, every password a user signs up, signs in or resets with is checked and the result is recorded on the user as `passwordPwned`. On its own the policy only records. Enable `users` to reject a breached password when a user signs up or sets a new password, and `sessions` to refuse a sign-in with a breached password until it is reset. Only the first five characters of the password hash are ever shared with the service. Options left out keep their current value.
+     *
+     * @param enabled Toggle password pwned policy. Set to true to check passwords against known data breaches and record the result on the user, or false to never check. Default is true. On its own this only records; use `users` and `sessions` to block. When changing this policy, existing passwords remain valid.
+     * @param sessions Whether a sign-in with a breached password is refused until the password is reset. Default is false, which allows the sign-in and only records the result.
+     * @param users Whether a breached password is rejected when a user signs up or sets a new password. Default is false, which allows the password and only records the result.
+     * @return [io.appwrite.models.Project]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePasswordPwnedPolicy(
+        enabled: Boolean? = null,
+        sessions: Boolean? = null,
+        users: Boolean? = null,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/password-pwned"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+            "sessions" to sessions,
+            "users" to users,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Require a password reset when an email/password sign-in uses a password older than the configured maximum age. Options left out keep their current value.
+     *
+     * @param enabled Enable password rotation. Disabled by default.
+     * @param maxAge Maximum password age in seconds. Minimum allowed value is 86400 seconds (1 day), and maximum is 10 years, which is 315360000 seconds. Defaults to 1 year, which is 31536000 seconds.
+     * @return [io.appwrite.models.Project]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePasswordRotationPolicy(
+        enabled: Boolean? = null,
+        maxAge: Long? = null,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/password-rotation"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+            "maxAge" to maxAge,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3548,7 +3864,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, passkey.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -3571,6 +3887,8 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "password-history" -> io.appwrite.models.PolicyPasswordHistory.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "password-strength" -> io.appwrite.models.PolicyPasswordStrength.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "password-personal-data" -> io.appwrite.models.PolicyPasswordPersonalData.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "password-pwned" -> io.appwrite.models.PolicyPasswordPwned.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "password-rotation" -> io.appwrite.models.PolicyPasswordRotation.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "session-alert" -> io.appwrite.models.PolicySessionAlert.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "session-duration" -> io.appwrite.models.PolicySessionDuration.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "session-invalidation" -> io.appwrite.models.PolicySessionInvalidation.from(map = responseMap)
@@ -3582,6 +3900,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "deny-disposable-email" -> io.appwrite.models.PolicyDenyDisposableEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-free-email" -> io.appwrite.models.PolicyDenyFreeEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-corporate-email" -> io.appwrite.models.PolicyDenyCorporateEmail.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "passkey" -> io.appwrite.models.PolicyPasskey.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }
@@ -3744,6 +4063,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "POST",
@@ -3792,7 +4112,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update a custom email template for the specified locale and type. Use this endpoint to modify the content of your email templates.
      *
-     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession
+     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession, otpVerification, otpRecovery
      * @param locale Custom email template locale. If left empty, the fallback locale (en) will be used.
      * @param subject Subject of the email template. Can be up to 255 characters.
      * @param message Plain or HTML body of the email template message. Can be up to 10MB of content.
@@ -3846,7 +4166,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a custom email template for the specified locale and type. This endpoint returns the template content, subject, and other configuration details.
      *
-     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession
+     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession, otpVerification, otpRecovery
      * @param locale Custom email template locale. If left empty, the fallback locale (en) will be used.
      * @return [io.appwrite.models.EmailTemplate]
      */
@@ -3966,6 +4286,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getVariable(
         variableId: String,
     ): io.appwrite.models.Variable {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4004,6 +4327,9 @@ class Project(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4040,6 +4366,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteVariable(
         variableId: String,
     ): Any {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4047,6 +4376,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

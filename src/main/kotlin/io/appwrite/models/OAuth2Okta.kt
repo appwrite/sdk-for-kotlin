@@ -32,6 +32,12 @@ data class OAuth2Okta(
     val clientSecret: String,
 
     /**
+     * Okta OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    val prompt: List<io.appwrite.enums.OAuth2OktaPrompt>,
+
+    /**
      * Okta OAuth2 domain.
      */
     @SerializedName("domain")
@@ -49,6 +55,7 @@ data class OAuth2Okta(
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any,
         "domain" to domain as Any,
         "authorizationServerId" to authorizationServerId as Any,
     )
@@ -58,12 +65,13 @@ data class OAuth2Okta(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Okta(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            clientId = map["clientId"] as String,
-            clientSecret = map["clientSecret"] as String,
-            domain = map["domain"] as String,
-            authorizationServerId = map["authorizationServerId"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
+            clientSecret = (if (map.containsKey("clientSecret")) map["clientSecret"] else "") as String,
+            prompt = (if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<io.appwrite.enums.OAuth2OktaPrompt>,
+            domain = (if (map.containsKey("domain")) map["domain"] else "") as String,
+            authorizationServerId = (if (map.containsKey("authorizationServerId")) map["authorizationServerId"] else "") as String,
         )
     }
 }

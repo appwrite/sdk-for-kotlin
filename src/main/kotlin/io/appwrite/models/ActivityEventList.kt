@@ -30,7 +30,7 @@ data class ActivityEventList(
         fun from(
             map: Map<String, Any>,
         ) = ActivityEventList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             events = (map["events"] as List<Map<String, Any>>).map { ActivityEvent.from(map = it) },
         )
     }

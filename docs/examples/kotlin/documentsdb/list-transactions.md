@@ -11,6 +11,7 @@ val client = Client()
 val documentsDB = DocumentsDB(client)
 
 val response = documentsDB.listTransactions(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

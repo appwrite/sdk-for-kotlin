@@ -12,6 +12,6 @@ val users = Users(client)
 
 val response = users.updateLabels(
     userId = "<USER_ID>",
-    labels = listOf()
+    labels = listOf("subscriber")
 )
 ```

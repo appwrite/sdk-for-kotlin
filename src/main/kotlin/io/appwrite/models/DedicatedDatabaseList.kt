@@ -30,7 +30,7 @@ data class DedicatedDatabaseList(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             databases = (map["databases"] as List<Map<String, Any>>).map { DedicatedDatabase.from(map = it) },
         )
     }

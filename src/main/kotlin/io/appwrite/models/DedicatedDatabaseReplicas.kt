@@ -72,12 +72,12 @@ data class DedicatedDatabaseReplicas(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseReplicas(
-            replicas = (map["replicas"] as Number).toLong(),
-            syncMode = map["syncMode"] as String,
+            replicas = ((if (map.containsKey("replicas")) map["replicas"] else 0) as Number).toLong(),
+            syncMode = (if (map.containsKey("syncMode")) map["syncMode"] else "async") as String,
             effectiveSyncMode = map["effectiveSyncMode"] as? String,
-            syncDegraded = map["syncDegraded"] as Boolean,
-            syncAcknowledgements = (map["syncAcknowledgements"] as Number).toLong(),
-            syncStandbyCount = (map["syncStandbyCount"] as Number).toLong(),
+            syncDegraded = (if (map.containsKey("syncDegraded")) map["syncDegraded"] else false) as Boolean,
+            syncAcknowledgements = ((if (map.containsKey("syncAcknowledgements")) map["syncAcknowledgements"] else 0) as Number).toLong(),
+            syncStandbyCount = ((if (map.containsKey("syncStandbyCount")) map["syncStandbyCount"] else 0) as Number).toLong(),
             syncStateConfirmed = map["syncStateConfirmed"] as? Boolean,
             members = (map["members"] as List<Map<String, Any>>).map { DedicatedDatabaseMember.from(map = it) },
         )

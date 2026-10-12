@@ -94,16 +94,16 @@ data class ColumnEnum(
         fun from(
             map: Map<String, Any>,
         ) = ColumnEnum(
-            key = map["key"] as String,
-            type = map["type"] as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
             status = ColumnStatus.values().find { it.value == map["status"] as String }!!,
-            error = map["error"] as String,
-            required = map["required"] as Boolean,
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
+            required = (if (map.containsKey("required")) map["required"] else false) as Boolean,
             array = map["array"] as? Boolean,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             elements = map["elements"] as List<String>,
-            format = map["format"] as String,
+            format = (if (map.containsKey("format")) map["format"] else "enum") as String,
             default = map["default"] as? String,
         )
     }

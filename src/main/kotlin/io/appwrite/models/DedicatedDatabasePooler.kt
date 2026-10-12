@@ -86,16 +86,16 @@ data class DedicatedDatabasePooler(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabasePooler(
-            enabled = map["enabled"] as Boolean,
-            mode = map["mode"] as String,
-            maxConnections = (map["maxConnections"] as Number).toLong(),
-            defaultPoolSize = (map["defaultPoolSize"] as Number).toLong(),
-            port = (map["port"] as Number).toLong(),
-            readWriteSplitting = map["readWriteSplitting"] as Boolean,
-            poolerCpuRequest = map["poolerCpuRequest"] as String,
-            poolerCpuLimit = map["poolerCpuLimit"] as String,
-            poolerMemoryRequest = map["poolerMemoryRequest"] as String,
-            poolerMemoryLimit = map["poolerMemoryLimit"] as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            mode = (if (map.containsKey("mode")) map["mode"] else "transaction") as String,
+            maxConnections = ((if (map.containsKey("maxConnections")) map["maxConnections"] else 100) as Number).toLong(),
+            defaultPoolSize = ((if (map.containsKey("defaultPoolSize")) map["defaultPoolSize"] else 20) as Number).toLong(),
+            port = ((if (map.containsKey("port")) map["port"] else 6432) as Number).toLong(),
+            readWriteSplitting = (if (map.containsKey("readWriteSplitting")) map["readWriteSplitting"] else false) as Boolean,
+            poolerCpuRequest = (if (map.containsKey("poolerCpuRequest")) map["poolerCpuRequest"] else "") as String,
+            poolerCpuLimit = (if (map.containsKey("poolerCpuLimit")) map["poolerCpuLimit"] else "") as String,
+            poolerMemoryRequest = (if (map.containsKey("poolerMemoryRequest")) map["poolerMemoryRequest"] else "") as String,
+            poolerMemoryLimit = (if (map.containsKey("poolerMemoryLimit")) map["poolerMemoryLimit"] else "") as String,
         )
     }
 }

@@ -38,10 +38,10 @@ data class DatabaseStatus(
     val uptime: Long,
 
     /**
-     * Connection statistics.
+     * Connection statistics. Null when the database has not been probed.
      */
     @SerializedName("connections")
-    val connections: DatabaseStatusConnections,
+    var connections: DatabaseStatusConnections?,
 
     /**
      * Requested replication sync mode. Possible values: async, sync, quorum. Compare with effectiveSyncMode for what the primary is enforcing.
@@ -98,7 +98,7 @@ data class DatabaseStatus(
         "engine" to engine as Any,
         "version" to version as Any,
         "uptime" to uptime as Any,
-        "connections" to connections.toMap() as Any,
+        "connections" to connections?.toMap() as Any?,
         "syncMode" to syncMode as Any,
         "effectiveSyncMode" to effectiveSyncMode as Any?,
         "syncDegraded" to syncDegraded as Any,
@@ -114,17 +114,17 @@ data class DatabaseStatus(
         fun from(
             map: Map<String, Any>,
         ) = DatabaseStatus(
-            health = map["health"] as String,
-            ready = map["ready"] as Boolean,
-            engine = map["engine"] as String,
-            version = map["version"] as String,
-            uptime = (map["uptime"] as Number).toLong(),
-            connections = DatabaseStatusConnections.from(map = map["connections"] as Map<String, Any>),
-            syncMode = map["syncMode"] as String,
+            health = (if (map.containsKey("health")) map["health"] else "unknown") as String,
+            ready = (if (map.containsKey("ready")) map["ready"] else false) as Boolean,
+            engine = (if (map.containsKey("engine")) map["engine"] else "postgresql") as String,
+            version = (if (map.containsKey("version")) map["version"] else "") as String,
+            uptime = ((if (map.containsKey("uptime")) map["uptime"] else 0) as Number).toLong(),
+            connections = (map["connections"] as? Map<String, Any>)?.let { DatabaseStatusConnections.from(map = it) },
+            syncMode = (if (map.containsKey("syncMode")) map["syncMode"] else "async") as String,
             effectiveSyncMode = map["effectiveSyncMode"] as? String,
-            syncDegraded = map["syncDegraded"] as Boolean,
-            syncAcknowledgements = (map["syncAcknowledgements"] as Number).toLong(),
-            syncStandbyCount = (map["syncStandbyCount"] as Number).toLong(),
+            syncDegraded = (if (map.containsKey("syncDegraded")) map["syncDegraded"] else false) as Boolean,
+            syncAcknowledgements = ((if (map.containsKey("syncAcknowledgements")) map["syncAcknowledgements"] else 0) as Number).toLong(),
+            syncStandbyCount = ((if (map.containsKey("syncStandbyCount")) map["syncStandbyCount"] else 0) as Number).toLong(),
             syncStateConfirmed = map["syncStateConfirmed"] as? Boolean,
             replicas = (map["replicas"] as List<Map<String, Any>>).map { DatabaseStatusReplica.from(map = it) },
             volumes = (map["volumes"] as List<Map<String, Any>>).map { DatabaseStatusVolume.from(map = it) },

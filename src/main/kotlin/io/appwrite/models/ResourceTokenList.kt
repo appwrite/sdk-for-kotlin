@@ -30,7 +30,7 @@ data class ResourceTokenList(
         fun from(
             map: Map<String, Any>,
         ) = ResourceTokenList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             tokens = (map["tokens"] as List<Map<String, Any>>).map { ResourceToken.from(map = it) },
         )
     }

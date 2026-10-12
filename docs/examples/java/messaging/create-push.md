@@ -25,12 +25,13 @@ messaging.createPush(
     "<SOUND>", // sound (optional)
     "<COLOR>", // color (optional)
     "<TAG>", // tag (optional)
-    1, // badge (optional)
+    1L, // badge (optional)
     false, // draft (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
     false, // contentAvailable (optional)
     false, // critical (optional)
     MessagePriority.NORMAL, // priority (optional)
+    "<CHANNEL_ID>", // channelId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

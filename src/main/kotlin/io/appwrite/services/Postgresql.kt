@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- ***/
+ *
+ */
 class Postgresql(client: Client) : Service(client) {
     /**
      * List all dedicated databases. Results support pagination.
@@ -59,7 +60,7 @@ class Postgresql(client: Client) : Service(client) {
      * @param pitrRetentionDays Number of days to retain PITR data.
      * @param storageAutoscaling Enable automatic storage expansion when usage exceeds threshold.
      * @param storageAutoscalingThresholdPercent Storage usage percentage (50-95) that triggers automatic expansion.
-     * @param storageAutoscalingMaxGb Maximum storage size in GB for autoscaling. 0 means no limit.
+     * @param storageAutoscalingMaxGb Maximum storage size in GB for autoscaling. Defaults to 3 times the specification's storage. 0 means no limit.
      * @return [io.appwrite.models.DedicatedDatabase]
      */
     @JvmOverloads
@@ -116,7 +117,7 @@ class Postgresql(client: Client) : Service(client) {
     }
 
     /**
-     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, pricing, and whether it is enabled for the organization.
+     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, its own prices and overage rates, and whether it is enabled for the organization.
      *
      * @return [io.appwrite.models.DedicatedDatabaseSpecificationList]
      */
@@ -151,6 +152,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun get(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -223,6 +227,9 @@ class Postgresql(client: Client) : Service(client) {
         sqlApiMaxBytes: Long? = null,
         sqlApiTimeoutSeconds: Long? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -276,6 +283,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun delete(
         databaseId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -307,6 +317,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         queries: List<String>? = null,
     ): io.appwrite.models.DedicatedDatabaseBackupList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups"
             .replace("{databaseId}", databaseId)
         )
@@ -343,6 +356,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         type: String? = null,
     ): io.appwrite.models.DedicatedDatabaseBackup {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups"
             .replace("{databaseId}", databaseId)
         )
@@ -380,6 +396,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         queries: List<String>? = null,
     ): io.appwrite.models.BackupPolicyList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/policies"
             .replace("{databaseId}", databaseId)
         )
@@ -426,6 +445,9 @@ class Postgresql(client: Client) : Service(client) {
         type: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/policies"
             .replace("{databaseId}", databaseId)
         )
@@ -467,6 +489,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         policyId: String,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -510,6 +538,12 @@ class Postgresql(client: Client) : Service(client) {
         retention: Long? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -550,6 +584,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         policyId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -594,6 +634,9 @@ class Postgresql(client: Client) : Service(client) {
         prefix: String? = null,
         endpoint: String? = null,
     ): io.appwrite.models.DedicatedDatabaseBackupStorage {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/storage"
             .replace("{databaseId}", databaseId)
         )
@@ -636,6 +679,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         backupId: String,
     ): io.appwrite.models.DedicatedDatabaseBackup {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (backupId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"backupId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/{backupId}"
             .replace("{databaseId}", databaseId)
             .replace("{backupId}", backupId)
@@ -670,6 +719,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         backupId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (backupId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"backupId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/backups/{backupId}"
             .replace("{databaseId}", databaseId)
             .replace("{backupId}", backupId)
@@ -699,6 +754,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun listBranches(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseBranchList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/branches"
             .replace("{databaseId}", databaseId)
         )
@@ -735,6 +793,9 @@ class Postgresql(client: Client) : Service(client) {
         branchId: String? = null,
         ttl: Long? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/branches"
             .replace("{databaseId}", databaseId)
         )
@@ -772,6 +833,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         branchId: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (branchId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"branchId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/branches/{branchId}"
             .replace("{databaseId}", databaseId)
             .replace("{branchId}", branchId)
@@ -805,6 +872,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun updateCredentials(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseOperation {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/credentials"
             .replace("{databaseId}", databaseId)
         )
@@ -844,6 +914,9 @@ class Postgresql(client: Client) : Service(client) {
         bindings: Map<String, Any?>? = null,
         timeoutSeconds: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseExecution {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/executions"
             .replace("{databaseId}", databaseId)
         )
@@ -880,6 +953,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun listExtensions(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseExtensions {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/extensions"
             .replace("{databaseId}", databaseId)
         )
@@ -913,6 +989,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         name: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/extensions"
             .replace("{databaseId}", databaseId)
         )
@@ -949,6 +1028,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         extensionName: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (extensionName.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"extensionName\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/extensions/{extensionName}"
             .replace("{databaseId}", databaseId)
             .replace("{extensionName}", extensionName)
@@ -985,6 +1070,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         targetReplicaId: String? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/failovers"
             .replace("{databaseId}", databaseId)
         )
@@ -1023,6 +1111,9 @@ class Postgresql(client: Client) : Service(client) {
         day: String,
         hourUtc: Long,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/maintenance"
             .replace("{databaseId}", databaseId)
         )
@@ -1063,6 +1154,9 @@ class Postgresql(client: Client) : Service(client) {
         targetType: String,
         specification: String? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
@@ -1105,6 +1199,9 @@ class Postgresql(client: Client) : Service(client) {
         limit: Long? = null,
         offset: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseOperationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/operations"
             .replace("{databaseId}", databaseId)
         )
@@ -1140,6 +1237,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun getPitr(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabasePITRWindows {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/pitr"
             .replace("{databaseId}", databaseId)
         )
@@ -1171,6 +1271,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun getPooler(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabasePooler {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/pooler"
             .replace("{databaseId}", databaseId)
         )
@@ -1219,6 +1322,9 @@ class Postgresql(client: Client) : Service(client) {
         poolerMemoryRequest: String? = null,
         poolerMemoryLimit: String? = null,
     ): io.appwrite.models.DedicatedDatabasePooler {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/pooler"
             .replace("{databaseId}", databaseId)
         )
@@ -1260,6 +1366,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun getReplicas(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseReplicas {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/replicas"
             .replace("{databaseId}", databaseId)
         )
@@ -1300,6 +1409,9 @@ class Postgresql(client: Client) : Service(client) {
         limit: Long? = null,
         offset: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseRestorationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/restorations"
             .replace("{databaseId}", databaseId)
         )
@@ -1345,6 +1457,9 @@ class Postgresql(client: Client) : Service(client) {
         targetDatabaseId: String? = null,
         targetTime: String? = null,
     ): io.appwrite.models.DedicatedDatabaseRestoration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/restorations"
             .replace("{databaseId}", databaseId)
         )
@@ -1384,6 +1499,12 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         restorationId: String,
     ): io.appwrite.models.DedicatedDatabaseRestoration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (restorationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"restorationId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/restorations/{restorationId}"
             .replace("{databaseId}", databaseId)
             .replace("{restorationId}", restorationId)
@@ -1416,6 +1537,9 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun getStatus(
         databaseId: String,
     ): io.appwrite.models.DatabaseStatus {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/status"
             .replace("{databaseId}", databaseId)
         )
@@ -1449,6 +1573,9 @@ class Postgresql(client: Client) : Service(client) {
         databaseId: String,
         targetVersion: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/postgresql/{databaseId}/upgrades"
             .replace("{databaseId}", databaseId)
         )

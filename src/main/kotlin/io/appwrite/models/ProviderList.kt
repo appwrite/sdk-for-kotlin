@@ -30,7 +30,7 @@ data class ProviderList(
         fun from(
             map: Map<String, Any>,
         ) = ProviderList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             providers = (map["providers"] as List<Map<String, Any>>).map { Provider.from(map = it) },
         )
     }

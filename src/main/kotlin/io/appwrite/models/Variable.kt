@@ -72,14 +72,14 @@ data class Variable(
         fun from(
             map: Map<String, Any>,
         ) = Variable(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            key = map["key"] as String,
-            value = map["value"] as String,
-            secret = map["secret"] as Boolean,
-            resourceType = map["resourceType"] as String,
-            resourceId = map["resourceId"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            value = (if (map.containsKey("value")) map["value"] else "") as String,
+            secret = (if (map.containsKey("secret")) map["secret"] else false) as Boolean,
+            resourceType = (if (map.containsKey("resourceType")) map["resourceType"] else "") as String,
+            resourceId = (if (map.containsKey("resourceId")) map["resourceId"] else "") as String,
         )
     }
 }

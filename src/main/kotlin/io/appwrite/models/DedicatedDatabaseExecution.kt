@@ -58,12 +58,12 @@ data class DedicatedDatabaseExecution(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseExecution(
-            rows = map["rows"] as List<Map<String, Any?>>,
-            rowCount = (map["rowCount"] as Number).toLong(),
+            rows = (if (map.containsKey("rows")) map["rows"] else listOf<Any?>()) as List<Map<String, Any?>>,
+            rowCount = ((if (map.containsKey("rowCount")) map["rowCount"] else 0) as Number).toLong(),
             columns = (map["columns"] as List<Map<String, Any>>).map { DedicatedDatabaseExecutionColumn.from(map = it) },
-            durationMs = (map["durationMs"] as Number).toLong(),
-            truncated = map["truncated"] as Boolean,
-            bytes = (map["bytes"] as Number).toLong(),
+            durationMs = ((if (map.containsKey("durationMs")) map["durationMs"] else 0) as Number).toLong(),
+            truncated = (if (map.containsKey("truncated")) map["truncated"] else false) as Boolean,
+            bytes = ((if (map.containsKey("bytes")) map["bytes"] else 0) as Number).toLong(),
         )
     }
 }

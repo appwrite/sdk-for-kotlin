@@ -9,12 +9,13 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Users service allows you to manage your project users.**/
+ * The Users service allows you to manage your project users.
+ */
 class Users(client: Client) : Service(client) {
     /**
      * Get a list of all the project's users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels, impersonator, accessedAt
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, passwordPwned, labels, impersonator, accessedAt
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
@@ -53,7 +54,7 @@ class Users(client: Client) : Service(client) {
     /**
      * Get a list of all the project's users. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, labels, impersonator, accessedAt
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, email, phone, status, passwordUpdate, registration, emailVerification, phoneVerification, passwordPwned, labels, impersonator, accessedAt
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.UserList<T>]
@@ -326,6 +327,9 @@ class Users(client: Client) : Service(client) {
     suspend fun deleteIdentity(
         identityId: String,
     ): Any {
+        if (identityId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"identityId\"")
+        }
         val apiPath = ("/users/identities/{identityId}"
             .replace("{identityId}", identityId)
         )
@@ -333,6 +337,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -743,6 +748,9 @@ class Users(client: Client) : Service(client) {
         userId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}"
             .replace("{userId}", userId)
         )
@@ -788,6 +796,9 @@ class Users(client: Client) : Service(client) {
     suspend fun delete(
         userId: String,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}"
             .replace("{userId}", userId)
         )
@@ -795,6 +806,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -818,6 +830,9 @@ class Users(client: Client) : Service(client) {
         email: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/email"
             .replace("{userId}", userId)
         )
@@ -860,7 +875,7 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
+     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data. Account endpoints are read-only while impersonating: they report the target's account, and anything that would change it is refused, so an impersonator cannot alter the target's credentials or delete their account.
      *
      *
      * @param userId User ID.
@@ -873,6 +888,9 @@ class Users(client: Client) : Service(client) {
         impersonator: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/impersonator"
             .replace("{userId}", userId)
         )
@@ -898,7 +916,7 @@ class Users(client: Client) : Service(client) {
     }
 
     /**
-     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data.
+     * Enable or disable whether a user can impersonate other users. When impersonation headers are used, the request runs as the target user for API behavior, while internal audit logs still attribute the action to the original impersonator and store the impersonated target details only in internal audit payload data. Account endpoints are read-only while impersonating: they report the target's account, and anything that would change it is refused, so an impersonator cannot alter the target's credentials or delete their account.
      *
      *
      * @param userId User ID.
@@ -930,6 +948,9 @@ class Users(client: Client) : Service(client) {
         sessionId: String? = null,
         duration: Long? = null,
     ): io.appwrite.models.Jwt {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/jwts"
             .replace("{userId}", userId)
         )
@@ -970,6 +991,9 @@ class Users(client: Client) : Service(client) {
         labels: List<String>,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/labels"
             .replace("{userId}", userId)
         )
@@ -1014,45 +1038,6 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
-     * Get the user activity logs list by its unique ID.
-     *
-     * @param userId User ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
-     * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @return [io.appwrite.models.LogList]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun listLogs(
-        userId: String,
-        queries: List<String>? = null,
-        total: Boolean? = null,
-    ): io.appwrite.models.LogList {
-        val apiPath = ("/users/{userId}/logs"
-            .replace("{userId}", userId)
-        )
-        val apiParams = mutableMapOf<String, Any?>(
-            "queries" to queries,
-            "total" to total,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.LogList = {
-            io.appwrite.models.LogList.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.LogList::class.java,
-            converter,
-        )
-    }
-
-    /**
      * Get the user membership list by its unique ID.
      *
      * @param userId User ID.
@@ -1069,6 +1054,9 @@ class Users(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.MembershipList {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/memberships"
             .replace("{userId}", userId)
         )
@@ -1111,6 +1099,9 @@ class Users(client: Client) : Service(client) {
         mfa: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa"
             .replace("{userId}", userId)
         )
@@ -1169,6 +1160,9 @@ class Users(client: Client) : Service(client) {
         mfa: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa"
             .replace("{userId}", userId)
         )
@@ -1226,6 +1220,9 @@ class Users(client: Client) : Service(client) {
         userId: String,
         type: io.appwrite.enums.AuthenticatorType,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/authenticators/{type}"
             .replace("{userId}", userId)
             .replace("{type}", type.value)
@@ -1234,6 +1231,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1256,6 +1254,9 @@ class Users(client: Client) : Service(client) {
         userId: String,
         type: io.appwrite.enums.AuthenticatorType,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/authenticators/{type}"
             .replace("{userId}", userId)
             .replace("{type}", type.value)
@@ -1264,6 +1265,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1286,6 +1288,12 @@ class Users(client: Client) : Service(client) {
         userId: String,
         challengeId: String,
     ): io.appwrite.models.MfaChallengeSecret {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (challengeId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"challengeId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/challenges/{challengeId}"
             .replace("{userId}", userId)
             .replace("{challengeId}", challengeId)
@@ -1322,6 +1330,9 @@ class Users(client: Client) : Service(client) {
     suspend fun listMfaFactors(
         userId: String,
     ): io.appwrite.models.MfaFactors {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/factors"
             .replace("{userId}", userId)
         )
@@ -1353,6 +1364,9 @@ class Users(client: Client) : Service(client) {
     suspend fun listMFAFactors(
         userId: String,
     ): io.appwrite.models.MfaFactors {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/factors"
             .replace("{userId}", userId)
         )
@@ -1388,6 +1402,9 @@ class Users(client: Client) : Service(client) {
     suspend fun getMfaRecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1419,6 +1436,9 @@ class Users(client: Client) : Service(client) {
     suspend fun getMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1454,6 +1474,9 @@ class Users(client: Client) : Service(client) {
     suspend fun updateMfaRecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1486,6 +1509,9 @@ class Users(client: Client) : Service(client) {
     suspend fun updateMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1522,6 +1548,9 @@ class Users(client: Client) : Service(client) {
     suspend fun createMfaRecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1554,6 +1583,9 @@ class Users(client: Client) : Service(client) {
     suspend fun createMFARecoveryCodes(
         userId: String,
     ): io.appwrite.models.MfaRecoveryCodes {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/mfa/recovery-codes"
             .replace("{userId}", userId)
         )
@@ -1589,6 +1621,9 @@ class Users(client: Client) : Service(client) {
         name: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/name"
             .replace("{userId}", userId)
         )
@@ -1631,6 +1666,170 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
+     * Get the list of verified passkeys registered by a user.
+     *
+     * @param userId User ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter and order on the following attributes: $id, $createdAt, $updatedAt, name, accessedAt
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.PasskeyList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listPasskeys(
+        userId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.PasskeyList {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys"
+            .replace("{userId}", userId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.PasskeyList = {
+            io.appwrite.models.PasskeyList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.PasskeyList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a verified passkey of a user by its unique ID.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @return [io.appwrite.models.Passkey]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getPasskey(
+        userId: String,
+        passkeyId: String,
+    ): io.appwrite.models.Passkey {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Passkey = {
+            io.appwrite.models.Passkey.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Passkey::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Rename a passkey of a user.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @param name Passkey name. Max length: 128 chars.
+     * @return [io.appwrite.models.Passkey]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePasskey(
+        userId: String,
+        passkeyId: String,
+        name: String,
+    ): io.appwrite.models.Passkey {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Passkey = {
+            io.appwrite.models.Passkey.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Passkey::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a passkey from a user, for example when a device is lost. The passkey can no longer be used to sign in.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deletePasskey(
+        userId: String,
+        passkeyId: String,
+    ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Update the user password by its unique ID.
      *
      * @param userId User ID.
@@ -1643,6 +1842,9 @@ class Users(client: Client) : Service(client) {
         password: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/password"
             .replace("{userId}", userId)
         )
@@ -1697,6 +1899,9 @@ class Users(client: Client) : Service(client) {
         number: String,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/phone"
             .replace("{userId}", userId)
         )
@@ -1749,6 +1954,9 @@ class Users(client: Client) : Service(client) {
         userId: String,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/prefs"
             .replace("{userId}", userId)
         )
@@ -1797,6 +2005,9 @@ class Users(client: Client) : Service(client) {
         prefs: Map<String, Any?>,
         nestedType: Class<T>,
     ): io.appwrite.models.Preferences<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/prefs"
             .replace("{userId}", userId)
         )
@@ -1851,6 +2062,9 @@ class Users(client: Client) : Service(client) {
         userId: String,
         total: Boolean? = null,
     ): io.appwrite.models.SessionList {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
@@ -1886,6 +2100,9 @@ class Users(client: Client) : Service(client) {
     suspend fun createSession(
         userId: String,
     ): io.appwrite.models.Session {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
@@ -1918,6 +2135,9 @@ class Users(client: Client) : Service(client) {
     suspend fun deleteSessions(
         userId: String,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/sessions"
             .replace("{userId}", userId)
         )
@@ -1925,6 +2145,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1947,6 +2168,12 @@ class Users(client: Client) : Service(client) {
         userId: String,
         sessionId: String,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (sessionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"sessionId\"")
+        }
         val apiPath = ("/users/{userId}/sessions/{sessionId}"
             .replace("{userId}", userId)
             .replace("{sessionId}", sessionId)
@@ -1955,6 +2182,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1978,6 +2206,9 @@ class Users(client: Client) : Service(client) {
         status: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/status"
             .replace("{userId}", userId)
         )
@@ -2034,6 +2265,9 @@ class Users(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.TargetList {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/targets"
             .replace("{userId}", userId)
         )
@@ -2079,6 +2313,9 @@ class Users(client: Client) : Service(client) {
         providerId: String? = null,
         name: String? = null,
     ): io.appwrite.models.Target {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/targets"
             .replace("{userId}", userId)
         )
@@ -2119,6 +2356,12 @@ class Users(client: Client) : Service(client) {
         userId: String,
         targetId: String,
     ): io.appwrite.models.Target {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (targetId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"targetId\"")
+        }
         val apiPath = ("/users/{userId}/targets/{targetId}"
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
@@ -2160,6 +2403,12 @@ class Users(client: Client) : Service(client) {
         providerId: String? = null,
         name: String? = null,
     ): io.appwrite.models.Target {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (targetId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"targetId\"")
+        }
         val apiPath = ("/users/{userId}/targets/{targetId}"
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
@@ -2199,6 +2448,12 @@ class Users(client: Client) : Service(client) {
         userId: String,
         targetId: String,
     ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (targetId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"targetId\"")
+        }
         val apiPath = ("/users/{userId}/targets/{targetId}"
             .replace("{userId}", userId)
             .replace("{targetId}", targetId)
@@ -2207,6 +2462,7 @@ class Users(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -2233,6 +2489,9 @@ class Users(client: Client) : Service(client) {
         length: Long? = null,
         expire: Long? = null,
     ): io.appwrite.models.Token {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/tokens"
             .replace("{userId}", userId)
         )
@@ -2271,6 +2530,9 @@ class Users(client: Client) : Service(client) {
         emailVerification: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/verification"
             .replace("{userId}", userId)
         )
@@ -2325,6 +2587,9 @@ class Users(client: Client) : Service(client) {
         phoneVerification: Boolean,
         nestedType: Class<T>,
     ): io.appwrite.models.User<T> {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
         val apiPath = ("/users/{userId}/verification/phone"
             .replace("{userId}", userId)
         )

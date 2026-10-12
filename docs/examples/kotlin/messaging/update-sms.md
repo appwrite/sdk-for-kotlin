@@ -12,10 +12,10 @@ val messaging = Messaging(client)
 
 val response = messaging.updateSMS(
     messageId = "<MESSAGE_ID>",
+    content = "<CONTENT>", // optional
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional
-    content = "<CONTENT>", // optional
     draft = false, // optional
     scheduledAt = "2020-10-15T06:38:00.000+00:00" // optional
 )

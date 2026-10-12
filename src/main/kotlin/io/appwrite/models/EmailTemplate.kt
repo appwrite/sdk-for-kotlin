@@ -72,14 +72,14 @@ data class EmailTemplate(
         fun from(
             map: Map<String, Any>,
         ) = EmailTemplate(
-            templateId = map["templateId"] as String,
-            locale = map["locale"] as String,
-            message = map["message"] as String,
-            senderName = map["senderName"] as String,
-            senderEmail = map["senderEmail"] as String,
-            replyToEmail = map["replyToEmail"] as String,
-            replyToName = map["replyToName"] as String,
-            subject = map["subject"] as String,
+            templateId = (if (map.containsKey("templateId")) map["templateId"] else "") as String,
+            locale = (if (map.containsKey("locale")) map["locale"] else "") as String,
+            message = (if (map.containsKey("message")) map["message"] else "") as String,
+            senderName = (if (map.containsKey("senderName")) map["senderName"] else "") as String,
+            senderEmail = (if (map.containsKey("senderEmail")) map["senderEmail"] else "") as String,
+            replyToEmail = (if (map.containsKey("replyToEmail")) map["replyToEmail"] else "") as String,
+            replyToName = (if (map.containsKey("replyToName")) map["replyToName"] else "") as String,
+            subject = (if (map.containsKey("subject")) map["subject"] else "") as String,
         )
     }
 }

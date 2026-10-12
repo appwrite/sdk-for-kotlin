@@ -30,7 +30,7 @@ data class TableList(
         fun from(
             map: Map<String, Any>,
         ) = TableList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             tables = (map["tables"] as List<Map<String, Any>>).map { Table.from(map = it) },
         )
     }

@@ -30,7 +30,7 @@ data class SubscriberList(
         fun from(
             map: Map<String, Any>,
         ) = SubscriberList(
-            total = (map["total"] as Number).toLong(),
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             subscribers = (map["subscribers"] as List<Map<String, Any>>).map { Subscriber.from(map = it) },
         )
     }

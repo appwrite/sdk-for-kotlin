@@ -10,5 +10,7 @@ val client = Client()
 
 val account = Account(client)
 
-val response = account.deleteSessions()
+val response = account.deleteSessions(
+    current = false // optional
+)
 ```

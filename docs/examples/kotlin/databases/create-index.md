@@ -17,7 +17,7 @@ val response = databases.createIndex(
     collectionId = "<COLLECTION_ID>",
     key = "<KEY>",
     type = DatabasesIndexType.KEY,
-    attributes = listOf(),
+    attributes = listOf("username"),
     orders = listOf(OrderBy.ASC), // optional
     lengths = listOf() // optional
 )

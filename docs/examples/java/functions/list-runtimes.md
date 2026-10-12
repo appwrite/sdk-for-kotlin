@@ -10,12 +10,16 @@ Client client = new Client()
 
 Functions functions = new Functions(client);
 
-functions.listRuntimes(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+functions.listRuntimes(
+    false, // total (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
 ```

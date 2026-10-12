@@ -122,6 +122,12 @@ data class User<T>(
     var emailIsCanonical: Boolean?,
 
     /**
+     * Whether the password was found in a known data breach the last time it was checked. Null when the password has never been checked.
+     */
+    @SerializedName("passwordPwned")
+    var passwordPwned: Boolean?,
+
+    /**
      * Phone verification status.
      */
     @SerializedName("phoneVerification")
@@ -184,6 +190,7 @@ data class User<T>(
         "emailIsDisposable" to emailIsDisposable as Any?,
         "emailIsCorporate" to emailIsCorporate as Any?,
         "emailIsCanonical" to emailIsCanonical as Any?,
+        "passwordPwned" to passwordPwned as Any?,
         "phoneVerification" to phoneVerification as Any,
         "mfa" to mfa as Any,
         "prefs" to prefs.toMap() as Any,
@@ -214,6 +221,7 @@ data class User<T>(
             emailIsDisposable: Boolean?,
             emailIsCorporate: Boolean?,
             emailIsCanonical: Boolean?,
+            passwordPwned: Boolean?,
             phoneVerification: Boolean,
             mfa: Boolean,
             prefs: Preferences<Map<String, Any>>,
@@ -241,6 +249,7 @@ data class User<T>(
             emailIsDisposable,
             emailIsCorporate,
             emailIsCanonical,
+            passwordPwned,
             phoneVerification,
             mfa,
             prefs,
@@ -255,30 +264,31 @@ data class User<T>(
             map: Map<String, Any>,
             nestedType: Class<T>
         ) = User<T>(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
             password = map["password"] as? String,
             hash = map["hash"] as? String,
             hashOptions = map["hashOptions"] as? Map<String, Any?>,
-            registration = map["registration"] as String,
-            status = map["status"] as Boolean,
-            labels = map["labels"] as List<String>,
-            passwordUpdate = map["passwordUpdate"] as String,
-            email = map["email"] as String,
-            phone = map["phone"] as String,
-            emailVerification = map["emailVerification"] as Boolean,
+            registration = (if (map.containsKey("registration")) map["registration"] else "") as String,
+            status = (if (map.containsKey("status")) map["status"] else true) as Boolean,
+            labels = (if (map.containsKey("labels")) map["labels"] else listOf<Any?>()) as List<String>,
+            passwordUpdate = (if (map.containsKey("passwordUpdate")) map["passwordUpdate"] else "") as String,
+            email = (if (map.containsKey("email")) map["email"] else "") as String,
+            phone = (if (map.containsKey("phone")) map["phone"] else "") as String,
+            emailVerification = (if (map.containsKey("emailVerification")) map["emailVerification"] else false) as Boolean,
             emailCanonical = map["emailCanonical"] as? String,
             emailIsFree = map["emailIsFree"] as? Boolean,
             emailIsDisposable = map["emailIsDisposable"] as? Boolean,
             emailIsCorporate = map["emailIsCorporate"] as? Boolean,
             emailIsCanonical = map["emailIsCanonical"] as? Boolean,
-            phoneVerification = map["phoneVerification"] as Boolean,
-            mfa = map["mfa"] as Boolean,
+            passwordPwned = map["passwordPwned"] as? Boolean,
+            phoneVerification = (if (map.containsKey("phoneVerification")) map["phoneVerification"] else false) as Boolean,
+            mfa = (if (map.containsKey("mfa")) map["mfa"] else false) as Boolean,
             prefs = Preferences.from(map = map["prefs"] as Map<String, Any>, nestedType),
             targets = (map["targets"] as List<Map<String, Any>>).map { Target.from(map = it) },
-            accessedAt = map["accessedAt"] as String,
+            accessedAt = (if (map.containsKey("accessedAt")) map["accessedAt"] else "") as String,
             impersonator = map["impersonator"] as? Boolean,
             impersonatorUserId = map["impersonatorUserId"] as? String,
         )

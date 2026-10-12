@@ -12,16 +12,18 @@ val messaging = Messaging(client)
 
 val response = messaging.updateEmail(
     messageId = "<MESSAGE_ID>",
+    subject = "<SUBJECT>", // optional
+    content = "<CONTENT>", // optional
     topics = listOf(), // optional
     users = listOf(), // optional
     targets = listOf(), // optional
-    subject = "<SUBJECT>", // optional
-    content = "<CONTENT>", // optional
-    draft = false, // optional
-    html = false, // optional
     cc = listOf(), // optional
     bcc = listOf(), // optional
-    scheduledAt = "2020-10-15T06:38:00.000+00:00", // optional
-    attachments = listOf() // optional
+    attachments = listOf(), // optional
+    replyToEmail = "email@example.com", // optional
+    replyToName = "<REPLY_TO_NAME>", // optional
+    draft = false, // optional
+    html = false, // optional
+    scheduledAt = "2020-10-15T06:38:00.000+00:00" // optional
 )
 ```

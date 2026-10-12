@@ -41,13 +41,13 @@ data class DedicatedDatabase(
      * Product API that owns this database: tablesdb, documentsdb, vectorsdb, mysql, postgresql, or mongodb.
      */
     @SerializedName("api")
-    val api: String,
+    var api: String?,
 
     /**
      * Database engine: postgresql, mysql, or mongodb. Null until the backing reports one.
      */
     @SerializedName("engine")
-    val engine: String,
+    var engine: String?,
 
     /**
      * Database engine version.
@@ -77,7 +77,7 @@ data class DedicatedDatabase(
      * Database port for connections. Derived from the engine when the backing has not reported one yet.
      */
     @SerializedName("connectionPort")
-    val connectionPort: Long,
+    var connectionPort: Long?,
 
     /**
      * Database username for connections.
@@ -95,7 +95,7 @@ data class DedicatedDatabase(
      * Committed generation of the primary connection credentials. Null until the rotation contract has been initialized.
      */
     @SerializedName("credentialGeneration")
-    val credentialGeneration: Long,
+    var credentialGeneration: Long?,
 
     /**
      * Full database connection string (URI format).
@@ -116,7 +116,7 @@ data class DedicatedDatabase(
     val status: String,
 
     /**
-     * Container status for lifecycle-managed database runtimes: active or inactive.
+     * Container status for lifecycle-managed database runtimes: active, inactive, or failed (a wake was declined because the backing namespace is gone).
      */
     @SerializedName("containerStatus")
     val containerStatus: String,
@@ -162,6 +162,24 @@ data class DedicatedDatabase(
      */
     @SerializedName("storage")
     val storage: Long,
+
+    /**
+     * Storage resize status. Possible values: idle (no resize in flight), resizing (the volume is growing towards storageTargetGb).
+     */
+    @SerializedName("storageStatus")
+    val storageStatus: String,
+
+    /**
+     * Size in GB the volume is growing towards while storageStatus is resizing. 0 when no resize is in flight.
+     */
+    @SerializedName("storageTargetGb")
+    val storageTargetGb: Long,
+
+    /**
+     * Time the in-flight storage resize started, in ISO 8601 format.
+     */
+    @SerializedName("storageResizeStartedAt")
+    var storageResizeStartedAt: String?,
 
     /**
      * Storage class. Currently always 'ssd'; DigitalOcean exposes a single block-storage class.
@@ -242,7 +260,7 @@ data class DedicatedDatabase(
     val storageAutoscalingThresholdPercent: Long,
 
     /**
-     * Maximum storage size in GB for autoscaling. 0 means no limit.
+     * Maximum storage size in GB for autoscaling. Defaults to 3 times the specification's storage. 0 means no limit.
      */
     @SerializedName("storageAutoscalingMaxGb")
     val storageAutoscalingMaxGb: Long,
@@ -308,16 +326,16 @@ data class DedicatedDatabase(
         "\$updatedAt" to updatedAt as Any,
         "projectId" to projectId as Any,
         "name" to name as Any,
-        "api" to api as Any,
-        "engine" to engine as Any,
+        "api" to api as Any?,
+        "engine" to engine as Any?,
         "version" to version as Any,
         "specification" to specification as Any,
         "backend" to backend as Any,
         "hostname" to hostname as Any,
-        "connectionPort" to connectionPort as Any,
+        "connectionPort" to connectionPort as Any?,
         "connectionUser" to connectionUser as Any,
         "connectionPassword" to connectionPassword as Any,
-        "credentialGeneration" to credentialGeneration as Any,
+        "credentialGeneration" to credentialGeneration as Any?,
         "connectionString" to connectionString as Any,
         "ssl" to ssl as Any,
         "status" to status as Any,
@@ -329,6 +347,9 @@ data class DedicatedDatabase(
         "cpu" to cpu as Any,
         "memory" to memory as Any,
         "storage" to storage as Any,
+        "storageStatus" to storageStatus as Any,
+        "storageTargetGb" to storageTargetGb as Any,
+        "storageResizeStartedAt" to storageResizeStartedAt as Any?,
         "storageClass" to storageClass as Any,
         "storageMaxGb" to storageMaxGb as Any,
         "nodePool" to nodePool as Any,
@@ -359,55 +380,58 @@ data class DedicatedDatabase(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabase(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            projectId = map["projectId"] as String,
-            name = map["name"] as String,
-            api = map["api"] as String,
-            engine = map["engine"] as String,
-            version = map["version"] as String,
-            specification = map["specification"] as String,
-            backend = map["backend"] as String,
-            hostname = map["hostname"] as String,
-            connectionPort = (map["connectionPort"] as Number).toLong(),
-            connectionUser = map["connectionUser"] as String,
-            connectionPassword = map["connectionPassword"] as String,
-            credentialGeneration = (map["credentialGeneration"] as Number).toLong(),
-            connectionString = map["connectionString"] as String,
-            ssl = map["ssl"] as Boolean,
-            status = map["status"] as String,
-            containerStatus = map["containerStatus"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            projectId = (if (map.containsKey("projectId")) map["projectId"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            api = map["api"] as? String,
+            engine = map["engine"] as? String,
+            version = (if (map.containsKey("version")) map["version"] else "") as String,
+            specification = (if (map.containsKey("specification")) map["specification"] else "") as String,
+            backend = (if (map.containsKey("backend")) map["backend"] else "") as String,
+            hostname = (if (map.containsKey("hostname")) map["hostname"] else "") as String,
+            connectionPort = (map["connectionPort"] as? Number)?.toLong(),
+            connectionUser = (if (map.containsKey("connectionUser")) map["connectionUser"] else "") as String,
+            connectionPassword = (if (map.containsKey("connectionPassword")) map["connectionPassword"] else "") as String,
+            credentialGeneration = (map["credentialGeneration"] as? Number)?.toLong(),
+            connectionString = (if (map.containsKey("connectionString")) map["connectionString"] else "") as String,
+            ssl = (if (map.containsKey("ssl")) map["ssl"] else false) as Boolean,
+            status = (if (map.containsKey("status")) map["status"] else "provisioning") as String,
+            containerStatus = (if (map.containsKey("containerStatus")) map["containerStatus"] else "") as String,
             lastAccessedAt = map["lastAccessedAt"] as? String,
             idleUntil = map["idleUntil"] as? String,
-            lifecycleState = map["lifecycleState"] as String,
-            idleTimeoutMinutes = (map["idleTimeoutMinutes"] as Number).toLong(),
-            cpu = (map["cpu"] as Number).toLong(),
-            memory = (map["memory"] as Number).toLong(),
-            storage = (map["storage"] as Number).toLong(),
-            storageClass = map["storageClass"] as String,
-            storageMaxGb = (map["storageMaxGb"] as Number).toLong(),
-            nodePool = map["nodePool"] as String,
-            replicas = (map["replicas"] as Number).toLong(),
-            syncMode = map["syncMode"] as String,
-            networkMaxConnections = (map["networkMaxConnections"] as Number).toLong(),
-            networkIdleTimeoutSeconds = (map["networkIdleTimeoutSeconds"] as Number).toLong(),
-            networkIPAllowlist = map["networkIPAllowlist"] as List<String>,
-            backupEnabled = map["backupEnabled"] as Boolean,
-            pitr = map["pitr"] as Boolean,
-            pitrRetentionDays = (map["pitrRetentionDays"] as Number).toLong(),
-            storageAutoscaling = map["storageAutoscaling"] as Boolean,
-            storageAutoscalingThresholdPercent = (map["storageAutoscalingThresholdPercent"] as Number).toLong(),
-            storageAutoscalingMaxGb = (map["storageAutoscalingMaxGb"] as Number).toLong(),
-            maintenanceWindowDay = map["maintenanceWindowDay"] as String,
-            maintenanceWindowHourUtc = (map["maintenanceWindowHourUtc"] as Number).toLong(),
-            metricsEnabled = map["metricsEnabled"] as Boolean,
-            sqlApiEnabled = map["sqlApiEnabled"] as Boolean,
-            sqlApiAllowedStatements = map["sqlApiAllowedStatements"] as List<String>,
-            sqlApiMaxRows = (map["sqlApiMaxRows"] as Number).toLong(),
-            sqlApiMaxBytes = (map["sqlApiMaxBytes"] as Number).toLong(),
-            sqlApiTimeoutSeconds = (map["sqlApiTimeoutSeconds"] as Number).toLong(),
-            error = map["error"] as String,
+            lifecycleState = (if (map.containsKey("lifecycleState")) map["lifecycleState"] else "") as String,
+            idleTimeoutMinutes = ((if (map.containsKey("idleTimeoutMinutes")) map["idleTimeoutMinutes"] else 15) as Number).toLong(),
+            cpu = ((if (map.containsKey("cpu")) map["cpu"] else 500) as Number).toLong(),
+            memory = ((if (map.containsKey("memory")) map["memory"] else 512) as Number).toLong(),
+            storage = ((if (map.containsKey("storage")) map["storage"] else 10) as Number).toLong(),
+            storageStatus = (if (map.containsKey("storageStatus")) map["storageStatus"] else "idle") as String,
+            storageTargetGb = ((if (map.containsKey("storageTargetGb")) map["storageTargetGb"] else 0) as Number).toLong(),
+            storageResizeStartedAt = map["storageResizeStartedAt"] as? String,
+            storageClass = (if (map.containsKey("storageClass")) map["storageClass"] else "ssd") as String,
+            storageMaxGb = ((if (map.containsKey("storageMaxGb")) map["storageMaxGb"] else 0) as Number).toLong(),
+            nodePool = (if (map.containsKey("nodePool")) map["nodePool"] else "") as String,
+            replicas = ((if (map.containsKey("replicas")) map["replicas"] else 0) as Number).toLong(),
+            syncMode = (if (map.containsKey("syncMode")) map["syncMode"] else "") as String,
+            networkMaxConnections = ((if (map.containsKey("networkMaxConnections")) map["networkMaxConnections"] else 100) as Number).toLong(),
+            networkIdleTimeoutSeconds = ((if (map.containsKey("networkIdleTimeoutSeconds")) map["networkIdleTimeoutSeconds"] else 900) as Number).toLong(),
+            networkIPAllowlist = (if (map.containsKey("networkIPAllowlist")) map["networkIPAllowlist"] else listOf<Any?>()) as List<String>,
+            backupEnabled = (if (map.containsKey("backupEnabled")) map["backupEnabled"] else true) as Boolean,
+            pitr = (if (map.containsKey("pitr")) map["pitr"] else true) as Boolean,
+            pitrRetentionDays = ((if (map.containsKey("pitrRetentionDays")) map["pitrRetentionDays"] else 7) as Number).toLong(),
+            storageAutoscaling = (if (map.containsKey("storageAutoscaling")) map["storageAutoscaling"] else true) as Boolean,
+            storageAutoscalingThresholdPercent = ((if (map.containsKey("storageAutoscalingThresholdPercent")) map["storageAutoscalingThresholdPercent"] else 85) as Number).toLong(),
+            storageAutoscalingMaxGb = ((if (map.containsKey("storageAutoscalingMaxGb")) map["storageAutoscalingMaxGb"] else 0) as Number).toLong(),
+            maintenanceWindowDay = (if (map.containsKey("maintenanceWindowDay")) map["maintenanceWindowDay"] else "sun") as String,
+            maintenanceWindowHourUtc = ((if (map.containsKey("maintenanceWindowHourUtc")) map["maintenanceWindowHourUtc"] else 3) as Number).toLong(),
+            metricsEnabled = (if (map.containsKey("metricsEnabled")) map["metricsEnabled"] else false) as Boolean,
+            sqlApiEnabled = (if (map.containsKey("sqlApiEnabled")) map["sqlApiEnabled"] else true) as Boolean,
+            sqlApiAllowedStatements = (if (map.containsKey("sqlApiAllowedStatements")) map["sqlApiAllowedStatements"] else listOf<Any?>("SELECT", "INSERT", "UPDATE", "DELETE")) as List<String>,
+            sqlApiMaxRows = ((if (map.containsKey("sqlApiMaxRows")) map["sqlApiMaxRows"] else 10000) as Number).toLong(),
+            sqlApiMaxBytes = ((if (map.containsKey("sqlApiMaxBytes")) map["sqlApiMaxBytes"] else 10485760) as Number).toLong(),
+            sqlApiTimeoutSeconds = ((if (map.containsKey("sqlApiTimeoutSeconds")) map["sqlApiTimeoutSeconds"] else 30) as Number).toLong(),
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
         )
     }
 }
