@@ -3243,6 +3243,38 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Set the relying party ID passkeys are bound to: the domain of your application. Passkeys work on the project's web platforms on that domain or its subdomains, and on the domain itself for Apple apps. A localhost web platform enables passkeys for local development without a relying party ID. The relying party ID cannot change while users have passkeys, and any change invalidates ceremonies in progress.
+     *
+     * @param rpId Relying party ID: the domain of your application, such as `example.com`. Use `localhost` for local development, or an empty string to unset it.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePasskeyPolicy(
+        rpId: String,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/passkey"
+        val apiParams = mutableMapOf<String, Any?>(
+            "rpId" to rpId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
      *
      * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
