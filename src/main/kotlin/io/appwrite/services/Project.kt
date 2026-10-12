@@ -3614,6 +3614,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "deny-disposable-email" -> io.appwrite.models.PolicyDenyDisposableEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-free-email" -> io.appwrite.models.PolicyDenyFreeEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-corporate-email" -> io.appwrite.models.PolicyDenyCorporateEmail.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "passkey" -> io.appwrite.models.PolicyPasskey.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }

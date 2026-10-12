@@ -16,7 +16,9 @@ enum class ProjectAuthMethodId(val value: String) {
     @SerializedName("jwt")
     JWT("jwt"),
     @SerializedName("phone")
-    PHONE("phone");
+    PHONE("phone"),
+    @SerializedName("passkey")
+    PASSKEY("passkey");
 
     override fun toString() = value
 }
