@@ -1631,6 +1631,170 @@ class Users(client: Client) : Service(client) {
     )
 
     /**
+     * Get the list of verified passkeys registered by a user.
+     *
+     * @param userId User ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter and order on the following attributes: $id, $createdAt, $updatedAt, name, accessedAt
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.PasskeyList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listPasskeys(
+        userId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.PasskeyList {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys"
+            .replace("{userId}", userId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.PasskeyList = {
+            io.appwrite.models.PasskeyList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.PasskeyList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a verified passkey of a user by its unique ID.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @return [io.appwrite.models.Passkey]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getPasskey(
+        userId: String,
+        passkeyId: String,
+    ): io.appwrite.models.Passkey {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Passkey = {
+            io.appwrite.models.Passkey.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Passkey::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Rename a passkey of a user.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @param name Passkey name. Max length: 128 chars.
+     * @return [io.appwrite.models.Passkey]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePasskey(
+        userId: String,
+        passkeyId: String,
+        name: String,
+    ): io.appwrite.models.Passkey {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Passkey = {
+            io.appwrite.models.Passkey.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Passkey::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a passkey from a user, for example when a device is lost. The passkey can no longer be used to sign in.
+     *
+     * @param userId User ID.
+     * @param passkeyId Passkey ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deletePasskey(
+        userId: String,
+        passkeyId: String,
+    ): Any {
+        if (userId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"userId\"")
+        }
+        if (passkeyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"passkeyId\"")
+        }
+        val apiPath = ("/users/{userId}/passkeys/{passkeyId}"
+            .replace("{userId}", userId)
+            .replace("{passkeyId}", passkeyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Update the user password by its unique ID.
      *
      * @param userId User ID.
