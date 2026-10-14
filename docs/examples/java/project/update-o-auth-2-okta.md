@@ -2,6 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
+import io.appwrite.enums.ProjectOAuth2OktaPrompt;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -16,6 +17,7 @@ project.updateOAuth2Okta(
     "example.com", // domain (optional)
     "<AUTHORIZATION_SERVER_ID>", // authorizationServerId (optional)
     false, // enabled (optional)
+    List.of(ProjectOAuth2OktaPrompt.NONE), // prompt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

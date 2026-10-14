@@ -2,6 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
+import io.appwrite.enums.ProjectOAuth2Auth0Prompt;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -15,6 +16,7 @@ project.updateOAuth2Auth0(
     "<CLIENT_SECRET>", // clientSecret (optional)
     "<ENDPOINT>", // endpoint (optional)
     false, // enabled (optional)
+    List.of(ProjectOAuth2Auth0Prompt.NONE), // prompt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

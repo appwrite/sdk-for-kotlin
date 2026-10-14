@@ -2,6 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
+import io.appwrite.enums.ProjectOAuth2ZohoPrompt;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,6 +15,7 @@ project.updateOAuth2Zoho(
     "<CLIENT_ID>", // clientId (optional)
     "<CLIENT_SECRET>", // clientSecret (optional)
     false, // enabled (optional)
+    List.of(ProjectOAuth2ZohoPrompt.CONSENT), // prompt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

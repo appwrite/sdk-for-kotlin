@@ -105,6 +105,8 @@ enum class BuildRuntime(val value: String) {
     DART_3_11("dart-3.11"),
     @SerializedName("dart-3.12")
     DART_3_12("dart-3.12"),
+    @SerializedName("dart-3.13")
+    DART_3_13("dart-3.13"),
     @SerializedName("dotnet-6.0")
     DOTNET_6_0("dotnet-6.0"),
     @SerializedName("dotnet-7.0")
@@ -188,7 +190,9 @@ enum class BuildRuntime(val value: String) {
     @SerializedName("flutter-3.41")
     FLUTTER_3_41("flutter-3.41"),
     @SerializedName("flutter-3.44")
-    FLUTTER_3_44("flutter-3.44");
+    FLUTTER_3_44("flutter-3.44"),
+    @SerializedName("flutter-3.47")
+    FLUTTER_3_47("flutter-3.47");
 
     override fun toString() = value
 }

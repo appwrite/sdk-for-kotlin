@@ -301,6 +301,24 @@ data class DedicatedDatabase(
     @SerializedName("error")
     val error: String,
 
+    /**
+     * Storage resize status. Possible values: idle (no resize in flight), resizing (the volume is growing towards storageTargetGb).
+     */
+    @SerializedName("storageStatus")
+    var storageStatus: String? = null,
+
+    /**
+     * Size in GB the volume is growing towards while storageStatus is resizing. 0 when no resize is in flight.
+     */
+    @SerializedName("storageTargetGb")
+    var storageTargetGb: Long? = null,
+
+    /**
+     * Time the in-flight storage resize started, in ISO 8601 format.
+     */
+    @SerializedName("storageResizeStartedAt")
+    var storageResizeStartedAt: String? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -329,6 +347,9 @@ data class DedicatedDatabase(
         "cpu" to cpu as Any,
         "memory" to memory as Any,
         "storage" to storage as Any,
+        "storageStatus" to storageStatus as Any?,
+        "storageTargetGb" to storageTargetGb as Any?,
+        "storageResizeStartedAt" to storageResizeStartedAt as Any?,
         "storageClass" to storageClass as Any,
         "storageMaxGb" to storageMaxGb as Any,
         "nodePool" to nodePool as Any,
@@ -408,6 +429,9 @@ data class DedicatedDatabase(
             sqlApiMaxBytes = (map["sqlApiMaxBytes"] as Number).toLong(),
             sqlApiTimeoutSeconds = (map["sqlApiTimeoutSeconds"] as Number).toLong(),
             error = map["error"] as String,
+            storageStatus = map["storageStatus"] as? String,
+            storageTargetGb = (map["storageTargetGb"] as? Number)?.toLong(),
+            storageResizeStartedAt = map["storageResizeStartedAt"] as? String,
         )
     }
 }

@@ -812,4 +812,219 @@ class Organization(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
+
+    /**
+     * Get a list of all API keys of a project in your organization.
+     *
+     * @param projectId Project unique ID.
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: expire, accessedAt, name, scopes
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.KeyList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listProjectKeys(
+        projectId: String,
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.KeyList {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
+        val apiPath = ("/organization/projects/{projectId}/keys"
+            .replace("{projectId}", projectId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.KeyList = {
+            io.appwrite.models.KeyList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.KeyList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new ephemeral API key for a project in your organization. It's recommended to have multiple API keys with strict scopes for separate functions within your project.
+     *
+     * You can also create a standard API key if you need a longer-lived key instead.
+     *
+     * @param projectId Project unique ID.
+     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
+     * @param duration Time in seconds before ephemeral key expires. Maximum duration is 3600 seconds.
+     * @return [io.appwrite.models.EphemeralKey]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createEphemeralProjectKey(
+        projectId: String,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
+        duration: Long,
+    ): io.appwrite.models.EphemeralKey {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
+        val apiPath = ("/organization/projects/{projectId}/keys/ephemeral"
+            .replace("{projectId}", projectId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "scopes" to scopes,
+            "duration" to duration,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.EphemeralKey = {
+            io.appwrite.models.EphemeralKey.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.EphemeralKey::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a project key by its unique ID.
+     *
+     * @param projectId Project unique ID.
+     * @param keyId Key ID.
+     * @return [io.appwrite.models.Key]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getProjectKey(
+        projectId: String,
+        keyId: String,
+    ): io.appwrite.models.Key {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
+        val apiPath = ("/organization/projects/{projectId}/keys/{keyId}"
+            .replace("{projectId}", projectId)
+            .replace("{keyId}", keyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Key = {
+            io.appwrite.models.Key.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Key::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a project key by its unique ID. Use this endpoint to update the name, scopes, or expiration time of an API key.
+     *
+     * @param projectId Project unique ID.
+     * @param keyId Key ID.
+     * @param name Key name. Max length: 128 chars.
+     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
+     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
+     * @return [io.appwrite.models.Key]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateProjectKey(
+        projectId: String,
+        keyId: String,
+        name: String,
+        scopes: List<io.appwrite.enums.ProjectKeyScopes>,
+        expire: String? = null,
+    ): io.appwrite.models.Key {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
+        val apiPath = ("/organization/projects/{projectId}/keys/{keyId}"
+            .replace("{projectId}", projectId)
+            .replace("{keyId}", keyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "scopes" to scopes,
+            "expire" to expire,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Key = {
+            io.appwrite.models.Key.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Key::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a project key by its unique ID. Once deleted, the key can no longer be used to authenticate API calls.
+     *
+     * @param projectId Project unique ID.
+     * @param keyId Key ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteProjectKey(
+        projectId: String,
+        keyId: String,
+    ): Any {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
+        val apiPath = ("/organization/projects/{projectId}/keys/{keyId}"
+            .replace("{projectId}", projectId)
+            .replace("{keyId}", keyId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
 }

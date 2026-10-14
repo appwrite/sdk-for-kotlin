@@ -183,6 +183,8 @@ enum class ProjectKeyScopes(val value: String) {
     LOCALE_READ("locale.read"),
     @SerializedName("avatars.read")
     AVATARS_READ("avatars.read"),
+    @SerializedName("avatars.write")
+    AVATARS_WRITE("avatars.write"),
     @SerializedName("health.read")
     HEALTH_READ("health.read"),
     @SerializedName("assistant.read")
@@ -211,6 +213,8 @@ enum class ProjectKeyScopes(val value: String) {
     PRESENCES_READ("presences.read"),
     @SerializedName("presences.write")
     PRESENCES_WRITE("presences.write"),
+    @SerializedName("dedicatedDatabases.execute")
+    DEDICATEDDATABASES_EXECUTE("dedicatedDatabases.execute"),
     @SerializedName("backups.policies.read")
     BACKUPS_POLICIES_READ("backups.policies.read"),
     @SerializedName("backups.policies.write")
@@ -244,7 +248,11 @@ enum class ProjectKeyScopes(val value: String) {
     @SerializedName("oauth2.write")
     OAUTH2_WRITE("oauth2.write"),
     @SerializedName("oauth2.introspect")
-    OAUTH2_INTROSPECT("oauth2.introspect");
+    OAUTH2_INTROSPECT("oauth2.introspect"),
+    @SerializedName("analytics.read")
+    ANALYTICS_READ("analytics.read"),
+    @SerializedName("analytics.write")
+    ANALYTICS_WRITE("analytics.write");
 
     override fun toString() = value
 }

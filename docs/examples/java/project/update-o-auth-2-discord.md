@@ -2,6 +2,7 @@
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.services.Project;
+import io.appwrite.enums.ProjectOAuth2DiscordPrompt;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,6 +15,7 @@ project.updateOAuth2Discord(
     "<CLIENT_ID>", // clientId (optional)
     "<CLIENT_SECRET>", // clientSecret (optional)
     false, // enabled (optional)
+    List.of(ProjectOAuth2DiscordPrompt.NONE), // prompt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

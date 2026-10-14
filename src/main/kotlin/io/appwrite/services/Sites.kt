@@ -156,12 +156,18 @@ class Sites(client: Client) : Service(client) {
     /**
      * Get a list of all frameworks that are currently available on the server instance.
      *
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.FrameworkList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun listFrameworks(): io.appwrite.models.FrameworkList {
+    suspend fun listFrameworks(
+        total: Boolean? = null,
+    ): io.appwrite.models.FrameworkList {
         val apiPath = "/sites/frameworks"
-        val apiParams = mutableMapOf<String, Any?>()
+        val apiParams = mutableMapOf<String, Any?>(
+            "total" to total,
+        )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -183,16 +189,19 @@ class Sites(client: Client) : Service(client) {
      * List allowed site specifications for this instance.
      *
      * @param type Specification type to list. Can be one of: runtimes, builds. Defaults to runtimes.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.SpecificationList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listSpecifications(
         type: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.SpecificationList {
         val apiPath = "/sites/specifications"
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

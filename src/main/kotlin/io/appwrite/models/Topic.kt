@@ -55,6 +55,18 @@ data class Topic(
     @SerializedName("subscribe")
     val subscribe: List<String>,
 
+    /**
+     * MQTT QoS for delivery on this topic. Null lets the subscriber choose their level.
+     */
+    @SerializedName("qos")
+    var qos: Long? = null,
+
+    /**
+     * Message retention in seconds for offline delivery.
+     */
+    @SerializedName("expiry")
+    var expiry: Long? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -65,6 +77,8 @@ data class Topic(
         "smsTotal" to smsTotal as Any,
         "pushTotal" to pushTotal as Any,
         "subscribe" to subscribe as Any,
+        "qos" to qos as Any?,
+        "expiry" to expiry as Any?,
     )
 
     companion object {
@@ -80,6 +94,8 @@ data class Topic(
             smsTotal = (map["smsTotal"] as Number).toLong(),
             pushTotal = (map["pushTotal"] as Number).toLong(),
             subscribe = map["subscribe"] as List<String>,
+            qos = (map["qos"] as? Number)?.toLong(),
+            expiry = (map["expiry"] as? Number)?.toLong(),
         )
     }
 }

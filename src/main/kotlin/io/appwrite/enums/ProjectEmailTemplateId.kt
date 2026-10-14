@@ -16,7 +16,11 @@ enum class ProjectEmailTemplateId(val value: String) {
     @SerializedName("sessionAlert")
     SESSIONALERT("sessionAlert"),
     @SerializedName("otpSession")
-    OTPSESSION("otpSession");
+    OTPSESSION("otpSession"),
+    @SerializedName("otpVerification")
+    OTPVERIFICATION("otpVerification"),
+    @SerializedName("otpRecovery")
+    OTPRECOVERY("otpRecovery");
 
     override fun toString() = value
 }

@@ -64,11 +64,11 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/22.3.1 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/22.4.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "22.3.1",
+            "x-sdk-version" to "22.4.0",
             "x-appwrite-response-format" to "2.0.0",
         )
 
@@ -520,6 +520,7 @@ class Client @JvmOverloads constructor(
      * @param path
      * @param headers
      * @param params
+     * @param method HTTP method the upload endpoint is declared with; resuming by upload ID always uses GET
      *
      * @return [T]
      */
@@ -533,6 +534,7 @@ class Client @JvmOverloads constructor(
         paramName: String,
         idParamName: String? = null,
         onProgress: ((UploadProgress) -> Unit)? = null,
+        method: String = "POST",
     ): T {
         val input = params[paramName] as InputFile
         val size: Long = when (input.sourceType) {
@@ -557,7 +559,7 @@ class Client @JvmOverloads constructor(
                 data
             )
             return call(
-                method = "POST",
+                method = method,
                 path,
                 headers,
                 params,
@@ -628,7 +630,7 @@ class Client @JvmOverloads constructor(
             )
 
             val chunkResult = call(
-                method = "POST",
+                method = method,
                 path,
                 chunkHeaders,
                 chunkParams,

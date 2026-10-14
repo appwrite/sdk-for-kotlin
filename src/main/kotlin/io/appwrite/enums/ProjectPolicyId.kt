@@ -11,6 +11,10 @@ enum class ProjectPolicyId(val value: String) {
     PASSWORD_STRENGTH("password-strength"),
     @SerializedName("password-personal-data")
     PASSWORD_PERSONAL_DATA("password-personal-data"),
+    @SerializedName("password-pwned")
+    PASSWORD_PWNED("password-pwned"),
+    @SerializedName("password-rotation")
+    PASSWORD_ROTATION("password-rotation"),
     @SerializedName("session-alert")
     SESSION_ALERT("session-alert"),
     @SerializedName("session-duration")

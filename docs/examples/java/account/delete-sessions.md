@@ -10,12 +10,16 @@ Client client = new Client()
 
 Account account = new Account(client);
 
-account.deleteSessions(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+account.deleteSessions(
+    false, // current (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
 ```

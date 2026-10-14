@@ -296,6 +296,84 @@ class Avatars(client: Client) : Service(client) {
     }
 
     /**
+     * Update the profile photo of the currently authenticated user. The uploaded image takes priority over every other photo source, including OAuth2 identity photos, Gravatar, and Libravatar. Updating an already customized photo replaces it. The image must be at most 5MB and is sent in a single request.
+     *
+     * @param file Binary image file of at most 5MB. Allowed file types are png, jpg, jpeg, and webp.
+     * @return [io.appwrite.models.Account<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updatePhoto(
+        file: InputFile,
+        nestedType: Class<T>,
+        onProgress: ((UploadProgress) -> Unit)? = null
+    ): io.appwrite.models.Account<T> {
+        val apiPath = "/avatars/photo"
+        val apiParams = mutableMapOf<String, Any?>(
+            "file" to file,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "multipart/form-data",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Account<T> = {
+            io.appwrite.models.Account.from(map = it as Map<String, Any>, nestedType)
+        }
+        val idParamName: String? = null
+        val paramName = "file"
+        return client.chunkedUpload(
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+            paramName = paramName,
+            idParamName = idParamName,
+            onProgress = onProgress,
+            method = "PUT",
+        )
+    }
+
+    /**
+     * Update the profile photo of the currently authenticated user. The uploaded image takes priority over every other photo source, including OAuth2 identity photos, Gravatar, and Libravatar. Updating an already customized photo replaces it. The image must be at most 5MB and is sent in a single request.
+     *
+     * @param file Binary image file of at most 5MB. Allowed file types are png, jpg, jpeg, and webp.
+     * @return [io.appwrite.models.Account<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePhoto(
+        file: InputFile,
+        onProgress: ((UploadProgress) -> Unit)? = null
+    ): io.appwrite.models.Account<Map<String, Any>> = updatePhoto(
+        file,
+        nestedType = classOf(),
+        onProgress = onProgress
+    )
+
+    /**
+     * Delete the profile photo of the currently authenticated user and store the built-in static placeholder in its place. The placeholder is the user's photo from then on, so it takes priority over every other photo source — OAuth2 identity photos, Gravatar, Libravatar, and initials — until a new photo is uploaded with avatars.updatePhoto.
+     *
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deletePhoto(): Any {
+        val apiPath = "/avatars/photo"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * Converts a given plain text to a QR code image. You can use the query parameters to change the size and style of the resulting image.
      *
      *

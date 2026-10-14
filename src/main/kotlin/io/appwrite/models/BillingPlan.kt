@@ -446,6 +446,18 @@ data class BillingPlan(
     @SerializedName("dedicatedDatabases")
     var dedicatedDatabases: BillingPlanDedicatedDatabaseLimits?,
 
+    /**
+     * Maximum environments per project. 0 when the plan does not offer environments.
+     */
+    @SerializedName("environments")
+    var environments: Long? = null,
+
+    /**
+     * ISO country codes eligible for this regional plan. Empty means no restriction.
+     */
+    @SerializedName("eligibleCountries")
+    var eligibleCountries: List<String>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -461,6 +473,7 @@ data class BillingPlan(
         "members" to members as Any?,
         "webhooks" to webhooks as Any,
         "wafRules" to wafRules as Any,
+        "environments" to environments as Any?,
         "projects" to projects as Any,
         "platforms" to platforms as Any,
         "users" to users as Any,
@@ -495,6 +508,7 @@ data class BillingPlan(
         "emailBranding" to emailBranding as Any,
         "requiresPaymentMethod" to requiresPaymentMethod as Any,
         "requiresBillingAddress" to requiresBillingAddress as Any,
+        "eligibleCountries" to eligibleCountries as Any?,
         "isAvailable" to isAvailable as Any,
         "selfService" to selfService as Any,
         "premiumSupport" to premiumSupport as Any,
@@ -562,6 +576,7 @@ data class BillingPlan(
             topics = (map["topics"] as Number).toLong(),
             authPhone = (map["authPhone"] as Number).toLong(),
             domains = (map["domains"] as Number).toLong(),
+            environments = (map["environments"] as? Number)?.toLong(),
             activityLogs = (map["activityLogs"] as? Number)?.toLong(),
             usageLogs = (map["usageLogs"] as Number).toLong(),
             usageLogsIntervals = map["usageLogsIntervals"] as? List<String>,
@@ -588,6 +603,7 @@ data class BillingPlan(
             supportsFreeEmailValidation = map["supportsFreeEmailValidation"] as Boolean,
             supportsCorporateEmailValidation = map["supportsCorporateEmailValidation"] as Boolean,
             supportsProjectSpecificRoles = map["supportsProjectSpecificRoles"] as Boolean,
+            eligibleCountries = map["eligibleCountries"] as? List<String>,
             backupsEnabled = map["backupsEnabled"] as? Boolean,
             usagePerProject = map["usagePerProject"] as Boolean,
             supportedAddons = BillingPlanSupportedAddons.from(map = map["supportedAddons"] as Map<String, Any>),

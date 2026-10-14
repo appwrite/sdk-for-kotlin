@@ -10,5 +10,7 @@ val client = Client()
 
 val functions = Functions(client)
 
-val response = functions.listRuntimes()
+val response = functions.listRuntimes(
+    total = false // optional
+)
 ```

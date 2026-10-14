@@ -16,6 +16,8 @@ project.updateOAuth2Google(
     "<CLIENT_SECRET>", // clientSecret (optional)
     List.of(ProjectOAuth2GooglePrompt.NONE), // prompt (optional)
     false, // enabled (optional)
+    List.of(), // nativeClientIds (optional)
+    false, // nativeEnabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

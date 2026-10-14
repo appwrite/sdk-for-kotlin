@@ -23,6 +23,8 @@ messaging.createEmail(
     false, // draft (optional)
     false, // html (optional)
     "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
+    "email@example.com", // replyToEmail (optional)
+    "<REPLY_TO_NAME>", // replyToName (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

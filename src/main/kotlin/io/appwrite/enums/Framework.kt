@@ -27,6 +27,8 @@ enum class Framework(val value: String) {
     LYNX("lynx"),
     @SerializedName("flutter")
     FLUTTER("flutter"),
+    @SerializedName("jaspr")
+    JASPR("jaspr"),
     @SerializedName("react-native")
     REACT_NATIVE("react-native"),
     @SerializedName("vite")

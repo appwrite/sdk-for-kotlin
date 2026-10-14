@@ -31,12 +31,19 @@ data class OAuth2Github(
     @SerializedName("clientSecret")
     val clientSecret: String,
 
+    /**
+     * GitHub OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    var prompt: List<io.appwrite.enums.OAuth2GithubPrompt>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any?,
     )
 
     companion object {
@@ -48,6 +55,7 @@ data class OAuth2Github(
             enabled = map["enabled"] as Boolean,
             clientId = map["clientId"] as String,
             clientSecret = map["clientSecret"] as String,
+            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2GithubPrompt>,
         )
     }
 }

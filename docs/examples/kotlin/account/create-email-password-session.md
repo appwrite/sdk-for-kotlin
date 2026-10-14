@@ -12,6 +12,7 @@ val account = Account(client)
 
 val response = account.createEmailPasswordSession(
     email = "email@example.com",
-    password = "password"
+    password = "password",
+    duration = 60 // optional
 )
 ```

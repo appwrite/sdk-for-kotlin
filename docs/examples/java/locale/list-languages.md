@@ -10,12 +10,16 @@ Client client = new Client()
 
 Locale locale = new Locale(client);
 
-locale.listLanguages(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+locale.listLanguages(
+    false, // total (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
 ```

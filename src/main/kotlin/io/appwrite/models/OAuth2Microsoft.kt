@@ -37,12 +37,19 @@ data class OAuth2Microsoft(
     @SerializedName("tenant")
     val tenant: String,
 
+    /**
+     * Microsoft OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    var prompt: List<io.appwrite.enums.OAuth2MicrosoftPrompt>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "applicationId" to applicationId as Any,
         "applicationSecret" to applicationSecret as Any,
+        "prompt" to prompt as Any?,
         "tenant" to tenant as Any,
     )
 
@@ -56,6 +63,7 @@ data class OAuth2Microsoft(
             applicationId = map["applicationId"] as String,
             applicationSecret = map["applicationSecret"] as String,
             tenant = map["tenant"] as String,
+            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2MicrosoftPrompt>,
         )
     }
 }

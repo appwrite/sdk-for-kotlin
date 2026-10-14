@@ -37,6 +37,18 @@ data class OAuth2Google(
     @SerializedName("prompt")
     val prompt: List<io.appwrite.enums.OAuth2GooglePrompt>,
 
+    /**
+     * Native Google sign-in is active and can be used to create sessions from an ID token. Independent of enabled, which only controls the browser-based flow.
+     */
+    @SerializedName("nativeEnabled")
+    var nativeEnabled: Boolean? = null,
+
+    /**
+     * Additional OAuth2 client IDs accepted as ID token audiences for native sign-in, next to the client ID.
+     */
+    @SerializedName("nativeClientIds")
+    var nativeClientIds: List<String>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -44,6 +56,8 @@ data class OAuth2Google(
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
         "prompt" to prompt as Any,
+        "nativeEnabled" to nativeEnabled as Any?,
+        "nativeClientIds" to nativeClientIds as Any?,
     )
 
     companion object {
@@ -56,6 +70,8 @@ data class OAuth2Google(
             clientId = map["clientId"] as String,
             clientSecret = map["clientSecret"] as String,
             prompt = map["prompt"] as List<io.appwrite.enums.OAuth2GooglePrompt>,
+            nativeEnabled = map["nativeEnabled"] as? Boolean,
+            nativeClientIds = map["nativeClientIds"] as? List<String>,
         )
     }
 }

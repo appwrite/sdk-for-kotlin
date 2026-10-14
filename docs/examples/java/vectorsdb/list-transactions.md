@@ -12,6 +12,7 @@ VectorsDB vectorsDB = new VectorsDB(client);
 
 vectorsDB.listTransactions(
     List.of(), // queries (optional)
+    false, // total (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

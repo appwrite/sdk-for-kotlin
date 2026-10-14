@@ -13,6 +13,7 @@ Account account = new Account(client);
 account.createEmailPasswordSession(
     "email@example.com", // email
     "password", // password
+    60L, // duration (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
