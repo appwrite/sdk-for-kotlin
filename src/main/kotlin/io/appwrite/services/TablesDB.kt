@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The TablesDB service allows you to create structured tables of columns, query and filter lists of rows**/
+ * The TablesDB service allows you to create structured tables of columns, query and filter lists of rows
+ */
 class TablesDB(client: Client) : Service(client) {
     /**
      * Get a list of all databases from the current Appwrite project. You can use the search parameter to filter your results.
@@ -99,7 +100,7 @@ class TablesDB(client: Client) : Service(client) {
     }
 
     /**
-     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, pricing, and whether it is enabled for the organization.
+     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, its own prices and overage rates, and whether it is enabled for the organization.
      *
      * @return [io.appwrite.models.DedicatedDatabaseSpecificationList]
      */
@@ -202,6 +203,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun getTransaction(
         transactionId: String,
     ): io.appwrite.models.Transaction {
+        if (transactionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"transactionId\"")
+        }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
@@ -238,6 +242,9 @@ class TablesDB(client: Client) : Service(client) {
         commit: Boolean? = null,
         rollback: Boolean? = null,
     ): io.appwrite.models.Transaction {
+        if (transactionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"transactionId\"")
+        }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
@@ -273,6 +280,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun deleteTransaction(
         transactionId: String,
     ): Any {
+        if (transactionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"transactionId\"")
+        }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
             .replace("{transactionId}", transactionId)
         )
@@ -280,6 +290,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -303,6 +314,9 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String,
         operations: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Transaction {
+        if (transactionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"transactionId\"")
+        }
         val apiPath = ("/tablesdb/transactions/{transactionId}/operations"
             .replace("{transactionId}", transactionId)
         )
@@ -337,6 +351,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun get(
         databaseId: String,
     ): io.appwrite.models.Database {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -379,6 +396,9 @@ class TablesDB(client: Client) : Service(client) {
         replicas: Long? = null,
         syncMode: String? = null,
     ): io.appwrite.models.Database {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -417,6 +437,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun delete(
         databaseId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -424,6 +447,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -447,6 +471,9 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         targetReplicaId: String? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/failovers"
             .replace("{databaseId}", databaseId)
         )
@@ -481,6 +508,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun listMigrations(
         databaseId: String,
     ): io.appwrite.models.DatabaseMigrationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
@@ -517,6 +547,9 @@ class TablesDB(client: Client) : Service(client) {
         specification: String,
         autoCutover: Boolean? = null,
     ): io.appwrite.models.DatabaseMigration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
@@ -554,6 +587,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         migrationId: String,
     ): io.appwrite.models.DatabaseMigration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (migrationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"migrationId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
@@ -588,6 +627,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         migrationId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (migrationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"migrationId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
@@ -619,6 +664,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         migrationId: String,
     ): io.appwrite.models.DatabaseMigration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (migrationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"migrationId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}/cutovers"
             .replace("{databaseId}", databaseId)
             .replace("{migrationId}", migrationId)
@@ -659,6 +710,9 @@ class TablesDB(client: Client) : Service(client) {
         limit: Long? = null,
         offset: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseOperationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/operations"
             .replace("{databaseId}", databaseId)
         )
@@ -694,6 +748,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun getReplicas(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseReplicas {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/replicas"
             .replace("{databaseId}", databaseId)
         )
@@ -725,6 +782,9 @@ class TablesDB(client: Client) : Service(client) {
     suspend fun getStatus(
         databaseId: String,
     ): io.appwrite.models.DatabaseStatus {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/status"
             .replace("{databaseId}", databaseId)
         )
@@ -763,6 +823,9 @@ class TablesDB(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.TableList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables"
             .replace("{databaseId}", databaseId)
         )
@@ -798,7 +861,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
      * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
-     * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
+     * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial, trigram), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
      * @return [io.appwrite.models.Table]
      */
     @JvmOverloads
@@ -813,6 +876,9 @@ class TablesDB(client: Client) : Service(client) {
         columns: List<Map<String, Any?>>? = null,
         indexes: List<Map<String, Any?>>? = null,
     ): io.appwrite.models.Table {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables"
             .replace("{databaseId}", databaseId)
         )
@@ -855,6 +921,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
     ): io.appwrite.models.Table {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -900,6 +972,12 @@ class TablesDB(client: Client) : Service(client) {
         enabled: Boolean? = null,
         purge: Boolean? = null,
     ): io.appwrite.models.Table {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -941,6 +1019,12 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         tableId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -949,6 +1033,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -976,6 +1061,12 @@ class TablesDB(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ColumnList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1027,6 +1118,12 @@ class TablesDB(client: Client) : Service(client) {
         default: Long? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnBigint {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/bigint"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1083,6 +1180,15 @@ class TablesDB(client: Client) : Service(client) {
         max: Long? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnBigint {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/bigint/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1135,6 +1241,12 @@ class TablesDB(client: Client) : Service(client) {
         default: Boolean? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnBoolean {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/boolean"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1184,6 +1296,15 @@ class TablesDB(client: Client) : Service(client) {
         default: Boolean? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnBoolean {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/boolean/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1233,6 +1354,12 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnDatetime {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/datetime"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1282,6 +1409,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnDatetime {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/datetime/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1332,6 +1468,12 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnEmail {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/email"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1382,6 +1524,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnEmail {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/email/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1433,6 +1584,12 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnEnum {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/enum"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1486,6 +1643,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnEnum {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/enum/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1541,6 +1707,12 @@ class TablesDB(client: Client) : Service(client) {
         default: Double? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnFloat {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/float"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1597,6 +1769,15 @@ class TablesDB(client: Client) : Service(client) {
         max: Double? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnFloat {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/float/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1653,6 +1834,12 @@ class TablesDB(client: Client) : Service(client) {
         default: Long? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnInteger {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/integer"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1709,6 +1896,15 @@ class TablesDB(client: Client) : Service(client) {
         max: Long? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnInteger {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/integer/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1761,6 +1957,12 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnIp {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/ip"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1811,6 +2013,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnIp {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/ip/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1858,6 +2069,12 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
     ): io.appwrite.models.ColumnLine {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/line"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1906,6 +2123,15 @@ class TablesDB(client: Client) : Service(client) {
         default: List<List<Any>>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnLine {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/line/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -1958,6 +2184,12 @@ class TablesDB(client: Client) : Service(client) {
         array: Boolean? = null,
         encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnLongtext {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/longtext"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2009,6 +2241,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnLongtext {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/longtext/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2061,6 +2302,12 @@ class TablesDB(client: Client) : Service(client) {
         array: Boolean? = null,
         encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnMediumtext {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2112,6 +2359,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnMediumtext {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2159,6 +2415,12 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<Double>? = null,
     ): io.appwrite.models.ColumnPoint {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/point"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2207,6 +2469,15 @@ class TablesDB(client: Client) : Service(client) {
         default: List<Double>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnPoint {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/point/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2254,6 +2525,12 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
     ): io.appwrite.models.ColumnPolygon {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/polygon"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2302,6 +2579,15 @@ class TablesDB(client: Client) : Service(client) {
         default: List<List<Any>>? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnPolygon {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/polygon/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2356,6 +2642,12 @@ class TablesDB(client: Client) : Service(client) {
         twoWayKey: String? = null,
         onDelete: io.appwrite.enums.RelationMutate? = null,
     ): io.appwrite.models.ColumnRelationship {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/relationship"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2378,6 +2670,62 @@ class TablesDB(client: Client) : Service(client) {
         }
         return client.call(
             "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ColumnRelationship::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
+     *
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID.
+     * @param key Column Key.
+     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
+     * @param newKey New Column Key.
+     * @return [io.appwrite.models.ColumnRelationship]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateRelationshipColumn(
+        databaseId: String,
+        tableId: String,
+        key: String,
+        onDelete: io.appwrite.enums.RelationMutate? = null,
+        newKey: String? = null,
+    ): io.appwrite.models.ColumnRelationship {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
+        val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/relationship/{key}"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+            .replace("{key}", key)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "onDelete" to onDelete,
+            "newKey" to newKey,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ColumnRelationship = {
+            io.appwrite.models.ColumnRelationship.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
@@ -2416,6 +2764,12 @@ class TablesDB(client: Client) : Service(client) {
         array: Boolean? = null,
         encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnString {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/string"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2474,6 +2828,15 @@ class TablesDB(client: Client) : Service(client) {
         size: Long? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnString {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/string/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2527,6 +2890,12 @@ class TablesDB(client: Client) : Service(client) {
         array: Boolean? = null,
         encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnText {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/text"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2578,6 +2947,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnText {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/text/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2628,6 +3006,12 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
     ): io.appwrite.models.ColumnUrl {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/url"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2678,6 +3062,15 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnUrl {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/url/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2732,6 +3125,12 @@ class TablesDB(client: Client) : Service(client) {
         array: Boolean? = null,
         encrypt: Boolean? = null,
     ): io.appwrite.models.ColumnVarchar {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/varchar"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2786,6 +3185,15 @@ class TablesDB(client: Client) : Service(client) {
         size: Long? = null,
         newKey: String? = null,
     ): io.appwrite.models.ColumnVarchar {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/varchar/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2829,6 +3237,15 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2848,10 +3265,18 @@ class TablesDB(client: Client) : Service(client) {
                 responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "url" -> io.appwrite.models.ColumnUrl.from(map = responseMap)
                 responseMap["type"]?.toString() == "string" && responseMap["format"]?.toString() == "ip" -> io.appwrite.models.ColumnIp.from(map = responseMap)
                 responseMap["type"]?.toString() == "boolean" -> io.appwrite.models.ColumnBoolean.from(map = responseMap)
+                responseMap["type"]?.toString() == "bigint" -> io.appwrite.models.ColumnBigint.from(map = responseMap)
                 responseMap["type"]?.toString() == "integer" -> io.appwrite.models.ColumnInteger.from(map = responseMap)
                 responseMap["type"]?.toString() == "double" -> io.appwrite.models.ColumnFloat.from(map = responseMap)
                 responseMap["type"]?.toString() == "datetime" -> io.appwrite.models.ColumnDatetime.from(map = responseMap)
                 responseMap["type"]?.toString() == "relationship" -> io.appwrite.models.ColumnRelationship.from(map = responseMap)
+                responseMap["type"]?.toString() == "point" -> io.appwrite.models.ColumnPoint.from(map = responseMap)
+                responseMap["type"]?.toString() == "linestring" -> io.appwrite.models.ColumnLine.from(map = responseMap)
+                responseMap["type"]?.toString() == "polygon" -> io.appwrite.models.ColumnPolygon.from(map = responseMap)
+                responseMap["type"]?.toString() == "varchar" -> io.appwrite.models.ColumnVarchar.from(map = responseMap)
+                responseMap["type"]?.toString() == "text" -> io.appwrite.models.ColumnText.from(map = responseMap)
+                responseMap["type"]?.toString() == "mediumtext" -> io.appwrite.models.ColumnMediumtext.from(map = responseMap)
+                responseMap["type"]?.toString() == "longtext" -> io.appwrite.models.ColumnLongtext.from(map = responseMap)
                 responseMap["type"]?.toString() == "string" -> io.appwrite.models.ColumnString.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
@@ -2880,6 +3305,15 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2889,6 +3323,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -2896,53 +3331,6 @@ class TablesDB(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * Update relationship column. [Learn more about relationship columns](https://appwrite.io/docs/databases-relationships#relationship-columns).
-     *
-     *
-     * @param databaseId Database ID.
-     * @param tableId Table ID.
-     * @param key Column Key.
-     * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
-     * @param newKey New Column Key.
-     * @return [io.appwrite.models.ColumnRelationship]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun updateRelationshipColumn(
-        databaseId: String,
-        tableId: String,
-        key: String,
-        onDelete: io.appwrite.enums.RelationMutate? = null,
-        newKey: String? = null,
-    ): io.appwrite.models.ColumnRelationship {
-        val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/{key}/relationship"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
-        )
-        val apiParams = mutableMapOf<String, Any?>(
-            "onDelete" to onDelete,
-            "newKey" to newKey,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.ColumnRelationship = {
-            io.appwrite.models.ColumnRelationship.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.ColumnRelationship::class.java,
-            converter,
         )
     }
 
@@ -2963,6 +3351,12 @@ class TablesDB(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ColumnIndexList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -2990,7 +3384,7 @@ class TablesDB(client: Client) : Service(client) {
 
     /**
      * Creates an index on the columns listed. Your index should include all the columns you will query in a single request.
-     * Type can be `key`, `fulltext`, or `unique`.
+     * Type can be `key`, `fulltext`, `unique`, `spatial`, or `trigram`. `trigram` is only available on PostgreSQL and lets `contains`, `startsWith`, and `endsWith` queries on string columns use an index.
      *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the Database service [server integration](https://appwrite.io/docs/references/cloud/server-dart/tablesDB#createTable).
@@ -3012,6 +3406,12 @@ class TablesDB(client: Client) : Service(client) {
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
     ): io.appwrite.models.ColumnIndex {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3055,6 +3455,15 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
     ): io.appwrite.models.ColumnIndex {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3092,6 +3501,15 @@ class TablesDB(client: Client) : Service(client) {
         tableId: String,
         key: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (key.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"key\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3101,6 +3519,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -3133,6 +3552,12 @@ class TablesDB(client: Client) : Service(client) {
         ttl: Long? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3212,6 +3637,12 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3288,6 +3719,12 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3357,6 +3794,12 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3428,6 +3871,12 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3500,6 +3949,12 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3570,6 +4025,15 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3645,6 +4109,15 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3725,6 +4198,15 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3800,6 +4282,15 @@ class TablesDB(client: Client) : Service(client) {
         rowId: String,
         transactionId: String? = null,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3811,6 +4302,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -3845,6 +4337,18 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
+        if (column.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"column\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/decrement"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)
@@ -3931,6 +4435,18 @@ class TablesDB(client: Client) : Service(client) {
         transactionId: String? = null,
         nestedType: Class<T>,
     ): io.appwrite.models.Row<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        if (rowId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"rowId\"")
+        }
+        if (column.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"column\"")
+        }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/increment"
             .replace("{databaseId}", databaseId)
             .replace("{tableId}", tableId)

@@ -14,7 +14,7 @@ webhooks.create(
     "<WEBHOOK_ID>", // webhookId
     "https://example.com/webhook", // url
     "<NAME>", // name
-    List.of(), // events
+    List.of("users.*.create"), // events
     false, // enabled (optional)
     false, // tls (optional)
     "<AUTH_USERNAME>", // authUsername (optional)

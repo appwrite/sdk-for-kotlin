@@ -44,12 +44,6 @@ data class Project(
     val region: String,
 
     /**
-     * Deprecated since 1.9.5: List of dev keys.
-     */
-    @SerializedName("devKeys")
-    val devKeys: List<DevKey>,
-
-    /**
      * Status for custom SMTP
      */
     @SerializedName("smtpEnabled")
@@ -176,10 +170,28 @@ data class Project(
     var wafEnabled: Boolean?,
 
     /**
+     * ID of the project this environment belongs to. Null when the project is not an environment.
+     */
+    @SerializedName("parentId")
+    var parentId: String?,
+
+    /**
      * Billing limits reached
      */
     @SerializedName("billingLimits")
     var billingLimits: BillingLimits?,
+
+    /**
+     * First time the project received a non-console API request. Empty until the project is used.
+     */
+    @SerializedName("firstAccessedAt")
+    var firstAccessedAt: String?,
+
+    /**
+     * Last time the project was accessed through the MCP server. Empty if it was never accessed via MCP.
+     */
+    @SerializedName("mcpAccessedAt")
+    var mcpAccessedAt: String?,
 
     /**
      * OAuth2 server status
@@ -283,24 +295,6 @@ data class Project(
     @SerializedName("oAuth2ServerDiscoveryUrl")
     var oAuth2ServerDiscoveryUrl: String?,
 
-    /**
-     * ID of the project this environment belongs to. Null when the project is not an environment.
-     */
-    @SerializedName("parentId")
-    var parentId: String? = null,
-
-    /**
-     * First time the project received a non-console API request. Empty until the project is used.
-     */
-    @SerializedName("firstAccessedAt")
-    var firstAccessedAt: String? = null,
-
-    /**
-     * Last time the project was accessed through the MCP server. Empty if it was never accessed via MCP.
-     */
-    @SerializedName("mcpAccessedAt")
-    var mcpAccessedAt: String? = null,
-
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -309,7 +303,6 @@ data class Project(
         "name" to name as Any,
         "teamId" to teamId as Any,
         "region" to region as Any,
-        "devKeys" to devKeys.map { it.toMap() } as Any,
         "smtpEnabled" to smtpEnabled as Any,
         "smtpSenderName" to smtpSenderName as Any,
         "smtpSenderEmail" to smtpSenderEmail as Any,
@@ -359,33 +352,32 @@ data class Project(
         fun from(
             map: Map<String, Any>,
         ) = Project(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            teamId = map["teamId"] as String,
-            region = map["region"] as String,
-            devKeys = (map["devKeys"] as List<Map<String, Any>>).map { DevKey.from(map = it) },
-            smtpEnabled = map["smtpEnabled"] as Boolean,
-            smtpSenderName = map["smtpSenderName"] as String,
-            smtpSenderEmail = map["smtpSenderEmail"] as String,
-            smtpReplyToName = map["smtpReplyToName"] as String,
-            smtpReplyToEmail = map["smtpReplyToEmail"] as String,
-            smtpHost = map["smtpHost"] as String,
-            smtpPort = (map["smtpPort"] as Number).toLong(),
-            smtpUsername = map["smtpUsername"] as String,
-            smtpPassword = map["smtpPassword"] as String,
-            smtpSecure = map["smtpSecure"] as String,
-            pingCount = (map["pingCount"] as Number).toLong(),
-            pingedAt = map["pingedAt"] as String,
-            labels = map["labels"] as List<String>,
-            status = map["status"] as String,
-            onboarding = map["onboarding"] as Map<String, Any?>,
-            authMethods = (map["authMethods"] as List<Map<String, Any>>).map { ProjectAuthMethod.from(map = it) },
-            services = (map["services"] as List<Map<String, Any>>).map { ProjectService.from(map = it) },
-            protocols = (map["protocols"] as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
-            blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
-            consoleAccessedAt = map["consoleAccessedAt"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            teamId = (if (map.containsKey("teamId")) map["teamId"] else "") as String,
+            region = (if (map.containsKey("region")) map["region"] else "fra") as String,
+            smtpEnabled = (if (map.containsKey("smtpEnabled")) map["smtpEnabled"] else false) as Boolean,
+            smtpSenderName = (if (map.containsKey("smtpSenderName")) map["smtpSenderName"] else "") as String,
+            smtpSenderEmail = (if (map.containsKey("smtpSenderEmail")) map["smtpSenderEmail"] else "") as String,
+            smtpReplyToName = (if (map.containsKey("smtpReplyToName")) map["smtpReplyToName"] else "") as String,
+            smtpReplyToEmail = (if (map.containsKey("smtpReplyToEmail")) map["smtpReplyToEmail"] else "") as String,
+            smtpHost = (if (map.containsKey("smtpHost")) map["smtpHost"] else "") as String,
+            smtpPort = ((if (map.containsKey("smtpPort")) map["smtpPort"] else 0) as Number).toLong(),
+            smtpUsername = (if (map.containsKey("smtpUsername")) map["smtpUsername"] else "") as String,
+            smtpPassword = (if (map.containsKey("smtpPassword")) map["smtpPassword"] else "") as String,
+            smtpSecure = (if (map.containsKey("smtpSecure")) map["smtpSecure"] else "") as String,
+            pingCount = ((if (map.containsKey("pingCount")) map["pingCount"] else 0) as Number).toLong(),
+            pingedAt = (if (map.containsKey("pingedAt")) map["pingedAt"] else "") as String,
+            labels = (if (map.containsKey("labels")) map["labels"] else listOf<Any?>()) as List<String>,
+            status = (if (map.containsKey("status")) map["status"] else "active") as String,
+            onboarding = (if (map.containsKey("onboarding")) map["onboarding"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            authMethods = ((if (map.containsKey("authMethods")) map["authMethods"] else listOf<Any?>()) as List<Map<String, Any>>).map { ProjectAuthMethod.from(map = it) },
+            services = ((if (map.containsKey("services")) map["services"] else listOf<Any?>()) as List<Map<String, Any>>).map { ProjectService.from(map = it) },
+            protocols = ((if (map.containsKey("protocols")) map["protocols"] else listOf<Any?>()) as List<Map<String, Any>>).map { ProjectProtocol.from(map = it) },
+            blocks = ((if (map.containsKey("blocks")) map["blocks"] else listOf<Any?>()) as List<Map<String, Any>>).map { Block.from(map = it) },
+            consoleAccessedAt = (if (map.containsKey("consoleAccessedAt")) map["consoleAccessedAt"] else "") as String,
             wafEnabled = map["wafEnabled"] as? Boolean,
             parentId = map["parentId"] as? String,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },

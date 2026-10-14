@@ -15,7 +15,7 @@ vectorsDB.create(
     "<NAME>", // name
     false, // enabled (optional)
     "serverless", // specification (optional)
-    0, // replicas (optional)
+    0L, // replicas (optional)
     "async", // syncMode (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

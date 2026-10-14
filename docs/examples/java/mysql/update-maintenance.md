@@ -13,7 +13,7 @@ Mysql mysql = new Mysql(client);
 mysql.updateMaintenance(
     "<DATABASE_ID>", // databaseId
     "sun", // day
-    0, // hourUtc
+    0L, // hourUtc
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

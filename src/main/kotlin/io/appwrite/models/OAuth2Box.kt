@@ -44,10 +44,10 @@ data class OAuth2Box(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Box(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            clientId = map["clientId"] as String,
-            clientSecret = map["clientSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
+            clientSecret = (if (map.containsKey("clientSecret")) map["clientSecret"] else "") as String,
         )
     }
 }

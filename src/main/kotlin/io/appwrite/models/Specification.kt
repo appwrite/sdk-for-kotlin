@@ -44,10 +44,10 @@ data class Specification(
         fun from(
             map: Map<String, Any>,
         ) = Specification(
-            memory = (map["memory"] as Number).toLong(),
-            cpus = (map["cpus"] as Number).toDouble(),
-            enabled = map["enabled"] as Boolean,
-            slug = map["slug"] as String,
+            memory = ((if (map.containsKey("memory")) map["memory"] else 0) as Number).toLong(),
+            cpus = ((if (map.containsKey("cpus")) map["cpus"] else 0.0) as Number).toDouble(),
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            slug = (if (map.containsKey("slug")) map["slug"] else "") as String,
         )
     }
 }

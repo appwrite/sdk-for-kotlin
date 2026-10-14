@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Tokens service allows you to create and manage resource tokens for secure file access.**/
+ * The Tokens service allows you to create and manage resource tokens for secure file access.
+ */
 class Tokens(client: Client) : Service(client) {
     /**
      * List all the tokens created for a specific file or bucket. You can use the query params to filter your results.
@@ -28,6 +29,12 @@ class Tokens(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ResourceTokenList {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -68,6 +75,12 @@ class Tokens(client: Client) : Service(client) {
         fileId: String,
         expire: String? = null,
     ): io.appwrite.models.ResourceToken {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -103,6 +116,9 @@ class Tokens(client: Client) : Service(client) {
     suspend fun get(
         tokenId: String,
     ): io.appwrite.models.ResourceToken {
+        if (tokenId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tokenId\"")
+        }
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
@@ -137,6 +153,9 @@ class Tokens(client: Client) : Service(client) {
         tokenId: String,
         expire: String? = null,
     ): io.appwrite.models.ResourceToken {
+        if (tokenId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tokenId\"")
+        }
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
@@ -171,6 +190,9 @@ class Tokens(client: Client) : Service(client) {
     suspend fun delete(
         tokenId: String,
     ): Any {
+        if (tokenId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tokenId\"")
+        }
         val apiPath = ("/tokens/{tokenId}"
             .replace("{tokenId}", tokenId)
         )
@@ -178,6 +200,7 @@ class Tokens(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

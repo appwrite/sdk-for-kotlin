@@ -44,10 +44,10 @@ data class OAuth2Notion(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Notion(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            oauthClientId = map["oauthClientId"] as String,
-            oauthClientSecret = map["oauthClientSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            oauthClientId = (if (map.containsKey("oauthClientId")) map["oauthClientId"] else "") as String,
+            oauthClientSecret = (if (map.containsKey("oauthClientSecret")) map["oauthClientSecret"] else "") as String,
         )
     }
 }

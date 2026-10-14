@@ -13,7 +13,7 @@ Backups backups = new Backups(client);
 backups.updatePolicy(
     "<POLICY_ID>", // policyId
     "<NAME>", // name (optional)
-    1, // retention (optional)
+    1L, // retention (optional)
     "", // schedule (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {

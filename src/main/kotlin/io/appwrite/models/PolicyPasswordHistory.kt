@@ -30,8 +30,8 @@ data class PolicyPasswordHistory(
         fun from(
             map: Map<String, Any>,
         ) = PolicyPasswordHistory(
-            id = map["\$id"] as String,
-            total = (map["total"] as Number).toLong(),
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
         )
     }
 }

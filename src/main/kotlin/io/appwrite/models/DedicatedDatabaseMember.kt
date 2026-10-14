@@ -51,9 +51,9 @@ data class DedicatedDatabaseMember(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseMember(
-            id = map["\$id"] as String,
-            role = map["role"] as String,
-            status = map["status"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            role = (if (map.containsKey("role")) map["role"] else "unknown") as String,
+            status = (if (map.containsKey("status")) map["status"] else "") as String,
             replicating = map["replicating"] as? Boolean,
             lagSeconds = (map["lagSeconds"] as? Number)?.toDouble(),
         )

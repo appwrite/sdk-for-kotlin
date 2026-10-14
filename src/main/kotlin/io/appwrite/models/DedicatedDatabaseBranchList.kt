@@ -30,8 +30,8 @@ data class DedicatedDatabaseBranchList(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseBranchList(
-            total = (map["total"] as Number).toLong(),
-            branches = (map["branches"] as List<Map<String, Any>>).map { DedicatedDatabaseBranch.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            branches = ((if (map.containsKey("branches")) map["branches"] else listOf<Any?>()) as List<Map<String, Any>>).map { DedicatedDatabaseBranch.from(map = it) },
         )
     }
 }

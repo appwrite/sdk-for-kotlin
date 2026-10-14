@@ -79,15 +79,15 @@ data class EphemeralKey(
         fun from(
             map: Map<String, Any>,
         ) = EphemeralKey(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            expire = map["expire"] as String,
-            scopes = map["scopes"] as List<String>,
-            secret = map["secret"] as String,
-            accessedAt = map["accessedAt"] as String,
-            sdks = map["sdks"] as List<String>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            expire = (if (map.containsKey("expire")) map["expire"] else "") as String,
+            scopes = (if (map.containsKey("scopes")) map["scopes"] else listOf<Any?>()) as List<String>,
+            secret = (if (map.containsKey("secret")) map["secret"] else "") as String,
+            accessedAt = (if (map.containsKey("accessedAt")) map["accessedAt"] else "") as String,
+            sdks = (if (map.containsKey("sdks")) map["sdks"] else listOf<Any?>()) as List<String>,
         )
     }
 }

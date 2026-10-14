@@ -16,7 +16,7 @@ vectorsDB.createCollection(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
     "<NAME>", // name
-    1, // dimension
+    4L, // dimension
     List.of(Permission.read(Role.any())), // permissions (optional)
     false, // documentSecurity (optional)
     false, // enabled (optional)

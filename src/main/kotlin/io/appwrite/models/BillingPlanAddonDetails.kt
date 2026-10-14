@@ -72,14 +72,14 @@ data class BillingPlanAddonDetails(
         fun from(
             map: Map<String, Any>,
         ) = BillingPlanAddonDetails(
-            supported = map["supported"] as Boolean,
-            planIncluded = (map["planIncluded"] as Number).toLong(),
-            limit = (map["limit"] as Number).toLong(),
-            type = map["type"] as String,
+            supported = (if (map.containsKey("supported")) map["supported"] else false) as Boolean,
+            planIncluded = ((if (map.containsKey("planIncluded")) map["planIncluded"] else 0) as Number).toLong(),
+            limit = ((if (map.containsKey("limit")) map["limit"] else 0) as Number).toLong(),
+            type = (if (map.containsKey("type")) map["type"] else "numeric") as String,
             currency = map["currency"] as? String,
-            price = (map["price"] as Number).toDouble(),
-            value = (map["value"] as Number).toLong(),
-            invoiceDesc = map["invoiceDesc"] as String,
+            price = ((if (map.containsKey("price")) map["price"] else 0.0) as Number).toDouble(),
+            value = ((if (map.containsKey("value")) map["value"] else 0) as Number).toLong(),
+            invoiceDesc = (if (map.containsKey("invoiceDesc")) map["invoiceDesc"] else "") as String,
         )
     }
 }

@@ -30,8 +30,8 @@ data class PolicySessionDuration(
         fun from(
             map: Map<String, Any>,
         ) = PolicySessionDuration(
-            id = map["\$id"] as String,
-            duration = (map["duration"] as Number).toLong(),
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            duration = ((if (map.containsKey("duration")) map["duration"] else 31536000) as Number).toLong(),
         )
     }
 }

@@ -44,10 +44,10 @@ data class OAuth2Dailymotion(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Dailymotion(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            apiKey = map["apiKey"] as String,
-            apiSecret = map["apiSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            apiKey = (if (map.containsKey("apiKey")) map["apiKey"] else "") as String,
+            apiSecret = (if (map.containsKey("apiSecret")) map["apiSecret"] else "") as String,
         )
     }
 }

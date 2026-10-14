@@ -11,7 +11,7 @@ Client client = new Client()
 VectorsDB vectorsDB = new VectorsDB(client);
 
 vectorsDB.createTransaction(
-    60, // ttl (optional)
+    60L, // ttl (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

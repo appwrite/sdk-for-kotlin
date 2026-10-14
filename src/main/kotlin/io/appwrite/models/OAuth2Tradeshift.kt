@@ -44,10 +44,10 @@ data class OAuth2Tradeshift(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Tradeshift(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            oauth2ClientId = map["oauth2ClientId"] as String,
-            oauth2ClientSecret = map["oauth2ClientSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            oauth2ClientId = (if (map.containsKey("oauth2ClientId")) map["oauth2ClientId"] else "") as String,
+            oauth2ClientSecret = (if (map.containsKey("oauth2ClientSecret")) map["oauth2ClientSecret"] else "") as String,
         )
     }
 }

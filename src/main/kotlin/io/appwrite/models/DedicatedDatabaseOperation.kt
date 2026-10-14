@@ -93,17 +93,17 @@ data class DedicatedDatabaseOperation(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseOperation(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            databaseId = map["databaseId"] as String,
-            type = map["type"] as String,
-            status = map["status"] as String,
-            attempts = (map["attempts"] as Number).toLong(),
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            databaseId = (if (map.containsKey("databaseId")) map["databaseId"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
+            status = (if (map.containsKey("status")) map["status"] else "") as String,
+            attempts = ((if (map.containsKey("attempts")) map["attempts"] else 0) as Number).toLong(),
             requestedAt = map["requestedAt"] as? String,
             startedAt = map["startedAt"] as? String,
             completedAt = map["completedAt"] as? String,
-            errorCode = map["errorCode"] as String,
-            errorMessage = map["errorMessage"] as String,
+            errorCode = (if (map.containsKey("errorCode")) map["errorCode"] else "") as String,
+            errorMessage = (if (map.containsKey("errorMessage")) map["errorMessage"] else "") as String,
         )
     }
 }

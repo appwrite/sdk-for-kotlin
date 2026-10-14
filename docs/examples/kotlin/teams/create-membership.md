@@ -12,7 +12,7 @@ val teams = Teams(client)
 
 val response = teams.createMembership(
     teamId = "<TEAM_ID>",
-    roles = listOf(),
+    roles = listOf("editor"),
     email = "email@example.com", // optional
     userId = "<USER_ID>", // optional
     phone = "+12065550100", // optional

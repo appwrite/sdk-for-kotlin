@@ -13,7 +13,14 @@ val documentsDB = DocumentsDB(client)
 val response = documentsDB.upsertDocuments(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    documents = listOf(),
+    documents = listOf(mapOf(
+        "\$id" to "example1",
+        "username" to "walter.obrien",
+        "email" to "walter.obrien@example.com",
+        "fullName" to "Walter O'Brien",
+        "age" to 30,
+        "isAdmin" to false
+    )),
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

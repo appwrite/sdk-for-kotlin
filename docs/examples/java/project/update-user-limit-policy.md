@@ -11,7 +11,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateUserLimitPolicy(
-    0, // total
+    0L, // total
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

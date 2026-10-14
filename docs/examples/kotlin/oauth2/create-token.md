@@ -5,21 +5,21 @@ import io.appwrite.services.Oauth2
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
-    .setSession("") // The user session to authenticate with
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
+    .setSession("") // The user session to authenticate with
 
 val oauth2 = Oauth2(client)
 
 val response = oauth2.createToken(
-    grant_type = "<GRANT_TYPE>",
+    grantType = "<GRANT_TYPE>",
     code = "<CODE>", // optional
-    refresh_token = "<REFRESH_TOKEN>", // optional
-    device_code = "<DEVICE_CODE>", // optional
-    client_id = "<CLIENT_ID>", // optional
-    client_secret = "<CLIENT_SECRET>", // optional
-    code_verifier = "<CODE_VERIFIER>", // optional
-    redirect_uri = "https://example.com", // optional
-    resource = "", // optional
+    refreshToken = "<REFRESH_TOKEN>", // optional
+    deviceCode = "<DEVICE_CODE>", // optional
+    clientId = "<CLIENT_ID>", // optional
+    clientSecret = "<CLIENT_SECRET>", // optional
+    codeVerifier = "<CODE_VERIFIER>", // optional
+    redirectUri = "https://example.com", // optional
+    resource = listOf(), // optional
     audience = "<AUDIENCE>" // optional
 )
 ```

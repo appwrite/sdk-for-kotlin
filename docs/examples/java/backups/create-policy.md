@@ -14,7 +14,7 @@ Backups backups = new Backups(client);
 backups.createPolicy(
     "<POLICY_ID>", // policyId
     List.of(BackupServices.DATABASES), // services
-    1, // retention
+    1L, // retention
     "", // schedule
     "<NAME>", // name (optional)
     "<RESOURCE_ID>", // resourceId (optional)

@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Account service allows you to authenticate and manage a user account.**/
+ * The Account service allows you to authenticate and manage a user account.
+ */
 class Account(client: Client) : Service(client) {
     /**
      * Get the currently logged in user.
@@ -161,6 +162,9 @@ class Account(client: Client) : Service(client) {
     suspend fun getConsent(
         consentId: String,
     ): io.appwrite.models.Oauth2Consent {
+        if (consentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"consentId\"")
+        }
         val apiPath = ("/account/consents/{consentId}"
             .replace("{consentId}", consentId)
         )
@@ -192,6 +196,9 @@ class Account(client: Client) : Service(client) {
     suspend fun deleteConsent(
         consentId: String,
     ): Any {
+        if (consentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"consentId\"")
+        }
         val apiPath = ("/account/consents/{consentId}"
             .replace("{consentId}", consentId)
         )
@@ -225,6 +232,9 @@ class Account(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.Oauth2ConsentTokenList {
+        if (consentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"consentId\"")
+        }
         val apiPath = ("/account/consents/{consentId}/tokens"
             .replace("{consentId}", consentId)
         )
@@ -261,6 +271,12 @@ class Account(client: Client) : Service(client) {
         consentId: String,
         tokenId: String,
     ): io.appwrite.models.Oauth2ConsentToken {
+        if (consentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"consentId\"")
+        }
+        if (tokenId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tokenId\"")
+        }
         val apiPath = ("/account/consents/{consentId}/tokens/{tokenId}"
             .replace("{consentId}", consentId)
             .replace("{tokenId}", tokenId)
@@ -295,6 +311,12 @@ class Account(client: Client) : Service(client) {
         consentId: String,
         tokenId: String,
     ): Any {
+        if (consentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"consentId\"")
+        }
+        if (tokenId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tokenId\"")
+        }
         val apiPath = ("/account/consents/{consentId}/tokens/{tokenId}"
             .replace("{consentId}", consentId)
             .replace("{tokenId}", tokenId)
@@ -416,6 +438,9 @@ class Account(client: Client) : Service(client) {
     suspend fun deleteIdentity(
         identityId: String,
     ): Any {
+        if (identityId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"identityId\"")
+        }
         val apiPath = ("/account/identities/{identityId}"
             .replace("{identityId}", identityId)
         )
@@ -423,6 +448,7 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -430,41 +456,6 @@ class Account(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * Get the list of latest security activity logs for the currently logged in user. Each log returns user IP address, location and date and time of log.
-     *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Only supported methods are limit and offset
-     * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @return [io.appwrite.models.LogList]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun listLogs(
-        queries: List<String>? = null,
-        total: Boolean? = null,
-    ): io.appwrite.models.LogList {
-        val apiPath = "/account/logs"
-        val apiParams = mutableMapOf<String, Any?>(
-            "queries" to queries,
-            "total" to total,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.LogList = {
-            io.appwrite.models.LogList.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.LogList::class.java,
-            converter,
         )
     }
 
@@ -720,6 +711,7 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -747,6 +739,7 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1767,7 +1760,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Delete all sessions from the user account and remove any sessions cookies from the end client.
+     * Delete all sessions from the user account and remove any sessions cookies from the end client. Pass `current` as false to keep the session making the request and sign out of every other session.
      *
      * @param current Delete the current session too. Use false to sign out of every other session while staying signed in on this one.
      * @return [Any]
@@ -1784,6 +1777,7 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1822,7 +1816,7 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
-     * Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user.
+     * Allow the user to login into their account by providing a valid email and password combination. This route will create a new session for the user. Use the optional `duration` parameter to create a shorter session, for example when the user doesn't choose "remember me". It must be at least 60 seconds and cannot exceed the project maximum session length.
      *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
@@ -2044,6 +2038,9 @@ class Account(client: Client) : Service(client) {
     suspend fun getSession(
         sessionId: String,
     ): io.appwrite.models.Session {
+        if (sessionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"sessionId\"")
+        }
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
@@ -2075,6 +2072,9 @@ class Account(client: Client) : Service(client) {
     suspend fun updateSession(
         sessionId: String,
     ): io.appwrite.models.Session {
+        if (sessionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"sessionId\"")
+        }
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
@@ -2107,6 +2107,9 @@ class Account(client: Client) : Service(client) {
     suspend fun deleteSession(
         sessionId: String,
     ): Any {
+        if (sessionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"sessionId\"")
+        }
         val apiPath = ("/account/sessions/{sessionId}"
             .replace("{sessionId}", sessionId)
         )
@@ -2114,6 +2117,7 @@ class Account(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -2255,9 +2259,11 @@ class Account(client: Client) : Service(client) {
      *
      * If authentication succeeds, `userId` and `secret` of a token will be appended to the success URL as query parameters. These can be used to create a new session using the [Create session](https://appwrite.io/docs/references/cloud/client-web/account#createSession) endpoint.
      *
+     * If there is already an active session, the OAuth2 identity is attached to the logged-in account and that session stays active until the token is exchanged for a new one.
+     *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, cloudflare, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, huggingface, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, resend, salesforce, slack, spotify, stripe, tradeshift, tradeshiftBox, twitch, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
+     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, cloudflare, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, huggingface, kakao, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, resend, salesforce, slack, spotify, stripe, tiktok, tradeshift, tradeshiftBox, twitch, webflow, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
      * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.

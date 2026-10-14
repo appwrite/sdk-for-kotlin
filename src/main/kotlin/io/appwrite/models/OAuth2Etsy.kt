@@ -44,10 +44,10 @@ data class OAuth2Etsy(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Etsy(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            keyString = map["keyString"] as String,
-            sharedSecret = map["sharedSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            keyString = (if (map.containsKey("keyString")) map["keyString"] else "") as String,
+            sharedSecret = (if (map.containsKey("sharedSecret")) map["sharedSecret"] else "") as String,
         )
     }
 }

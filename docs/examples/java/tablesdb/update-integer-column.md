@@ -15,9 +15,9 @@ tablesDB.updateIntegerColumn(
     "<TABLE_ID>", // tableId
     "<KEY>", // key
     false, // required
-    10, // default
-    0, // min (optional)
-    100, // max (optional)
+    10L, // default
+    0L, // min (optional)
+    100L, // max (optional)
     "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

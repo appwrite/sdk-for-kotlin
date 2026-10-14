@@ -14,7 +14,7 @@ val project = Project(client)
 val response = project.updateOAuth2Kakao(
     clientId = "<CLIENT_ID>", // optional
     clientSecret = "<CLIENT_SECRET>", // optional
-    prompt = listOf(ProjectOAuth2KakaoPrompt.NONE), // optional
-    enabled = false // optional
+    enabled = false, // optional
+    prompt = listOf(ProjectOAuth2KakaoPrompt.NONE) // optional
 )
 ```

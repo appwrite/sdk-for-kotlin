@@ -14,7 +14,7 @@ mysql.createExecution(
     "<DATABASE_ID>", // databaseId
     "<SQL>", // sql
     Map.of("a", "b"), // bindings (optional)
-    1, // timeoutSeconds (optional)
+    1L, // timeoutSeconds (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

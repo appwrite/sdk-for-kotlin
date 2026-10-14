@@ -30,8 +30,8 @@ data class DedicatedDatabasePITRWindows(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabasePITRWindows(
-            earliest = map["earliest"] as String,
-            latest = map["latest"] as String,
+            earliest = (if (map.containsKey("earliest")) map["earliest"] else "") as String,
+            latest = (if (map.containsKey("latest")) map["latest"] else "") as String,
         )
     }
 }

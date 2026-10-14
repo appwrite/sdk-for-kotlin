@@ -30,8 +30,8 @@ data class PolicyPasswordDictionary(
         fun from(
             map: Map<String, Any>,
         ) = PolicyPasswordDictionary(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
         )
     }
 }

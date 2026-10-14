@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Activities service allows you to list and inspect project activity events.**/
+ * The Activities service allows you to list and inspect project activity events.
+ */
 class Activities(client: Client) : Service(client) {
     /**
      * List all events for selected filters.
@@ -54,6 +55,9 @@ class Activities(client: Client) : Service(client) {
     suspend fun getEvent(
         eventId: String,
     ): io.appwrite.models.ActivityEvent {
+        if (eventId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"eventId\"")
+        }
         val apiPath = ("/activities/events/{eventId}"
             .replace("{eventId}", eventId)
         )

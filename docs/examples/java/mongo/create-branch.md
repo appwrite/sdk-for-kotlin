@@ -13,7 +13,7 @@ Mongo mongo = new Mongo(client);
 mongo.createBranch(
     "<DATABASE_ID>", // databaseId
     "<BRANCH_ID>", // branchId (optional)
-    300, // ttl (optional)
+    300L, // ttl (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
