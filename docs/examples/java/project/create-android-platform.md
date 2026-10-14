@@ -14,6 +14,7 @@ project.createAndroidPlatform(
     "<PLATFORM_ID>", // platformId
     "<NAME>", // name
     "<APPLICATION_ID>", // applicationId
+    List.of(), // fingerprints (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

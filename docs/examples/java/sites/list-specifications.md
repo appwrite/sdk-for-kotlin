@@ -12,6 +12,7 @@ Sites sites = new Sites(client);
 
 sites.listSpecifications(
     "runtimes", // type (optional)
+    false, // total (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

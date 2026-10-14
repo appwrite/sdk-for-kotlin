@@ -31,12 +31,19 @@ data class OAuth2Salesforce(
     @SerializedName("customerSecret")
     val customerSecret: String,
 
+    /**
+     * Salesforce OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    var prompt: List<io.appwrite.enums.OAuth2SalesforcePrompt>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "customerKey" to customerKey as Any,
         "customerSecret" to customerSecret as Any,
+        "prompt" to prompt as Any?,
     )
 
     companion object {
@@ -48,6 +55,7 @@ data class OAuth2Salesforce(
             enabled = map["enabled"] as Boolean,
             customerKey = map["customerKey"] as String,
             customerSecret = map["customerSecret"] as String,
+            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2SalesforcePrompt>,
         )
     }
 }

@@ -11,6 +11,7 @@ val client = Client()
 val sites = Sites(client)
 
 val response = sites.listSpecifications(
-    type = "runtimes" // optional
+    type = "runtimes", // optional
+    total = false // optional
 )
 ```

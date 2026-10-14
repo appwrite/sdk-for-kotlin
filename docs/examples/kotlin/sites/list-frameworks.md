@@ -10,5 +10,7 @@ val client = Client()
 
 val sites = Sites(client)
 
-val response = sites.listFrameworks()
+val response = sites.listFrameworks(
+    total = false // optional
+)
 ```

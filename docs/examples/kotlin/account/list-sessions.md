@@ -10,5 +10,7 @@ val client = Client()
 
 val account = Account(client)
 
-val response = account.listSessions()
+val response = account.listSessions(
+    total = false // optional
+)
 ```

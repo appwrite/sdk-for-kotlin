@@ -61,11 +61,39 @@ data class DedicatedDatabaseSpecification(
     @SerializedName("enabled")
     val enabled: Boolean,
 
+    /**
+     * Price per GB of storage above the included amount, per month, in USD.
+     */
+    @SerializedName("storageOverageRate")
+    var storageOverageRate: Double? = null,
+
+    /**
+     * Price per GB of bandwidth above the included amount, per month, in USD.
+     */
+    @SerializedName("bandwidthOverageRate")
+    var bandwidthOverageRate: Double? = null,
+
+    /**
+     * High availability replica price as a fraction of the specification price.
+     */
+    @SerializedName("replicaRate")
+    var replicaRate: Double? = null,
+
+    /**
+     * Point-in-time recovery price as a fraction of the specification price.
+     */
+    @SerializedName("pitrRate")
+    var pitrRate: Double? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "slug" to slug as Any,
         "name" to name as Any,
         "price" to price as Any,
+        "storageOverageRate" to storageOverageRate as Any?,
+        "bandwidthOverageRate" to bandwidthOverageRate as Any?,
+        "replicaRate" to replicaRate as Any?,
+        "pitrRate" to pitrRate as Any?,
         "cpu" to cpu as Any,
         "memory" to memory as Any,
         "maxConnections" to maxConnections as Any,
@@ -88,6 +116,10 @@ data class DedicatedDatabaseSpecification(
             includedStorage = (map["includedStorage"] as Number).toLong(),
             includedBandwidth = (map["includedBandwidth"] as Number).toLong(),
             enabled = map["enabled"] as Boolean,
+            storageOverageRate = (map["storageOverageRate"] as? Number)?.toDouble(),
+            bandwidthOverageRate = (map["bandwidthOverageRate"] as? Number)?.toDouble(),
+            replicaRate = (map["replicaRate"] as? Number)?.toDouble(),
+            pitrRate = (map["pitrRate"] as? Number)?.toDouble(),
         )
     }
 }

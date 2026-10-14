@@ -12,6 +12,7 @@ Functions functions = new Functions(client);
 
 functions.listSpecifications(
     "runtimes", // type (optional)
+    false, // total (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

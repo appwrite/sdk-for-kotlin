@@ -43,6 +43,18 @@ data class OAuth2Apple(
     @SerializedName("p8File")
     val p8File: String,
 
+    /**
+     * Native Sign in with Apple is active and can be used to create sessions from an ID token. Independent of enabled, which only controls the browser-based flow.
+     */
+    @SerializedName("nativeEnabled")
+    var nativeEnabled: Boolean? = null,
+
+    /**
+     * App bundle IDs accepted as ID token audiences for native Sign in with Apple, next to the Services ID.
+     */
+    @SerializedName("nativeClientIds")
+    var nativeClientIds: List<String>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -51,6 +63,8 @@ data class OAuth2Apple(
         "keyId" to keyId as Any,
         "teamId" to teamId as Any,
         "p8File" to p8File as Any,
+        "nativeEnabled" to nativeEnabled as Any?,
+        "nativeClientIds" to nativeClientIds as Any?,
     )
 
     companion object {
@@ -64,6 +78,8 @@ data class OAuth2Apple(
             keyId = map["keyId"] as String,
             teamId = map["teamId"] as String,
             p8File = map["p8File"] as String,
+            nativeEnabled = map["nativeEnabled"] as? Boolean,
+            nativeClientIds = map["nativeClientIds"] as? List<String>,
         )
     }
 }

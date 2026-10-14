@@ -31,6 +31,7 @@ messaging.createPush(
     false, // contentAvailable (optional)
     false, // critical (optional)
     MessagePriority.NORMAL, // priority (optional)
+    "<CHANNEL_ID>", // channelId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

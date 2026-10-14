@@ -163,6 +163,12 @@ data class User<T>(
     @SerializedName("impersonatorUserId")
     var impersonatorUserId: String?,
 
+    /**
+     * Whether the password was found in a known data breach the last time it was checked. Null when the password has never been checked.
+     */
+    @SerializedName("passwordPwned")
+    var passwordPwned: Boolean? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -184,6 +190,7 @@ data class User<T>(
         "emailIsDisposable" to emailIsDisposable as Any?,
         "emailIsCorporate" to emailIsCorporate as Any?,
         "emailIsCanonical" to emailIsCanonical as Any?,
+        "passwordPwned" to passwordPwned as Any?,
         "phoneVerification" to phoneVerification as Any,
         "mfa" to mfa as Any,
         "prefs" to prefs.toMap() as Any,
@@ -221,6 +228,7 @@ data class User<T>(
             accessedAt: String,
             impersonator: Boolean?,
             impersonatorUserId: String?,
+            passwordPwned: Boolean? = null,
         ) = User<Map<String, Any>>(
             id,
             createdAt,
@@ -248,6 +256,7 @@ data class User<T>(
             accessedAt,
             impersonator,
             impersonatorUserId,
+            passwordPwned,
         )
 
         @Suppress("UNCHECKED_CAST")
@@ -276,6 +285,7 @@ data class User<T>(
             emailIsCanonical = map["emailIsCanonical"] as? Boolean,
             phoneVerification = map["phoneVerification"] as Boolean,
             mfa = map["mfa"] as Boolean,
+            passwordPwned = map["passwordPwned"] as? Boolean,
             prefs = Preferences.from(map = map["prefs"] as Map<String, Any>, nestedType),
             targets = (map["targets"] as List<Map<String, Any>>).map { Target.from(map = it) },
             accessedAt = map["accessedAt"] as String,

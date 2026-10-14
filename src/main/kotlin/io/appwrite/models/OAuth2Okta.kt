@@ -43,12 +43,19 @@ data class OAuth2Okta(
     @SerializedName("authorizationServerId")
     val authorizationServerId: String,
 
+    /**
+     * Okta OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    var prompt: List<io.appwrite.enums.OAuth2OktaPrompt>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any?,
         "domain" to domain as Any,
         "authorizationServerId" to authorizationServerId as Any,
     )
@@ -64,6 +71,7 @@ data class OAuth2Okta(
             clientSecret = map["clientSecret"] as String,
             domain = map["domain"] as String,
             authorizationServerId = map["authorizationServerId"] as String,
+            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2OktaPrompt>,
         )
     }
 }

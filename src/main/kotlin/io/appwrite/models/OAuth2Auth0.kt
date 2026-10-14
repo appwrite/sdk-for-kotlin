@@ -37,12 +37,19 @@ data class OAuth2Auth0(
     @SerializedName("endpoint")
     val endpoint: String,
 
+    /**
+     * Auth0 OAuth2 prompt values.
+     */
+    @SerializedName("prompt")
+    var prompt: List<io.appwrite.enums.OAuth2Auth0Prompt>? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
+        "prompt" to prompt as Any?,
         "endpoint" to endpoint as Any,
     )
 
@@ -56,6 +63,7 @@ data class OAuth2Auth0(
             clientId = map["clientId"] as String,
             clientSecret = map["clientSecret"] as String,
             endpoint = map["endpoint"] as String,
+            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2Auth0Prompt>,
         )
     }
 }

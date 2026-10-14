@@ -15,6 +15,8 @@ val response = project.updateOAuth2Apple(
     keyId = "<KEY_ID>", // optional
     teamId = "<TEAM_ID>", // optional
     p8File = "<P8_FILE>", // optional
-    enabled = false // optional
+    enabled = false, // optional
+    nativeClientIds = listOf(), // optional
+    nativeEnabled = false // optional
 )
 ```

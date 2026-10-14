@@ -11,6 +11,7 @@ val client = Client()
 val databases = Databases(client)
 
 val response = databases.listTransactions(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

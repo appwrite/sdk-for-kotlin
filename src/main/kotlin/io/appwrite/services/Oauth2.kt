@@ -307,6 +307,49 @@ class Oauth2(client: Client) : Service(client) {
     }
 
     /**
+     * Introspect an OAuth2 access token or refresh token. Authenticate with an API key holding the `oauth2.introspect` scope to introspect any token in the project, or with the client credentials of the app the token was issued to.
+     *
+     * @param token The access token or refresh token to introspect.
+     * @param tokenTypeHint Type of token to introspect. Can be one of: `access_token` or `refresh_token`.
+     * @param clientId OAuth2 client ID. Either a registered app ID or an HTTPS client ID metadata document URL.
+     * @param clientSecret OAuth2 client secret.
+     * @return [io.appwrite.models.Oauth2Introspection]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun introspect(
+        token: String,
+        tokenTypeHint: String? = null,
+        clientId: String? = null,
+        clientSecret: String? = null,
+    ): io.appwrite.models.Oauth2Introspection {
+        val apiPath = ("/oauth2/{project_id}/introspect"
+            .replace("{project_id}", client.config["project"].orEmpty())
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "token" to token,
+            "token_type_hint" to tokenTypeHint,
+            "client_id" to clientId,
+            "client_secret" to clientSecret,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Oauth2Introspection = {
+            io.appwrite.models.Oauth2Introspection.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Oauth2Introspection::class.java,
+            converter,
+        )
+    }
+
+    /**
      * List the organizations the OAuth2 access token can access. Resolves the token's `organization` authorization details, expanding the `*` wildcard into the concrete set of organizations the user can see.
      *
      * @param limit Maximum number of organizations to return. Between 1 and 5000.

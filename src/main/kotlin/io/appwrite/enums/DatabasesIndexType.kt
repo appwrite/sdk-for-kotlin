@@ -10,7 +10,9 @@ enum class DatabasesIndexType(val value: String) {
     @SerializedName("unique")
     UNIQUE("unique"),
     @SerializedName("spatial")
-    SPATIAL("spatial");
+    SPATIAL("spatial"),
+    @SerializedName("trigram")
+    TRIGRAM("trigram");
 
     override fun toString() = value
 }

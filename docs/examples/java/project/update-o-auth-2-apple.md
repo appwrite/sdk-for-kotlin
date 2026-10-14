@@ -16,6 +16,8 @@ project.updateOAuth2Apple(
     "<TEAM_ID>", // teamId (optional)
     "<P8_FILE>", // p8File (optional)
     false, // enabled (optional)
+    List.of(), // nativeClientIds (optional)
+    false, // nativeEnabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

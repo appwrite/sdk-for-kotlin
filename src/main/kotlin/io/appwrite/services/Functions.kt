@@ -153,12 +153,18 @@ class Functions(client: Client) : Service(client) {
     /**
      * Get a list of all runtimes that are currently active on your instance.
      *
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.RuntimeList]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun listRuntimes(): io.appwrite.models.RuntimeList {
+    suspend fun listRuntimes(
+        total: Boolean? = null,
+    ): io.appwrite.models.RuntimeList {
         val apiPath = "/functions/runtimes"
-        val apiParams = mutableMapOf<String, Any?>()
+        val apiParams = mutableMapOf<String, Any?>(
+            "total" to total,
+        )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
@@ -180,16 +186,19 @@ class Functions(client: Client) : Service(client) {
      * List allowed function specifications for this instance.
      *
      * @param type Specification type to list. Can be one of: runtimes, builds. Defaults to runtimes.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.SpecificationList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listSpecifications(
         type: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.SpecificationList {
         val apiPath = "/functions/specifications"
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

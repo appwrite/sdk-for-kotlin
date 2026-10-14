@@ -283,6 +283,24 @@ data class Project(
     @SerializedName("oAuth2ServerDiscoveryUrl")
     var oAuth2ServerDiscoveryUrl: String?,
 
+    /**
+     * ID of the project this environment belongs to. Null when the project is not an environment.
+     */
+    @SerializedName("parentId")
+    var parentId: String? = null,
+
+    /**
+     * First time the project received a non-console API request. Empty until the project is used.
+     */
+    @SerializedName("firstAccessedAt")
+    var firstAccessedAt: String? = null,
+
+    /**
+     * Last time the project was accessed through the MCP server. Empty if it was never accessed via MCP.
+     */
+    @SerializedName("mcpAccessedAt")
+    var mcpAccessedAt: String? = null,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -313,7 +331,10 @@ data class Project(
         "blocks" to blocks.map { it.toMap() } as Any,
         "consoleAccessedAt" to consoleAccessedAt as Any,
         "wafEnabled" to wafEnabled as Any?,
+        "parentId" to parentId as Any?,
         "billingLimits" to billingLimits?.toMap() as Any?,
+        "firstAccessedAt" to firstAccessedAt as Any?,
+        "mcpAccessedAt" to mcpAccessedAt as Any?,
         "oAuth2ServerEnabled" to oAuth2ServerEnabled as Any?,
         "oAuth2ServerAuthorizationUrl" to oAuth2ServerAuthorizationUrl as Any?,
         "oAuth2ServerScopes" to oAuth2ServerScopes as Any?,
@@ -366,7 +387,10 @@ data class Project(
             blocks = (map["blocks"] as List<Map<String, Any>>).map { Block.from(map = it) },
             consoleAccessedAt = map["consoleAccessedAt"] as String,
             wafEnabled = map["wafEnabled"] as? Boolean,
+            parentId = map["parentId"] as? String,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
+            firstAccessedAt = map["firstAccessedAt"] as? String,
+            mcpAccessedAt = map["mcpAccessedAt"] as? String,
             oAuth2ServerEnabled = map["oAuth2ServerEnabled"] as? Boolean,
             oAuth2ServerAuthorizationUrl = map["oAuth2ServerAuthorizationUrl"] as? String,
             oAuth2ServerScopes = map["oAuth2ServerScopes"] as? List<String>,

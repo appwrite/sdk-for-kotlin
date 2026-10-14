@@ -10,12 +10,16 @@ Client client = new Client()
 
 Account account = new Account(client);
 
-account.listSessions(new CoroutineCallback<>((result, error) -> {
-    if (error != null) {
-        error.printStackTrace();
-        return;
-    }
+account.listSessions(
+    false, // total (optional)
+    new CoroutineCallback<>((result, error) -> {
+        if (error != null) {
+            error.printStackTrace();
+            return;
+        }
 
-    System.out.println(result);
-}));
+        System.out.println(result);
+    })
+);
+
 ```
