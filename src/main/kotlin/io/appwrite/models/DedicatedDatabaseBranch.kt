@@ -41,7 +41,7 @@ data class DedicatedDatabaseBranch(
      * Branch port. Null until the backing reports one.
      */
     @SerializedName("port")
-    val port: Long,
+    var port: Long?,
 
     /**
      * Advertised catalog the client connects to. MySQL/MariaDB use default; Postgres uses the routing label.
@@ -86,7 +86,7 @@ data class DedicatedDatabaseBranch(
         "namespace" to namespace as Any,
         "expiresAt" to expiresAt as Any,
         "host" to host as Any,
-        "port" to port as Any,
+        "port" to port as Any?,
         "database" to database as Any,
         "username" to username as Any,
         "password" to password as Any,
@@ -100,18 +100,18 @@ data class DedicatedDatabaseBranch(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseBranch(
-            branchId = map["branchId"] as String,
-            branchName = map["branchName"] as String,
-            namespace = map["namespace"] as String,
-            expiresAt = (map["expiresAt"] as Number).toLong(),
-            host = map["host"] as String,
-            port = (map["port"] as Number).toLong(),
-            database = map["database"] as String,
-            username = map["username"] as String,
-            password = map["password"] as String,
-            ssl = map["ssl"] as Boolean,
-            engine = map["engine"] as String,
-            connectionString = map["connectionString"] as String,
+            branchId = (if (map.containsKey("branchId")) map["branchId"] else "") as String,
+            branchName = (if (map.containsKey("branchName")) map["branchName"] else "") as String,
+            namespace = (if (map.containsKey("namespace")) map["namespace"] else "") as String,
+            expiresAt = ((if (map.containsKey("expiresAt")) map["expiresAt"] else 0) as Number).toLong(),
+            host = (if (map.containsKey("host")) map["host"] else "") as String,
+            port = (map["port"] as? Number)?.toLong(),
+            database = (if (map.containsKey("database")) map["database"] else "") as String,
+            username = (if (map.containsKey("username")) map["username"] else "") as String,
+            password = (if (map.containsKey("password")) map["password"] else "") as String,
+            ssl = (if (map.containsKey("ssl")) map["ssl"] else false) as Boolean,
+            engine = (if (map.containsKey("engine")) map["engine"] else "") as String,
+            connectionString = (if (map.containsKey("connectionString")) map["connectionString"] else "") as String,
         )
     }
 }

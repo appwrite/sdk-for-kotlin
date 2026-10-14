@@ -44,10 +44,10 @@ data class OAuth2Dropbox(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Dropbox(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            appKey = map["appKey"] as String,
-            appSecret = map["appSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            appKey = (if (map.containsKey("appKey")) map["appKey"] else "") as String,
+            appSecret = (if (map.containsKey("appSecret")) map["appSecret"] else "") as String,
         )
     }
 }

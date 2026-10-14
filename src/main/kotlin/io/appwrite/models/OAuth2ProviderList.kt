@@ -30,8 +30,8 @@ data class OAuth2ProviderList(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2ProviderList(
-            total = (map["total"] as Number).toLong(),
-            providers = map["providers"] as List<Map<String, Any?>>,
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            providers = (if (map.containsKey("providers")) map["providers"] else listOf<Any?>()) as List<Map<String, Any?>>,
         )
     }
 }

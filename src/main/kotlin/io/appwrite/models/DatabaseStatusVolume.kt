@@ -44,10 +44,10 @@ data class DatabaseStatusVolume(
         fun from(
             map: Map<String, Any>,
         ) = DatabaseStatusVolume(
-            xpath = map["path"] as String,
-            usedPercent = map["usedPercent"] as String,
-            available = map["available"] as String,
-            mounted = map["mounted"] as Boolean,
+            xpath = (if (map.containsKey("path")) map["path"] else "") as String,
+            usedPercent = (if (map.containsKey("usedPercent")) map["usedPercent"] else "0%") as String,
+            available = (if (map.containsKey("available")) map["available"] else "0GB") as String,
+            mounted = (if (map.containsKey("mounted")) map["mounted"] else false) as Boolean,
         )
     }
 }

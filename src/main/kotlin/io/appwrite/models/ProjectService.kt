@@ -32,7 +32,7 @@ data class ProjectService(
             map: Map<String, Any>,
         ) = ProjectService(
             id = ProjectServiceId.values().find { it.value == map["\$id"] as String }!!,
-            enabled = map["enabled"] as Boolean,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
         )
     }
 }

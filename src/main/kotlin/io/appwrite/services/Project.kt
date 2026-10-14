@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Project service allows you to manage all the projects in your Appwrite server.**/
+ * The Project service allows you to manage all the projects in your Appwrite server.
+ */
 class Project(client: Client) : Service(client) {
     /**
      * Get a project.
@@ -22,6 +23,7 @@ class Project(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -48,6 +50,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -61,7 +64,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project.
      *
-     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone
+     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
      * @param enabled Auth method status.
      * @return [io.appwrite.models.Project]
      */
@@ -350,6 +353,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getKey(
         keyId: String,
     ): io.appwrite.models.Key {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -388,6 +394,9 @@ class Project(client: Client) : Service(client) {
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
     ): io.appwrite.models.Key {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -424,6 +433,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteKey(
         keyId: String,
     ): Any {
+        if (keyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"keyId\"")
+        }
         val apiPath = ("/project/keys/{keyId}"
             .replace("{keyId}", keyId)
         )
@@ -431,6 +443,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -553,6 +566,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getMockPhone(
         number: String,
     ): io.appwrite.models.MockNumber {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -586,6 +602,9 @@ class Project(client: Client) : Service(client) {
         number: String,
         otp: String,
     ): io.appwrite.models.MockNumber {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -620,6 +639,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteMockPhone(
         number: String,
     ): Any {
+        if (number.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"number\"")
+        }
         val apiPath = ("/project/mock-phones/{number}"
             .replace("{number}", number)
         )
@@ -627,6 +649,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -1655,8 +1678,8 @@ class Project(client: Client) : Service(client) {
      *
      * @param clientId 'REST API key' of Kakao OAuth2 app. For example: 839ff5000000000000000000013206de
      * @param clientSecret 'Client Secret' of Kakao OAuth2 app. For example: jLNVOK00000000000000000000yJebea. Generate it under Kakao Login > Security and set its status to enabled
-     * @param prompt Array of Kakao OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "create" means: prompt the user to sign up. "select_account" means: prompt the user to select an account. Pass an empty array to use the Kakao default.
      * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @param prompt Array of Kakao OAuth2 prompt values. If "none" is included, it must be the only element. "none" means: don't display any authentication or consent screens. "login" means: prompt the user to re-authenticate. "create" means: prompt the user to sign up. "select_account" means: prompt the user to select an account. Pass an empty array to use the Kakao default.
      * @return [io.appwrite.models.OAuth2Kakao]
      */
     @JvmOverloads
@@ -1664,15 +1687,15 @@ class Project(client: Client) : Service(client) {
     suspend fun updateOAuth2Kakao(
         clientId: String? = null,
         clientSecret: String? = null,
-        prompt: List<io.appwrite.enums.ProjectOAuth2KakaoPrompt>? = null,
         enabled: Boolean? = null,
+        prompt: List<io.appwrite.enums.ProjectOAuth2KakaoPrompt>? = null,
     ): io.appwrite.models.OAuth2Kakao {
         val apiPath = "/project/oauth2/kakao"
         val apiParams = mutableMapOf<String, Any?>(
             "clientId" to clientId,
             "clientSecret" to clientSecret,
-            "prompt" to prompt,
             "enabled" to enabled,
+            "prompt" to prompt,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2910,7 +2933,7 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
-     * Update an Android platform by its unique ID. Use this endpoint to update the platform's name or application ID.
+     * Update an Android platform by its unique ID. Use this endpoint to update the platform's name, application ID or signing certificate fingerprints.
      *
      * @param platformId Platform ID.
      * @param name Platform name. Max length: 128 chars.
@@ -2926,6 +2949,9 @@ class Project(client: Client) : Service(client) {
         applicationId: String,
         fingerprints: List<String>? = null,
     ): io.appwrite.models.PlatformAndroid {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/android/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3004,6 +3030,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         bundleIdentifier: String,
     ): io.appwrite.models.PlatformApple {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/apple/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3081,6 +3110,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageName: String,
     ): io.appwrite.models.PlatformLinux {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/linux/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3158,6 +3190,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         hostname: String,
     ): io.appwrite.models.PlatformWeb {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/web/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3235,6 +3270,9 @@ class Project(client: Client) : Service(client) {
         name: String,
         packageIdentifierName: String,
     ): io.appwrite.models.PlatformWindows {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/windows/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3270,6 +3308,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getPlatform(
         platformId: String,
     ): Any {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3310,6 +3351,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deletePlatform(
         platformId: String,
     ): Any {
+        if (platformId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"platformId\"")
+        }
         val apiPath = ("/project/platforms/{platformId}"
             .replace("{platformId}", platformId)
         )
@@ -3317,6 +3361,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -3993,7 +4038,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, passkey.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -4192,6 +4237,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "POST",
@@ -4240,7 +4286,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update a custom email template for the specified locale and type. Use this endpoint to modify the content of your email templates.
      *
-     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession
+     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession, otpVerification, otpRecovery
      * @param locale Custom email template locale. If left empty, the fallback locale (en) will be used.
      * @param subject Subject of the email template. Can be up to 255 characters.
      * @param message Plain or HTML body of the email template message. Can be up to 10MB of content.
@@ -4294,7 +4340,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a custom email template for the specified locale and type. This endpoint returns the template content, subject, and other configuration details.
      *
-     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession
+     * @param templateId Custom email template type. Can be one of: verification, magicSession, recovery, invitation, mfaChallenge, sessionAlert, otpSession, otpVerification, otpRecovery
      * @param locale Custom email template locale. If left empty, the fallback locale (en) will be used.
      * @return [io.appwrite.models.EmailTemplate]
      */
@@ -4414,6 +4460,9 @@ class Project(client: Client) : Service(client) {
     suspend fun getVariable(
         variableId: String,
     ): io.appwrite.models.Variable {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4452,6 +4501,9 @@ class Project(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4488,6 +4540,9 @@ class Project(client: Client) : Service(client) {
     suspend fun deleteVariable(
         variableId: String,
     ): Any {
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/project/variables/{variableId}"
             .replace("{variableId}", variableId)
         )
@@ -4495,6 +4550,7 @@ class Project(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

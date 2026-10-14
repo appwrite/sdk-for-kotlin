@@ -30,8 +30,8 @@ data class EmbeddingList(
         fun from(
             map: Map<String, Any>,
         ) = EmbeddingList(
-            total = (map["total"] as Number).toLong(),
-            embeddings = (map["embeddings"] as List<Map<String, Any>>).map { Embedding.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            embeddings = ((if (map.containsKey("embeddings")) map["embeddings"] else listOf<Any?>()) as List<Map<String, Any>>).map { Embedding.from(map = it) },
         )
     }
 }

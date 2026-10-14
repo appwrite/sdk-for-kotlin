@@ -3,6 +3,7 @@ package io.appwrite
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.extensions.fromJson
 import io.appwrite.extensions.toJsonRequestBody
+import io.appwrite.extensions.toJsonWithNulls
 import io.appwrite.models.InputFile
 import io.appwrite.models.UploadProgress
 import kotlinx.coroutines.CoroutineScope
@@ -64,12 +65,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/22.4.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/23.0.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "22.4.0",
-            "x-appwrite-response-format" to "2.0.0",
+            "x-sdk-version" to "23.0.0",
+            "x-appwrite-response-format" to "2.5.0",
         )
 
         config = mutableMapOf()
@@ -191,21 +192,6 @@ class Client @JvmOverloads constructor(
     fun setForwardedUserAgent(value: String): Client {
         config["forwardedUserAgent"] = value
         addHeader("x-forwarded-user-agent", value)
-        return this
-    }
-
-    /**
-     * Set DevKey
-     *
-     * Your secret dev API key
-     *
-     * @param {string} devkey
-     *
-     * @return this
-     */
-    fun setDevKey(value: String): Client {
-        config["devKey"] = value
-        addHeader("x-appwrite-dev-key", value)
         return this
     }
 
@@ -438,8 +424,11 @@ class Client @JvmOverloads constructor(
 
             filteredParams.forEach {
                 when {
-                    it.key == "file" -> {
+                    it.value is MultipartBody.Part -> {
                         builder.addPart(it.value as MultipartBody.Part)
+                    }
+                    it.value is Map<*, *> -> {
+                        builder.addFormDataPart(it.key, (it.value as Map<*, *>).toJsonWithNulls())
                     }
                     it.value is List<*> -> {
                         val list = it.value as List<*>
@@ -530,12 +519,22 @@ class Client @JvmOverloads constructor(
         headers: MutableMap<String, String>,
         params: MutableMap<String, Any?>,
         responseType: Class<T>,
-        converter: ((Any) -> T),
+        converter: ((Any) -> T)? = null,
         paramName: String,
         idParamName: String? = null,
         onProgress: ((UploadProgress) -> Unit)? = null,
         method: String = "POST",
     ): T {
+        if (params[paramName] == null) {
+            return call(
+                method = method,
+                path,
+                headers,
+                params,
+                responseType,
+                converter
+            )
+        }
         val input = params[paramName] as InputFile
         val size: Long = when (input.sourceType) {
             "path", "file" -> {
@@ -547,7 +546,7 @@ class Client @JvmOverloads constructor(
             else -> throw UnsupportedOperationException()
         }
 
-        if (size < CHUNK_SIZE) {
+        if (size <= CHUNK_SIZE || responseType == String::class.java) {
             val data = when (input.sourceType) {
                 "file", "path" -> File(input.path).asRequestBody()
                 "bytes" -> (input.data as ByteArray).toRequestBody(input.mimeType.toMediaType())
@@ -713,7 +712,7 @@ class Client @JvmOverloads constructor(
             result = completedResultRef.get() ?: lastResultRef.get()
         }
 
-        return converter(result as Map<String, Any>)
+        return converter?.invoke(result as Map<String, Any>) ?: result as T
     }
 
     /**

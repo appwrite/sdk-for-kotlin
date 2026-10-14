@@ -32,46 +32,10 @@ data class Block(
     val mode: String,
 
     /**
-     * Reason for the block. Can be null if no reason was provided.
-     */
-    @SerializedName("reason")
-    var reason: String?,
-
-    /**
      * Block expiration date in ISO 8601 format. Can be null if the block does not expire.
      */
     @SerializedName("expiredAt")
     var expiredAt: String?,
-
-    /**
-     * Name of the project this block applies to.
-     */
-    @SerializedName("projectName")
-    val projectName: String,
-
-    /**
-     * Region of the project this block applies to.
-     */
-    @SerializedName("region")
-    val region: String,
-
-    /**
-     * Name of the organization that owns the project.
-     */
-    @SerializedName("organizationName")
-    val organizationName: String,
-
-    /**
-     * ID of the organization that owns the project.
-     */
-    @SerializedName("organizationId")
-    val organizationId: String,
-
-    /**
-     * Billing plan of the organization that owns the project.
-     */
-    @SerializedName("billingPlan")
-    val billingPlan: String,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -79,13 +43,7 @@ data class Block(
         "resourceType" to resourceType as Any,
         "resourceId" to resourceId as Any,
         "mode" to mode as Any,
-        "reason" to reason as Any?,
         "expiredAt" to expiredAt as Any?,
-        "projectName" to projectName as Any,
-        "region" to region as Any,
-        "organizationName" to organizationName as Any,
-        "organizationId" to organizationId as Any,
-        "billingPlan" to billingPlan as Any,
     )
 
     companion object {
@@ -93,17 +51,11 @@ data class Block(
         fun from(
             map: Map<String, Any>,
         ) = Block(
-            createdAt = map["\$createdAt"] as String,
-            resourceType = map["resourceType"] as String,
-            resourceId = map["resourceId"] as String,
-            mode = map["mode"] as String,
-            reason = map["reason"] as? String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            resourceType = (if (map.containsKey("resourceType")) map["resourceType"] else "") as String,
+            resourceId = (if (map.containsKey("resourceId")) map["resourceId"] else "") as String,
+            mode = (if (map.containsKey("mode")) map["mode"] else "full") as String,
             expiredAt = map["expiredAt"] as? String,
-            projectName = map["projectName"] as String,
-            region = map["region"] as String,
-            organizationName = map["organizationName"] as String,
-            organizationId = map["organizationId"] as String,
-            billingPlan = map["billingPlan"] as String,
         )
     }
 }

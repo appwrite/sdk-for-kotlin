@@ -13,7 +13,7 @@ Users users = new Users(client);
 users.createJWT(
     "<USER_ID>", // userId
     "recent()", // sessionId (optional)
-    0, // duration (optional)
+    0L, // duration (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -56,7 +56,7 @@ data class Webhook(
     val authUsername: String,
 
     /**
-     * HTTP basic authentication password.
+     * HTTP basic authentication password. Write-only: always returned empty.
      */
     @SerializedName("authPassword")
     val authPassword: String,
@@ -107,19 +107,19 @@ data class Webhook(
         fun from(
             map: Map<String, Any>,
         ) = Webhook(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            url = map["url"] as String,
-            events = map["events"] as List<String>,
-            tls = map["tls"] as Boolean,
-            authUsername = map["authUsername"] as String,
-            authPassword = map["authPassword"] as String,
-            secret = map["secret"] as String,
-            enabled = map["enabled"] as Boolean,
-            logs = map["logs"] as String,
-            attempts = (map["attempts"] as Number).toLong(),
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            url = (if (map.containsKey("url")) map["url"] else "") as String,
+            events = (if (map.containsKey("events")) map["events"] else listOf<Any?>()) as List<String>,
+            tls = (if (map.containsKey("tls")) map["tls"] else true) as Boolean,
+            authUsername = (if (map.containsKey("authUsername")) map["authUsername"] else "") as String,
+            authPassword = (if (map.containsKey("authPassword")) map["authPassword"] else "") as String,
+            secret = (if (map.containsKey("secret")) map["secret"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
+            logs = (if (map.containsKey("logs")) map["logs"] else "") as String,
+            attempts = ((if (map.containsKey("attempts")) map["attempts"] else 0) as Number).toLong(),
         )
     }
 }

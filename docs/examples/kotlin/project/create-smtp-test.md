@@ -11,6 +11,6 @@ val client = Client()
 val project = Project(client)
 
 val response = project.createSMTPTest(
-    emails = listOf()
+    emails = listOf("recipient@example.com")
 )
 ```

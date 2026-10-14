@@ -14,8 +14,8 @@ mongo.listRestorations(
     "<DATABASE_ID>", // databaseId
     "pending", // status (optional)
     "backup", // type (optional)
-    1, // limit (optional)
-    0, // offset (optional)
+    1L, // limit (optional)
+    0L, // offset (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

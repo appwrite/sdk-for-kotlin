@@ -51,11 +51,11 @@ data class DedicatedDatabaseBackupStorage(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseBackupStorage(
-            provider = map["provider"] as String,
-            bucket = map["bucket"] as String,
-            region = map["region"] as String,
-            prefix = map["prefix"] as String,
-            endpoint = map["endpoint"] as String,
+            provider = (if (map.containsKey("provider")) map["provider"] else "") as String,
+            bucket = (if (map.containsKey("bucket")) map["bucket"] else "") as String,
+            region = (if (map.containsKey("region")) map["region"] else "") as String,
+            prefix = (if (map.containsKey("prefix")) map["prefix"] else "backups/") as String,
+            endpoint = (if (map.containsKey("endpoint")) map["endpoint"] else "") as String,
         )
     }
 }

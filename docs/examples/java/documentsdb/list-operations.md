@@ -13,8 +13,8 @@ DocumentsDB documentsDB = new DocumentsDB(client);
 documentsDB.listOperations(
     "<DATABASE_ID>", // databaseId
     "queued", // status (optional)
-    1, // limit (optional)
-    0, // offset (optional)
+    1L, // limit (optional)
+    0L, // offset (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

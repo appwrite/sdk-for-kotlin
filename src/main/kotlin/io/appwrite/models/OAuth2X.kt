@@ -44,10 +44,10 @@ data class OAuth2X(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2X(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            customerKey = map["customerKey"] as String,
-            secretKey = map["secretKey"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            customerKey = (if (map.containsKey("customerKey")) map["customerKey"] else "") as String,
+            secretKey = (if (map.containsKey("secretKey")) map["secretKey"] else "") as String,
         )
     }
 }

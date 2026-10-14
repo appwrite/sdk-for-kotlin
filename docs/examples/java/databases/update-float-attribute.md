@@ -16,8 +16,8 @@ databases.updateFloatAttribute(
     "<KEY>", // key
     false, // required
     10.5, // default
-    0, // min (optional)
-    100, // max (optional)
+    0.0, // min (optional)
+    100.0, // max (optional)
     "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

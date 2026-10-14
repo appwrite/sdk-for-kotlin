@@ -15,7 +15,7 @@ messaging.updateSMTPProvider(
     "<PROVIDER_ID>", // providerId
     "<NAME>", // name (optional)
     "<HOST>", // host (optional)
-    1, // port (optional)
+    1L, // port (optional)
     "<USERNAME>", // username (optional)
     "password", // password (optional)
     SmtpEncryption.NONE, // encryption (optional)

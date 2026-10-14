@@ -30,8 +30,8 @@ data class MockNumberList(
         fun from(
             map: Map<String, Any>,
         ) = MockNumberList(
-            total = (map["total"] as Number).toLong(),
-            mockNumbers = (map["mockNumbers"] as List<Map<String, Any>>).map { MockNumber.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            mockNumbers = ((if (map.containsKey("mockNumbers")) map["mockNumbers"] else listOf<Any?>()) as List<Map<String, Any>>).map { MockNumber.from(map = it) },
         )
     }
 }

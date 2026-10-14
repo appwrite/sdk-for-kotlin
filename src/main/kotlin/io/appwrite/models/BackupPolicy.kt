@@ -100,18 +100,18 @@ data class BackupPolicy(
         fun from(
             map: Map<String, Any>,
         ) = BackupPolicy(
-            id = map["\$id"] as String,
-            name = map["name"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            services = map["services"] as List<String>,
-            resources = map["resources"] as List<String>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            services = (if (map.containsKey("services")) map["services"] else listOf<Any?>()) as List<String>,
+            resources = (if (map.containsKey("resources")) map["resources"] else listOf<Any?>()) as List<String>,
             resourceId = map["resourceId"] as? String,
             resourceType = map["resourceType"] as? String,
-            retention = (map["retention"] as Number).toLong(),
-            schedule = map["schedule"] as String,
-            type = map["type"] as String,
-            enabled = map["enabled"] as Boolean,
+            retention = ((if (map.containsKey("retention")) map["retention"] else 1) as Number).toLong(),
+            schedule = (if (map.containsKey("schedule")) map["schedule"] else "0 * * * *") as String,
+            type = (if (map.containsKey("type")) map["type"] else "full") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
         )
     }
 }

@@ -11,7 +11,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateLabels(
-    List.of(), // labels
+    List.of("production"), // labels
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

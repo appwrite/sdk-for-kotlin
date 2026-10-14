@@ -16,7 +16,7 @@ databases.updateStringAttribute(
     "<KEY>", // key
     false, // required
     "Hello World", // default
-    1, // size (optional)
+    1L, // size (optional)
     "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

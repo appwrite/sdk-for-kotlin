@@ -13,7 +13,13 @@ val vectorsDB = VectorsDB(client)
 val response = vectorsDB.upsertDocuments(
     databaseId = "<DATABASE_ID>",
     collectionId = "<COLLECTION_ID>",
-    documents = listOf(),
+    documents = listOf(mapOf(
+        "\$id" to "example1",
+        "embeddings" to listOf(0.12, -0.55, 0.88, 1.02),
+        "metadata" to mapOf(
+            "name" to "First document"
+        )
+    )),
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

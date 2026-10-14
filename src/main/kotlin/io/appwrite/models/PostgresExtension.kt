@@ -44,10 +44,10 @@ data class PostgresExtension(
         fun from(
             map: Map<String, Any>,
         ) = PostgresExtension(
-            key = map["key"] as String,
-            name = map["name"] as String,
-            description = map["description"] as String,
-            category = map["category"] as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
+            category = (if (map.containsKey("category")) map["category"] else "") as String,
         )
     }
 }

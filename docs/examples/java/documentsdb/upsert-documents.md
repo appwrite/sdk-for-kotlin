@@ -13,7 +13,14 @@ DocumentsDB documentsDB = new DocumentsDB(client);
 documentsDB.upsertDocuments(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    List.of(), // documents
+    List.of(Map.of(
+        "$id", "example1",
+        "username", "walter.obrien",
+        "email", "walter.obrien@example.com",
+        "fullName", "Walter O'Brien",
+        "age", 30,
+        "isAdmin", false
+    )), // documents
     "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

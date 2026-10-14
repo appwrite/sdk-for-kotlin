@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Presences service allows you to track and manage real-time user presence in your project.**/
+ * The Presences service allows you to track and manage real-time user presence in your project.
+ */
 class Presences(client: Client) : Service(client) {
     /**
      * List presence logs. Expired entries are filtered out automatically.
@@ -61,6 +62,9 @@ class Presences(client: Client) : Service(client) {
     suspend fun get(
         presenceId: String,
     ): io.appwrite.models.Presence {
+        if (presenceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"presenceId\"")
+        }
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
@@ -104,6 +108,9 @@ class Presences(client: Client) : Service(client) {
         expiresAt: String? = null,
         metadata: Map<String, Any?>? = null,
     ): io.appwrite.models.Presence {
+        if (presenceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"presenceId\"")
+        }
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
@@ -156,6 +163,9 @@ class Presences(client: Client) : Service(client) {
         permissions: List<String>? = null,
         purge: Boolean? = null,
     ): io.appwrite.models.Presence {
+        if (presenceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"presenceId\"")
+        }
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
@@ -196,6 +206,9 @@ class Presences(client: Client) : Service(client) {
     suspend fun delete(
         presenceId: String,
     ): Any {
+        if (presenceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"presenceId\"")
+        }
         val apiPath = ("/presences/{presenceId}"
             .replace("{presenceId}", presenceId)
         )
@@ -203,6 +216,7 @@ class Presences(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

@@ -11,6 +11,8 @@ val client = Client()
 val graphql = Graphql(client)
 
 val response = graphql.mutation(
-    query = mapOf( "a" to "b" )
+    query = mapOf(
+        "query" to "mutation { accountUpdateName(name: \"Walter\") { name } }"
+    )
 )
 ```

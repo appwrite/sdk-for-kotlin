@@ -37,9 +37,9 @@ data class DedicatedDatabaseExtensions(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseExtensions(
-            installed = map["installed"] as List<String>,
-            available = map["available"] as List<String>,
-            metadata = (map["metadata"] as List<Map<String, Any>>).map { PostgresExtension.from(map = it) },
+            installed = (if (map.containsKey("installed")) map["installed"] else listOf<Any?>()) as List<String>,
+            available = (if (map.containsKey("available")) map["available"] else listOf<Any?>()) as List<String>,
+            metadata = ((if (map.containsKey("metadata")) map["metadata"] else listOf<Any?>()) as List<Map<String, Any>>).map { PostgresExtension.from(map = it) },
         )
     }
 }

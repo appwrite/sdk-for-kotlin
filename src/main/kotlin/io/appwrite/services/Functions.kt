@@ -11,7 +11,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Functions Service allows you view, create and manage your Cloud Functions.**/
+ * The Functions Service allows you view, create and manage your Cloud Functions.
+ */
 class Functions(client: Client) : Service(client) {
     /**
      * Get a list of all the project's functions. You can use the query params to filter your results.
@@ -227,6 +228,9 @@ class Functions(client: Client) : Service(client) {
     suspend fun get(
         functionId: String,
     ): io.appwrite.models.Function {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
@@ -303,6 +307,9 @@ class Functions(client: Client) : Service(client) {
         deploymentRetention: Long? = null,
         interval: Long? = null,
     ): io.appwrite.models.Function {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
@@ -358,6 +365,9 @@ class Functions(client: Client) : Service(client) {
     suspend fun delete(
         functionId: String,
     ): Any {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}"
             .replace("{functionId}", functionId)
         )
@@ -365,6 +375,7 @@ class Functions(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -387,6 +398,9 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         deploymentId: String,
     ): io.appwrite.models.Function {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployment"
             .replace("{functionId}", functionId)
         )
@@ -428,6 +442,9 @@ class Functions(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.DeploymentList {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
         )
@@ -477,6 +494,9 @@ class Functions(client: Client) : Service(client) {
         commands: String? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments"
             .replace("{functionId}", functionId)
         )
@@ -502,9 +522,10 @@ class Functions(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.Deployment::class.java,
             converter,
-            paramName,
-            idParamName,
-            onProgress,
+            paramName = paramName,
+            idParamName = idParamName,
+            onProgress = onProgress,
+            method = "POST",
         )
     }
 
@@ -523,6 +544,9 @@ class Functions(client: Client) : Service(client) {
         deploymentId: String,
         buildId: String? = null,
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/duplicate"
             .replace("{functionId}", functionId)
         )
@@ -573,6 +597,9 @@ class Functions(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/template"
             .replace("{functionId}", functionId)
         )
@@ -621,6 +648,9 @@ class Functions(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/vcs"
             .replace("{functionId}", functionId)
         )
@@ -659,6 +689,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/{deploymentId}"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
@@ -693,6 +729,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         deploymentId: String,
     ): Any {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/{deploymentId}"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
@@ -701,6 +743,7 @@ class Functions(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -728,6 +771,12 @@ class Functions(client: Client) : Service(client) {
         type: io.appwrite.enums.DeploymentDownloadType? = null,
         token: String? = null,
     ): ByteArray {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/{deploymentId}/download"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
@@ -761,6 +810,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/functions/{functionId}/deployments/{deploymentId}/status"
             .replace("{functionId}", functionId)
             .replace("{deploymentId}", deploymentId)
@@ -799,6 +854,9 @@ class Functions(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ExecutionList {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
         )
@@ -846,6 +904,9 @@ class Functions(client: Client) : Service(client) {
         headers: Map<String, Any?>? = null,
         scheduledAt: String? = null,
     ): io.appwrite.models.Execution {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/executions"
             .replace("{functionId}", functionId)
         )
@@ -887,6 +948,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         executionId: String,
     ): io.appwrite.models.Execution {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (executionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"executionId\"")
+        }
         val apiPath = ("/functions/{functionId}/executions/{executionId}"
             .replace("{functionId}", functionId)
             .replace("{executionId}", executionId)
@@ -921,6 +988,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         executionId: String,
     ): Any {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (executionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"executionId\"")
+        }
         val apiPath = ("/functions/{functionId}/executions/{executionId}"
             .replace("{functionId}", functionId)
             .replace("{executionId}", executionId)
@@ -929,6 +1002,7 @@ class Functions(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -954,6 +1028,9 @@ class Functions(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.VariableList {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
         )
@@ -997,6 +1074,9 @@ class Functions(client: Client) : Service(client) {
         value: String,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
         val apiPath = ("/functions/{functionId}/variables"
             .replace("{functionId}", functionId)
         )
@@ -1036,6 +1116,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         variableId: String,
     ): io.appwrite.models.Variable {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/functions/{functionId}/variables/{variableId}"
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
@@ -1077,6 +1163,12 @@ class Functions(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/functions/{functionId}/variables/{variableId}"
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
@@ -1116,6 +1208,12 @@ class Functions(client: Client) : Service(client) {
         functionId: String,
         variableId: String,
     ): Any {
+        if (functionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"functionId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/functions/{functionId}/variables/{variableId}"
             .replace("{functionId}", functionId)
             .replace("{variableId}", variableId)
@@ -1124,6 +1222,7 @@ class Functions(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

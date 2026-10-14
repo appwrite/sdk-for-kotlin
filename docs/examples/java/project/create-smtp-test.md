@@ -11,7 +11,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.createSMTPTest(
-    List.of(), // emails
+    List.of("recipient@example.com"), // emails
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

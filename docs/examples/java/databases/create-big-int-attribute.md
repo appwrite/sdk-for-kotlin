@@ -15,9 +15,9 @@ databases.createBigIntAttribute(
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
     false, // required
-    0, // min (optional)
-    1000000, // max (optional)
-    0, // default (optional)
+    0L, // min (optional)
+    1000000L, // max (optional)
+    0L, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
