@@ -30,8 +30,8 @@ data class SiteList(
         fun from(
             map: Map<String, Any>,
         ) = SiteList(
-            total = (map["total"] as Number).toLong(),
-            sites = (map["sites"] as List<Map<String, Any>>).map { Site.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            sites = ((if (map.containsKey("sites")) map["sites"] else listOf<Any?>()) as List<Map<String, Any>>).map { Site.from(map = it) },
         )
     }
 }

@@ -15,8 +15,8 @@ val response = databases.decrementDocumentAttribute(
     collectionId = "<COLLECTION_ID>",
     documentId = "<DOCUMENT_ID>",
     attribute = "<ATTRIBUTE>",
-    value = 1, // optional
-    min = 0, // optional
+    value = 1.0, // optional
+    min = 0.0, // optional
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

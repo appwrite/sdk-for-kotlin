@@ -65,13 +65,13 @@ data class ResourceToken(
         fun from(
             map: Map<String, Any>,
         ) = ResourceToken(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            resourceId = map["resourceId"] as String,
-            resourceType = map["resourceType"] as String,
-            expire = map["expire"] as String,
-            secret = map["secret"] as String,
-            accessedAt = map["accessedAt"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            resourceId = (if (map.containsKey("resourceId")) map["resourceId"] else "") as String,
+            resourceType = (if (map.containsKey("resourceType")) map["resourceType"] else "") as String,
+            expire = (if (map.containsKey("expire")) map["expire"] else "") as String,
+            secret = (if (map.containsKey("secret")) map["secret"] else "") as String,
+            accessedAt = (if (map.containsKey("accessedAt")) map["accessedAt"] else "") as String,
         )
     }
 }

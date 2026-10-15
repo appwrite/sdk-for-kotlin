@@ -15,10 +15,10 @@ users.createScryptUser(
     "email@example.com", // email
     "password", // password
     "<PASSWORD_SALT>", // passwordSalt
-    8, // passwordCpu
-    65536, // passwordMemory
-    1, // passwordParallel
-    64, // passwordLength
+    8L, // passwordCpu
+    65536L, // passwordMemory
+    1L, // passwordParallel
+    64L, // passwordLength
     "<NAME>", // name (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

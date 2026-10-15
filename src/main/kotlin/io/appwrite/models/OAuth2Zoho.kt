@@ -35,7 +35,7 @@ data class OAuth2Zoho(
      * Zoho OAuth2 prompt values.
      */
     @SerializedName("prompt")
-    var prompt: List<io.appwrite.enums.OAuth2ZohoPrompt>? = null,
+    val prompt: List<io.appwrite.enums.OAuth2ZohoPrompt>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -43,7 +43,7 @@ data class OAuth2Zoho(
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
-        "prompt" to prompt as Any?,
+        "prompt" to prompt.map { it.value } as Any,
     )
 
     companion object {
@@ -51,11 +51,11 @@ data class OAuth2Zoho(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Zoho(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            clientId = map["clientId"] as String,
-            clientSecret = map["clientSecret"] as String,
-            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2ZohoPrompt>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
+            clientSecret = (if (map.containsKey("clientSecret")) map["clientSecret"] else "") as String,
+            prompt = ((if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<*>).mapNotNull { value -> io.appwrite.enums.OAuth2ZohoPrompt.values().find { it.value == value } },
         )
     }
 }

@@ -11,7 +11,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updateSessionDurationPolicy(
-    60, // duration
+    60L, // duration
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

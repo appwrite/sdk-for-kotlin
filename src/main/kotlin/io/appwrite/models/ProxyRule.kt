@@ -3,6 +3,7 @@ package io.appwrite.models
 import com.google.gson.annotations.SerializedName
 import io.appwrite.enums.ProxyRuleDeploymentResourceType
 import io.appwrite.enums.ProxyRuleStatus
+import io.appwrite.enums.ProxyRuleProtocol
 import io.appwrite.extensions.jsonCast
 
 /**
@@ -64,7 +65,7 @@ data class ProxyRule(
     val deploymentId: String,
 
     /**
-     * Type of deployment. Possible values are "function", "site". Used if rule's type is "deployment".
+     * Type of deployment resource: function, site, or dedicatedDatabase.
      */
     @SerializedName("deploymentResourceType")
     var deploymentResourceType: ProxyRuleDeploymentResourceType?,
@@ -99,6 +100,12 @@ data class ProxyRule(
     @SerializedName("renewAt")
     val renewAt: String,
 
+    /**
+     * Ingress protocol for the rule.
+     */
+    @SerializedName("protocol")
+    val protocol: ProxyRuleProtocol,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -116,6 +123,7 @@ data class ProxyRule(
         "status" to status.value as Any,
         "logs" to logs as Any,
         "renewAt" to renewAt as Any,
+        "protocol" to protocol.value as Any,
     )
 
     companion object {
@@ -123,21 +131,22 @@ data class ProxyRule(
         fun from(
             map: Map<String, Any>,
         ) = ProxyRule(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            domain = map["domain"] as String,
-            type = map["type"] as String,
-            trigger = map["trigger"] as String,
-            redirectUrl = map["redirectUrl"] as String,
-            redirectStatusCode = (map["redirectStatusCode"] as Number).toLong(),
-            deploymentId = map["deploymentId"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            domain = (if (map.containsKey("domain")) map["domain"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
+            trigger = (if (map.containsKey("trigger")) map["trigger"] else "") as String,
+            redirectUrl = (if (map.containsKey("redirectUrl")) map["redirectUrl"] else "") as String,
+            redirectStatusCode = ((if (map.containsKey("redirectStatusCode")) map["redirectStatusCode"] else 301) as Number).toLong(),
+            deploymentId = (if (map.containsKey("deploymentId")) map["deploymentId"] else "") as String,
             deploymentResourceType = ProxyRuleDeploymentResourceType.values().find { it.value == (map["deploymentResourceType"] as? String) },
-            deploymentResourceId = map["deploymentResourceId"] as String,
-            deploymentVcsProviderBranch = map["deploymentVcsProviderBranch"] as String,
-            status = ProxyRuleStatus.values().find { it.value == map["status"] as String }!!,
-            logs = map["logs"] as String,
+            deploymentResourceId = (if (map.containsKey("deploymentResourceId")) map["deploymentResourceId"] else "") as String,
+            deploymentVcsProviderBranch = (if (map.containsKey("deploymentVcsProviderBranch")) map["deploymentVcsProviderBranch"] else "") as String,
+            status = ProxyRuleStatus.values().find { it.value == (if (map.containsKey("status")) map["status"] else "unverified") as String }!!,
+            logs = (if (map.containsKey("logs")) map["logs"] else "") as String,
             renewAt = map["renewAt"] as String,
+            protocol = ProxyRuleProtocol.values().find { it.value == (if (map.containsKey("protocol")) map["protocol"] else "http") as String }!!,
         )
     }
 }

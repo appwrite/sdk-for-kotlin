@@ -43,7 +43,7 @@ data class OAuth2Kakao(
         "enabled" to enabled as Any,
         "clientId" to clientId as Any,
         "clientSecret" to clientSecret as Any,
-        "prompt" to prompt as Any,
+        "prompt" to prompt.map { it.value } as Any,
     )
 
     companion object {
@@ -55,7 +55,7 @@ data class OAuth2Kakao(
             enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
             clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
             clientSecret = (if (map.containsKey("clientSecret")) map["clientSecret"] else "") as String,
-            prompt = (if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<io.appwrite.enums.OAuth2KakaoPrompt>,
+            prompt = ((if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<*>).mapNotNull { value -> io.appwrite.enums.OAuth2KakaoPrompt.values().find { it.value == value } },
         )
     }
 }

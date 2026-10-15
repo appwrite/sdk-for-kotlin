@@ -30,8 +30,8 @@ data class ColumnIndexList(
         fun from(
             map: Map<String, Any>,
         ) = ColumnIndexList(
-            total = (map["total"] as Number).toLong(),
-            indexes = (map["indexes"] as List<Map<String, Any>>).map { ColumnIndex.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            indexes = ((if (map.containsKey("indexes")) map["indexes"] else listOf<Any?>()) as List<Map<String, Any>>).map { ColumnIndex.from(map = it) },
         )
     }
 }

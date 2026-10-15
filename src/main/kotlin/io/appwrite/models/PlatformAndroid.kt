@@ -48,7 +48,7 @@ data class PlatformAndroid(
      * SHA-256 fingerprints of the certificates the app is signed with. Passkeys created in the app are accepted when its signature matches one.
      */
     @SerializedName("fingerprints")
-    var fingerprints: List<String>? = null,
+    val fingerprints: List<String>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -58,7 +58,7 @@ data class PlatformAndroid(
         "name" to name as Any,
         "type" to type.value as Any,
         "applicationId" to applicationId as Any,
-        "fingerprints" to fingerprints as Any?,
+        "fingerprints" to fingerprints as Any,
     )
 
     companion object {
@@ -66,13 +66,13 @@ data class PlatformAndroid(
         fun from(
             map: Map<String, Any>,
         ) = PlatformAndroid(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
             type = PlatformType.values().find { it.value == map["type"] as String }!!,
-            applicationId = map["applicationId"] as String,
-            fingerprints = map["fingerprints"] as? List<String>,
+            applicationId = (if (map.containsKey("applicationId")) map["applicationId"] else "") as String,
+            fingerprints = (if (map.containsKey("fingerprints")) map["fingerprints"] else listOf<Any?>()) as List<String>,
         )
     }
 }

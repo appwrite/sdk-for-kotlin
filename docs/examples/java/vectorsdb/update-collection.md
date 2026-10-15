@@ -16,7 +16,7 @@ vectorsDB.updateCollection(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
     "<NAME>", // name
-    1, // dimension (optional)
+    4L, // dimension (optional)
     List.of(Permission.read(Role.any())), // permissions (optional)
     false, // documentSecurity (optional)
     false, // enabled (optional)

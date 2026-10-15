@@ -13,7 +13,14 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.upsertRows(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    rows = listOf(),
+    rows = listOf(mapOf(
+        "\$id" to "example1",
+        "username" to "walter.obrien",
+        "email" to "walter.obrien@example.com",
+        "fullName" to "Walter O'Brien",
+        "age" to 30,
+        "isAdmin" to false
+    )),
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

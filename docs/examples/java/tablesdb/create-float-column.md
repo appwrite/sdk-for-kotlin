@@ -15,8 +15,8 @@ tablesDB.createFloatColumn(
     "<TABLE_ID>", // tableId
     "<KEY>", // key
     false, // required
-    0, // min (optional)
-    100, // max (optional)
+    0.0, // min (optional)
+    100.0, // max (optional)
     10.5, // default (optional)
     false, // array (optional)
     new CoroutineCallback<>((result, error) -> {

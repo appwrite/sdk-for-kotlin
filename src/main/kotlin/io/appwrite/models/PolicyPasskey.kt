@@ -37,9 +37,9 @@ data class PolicyPasskey(
         fun from(
             map: Map<String, Any>,
         ) = PolicyPasskey(
-            id = map["\$id"] as String,
-            rpId = map["rpId"] as String,
-            origins = map["origins"] as List<String>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            rpId = (if (map.containsKey("rpId")) map["rpId"] else "") as String,
+            origins = (if (map.containsKey("origins")) map["origins"] else listOf<Any?>()) as List<String>,
         )
     }
 }

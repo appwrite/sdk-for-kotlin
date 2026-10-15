@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Advisor service surfaces actionable reports about your project resources, with CTA descriptors for one-click remediation in the console.**/
+ * The Advisor service surfaces actionable reports about your project resources, with CTA descriptors for one-click remediation in the console.
+ */
 class Advisor(client: Client) : Service(client) {
     /**
      * Get a list of all the project's analyzer reports. You can use the query params to filter your results.
@@ -58,6 +59,9 @@ class Advisor(client: Client) : Service(client) {
     suspend fun getReport(
         reportId: String,
     ): io.appwrite.models.Report {
+        if (reportId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"reportId\"")
+        }
         val apiPath = ("/reports/{reportId}"
             .replace("{reportId}", reportId)
         )
@@ -90,6 +94,9 @@ class Advisor(client: Client) : Service(client) {
     suspend fun deleteReport(
         reportId: String,
     ): Any {
+        if (reportId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"reportId\"")
+        }
         val apiPath = ("/reports/{reportId}"
             .replace("{reportId}", reportId)
         )
@@ -97,6 +104,7 @@ class Advisor(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -123,6 +131,9 @@ class Advisor(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.InsightList {
+        if (reportId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"reportId\"")
+        }
         val apiPath = ("/reports/{reportId}/insights"
             .replace("{reportId}", reportId)
         )
@@ -160,6 +171,12 @@ class Advisor(client: Client) : Service(client) {
         reportId: String,
         insightId: String,
     ): io.appwrite.models.Insight {
+        if (reportId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"reportId\"")
+        }
+        if (insightId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"insightId\"")
+        }
         val apiPath = ("/reports/{reportId}/insights/{insightId}"
             .replace("{reportId}", reportId)
             .replace("{insightId}", insightId)

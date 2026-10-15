@@ -15,7 +15,7 @@ mongo.createBackupPolicy(
     "<POLICY_ID>", // policyId
     "<NAME>", // name
     "", // schedule
-    1, // retention
+    1L, // retention
     "full", // type (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {

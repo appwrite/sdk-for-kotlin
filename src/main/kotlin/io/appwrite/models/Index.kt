@@ -87,15 +87,15 @@ data class Index(
         fun from(
             map: Map<String, Any>,
         ) = Index(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            key = map["key"] as String,
-            type = map["type"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
             status = IndexStatus.values().find { it.value == map["status"] as String }!!,
-            error = map["error"] as String,
-            attributes = map["attributes"] as List<String>,
-            lengths = map["lengths"] as List<Long>,
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
+            attributes = (if (map.containsKey("attributes")) map["attributes"] else listOf<Any?>()) as List<String>,
+            lengths = (if (map.containsKey("lengths")) map["lengths"] else listOf<Any?>()) as List<Long>,
             orders = map["orders"] as? List<String>,
         )
     }

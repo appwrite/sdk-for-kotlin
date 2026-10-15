@@ -30,8 +30,8 @@ data class DeploymentList(
         fun from(
             map: Map<String, Any>,
         ) = DeploymentList(
-            total = (map["total"] as Number).toLong(),
-            deployments = (map["deployments"] as List<Map<String, Any>>).map { Deployment.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            deployments = ((if (map.containsKey("deployments")) map["deployments"] else listOf<Any?>()) as List<Map<String, Any>>).map { Deployment.from(map = it) },
         )
     }
 }

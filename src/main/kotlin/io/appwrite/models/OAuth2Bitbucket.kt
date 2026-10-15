@@ -44,10 +44,10 @@ data class OAuth2Bitbucket(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Bitbucket(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            key = map["key"] as String,
-            secret = map["secret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            secret = (if (map.containsKey("secret")) map["secret"] else "") as String,
         )
     }
 }

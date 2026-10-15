@@ -100,17 +100,17 @@ data class Report(
         fun from(
             map: Map<String, Any>,
         ) = Report(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            appId = map["appId"] as String,
-            type = map["type"] as String,
-            title = map["title"] as String,
-            summary = map["summary"] as String,
-            targetType = map["targetType"] as String,
-            target = map["target"] as String,
-            categories = map["categories"] as List<String>,
-            insights = (map["insights"] as List<Map<String, Any>>).map { Insight.from(map = it) },
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            appId = (if (map.containsKey("appId")) map["appId"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
+            title = (if (map.containsKey("title")) map["title"] else "") as String,
+            summary = (if (map.containsKey("summary")) map["summary"] else "") as String,
+            targetType = (if (map.containsKey("targetType")) map["targetType"] else "") as String,
+            target = (if (map.containsKey("target")) map["target"] else "") as String,
+            categories = (if (map.containsKey("categories")) map["categories"] else listOf<Any?>()) as List<String>,
+            insights = ((if (map.containsKey("insights")) map["insights"] else listOf<Any?>()) as List<Map<String, Any>>).map { Insight.from(map = it) },
             analyzedAt = map["analyzedAt"] as? String,
         )
     }

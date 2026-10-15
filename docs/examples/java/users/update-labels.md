@@ -12,7 +12,7 @@ Users users = new Users(client);
 
 users.updateLabels(
     "<USER_ID>", // userId
-    List.of(), // labels
+    List.of("subscriber"), // labels
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

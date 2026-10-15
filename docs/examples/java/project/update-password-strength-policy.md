@@ -11,7 +11,7 @@ Client client = new Client()
 Project project = new Project(client);
 
 project.updatePasswordStrengthPolicy(
-    8, // min (optional)
+    8L, // min (optional)
     false, // uppercase (optional)
     false, // lowercase (optional)
     false, // number (optional)

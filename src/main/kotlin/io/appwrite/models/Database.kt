@@ -76,7 +76,7 @@ data class Database(
     var error: String?,
 
     /**
-     * Container status of the dedicated backing: active or inactive. Null when the database has no dedicated backing or the runtime has not reported one.
+     * Container status of the dedicated backing: active, inactive, or failed (a wake was declined because the backing namespace is gone). Null when the database has no dedicated backing or the runtime has not reported one.
      */
     @SerializedName("containerStatus")
     var containerStatus: String?,
@@ -123,12 +123,12 @@ data class Database(
         fun from(
             map: Map<String, Any>,
         ) = Database(
-            id = map["\$id"] as String,
-            name = map["name"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            enabled = map["enabled"] as Boolean,
-            type = DatabaseType.values().find { it.value == map["type"] as String }!!,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
+            type = DatabaseType.values().find { it.value == (if (map.containsKey("type")) map["type"] else "legacy") as String }!!,
             status = DatabaseStatus.values().find { it.value == (map["status"] as? String) },
             engine = map["engine"] as? String,
             specification = map["specification"] as? String,

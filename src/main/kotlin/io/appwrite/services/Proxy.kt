@@ -9,12 +9,15 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.**/
+ * The Proxy Service allows you to configure actions for your domains beyond DNS configuration.
+ */
 class Proxy(client: Client) : Service(client) {
     /**
      * Create a new CDN cache invalidation for a domain. Executes a hard purge of cached content.
      *
      * Depending on type, the invalidation purges a single cache tag, a single URL path, or all cached content for the domain.
+     *
+     * Domains that route to a function do not support cache invalidation.
      *
      * @param domain Domain name.
      * @param type Type of reference passed. Allowed values are: tag, path, all
@@ -55,7 +58,7 @@ class Proxy(client: Client) : Service(client) {
     /**
      * Get a list of all the proxy rules. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: domain, type, trigger, deploymentResourceType, deploymentResourceId, deploymentId, deploymentVcsProviderBranch
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: domain, type, trigger, deploymentResourceType, deploymentResourceId, deploymentId, deploymentVcsProviderBranch, protocol
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.ProxyRuleList]
      */
@@ -250,6 +253,45 @@ class Proxy(client: Client) : Service(client) {
     }
 
     /**
+     * Create an SMTP ingress rule that asynchronously executes an Appwrite Function for incoming email.
+     *
+     * @param domain Domain that receives email.
+     * @param functionId ID of function to execute.
+     * @param branch Name of VCS branch to deploy changes automatically.
+     * @return [io.appwrite.models.ProxyRule]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createSMTPRule(
+        domain: String,
+        functionId: String,
+        branch: String? = null,
+    ): io.appwrite.models.ProxyRule {
+        val apiPath = "/proxy/rules/smtp"
+        val apiParams = mutableMapOf<String, Any?>(
+            "domain" to domain,
+            "functionId" to functionId,
+            "branch" to branch,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ProxyRule = {
+            io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ProxyRule::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get a proxy rule by its unique ID.
      *
      * @param ruleId Rule ID.
@@ -259,6 +301,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun getRule(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
@@ -290,6 +335,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun deleteRule(
         ruleId: String,
     ): Any {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}"
             .replace("{ruleId}", ruleId)
         )
@@ -297,6 +345,7 @@ class Proxy(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -317,6 +366,9 @@ class Proxy(client: Client) : Service(client) {
     suspend fun updateRuleStatus(
         ruleId: String,
     ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
         val apiPath = ("/proxy/rules/{ruleId}/status"
             .replace("{ruleId}", ruleId)
         )

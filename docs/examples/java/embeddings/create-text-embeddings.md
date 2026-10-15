@@ -12,7 +12,7 @@ Client client = new Client()
 Embeddings embeddings = new Embeddings(client);
 
 embeddings.createTextEmbeddings(
-    List.of(), // texts
+    List.of("Appwrite helps developers build applications.", "Find documents with semantic search."), // texts
     EmbeddingModel.NOMIC_EMBED_TEXT, // model (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

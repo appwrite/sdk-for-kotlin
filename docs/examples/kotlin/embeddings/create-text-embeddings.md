@@ -12,7 +12,7 @@ val client = Client()
 val embeddings = Embeddings(client)
 
 val response = embeddings.createTextEmbeddings(
-    texts = listOf(),
+    texts = listOf("Appwrite helps developers build applications.", "Find documents with semantic search."),
     model = EmbeddingModel.NOMIC_EMBED_TEXT // optional
 )
 ```

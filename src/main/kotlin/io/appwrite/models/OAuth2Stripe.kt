@@ -44,10 +44,10 @@ data class OAuth2Stripe(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Stripe(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            clientId = map["clientId"] as String,
-            apiSecretKey = map["apiSecretKey"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            clientId = (if (map.containsKey("clientId")) map["clientId"] else "") as String,
+            apiSecretKey = (if (map.containsKey("apiSecretKey")) map["apiSecretKey"] else "") as String,
         )
     }
 }

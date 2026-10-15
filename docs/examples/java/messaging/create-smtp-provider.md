@@ -15,7 +15,7 @@ messaging.createSMTPProvider(
     "<PROVIDER_ID>", // providerId
     "<NAME>", // name
     "<HOST>", // host
-    587, // port (optional)
+    587L, // port (optional)
     "<USERNAME>", // username (optional)
     "password", // password (optional)
     SmtpEncryption.NONE, // encryption (optional)

@@ -19,7 +19,7 @@ storage.updateBucket(
     List.of(Permission.read(Role.any())), // permissions (optional)
     false, // fileSecurity (optional)
     false, // enabled (optional)
-    1, // maximumFileSize (optional)
+    1L, // maximumFileSize (optional)
     List.of(), // allowedFileExtensions (optional)
     Compression.NONE, // compression (optional)
     false, // encryption (optional)

@@ -1,21 +1,19 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Organization;
-import io.appwrite.enums.OrganizationKeyScopes;
+import io.appwrite.services.Proxy;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Organization organization = new Organization(client);
+Proxy proxy = new Proxy(client);
 
-organization.createKey(
-    "<KEY_ID>", // keyId
-    "<NAME>", // name
-    List.of(OrganizationKeyScopes.PROJECTS_READ), // scopes
-    "2020-10-15T06:38:00.000+00:00", // expire (optional)
+proxy.createSMTPRule(
+    "example.com", // domain
+    "<FUNCTION_ID>", // functionId
+    "<BRANCH>", // branch (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();
