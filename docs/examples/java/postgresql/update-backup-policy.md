@@ -15,7 +15,7 @@ postgresql.updateBackupPolicy(
     "<POLICY_ID>", // policyId
     "<NAME>", // name (optional)
     "", // schedule (optional)
-    1, // retention (optional)
+    1L, // retention (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

@@ -30,8 +30,8 @@ data class PolicyList(
         fun from(
             map: Map<String, Any>,
         ) = PolicyList(
-            total = (map["total"] as Number).toLong(),
-            policies = map["policies"] as List<Map<String, Any?>>,
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            policies = (if (map.containsKey("policies")) map["policies"] else listOf<Any?>()) as List<Map<String, Any?>>,
         )
     }
 }

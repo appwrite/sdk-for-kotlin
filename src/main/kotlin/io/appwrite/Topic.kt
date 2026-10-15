@@ -1,0 +1,44 @@
+package io.appwrite
+
+/**
+ * Validate the levels passed to `path()`: a non-empty list of non-empty strings, none holding
+ * the level separator `/` or the MQTT wildcards `+` and `#`.
+ */
+private fun levelsOf(levels: List<String>): List<String> {
+    require(levels.isNotEmpty()) { "path() needs at least one level" }
+    levels.forEachIndexed { index, level ->
+        require(level.isNotEmpty()) { "empty level at index $index" }
+        require(!level.contains("/")) {
+            val parts = level.split("/").joinToString(", ") { "'$it'" }
+            "\"$level\" contains \"/\", split it: path([$parts])"
+        }
+        require(!level.contains("+")) { "\"$level\" contains \"+\", not allowed in a topic" }
+        require(!level.contains("#")) { "\"$level\" contains \"#\", not allowed in a topic" }
+        require(!level.contains('\u0000')) { "level at index $index contains a NUL character" }
+    }
+    return levels.toList()
+}
+
+/**
+ * Helper to build MQTT topics, level by level.
+ *
+ * ```
+ * Topic.path(listOf("user", userId, "notification")) // "user/123/notification"
+ * Topic.path(listOf("org", orgId)).path(listOf("logs")) // "org/42/logs"
+ * ```
+ *
+ * @throws IllegalArgumentException from `path()` when a level is empty or holds `/`, `+` or `#`.
+ */
+class Topic private constructor(
+    private val levels: List<String>,
+) {
+    /** Append the given levels. */
+    fun path(levels: List<String>): Topic = Topic(this.levels + levelsOf(levels))
+
+    override fun toString(): String = levels.joinToString("/")
+
+    companion object {
+        /** Start a topic with the given levels, e.g. `Topic.path(listOf("user", userId))`. */
+        fun path(levels: List<String>): Topic = Topic(levelsOf(levels))
+    }
+}

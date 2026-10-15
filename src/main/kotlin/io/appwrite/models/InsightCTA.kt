@@ -44,10 +44,10 @@ data class InsightCTA(
         fun from(
             map: Map<String, Any>,
         ) = InsightCTA(
-            label = map["label"] as String,
-            service = map["service"] as String,
-            method = map["method"] as String,
-            params = map["params"] as Map<String, Any?>,
+            label = (if (map.containsKey("label")) map["label"] else "") as String,
+            service = (if (map.containsKey("service")) map["service"] else "") as String,
+            method = (if (map.containsKey("method")) map["method"] else "") as String,
+            params = (if (map.containsKey("params")) map["params"] else mapOf<String, Any?>()) as Map<String, Any?>,
         )
     }
 }

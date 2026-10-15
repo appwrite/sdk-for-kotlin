@@ -44,10 +44,10 @@ data class Embedding(
         fun from(
             map: Map<String, Any>,
         ) = Embedding(
-            model = map["model"] as String,
-            dimension = (map["dimension"] as Number).toLong(),
-            embedding = map["embedding"] as List<Double>,
-            error = map["error"] as String,
+            model = (if (map.containsKey("model")) map["model"] else "") as String,
+            dimension = ((if (map.containsKey("dimension")) map["dimension"] else 0) as Number).toLong(),
+            embedding = (if (map.containsKey("embedding")) map["embedding"] else listOf<Any?>()) as List<Double>,
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
         )
     }
 }

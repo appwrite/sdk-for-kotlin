@@ -44,10 +44,10 @@ data class MockNumber(
         fun from(
             map: Map<String, Any>,
         ) = MockNumber(
-            number = map["number"] as String,
-            otp = map["otp"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
+            number = (if (map.containsKey("number")) map["number"] else "") as String,
+            otp = (if (map.containsKey("otp")) map["otp"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
         )
     }
 }

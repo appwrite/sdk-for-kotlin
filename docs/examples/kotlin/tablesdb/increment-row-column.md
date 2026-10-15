@@ -15,8 +15,8 @@ val response = tablesDB.incrementRowColumn(
     tableId = "<TABLE_ID>",
     rowId = "<ROW_ID>",
     column = "<COLUMN>",
-    value = 1, // optional
-    max = 100, // optional
+    value = 1.0, // optional
+    max = 100.0, // optional
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

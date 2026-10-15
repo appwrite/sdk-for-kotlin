@@ -14,7 +14,7 @@ Project project = new Project(client);
 project.updateKey(
     "<KEY_ID>", // keyId
     "<NAME>", // name
-    List.of(ProjectKeyScopes.PROJECT_READ), // scopes
+    List.of(ProjectKeyScopes.USERS_READ), // scopes
     "2020-10-15T06:38:00.000+00:00", // expire (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

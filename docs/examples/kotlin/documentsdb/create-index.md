@@ -17,7 +17,7 @@ val response = documentsDB.createIndex(
     collectionId = "<COLLECTION_ID>",
     key = "<KEY>",
     type = DocumentsDBIndexType.KEY,
-    attributes = listOf(),
+    attributes = listOf("username"),
     orders = listOf(OrderBy.ASC), // optional
     lengths = listOf() // optional
 )

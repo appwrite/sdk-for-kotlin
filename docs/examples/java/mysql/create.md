@@ -15,16 +15,16 @@ mysql.create(
     "<NAME>", // name
     "17", // version (optional)
     "<SPECIFICATION>", // specification (optional)
-    0, // replicas (optional)
+    0L, // replicas (optional)
     "async", // syncMode (optional)
-    60, // networkIdleTimeoutSeconds (optional)
+    60L, // networkIdleTimeoutSeconds (optional)
     List.of(), // networkIPAllowlist (optional)
-    5, // idleTimeoutMinutes (optional)
+    5L, // idleTimeoutMinutes (optional)
     false, // pitr (optional)
-    1, // pitrRetentionDays (optional)
+    1L, // pitrRetentionDays (optional)
     false, // storageAutoscaling (optional)
-    50, // storageAutoscalingThresholdPercent (optional)
-    0, // storageAutoscalingMaxGb (optional)
+    50L, // storageAutoscalingThresholdPercent (optional)
+    0L, // storageAutoscalingMaxGb (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

@@ -39,8 +39,8 @@ data class UserList<T>(
             map: Map<String, Any>,
             nestedType: Class<T>
         ) = UserList<T>(
-            total = (map["total"] as Number).toLong(),
-            users = (map["users"] as List<Map<String, Any>>).map { User.from(map = it, nestedType) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            users = ((if (map.containsKey("users")) map["users"] else listOf<Any?>()) as List<Map<String, Any>>).map { User.from(map = it, nestedType) },
         )
     }
 }

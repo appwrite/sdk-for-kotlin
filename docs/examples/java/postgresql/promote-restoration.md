@@ -1,18 +1,18 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
-import io.appwrite.services.Organization;
+import io.appwrite.services.Postgresql;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>"); // Your secret API key
 
-Organization organization = new Organization(client);
+Postgresql postgresql = new Postgresql(client);
 
-organization.listKeys(
-    List.of(), // queries (optional)
-    false, // total (optional)
+postgresql.promoteRestoration(
+    "<DATABASE_ID>", // databaseId
+    "<RESTORATION_ID>", // restorationId
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

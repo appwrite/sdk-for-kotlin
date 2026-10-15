@@ -108,19 +108,19 @@ data class Message(
         fun from(
             map: Map<String, Any>,
         ) = Message(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            providerType = map["providerType"] as String,
-            topics = map["topics"] as List<String>,
-            users = map["users"] as List<String>,
-            targets = map["targets"] as List<String>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            providerType = (if (map.containsKey("providerType")) map["providerType"] else "") as String,
+            topics = (if (map.containsKey("topics")) map["topics"] else listOf<Any?>()) as List<String>,
+            users = (if (map.containsKey("users")) map["users"] else listOf<Any?>()) as List<String>,
+            targets = (if (map.containsKey("targets")) map["targets"] else listOf<Any?>()) as List<String>,
             scheduledAt = map["scheduledAt"] as? String,
             deliveredAt = map["deliveredAt"] as? String,
             deliveryErrors = map["deliveryErrors"] as? List<String>,
-            deliveredTotal = (map["deliveredTotal"] as Number).toLong(),
-            data = map["data"] as Map<String, Any?>,
-            status = MessageStatus.values().find { it.value == map["status"] as String }!!,
+            deliveredTotal = ((if (map.containsKey("deliveredTotal")) map["deliveredTotal"] else 0) as Number).toLong(),
+            data = (if (map.containsKey("data")) map["data"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            status = MessageStatus.values().find { it.value == (if (map.containsKey("status")) map["status"] else "draft") as String }!!,
         )
     }
 }

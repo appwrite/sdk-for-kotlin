@@ -19,17 +19,10 @@ data class DedicatedDatabaseSpecificationList(
     @SerializedName("total")
     val total: Long,
 
-    /**
-     * Overage and add-on pricing shared across all specifications.
-     */
-    @SerializedName("pricing")
-    val pricing: DedicatedDatabaseSpecificationPricing,
-
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "specifications" to specifications.map { it.toMap() } as Any,
         "total" to total as Any,
-        "pricing" to pricing.toMap() as Any,
     )
 
     companion object {
@@ -37,9 +30,8 @@ data class DedicatedDatabaseSpecificationList(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseSpecificationList(
-            specifications = (map["specifications"] as List<Map<String, Any>>).map { DedicatedDatabaseSpecification.from(map = it) },
-            total = (map["total"] as Number).toLong(),
-            pricing = DedicatedDatabaseSpecificationPricing.from(map = map["pricing"] as Map<String, Any>),
+            specifications = ((if (map.containsKey("specifications")) map["specifications"] else listOf<Any?>()) as List<Map<String, Any>>).map { DedicatedDatabaseSpecification.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
         )
     }
 }

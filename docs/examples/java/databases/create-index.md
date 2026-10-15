@@ -17,7 +17,7 @@ databases.createIndex(
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
     DatabasesIndexType.KEY, // type
-    List.of(), // attributes
+    List.of("username"), // attributes
     List.of(OrderBy.ASC), // orders (optional)
     List.of(), // lengths (optional)
     new CoroutineCallback<>((result, error) -> {

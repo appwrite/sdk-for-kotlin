@@ -15,8 +15,8 @@ val response = databases.incrementDocumentAttribute(
     collectionId = "<COLLECTION_ID>",
     documentId = "<DOCUMENT_ID>",
     attribute = "<ATTRIBUTE>",
-    value = 1, // optional
-    max = 100, // optional
+    value = 1.0, // optional
+    max = 100.0, // optional
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

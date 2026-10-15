@@ -83,19 +83,19 @@ data class Organization<T>(
      * Billing cycle start date.
      */
     @SerializedName("billingStartDate")
-    val billingStartDate: String,
+    var billingStartDate: String?,
 
     /**
      * Current invoice cycle start date.
      */
     @SerializedName("billingCurrentInvoiceDate")
-    val billingCurrentInvoiceDate: String,
+    var billingCurrentInvoiceDate: String?,
 
     /**
      * Next invoice cycle start date.
      */
     @SerializedName("billingNextInvoiceDate")
-    val billingNextInvoiceDate: String,
+    var billingNextInvoiceDate: String?,
 
     /**
      * Start date of trial.
@@ -107,25 +107,25 @@ data class Organization<T>(
      * Number of trial days.
      */
     @SerializedName("billingTrialDays")
-    val billingTrialDays: Long,
+    var billingTrialDays: Long?,
 
     /**
      * Current active aggregation id.
      */
     @SerializedName("billingAggregationId")
-    val billingAggregationId: String,
+    var billingAggregationId: String?,
 
     /**
      * Current active aggregation id.
      */
     @SerializedName("billingInvoiceId")
-    val billingInvoiceId: String,
+    var billingInvoiceId: String?,
 
     /**
      * Default payment method.
      */
     @SerializedName("paymentMethodId")
-    val paymentMethodId: String,
+    var paymentMethodId: String?,
 
     /**
      * Default payment method.
@@ -231,14 +231,14 @@ data class Organization<T>(
         "billingPlanId" to billingPlanId as Any,
         "billingPlanDetails" to billingPlanDetails.toMap() as Any,
         "billingEmail" to billingEmail as Any,
-        "billingStartDate" to billingStartDate as Any,
-        "billingCurrentInvoiceDate" to billingCurrentInvoiceDate as Any,
-        "billingNextInvoiceDate" to billingNextInvoiceDate as Any,
+        "billingStartDate" to billingStartDate as Any?,
+        "billingCurrentInvoiceDate" to billingCurrentInvoiceDate as Any?,
+        "billingNextInvoiceDate" to billingNextInvoiceDate as Any?,
         "billingTrialStartDate" to billingTrialStartDate as Any?,
-        "billingTrialDays" to billingTrialDays as Any,
-        "billingAggregationId" to billingAggregationId as Any,
-        "billingInvoiceId" to billingInvoiceId as Any,
-        "paymentMethodId" to paymentMethodId as Any,
+        "billingTrialDays" to billingTrialDays as Any?,
+        "billingAggregationId" to billingAggregationId as Any?,
+        "billingInvoiceId" to billingInvoiceId as Any?,
+        "paymentMethodId" to paymentMethodId as Any?,
         "billingAddressId" to billingAddressId as Any?,
         "backupPaymentMethodId" to backupPaymentMethodId as Any?,
         "status" to status as Any,
@@ -270,14 +270,14 @@ data class Organization<T>(
             billingPlanId: String,
             billingPlanDetails: BillingPlan,
             billingEmail: String,
-            billingStartDate: String,
-            billingCurrentInvoiceDate: String,
-            billingNextInvoiceDate: String,
+            billingStartDate: String?,
+            billingCurrentInvoiceDate: String?,
+            billingNextInvoiceDate: String?,
             billingTrialStartDate: String?,
-            billingTrialDays: Long,
-            billingAggregationId: String,
-            billingInvoiceId: String,
-            paymentMethodId: String,
+            billingTrialDays: Long?,
+            billingAggregationId: String?,
+            billingInvoiceId: String?,
+            paymentMethodId: String?,
             billingAddressId: String?,
             backupPaymentMethodId: String?,
             status: String,
@@ -336,29 +336,29 @@ data class Organization<T>(
             map: Map<String, Any>,
             nestedType: Class<T>
         ) = Organization<T>(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            total = (map["total"] as Number).toLong(),
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
             prefs = Preferences.from(map = map["prefs"] as Map<String, Any>, nestedType),
             billingBudget = (map["billingBudget"] as? Number)?.toLong(),
-            budgetAlerts = map["budgetAlerts"] as List<Long>,
-            billingPlan = map["billingPlan"] as String,
-            billingPlanId = map["billingPlanId"] as String,
+            budgetAlerts = (if (map.containsKey("budgetAlerts")) map["budgetAlerts"] else listOf<Any?>(75)) as List<Long>,
+            billingPlan = (if (map.containsKey("billingPlan")) map["billingPlan"] else "tier-0") as String,
+            billingPlanId = (if (map.containsKey("billingPlanId")) map["billingPlanId"] else "tier-0") as String,
             billingPlanDetails = BillingPlan.from(map = map["billingPlanDetails"] as Map<String, Any>),
-            billingEmail = map["billingEmail"] as String,
-            billingStartDate = map["billingStartDate"] as String,
-            billingCurrentInvoiceDate = map["billingCurrentInvoiceDate"] as String,
-            billingNextInvoiceDate = map["billingNextInvoiceDate"] as String,
+            billingEmail = (if (map.containsKey("billingEmail")) map["billingEmail"] else "") as String,
+            billingStartDate = map["billingStartDate"] as? String,
+            billingCurrentInvoiceDate = map["billingCurrentInvoiceDate"] as? String,
+            billingNextInvoiceDate = map["billingNextInvoiceDate"] as? String,
             billingTrialStartDate = map["billingTrialStartDate"] as? String,
-            billingTrialDays = (map["billingTrialDays"] as Number).toLong(),
-            billingAggregationId = map["billingAggregationId"] as String,
-            billingInvoiceId = map["billingInvoiceId"] as String,
-            paymentMethodId = map["paymentMethodId"] as String,
+            billingTrialDays = (map["billingTrialDays"] as? Number)?.toLong(),
+            billingAggregationId = map["billingAggregationId"] as? String,
+            billingInvoiceId = map["billingInvoiceId"] as? String,
+            paymentMethodId = map["paymentMethodId"] as? String,
             billingAddressId = map["billingAddressId"] as? String,
             backupPaymentMethodId = map["backupPaymentMethodId"] as? String,
-            status = map["status"] as String,
+            status = (if (map.containsKey("status")) map["status"] else "draft") as String,
             remarks = map["remarks"] as? String,
             agreementBAA = map["agreementBAA"] as? String,
             programManagerName = map["programManagerName"] as? String,
@@ -368,9 +368,9 @@ data class Organization<T>(
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             billingPlanDowngrade = map["billingPlanDowngrade"] as? String,
             billingTaxId = map["billingTaxId"] as? String,
-            markedForDeletion = map["markedForDeletion"] as Boolean,
-            platform = map["platform"] as String,
-            projects = map["projects"] as List<String>,
+            markedForDeletion = (if (map.containsKey("markedForDeletion")) map["markedForDeletion"] else false) as Boolean,
+            platform = (if (map.containsKey("platform")) map["platform"] else "appwrite") as String,
+            projects = (if (map.containsKey("projects")) map["projects"] else listOf<Any?>()) as List<String>,
         )
     }
 }

@@ -30,8 +30,8 @@ data class DedicatedDatabaseBackupList(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseBackupList(
-            total = (map["total"] as Number).toLong(),
-            backups = (map["backups"] as List<Map<String, Any>>).map { DedicatedDatabaseBackup.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            backups = ((if (map.containsKey("backups")) map["backups"] else listOf<Any?>()) as List<Map<String, Any>>).map { DedicatedDatabaseBackup.from(map = it) },
         )
     }
 }

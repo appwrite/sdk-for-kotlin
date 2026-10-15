@@ -17,7 +17,7 @@ tablesDB.createIndex(
     "<TABLE_ID>", // tableId
     "<KEY>", // key
     TablesDBIndexType.KEY, // type
-    List.of(), // columns
+    List.of("username"), // columns
     List.of(OrderBy.ASC), // orders (optional)
     List.of(), // lengths (optional)
     new CoroutineCallback<>((result, error) -> {

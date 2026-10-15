@@ -11,6 +11,6 @@ val client = Client()
 val project = Project(client)
 
 val response = project.updateLabels(
-    labels = listOf()
+    labels = listOf("production")
 )
 ```

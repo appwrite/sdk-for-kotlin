@@ -14,8 +14,8 @@ Project project = new Project(client);
 project.updateOAuth2Kakao(
     "<CLIENT_ID>", // clientId (optional)
     "<CLIENT_SECRET>", // clientSecret (optional)
-    List.of(ProjectOAuth2KakaoPrompt.NONE), // prompt (optional)
     false, // enabled (optional)
+    List.of(ProjectOAuth2KakaoPrompt.NONE), // prompt (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

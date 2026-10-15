@@ -14,7 +14,7 @@ databases.createVarcharAttribute(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
-    1, // size
+    1L, // size
     false, // required
     "Hello World", // default (optional)
     false, // array (optional)

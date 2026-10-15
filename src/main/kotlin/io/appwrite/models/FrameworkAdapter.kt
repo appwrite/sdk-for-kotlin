@@ -51,10 +51,10 @@ data class FrameworkAdapter(
         fun from(
             map: Map<String, Any>,
         ) = FrameworkAdapter(
-            key = map["key"] as String,
-            installCommand = map["installCommand"] as String,
-            buildCommand = map["buildCommand"] as String,
-            outputDirectory = map["outputDirectory"] as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            installCommand = (if (map.containsKey("installCommand")) map["installCommand"] else "") as String,
+            buildCommand = (if (map.containsKey("buildCommand")) map["buildCommand"] else "") as String,
+            outputDirectory = (if (map.containsKey("outputDirectory")) map["outputDirectory"] else "") as String,
             fallbackFile = map["fallbackFile"] as? String,
         )
     }

@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Backups service allows you to manage backup policies, archives, and restorations for your project.**/
+ * The Backups service allows you to manage backup policies, archives, and restorations for your project.
+ */
 class Backups(client: Client) : Service(client) {
     /**
      * List all archives for a project.
@@ -89,6 +90,9 @@ class Backups(client: Client) : Service(client) {
     suspend fun getArchive(
         archiveId: String,
     ): io.appwrite.models.BackupArchive {
+        if (archiveId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"archiveId\"")
+        }
         val apiPath = ("/backups/archives/{archiveId}"
             .replace("{archiveId}", archiveId)
         )
@@ -120,6 +124,9 @@ class Backups(client: Client) : Service(client) {
     suspend fun deleteArchive(
         archiveId: String,
     ): Any {
+        if (archiveId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"archiveId\"")
+        }
         val apiPath = ("/backups/archives/{archiveId}"
             .replace("{archiveId}", archiveId)
         )
@@ -231,6 +238,9 @@ class Backups(client: Client) : Service(client) {
     suspend fun getPolicy(
         policyId: String,
     ): io.appwrite.models.BackupPolicy {
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
@@ -271,6 +281,9 @@ class Backups(client: Client) : Service(client) {
         schedule: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
@@ -308,6 +321,9 @@ class Backups(client: Client) : Service(client) {
     suspend fun deletePolicy(
         policyId: String,
     ): Any {
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/backups/policies/{policyId}"
             .replace("{policyId}", policyId)
         )
@@ -419,6 +435,9 @@ class Backups(client: Client) : Service(client) {
     suspend fun getRestoration(
         restorationId: String,
     ): io.appwrite.models.BackupRestoration {
+        if (restorationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"restorationId\"")
+        }
         val apiPath = ("/backups/restorations/{restorationId}"
             .replace("{restorationId}", restorationId)
         )

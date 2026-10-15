@@ -30,8 +30,8 @@ data class CollectionList(
         fun from(
             map: Map<String, Any>,
         ) = CollectionList(
-            total = (map["total"] as Number).toLong(),
-            collections = (map["collections"] as List<Map<String, Any>>).map { Collection.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            collections = ((if (map.containsKey("collections")) map["collections"] else listOf<Any?>()) as List<Map<String, Any>>).map { Collection.from(map = it) },
         )
     }
 }

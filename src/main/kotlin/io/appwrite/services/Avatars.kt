@@ -11,7 +11,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Avatars service aims to help you complete everyday tasks related to your app image, icons, and avatars.**/
+ * The Avatars service aims to help you complete everyday tasks related to your app image, icons, and avatars.
+ */
 class Avatars(client: Client) : Service(client) {
     /**
      * You can use this endpoint to show different browser icons to your users. The code argument receives the browser code as it appears in your user [GET /account/sessions](https://appwrite.io/docs/references/cloud/client-web/account#getSessions) endpoint. Use width, height and quality arguments to change the output settings.
@@ -245,7 +246,7 @@ class Avatars(client: Client) : Service(client) {
     }
 
     /**
-     * Returns the best available profile photo for a user. The endpoint tries each source in priority order and returns the first successful result: OAuth2 identity photo, Gravatar, Libravatar, Appwrite Initials, built-in static fallback.
+     * Returns the best available profile photo for a user. The endpoint tries each source in priority order and returns the first successful result: a custom uploaded photo (see avatars.updatePhoto), OAuth2 identity photo, Gravatar, Libravatar, Appwrite Initials, built-in static fallback.
      *
      * Passing `userId` — `current()` for the authenticated user — resolves the photo from everything known about that user: identity photos, email, and name. An explicit `emailHash` or `name` then overrides just that value, and the user's remaining sources stay in the chain. Without `userId`, passing `emailHash` and/or `name` resolves the avatar from those values alone: the hash is looked up on Gravatar and Libravatar, the name is rendered as initials, and the session user stays out of the chain so their own photo never shadows the avatar being asked for. When nothing is passed, the photo resolves for the currently authenticated user. Emails are only ever accepted pre-hashed, so no address ends up in a URL.
      *
@@ -419,7 +420,7 @@ class Avatars(client: Client) : Service(client) {
      * When width and height are specified, the image is resized accordingly. If both dimensions are 0, the API provides an image at original size. If dimensions are not specified, the default viewport size is 1280x720px.
      *
      * @param url Website URL which you want to capture.
-     * @param headers HTTP headers to send with the browser request. Defaults to empty.
+     * @param headers HTTP headers to send with the browser request. Only Accept and Accept-Language are allowed. Defaults to empty.
      * @param viewportWidth Browser viewport width. Pass an integer between 1 to 1920. Defaults to 1280.
      * @param viewportHeight Browser viewport height. Pass an integer between 1 to 1080. Defaults to 720.
      * @param scale Browser scale factor. Pass a number between 0.1 to 3. Defaults to 1.

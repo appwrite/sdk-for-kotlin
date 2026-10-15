@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.**/
+ * The OAuth2 service allows you to authorize apps and issue standards-based OAuth2 and OpenID Connect tokens.
+ */
 class Oauth2(client: Client) : Service(client) {
     /**
      * Approve an OAuth2 grant after the user gives consent. Returns the `redirectUrl` the end user should be sent to. The consent screen may optionally pass enriched `authorization_details` to record the concrete resources the user selected. You can pass Accept header of `application/json` to receive a JSON response instead of a redirect.
@@ -84,7 +85,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
         requestUri: String? = null,
     ): io.appwrite.models.Oauth2Authorize {
@@ -156,7 +157,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
         requestUri: String? = null,
     ): io.appwrite.models.Oauth2Authorize {
@@ -212,7 +213,7 @@ class Oauth2(client: Client) : Service(client) {
         clientId: String? = null,
         scope: String? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2DeviceAuthorization {
         val apiPath = ("/oauth2/{project_id}/device_authorization"
@@ -285,6 +286,9 @@ class Oauth2(client: Client) : Service(client) {
     suspend fun getGrant(
         grantId: String,
     ): io.appwrite.models.Oauth2Grant {
+        if (grantId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"grantId\"")
+        }
         val apiPath = ("/oauth2/{project_id}/grants/{grant_id}"
             .replace("{project_id}", client.config["project"].orEmpty())
             .replace("{grant_id}", grantId)
@@ -420,7 +424,7 @@ class Oauth2(client: Client) : Service(client) {
         prompt: String? = null,
         maxAge: Long? = null,
         authorizationDetails: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2PAR {
         val apiPath = ("/oauth2/{project_id}/par"
@@ -595,7 +599,7 @@ class Oauth2(client: Client) : Service(client) {
         clientSecret: String? = null,
         codeVerifier: String? = null,
         redirectUri: String? = null,
-        resource: String? = null,
+        resource: List<String>? = null,
         audience: String? = null,
     ): io.appwrite.models.Oauth2Token {
         val apiPath = ("/oauth2/{project_id}/token"

@@ -58,12 +58,12 @@ data class AdditionalResource(
         fun from(
             map: Map<String, Any>,
         ) = AdditionalResource(
-            name = map["name"] as String,
-            unit = map["unit"] as String,
-            currency = map["currency"] as String,
-            price = (map["price"] as Number).toDouble(),
-            value = (map["value"] as Number).toLong(),
-            invoiceDesc = map["invoiceDesc"] as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            unit = (if (map.containsKey("unit")) map["unit"] else "") as String,
+            currency = (if (map.containsKey("currency")) map["currency"] else "") as String,
+            price = ((if (map.containsKey("price")) map["price"] else 0.0) as Number).toDouble(),
+            value = ((if (map.containsKey("value")) map["value"] else 0) as Number).toLong(),
+            invoiceDesc = (if (map.containsKey("invoiceDesc")) map["invoiceDesc"] else "") as String,
         )
     }
 }

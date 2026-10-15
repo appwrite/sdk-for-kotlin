@@ -13,8 +13,8 @@ Postgresql postgresql = new Postgresql(client);
 postgresql.updatePooler(
     "<DATABASE_ID>", // databaseId
     "transaction", // mode (optional)
-    10, // maxConnections (optional)
-    1, // defaultPoolSize (optional)
+    10L, // maxConnections (optional)
+    1L, // defaultPoolSize (optional)
     false, // readWriteSplitting (optional)
     "<POOLER_CPU_REQUEST>", // poolerCpuRequest (optional)
     "<POOLER_CPU_LIMIT>", // poolerCpuLimit (optional)

@@ -16,6 +16,9 @@ mongo.createRestoration(
     "<BACKUP_ID>", // backupId (optional)
     "<TARGET_DATABASE_ID>", // targetDatabaseId (optional)
     "2020-10-15T06:38:00.000+00:00", // targetTime (optional)
+    "in_place", // restoreMode (optional)
+    "<TARGET_NAME>", // targetName (optional)
+    false, // autoPromote (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
             error.printStackTrace();

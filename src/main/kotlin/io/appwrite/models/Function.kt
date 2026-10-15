@@ -205,6 +205,12 @@ data class Function(
     @SerializedName("runtimeSpecification")
     val runtimeSpecification: String,
 
+    /**
+     * Whether inbound email (SMTP) may trigger this function. Opt-in; default is false. When disabled, recipients for this function are rejected.
+     */
+    @SerializedName("emailEnabled")
+    val emailEnabled: Boolean,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -240,6 +246,7 @@ data class Function(
         "providerPaths" to providerPaths as Any,
         "buildSpecification" to buildSpecification as Any,
         "runtimeSpecification" to runtimeSpecification as Any,
+        "emailEnabled" to emailEnabled as Any,
     )
 
     companion object {
@@ -247,39 +254,40 @@ data class Function(
         fun from(
             map: Map<String, Any>,
         ) = Function(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            execute = map["execute"] as List<String>,
-            name = map["name"] as String,
-            enabled = map["enabled"] as Boolean,
-            live = map["live"] as Boolean,
-            logging = map["logging"] as Boolean,
-            runtime = map["runtime"] as String,
-            deploymentRetention = (map["deploymentRetention"] as Number).toLong(),
-            deploymentId = map["deploymentId"] as String,
-            deploymentCreatedAt = map["deploymentCreatedAt"] as String,
-            latestDeploymentId = map["latestDeploymentId"] as String,
-            latestDeploymentCreatedAt = map["latestDeploymentCreatedAt"] as String,
-            latestDeploymentStatus = map["latestDeploymentStatus"] as String,
-            scopes = map["scopes"] as List<String>,
-            vars = (map["vars"] as List<Map<String, Any>>).map { Variable.from(map = it) },
-            events = map["events"] as List<String>,
-            schedule = map["schedule"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            execute = (if (map.containsKey("execute")) map["execute"] else listOf<Any?>()) as List<String>,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
+            live = (if (map.containsKey("live")) map["live"] else true) as Boolean,
+            logging = (if (map.containsKey("logging")) map["logging"] else true) as Boolean,
+            runtime = (if (map.containsKey("runtime")) map["runtime"] else "") as String,
+            deploymentRetention = ((if (map.containsKey("deploymentRetention")) map["deploymentRetention"] else 0) as Number).toLong(),
+            deploymentId = (if (map.containsKey("deploymentId")) map["deploymentId"] else "") as String,
+            deploymentCreatedAt = (if (map.containsKey("deploymentCreatedAt")) map["deploymentCreatedAt"] else "") as String,
+            latestDeploymentId = (if (map.containsKey("latestDeploymentId")) map["latestDeploymentId"] else "") as String,
+            latestDeploymentCreatedAt = (if (map.containsKey("latestDeploymentCreatedAt")) map["latestDeploymentCreatedAt"] else "") as String,
+            latestDeploymentStatus = (if (map.containsKey("latestDeploymentStatus")) map["latestDeploymentStatus"] else "") as String,
+            scopes = (if (map.containsKey("scopes")) map["scopes"] else listOf<Any?>()) as List<String>,
+            vars = ((if (map.containsKey("vars")) map["vars"] else listOf<Any?>()) as List<Map<String, Any>>).map { Variable.from(map = it) },
+            events = (if (map.containsKey("events")) map["events"] else listOf<Any?>()) as List<String>,
+            schedule = (if (map.containsKey("schedule")) map["schedule"] else "") as String,
             interval = (map["interval"] as? Number)?.toLong(),
-            timeout = (map["timeout"] as Number).toLong(),
-            entrypoint = map["entrypoint"] as String,
-            commands = map["commands"] as String,
-            version = map["version"] as String,
-            installationId = map["installationId"] as String,
-            providerRepositoryId = map["providerRepositoryId"] as String,
-            providerBranch = map["providerBranch"] as String,
-            providerRootDirectory = map["providerRootDirectory"] as String,
-            providerSilentMode = map["providerSilentMode"] as Boolean,
-            providerBranches = map["providerBranches"] as List<String>,
-            providerPaths = map["providerPaths"] as List<String>,
-            buildSpecification = map["buildSpecification"] as String,
-            runtimeSpecification = map["runtimeSpecification"] as String,
+            timeout = ((if (map.containsKey("timeout")) map["timeout"] else 15) as Number).toLong(),
+            entrypoint = (if (map.containsKey("entrypoint")) map["entrypoint"] else "") as String,
+            commands = (if (map.containsKey("commands")) map["commands"] else "") as String,
+            version = (if (map.containsKey("version")) map["version"] else "v5") as String,
+            installationId = (if (map.containsKey("installationId")) map["installationId"] else "") as String,
+            providerRepositoryId = (if (map.containsKey("providerRepositoryId")) map["providerRepositoryId"] else "") as String,
+            providerBranch = (if (map.containsKey("providerBranch")) map["providerBranch"] else "") as String,
+            providerRootDirectory = (if (map.containsKey("providerRootDirectory")) map["providerRootDirectory"] else "") as String,
+            providerSilentMode = (if (map.containsKey("providerSilentMode")) map["providerSilentMode"] else false) as Boolean,
+            providerBranches = (if (map.containsKey("providerBranches")) map["providerBranches"] else listOf<Any?>()) as List<String>,
+            providerPaths = (if (map.containsKey("providerPaths")) map["providerPaths"] else listOf<Any?>()) as List<String>,
+            buildSpecification = (if (map.containsKey("buildSpecification")) map["buildSpecification"] else "s-1vcpu-512mb") as String,
+            runtimeSpecification = (if (map.containsKey("runtimeSpecification")) map["runtimeSpecification"] else "s-1vcpu-512mb") as String,
+            emailEnabled = (if (map.containsKey("emailEnabled")) map["emailEnabled"] else false) as Boolean,
         )
     }
 }

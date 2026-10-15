@@ -44,10 +44,10 @@ data class OAuth2Facebook(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Facebook(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            appId = map["appId"] as String,
-            appSecret = map["appSecret"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            appId = (if (map.containsKey("appId")) map["appId"] else "") as String,
+            appSecret = (if (map.containsKey("appSecret")) map["appSecret"] else "") as String,
         )
     }
 }

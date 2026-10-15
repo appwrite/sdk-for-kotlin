@@ -13,7 +13,13 @@ VectorsDB vectorsDB = new VectorsDB(client);
 vectorsDB.upsertDocuments(
     "<DATABASE_ID>", // databaseId
     "<COLLECTION_ID>", // collectionId
-    List.of(), // documents
+    List.of(Map.of(
+        "$id", "example1",
+        "embeddings", List.of(0.12, -0.55, 0.88, 1.02),
+        "metadata", Map.of(
+            "name", "First document"
+        )
+    )), // documents
     "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

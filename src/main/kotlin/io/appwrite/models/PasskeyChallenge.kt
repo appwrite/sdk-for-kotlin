@@ -51,11 +51,11 @@ data class PasskeyChallenge(
         fun from(
             map: Map<String, Any>,
         ) = PasskeyChallenge(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            passkeyId = map["passkeyId"] as String,
-            expire = map["expire"] as String,
-            publicKey = map["publicKey"] as Map<String, Any?>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            passkeyId = (if (map.containsKey("passkeyId")) map["passkeyId"] else "") as String,
+            expire = (if (map.containsKey("expire")) map["expire"] else "") as String,
+            publicKey = (if (map.containsKey("publicKey")) map["publicKey"] else mapOf<String, Any?>()) as Map<String, Any?>,
         )
     }
 }

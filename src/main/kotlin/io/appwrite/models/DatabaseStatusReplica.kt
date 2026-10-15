@@ -51,9 +51,9 @@ data class DatabaseStatusReplica(
         fun from(
             map: Map<String, Any>,
         ) = DatabaseStatusReplica(
-            index = (map["index"] as Number).toLong(),
-            role = map["role"] as String,
-            healthy = map["healthy"] as Boolean,
+            index = ((if (map.containsKey("index")) map["index"] else 0) as Number).toLong(),
+            role = (if (map.containsKey("role")) map["role"] else "unknown") as String,
+            healthy = (if (map.containsKey("healthy")) map["healthy"] else false) as Boolean,
             replicating = map["replicating"] as? Boolean,
             lagSeconds = (map["lagSeconds"] as? Number)?.toDouble(),
         )

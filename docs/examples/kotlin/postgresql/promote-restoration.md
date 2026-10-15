@@ -1,16 +1,17 @@
 ```kotlin
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.services.Organization
+import io.appwrite.services.Postgresql
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>") // Your secret API key
 
-val organization = Organization(client)
+val postgresql = Postgresql(client)
 
-val response = organization.deleteKey(
-    keyId = "<KEY_ID>"
+val response = postgresql.promoteRestoration(
+    databaseId = "<DATABASE_ID>",
+    restorationId = "<RESTORATION_ID>"
 )
 ```

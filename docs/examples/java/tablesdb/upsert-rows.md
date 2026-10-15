@@ -13,7 +13,14 @@ TablesDB tablesDB = new TablesDB(client);
 tablesDB.upsertRows(
     "<DATABASE_ID>", // databaseId
     "<TABLE_ID>", // tableId
-    List.of(), // rows
+    List.of(Map.of(
+        "$id", "example1",
+        "username", "walter.obrien",
+        "email", "walter.obrien@example.com",
+        "fullName", "Walter O'Brien",
+        "age", 30,
+        "isAdmin", false
+    )), // rows
     "<TRANSACTION_ID>", // transactionId (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {
