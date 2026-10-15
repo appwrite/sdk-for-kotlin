@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Webhooks service allows you to manage your project webhooks.**/
+ * The Webhooks service allows you to manage your project webhooks.
+ */
 class Webhooks(client: Client) : Service(client) {
     /**
      * Get a list of all webhooks belonging to the project. You can use the query params to filter your results.
@@ -55,8 +56,8 @@ class Webhooks(client: Client) : Service(client) {
      * @param events Events list. Maximum of 100 events are allowed.
      * @param enabled Enable or disable a webhook.
      * @param tls Certificate verification, false for disabled or true for enabled.
-     * @param authUsername Webhook HTTP user. Max length: 256 chars.
-     * @param authPassword Webhook HTTP password. Max length: 256 chars.
+     * @param authUsername Webhook HTTP user. Max length: 255 chars.
+     * @param authPassword Webhook HTTP password. Max length: 2048 chars.
      * @param secret Webhook secret key. If not provided, a new key will be generated automatically. Key must be at least 8 characters long, and at max 256 characters.
      * @return [io.appwrite.models.Webhook]
      */
@@ -113,6 +114,9 @@ class Webhooks(client: Client) : Service(client) {
     suspend fun get(
         webhookId: String,
     ): io.appwrite.models.Webhook {
+        if (webhookId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"webhookId\"")
+        }
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
@@ -143,8 +147,8 @@ class Webhooks(client: Client) : Service(client) {
      * @param events Events list. Maximum of 100 events are allowed.
      * @param enabled Enable or disable a webhook.
      * @param tls Certificate verification, false for disabled or true for enabled.
-     * @param authUsername Webhook HTTP user. Max length: 256 chars.
-     * @param authPassword Webhook HTTP password. Max length: 256 chars.
+     * @param authUsername Webhook HTTP user. Max length: 255 chars.
+     * @param authPassword Webhook HTTP password. Max length: 2048 chars. Omit to keep the current password; it is cleared when the URL changes or TLS verification is disabled.
      * @return [io.appwrite.models.Webhook]
      */
     @JvmOverloads
@@ -159,6 +163,9 @@ class Webhooks(client: Client) : Service(client) {
         authUsername: String? = null,
         authPassword: String? = null,
     ): io.appwrite.models.Webhook {
+        if (webhookId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"webhookId\"")
+        }
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
@@ -199,6 +206,9 @@ class Webhooks(client: Client) : Service(client) {
     suspend fun delete(
         webhookId: String,
     ): Any {
+        if (webhookId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"webhookId\"")
+        }
         val apiPath = ("/webhooks/{webhookId}"
             .replace("{webhookId}", webhookId)
         )
@@ -206,6 +216,7 @@ class Webhooks(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -229,6 +240,9 @@ class Webhooks(client: Client) : Service(client) {
         webhookId: String,
         secret: String? = null,
     ): io.appwrite.models.Webhook {
+        if (webhookId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"webhookId\"")
+        }
         val apiPath = ("/webhooks/{webhookId}/secret"
             .replace("{webhookId}", webhookId)
         )

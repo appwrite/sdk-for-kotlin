@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- * The Organization service allows you to manage organization-level projects.**/
+ * The Organization service allows you to manage organization-level projects.
+ */
 class Organization(client: Client) : Service(client) {
     /**
      * Get the current organization.
@@ -108,6 +109,7 @@ class Organization(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -199,6 +201,9 @@ class Organization(client: Client) : Service(client) {
     suspend fun getInstallation(
         installationId: String,
     ): io.appwrite.models.AppInstallation {
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
@@ -233,6 +238,9 @@ class Organization(client: Client) : Service(client) {
         installationId: String,
         authorizationDetails: String? = null,
     ): io.appwrite.models.AppInstallation {
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
@@ -267,6 +275,9 @@ class Organization(client: Client) : Service(client) {
     suspend fun deleteInstallation(
         installationId: String,
     ): Any {
+        if (installationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"installationId\"")
+        }
         val apiPath = ("/organization/installations/{installationId}"
             .replace("{installationId}", installationId)
         )
@@ -275,184 +286,6 @@ class Organization(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
             "accept" to "application/json",
-        )
-        return client.call(
-            "DELETE",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = Any::class.java,
-        )
-    }
-
-    /**
-     * Get a list of all API keys from the current organization.
-     *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: expire, accessedAt, name, scopes
-     * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @return [io.appwrite.models.KeyList]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun listKeys(
-        queries: List<String>? = null,
-        total: Boolean? = null,
-    ): io.appwrite.models.KeyList {
-        val apiPath = "/organization/keys"
-        val apiParams = mutableMapOf<String, Any?>(
-            "queries" to queries,
-            "total" to total,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.KeyList = {
-            io.appwrite.models.KeyList.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.KeyList::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Create a new organization API key.
-     *
-     * @param keyId Key ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param name Key name. Max length: 128 chars.
-     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
-     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
-     * @return [io.appwrite.models.Key]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createKey(
-        keyId: String,
-        name: String,
-        scopes: List<io.appwrite.enums.OrganizationKeyScopes>,
-        expire: String? = null,
-    ): io.appwrite.models.Key {
-        val apiPath = "/organization/keys"
-        val apiParams = mutableMapOf<String, Any?>(
-            "keyId" to keyId,
-            "name" to name,
-            "scopes" to scopes,
-            "expire" to expire,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Key = {
-            io.appwrite.models.Key.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "POST",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Key::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Get a key by its unique ID. This endpoint returns details about a specific API key in your organization including its scopes.
-     *
-     * @param keyId Key unique ID.
-     * @return [io.appwrite.models.Key]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun getKey(
-        keyId: String,
-    ): io.appwrite.models.Key {
-        val apiPath = ("/organization/keys/{keyId}"
-            .replace("{keyId}", keyId)
-        )
-        val apiParams = mutableMapOf<String, Any?>()
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Key = {
-            io.appwrite.models.Key.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "GET",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Key::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Update a key by its unique ID. Use this endpoint to update the name, scopes, or expiration time of an API key.
-     *
-     * @param keyId Key unique ID.
-     * @param name Key name. Max length: 128 chars.
-     * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
-     * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
-     * @return [io.appwrite.models.Key]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun updateKey(
-        keyId: String,
-        name: String,
-        scopes: List<io.appwrite.enums.OrganizationKeyScopes>,
-        expire: String? = null,
-    ): io.appwrite.models.Key {
-        val apiPath = ("/organization/keys/{keyId}"
-            .replace("{keyId}", keyId)
-        )
-        val apiParams = mutableMapOf<String, Any?>(
-            "name" to name,
-            "scopes" to scopes,
-            "expire" to expire,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Key = {
-            io.appwrite.models.Key.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PUT",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Key::class.java,
-            converter,
-        )
-    }
-
-    /**
-     * Delete a key by its unique ID. Once deleted, the key can no longer be used to authenticate API calls.
-     *
-     * @param keyId Key unique ID.
-     * @return [Any]
-     */
-    @Throws(AppwriteException::class)
-    suspend fun deleteKey(
-        keyId: String,
-    ): Any {
-        val apiPath = ("/organization/keys/{keyId}"
-            .replace("{keyId}", keyId)
-        )
-        val apiParams = mutableMapOf<String, Any?>()
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -559,6 +392,9 @@ class Organization(client: Client) : Service(client) {
     suspend fun getMembership(
         membershipId: String,
     ): io.appwrite.models.Membership {
+        if (membershipId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"membershipId\"")
+        }
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
@@ -592,6 +428,9 @@ class Organization(client: Client) : Service(client) {
         membershipId: String,
         roles: List<String>,
     ): io.appwrite.models.Membership {
+        if (membershipId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"membershipId\"")
+        }
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
@@ -626,6 +465,9 @@ class Organization(client: Client) : Service(client) {
     suspend fun deleteMembership(
         membershipId: String,
     ): Any {
+        if (membershipId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"membershipId\"")
+        }
         val apiPath = ("/organization/memberships/{membershipId}"
             .replace("{membershipId}", membershipId)
         )
@@ -633,6 +475,7 @@ class Organization(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -730,12 +573,16 @@ class Organization(client: Client) : Service(client) {
     suspend fun getProject(
         projectId: String,
     ): io.appwrite.models.Project {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
         )
         val converter: (Any) -> io.appwrite.models.Project = {
             io.appwrite.models.Project.from(map = it as Map<String, Any>)
@@ -762,6 +609,9 @@ class Organization(client: Client) : Service(client) {
         projectId: String,
         name: String,
     ): io.appwrite.models.Project {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
@@ -796,6 +646,9 @@ class Organization(client: Client) : Service(client) {
     suspend fun deleteProject(
         projectId: String,
     ): Any {
+        if (projectId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"projectId\"")
+        }
         val apiPath = ("/organization/projects/{projectId}"
             .replace("{projectId}", projectId)
         )
@@ -803,6 +656,7 @@ class Organization(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

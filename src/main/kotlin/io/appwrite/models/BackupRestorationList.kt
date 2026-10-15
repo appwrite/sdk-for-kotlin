@@ -30,8 +30,8 @@ data class BackupRestorationList(
         fun from(
             map: Map<String, Any>,
         ) = BackupRestorationList(
-            total = (map["total"] as Number).toLong(),
-            restorations = (map["restorations"] as List<Map<String, Any>>).map { BackupRestoration.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            restorations = ((if (map.containsKey("restorations")) map["restorations"] else listOf<Any?>()) as List<Map<String, Any>>).map { BackupRestoration.from(map = it) },
         )
     }
 }

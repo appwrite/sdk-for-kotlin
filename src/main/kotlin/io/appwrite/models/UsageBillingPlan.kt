@@ -11,13 +11,13 @@ data class UsageBillingPlan(
      * Bandwidth additional resources
      */
     @SerializedName("bandwidth")
-    val bandwidth: AdditionalResource,
+    var bandwidth: AdditionalResource?,
 
     /**
      * Executions additional resources
      */
     @SerializedName("executions")
-    val executions: AdditionalResource,
+    var executions: AdditionalResource?,
 
     /**
      * Member additional resources
@@ -29,13 +29,13 @@ data class UsageBillingPlan(
      * Realtime additional resources
      */
     @SerializedName("realtime")
-    val realtime: AdditionalResource,
+    var realtime: AdditionalResource?,
 
     /**
      * Realtime messages additional resources
      */
     @SerializedName("realtimeMessages")
-    val realtimeMessages: AdditionalResource,
+    var realtimeMessages: AdditionalResource?,
 
     /**
      * Realtime bandwidth additional resources
@@ -47,25 +47,25 @@ data class UsageBillingPlan(
      * Storage additional resources
      */
     @SerializedName("storage")
-    val storage: AdditionalResource,
+    var storage: AdditionalResource?,
 
     /**
      * User additional resources
      */
     @SerializedName("users")
-    val users: AdditionalResource,
+    var users: AdditionalResource?,
 
     /**
      * GBHour additional resources
      */
     @SerializedName("GBHours")
-    val GBHours: AdditionalResource,
+    var GBHours: AdditionalResource?,
 
     /**
      * Image transformation additional resources
      */
     @SerializedName("imageTransformations")
-    val imageTransformations: AdditionalResource,
+    var imageTransformations: AdditionalResource?,
 
     /**
      * Credits additional resources
@@ -75,16 +75,16 @@ data class UsageBillingPlan(
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
-        "bandwidth" to bandwidth.toMap() as Any,
-        "executions" to executions.toMap() as Any,
+        "bandwidth" to bandwidth?.toMap() as Any?,
+        "executions" to executions?.toMap() as Any?,
         "member" to member?.toMap() as Any?,
-        "realtime" to realtime.toMap() as Any,
-        "realtimeMessages" to realtimeMessages.toMap() as Any,
+        "realtime" to realtime?.toMap() as Any?,
+        "realtimeMessages" to realtimeMessages?.toMap() as Any?,
         "realtimeBandwidth" to realtimeBandwidth?.toMap() as Any?,
-        "storage" to storage.toMap() as Any,
-        "users" to users.toMap() as Any,
-        "GBHours" to GBHours.toMap() as Any,
-        "imageTransformations" to imageTransformations.toMap() as Any,
+        "storage" to storage?.toMap() as Any?,
+        "users" to users?.toMap() as Any?,
+        "GBHours" to GBHours?.toMap() as Any?,
+        "imageTransformations" to imageTransformations?.toMap() as Any?,
         "credits" to credits?.toMap() as Any?,
     )
 
@@ -93,16 +93,16 @@ data class UsageBillingPlan(
         fun from(
             map: Map<String, Any>,
         ) = UsageBillingPlan(
-            bandwidth = AdditionalResource.from(map = map["bandwidth"] as Map<String, Any>),
-            executions = AdditionalResource.from(map = map["executions"] as Map<String, Any>),
+            bandwidth = (map["bandwidth"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
+            executions = (map["executions"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
             member = (map["member"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
-            realtime = AdditionalResource.from(map = map["realtime"] as Map<String, Any>),
-            realtimeMessages = AdditionalResource.from(map = map["realtimeMessages"] as Map<String, Any>),
+            realtime = (map["realtime"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
+            realtimeMessages = (map["realtimeMessages"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
             realtimeBandwidth = (map["realtimeBandwidth"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
-            storage = AdditionalResource.from(map = map["storage"] as Map<String, Any>),
-            users = AdditionalResource.from(map = map["users"] as Map<String, Any>),
-            GBHours = AdditionalResource.from(map = map["GBHours"] as Map<String, Any>),
-            imageTransformations = AdditionalResource.from(map = map["imageTransformations"] as Map<String, Any>),
+            storage = (map["storage"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
+            users = (map["users"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
+            GBHours = (map["GBHours"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
+            imageTransformations = (map["imageTransformations"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
             credits = (map["credits"] as? Map<String, Any>)?.let { AdditionalResource.from(map = it) },
         )
     }

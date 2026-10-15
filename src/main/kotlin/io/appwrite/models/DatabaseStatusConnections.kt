@@ -30,8 +30,8 @@ data class DatabaseStatusConnections(
         fun from(
             map: Map<String, Any>,
         ) = DatabaseStatusConnections(
-            current = (map["current"] as Number).toLong(),
-            max = (map["max"] as Number).toLong(),
+            current = ((if (map.containsKey("current")) map["current"] else 0) as Number).toLong(),
+            max = ((if (map.containsKey("max")) map["max"] else 100) as Number).toLong(),
         )
     }
 }

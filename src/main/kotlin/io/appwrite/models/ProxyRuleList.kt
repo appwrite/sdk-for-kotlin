@@ -30,8 +30,8 @@ data class ProxyRuleList(
         fun from(
             map: Map<String, Any>,
         ) = ProxyRuleList(
-            total = (map["total"] as Number).toLong(),
-            rules = (map["rules"] as List<Map<String, Any>>).map { ProxyRule.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            rules = ((if (map.containsKey("rules")) map["rules"] else listOf<Any?>()) as List<Map<String, Any>>).map { ProxyRule.from(map = it) },
         )
     }
 }

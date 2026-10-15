@@ -32,7 +32,7 @@ data class ProjectAuthMethod(
             map: Map<String, Any>,
         ) = ProjectAuthMethod(
             id = ProjectAuthMethodId.values().find { it.value == map["\$id"] as String }!!,
-            enabled = map["enabled"] as Boolean,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
         )
     }
 }

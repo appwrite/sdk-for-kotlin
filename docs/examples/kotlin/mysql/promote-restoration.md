@@ -1,18 +1,17 @@
 ```kotlin
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.services.Users
+import io.appwrite.services.Mysql
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>") // Your secret API key
 
-val users = Users(client)
+val mysql = Mysql(client)
 
-val response = users.listLogs(
-    userId = "<USER_ID>",
-    queries = listOf(), // optional
-    total = false // optional
+val response = mysql.promoteRestoration(
+    databaseId = "<DATABASE_ID>",
+    restorationId = "<RESTORATION_ID>"
 )
 ```

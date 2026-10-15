@@ -44,10 +44,10 @@ data class ProxyInvalidation(
         fun from(
             map: Map<String, Any>,
         ) = ProxyInvalidation(
-            domain = map["domain"] as String,
-            type = map["type"] as String,
-            reference = map["reference"] as String,
-            status = map["status"] as String,
+            domain = (if (map.containsKey("domain")) map["domain"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
+            reference = (if (map.containsKey("reference")) map["reference"] else "") as String,
+            status = (if (map.containsKey("status")) map["status"] else "") as String,
         )
     }
 }

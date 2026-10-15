@@ -17,7 +17,7 @@ vectorsDB.createIndex(
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
     VectorsDBIndexType.HNSW_EUCLIDEAN, // type
-    List.of(), // attributes
+    List.of("embeddings"), // attributes
     List.of(OrderBy.ASC), // orders (optional)
     List.of(), // lengths (optional)
     new CoroutineCallback<>((result, error) -> {

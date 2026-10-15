@@ -5,14 +5,14 @@ import io.appwrite.services.Oauth2;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
-    .setSession("") // The user session to authenticate with
-    .setProject("<YOUR_PROJECT_ID>"); // Your project ID
+    .setProject("<YOUR_PROJECT_ID>") // Your project ID
+    .setSession(""); // The user session to authenticate with
 
 Oauth2 oauth2 = new Oauth2(client);
 
 oauth2.listOrganizations(
-    1, // limit (optional)
-    0, // offset (optional)
+    1L, // limit (optional)
+    0L, // offset (optional)
     "<SEARCH>", // search (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

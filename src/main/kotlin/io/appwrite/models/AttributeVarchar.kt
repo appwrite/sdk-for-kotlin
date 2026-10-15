@@ -94,15 +94,15 @@ data class AttributeVarchar(
         fun from(
             map: Map<String, Any>,
         ) = AttributeVarchar(
-            key = map["key"] as String,
-            type = map["type"] as String,
+            key = (if (map.containsKey("key")) map["key"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
             status = AttributeStatus.values().find { it.value == map["status"] as String }!!,
-            error = map["error"] as String,
-            required = map["required"] as Boolean,
+            error = (if (map.containsKey("error")) map["error"] else "") as String,
+            required = (if (map.containsKey("required")) map["required"] else false) as Boolean,
             array = map["array"] as? Boolean,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            size = (map["size"] as Number).toLong(),
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            size = ((if (map.containsKey("size")) map["size"] else 0) as Number).toLong(),
             default = map["default"] as? String,
             encrypt = map["encrypt"] as? Boolean,
         )

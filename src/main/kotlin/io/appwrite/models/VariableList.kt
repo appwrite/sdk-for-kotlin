@@ -30,8 +30,8 @@ data class VariableList(
         fun from(
             map: Map<String, Any>,
         ) = VariableList(
-            total = (map["total"] as Number).toLong(),
-            variables = (map["variables"] as List<Map<String, Any>>).map { Variable.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            variables = ((if (map.containsKey("variables")) map["variables"] else listOf<Any?>()) as List<Map<String, Any>>).map { Variable.from(map = it) },
         )
     }
 }

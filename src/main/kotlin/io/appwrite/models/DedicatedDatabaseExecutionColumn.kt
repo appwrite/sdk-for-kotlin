@@ -30,8 +30,8 @@ data class DedicatedDatabaseExecutionColumn(
         fun from(
             map: Map<String, Any>,
         ) = DedicatedDatabaseExecutionColumn(
-            name = map["name"] as String,
-            type = map["type"] as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
         )
     }
 }

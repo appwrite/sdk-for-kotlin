@@ -11,7 +11,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Storage service allows you to manage your project files.**/
+ * The Storage service allows you to manage your project files.
+ */
 class Storage(client: Client) : Service(client) {
     /**
      * Get a list of all the storage buckets. You can use the query params to filter your results.
@@ -124,6 +125,9 @@ class Storage(client: Client) : Service(client) {
     suspend fun getBucket(
         bucketId: String,
     ): io.appwrite.models.Bucket {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
@@ -176,6 +180,9 @@ class Storage(client: Client) : Service(client) {
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
     ): io.appwrite.models.Bucket {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
@@ -219,6 +226,9 @@ class Storage(client: Client) : Service(client) {
     suspend fun deleteBucket(
         bucketId: String,
     ): Any {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}"
             .replace("{bucketId}", bucketId)
         )
@@ -226,6 +236,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -253,6 +264,9 @@ class Storage(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.FileList {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
         )
@@ -305,6 +319,9 @@ class Storage(client: Client) : Service(client) {
         folder: String? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.File {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files"
             .replace("{bucketId}", bucketId)
         )
@@ -330,9 +347,10 @@ class Storage(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.File::class.java,
             converter,
-            paramName,
-            idParamName,
-            onProgress,
+            paramName = paramName,
+            idParamName = idParamName,
+            onProgress = onProgress,
+            method = "POST",
         )
     }
 
@@ -348,6 +366,12 @@ class Storage(client: Client) : Service(client) {
         bucketId: String,
         fileId: String,
     ): io.appwrite.models.File {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -387,6 +411,12 @@ class Storage(client: Client) : Service(client) {
         name: String? = null,
         permissions: List<String>? = null,
     ): io.appwrite.models.File {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -425,6 +455,12 @@ class Storage(client: Client) : Service(client) {
         bucketId: String,
         fileId: String,
     ): Any {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -433,6 +469,7 @@ class Storage(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -458,6 +495,12 @@ class Storage(client: Client) : Service(client) {
         fileId: String,
         token: String? = null,
     ): ByteArray {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/download"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -485,7 +528,7 @@ class Storage(client: Client) : Service(client) {
      * @param fileId File ID
      * @param width Resize preview image width, Pass an integer between 0 to 4000.
      * @param height Resize preview image height, Pass an integer between 0 to 4000.
-     * @param gravity Image crop gravity. Can be one of center,top-left,top,top-right,left,right,bottom-left,bottom,bottom-right
+     * @param gravity Image crop gravity. Can be one of auto,center,top-left,top,top-right,left,right,bottom-left,bottom,bottom-right
      * @param quality Preview image quality. Pass an integer between 0 to 100. Defaults to keep existing image quality.
      * @param borderWidth Preview image border in pixels. Pass an integer between 0 to 100. Defaults to 0.
      * @param borderColor Preview image border color. Use a valid HEX color, no # is needed for prefix.
@@ -515,6 +558,12 @@ class Storage(client: Client) : Service(client) {
         output: io.appwrite.enums.ImageFormat? = null,
         token: String? = null,
     ): ByteArray {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/preview"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)
@@ -561,6 +610,12 @@ class Storage(client: Client) : Service(client) {
         fileId: String,
         token: String? = null,
     ): ByteArray {
+        if (bucketId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"bucketId\"")
+        }
+        if (fileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"fileId\"")
+        }
         val apiPath = ("/storage/buckets/{bucketId}/files/{fileId}/view"
             .replace("{bucketId}", bucketId)
             .replace("{fileId}", fileId)

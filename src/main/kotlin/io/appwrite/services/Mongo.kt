@@ -9,7 +9,8 @@ import okhttp3.Cookie
 import java.io.File
 
 /**
- ***/
+ *
+ */
 class Mongo(client: Client) : Service(client) {
     /**
      * List all dedicated databases. Results support pagination.
@@ -59,7 +60,7 @@ class Mongo(client: Client) : Service(client) {
      * @param pitrRetentionDays Number of days to retain PITR data.
      * @param storageAutoscaling Enable automatic storage expansion when usage exceeds threshold.
      * @param storageAutoscalingThresholdPercent Storage usage percentage (50-95) that triggers automatic expansion.
-     * @param storageAutoscalingMaxGb Maximum storage size in GB for autoscaling. 0 means no limit.
+     * @param storageAutoscalingMaxGb Maximum storage size in GB for autoscaling. Defaults to 3 times the specification's storage. 0 means no limit.
      * @return [io.appwrite.models.DedicatedDatabase]
      */
     @JvmOverloads
@@ -116,7 +117,7 @@ class Mongo(client: Client) : Service(client) {
     }
 
     /**
-     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, pricing, and whether it is enabled for the organization.
+     * List the dedicated database specifications available on the current plan. Each specification reports its resource limits, its own prices and overage rates, and whether it is enabled for the organization.
      *
      * @return [io.appwrite.models.DedicatedDatabaseSpecificationList]
      */
@@ -151,6 +152,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun get(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -223,6 +227,9 @@ class Mongo(client: Client) : Service(client) {
         sqlApiMaxBytes: Long? = null,
         sqlApiTimeoutSeconds: Long? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -276,6 +283,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun delete(
         databaseId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}"
             .replace("{databaseId}", databaseId)
         )
@@ -307,6 +317,9 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         queries: List<String>? = null,
     ): io.appwrite.models.DedicatedDatabaseBackupList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups"
             .replace("{databaseId}", databaseId)
         )
@@ -343,6 +356,9 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         type: String? = null,
     ): io.appwrite.models.DedicatedDatabaseBackup {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups"
             .replace("{databaseId}", databaseId)
         )
@@ -380,6 +396,9 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         queries: List<String>? = null,
     ): io.appwrite.models.BackupPolicyList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/policies"
             .replace("{databaseId}", databaseId)
         )
@@ -426,6 +445,9 @@ class Mongo(client: Client) : Service(client) {
         type: String? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/policies"
             .replace("{databaseId}", databaseId)
         )
@@ -467,6 +489,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         policyId: String,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -510,6 +538,12 @@ class Mongo(client: Client) : Service(client) {
         retention: Long? = null,
         enabled: Boolean? = null,
     ): io.appwrite.models.BackupPolicy {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -550,6 +584,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         policyId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (policyId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"policyId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
             .replace("{databaseId}", databaseId)
             .replace("{policyId}", policyId)
@@ -594,6 +634,9 @@ class Mongo(client: Client) : Service(client) {
         prefix: String? = null,
         endpoint: String? = null,
     ): io.appwrite.models.DedicatedDatabaseBackupStorage {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/storage"
             .replace("{databaseId}", databaseId)
         )
@@ -636,6 +679,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         backupId: String,
     ): io.appwrite.models.DedicatedDatabaseBackup {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (backupId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"backupId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/{backupId}"
             .replace("{databaseId}", databaseId)
             .replace("{backupId}", backupId)
@@ -670,6 +719,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         backupId: String,
     ): Any {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (backupId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"backupId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/backups/{backupId}"
             .replace("{databaseId}", databaseId)
             .replace("{backupId}", backupId)
@@ -699,6 +754,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun listBranches(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseBranchList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/branches"
             .replace("{databaseId}", databaseId)
         )
@@ -735,6 +793,9 @@ class Mongo(client: Client) : Service(client) {
         branchId: String? = null,
         ttl: Long? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/branches"
             .replace("{databaseId}", databaseId)
         )
@@ -772,6 +833,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         branchId: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (branchId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"branchId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/branches/{branchId}"
             .replace("{databaseId}", databaseId)
             .replace("{branchId}", branchId)
@@ -805,6 +872,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun updateCredentials(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseOperation {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/credentials"
             .replace("{databaseId}", databaseId)
         )
@@ -840,6 +910,9 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         targetReplicaId: String? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/failovers"
             .replace("{databaseId}", databaseId)
         )
@@ -878,6 +951,9 @@ class Mongo(client: Client) : Service(client) {
         day: String,
         hourUtc: Long,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/maintenance"
             .replace("{databaseId}", databaseId)
         )
@@ -918,6 +994,9 @@ class Mongo(client: Client) : Service(client) {
         targetType: String,
         specification: String? = null,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/migrations"
             .replace("{databaseId}", databaseId)
         )
@@ -960,6 +1039,9 @@ class Mongo(client: Client) : Service(client) {
         limit: Long? = null,
         offset: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseOperationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/operations"
             .replace("{databaseId}", databaseId)
         )
@@ -995,6 +1077,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun getPitr(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabasePITRWindows {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/pitr"
             .replace("{databaseId}", databaseId)
         )
@@ -1026,6 +1111,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun getReplicas(
         databaseId: String,
     ): io.appwrite.models.DedicatedDatabaseReplicas {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/replicas"
             .replace("{databaseId}", databaseId)
         )
@@ -1066,6 +1154,9 @@ class Mongo(client: Client) : Service(client) {
         limit: Long? = null,
         offset: Long? = null,
     ): io.appwrite.models.DedicatedDatabaseRestorationList {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/restorations"
             .replace("{databaseId}", databaseId)
         )
@@ -1095,11 +1186,16 @@ class Mongo(client: Client) : Service(client) {
     /**
      * Restore a database from a backup or to a specific point in time (PITR). For backup restoration, provide a backupId. For PITR, provide a targetTime as an ISO 8601 datetime. PITR requires the database to have PITR enabled and is only available for enterprise databases.
      *
+     * By default the backup is replayed over the database it was taken from. Pass `restoreMode` as `clone` to recover it onto a second workload beside this database instead: this database keeps serving its own data while the clone is filled, and the switch happens as soon as the clone is ready, on the endpoint and credentials it already had. Pass `autoPromote` as false to hold the clone until you promote it yourself. Pass `restoreMode` as `copy` to recover onto a separate database with its own endpoint, either one you name with `targetDatabaseId` or one provisioned as a copy of this database's engine, version, specification and replicas. Neither mode is available for a point-in-time recovery or an incremental backup.
+     *
      * @param databaseId Database ID.
      * @param type Restoration type. Allowed values: backup, pitr. Use "backup" to restore from a specific backup, or "pitr" for point-in-time recovery.
      * @param backupId Backup ID to restore from (required for backup type).
-     * @param targetDatabaseId Existing database ID to restore into. The target must be distinct, ready, and use the same engine and version.
+     * @param targetDatabaseId Existing database ID to restore into. The target must be distinct, ready, and use the same engine and version. Omit it on a copy restoration to have one provisioned. Not accepted for a clone, which is recovered inside this database.
      * @param targetTime Target time for PITR (required for pitr type) as an [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) datetime.
+     * @param restoreMode Where the backup is restored. Allowed values: in_place, clone, copy. Use "clone" to recover onto a second workload beside this database and leave it serving until you promote — the endpoint and credentials do not change. Use "copy" to recover onto a separate database with its own endpoint, either one you name with targetDatabaseId or one Cloud provisions. Use "in_place" to replay the backup over this database. Defaults to "copy" when a targetDatabaseId is given, "in_place" otherwise.
+     * @param targetName Display name for the database a copy restoration provisions. Defaults to this database's name followed by "(restored)". Max length: 128 chars.
+     * @param autoPromote Whether a clone restoration switches the database over as soon as the recovery is ready. Default true: the restore finishes with the database serving the recovery point on the endpoint it already had, and the side it replaced kept briefly so the switch can be reversed. Pass false to hold the recovery until you call the promotion endpoint yourself.
      * @return [io.appwrite.models.DedicatedDatabaseRestoration]
      */
     @JvmOverloads
@@ -1110,7 +1206,13 @@ class Mongo(client: Client) : Service(client) {
         backupId: String? = null,
         targetDatabaseId: String? = null,
         targetTime: String? = null,
+        restoreMode: String? = null,
+        targetName: String? = null,
+        autoPromote: Boolean? = null,
     ): io.appwrite.models.DedicatedDatabaseRestoration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/restorations"
             .replace("{databaseId}", databaseId)
         )
@@ -1119,6 +1221,9 @@ class Mongo(client: Client) : Service(client) {
             "backupId" to backupId,
             "targetDatabaseId" to targetDatabaseId,
             "targetTime" to targetTime,
+            "restoreMode" to restoreMode,
+            "targetName" to targetName,
+            "autoPromote" to autoPromote,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1150,6 +1255,12 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         restorationId: String,
     ): io.appwrite.models.DedicatedDatabaseRestoration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (restorationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"restorationId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/restorations/{restorationId}"
             .replace("{databaseId}", databaseId)
             .replace("{restorationId}", restorationId)
@@ -1173,6 +1284,50 @@ class Mongo(client: Client) : Service(client) {
     }
 
     /**
+     * Switch the database over to the clone a restoration recovered. The database keeps
+     * its endpoint and credentials; clients reconnect once. Writes made after the
+     * recovery point are discarded, and the side being replaced is retained briefly so
+     * the switch can be reversed.
+     *
+     * @param databaseId Database ID.
+     * @param restorationId Restoration ID.
+     * @return [io.appwrite.models.DedicatedDatabaseRestoration]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun promoteRestoration(
+        databaseId: String,
+        restorationId: String,
+    ): io.appwrite.models.DedicatedDatabaseRestoration {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (restorationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"restorationId\"")
+        }
+        val apiPath = ("/mongo/{databaseId}/restorations/{restorationId}/promotions"
+            .replace("{databaseId}", databaseId)
+            .replace("{restorationId}", restorationId)
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DedicatedDatabaseRestoration = {
+            io.appwrite.models.DedicatedDatabaseRestoration.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.DedicatedDatabaseRestoration::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Get real-time health and status information for a dedicated database. Returns health status, readiness, uptime, connection info, replica status, and volume information.
      *
      * @param databaseId Database ID.
@@ -1182,6 +1337,9 @@ class Mongo(client: Client) : Service(client) {
     suspend fun getStatus(
         databaseId: String,
     ): io.appwrite.models.DatabaseStatus {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/status"
             .replace("{databaseId}", databaseId)
         )
@@ -1215,6 +1373,9 @@ class Mongo(client: Client) : Service(client) {
         databaseId: String,
         targetVersion: String,
     ): io.appwrite.models.DedicatedDatabase {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
         val apiPath = ("/mongo/{databaseId}/upgrades"
             .replace("{databaseId}", databaseId)
         )

@@ -79,15 +79,15 @@ data class Program(
         fun from(
             map: Map<String, Any>,
         ) = Program(
-            id = map["\$id"] as String,
-            title = map["title"] as String,
-            description = map["description"] as String,
-            tag = map["tag"] as String,
-            icon = map["icon"] as String,
-            url = map["url"] as String,
-            active = map["active"] as Boolean,
-            external = map["external"] as Boolean,
-            billingPlanId = map["billingPlanId"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            title = (if (map.containsKey("title")) map["title"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
+            tag = (if (map.containsKey("tag")) map["tag"] else "") as String,
+            icon = (if (map.containsKey("icon")) map["icon"] else "") as String,
+            url = (if (map.containsKey("url")) map["url"] else "") as String,
+            active = (if (map.containsKey("active")) map["active"] else true) as Boolean,
+            external = (if (map.containsKey("external")) map["external"] else true) as Boolean,
+            billingPlanId = (if (map.containsKey("billingPlanId")) map["billingPlanId"] else "") as String,
         )
     }
 }

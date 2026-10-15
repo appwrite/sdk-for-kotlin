@@ -44,10 +44,10 @@ data class BackupRestoration(
     val status: String,
 
     /**
-     * The backup start time.
+     * The restoration start time. Null until the restoration starts.
      */
     @SerializedName("startedAt")
-    val startedAt: String,
+    var startedAt: String?,
 
     /**
      * Migration ID.
@@ -68,10 +68,10 @@ data class BackupRestoration(
     val resources: List<String>,
 
     /**
-     * Optional data in key-value object.
+     * Restoration options as a key-value object.
      */
     @SerializedName("options")
-    val options: String,
+    val options: Map<String, Any?>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -81,7 +81,7 @@ data class BackupRestoration(
         "archiveId" to archiveId as Any,
         "policyId" to policyId as Any,
         "status" to status as Any,
-        "startedAt" to startedAt as Any,
+        "startedAt" to startedAt as Any?,
         "migrationId" to migrationId as Any,
         "services" to services as Any,
         "resources" to resources as Any,
@@ -93,17 +93,17 @@ data class BackupRestoration(
         fun from(
             map: Map<String, Any>,
         ) = BackupRestoration(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            archiveId = map["archiveId"] as String,
-            policyId = map["policyId"] as String,
-            status = map["status"] as String,
-            startedAt = map["startedAt"] as String,
-            migrationId = map["migrationId"] as String,
-            services = map["services"] as List<String>,
-            resources = map["resources"] as List<String>,
-            options = map["options"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            archiveId = (if (map.containsKey("archiveId")) map["archiveId"] else "") as String,
+            policyId = (if (map.containsKey("policyId")) map["policyId"] else "") as String,
+            status = (if (map.containsKey("status")) map["status"] else "") as String,
+            startedAt = map["startedAt"] as? String,
+            migrationId = (if (map.containsKey("migrationId")) map["migrationId"] else "") as String,
+            services = (if (map.containsKey("services")) map["services"] else listOf<Any?>()) as List<String>,
+            resources = (if (map.containsKey("resources")) map["resources"] else listOf<Any?>()) as List<String>,
+            options = (if (map.containsKey("options")) map["options"] else mapOf<String, Any?>()) as Map<String, Any?>,
         )
     }
 }

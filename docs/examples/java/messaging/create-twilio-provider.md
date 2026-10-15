@@ -13,7 +13,7 @@ Messaging messaging = new Messaging(client);
 messaging.createTwilioProvider(
     "<PROVIDER_ID>", // providerId
     "<NAME>", // name
-    "+12065550100", // from (optional)
+    "<FROM>", // from (optional)
     "<ACCOUNT_SID>", // accountSid (optional)
     "<AUTH_TOKEN>", // authToken (optional)
     false, // enabled (optional)

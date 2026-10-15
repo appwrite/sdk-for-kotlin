@@ -30,8 +30,8 @@ data class TargetList(
         fun from(
             map: Map<String, Any>,
         ) = TargetList(
-            total = (map["total"] as Number).toLong(),
-            targets = (map["targets"] as List<Map<String, Any>>).map { Target.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            targets = ((if (map.containsKey("targets")) map["targets"] else listOf<Any?>()) as List<Map<String, Any>>).map { Target.from(map = it) },
         )
     }
 }

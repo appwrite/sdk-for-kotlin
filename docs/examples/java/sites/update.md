@@ -20,7 +20,7 @@ sites.update(
     Framework.ANALOG, // framework
     false, // enabled (optional)
     false, // logging (optional)
-    1, // timeout (optional)
+    1L, // timeout (optional)
     "<INSTALL_COMMAND>", // installCommand (optional)
     "<BUILD_COMMAND>", // buildCommand (optional)
     "<START_COMMAND>", // startCommand (optional)
@@ -37,7 +37,7 @@ sites.update(
     List.of(), // providerPaths (optional)
     "s-1vcpu-512mb", // buildSpecification (optional)
     "s-1vcpu-512mb", // runtimeSpecification (optional)
-    0, // deploymentRetention (optional)
+    0L, // deploymentRetention (optional)
     List.of(ProjectKeyScopes.PROJECT_READ), // scopes (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

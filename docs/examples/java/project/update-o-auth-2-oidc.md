@@ -19,7 +19,7 @@ project.updateOAuth2Oidc(
     "https://example.com", // tokenURL (optional)
     "https://example.com", // userInfoURL (optional)
     List.of(ProjectOAuth2OidcPrompt.NONE), // prompt (optional)
-    0, // maxAge (optional)
+    0L, // maxAge (optional)
     false, // enabled (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

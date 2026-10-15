@@ -59,12 +59,12 @@ data class PlatformWindows(
         fun from(
             map: Map<String, Any>,
         ) = PlatformWindows(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
             type = PlatformType.values().find { it.value == map["type"] as String }!!,
-            packageIdentifierName = map["packageIdentifierName"] as String,
+            packageIdentifierName = (if (map.containsKey("packageIdentifierName")) map["packageIdentifierName"] else "") as String,
         )
     }
 }

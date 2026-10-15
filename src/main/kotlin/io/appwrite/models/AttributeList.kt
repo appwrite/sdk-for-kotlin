@@ -30,8 +30,8 @@ data class AttributeList(
         fun from(
             map: Map<String, Any>,
         ) = AttributeList(
-            total = (map["total"] as Number).toLong(),
-            attributes = map["attributes"] as List<Map<String, Any?>>,
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            attributes = (if (map.containsKey("attributes")) map["attributes"] else listOf<Any?>()) as List<Map<String, Any?>>,
         )
     }
 }

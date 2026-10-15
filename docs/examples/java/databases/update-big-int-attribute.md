@@ -15,9 +15,9 @@ databases.updateBigIntAttribute(
     "<COLLECTION_ID>", // collectionId
     "<KEY>", // key
     false, // required
-    0, // default
-    0, // min (optional)
-    1000000, // max (optional)
+    0L, // default
+    0L, // min (optional)
+    1000000L, // max (optional)
     "<NEW_KEY>", // newKey (optional)
     new CoroutineCallback<>((result, error) -> {
         if (error != null) {

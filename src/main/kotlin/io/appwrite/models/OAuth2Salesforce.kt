@@ -35,7 +35,7 @@ data class OAuth2Salesforce(
      * Salesforce OAuth2 prompt values.
      */
     @SerializedName("prompt")
-    var prompt: List<io.appwrite.enums.OAuth2SalesforcePrompt>? = null,
+    val prompt: List<io.appwrite.enums.OAuth2SalesforcePrompt>,
 
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
@@ -43,7 +43,7 @@ data class OAuth2Salesforce(
         "enabled" to enabled as Any,
         "customerKey" to customerKey as Any,
         "customerSecret" to customerSecret as Any,
-        "prompt" to prompt as Any?,
+        "prompt" to prompt.map { it.value } as Any,
     )
 
     companion object {
@@ -51,11 +51,11 @@ data class OAuth2Salesforce(
         fun from(
             map: Map<String, Any>,
         ) = OAuth2Salesforce(
-            id = map["\$id"] as String,
-            enabled = map["enabled"] as Boolean,
-            customerKey = map["customerKey"] as String,
-            customerSecret = map["customerSecret"] as String,
-            prompt = map["prompt"] as? List<io.appwrite.enums.OAuth2SalesforcePrompt>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            customerKey = (if (map.containsKey("customerKey")) map["customerKey"] else "") as String,
+            customerSecret = (if (map.containsKey("customerSecret")) map["customerSecret"] else "") as String,
+            prompt = ((if (map.containsKey("prompt")) map["prompt"] else listOf<Any?>()) as List<*>).mapNotNull { value -> io.appwrite.enums.OAuth2SalesforcePrompt.values().find { it.value == value } },
         )
     }
 }

@@ -16,8 +16,8 @@ val response = tablesDB.updateFloatColumn(
     key = "<KEY>",
     required = false,
     default = 10.5,
-    min = 0, // optional
-    max = 100, // optional
+    min = 0.0, // optional
+    max = 100.0, // optional
     newKey = "<NEW_KEY>" // optional
 )
 ```

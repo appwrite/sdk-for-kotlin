@@ -13,7 +13,7 @@ val tablesDB = TablesDB(client)
 val response = tablesDB.deleteRows(
     databaseId = "<DATABASE_ID>",
     tableId = "<TABLE_ID>",
-    queries = listOf(), // optional
+    queries = listOf("{\"method\":\"equal\", \"attribute\":\"\$id\", \"values\":[\"<ROW_ID>\"]}"), // optional
     transactionId = "<TRANSACTION_ID>" // optional
 )
 ```

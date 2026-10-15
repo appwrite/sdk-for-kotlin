@@ -30,8 +30,8 @@ data class ActivityEventList(
         fun from(
             map: Map<String, Any>,
         ) = ActivityEventList(
-            total = (map["total"] as Number).toLong(),
-            events = (map["events"] as List<Map<String, Any>>).map { ActivityEvent.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            events = ((if (map.containsKey("events")) map["events"] else listOf<Any?>()) as List<Map<String, Any>>).map { ActivityEvent.from(map = it) },
         )
     }
 }

@@ -51,11 +51,11 @@ data class PolicyMfaFactors(
         fun from(
             map: Map<String, Any>,
         ) = PolicyMfaFactors(
-            id = map["\$id"] as String,
-            totp = map["totp"] as Boolean,
-            email = map["email"] as Boolean,
-            phone = map["phone"] as Boolean,
-            custom = map["custom"] as Boolean,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            totp = (if (map.containsKey("totp")) map["totp"] else true) as Boolean,
+            email = (if (map.containsKey("email")) map["email"] else true) as Boolean,
+            phone = (if (map.containsKey("phone")) map["phone"] else true) as Boolean,
+            custom = (if (map.containsKey("custom")) map["custom"] else false) as Boolean,
         )
     }
 }

@@ -30,8 +30,8 @@ data class PasskeyList(
         fun from(
             map: Map<String, Any>,
         ) = PasskeyList(
-            total = (map["total"] as Number).toLong(),
-            passkeys = (map["passkeys"] as List<Map<String, Any>>).map { Passkey.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            passkeys = ((if (map.containsKey("passkeys")) map["passkeys"] else listOf<Any?>()) as List<Map<String, Any>>).map { Passkey.from(map = it) },
         )
     }
 }

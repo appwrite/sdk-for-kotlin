@@ -1,5 +1,33 @@
 # Change Log
 
+## 23.0.0
+
+* Breaking: removed `account.listLogs` and `users.listLogs`
+* Breaking: removed `organization.createKey`, `getKey`, `listKeys`, `updateKey` and `deleteKey`, and `OrganizationKeyScopes`; use `organization.listProjectKeys`, `getProjectKey`, `updateProjectKey` and `deleteProjectKey` instead
+* Breaking: removed the `Log`, `LogList` and `DevKey` models
+* Breaking: removed `Project.devKeys` and the unsent `Block` fields
+* Breaking: `listSpecifications` returns each specification's prices and overage rates on the row itself. Removed the list-level `pricing` field and the `DedicatedDatabaseSpecificationPricing` model
+* Breaking: removed `Client.setDevKey`
+* Breaking: removed `BillingPlanGroup.STARTER`; use `BillingPlanGroup.FREE`
+* Breaking: requests send response format `2.5.0`
+* Breaking: `resource` on the `oauth2` authorize, PAR, device and token methods is now `List<String>?`
+* Breaking: `project.updateOAuth2Kakao` takes `enabled` before `prompt`
+* Breaking: `BackupRestoration.options` is now a `Map<String, Any?>`
+* Breaking: billing, backup and dedicated database fields the server can omit are now nullable
+* Breaking: `providerIdToken`, `fingerprints`, OAuth2 `prompt` and native fields are now non-nullable
+* Breaking: model constructors follow the API field order; optional fields no longer default to `null`
+* Added: `Topic` helper to build MQTT topics for push messages
+* Added: `mongo`, `mysql` and `postgresql` `promoteRestoration`, `restoreMode`, `targetName` and `autoPromote` on `createRestoration`, and `DedicatedDatabaseRestoration.restoreMode`
+* Added: `proxy.createSMTPRule`, the `ProxyRuleProtocol` enum and `ProxyRule.protocol`
+* Added: `emailEnabled` on `functions.update` and `Function`, and `ExecutionTrigger.EMAIL`
+* Added: `Query` aggregates (`count`, `countDistinct`, `sum`, `avg`, `min`, `max` and more), `groupBy`, `having`, `distinct`, joins, `relationship`, `covers`, `spatialEquals` and `page`
+* Added: `Query.builder()` to chain queries; `build()` returns the query list
+* Updated: models fill documented defaults for fields missing from a response
+* Updated: empty required path parameters now throw `AppwriteException` before sending the request
+* Updated: multipart requests encode map parameters as JSON
+* Updated: Kotlin 2.4.20
+* Fixed: OAuth2 models with a `prompt` list no longer throw `ClassCastException`
+
 ## 22.4.0
 
 * Added: `domains` service to manage domains, DNS records, email presets, prices, transfer status and zones

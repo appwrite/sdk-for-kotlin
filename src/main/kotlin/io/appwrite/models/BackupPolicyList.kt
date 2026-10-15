@@ -30,8 +30,8 @@ data class BackupPolicyList(
         fun from(
             map: Map<String, Any>,
         ) = BackupPolicyList(
-            total = (map["total"] as Number).toLong(),
-            policies = (map["policies"] as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
+            total = ((if (map.containsKey("total")) map["total"] else 0) as Number).toLong(),
+            policies = ((if (map.containsKey("policies")) map["policies"] else listOf<Any?>()) as List<Map<String, Any>>).map { BackupPolicy.from(map = it) },
         )
     }
 }

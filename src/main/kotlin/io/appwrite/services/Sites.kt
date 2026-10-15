@@ -11,7 +11,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import java.io.File
 
 /**
- * The Sites Service allows you view, create and manage your web applications.**/
+ * The Sites Service allows you view, create and manage your web applications.
+ */
 class Sites(client: Client) : Service(client) {
     /**
      * Get a list of all the project's sites. You can use the query params to filter your results.
@@ -230,6 +231,9 @@ class Sites(client: Client) : Service(client) {
     suspend fun get(
         siteId: String,
     ): io.appwrite.models.Site {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
@@ -308,6 +312,9 @@ class Sites(client: Client) : Service(client) {
         deploymentRetention: Long? = null,
         scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
     ): io.appwrite.models.Site {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
@@ -364,6 +371,9 @@ class Sites(client: Client) : Service(client) {
     suspend fun delete(
         siteId: String,
     ): Any {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}"
             .replace("{siteId}", siteId)
         )
@@ -371,6 +381,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -393,6 +404,9 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Site {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployment"
             .replace("{siteId}", siteId)
         )
@@ -434,6 +448,9 @@ class Sites(client: Client) : Service(client) {
         search: String? = null,
         total: Boolean? = null,
     ): io.appwrite.models.DeploymentList {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
         )
@@ -481,6 +498,9 @@ class Sites(client: Client) : Service(client) {
         activate: Boolean? = null,
         onProgress: ((UploadProgress) -> Unit)? = null
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments"
             .replace("{siteId}", siteId)
         )
@@ -507,9 +527,10 @@ class Sites(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.Deployment::class.java,
             converter,
-            paramName,
-            idParamName,
-            onProgress,
+            paramName = paramName,
+            idParamName = idParamName,
+            onProgress = onProgress,
+            method = "POST",
         )
     }
 
@@ -525,6 +546,9 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/duplicate"
             .replace("{siteId}", siteId)
         )
@@ -574,6 +598,9 @@ class Sites(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/template"
             .replace("{siteId}", siteId)
         )
@@ -622,6 +649,9 @@ class Sites(client: Client) : Service(client) {
         reference: String,
         activate: Boolean? = null,
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/vcs"
             .replace("{siteId}", siteId)
         )
@@ -660,6 +690,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
@@ -694,6 +730,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): Any {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
@@ -702,6 +744,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",
@@ -729,6 +772,12 @@ class Sites(client: Client) : Service(client) {
         type: io.appwrite.enums.DeploymentDownloadType? = null,
         token: String? = null,
     ): ByteArray {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/download"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
@@ -762,6 +811,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         deploymentId: String,
     ): io.appwrite.models.Deployment {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (deploymentId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deploymentId\"")
+        }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/status"
             .replace("{siteId}", siteId)
             .replace("{deploymentId}", deploymentId)
@@ -800,6 +855,9 @@ class Sites(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.ExecutionList {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/logs"
             .replace("{siteId}", siteId)
         )
@@ -836,6 +894,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         logId: String,
     ): io.appwrite.models.Execution {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (logId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"logId\"")
+        }
         val apiPath = ("/sites/{siteId}/logs/{logId}"
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
@@ -870,6 +934,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         logId: String,
     ): Any {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (logId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"logId\"")
+        }
         val apiPath = ("/sites/{siteId}/logs/{logId}"
             .replace("{siteId}", siteId)
             .replace("{logId}", logId)
@@ -904,6 +974,9 @@ class Sites(client: Client) : Service(client) {
         queries: List<String>? = null,
         total: Boolean? = null,
     ): io.appwrite.models.VariableList {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
         )
@@ -947,6 +1020,9 @@ class Sites(client: Client) : Service(client) {
         value: String,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
         val apiPath = ("/sites/{siteId}/variables"
             .replace("{siteId}", siteId)
         )
@@ -986,6 +1062,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         variableId: String,
     ): io.appwrite.models.Variable {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
@@ -1027,6 +1109,12 @@ class Sites(client: Client) : Service(client) {
         value: String? = null,
         secret: Boolean? = null,
     ): io.appwrite.models.Variable {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
@@ -1066,6 +1154,12 @@ class Sites(client: Client) : Service(client) {
         siteId: String,
         variableId: String,
     ): Any {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        if (variableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"variableId\"")
+        }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
             .replace("{siteId}", siteId)
             .replace("{variableId}", variableId)
@@ -1074,6 +1168,7 @@ class Sites(client: Client) : Service(client) {
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
+            "accept" to "application/json",
         )
         return client.call(
             "DELETE",

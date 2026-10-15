@@ -1,17 +1,17 @@
 ```kotlin
 import io.appwrite.Client
 import io.appwrite.coroutines.CoroutineCallback
-import io.appwrite.services.Organization
+import io.appwrite.services.Mongo
 
 val client = Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
     .setKey("<YOUR_API_KEY>") // Your secret API key
 
-val organization = Organization(client)
+val mongo = Mongo(client)
 
-val response = organization.listKeys(
-    queries = listOf(), // optional
-    total = false // optional
+val response = mongo.promoteRestoration(
+    databaseId = "<DATABASE_ID>",
+    restorationId = "<RESTORATION_ID>"
 )
 ```

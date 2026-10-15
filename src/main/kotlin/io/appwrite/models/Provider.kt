@@ -79,14 +79,14 @@ data class Provider(
         fun from(
             map: Map<String, Any>,
         ) = Provider(
-            id = map["\$id"] as String,
-            createdAt = map["\$createdAt"] as String,
-            updatedAt = map["\$updatedAt"] as String,
-            name = map["name"] as String,
-            provider = map["provider"] as String,
-            enabled = map["enabled"] as Boolean,
-            type = map["type"] as String,
-            credentials = map["credentials"] as Map<String, Any?>,
+            id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
+            createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
+            updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
+            name = (if (map.containsKey("name")) map["name"] else "") as String,
+            provider = (if (map.containsKey("provider")) map["provider"] else "") as String,
+            enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
+            type = (if (map.containsKey("type")) map["type"] else "") as String,
+            credentials = (if (map.containsKey("credentials")) map["credentials"] else mapOf<String, Any?>()) as Map<String, Any?>,
             options = map["options"] as? Map<String, Any?>,
         )
     }
