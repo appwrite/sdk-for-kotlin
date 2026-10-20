@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,21 +12,25 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.updateLineColumn(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    "<KEY>", // key
-    false, // required
-    List.of(List.of(1, 2), List.of(3, 4), List.of(5, 6)), // default (optional)
-    "<NEW_KEY>", // newKey (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.updateLineColumn(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        "<KEY>", // key
+        false, // required
+        List.of(List.of(1.0, 2.0), List.of(3.0, 4.0), List.of(5.0, 6.0)), // default (optional)
+        "<NEW_KEY>", // newKey (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

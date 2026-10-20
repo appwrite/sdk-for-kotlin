@@ -1,8 +1,11 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 import io.appwrite.enums.MessagePriority;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,35 +14,38 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.createPush(
-    "<MESSAGE_ID>", // messageId
-    "<TITLE>", // title (optional)
-    "<BODY>", // body (optional)
-    List.of(), // topics (optional)
-    List.of(), // users (optional)
-    List.of(), // targets (optional)
-    Map.of("a", "b"), // data (optional)
-    "<ACTION>", // action (optional)
-    "<ID1:ID2>", // image (optional)
-    "<ICON>", // icon (optional)
-    "<SOUND>", // sound (optional)
-    "<COLOR>", // color (optional)
-    "<TAG>", // tag (optional)
-    1L, // badge (optional)
-    false, // draft (optional)
-    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
-    false, // contentAvailable (optional)
-    false, // critical (optional)
-    MessagePriority.NORMAL, // priority (optional)
-    "<CHANNEL_ID>", // channelId (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.createPush(
+        "<MESSAGE_ID>", // messageId
+        "<TITLE>", // title (optional)
+        "<BODY>", // body (optional)
+        List.of(), // topics (optional)
+        List.of(), // users (optional)
+        List.of(), // targets (optional)
+        Map.of("a", "b"), // data (optional)
+        "<ACTION>", // action (optional)
+        "<ID1:ID2>", // image (optional)
+        "<ICON>", // icon (optional)
+        "<SOUND>", // sound (optional)
+        "<COLOR>", // color (optional)
+        "<TAG>", // tag (optional)
+        1L, // badge (optional)
+        false, // draft (optional)
+        "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
+        false, // contentAvailable (optional)
+        false, // critical (optional)
+        MessagePriority.NORMAL, // priority (optional)
+        "<CHANNEL_ID>", // channelId (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 
 Client client = new Client()
@@ -10,21 +11,24 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateMembershipPrivacyPolicy(
-    false, // userId (optional)
-    false, // userEmail (optional)
-    false, // userPhone (optional)
-    false, // userName (optional)
-    false, // userMFA (optional)
-    false, // userAccessedAt (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateMembershipPrivacyPolicy(
+        false, // userId (optional)
+        false, // userEmail (optional)
+        false, // userPhone (optional)
+        false, // userName (optional)
+        false, // userMFA (optional)
+        false, // userAccessedAt (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

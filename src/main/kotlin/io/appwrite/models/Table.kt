@@ -44,6 +44,12 @@ data class Table(
     val name: String,
 
     /**
+     * Optional description for the table.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Table enabled. Can be 'enabled' or 'disabled'. When disabled, the table is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
@@ -87,6 +93,7 @@ data class Table(
         "\$permissions" to permissions as Any,
         "databaseId" to databaseId as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "rowSecurity" to rowSecurity as Any,
         "columns" to columns as Any,
@@ -106,6 +113,7 @@ data class Table(
             permissions = (if (map.containsKey("\$permissions")) map["\$permissions"] else listOf<Any?>()) as List<String>,
             databaseId = (if (map.containsKey("databaseId")) map["databaseId"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             rowSecurity = (if (map.containsKey("rowSecurity")) map["rowSecurity"] else false) as Boolean,
             columns = (if (map.containsKey("columns")) map["columns"] else listOf<Any?>()) as List<Map<String, Any?>>,

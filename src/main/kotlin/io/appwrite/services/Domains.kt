@@ -17,6 +17,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on attributes such as domain name, teamInternalId, expiration, etc.
      * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.DomainsList]
      */
     @JvmOverloads
@@ -24,11 +25,13 @@ class Domains(client: Client) : Service(client) {
     suspend fun list(
         queries: List<String>? = null,
         search: String? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.DomainsList {
         val apiPath = "/domains"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
             "search" to search,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -732,6 +735,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. You may filter on attributes such as type, name, value, etc. Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.DnsRecordsList]
      */
     @JvmOverloads
@@ -739,6 +743,7 @@ class Domains(client: Client) : Service(client) {
     suspend fun listRecords(
         domainId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.DnsRecordsList {
         if (domainId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
@@ -748,6 +753,7 @@ class Domains(client: Client) : Service(client) {
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

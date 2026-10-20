@@ -18,6 +18,7 @@ val response = databases.createFloatAttribute(
     min = 0.0, // optional
     max = 100.0, // optional
     default = 10.5, // optional
-    array = false // optional
+    array = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

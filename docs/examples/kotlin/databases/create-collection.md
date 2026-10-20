@@ -20,6 +20,7 @@ val response = databases.createCollection(
     documentSecurity = false, // optional
     enabled = false, // optional
     attributes = listOf(), // optional
-    indexes = listOf() // optional
+    indexes = listOf(), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

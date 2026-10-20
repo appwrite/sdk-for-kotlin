@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Users;
 
 Client client = new Client()
@@ -10,24 +11,27 @@ Client client = new Client()
 
 Users users = new Users(client);
 
-users.createScryptUser(
-    "<USER_ID>", // userId
-    "email@example.com", // email
-    "password", // password
-    "<PASSWORD_SALT>", // passwordSalt
-    8L, // passwordCpu
-    65536L, // passwordMemory
-    1L, // passwordParallel
-    64L, // passwordLength
-    "<NAME>", // name (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    users.createScryptUser(
+        "<USER_ID>", // userId
+        "email@example.com", // email
+        "password", // password
+        "<PASSWORD_SALT>", // passwordSalt
+        8L, // passwordCpu
+        65536L, // passwordMemory
+        1L, // passwordParallel
+        64L, // passwordLength
+        "<NAME>", // name (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -15,6 +15,7 @@ val response = messaging.createTopic(
     name = "<NAME>",
     subscribe = listOf("any"), // optional
     qos = 0, // optional
-    expiry = 0 // optional
+    expiry = 0, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 
 Client client = new Client()
@@ -10,21 +11,24 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateMsg91Provider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name (optional)
-    false, // enabled (optional)
-    "<TEMPLATE_ID>", // templateId (optional)
-    "<SENDER_ID>", // senderId (optional)
-    "<AUTH_KEY>", // authKey (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.updateMsg91Provider(
+        "<PROVIDER_ID>", // providerId
+        "<NAME>", // name (optional)
+        false, // enabled (optional)
+        "<TEMPLATE_ID>", // templateId (optional)
+        "<SENDER_ID>", // senderId (optional)
+        "<AUTH_KEY>", // authKey (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

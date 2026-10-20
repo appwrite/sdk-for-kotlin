@@ -59,6 +59,7 @@ class Webhooks(client: Client) : Service(client) {
      * @param authUsername Webhook HTTP user. Max length: 255 chars.
      * @param authPassword Webhook HTTP password. Max length: 2048 chars.
      * @param secret Webhook secret key. If not provided, a new key will be generated automatically. Key must be at least 8 characters long, and at max 256 characters.
+     * @param description Optional description for the webhook.
      * @return [io.appwrite.models.Webhook]
      */
     @JvmOverloads
@@ -73,6 +74,7 @@ class Webhooks(client: Client) : Service(client) {
         authUsername: String? = null,
         authPassword: String? = null,
         secret: String? = null,
+        description: String? = null,
     ): io.appwrite.models.Webhook {
         val apiPath = "/webhooks"
         val apiParams = mutableMapOf<String, Any?>(
@@ -85,6 +87,7 @@ class Webhooks(client: Client) : Service(client) {
             "authUsername" to authUsername,
             "authPassword" to authPassword,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -149,6 +152,7 @@ class Webhooks(client: Client) : Service(client) {
      * @param tls Certificate verification, false for disabled or true for enabled.
      * @param authUsername Webhook HTTP user. Max length: 255 chars.
      * @param authPassword Webhook HTTP password. Max length: 2048 chars. Omit to keep the current password; it is cleared when the URL changes or TLS verification is disabled.
+     * @param description Optional description for the webhook.
      * @return [io.appwrite.models.Webhook]
      */
     @JvmOverloads
@@ -162,6 +166,7 @@ class Webhooks(client: Client) : Service(client) {
         tls: Boolean? = null,
         authUsername: String? = null,
         authPassword: String? = null,
+        description: String? = null,
     ): io.appwrite.models.Webhook {
         if (webhookId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"webhookId\"")
@@ -177,6 +182,7 @@ class Webhooks(client: Client) : Service(client) {
             "tls" to tls,
             "authUsername" to authUsername,
             "authPassword" to authPassword,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

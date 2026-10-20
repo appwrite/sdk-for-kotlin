@@ -11,6 +11,7 @@ val client = Client()
 val activities = Activities(client)
 
 val response = activities.listEvents(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

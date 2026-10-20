@@ -15,6 +15,12 @@ data class AttributeLine(
     val key: String,
 
     /**
+     * Optional description for the attribute.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Attribute type.
      */
     @SerializedName("type")
@@ -65,6 +71,7 @@ data class AttributeLine(
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "key" to key as Any,
+        "description" to description as Any,
         "type" to type as Any,
         "status" to status.value as Any,
         "error" to error as Any,
@@ -81,6 +88,7 @@ data class AttributeLine(
             map: Map<String, Any>,
         ) = AttributeLine(
             key = (if (map.containsKey("key")) map["key"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             type = (if (map.containsKey("type")) map["type"] else "") as String,
             status = AttributeStatus.values().find { it.value == map["status"] as String }!!,
             error = (if (map.containsKey("error")) map["error"] else "") as String,

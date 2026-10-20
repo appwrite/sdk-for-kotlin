@@ -17,6 +17,7 @@ val response = databases.updateVarcharAttribute(
     required = false,
     default = "Hello World",
     size = 1, // optional
-    newKey = "<NEW_KEY>" // optional
+    newKey = "<NEW_KEY>", // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mongo;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,29 +12,32 @@ Client client = new Client()
 
 Mongo mongo = new Mongo(client);
 
-mongo.create(
-    "<DATABASE_ID>", // databaseId
-    "<NAME>", // name
-    "17", // version (optional)
-    "<SPECIFICATION>", // specification (optional)
-    0L, // replicas (optional)
-    "async", // syncMode (optional)
-    60L, // networkIdleTimeoutSeconds (optional)
-    List.of(), // networkIPAllowlist (optional)
-    5L, // idleTimeoutMinutes (optional)
-    false, // pitr (optional)
-    1L, // pitrRetentionDays (optional)
-    false, // storageAutoscaling (optional)
-    50L, // storageAutoscalingThresholdPercent (optional)
-    0L, // storageAutoscalingMaxGb (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mongo.create(
+        "<DATABASE_ID>", // databaseId
+        "<NAME>", // name
+        "17", // version (optional)
+        "<SPECIFICATION>", // specification (optional)
+        0L, // replicas (optional)
+        "async", // syncMode (optional)
+        60L, // networkIdleTimeoutSeconds (optional)
+        List.of(), // networkIPAllowlist (optional)
+        5L, // idleTimeoutMinutes (optional)
+        false, // pitr (optional)
+        1L, // pitrRetentionDays (optional)
+        false, // storageAutoscaling (optional)
+        50L, // storageAutoscalingThresholdPercent (optional)
+        0L, // storageAutoscalingMaxGb (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

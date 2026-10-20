@@ -1,5 +1,21 @@
 # Change Log
 
+## 24.0.0
+
+* Breaking: `create` and `update` on `TablesDB`, `DocumentsDB` and `VectorsDB` take `description` before `specification`
+* Breaking: `functions.update` takes `description` before `emailEnabled`
+* Added: `description` params and model fields on databases, collections, tables, attributes, columns, indexes, buckets, functions, sites, topics, variables, keys and webhooks
+* Added: `account.listMemberships` to list the current user's team memberships
+* Added: `createQuery` on `Databases`, `DocumentsDB` and `TablesDB` to send list queries in the request body
+* Added: `total` param on `Activities`, `Backups`, `Domains`, `Mongo`, `Mysql` and `Postgresql` list methods
+* Added: `emails` param on `messaging.createEmail` and `updateEmail` for recipients without an Appwrite target
+* Added: `denyList` on `project.updatePasswordDictionaryPolicy`, `updatePasswordPersonalDataPolicy` and their policy models
+* Added: `BillingPlan.functionsAllowCron`
+* Added: `@JvmStatic` on `ID`, `Permission`, `Role`, `Query`, `Operator` and `InputFile` helpers for Java
+* Added: `stripMetadata` on `storage.createBucket`, `storage.updateBucket` and the `Bucket` model
+* Fixed: `row.data` keeps null-valued columns instead of dropping them
+* Updated: Java examples catch `AppwriteException` and import `List` and `Map`
+
 ## 23.0.0
 
 * Breaking: removed `account.listLogs` and `users.listLogs`

@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,22 +12,25 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateOAuth2Apple(
-    "<SERVICE_ID>", // serviceId (optional)
-    "<KEY_ID>", // keyId (optional)
-    "<TEAM_ID>", // teamId (optional)
-    "<P8_FILE>", // p8File (optional)
-    false, // enabled (optional)
-    List.of(), // nativeClientIds (optional)
-    false, // nativeEnabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateOAuth2Apple(
+        "<SERVICE_ID>", // serviceId (optional)
+        "<KEY_ID>", // keyId (optional)
+        "<TEAM_ID>", // teamId (optional)
+        "<P8_FILE>", // p8File (optional)
+        false, // enabled (optional)
+        List.of(), // nativeClientIds (optional)
+        false, // nativeEnabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

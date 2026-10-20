@@ -302,6 +302,7 @@ class Avatars(client: Client) : Service(client) {
      * @param file Binary image file of at most 5MB. Allowed file types are png, jpg, jpeg, and webp.
      * @return [io.appwrite.models.Account<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun <T> updatePhoto(
         file: InputFile,
@@ -341,6 +342,7 @@ class Avatars(client: Client) : Service(client) {
      * @param file Binary image file of at most 5MB. Allowed file types are png, jpg, jpeg, and webp.
      * @return [io.appwrite.models.Account<T>]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePhoto(
         file: InputFile,

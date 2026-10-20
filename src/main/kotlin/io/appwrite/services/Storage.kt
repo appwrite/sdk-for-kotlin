@@ -17,7 +17,7 @@ class Storage(client: Client) : Service(client) {
     /**
      * Get a list of all the storage buckets. You can use the query params to filter your results.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus, transformations
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: enabled, name, fileSecurity, maximumFileSize, encryption, antivirus, transformations, stripMetadata
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BucketList]
@@ -66,6 +66,8 @@ class Storage(client: Client) : Service(client) {
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
+     * @param description Optional description for the bucket.
+     * @param stripMetadata Remove metadata such as location, device and capture time from uploaded images. The color profile and orientation are kept. For file size above 20MB metadata is not removed even if it's enabled.
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -82,6 +84,8 @@ class Storage(client: Client) : Service(client) {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
+        description: String? = null,
+        stripMetadata: Boolean? = null,
     ): io.appwrite.models.Bucket {
         val apiPath = "/storage/buckets"
         val apiParams = mutableMapOf<String, Any?>(
@@ -96,6 +100,8 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
             "transformations" to transformations,
+            "description" to description,
+            "stripMetadata" to stripMetadata,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -163,6 +169,8 @@ class Storage(client: Client) : Service(client) {
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
+     * @param description Optional description for the bucket.
+     * @param stripMetadata Remove metadata such as location, device and capture time from uploaded images. The color profile and orientation are kept. For file size above 20MB metadata is not removed even if it's enabled. By default, the current setting is kept.
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -179,6 +187,8 @@ class Storage(client: Client) : Service(client) {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
+        description: String? = null,
+        stripMetadata: Boolean? = null,
     ): io.appwrite.models.Bucket {
         if (bucketId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"bucketId\"")
@@ -197,6 +207,8 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
             "transformations" to transformations,
+            "description" to description,
+            "stripMetadata" to stripMetadata,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

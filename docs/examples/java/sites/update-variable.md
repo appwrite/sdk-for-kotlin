@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Sites;
 
 Client client = new Client()
@@ -10,20 +11,24 @@ Client client = new Client()
 
 Sites sites = new Sites(client);
 
-sites.updateVariable(
-    "<SITE_ID>", // siteId
-    "<VARIABLE_ID>", // variableId
-    "<KEY>", // key (optional)
-    "<VALUE>", // value (optional)
-    false, // secret (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    sites.updateVariable(
+        "<SITE_ID>", // siteId
+        "<VARIABLE_ID>", // variableId
+        "<KEY>", // key (optional)
+        "<VALUE>", // value (optional)
+        false, // secret (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

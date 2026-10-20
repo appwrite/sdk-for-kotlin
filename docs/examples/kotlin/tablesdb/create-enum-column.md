@@ -17,6 +17,7 @@ val response = tablesDB.createEnumColumn(
     elements = listOf("active", "inactive"),
     required = false,
     default = "active", // optional
-    array = false // optional
+    array = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

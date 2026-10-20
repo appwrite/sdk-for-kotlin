@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
 import io.appwrite.enums.RelationMutate;
 
@@ -11,20 +12,24 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.updateRelationshipColumn(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    "<KEY>", // key
-    RelationMutate.CASCADE, // onDelete (optional)
-    "<NEW_KEY>", // newKey (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.updateRelationshipColumn(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        "<KEY>", // key
+        RelationMutate.CASCADE, // onDelete (optional)
+        "<NEW_KEY>", // newKey (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

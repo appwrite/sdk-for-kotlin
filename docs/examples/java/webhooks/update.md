@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Webhooks;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,23 +12,27 @@ Client client = new Client()
 
 Webhooks webhooks = new Webhooks(client);
 
-webhooks.update(
-    "<WEBHOOK_ID>", // webhookId
-    "<NAME>", // name
-    "https://example.com/webhook", // url
-    List.of("users.*.create"), // events
-    false, // enabled (optional)
-    false, // tls (optional)
-    "<AUTH_USERNAME>", // authUsername (optional)
-    "password", // authPassword (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    webhooks.update(
+        "<WEBHOOK_ID>", // webhookId
+        "<NAME>", // name
+        "https://example.com/webhook", // url
+        List.of("users.*.create"), // events
+        false, // enabled (optional)
+        false, // tls (optional)
+        "<AUTH_USERNAME>", // authUsername (optional)
+        "password", // authPassword (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

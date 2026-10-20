@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updatePasswordRotationPolicy(
-    false, // enabled (optional)
-    86400L, // maxAge (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updatePasswordRotationPolicy(
+        false, // enabled (optional)
+        86400L, // maxAge (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

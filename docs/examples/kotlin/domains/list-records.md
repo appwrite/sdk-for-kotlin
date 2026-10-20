@@ -12,6 +12,7 @@ val domains = Domains(client)
 
 val response = domains.listRecords(
     domainId = "<DOMAIN_ID>",
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

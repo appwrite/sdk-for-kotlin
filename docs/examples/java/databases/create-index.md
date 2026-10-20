@@ -1,9 +1,11 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Databases;
 import io.appwrite.enums.DatabasesIndexType;
 import io.appwrite.enums.OrderBy;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,22 +14,26 @@ Client client = new Client()
 
 Databases databases = new Databases(client);
 
-databases.createIndex(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    "<KEY>", // key
-    DatabasesIndexType.KEY, // type
-    List.of("username"), // attributes
-    List.of(OrderBy.ASC), // orders (optional)
-    List.of(), // lengths (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    databases.createIndex(
+        "<DATABASE_ID>", // databaseId
+        "<COLLECTION_ID>", // collectionId
+        "<KEY>", // key
+        DatabasesIndexType.KEY, // type
+        List.of("username"), // attributes
+        List.of(OrderBy.ASC), // orders (optional)
+        List.of(), // lengths (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

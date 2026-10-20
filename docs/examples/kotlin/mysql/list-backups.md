@@ -12,6 +12,7 @@ val mysql = Mysql(client)
 
 val response = mysql.listBackups(
     databaseId = "<DATABASE_ID>",
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

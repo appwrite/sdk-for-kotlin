@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Avatars;
 
 Client client = new Client()
@@ -10,19 +11,22 @@ Client client = new Client()
 
 Avatars avatars = new Avatars(client);
 
-avatars.getInitials(
-    "<NAME>", // name (optional)
-    0L, // width (optional)
-    0L, // height (optional)
-    "FFFFFF", // background (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    avatars.getInitials(
+        "<NAME>", // name (optional)
+        0L, // width (optional)
+        0L, // height (optional)
+        "FFFFFF", // background (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

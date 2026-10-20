@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mysql;
 
 Client client = new Client()
@@ -10,21 +11,24 @@ Client client = new Client()
 
 Mysql mysql = new Mysql(client);
 
-mysql.updateBackupPolicy(
-    "<DATABASE_ID>", // databaseId
-    "<POLICY_ID>", // policyId
-    "<NAME>", // name (optional)
-    "", // schedule (optional)
-    1L, // retention (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mysql.updateBackupPolicy(
+        "<DATABASE_ID>", // databaseId
+        "<POLICY_ID>", // policyId
+        "<NAME>", // name (optional)
+        "", // schedule (optional)
+        1L, // retention (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

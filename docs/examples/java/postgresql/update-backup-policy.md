@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Postgresql;
 
 Client client = new Client()
@@ -10,21 +11,24 @@ Client client = new Client()
 
 Postgresql postgresql = new Postgresql(client);
 
-postgresql.updateBackupPolicy(
-    "<DATABASE_ID>", // databaseId
-    "<POLICY_ID>", // policyId
-    "<NAME>", // name (optional)
-    "", // schedule (optional)
-    1L, // retention (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    postgresql.updateBackupPolicy(
+        "<DATABASE_ID>", // databaseId
+        "<POLICY_ID>", // policyId
+        "<NAME>", // name (optional)
+        "", // schedule (optional)
+        1L, // retention (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

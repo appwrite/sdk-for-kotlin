@@ -1,9 +1,12 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.Permission;
 import io.appwrite.Role;
 import io.appwrite.services.Presences;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,22 +15,25 @@ Client client = new Client()
 
 Presences presences = new Presences(client);
 
-presences.update(
-    "<PRESENCE_ID>", // presenceId
-    "<USER_ID>", // userId
-    "<STATUS>", // status (optional)
-    "2020-10-15T06:38:00.000+00:00", // expiresAt (optional)
-    Map.of("a", "b"), // metadata (optional)
-    List.of(Permission.read(Role.any())), // permissions (optional)
-    false, // purge (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    presences.update(
+        "<PRESENCE_ID>", // presenceId
+        "<USER_ID>", // userId
+        "<STATUS>", // status (optional)
+        "2020-10-15T06:38:00.000+00:00", // expiresAt (optional)
+        Map.of("a", "b"), // metadata (optional)
+        List.of(Permission.read(Role.any())), // permissions (optional)
+        false, // purge (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -1,9 +1,11 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
 import io.appwrite.enums.TablesDBIndexType;
 import io.appwrite.enums.OrderBy;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -12,22 +14,26 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.createIndex(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    "<KEY>", // key
-    TablesDBIndexType.KEY, // type
-    List.of("username"), // columns
-    List.of(OrderBy.ASC), // orders (optional)
-    List.of(), // lengths (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.createIndex(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        "<KEY>", // key
+        TablesDBIndexType.KEY, // type
+        List.of("username"), // columns
+        List.of(OrderBy.ASC), // orders (optional)
+        List.of(), // lengths (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```
