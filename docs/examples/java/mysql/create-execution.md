@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mysql;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,19 +12,22 @@ Client client = new Client()
 
 Mysql mysql = new Mysql(client);
 
-mysql.createExecution(
-    "<DATABASE_ID>", // databaseId
-    "<SQL>", // sql
-    Map.of("a", "b"), // bindings (optional)
-    1L, // timeoutSeconds (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mysql.createExecution(
+        "<DATABASE_ID>", // databaseId
+        "<SQL>", // sql
+        Map.of("a", "b"), // bindings (optional)
+        1L, // timeoutSeconds (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Tokens;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Tokens tokens = new Tokens(client);
 
-tokens.update(
-    "<TOKEN_ID>", // tokenId
-    "2020-10-15T06:38:00.000+00:00", // expire (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tokens.update(
+        "<TOKEN_ID>", // tokenId
+        "2020-10-15T06:38:00.000+00:00", // expire (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

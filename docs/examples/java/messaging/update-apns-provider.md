@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 
 Client client = new Client()
@@ -10,23 +11,26 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateAPNSProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name (optional)
-    false, // enabled (optional)
-    "<AUTH_KEY>", // authKey (optional)
-    "<AUTH_KEY_ID>", // authKeyId (optional)
-    "<TEAM_ID>", // teamId (optional)
-    "<BUNDLE_ID>", // bundleId (optional)
-    false, // sandbox (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.updateAPNSProvider(
+        "<PROVIDER_ID>", // providerId
+        "<NAME>", // name (optional)
+        false, // enabled (optional)
+        "<AUTH_KEY>", // authKey (optional)
+        "<AUTH_KEY_ID>", // authKeyId (optional)
+        "<TEAM_ID>", // teamId (optional)
+        "<BUNDLE_ID>", // bundleId (optional)
+        false, // sandbox (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

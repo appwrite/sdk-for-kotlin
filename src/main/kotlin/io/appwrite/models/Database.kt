@@ -22,6 +22,12 @@ data class Database(
     val name: String,
 
     /**
+     * Optional description for the database.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Database creation date in ISO 8601 format.
      */
     @SerializedName("\$createdAt")
@@ -103,6 +109,7 @@ data class Database(
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "enabled" to enabled as Any,
@@ -125,6 +132,7 @@ data class Database(
         ) = Database(
             id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,

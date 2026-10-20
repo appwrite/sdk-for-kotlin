@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.DocumentsDB;
 
 Client client = new Client()
@@ -10,19 +11,22 @@ Client client = new Client()
 
 DocumentsDB documentsDB = new DocumentsDB(client);
 
-documentsDB.listOperations(
-    "<DATABASE_ID>", // databaseId
-    "queued", // status (optional)
-    1L, // limit (optional)
-    0L, // offset (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    documentsDB.listOperations(
+        "<DATABASE_ID>", // databaseId
+        "queued", // status (optional)
+        1L, // limit (optional)
+        0L, // offset (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

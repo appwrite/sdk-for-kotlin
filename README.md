@@ -22,7 +22,7 @@ Gradle Kotlin DSL (`build.gradle.kts`):
 
 ```kotlin
 dependencies {
-    implementation("io.appwrite:sdk-for-kotlin:23.0.0")
+    implementation("io.appwrite:sdk-for-kotlin:24.0.0")
 }
 ```
 
@@ -30,7 +30,7 @@ Gradle Groovy (`build.gradle`):
 
 ```groovy
 dependencies {
-    implementation 'io.appwrite:sdk-for-kotlin:23.0.0'
+    implementation 'io.appwrite:sdk-for-kotlin:24.0.0'
 }
 ```
 
@@ -40,7 +40,7 @@ Maven (`pom.xml`):
 <dependency>
     <groupId>io.appwrite</groupId>
     <artifactId>sdk-for-kotlin</artifactId>
-    <version>23.0.0</version>
+    <version>24.0.0</version>
 </dependency>
 ```
 

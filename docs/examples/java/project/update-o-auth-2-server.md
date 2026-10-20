@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,31 +12,34 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateOAuth2Server(
-    false, // enabled
-    "https://example.com", // authorizationUrl
-    List.of(), // scopes (optional)
-    List.of(), // authorizationDetailsTypes (optional)
-    60L, // accessTokenDuration (optional)
-    60L, // refreshTokenDuration (optional)
-    60L, // publicAccessTokenDuration (optional)
-    60L, // publicRefreshTokenDuration (optional)
-    60L, // installationAccessTokenDuration (optional)
-    false, // confidentialPkce (optional)
-    "https://example.com", // verificationUrl (optional)
-    6L, // userCodeLength (optional)
-    "numeric", // userCodeFormat (optional)
-    60L, // deviceCodeDuration (optional)
-    List.of(), // defaultScopes (optional)
-    List.of(), // installationScopes (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateOAuth2Server(
+        false, // enabled
+        "https://example.com", // authorizationUrl
+        List.of(), // scopes (optional)
+        List.of(), // authorizationDetailsTypes (optional)
+        60L, // accessTokenDuration (optional)
+        60L, // refreshTokenDuration (optional)
+        60L, // publicAccessTokenDuration (optional)
+        60L, // publicRefreshTokenDuration (optional)
+        60L, // installationAccessTokenDuration (optional)
+        false, // confidentialPkce (optional)
+        "https://example.com", // verificationUrl (optional)
+        6L, // userCodeLength (optional)
+        "numeric", // userCodeFormat (optional)
+        60L, // deviceCodeDuration (optional)
+        List.of(), // defaultScopes (optional)
+        List.of(), // installationScopes (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

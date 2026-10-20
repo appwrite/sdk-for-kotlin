@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Domains;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,17 +12,20 @@ Client client = new Client()
 
 Domains domains = new Domains(client);
 
-domains.updateNameservers(
-    "<DOMAIN_ID>", // domainId
-    List.of(), // nameservers (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    domains.updateNameservers(
+        "<DOMAIN_ID>", // domainId
+        List.of(), // nameservers (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

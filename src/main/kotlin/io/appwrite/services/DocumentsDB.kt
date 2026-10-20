@@ -54,6 +54,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Defaults to `serverless`, which creates the database on the shared pool. Any other value provisions a dedicated database on that specification.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Requires a dedicated `specification`; must be 0 for a serverless database. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Requires a dedicated `specification`; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -65,6 +66,7 @@ class DocumentsDB(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -74,6 +76,7 @@ class DocumentsDB(client: Client) : Service(client) {
             "databaseId" to databaseId,
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -378,6 +381,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Resizing between dedicated specifications changes cpu, memory, storage and the connection ceiling via a rolling cutover with zero downtime. Moving a `serverless` database onto a dedicated specification is a data migration, not a resize.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -389,6 +393,7 @@ class DocumentsDB(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -402,6 +407,7 @@ class DocumentsDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -511,6 +517,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @param attributes Array of attribute definitions to create. Each attribute should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
      * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial), attributes (array of attribute keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.Collection]
      */
     @JvmOverloads
@@ -524,6 +531,7 @@ class DocumentsDB(client: Client) : Service(client) {
         enabled: Boolean? = null,
         attributes: List<Map<String, Any?>>? = null,
         indexes: List<Map<String, Any?>>? = null,
+        description: String? = null,
     ): io.appwrite.models.Collection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -539,6 +547,7 @@ class DocumentsDB(client: Client) : Service(client) {
             "enabled" to enabled,
             "attributes" to attributes,
             "indexes" to indexes,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -608,6 +617,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @param purge When true, purge all cached list responses for this collection as part of the update. Use this to force readers to see fresh data immediately instead of waiting for the cache TTL to expire.
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.Collection]
      */
     @JvmOverloads
@@ -620,6 +630,7 @@ class DocumentsDB(client: Client) : Service(client) {
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
         purge: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Collection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -637,6 +648,7 @@ class DocumentsDB(client: Client) : Service(client) {
             "documentSecurity" to documentSecurity,
             "enabled" to enabled,
             "purge" to purge,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1165,6 +1177,94 @@ class DocumentsDB(client: Client) : Service(client) {
         collectionId,
         queries,
         transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Get a list of all the user's documents in a given collection using a POST request. This behaves identically to the list documents endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> createQuery(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (collectionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"collectionId\"")
+        }
+        val apiPath = ("/documentsdb/{databaseId}/collections/{collectionId}/documents/query"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+            "total" to total,
+            "ttl" to ttl,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get a list of all the user's documents in a given collection using a POST request. This behaves identically to the list documents endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for cached responses when caching is enabled for select queries. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createQuery(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = createQuery(
+        databaseId,
+        collectionId,
+        queries,
+        transactionId,
+        total,
+        ttl,
         nestedType = classOf(),
     )
 
@@ -1731,6 +1831,7 @@ class DocumentsDB(client: Client) : Service(client) {
      * @param attributes Array of attributes to index. Maximum of 100 attributes are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
      * @param lengths Length of index. Maximum of 100
+     * @param description Optional description for the index.
      * @return [io.appwrite.models.Index]
      */
     @JvmOverloads
@@ -1743,6 +1844,7 @@ class DocumentsDB(client: Client) : Service(client) {
         attributes: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
+        description: String? = null,
     ): io.appwrite.models.Index {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1760,6 +1862,7 @@ class DocumentsDB(client: Client) : Service(client) {
             "attributes" to attributes,
             "orders" to orders,
             "lengths" to lengths,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

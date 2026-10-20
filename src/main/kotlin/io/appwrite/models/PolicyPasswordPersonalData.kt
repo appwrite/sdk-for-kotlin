@@ -19,10 +19,17 @@ data class PolicyPasswordPersonalData(
     @SerializedName("enabled")
     val enabled: Boolean,
 
+    /**
+     * Custom terms blocked by case-insensitive substring matching when enabled.
+     */
+    @SerializedName("denyList")
+    val denyList: List<String>,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
         "enabled" to enabled as Any,
+        "denyList" to denyList as Any,
     )
 
     companion object {
@@ -32,6 +39,7 @@ data class PolicyPasswordPersonalData(
         ) = PolicyPasswordPersonalData(
             id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else false) as Boolean,
+            denyList = (if (map.containsKey("denyList")) map["denyList"] else listOf<Any?>()) as List<String>,
         )
     }
 }

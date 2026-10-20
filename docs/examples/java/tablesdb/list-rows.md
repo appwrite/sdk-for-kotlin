@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,21 +12,24 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.listRows(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    List.of(), // queries (optional)
-    "<TRANSACTION_ID>", // transactionId (optional)
-    false, // total (optional)
-    0L, // ttl (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.listRows(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        List.of(), // queries (optional)
+        "<TRANSACTION_ID>", // transactionId (optional)
+        false, // total (optional)
+        0L, // ttl (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

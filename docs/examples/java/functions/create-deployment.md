@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.models.InputFile;
 import io.appwrite.services.Functions;
 
@@ -11,20 +12,23 @@ Client client = new Client()
 
 Functions functions = new Functions(client);
 
-functions.createDeployment(
-    "<FUNCTION_ID>", // functionId
-    InputFile.fromPath("file.png"), // code
-    false, // activate
-    "<ENTRYPOINT>", // entrypoint (optional)
-    "<COMMANDS>", // commands (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    functions.createDeployment(
+        "<FUNCTION_ID>", // functionId
+        InputFile.fromPath("file.png"), // code
+        false, // activate
+        "<ENTRYPOINT>", // entrypoint (optional)
+        "<COMMANDS>", // commands (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Domains;
 
 Client client = new Client()
@@ -10,20 +11,23 @@ Client client = new Client()
 
 Domains domains = new Domains(client);
 
-domains.createRecordTXT(
-    "<DOMAIN_ID>", // domainId
-    "", // name
-    1L, // ttl
-    "<VALUE>", // value (optional)
-    "<COMMENT>", // comment (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    domains.createRecordTXT(
+        "<DOMAIN_ID>", // domainId
+        "", // name
+        1L, // ttl
+        "<VALUE>", // value (optional)
+        "<COMMENT>", // comment (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

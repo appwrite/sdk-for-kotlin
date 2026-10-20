@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Oauth2;
 
 Client client = new Client()
@@ -10,18 +11,21 @@ Client client = new Client()
 
 Oauth2 oauth2 = new Oauth2(client);
 
-oauth2.listOrganizations(
-    1L, // limit (optional)
-    0L, // offset (optional)
-    "<SEARCH>", // search (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    oauth2.listOrganizations(
+        1L, // limit (optional)
+        0L, // offset (optional)
+        "<SEARCH>", // search (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

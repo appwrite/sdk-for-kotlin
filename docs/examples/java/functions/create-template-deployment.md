@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Functions;
 import io.appwrite.enums.TemplateReferenceType;
 
@@ -11,22 +12,25 @@ Client client = new Client()
 
 Functions functions = new Functions(client);
 
-functions.createTemplateDeployment(
-    "<FUNCTION_ID>", // functionId
-    "<REPOSITORY>", // repository
-    "<OWNER>", // owner
-    "<ROOT_DIRECTORY>", // rootDirectory
-    TemplateReferenceType.COMMIT, // type
-    "<REFERENCE>", // reference
-    false, // activate (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    functions.createTemplateDeployment(
+        "<FUNCTION_ID>", // functionId
+        "<REPOSITORY>", // repository
+        "<OWNER>", // owner
+        "<ROOT_DIRECTORY>", // rootDirectory
+        TemplateReferenceType.COMMIT, // type
+        "<REFERENCE>", // reference
+        false, // activate (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

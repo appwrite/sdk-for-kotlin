@@ -1,7 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.VectorsDB;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,25 +13,28 @@ Client client = new Client()
 
 VectorsDB vectorsDB = new VectorsDB(client);
 
-vectorsDB.createDocuments(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    List.of(Map.of(
-        "$id", "example1",
-        "embeddings", List.of(0.12, -0.55, 0.88, 1.02),
-        "metadata", Map.of(
-            "name", "First document"
-        )
-    )), // documents
-    "<TRANSACTION_ID>", // transactionId (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    vectorsDB.createDocuments(
+        "<DATABASE_ID>", // databaseId
+        "<COLLECTION_ID>", // collectionId
+        List.of(Map.of(
+            "$id", "example1",
+            "embeddings", List.of(0.12, -0.55, 0.88, 1.02),
+            "metadata", Map.of(
+                "name", "First document"
+            )
+        )), // documents
+        "<TRANSACTION_ID>", // transactionId (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

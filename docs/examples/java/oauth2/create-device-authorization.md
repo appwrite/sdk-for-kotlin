@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Oauth2;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,20 +12,23 @@ Client client = new Client()
 
 Oauth2 oauth2 = new Oauth2(client);
 
-oauth2.createDeviceAuthorization(
-    "<CLIENT_ID>", // client_id (optional)
-    "<SCOPE>", // scope (optional)
-    "<AUTHORIZATION_DETAILS>", // authorization_details (optional)
-    List.of(), // resource (optional)
-    "<AUDIENCE>", // audience (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    oauth2.createDeviceAuthorization(
+        "<CLIENT_ID>", // client_id (optional)
+        "<SCOPE>", // scope (optional)
+        "<AUTHORIZATION_DETAILS>", // authorization_details (optional)
+        List.of(), // resource (optional)
+        "<AUDIENCE>", // audience (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

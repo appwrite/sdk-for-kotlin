@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mysql;
 
 Client client = new Client()
@@ -10,23 +11,26 @@ Client client = new Client()
 
 Mysql mysql = new Mysql(client);
 
-mysql.createRestoration(
-    "<DATABASE_ID>", // databaseId
-    "backup", // type (optional)
-    "<BACKUP_ID>", // backupId (optional)
-    "<TARGET_DATABASE_ID>", // targetDatabaseId (optional)
-    "2020-10-15T06:38:00.000+00:00", // targetTime (optional)
-    "in_place", // restoreMode (optional)
-    "<TARGET_NAME>", // targetName (optional)
-    false, // autoPromote (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mysql.createRestoration(
+        "<DATABASE_ID>", // databaseId
+        "backup", // type (optional)
+        "<BACKUP_ID>", // backupId (optional)
+        "<TARGET_DATABASE_ID>", // targetDatabaseId (optional)
+        "2020-10-15T06:38:00.000+00:00", // targetTime (optional)
+        "in_place", // restoreMode (optional)
+        "<TARGET_NAME>", // targetName (optional)
+        false, // autoPromote (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

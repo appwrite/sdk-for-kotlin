@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.DocumentsDB;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,19 +12,22 @@ Client client = new Client()
 
 DocumentsDB documentsDB = new DocumentsDB(client);
 
-documentsDB.listCollections(
-    "<DATABASE_ID>", // databaseId
-    List.of(), // queries (optional)
-    "<SEARCH>", // search (optional)
-    false, // total (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    documentsDB.listCollections(
+        "<DATABASE_ID>", // databaseId
+        List.of(), // queries (optional)
+        "<SEARCH>", // search (optional)
+        false, // total (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

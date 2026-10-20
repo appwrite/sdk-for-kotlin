@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 import io.appwrite.enums.ProjectEmailTemplateId;
 import io.appwrite.enums.ProjectEmailTemplateLocale;
@@ -12,23 +13,26 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateEmailTemplate(
-    ProjectEmailTemplateId.VERIFICATION, // templateId
-    ProjectEmailTemplateLocale.AF, // locale (optional)
-    "<SUBJECT>", // subject (optional)
-    "<MESSAGE>", // message (optional)
-    "<SENDER_NAME>", // senderName (optional)
-    "email@example.com", // senderEmail (optional)
-    "email@example.com", // replyToEmail (optional)
-    "<REPLY_TO_NAME>", // replyToName (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateEmailTemplate(
+        ProjectEmailTemplateId.VERIFICATION, // templateId
+        ProjectEmailTemplateLocale.AF, // locale (optional)
+        "<SUBJECT>", // subject (optional)
+        "<MESSAGE>", // message (optional)
+        "<SENDER_NAME>", // senderName (optional)
+        "email@example.com", // senderEmail (optional)
+        "email@example.com", // replyToEmail (optional)
+        "<REPLY_TO_NAME>", // replyToName (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

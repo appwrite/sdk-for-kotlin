@@ -12,6 +12,7 @@ val postgresql = Postgresql(client)
 
 val response = postgresql.listBackupPolicies(
     databaseId = "<DATABASE_ID>",
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

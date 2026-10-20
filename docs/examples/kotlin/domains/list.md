@@ -12,6 +12,7 @@ val domains = Domains(client)
 
 val response = domains.list(
     queries = listOf(), // optional
-    search = "<SEARCH>" // optional
+    search = "<SEARCH>", // optional
+    total = false // optional
 )
 ```

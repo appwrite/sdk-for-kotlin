@@ -1,8 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 import io.appwrite.enums.ProjectOAuth2GitHubPrompt;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,19 +13,22 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateOAuth2GitHub(
-    "<CLIENT_ID>", // clientId (optional)
-    "<CLIENT_SECRET>", // clientSecret (optional)
-    false, // enabled (optional)
-    List.of(ProjectOAuth2GitHubPrompt.SELECT_ACCOUNT), // prompt (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateOAuth2GitHub(
+        "<CLIENT_ID>", // clientId (optional)
+        "<CLIENT_SECRET>", // clientSecret (optional)
+        false, // enabled (optional)
+        List.of(ProjectOAuth2GitHubPrompt.SELECT_ACCOUNT), // prompt (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

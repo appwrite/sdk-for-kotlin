@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Backups;
 
 Client client = new Client()
@@ -10,20 +11,23 @@ Client client = new Client()
 
 Backups backups = new Backups(client);
 
-backups.updatePolicy(
-    "<POLICY_ID>", // policyId
-    "<NAME>", // name (optional)
-    1L, // retention (optional)
-    "", // schedule (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    backups.updatePolicy(
+        "<POLICY_ID>", // policyId
+        "<NAME>", // name (optional)
+        1L, // retention (optional)
+        "", // schedule (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

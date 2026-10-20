@@ -1,8 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Account;
 import io.appwrite.enums.OAuthProvider;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,20 +13,23 @@ Client client = new Client()
 
 Account account = new Account(client);
 
-account.createOAuth2Token(
-    OAuthProvider.AMAZON, // provider
-    "https://example.com", // success (optional)
-    "https://example.com", // failure (optional)
-    List.of(), // scopes (optional)
-    "<STATE>", // state (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    account.createOAuth2Token(
+        OAuthProvider.AMAZON, // provider
+        "https://example.com", // success (optional)
+        "https://example.com", // failure (optional)
+        List.of(), // scopes (optional)
+        "<STATE>", // state (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

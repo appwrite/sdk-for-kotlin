@@ -19,6 +19,7 @@ val response = tablesDB.updateTable(
     permissions = listOf(Permission.read(Role.any())), // optional
     rowSecurity = false, // optional
     enabled = false, // optional
-    purge = false // optional
+    purge = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

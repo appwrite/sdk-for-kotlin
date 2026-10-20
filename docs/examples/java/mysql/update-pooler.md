@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mysql;
 
 Client client = new Client()
@@ -10,24 +11,27 @@ Client client = new Client()
 
 Mysql mysql = new Mysql(client);
 
-mysql.updatePooler(
-    "<DATABASE_ID>", // databaseId
-    "transaction", // mode (optional)
-    10L, // maxConnections (optional)
-    1L, // defaultPoolSize (optional)
-    false, // readWriteSplitting (optional)
-    "<POOLER_CPU_REQUEST>", // poolerCpuRequest (optional)
-    "<POOLER_CPU_LIMIT>", // poolerCpuLimit (optional)
-    "<POOLER_MEMORY_REQUEST>", // poolerMemoryRequest (optional)
-    "<POOLER_MEMORY_LIMIT>", // poolerMemoryLimit (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mysql.updatePooler(
+        "<DATABASE_ID>", // databaseId
+        "transaction", // mode (optional)
+        10L, // maxConnections (optional)
+        1L, // defaultPoolSize (optional)
+        false, // readWriteSplitting (optional)
+        "<POOLER_CPU_REQUEST>", // poolerCpuRequest (optional)
+        "<POOLER_CPU_LIMIT>", // poolerCpuLimit (optional)
+        "<POOLER_MEMORY_REQUEST>", // poolerMemoryRequest (optional)
+        "<POOLER_MEMORY_LIMIT>", // poolerMemoryLimit (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

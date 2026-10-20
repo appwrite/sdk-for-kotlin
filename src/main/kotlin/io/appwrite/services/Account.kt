@@ -460,6 +460,41 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
+     * Get the team memberships of the currently logged in user.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: userId, teamId, invited, joined, confirm, roles
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.MembershipList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listMemberships(
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.MembershipList {
+        val apiPath = "/account/memberships"
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.MembershipList = {
+            io.appwrite.models.MembershipList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.MembershipList::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Enable or disable MFA on an account.
      *
      * @param mfa Enable or disable MFA.
@@ -1614,6 +1649,9 @@ class Account(client: Client) : Service(client) {
      *
      * Please note that in order to avoid a [Redirect Attack](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.md) the only valid redirect URLs are the ones from domains you have set when adding your platforms in the console interface.
      *
+     * The new password must satisfy the project's enabled password policies, including custom deny lists. Dictionary entries match the entire password case-sensitively; personal-data terms match substrings case-insensitively. Personal-data validation runs after token verification against the recovered user's ID, name, email, and phone, closing the previous recovery gap for profile-based checks. A rejected password leaves the existing credentials unchanged and the recovery token usable.
+     *
+     *
      * @param userId User ID.
      * @param secret Valid reset token.
      * @param password New user password. Must be between 8 and 256 chars.
@@ -1690,6 +1728,8 @@ class Account(client: Client) : Service(client) {
 
     /**
      * Use this endpoint to complete the user password recovery process using the 6-digit code that was emailed by [createRecoveryOTP](https://appwrite.io/docs/references/cloud/client-web/account#createRecoveryOTP). Pass the **userId** of the user along with the **secret** code from the email and the new **password** to set. If confirmed, this route will return a 200 status code, the code is consumed and the user's password is updated.
+     *
+     * The new password must satisfy the project's enabled password policies, including custom deny lists. Dictionary entries match the entire password case-sensitively; personal-data terms match substrings case-insensitively. Personal-data validation runs after token verification against the recovered user's ID, name, email, and phone, closing the previous recovery gap for profile-based checks. A rejected password leaves the existing credentials unchanged and the recovery token usable.
      *
      *
      * @param userId User ID.

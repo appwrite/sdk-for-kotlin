@@ -19,6 +19,7 @@ val response = vectorsDB.updateCollection(
     dimension = 4, // optional
     permissions = listOf(Permission.read(Role.any())), // optional
     documentSecurity = false, // optional
-    enabled = false // optional
+    enabled = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

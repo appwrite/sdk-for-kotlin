@@ -1,8 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Organization;
 import io.appwrite.enums.ProjectKeyScopes;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,20 +13,24 @@ Client client = new Client()
 
 Organization organization = new Organization(client);
 
-organization.updateProjectKey(
-    "<PROJECT_ID>", // projectId
-    "<KEY_ID>", // keyId
-    "<NAME>", // name
-    List.of(ProjectKeyScopes.USERS_READ), // scopes
-    "2020-10-15T06:38:00.000+00:00", // expire (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    organization.updateProjectKey(
+        "<PROJECT_ID>", // projectId
+        "<KEY_ID>", // keyId
+        "<NAME>", // name
+        List.of(ProjectKeyScopes.USERS_READ), // scopes
+        "2020-10-15T06:38:00.000+00:00", // expire (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

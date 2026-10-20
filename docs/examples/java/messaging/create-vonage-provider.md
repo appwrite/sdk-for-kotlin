@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 
 Client client = new Client()
@@ -10,21 +11,24 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.createVonageProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name
-    "+12065550100", // from (optional)
-    "<API_KEY>", // apiKey (optional)
-    "<API_SECRET>", // apiSecret (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.createVonageProvider(
+        "<PROVIDER_ID>", // providerId
+        "<NAME>", // name
+        "+12065550100", // from (optional)
+        "<API_KEY>", // apiKey (optional)
+        "<API_SECRET>", // apiSecret (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

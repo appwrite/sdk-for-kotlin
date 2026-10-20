@@ -16,6 +16,7 @@ val response = databases.createUrlAttribute(
     key = "<KEY>",
     required = false,
     default = "https://example.com", // optional
-    array = false // optional
+    array = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

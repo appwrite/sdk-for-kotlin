@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Account;
 import io.appwrite.enums.AuthenticatorType;
 
@@ -11,17 +12,20 @@ Client client = new Client()
 
 Account account = new Account(client);
 
-account.updateMFAAuthenticator(
-    AuthenticatorType.TOTP, // type
-    "<OTP>", // otp
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    account.updateMFAAuthenticator(
+        AuthenticatorType.TOTP, // type
+        "<OTP>", // otp
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

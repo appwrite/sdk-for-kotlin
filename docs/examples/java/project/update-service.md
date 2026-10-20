@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 import io.appwrite.enums.ProjectServiceId;
 
@@ -11,17 +12,20 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateService(
-    ProjectServiceId.ACCOUNT, // serviceId
-    false, // enabled
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateService(
+        ProjectServiceId.ACCOUNT, // serviceId
+        false, // enabled
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

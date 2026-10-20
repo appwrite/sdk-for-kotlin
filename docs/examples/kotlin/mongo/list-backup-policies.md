@@ -12,6 +12,7 @@ val mongo = Mongo(client)
 
 val response = mongo.listBackupPolicies(
     databaseId = "<DATABASE_ID>",
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

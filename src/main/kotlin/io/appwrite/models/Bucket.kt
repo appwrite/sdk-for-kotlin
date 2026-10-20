@@ -44,6 +44,12 @@ data class Bucket(
     val name: String,
 
     /**
+     * Optional description for the bucket.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Bucket enabled.
      */
     @SerializedName("enabled")
@@ -86,6 +92,12 @@ data class Bucket(
     val transformations: Boolean,
 
     /**
+     * Metadata such as location, device and capture time is removed from uploaded images.
+     */
+    @SerializedName("stripMetadata")
+    val stripMetadata: Boolean,
+
+    /**
      * Total size of this bucket in bytes.
      */
     @SerializedName("totalSize")
@@ -99,6 +111,7 @@ data class Bucket(
         "\$permissions" to permissions as Any,
         "fileSecurity" to fileSecurity as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "maximumFileSize" to maximumFileSize as Any,
         "allowedFileExtensions" to allowedFileExtensions as Any,
@@ -106,6 +119,7 @@ data class Bucket(
         "encryption" to encryption as Any,
         "antivirus" to antivirus as Any,
         "transformations" to transformations as Any,
+        "stripMetadata" to stripMetadata as Any,
         "totalSize" to totalSize as Any,
     )
 
@@ -120,6 +134,7 @@ data class Bucket(
             permissions = (if (map.containsKey("\$permissions")) map["\$permissions"] else listOf<Any?>()) as List<String>,
             fileSecurity = (if (map.containsKey("fileSecurity")) map["fileSecurity"] else false) as Boolean,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             maximumFileSize = ((if (map.containsKey("maximumFileSize")) map["maximumFileSize"] else 0) as Number).toLong(),
             allowedFileExtensions = (if (map.containsKey("allowedFileExtensions")) map["allowedFileExtensions"] else listOf<Any?>()) as List<String>,
@@ -127,6 +142,7 @@ data class Bucket(
             encryption = (if (map.containsKey("encryption")) map["encryption"] else true) as Boolean,
             antivirus = (if (map.containsKey("antivirus")) map["antivirus"] else true) as Boolean,
             transformations = (if (map.containsKey("transformations")) map["transformations"] else true) as Boolean,
+            stripMetadata = (if (map.containsKey("stripMetadata")) map["stripMetadata"] else false) as Boolean,
             totalSize = ((if (map.containsKey("totalSize")) map["totalSize"] else 0) as Number).toLong(),
         )
     }

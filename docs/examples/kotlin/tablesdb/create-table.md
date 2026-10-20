@@ -20,6 +20,7 @@ val response = tablesDB.createTable(
     rowSecurity = false, // optional
     enabled = false, // optional
     columns = listOf(), // optional
-    indexes = listOf() // optional
+    indexes = listOf(), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

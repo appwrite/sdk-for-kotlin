@@ -79,6 +79,7 @@ class Sites(client: Client) : Service(client) {
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
+     * @param description Optional description for the site.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -108,6 +109,7 @@ class Sites(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
         scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
+        description: String? = null,
     ): io.appwrite.models.Site {
         val apiPath = "/sites"
         val apiParams = mutableMapOf<String, Any?>(
@@ -135,6 +137,7 @@ class Sites(client: Client) : Service(client) {
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
             "scopes" to scopes,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -282,6 +285,7 @@ class Sites(client: Client) : Service(client) {
      * @param runtimeSpecification Runtime specification for the SSR executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
+     * @param description Optional description for the site.
      * @return [io.appwrite.models.Site]
      */
     @JvmOverloads
@@ -311,6 +315,7 @@ class Sites(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
         scopes: List<io.appwrite.enums.ProjectKeyScopes>? = null,
+        description: String? = null,
     ): io.appwrite.models.Site {
         if (siteId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
@@ -342,6 +347,7 @@ class Sites(client: Client) : Service(client) {
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
             "scopes" to scopes,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1009,6 +1015,7 @@ class Sites(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only sites can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -1019,6 +1026,7 @@ class Sites(client: Client) : Service(client) {
         key: String,
         value: String,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         if (siteId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
@@ -1031,6 +1039,7 @@ class Sites(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1098,6 +1107,7 @@ class Sites(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only sites can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -1108,6 +1118,7 @@ class Sites(client: Client) : Service(client) {
         key: String? = null,
         value: String? = null,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         if (siteId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
@@ -1123,6 +1134,7 @@ class Sites(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Proxy;
 
 Client client = new Client()
@@ -10,18 +11,21 @@ Client client = new Client()
 
 Proxy proxy = new Proxy(client);
 
-proxy.createSiteRule(
-    "example.com", // domain
-    "<SITE_ID>", // siteId
-    "<BRANCH>", // branch (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    proxy.createSiteRule(
+        "example.com", // domain
+        "<SITE_ID>", // siteId
+        "<BRANCH>", // branch (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

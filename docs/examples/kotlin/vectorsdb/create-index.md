@@ -19,6 +19,7 @@ val response = vectorsDB.createIndex(
     type = VectorsDBIndexType.HNSW_EUCLIDEAN,
     attributes = listOf("embeddings"),
     orders = listOf(OrderBy.ASC), // optional
-    lengths = listOf() // optional
+    lengths = listOf(), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

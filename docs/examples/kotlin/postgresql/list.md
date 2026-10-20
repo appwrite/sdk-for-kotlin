@@ -11,6 +11,7 @@ val client = Client()
 val postgresql = Postgresql(client)
 
 val response = postgresql.list(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

@@ -11,6 +11,7 @@ val client = Client()
 val backups = Backups(client)
 
 val response = backups.listArchives(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

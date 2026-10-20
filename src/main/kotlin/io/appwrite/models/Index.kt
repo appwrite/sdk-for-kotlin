@@ -33,6 +33,12 @@ data class Index(
     val key: String,
 
     /**
+     * Optional description for the index.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Index type.
      */
     @SerializedName("type")
@@ -74,6 +80,7 @@ data class Index(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "key" to key as Any,
+        "description" to description as Any,
         "type" to type as Any,
         "status" to status.value as Any,
         "error" to error as Any,
@@ -91,6 +98,7 @@ data class Index(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             key = (if (map.containsKey("key")) map["key"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             type = (if (map.containsKey("type")) map["type"] else "") as String,
             status = IndexStatus.values().find { it.value == map["status"] as String }!!,
             error = (if (map.containsKey("error")) map["error"] else "") as String,

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
 
 Client client = new Client()
@@ -10,21 +11,25 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.updateUrlColumn(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    "<KEY>", // key
-    false, // required
-    "https://example.com", // default
-    "<NEW_KEY>", // newKey (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.updateUrlColumn(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        "<KEY>", // key
+        false, // required
+        "https://example.com", // default
+        "<NEW_KEY>", // newKey (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

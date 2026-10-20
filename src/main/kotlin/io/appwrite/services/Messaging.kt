@@ -67,6 +67,7 @@ class Messaging(client: Client) : Service(client) {
      * @param scheduledAt Scheduled delivery time for message in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. DateTime value must be in future.
      * @param replyToEmail Email address to reply to. If not set, defaults to the sender email address.
      * @param replyToName Name of the reply to recipient. If not set, defaults to the sender name.
+     * @param emails List of email addresses to send the message to. Use this to deliver to recipients that are not backed by an Appwrite user, target, or topic.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -86,6 +87,7 @@ class Messaging(client: Client) : Service(client) {
         scheduledAt: String? = null,
         replyToEmail: String? = null,
         replyToName: String? = null,
+        emails: List<String>? = null,
     ): io.appwrite.models.Message {
         val apiPath = "/messaging/messages/email"
         val apiParams = mutableMapOf<String, Any?>(
@@ -103,6 +105,7 @@ class Messaging(client: Client) : Service(client) {
             "scheduledAt" to scheduledAt,
             "replyToEmail" to replyToEmail,
             "replyToName" to replyToName,
+            "emails" to emails,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -140,6 +143,7 @@ class Messaging(client: Client) : Service(client) {
      * @param attachments Array of compound ID strings of bucket IDs and file IDs to be attached to the email. They should be formatted as <BUCKET_ID>:<FILE_ID>.
      * @param replyToEmail Email address to reply to. Pass an empty string to restore the provider or sender default.
      * @param replyToName Name of the reply to recipient. Pass an empty string to restore the provider or sender default.
+     * @param emails List of email addresses to send the message to. Use this to deliver to recipients that are not backed by an Appwrite user, target, or topic.
      * @return [io.appwrite.models.Message]
      */
     @JvmOverloads
@@ -159,6 +163,7 @@ class Messaging(client: Client) : Service(client) {
         attachments: List<String>? = null,
         replyToEmail: String? = null,
         replyToName: String? = null,
+        emails: List<String>? = null,
     ): io.appwrite.models.Message {
         if (messageId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"messageId\"")
@@ -180,6 +185,7 @@ class Messaging(client: Client) : Service(client) {
             "attachments" to attachments,
             "replyToEmail" to replyToEmail,
             "replyToName" to replyToName,
+            "emails" to emails,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2650,6 +2656,7 @@ class Messaging(client: Client) : Service(client) {
      * @param subscribe An array of role strings with subscribe permission. By default all users are granted with any subscribe permission. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
      * @param qos MQTT delivery quality of service for this topic. 0 is fire-and-forget (delivered only to clients connected at publish time). 1 persists each message and replays it when a client reconnects without having acknowledged it. Null lets the subscriber choose.
      * @param expiry Message retention in seconds for offline delivery. Max 7 days (604800). Null inherits the lowest expiry of the project's enabled Appwrite providers, or the 7-day ledger window if none sets one.
+     * @param description Optional description for the topic.
      * @return [io.appwrite.models.Topic]
      */
     @JvmOverloads
@@ -2660,6 +2667,7 @@ class Messaging(client: Client) : Service(client) {
         subscribe: List<String>? = null,
         qos: Long? = null,
         expiry: Long? = null,
+        description: String? = null,
     ): io.appwrite.models.Topic {
         val apiPath = "/messaging/topics"
         val apiParams = mutableMapOf<String, Any?>(
@@ -2668,6 +2676,7 @@ class Messaging(client: Client) : Service(client) {
             "subscribe" to subscribe,
             "qos" to qos,
             "expiry" to expiry,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2731,6 +2740,7 @@ class Messaging(client: Client) : Service(client) {
      * @param subscribe An array of role strings with subscribe permission. By default all users are granted with any subscribe permission. [learn more about roles](https://appwrite.io/docs/permissions#permission-roles). Maximum of 100 roles are allowed, each 64 characters long.
      * @param qos MQTT delivery quality of service for this topic. 0 is fire-and-forget (delivered only to clients connected at publish time). 1 persists each message and replays it when a client reconnects without having acknowledged it. Null lets the subscriber choose.
      * @param expiry Message retention in seconds for offline delivery. Max 7 days (604800). Null inherits the lowest expiry of the project's enabled Appwrite providers, or the 7-day ledger window if none sets one.
+     * @param description Optional description for the topic.
      * @return [io.appwrite.models.Topic]
      */
     @JvmOverloads
@@ -2741,6 +2751,7 @@ class Messaging(client: Client) : Service(client) {
         subscribe: List<String>? = null,
         qos: Long? = null,
         expiry: Long? = null,
+        description: String? = null,
     ): io.appwrite.models.Topic {
         if (topicId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"topicId\"")
@@ -2753,6 +2764,7 @@ class Messaging(client: Client) : Service(client) {
             "subscribe" to subscribe,
             "qos" to qos,
             "expiry" to expiry,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

@@ -384,6 +384,7 @@ class Project(client: Client) : Service(client) {
      * @param name Key name. Max length: 128 chars.
      * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
      * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
+     * @param description Optional description for the key.
      * @return [io.appwrite.models.Key]
      */
     @JvmOverloads
@@ -393,6 +394,7 @@ class Project(client: Client) : Service(client) {
         name: String,
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
+        description: String? = null,
     ): io.appwrite.models.Key {
         if (keyId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"keyId\"")
@@ -404,6 +406,7 @@ class Project(client: Client) : Service(client) {
             "name" to name,
             "scopes" to scopes,
             "expire" to expire,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3660,16 +3663,22 @@ class Project(client: Client) : Service(client) {
     /**
      * Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
      *
+     * Custom denyList entries use case-sensitive equality and apply only while this policy is enabled. Omit denyList or pass null to preserve it, pass an array to replace it, or pass [] to clear it. Entries are stored without trimming or deduplication. Existing passwords remain valid for sign-in and password confirmation. The combined serialized project authentication configuration must fit within 16,384 characters, even when each list meets its entry limits.
+     *
      * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
+     * @param denyList Custom blocked values using case-sensitive equality. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
      * @return [io.appwrite.models.Project]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePasswordDictionaryPolicy(
         enabled: Boolean,
+        denyList: List<String>? = null,
     ): io.appwrite.models.Project {
         val apiPath = "/project/policies/password-dictionary"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
+            "denyList" to denyList,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3726,16 +3735,23 @@ class Project(client: Client) : Service(client) {
     /**
      * Updating this policy allows you to control if password strength is checked against personal data. When enabled, and user sets or changes their password, the password must not contain user ID, name, email or phone number.
      *
+     * Custom denyList entries use case-insensitive substring matching and apply only while this policy is enabled. Omit denyList or pass null to preserve it, pass an array to replace it, or pass [] to clear it. Entries are stored without trimming or deduplication. Existing passwords remain valid for sign-in and password confirmation. The combined serialized project authentication configuration must fit within 16,384 characters, even when each list meets its entry limits.
+     * Password recovery also checks the recovered user profile, closing the previous gap in profile-based personal-data validation.
+     *
      * @param enabled Toggle password personal data policy. Set to true if you want to block passwords including user's personal data, or false to allow it. When changing this policy, existing passwords remain valid.
+     * @param denyList Custom blocked values using case-insensitive substring matching. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
      * @return [io.appwrite.models.Project]
      */
+    @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePasswordPersonalDataPolicy(
         enabled: Boolean,
+        denyList: List<String>? = null,
     ): io.appwrite.models.Project {
         val apiPath = "/project/policies/password-personal-data"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
+            "denyList" to denyList,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -4415,6 +4431,7 @@ class Project(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only projects can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -4424,6 +4441,7 @@ class Project(client: Client) : Service(client) {
         key: String,
         value: String,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         val apiPath = "/project/variables"
         val apiParams = mutableMapOf<String, Any?>(
@@ -4431,6 +4449,7 @@ class Project(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -4491,6 +4510,7 @@ class Project(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only projects can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -4500,6 +4520,7 @@ class Project(client: Client) : Service(client) {
         key: String? = null,
         value: String? = null,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         if (variableId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
@@ -4511,6 +4532,7 @@ class Project(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

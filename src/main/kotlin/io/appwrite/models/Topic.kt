@@ -32,6 +32,12 @@ data class Topic(
     val name: String,
 
     /**
+     * Optional description for the topic.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Total count of email subscribers subscribed to the topic.
      */
     @SerializedName("emailTotal")
@@ -73,6 +79,7 @@ data class Topic(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "emailTotal" to emailTotal as Any,
         "smsTotal" to smsTotal as Any,
         "pushTotal" to pushTotal as Any,
@@ -90,6 +97,7 @@ data class Topic(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             emailTotal = ((if (map.containsKey("emailTotal")) map["emailTotal"] else 0) as Number).toLong(),
             smsTotal = ((if (map.containsKey("smsTotal")) map["smsTotal"] else 0) as Number).toLong(),
             pushTotal = ((if (map.containsKey("pushTotal")) map["pushTotal"] else 0) as Number).toLong(),

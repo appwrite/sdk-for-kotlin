@@ -17,6 +17,7 @@ val response = databases.createEnumAttribute(
     elements = listOf("active", "inactive"),
     required = false,
     default = "active", // optional
-    array = false // optional
+    array = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

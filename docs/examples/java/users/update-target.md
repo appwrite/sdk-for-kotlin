@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Users;
 
 Client client = new Client()
@@ -10,20 +11,23 @@ Client client = new Client()
 
 Users users = new Users(client);
 
-users.updateTarget(
-    "<USER_ID>", // userId
-    "<TARGET_ID>", // targetId
-    "<IDENTIFIER>", // identifier (optional)
-    "<PROVIDER_ID>", // providerId (optional)
-    "<NAME>", // name (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    users.updateTarget(
+        "<USER_ID>", // userId
+        "<TARGET_ID>", // targetId
+        "<IDENTIFIER>", // identifier (optional)
+        "<PROVIDER_ID>", // providerId (optional)
+        "<NAME>", // name (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

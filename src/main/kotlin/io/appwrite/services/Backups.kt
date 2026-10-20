@@ -16,16 +16,19 @@ class Backups(client: Client) : Service(client) {
      * List all archives for a project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BackupArchiveList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listArchives(
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.BackupArchiveList {
         val apiPath = "/backups/archives"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -149,16 +152,19 @@ class Backups(client: Client) : Service(client) {
      * List all policies for a project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BackupPolicyList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listPolicies(
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.BackupPolicyList {
         val apiPath = "/backups/policies"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -397,16 +403,19 @@ class Backups(client: Client) : Service(client) {
      * List all backup restorations for a project.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BackupRestorationList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listRestorations(
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.BackupRestorationList {
         val apiPath = "/backups/restorations"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

@@ -1,7 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Databases;
+import java.util.List;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,26 +13,29 @@ Client client = new Client()
 
 Databases databases = new Databases(client);
 
-databases.upsertDocuments(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    List.of(Map.of(
-        "$id", "example1",
-        "username", "walter.obrien",
-        "email", "walter.obrien@example.com",
-        "fullName", "Walter O'Brien",
-        "age", 30,
-        "isAdmin", false
-    )), // documents
-    "<TRANSACTION_ID>", // transactionId (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    databases.upsertDocuments(
+        "<DATABASE_ID>", // databaseId
+        "<COLLECTION_ID>", // collectionId
+        List.of(Map.of(
+            "$id", "example1",
+            "username", "walter.obrien",
+            "email", "walter.obrien@example.com",
+            "fullName", "Walter O'Brien",
+            "age", 30,
+            "isAdmin", false
+        )), // documents
+        "<TRANSACTION_ID>", // transactionId (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

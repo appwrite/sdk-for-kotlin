@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 import io.appwrite.enums.SmtpEncryption;
 
@@ -11,29 +12,32 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.createSMTPProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name
-    "<HOST>", // host
-    587L, // port (optional)
-    "<USERNAME>", // username (optional)
-    "password", // password (optional)
-    SmtpEncryption.NONE, // encryption (optional)
-    false, // autoTLS (optional)
-    "<MAILER>", // mailer (optional)
-    "<FROM_NAME>", // fromName (optional)
-    "email@example.com", // fromEmail (optional)
-    "<REPLY_TO_NAME>", // replyToName (optional)
-    "email@example.com", // replyToEmail (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.createSMTPProvider(
+        "<PROVIDER_ID>", // providerId
+        "<NAME>", // name
+        "<HOST>", // host
+        587L, // port (optional)
+        "<USERNAME>", // username (optional)
+        "password", // password (optional)
+        SmtpEncryption.NONE, // encryption (optional)
+        false, // autoTLS (optional)
+        "<MAILER>", // mailer (optional)
+        "<FROM_NAME>", // fromName (optional)
+        "email@example.com", // fromEmail (optional)
+        "<REPLY_TO_NAME>", // replyToName (optional)
+        "email@example.com", // replyToEmail (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

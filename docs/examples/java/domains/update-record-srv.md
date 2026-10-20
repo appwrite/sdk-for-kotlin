@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Domains;
 
 Client client = new Client()
@@ -10,24 +11,27 @@ Client client = new Client()
 
 Domains domains = new Domains(client);
 
-domains.updateRecordSRV(
-    "<DOMAIN_ID>", // domainId
-    "<RECORD_ID>", // recordId
-    "", // name
-    "<VALUE>", // value
-    1L, // ttl
-    0L, // priority
-    0L, // weight
-    0L, // port
-    "<COMMENT>", // comment (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    domains.updateRecordSRV(
+        "<DOMAIN_ID>", // domainId
+        "<RECORD_ID>", // recordId
+        "", // name
+        "<VALUE>", // value
+        1L, // ttl
+        0L, // priority
+        0L, // weight
+        0L, // port
+        "<COMMENT>", // comment (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

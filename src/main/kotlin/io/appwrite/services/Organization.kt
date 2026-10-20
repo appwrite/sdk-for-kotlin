@@ -801,6 +801,7 @@ class Organization(client: Client) : Service(client) {
      * @param name Key name. Max length: 128 chars.
      * @param scopes Key scopes list. Maximum of 200 scopes are allowed.
      * @param expire Expiration time in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Use null for unlimited expiration.
+     * @param description Optional description for the key.
      * @return [io.appwrite.models.Key]
      */
     @JvmOverloads
@@ -811,6 +812,7 @@ class Organization(client: Client) : Service(client) {
         name: String,
         scopes: List<io.appwrite.enums.ProjectKeyScopes>,
         expire: String? = null,
+        description: String? = null,
     ): io.appwrite.models.Key {
         if (projectId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"projectId\"")
@@ -826,6 +828,7 @@ class Organization(client: Client) : Service(client) {
             "name" to name,
             "scopes" to scopes,
             "expire" to expire,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

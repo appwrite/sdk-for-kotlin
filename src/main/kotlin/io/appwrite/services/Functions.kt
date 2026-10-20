@@ -78,6 +78,7 @@ class Functions(client: Client) : Service(client) {
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @param interval Minutes between scheduled executions. Appwrite picks when within each interval the function runs. Use 0 to disable. Cannot be combined with schedule.
+     * @param description Optional description for the function.
      * @return [io.appwrite.models.Function]
      */
     @JvmOverloads
@@ -106,6 +107,7 @@ class Functions(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
         interval: Long? = null,
+        description: String? = null,
     ): io.appwrite.models.Function {
         val apiPath = "/functions"
         val apiParams = mutableMapOf<String, Any?>(
@@ -132,6 +134,7 @@ class Functions(client: Client) : Service(client) {
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
             "interval" to interval,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -278,6 +281,7 @@ class Functions(client: Client) : Service(client) {
      * @param runtimeSpecification Runtime specification for the function executions.
      * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
      * @param interval Minutes between scheduled executions. Appwrite picks when within each interval the function runs. Use 0 to disable. Cannot be combined with schedule. When omitted, the current interval is kept unless schedule is set.
+     * @param description Optional description for the function.
      * @param emailEnabled Enable inbound email triggering for this function. When false or omitted on create, SMTP recipients are rejected. Opt-in; default is off.
      * @return [io.appwrite.models.Function]
      */
@@ -307,6 +311,7 @@ class Functions(client: Client) : Service(client) {
         runtimeSpecification: String? = null,
         deploymentRetention: Long? = null,
         interval: Long? = null,
+        description: String? = null,
         emailEnabled: Boolean? = null,
     ): io.appwrite.models.Function {
         if (functionId.isEmpty()) {
@@ -338,6 +343,7 @@ class Functions(client: Client) : Service(client) {
             "runtimeSpecification" to runtimeSpecification,
             "deploymentRetention" to deploymentRetention,
             "interval" to interval,
+            "description" to description,
             "emailEnabled" to emailEnabled,
         )
         val apiHeaders = mutableMapOf<String, String>(
@@ -1066,6 +1072,7 @@ class Functions(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -1076,6 +1083,7 @@ class Functions(client: Client) : Service(client) {
         key: String,
         value: String,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         if (functionId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"functionId\"")
@@ -1088,6 +1096,7 @@ class Functions(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1155,6 +1164,7 @@ class Functions(client: Client) : Service(client) {
      * @param key Variable key. Letters, digits and underscores only, must not start with a digit. Max length: 255 chars.
      * @param value Variable value. Max length: 8192 chars.
      * @param secret Secret variables can be updated or deleted, but only functions can read them during build and runtime.
+     * @param description Optional description for the variable.
      * @return [io.appwrite.models.Variable]
      */
     @JvmOverloads
@@ -1165,6 +1175,7 @@ class Functions(client: Client) : Service(client) {
         key: String? = null,
         value: String? = null,
         secret: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Variable {
         if (functionId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"functionId\"")
@@ -1180,6 +1191,7 @@ class Functions(client: Client) : Service(client) {
             "key" to key,
             "value" to value,
             "secret" to secret,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

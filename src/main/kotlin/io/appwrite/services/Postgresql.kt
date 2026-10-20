@@ -16,16 +16,19 @@ class Postgresql(client: Client) : Service(client) {
      * List all dedicated databases. Results support pagination.
      *
      * @param queries Array of query strings.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.DedicatedDatabaseList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun list(
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.DedicatedDatabaseList {
         val apiPath = "/postgresql"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -309,6 +312,7 @@ class Postgresql(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: status, type, databaseId
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.DedicatedDatabaseBackupList]
      */
     @JvmOverloads
@@ -316,6 +320,7 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun listBackups(
         databaseId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.DedicatedDatabaseBackupList {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -325,6 +330,7 @@ class Postgresql(client: Client) : Service(client) {
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -388,6 +394,7 @@ class Postgresql(client: Client) : Service(client) {
      *
      * @param databaseId Database ID.
      * @param queries Array of query strings generated using the Query class provided by the SDK.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
      * @return [io.appwrite.models.BackupPolicyList]
      */
     @JvmOverloads
@@ -395,6 +402,7 @@ class Postgresql(client: Client) : Service(client) {
     suspend fun listBackupPolicies(
         databaseId: String,
         queries: List<String>? = null,
+        total: Boolean? = null,
     ): io.appwrite.models.BackupPolicyList {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -404,6 +412,7 @@ class Postgresql(client: Client) : Service(client) {
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

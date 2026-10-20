@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Webhooks;
 
 Client client = new Client()
@@ -10,16 +11,19 @@ Client client = new Client()
 
 Webhooks webhooks = new Webhooks(client);
 
-webhooks.get(
-    "<WEBHOOK_ID>", // webhookId
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    webhooks.get(
+        "<WEBHOOK_ID>", // webhookId
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```
