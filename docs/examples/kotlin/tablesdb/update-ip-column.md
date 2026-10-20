@@ -16,6 +16,7 @@ val response = tablesDB.updateIpColumn(
     key = "<KEY>",
     required = false,
     default = "192.0.2.0",
-    newKey = "<NEW_KEY>" // optional
+    newKey = "<NEW_KEY>", // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

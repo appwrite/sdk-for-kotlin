@@ -16,6 +16,7 @@ val response = tablesDB.createEmailColumn(
     key = "<KEY>",
     required = false,
     default = "email@example.com", // optional
-    array = false // optional
+    array = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

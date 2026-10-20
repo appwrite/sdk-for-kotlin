@@ -15,7 +15,8 @@ val response = tablesDB.updatePointColumn(
     tableId = "<TABLE_ID>",
     key = "<KEY>",
     required = false,
-    default = listOf(1, 2), // optional
-    newKey = "<NEW_KEY>" // optional
+    default = listOf(1.0, 2.0), // optional
+    newKey = "<NEW_KEY>", // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

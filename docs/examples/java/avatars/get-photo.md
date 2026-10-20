@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Avatars;
 
 Client client = new Client()
@@ -10,23 +11,26 @@ Client client = new Client()
 
 Avatars avatars = new Avatars(client);
 
-avatars.getPhoto(
-    0L, // width (optional)
-    0L, // height (optional)
-    0L, // quality (optional)
-    "png", // output (optional)
-    "g", // rating (optional)
-    "current()", // userId (optional)
-    "<EMAIL_HASH>", // emailHash (optional)
-    "<NAME>", // name (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    avatars.getPhoto(
+        0L, // width (optional)
+        0L, // height (optional)
+        0L, // quality (optional)
+        "png", // output (optional)
+        "g", // rating (optional)
+        "current()", // userId (optional)
+        "<EMAIL_HASH>", // emailHash (optional)
+        "<NAME>", // name (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

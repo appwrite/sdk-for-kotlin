@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Organization;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Organization organization = new Organization(client);
 
-organization.getProjectKey(
-    "<PROJECT_ID>", // projectId
-    "<KEY_ID>", // keyId
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    organization.getProjectKey(
+        "<PROJECT_ID>", // projectId
+        "<KEY_ID>", // keyId
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

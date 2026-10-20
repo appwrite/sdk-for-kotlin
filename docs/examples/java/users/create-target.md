@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Users;
 import io.appwrite.enums.MessagingProviderType;
 
@@ -11,21 +12,24 @@ Client client = new Client()
 
 Users users = new Users(client);
 
-users.createTarget(
-    "<USER_ID>", // userId
-    "<TARGET_ID>", // targetId
-    MessagingProviderType.EMAIL, // providerType
-    "<IDENTIFIER>", // identifier
-    "<PROVIDER_ID>", // providerId (optional)
-    "<NAME>", // name (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    users.createTarget(
+        "<USER_ID>", // userId
+        "<TARGET_ID>", // targetId
+        MessagingProviderType.EMAIL, // providerType
+        "<IDENTIFIER>", // identifier
+        "<PROVIDER_ID>", // providerId (optional)
+        "<NAME>", // name (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

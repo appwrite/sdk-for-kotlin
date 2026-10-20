@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
 import io.appwrite.enums.RelationshipType;
 import io.appwrite.enums.RelationMutate;
@@ -12,23 +13,27 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.createRelationshipColumn(
-    "<DATABASE_ID>", // databaseId
-    "<TABLE_ID>", // tableId
-    "<RELATED_TABLE_ID>", // relatedTableId
-    RelationshipType.ONETOONE, // type
-    false, // twoWay (optional)
-    "<KEY>", // key (optional)
-    "<TWO_WAY_KEY>", // twoWayKey (optional)
-    RelationMutate.CASCADE, // onDelete (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.createRelationshipColumn(
+        "<DATABASE_ID>", // databaseId
+        "<TABLE_ID>", // tableId
+        "<RELATED_TABLE_ID>", // relatedTableId
+        RelationshipType.ONETOONE, // type
+        false, // twoWay (optional)
+        "<KEY>", // key (optional)
+        "<TWO_WAY_KEY>", // twoWayKey (optional)
+        RelationMutate.CASCADE, // onDelete (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

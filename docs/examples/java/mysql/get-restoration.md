@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mysql;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Mysql mysql = new Mysql(client);
 
-mysql.getRestoration(
-    "<DATABASE_ID>", // databaseId
-    "<RESTORATION_ID>", // restorationId
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mysql.getRestoration(
+        "<DATABASE_ID>", // databaseId
+        "<RESTORATION_ID>", // restorationId
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Proxy;
 import io.appwrite.enums.StatusCode;
 import io.appwrite.enums.ProxyResourceType;
@@ -12,20 +13,23 @@ Client client = new Client()
 
 Proxy proxy = new Proxy(client);
 
-proxy.createRedirectRule(
-    "example.com", // domain
-    "https://example.com", // url
-    StatusCode.MOVEDPERMANENTLY, // statusCode
-    "<RESOURCE_ID>", // resourceId
-    ProxyResourceType.SITE, // resourceType
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    proxy.createRedirectRule(
+        "example.com", // domain
+        "https://example.com", // url
+        StatusCode.MOVEDPERMANENTLY, // statusCode
+        "<RESOURCE_ID>", // resourceId
+        ProxyResourceType.SITE, // resourceType
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

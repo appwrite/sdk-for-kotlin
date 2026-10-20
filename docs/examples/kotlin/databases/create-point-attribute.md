@@ -15,6 +15,7 @@ val response = databases.createPointAttribute(
     collectionId = "<COLLECTION_ID>",
     key = "<KEY>",
     required = false,
-    default = listOf(1, 2) // optional
+    default = listOf(1.0, 2.0), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Domains;
 import io.appwrite.enums.DomainRegistrationType;
 
@@ -11,18 +12,21 @@ Client client = new Client()
 
 Domains domains = new Domains(client);
 
-domains.getPrice(
-    "example.com", // domain
-    0L, // periodYears (optional)
-    DomainRegistrationType.NEW, // registrationType (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    domains.getPrice(
+        "example.com", // domain
+        0L, // periodYears (optional)
+        DomainRegistrationType.NEW, // registrationType (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

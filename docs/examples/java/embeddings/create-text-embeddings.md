@@ -1,8 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Embeddings;
 import io.appwrite.enums.EmbeddingModel;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,17 +13,20 @@ Client client = new Client()
 
 Embeddings embeddings = new Embeddings(client);
 
-embeddings.createTextEmbeddings(
-    List.of("Appwrite helps developers build applications.", "Find documents with semantic search."), // texts
-    EmbeddingModel.NOMIC_EMBED_TEXT, // model (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    embeddings.createTextEmbeddings(
+        List.of("Appwrite helps developers build applications.", "Find documents with semantic search."), // texts
+        EmbeddingModel.NOMIC_EMBED_TEXT, // model (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

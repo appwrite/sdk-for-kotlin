@@ -32,6 +32,12 @@ data class Variable(
     val key: String,
 
     /**
+     * Optional description for the variable.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Variable value.
      */
     @SerializedName("value")
@@ -61,6 +67,7 @@ data class Variable(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "key" to key as Any,
+        "description" to description as Any,
         "value" to value as Any,
         "secret" to secret as Any,
         "resourceType" to resourceType as Any,
@@ -76,6 +83,7 @@ data class Variable(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             key = (if (map.containsKey("key")) map["key"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             value = (if (map.containsKey("value")) map["value"] else "") as String,
             secret = (if (map.containsKey("secret")) map["secret"] else false) as Boolean,
             resourceType = (if (map.containsKey("resourceType")) map["resourceType"] else "") as String,

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
 
 Client client = new Client()
@@ -10,25 +11,28 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateSesProvider(
-    "<PROVIDER_ID>", // providerId
-    "<NAME>", // name (optional)
-    false, // enabled (optional)
-    "<ACCESS_KEY>", // accessKey (optional)
-    "<SECRET_KEY>", // secretKey (optional)
-    "<REGION>", // region (optional)
-    "<FROM_NAME>", // fromName (optional)
-    "email@example.com", // fromEmail (optional)
-    "<REPLY_TO_NAME>", // replyToName (optional)
-    "<REPLY_TO_EMAIL>", // replyToEmail (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.updateSesProvider(
+        "<PROVIDER_ID>", // providerId
+        "<NAME>", // name (optional)
+        false, // enabled (optional)
+        "<ACCESS_KEY>", // accessKey (optional)
+        "<SECRET_KEY>", // secretKey (optional)
+        "<REGION>", // region (optional)
+        "<FROM_NAME>", // fromName (optional)
+        "email@example.com", // fromEmail (optional)
+        "<REPLY_TO_NAME>", // replyToName (optional)
+        "<REPLY_TO_EMAIL>", // replyToEmail (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

@@ -423,6 +423,12 @@ data class BillingPlan(
     val functionsIntervalMinimum: Long,
 
     /**
+     * Does the plan allow cron function schedules or only intervals.
+     */
+    @SerializedName("functionsAllowCron")
+    val functionsAllowCron: Boolean,
+
+    /**
      * Does the plan support encrypted string attributes or not.
      */
     @SerializedName("databasesAllowEncrypt")
@@ -529,6 +535,7 @@ data class BillingPlan(
         "deploymentSize" to deploymentSize as Any,
         "buildSize" to buildSize as Any,
         "functionsIntervalMinimum" to functionsIntervalMinimum as Any,
+        "functionsAllowCron" to functionsAllowCron as Any,
         "databasesAllowEncrypt" to databasesAllowEncrypt as Any,
         "limits" to limits?.toMap() as Any?,
         "group" to group.value as Any,
@@ -611,6 +618,7 @@ data class BillingPlan(
             deploymentSize = ((if (map.containsKey("deploymentSize")) map["deploymentSize"] else 0) as Number).toLong(),
             buildSize = ((if (map.containsKey("buildSize")) map["buildSize"] else 0) as Number).toLong(),
             functionsIntervalMinimum = ((if (map.containsKey("functionsIntervalMinimum")) map["functionsIntervalMinimum"] else 0) as Number).toLong(),
+            functionsAllowCron = (if (map.containsKey("functionsAllowCron")) map["functionsAllowCron"] else true) as Boolean,
             databasesAllowEncrypt = (if (map.containsKey("databasesAllowEncrypt")) map["databasesAllowEncrypt"] else false) as Boolean,
             limits = (map["limits"] as? Map<String, Any>)?.let { BillingPlanLimits.from(map = it) },
             group = BillingPlanGroup.values().find { it.value == map["group"] as String }!!,

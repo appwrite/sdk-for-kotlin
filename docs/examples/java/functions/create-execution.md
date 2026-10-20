@@ -1,8 +1,10 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Functions;
 import io.appwrite.enums.ExecutionMethod;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -11,22 +13,25 @@ Client client = new Client()
 
 Functions functions = new Functions(client);
 
-functions.createExecution(
-    "<FUNCTION_ID>", // functionId
-    "<BODY>", // body (optional)
-    false, // async (optional)
-    "<PATH>", // path (optional)
-    ExecutionMethod.GET, // method (optional)
-    Map.of("a", "b"), // headers (optional)
-    "<SCHEDULED_AT>", // scheduledAt (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    functions.createExecution(
+        "<FUNCTION_ID>", // functionId
+        "<BODY>", // body (optional)
+        false, // async (optional)
+        "<PATH>", // path (optional)
+        ExecutionMethod.GET, // method (optional)
+        Map.of("a", "b"), // headers (optional)
+        "<SCHEDULED_AT>", // scheduledAt (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

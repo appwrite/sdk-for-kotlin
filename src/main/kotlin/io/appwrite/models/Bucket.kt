@@ -44,6 +44,12 @@ data class Bucket(
     val name: String,
 
     /**
+     * Optional description for the bucket.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Bucket enabled.
      */
     @SerializedName("enabled")
@@ -99,6 +105,7 @@ data class Bucket(
         "\$permissions" to permissions as Any,
         "fileSecurity" to fileSecurity as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "maximumFileSize" to maximumFileSize as Any,
         "allowedFileExtensions" to allowedFileExtensions as Any,
@@ -120,6 +127,7 @@ data class Bucket(
             permissions = (if (map.containsKey("\$permissions")) map["\$permissions"] else listOf<Any?>()) as List<String>,
             fileSecurity = (if (map.containsKey("fileSecurity")) map["fileSecurity"] else false) as Boolean,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             maximumFileSize = ((if (map.containsKey("maximumFileSize")) map["maximumFileSize"] else 0) as Number).toLong(),
             allowedFileExtensions = (if (map.containsKey("allowedFileExtensions")) map["allowedFileExtensions"] else listOf<Any?>()) as List<String>,

@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Sites;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Sites sites = new Sites(client);
 
-sites.getLog(
-    "<SITE_ID>", // siteId
-    "<LOG_ID>", // logId
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    sites.getLog(
+        "<SITE_ID>", // siteId
+        "<LOG_ID>", // logId
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

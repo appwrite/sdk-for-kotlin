@@ -61,6 +61,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @return [io.appwrite.models.Database]
      */
     @Deprecated(
@@ -73,12 +74,14 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Database {
         val apiPath = "/databases"
         val apiParams = mutableMapOf<String, Any?>(
             "databaseId" to databaseId,
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -382,6 +385,7 @@ class Databases(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @return [io.appwrite.models.Database]
      */
     @Deprecated(
@@ -394,6 +398,7 @@ class Databases(client: Client) : Service(client) {
         databaseId: String,
         name: String? = null,
         enabled: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Database {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -404,6 +409,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -518,6 +524,7 @@ class Databases(client: Client) : Service(client) {
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @param attributes Array of attribute definitions to create. Each attribute should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
      * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial, trigram), attributes (array of attribute keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.Collection]
      */
     @Deprecated(
@@ -535,6 +542,7 @@ class Databases(client: Client) : Service(client) {
         enabled: Boolean? = null,
         attributes: List<Map<String, Any?>>? = null,
         indexes: List<Map<String, Any?>>? = null,
+        description: String? = null,
     ): io.appwrite.models.Collection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -550,6 +558,7 @@ class Databases(client: Client) : Service(client) {
             "enabled" to enabled,
             "attributes" to attributes,
             "indexes" to indexes,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -623,6 +632,7 @@ class Databases(client: Client) : Service(client) {
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
      * @param purge When true, purge all cached list responses for this collection as part of the update. Use this to force readers to see fresh data immediately instead of waiting for the cache TTL to expire.
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.Collection]
      */
     @Deprecated(
@@ -639,6 +649,7 @@ class Databases(client: Client) : Service(client) {
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
         purge: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Collection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -656,6 +667,7 @@ class Databases(client: Client) : Service(client) {
             "documentSecurity" to documentSecurity,
             "enabled" to enabled,
             "purge" to purge,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -780,6 +792,7 @@ class Databases(client: Client) : Service(client) {
      * @param max Maximum value
      * @param default Default value. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeBigint]
      */
     @Deprecated(
@@ -797,6 +810,7 @@ class Databases(client: Client) : Service(client) {
         max: Long? = null,
         default: Long? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeBigint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -815,6 +829,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -846,6 +861,7 @@ class Databases(client: Client) : Service(client) {
      * @param min Minimum value
      * @param max Maximum value
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeBigint]
      */
     @Deprecated(
@@ -863,6 +879,7 @@ class Databases(client: Client) : Service(client) {
         min: Long? = null,
         max: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeBigint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -884,6 +901,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -913,6 +931,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeBoolean]
      */
     @Deprecated(
@@ -928,6 +947,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: Boolean? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeBoolean {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -944,6 +964,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -972,6 +993,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeBoolean]
      */
     @Deprecated(
@@ -987,6 +1009,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: Boolean? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeBoolean {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1006,6 +1029,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1034,6 +1058,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for the attribute in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeDatetime]
      */
     @Deprecated(
@@ -1049,6 +1074,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeDatetime {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1065,6 +1091,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1093,6 +1120,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New attribute key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeDatetime]
      */
     @Deprecated(
@@ -1108,6 +1136,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeDatetime {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1127,6 +1156,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1156,6 +1186,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeEmail]
      */
     @Deprecated(
@@ -1171,6 +1202,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeEmail {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1187,6 +1219,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1216,6 +1249,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeEmail]
      */
     @Deprecated(
@@ -1231,6 +1265,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeEmail {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1250,6 +1285,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1280,6 +1316,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeEnum]
      */
     @Deprecated(
@@ -1296,6 +1333,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeEnum {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1313,6 +1351,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1343,6 +1382,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeEnum]
      */
     @Deprecated(
@@ -1359,6 +1399,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeEnum {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1379,6 +1420,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1410,6 +1452,7 @@ class Databases(client: Client) : Service(client) {
      * @param max Maximum value.
      * @param default Default value. Cannot be set when required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeFloat]
      */
     @Deprecated(
@@ -1427,6 +1470,7 @@ class Databases(client: Client) : Service(client) {
         max: Double? = null,
         default: Double? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeFloat {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1445,6 +1489,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1476,6 +1521,7 @@ class Databases(client: Client) : Service(client) {
      * @param min Minimum value.
      * @param max Maximum value.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeFloat]
      */
     @Deprecated(
@@ -1493,6 +1539,7 @@ class Databases(client: Client) : Service(client) {
         min: Double? = null,
         max: Double? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeFloat {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1514,6 +1561,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1545,6 +1593,7 @@ class Databases(client: Client) : Service(client) {
      * @param max Maximum value
      * @param default Default value. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeInteger]
      */
     @Deprecated(
@@ -1562,6 +1611,7 @@ class Databases(client: Client) : Service(client) {
         max: Long? = null,
         default: Long? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeInteger {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1580,6 +1630,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1611,6 +1662,7 @@ class Databases(client: Client) : Service(client) {
      * @param min Minimum value
      * @param max Maximum value
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeInteger]
      */
     @Deprecated(
@@ -1628,6 +1680,7 @@ class Databases(client: Client) : Service(client) {
         min: Long? = null,
         max: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeInteger {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1649,6 +1702,7 @@ class Databases(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1678,6 +1732,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeIp]
      */
     @Deprecated(
@@ -1693,6 +1748,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeIp {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1709,6 +1765,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1738,6 +1795,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeIp]
      */
     @Deprecated(
@@ -1753,6 +1811,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeIp {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1772,6 +1831,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1799,6 +1859,7 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeLine]
      */
     @Deprecated(
@@ -1813,6 +1874,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<List<Any>>? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeLine {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1828,6 +1890,7 @@ class Databases(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1856,6 +1919,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when attribute is required.
      * @param newKey New attribute key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeLine]
      */
     @Deprecated(
@@ -1871,6 +1935,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeLine {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1890,6 +1955,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1920,6 +1986,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeLongtext]
      */
     @Deprecated(
@@ -1936,6 +2003,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeLongtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1953,6 +2021,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1982,6 +2051,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeLongtext]
      */
     @Deprecated(
@@ -1997,6 +2067,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeLongtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2016,6 +2087,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2046,6 +2118,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeMediumtext]
      */
     @Deprecated(
@@ -2062,6 +2135,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeMediumtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2079,6 +2153,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2108,6 +2183,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeMediumtext]
      */
     @Deprecated(
@@ -2123,6 +2199,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeMediumtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2142,6 +2219,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2169,6 +2247,7 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributePoint]
      */
     @Deprecated(
@@ -2183,6 +2262,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<Double>? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributePoint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2198,6 +2278,7 @@ class Databases(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2226,6 +2307,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when attribute is required.
      * @param newKey New attribute key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributePoint]
      */
     @Deprecated(
@@ -2241,6 +2323,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: List<Double>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributePoint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2260,6 +2343,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2287,6 +2371,7 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributePolygon]
      */
     @Deprecated(
@@ -2301,6 +2386,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<List<Any>>? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributePolygon {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2316,6 +2402,7 @@ class Databases(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2344,6 +2431,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when attribute is required.
      * @param newKey New attribute key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributePolygon]
      */
     @Deprecated(
@@ -2359,6 +2447,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributePolygon {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2378,6 +2467,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2409,6 +2499,7 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param twoWayKey Two Way Attribute Key.
      * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeRelationship]
      */
     @Deprecated(
@@ -2426,6 +2517,7 @@ class Databases(client: Client) : Service(client) {
         key: String? = null,
         twoWayKey: String? = null,
         onDelete: io.appwrite.enums.RelationMutate? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeRelationship {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2444,6 +2536,7 @@ class Databases(client: Client) : Service(client) {
             "key" to key,
             "twoWayKey" to twoWayKey,
             "onDelete" to onDelete,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2472,6 +2565,7 @@ class Databases(client: Client) : Service(client) {
      * @param key Attribute Key.
      * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeRelationship]
      */
     @Deprecated(
@@ -2486,6 +2580,7 @@ class Databases(client: Client) : Service(client) {
         key: String,
         onDelete: io.appwrite.enums.RelationMutate? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeRelationship {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2504,6 +2599,7 @@ class Databases(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2535,6 +2631,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeString]
      */
     @Deprecated(
@@ -2552,6 +2649,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeString {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2570,6 +2668,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2600,6 +2699,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param size Maximum size of the string attribute.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeString]
      */
     @Deprecated(
@@ -2616,6 +2716,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         size: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeString {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2636,6 +2737,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "size" to size,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2666,6 +2768,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeText]
      */
     @Deprecated(
@@ -2682,6 +2785,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeText {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2699,6 +2803,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2728,6 +2833,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeText]
      */
     @Deprecated(
@@ -2743,6 +2849,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeText {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2762,6 +2869,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2791,6 +2899,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeUrl]
      */
     @Deprecated(
@@ -2806,6 +2915,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeUrl {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2822,6 +2932,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2851,6 +2962,7 @@ class Databases(client: Client) : Service(client) {
      * @param required Is attribute required?
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeUrl]
      */
     @Deprecated(
@@ -2866,6 +2978,7 @@ class Databases(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeUrl {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2885,6 +2998,7 @@ class Databases(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2916,6 +3030,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param array Is attribute an array?
      * @param encrypt Toggle encryption for the attribute. Encryption enhances security by not storing any plain text values in the database. However, encrypted attributes cannot be queried.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeVarchar]
      */
     @Deprecated(
@@ -2933,6 +3048,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeVarchar {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2951,6 +3067,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2981,6 +3098,7 @@ class Databases(client: Client) : Service(client) {
      * @param default Default value for attribute when not provided. Cannot be set when attribute is required.
      * @param size Maximum size of the varchar attribute.
      * @param newKey New Attribute Key.
+     * @param description Optional description for the attribute.
      * @return [io.appwrite.models.AttributeVarchar]
      */
     @Deprecated(
@@ -2997,6 +3115,7 @@ class Databases(client: Client) : Service(client) {
         default: String? = null,
         size: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.AttributeVarchar {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3017,6 +3136,7 @@ class Databases(client: Client) : Service(client) {
             "default" to default,
             "size" to size,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3158,12 +3278,14 @@ class Databases(client: Client) : Service(client) {
     /**
      * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
+     * Documents returned by aggregate, groupBy or distinct queries hold only the attributes they select, group or aggregate, typed as a document types them, with a joined attribute named by its join alias (`alias.attribute`). They have no `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or `$collectionId` unless they select or group it, and neither does a right or full join document that no document of this collection matched.
+     *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(
@@ -3217,12 +3339,14 @@ class Databases(client: Client) : Service(client) {
     /**
      * Get a list of all the user's documents in a given collection. You can use the query params to filter your results.
      *
+     * Documents returned by aggregate, groupBy or distinct queries hold only the attributes they select, group or aggregate, typed as a document types them, with a joined attribute named by its join alias (`alias.attribute`). They have no `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or `$collectionId` unless they select or group it, and neither does a right or full join document that no document of this collection matched.
+     *
      * @param databaseId Database ID.
      * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.DocumentList<T>]
      */
     @Deprecated(
@@ -3675,6 +3799,102 @@ class Databases(client: Client) : Service(client) {
         collectionId,
         queries,
         transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Get a list of all the user's documents in a given collection using a POST request. This behaves identically to the list documents endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createQuery` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createQuery")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> createQuery(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.DocumentList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (collectionId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"collectionId\"")
+        }
+        val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/query"
+            .replace("{databaseId}", databaseId)
+            .replace("{collectionId}", collectionId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+            "total" to total,
+            "ttl" to ttl,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.DocumentList<T> = {
+            io.appwrite.models.DocumentList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get a list of all the user's documents in a given collection using a POST request. This behaves identically to the list documents endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, collection, schema version (attributes and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; document writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.DocumentList<T>]
+     */
+    @Deprecated(
+        message = "This API has been deprecated since 1.8.0. Please use `TablesDB.createQuery` instead.",
+        replaceWith = ReplaceWith("io.appwrite.services.TablesDB.createQuery")
+    )
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createQuery(
+        databaseId: String,
+        collectionId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+    ): io.appwrite.models.DocumentList<Map<String, Any>> = createQuery(
+        databaseId,
+        collectionId,
+        queries,
+        transactionId,
+        total,
+        ttl,
         nestedType = classOf(),
     )
 
@@ -4289,6 +4509,7 @@ class Databases(client: Client) : Service(client) {
      * @param attributes Array of attributes to index. Maximum of 100 attributes are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
      * @param lengths Length of index. Maximum of 100
+     * @param description Optional description for the index.
      * @return [io.appwrite.models.Index]
      */
     @Deprecated(
@@ -4305,6 +4526,7 @@ class Databases(client: Client) : Service(client) {
         attributes: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
+        description: String? = null,
     ): io.appwrite.models.Index {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -4322,6 +4544,7 @@ class Databases(client: Client) : Service(client) {
             "attributes" to attributes,
             "orders" to orders,
             "lengths" to lengths,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

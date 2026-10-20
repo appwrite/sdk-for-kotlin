@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.models.InputFile;
 import io.appwrite.services.Avatars;
 
@@ -11,16 +12,19 @@ Client client = new Client()
 
 Avatars avatars = new Avatars(client);
 
-avatars.updatePhoto(
-    InputFile.fromPath("file.png"), // file
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    avatars.updatePhoto(
+        InputFile.fromPath("file.png"), // file
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

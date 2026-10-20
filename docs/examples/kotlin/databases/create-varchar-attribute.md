@@ -18,6 +18,7 @@ val response = databases.createVarcharAttribute(
     required = false,
     default = "Hello World", // optional
     array = false, // optional
-    encrypt = false // optional
+    encrypt = false, // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

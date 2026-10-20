@@ -38,6 +38,7 @@ val response = sites.create(
     buildSpecification = "s-1vcpu-512mb", // optional
     runtimeSpecification = "s-1vcpu-512mb", // optional
     deploymentRetention = 0, // optional
-    scopes = listOf(ProjectKeyScopes.PROJECT_READ) // optional
+    scopes = listOf(ProjectKeyScopes.PROJECT_READ), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

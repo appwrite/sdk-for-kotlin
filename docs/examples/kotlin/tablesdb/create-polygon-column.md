@@ -15,6 +15,7 @@ val response = tablesDB.createPolygonColumn(
     tableId = "<TABLE_ID>",
     key = "<KEY>",
     required = false,
-    default = listOf(listOf(listOf(1, 2), listOf(3, 4), listOf(5, 6), listOf(1, 2))) // optional
+    default = listOf(listOf(listOf(1.0, 2.0), listOf(3.0, 4.0), listOf(5.0, 6.0), listOf(1.0, 2.0))), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

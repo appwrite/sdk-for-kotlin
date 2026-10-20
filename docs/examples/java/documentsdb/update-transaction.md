@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.DocumentsDB;
 
 Client client = new Client()
@@ -10,18 +11,21 @@ Client client = new Client()
 
 DocumentsDB documentsDB = new DocumentsDB(client);
 
-documentsDB.updateTransaction(
-    "<TRANSACTION_ID>", // transactionId
-    false, // commit (optional)
-    false, // rollback (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    documentsDB.updateTransaction(
+        "<TRANSACTION_ID>", // transactionId
+        false, // commit (optional)
+        false, // rollback (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

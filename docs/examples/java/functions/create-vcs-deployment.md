@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Functions;
 import io.appwrite.enums.VCSReferenceType;
 
@@ -11,19 +12,22 @@ Client client = new Client()
 
 Functions functions = new Functions(client);
 
-functions.createVcsDeployment(
-    "<FUNCTION_ID>", // functionId
-    VCSReferenceType.BRANCH, // type
-    "<REFERENCE>", // reference
-    false, // activate (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    functions.createVcsDeployment(
+        "<FUNCTION_ID>", // functionId
+        VCSReferenceType.BRANCH, // type
+        "<REFERENCE>", // reference
+        false, // activate (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

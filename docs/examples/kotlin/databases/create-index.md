@@ -19,6 +19,7 @@ val response = databases.createIndex(
     type = DatabasesIndexType.KEY,
     attributes = listOf("username"),
     orders = listOf(OrderBy.ASC), // optional
-    lengths = listOf() // optional
+    lengths = listOf(), // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

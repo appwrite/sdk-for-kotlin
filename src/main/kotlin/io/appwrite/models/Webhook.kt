@@ -32,6 +32,12 @@ data class Webhook(
     val name: String,
 
     /**
+     * Optional description for the webhook.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Webhook URL endpoint.
      */
     @SerializedName("url")
@@ -91,6 +97,7 @@ data class Webhook(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "url" to url as Any,
         "events" to events as Any,
         "tls" to tls as Any,
@@ -111,6 +118,7 @@ data class Webhook(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             url = (if (map.containsKey("url")) map["url"] else "") as String,
             events = (if (map.containsKey("events")) map["events"] else listOf<Any?>()) as List<String>,
             tls = (if (map.containsKey("tls")) map["tls"] else true) as Boolean,

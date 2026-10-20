@@ -38,6 +38,12 @@ data class Function(
     val name: String,
 
     /**
+     * Optional description for the function.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Function enabled.
      */
     @SerializedName("enabled")
@@ -218,6 +224,7 @@ data class Function(
         "\$updatedAt" to updatedAt as Any,
         "execute" to execute as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "live" to live as Any,
         "logging" to logging as Any,
@@ -259,6 +266,7 @@ data class Function(
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             execute = (if (map.containsKey("execute")) map["execute"] else listOf<Any?>()) as List<String>,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             live = (if (map.containsKey("live")) map["live"] else true) as Boolean,
             logging = (if (map.containsKey("logging")) map["logging"] else true) as Boolean,

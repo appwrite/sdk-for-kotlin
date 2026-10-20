@@ -11,6 +11,7 @@ val client = Client()
 val project = Project(client)
 
 val response = project.updatePasswordDictionaryPolicy(
-    enabled = false
+    enabled = false,
+    denyList = listOf() // optional
 )
 ```

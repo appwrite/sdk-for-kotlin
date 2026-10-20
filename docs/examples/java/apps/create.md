@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Apps;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,34 +12,37 @@ Client client = new Client()
 
 Apps apps = new Apps(client);
 
-apps.create(
-    "<APP_ID>", // appId
-    "<NAME>", // name
-    List.of(), // redirectUris
-    "<DESCRIPTION>", // description (optional)
-    "https://example.com", // clientUri (optional)
-    "https://example.com", // logoUri (optional)
-    "https://example.com", // privacyPolicyUrl (optional)
-    "https://example.com", // termsUrl (optional)
-    List.of(), // contacts (optional)
-    "<TAGLINE>", // tagline (optional)
-    List.of(), // tags (optional)
-    List.of(), // images (optional)
-    "https://example.com", // supportUrl (optional)
-    "https://example.com", // dataDeletionUrl (optional)
-    List.of(), // postLogoutRedirectUris (optional)
-    false, // enabled (optional)
-    "public", // type (optional)
-    false, // deviceFlow (optional)
-    "<TEAM_ID>", // teamId (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    apps.create(
+        "<APP_ID>", // appId
+        "<NAME>", // name
+        List.of(), // redirectUris
+        "<DESCRIPTION>", // description (optional)
+        "https://example.com", // clientUri (optional)
+        "https://example.com", // logoUri (optional)
+        "https://example.com", // privacyPolicyUrl (optional)
+        "https://example.com", // termsUrl (optional)
+        List.of(), // contacts (optional)
+        "<TAGLINE>", // tagline (optional)
+        List.of(), // tags (optional)
+        List.of(), // images (optional)
+        "https://example.com", // supportUrl (optional)
+        "https://example.com", // dataDeletionUrl (optional)
+        List.of(), // postLogoutRedirectUris (optional)
+        false, // enabled (optional)
+        "public", // type (optional)
+        false, // deviceFlow (optional)
+        "<TEAM_ID>", // teamId (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

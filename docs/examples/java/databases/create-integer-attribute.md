@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Databases;
 
 Client client = new Client()
@@ -10,23 +11,27 @@ Client client = new Client()
 
 Databases databases = new Databases(client);
 
-databases.createIntegerAttribute(
-    "<DATABASE_ID>", // databaseId
-    "<COLLECTION_ID>", // collectionId
-    "<KEY>", // key
-    false, // required
-    0L, // min (optional)
-    100L, // max (optional)
-    10L, // default (optional)
-    false, // array (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    databases.createIntegerAttribute(
+        "<DATABASE_ID>", // databaseId
+        "<COLLECTION_ID>", // collectionId
+        "<KEY>", // key
+        false, // required
+        0L, // min (optional)
+        100L, // max (optional)
+        10L, // default (optional)
+        false, // array (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

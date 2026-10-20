@@ -16,6 +16,7 @@ val response = databases.updateBooleanAttribute(
     key = "<KEY>",
     required = false,
     default = false,
-    newKey = "<NEW_KEY>" // optional
+    newKey = "<NEW_KEY>", // optional
+    description = "<DESCRIPTION>" // optional
 )
 ```

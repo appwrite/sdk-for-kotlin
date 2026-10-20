@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Waf;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,25 +12,28 @@ Client client = new Client()
 
 Waf waf = new Waf(client);
 
-waf.updateRedirectRule(
-    "<RULE_ID>", // ruleId
-    "api", // resourceType (optional)
-    "<RESOURCE_ID>", // resourceId (optional)
-    "<NAME>", // name (optional)
-    "<DESCRIPTION>", // description (optional)
-    "<LOCATION>", // location (optional)
-    300L, // statusCode (optional)
-    -100000L, // priority (optional)
-    false, // enabled (optional)
-    List.of(), // conditions (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    waf.updateRedirectRule(
+        "<RULE_ID>", // ruleId
+        "api", // resourceType (optional)
+        "<RESOURCE_ID>", // resourceId (optional)
+        "<NAME>", // name (optional)
+        "<DESCRIPTION>", // description (optional)
+        "<LOCATION>", // location (optional)
+        300L, // statusCode (optional)
+        -100000L, // priority (optional)
+        false, // enabled (optional)
+        List.of(), // conditions (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

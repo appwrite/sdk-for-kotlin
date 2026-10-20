@@ -1,11 +1,13 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Sites;
 import io.appwrite.enums.Framework;
 import io.appwrite.enums.BuildRuntime;
 import io.appwrite.enums.Adapter;
 import io.appwrite.enums.ProjectKeyScopes;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -14,39 +16,43 @@ Client client = new Client()
 
 Sites sites = new Sites(client);
 
-sites.update(
-    "<SITE_ID>", // siteId
-    "<NAME>", // name
-    Framework.ANALOG, // framework
-    false, // enabled (optional)
-    false, // logging (optional)
-    1L, // timeout (optional)
-    "<INSTALL_COMMAND>", // installCommand (optional)
-    "<BUILD_COMMAND>", // buildCommand (optional)
-    "<START_COMMAND>", // startCommand (optional)
-    "<OUTPUT_DIRECTORY>", // outputDirectory (optional)
-    BuildRuntime.NODE_14_5, // buildRuntime (optional)
-    Adapter.STATIC, // adapter (optional)
-    "<FALLBACK_FILE>", // fallbackFile (optional)
-    "<INSTALLATION_ID>", // installationId (optional)
-    "<PROVIDER_REPOSITORY_ID>", // providerRepositoryId (optional)
-    "<PROVIDER_BRANCH>", // providerBranch (optional)
-    false, // providerSilentMode (optional)
-    "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
-    List.of(), // providerBranches (optional)
-    List.of(), // providerPaths (optional)
-    "s-1vcpu-512mb", // buildSpecification (optional)
-    "s-1vcpu-512mb", // runtimeSpecification (optional)
-    0L, // deploymentRetention (optional)
-    List.of(ProjectKeyScopes.PROJECT_READ), // scopes (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    sites.update(
+        "<SITE_ID>", // siteId
+        "<NAME>", // name
+        Framework.ANALOG, // framework
+        false, // enabled (optional)
+        false, // logging (optional)
+        1L, // timeout (optional)
+        "<INSTALL_COMMAND>", // installCommand (optional)
+        "<BUILD_COMMAND>", // buildCommand (optional)
+        "<START_COMMAND>", // startCommand (optional)
+        "<OUTPUT_DIRECTORY>", // outputDirectory (optional)
+        BuildRuntime.NODE_14_5, // buildRuntime (optional)
+        Adapter.STATIC, // adapter (optional)
+        "<FALLBACK_FILE>", // fallbackFile (optional)
+        "<INSTALLATION_ID>", // installationId (optional)
+        "<PROVIDER_REPOSITORY_ID>", // providerRepositoryId (optional)
+        "<PROVIDER_BRANCH>", // providerBranch (optional)
+        false, // providerSilentMode (optional)
+        "<PROVIDER_ROOT_DIRECTORY>", // providerRootDirectory (optional)
+        List.of(), // providerBranches (optional)
+        List.of(), // providerPaths (optional)
+        "s-1vcpu-512mb", // buildSpecification (optional)
+        "s-1vcpu-512mb", // runtimeSpecification (optional)
+        0L, // deploymentRetention (optional)
+        List.of(ProjectKeyScopes.PROJECT_READ), // scopes (optional)
+        "<DESCRIPTION>", // description (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

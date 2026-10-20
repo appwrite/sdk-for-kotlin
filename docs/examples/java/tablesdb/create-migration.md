@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.TablesDB;
 
 Client client = new Client()
@@ -10,18 +11,21 @@ Client client = new Client()
 
 TablesDB tablesDB = new TablesDB(client);
 
-tablesDB.createMigration(
-    "<DATABASE_ID>", // databaseId
-    "s-1vcpu-1gb", // specification
-    false, // autoCutover (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    tablesDB.createMigration(
+        "<DATABASE_ID>", // databaseId
+        "s-1vcpu-1gb", // specification
+        false, // autoCutover (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

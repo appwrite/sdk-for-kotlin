@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
 import io.appwrite.enums.ProjectSMTPSecure;
 
@@ -11,25 +12,28 @@ Client client = new Client()
 
 Project project = new Project(client);
 
-project.updateSMTP(
-    "example.com", // host (optional)
-    587L, // port (optional)
-    "<USERNAME>", // username (optional)
-    "password", // password (optional)
-    "email@example.com", // senderEmail (optional)
-    "<SENDER_NAME>", // senderName (optional)
-    "email@example.com", // replyToEmail (optional)
-    "<REPLY_TO_NAME>", // replyToName (optional)
-    ProjectSMTPSecure.TLS, // secure (optional)
-    false, // enabled (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    project.updateSMTP(
+        "example.com", // host (optional)
+        587L, // port (optional)
+        "<USERNAME>", // username (optional)
+        "password", // password (optional)
+        "email@example.com", // senderEmail (optional)
+        "<SENDER_NAME>", // senderName (optional)
+        "email@example.com", // replyToEmail (optional)
+        "<REPLY_TO_NAME>", // replyToName (optional)
+        ProjectSMTPSecure.TLS, // secure (optional)
+        false, // enabled (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

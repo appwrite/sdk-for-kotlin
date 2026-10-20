@@ -1,7 +1,9 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Messaging;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -10,29 +12,33 @@ Client client = new Client()
 
 Messaging messaging = new Messaging(client);
 
-messaging.updateEmail(
-    "<MESSAGE_ID>", // messageId
-    List.of(), // topics (optional)
-    List.of(), // users (optional)
-    List.of(), // targets (optional)
-    "<SUBJECT>", // subject (optional)
-    "<CONTENT>", // content (optional)
-    false, // draft (optional)
-    false, // html (optional)
-    List.of(), // cc (optional)
-    List.of(), // bcc (optional)
-    "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
-    List.of(), // attachments (optional)
-    "email@example.com", // replyToEmail (optional)
-    "<REPLY_TO_NAME>", // replyToName (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    messaging.updateEmail(
+        "<MESSAGE_ID>", // messageId
+        List.of(), // topics (optional)
+        List.of(), // users (optional)
+        List.of(), // targets (optional)
+        "<SUBJECT>", // subject (optional)
+        "<CONTENT>", // content (optional)
+        false, // draft (optional)
+        false, // html (optional)
+        List.of(), // cc (optional)
+        List.of(), // bcc (optional)
+        "2020-10-15T06:38:00.000+00:00", // scheduledAt (optional)
+        List.of(), // attachments (optional)
+        "email@example.com", // replyToEmail (optional)
+        "<REPLY_TO_NAME>", // replyToName (optional)
+        List.of(), // emails (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

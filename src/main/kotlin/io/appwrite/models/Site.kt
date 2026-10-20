@@ -32,6 +32,12 @@ data class Site(
     val name: String,
 
     /**
+     * Optional description for the site.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Site enabled.
      */
     @SerializedName("enabled")
@@ -223,6 +229,7 @@ data class Site(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "live" to live as Any,
         "logging" to logging as Any,
@@ -265,6 +272,7 @@ data class Site(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             live = (if (map.containsKey("live")) map["live"] else true) as Boolean,
             logging = (if (map.containsKey("logging")) map["logging"] else true) as Boolean,

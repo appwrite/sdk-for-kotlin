@@ -54,6 +54,7 @@ class VectorsDB(client: Client) : Service(client) {
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Defaults to `serverless`, which creates the database on the shared pool. Any other value provisions a dedicated database on that specification.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Requires a dedicated `specification`; must be 0 for a serverless database. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Requires a dedicated `specification`; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -65,6 +66,7 @@ class VectorsDB(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -74,6 +76,7 @@ class VectorsDB(client: Client) : Service(client) {
             "databaseId" to databaseId,
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -378,6 +381,7 @@ class VectorsDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Resizing between dedicated specifications changes cpu, memory, storage and the connection ceiling via a rolling cutover with zero downtime. Moving a `serverless` database onto a dedicated specification is a data migration, not a resize.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -389,6 +393,7 @@ class VectorsDB(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -402,6 +407,7 @@ class VectorsDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -510,6 +516,7 @@ class VectorsDB(client: Client) : Service(client) {
      * @param permissions An array of permissions strings. By default, no user is granted with any permissions. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.VectorsdbCollection]
      */
     @JvmOverloads
@@ -522,6 +529,7 @@ class VectorsDB(client: Client) : Service(client) {
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.VectorsdbCollection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -536,6 +544,7 @@ class VectorsDB(client: Client) : Service(client) {
             "permissions" to permissions,
             "documentSecurity" to documentSecurity,
             "enabled" to enabled,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -605,6 +614,7 @@ class VectorsDB(client: Client) : Service(client) {
      * @param permissions An array of permission strings. By default, the current permissions are inherited. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param documentSecurity Enables configuring permissions for individual documents. A user needs one of document or collection level permissions to access a document. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is collection enabled? When set to 'disabled', users cannot access the collection but Server SDKs with and API key can still read and write to the collection. No data is lost when this is toggled.
+     * @param description Optional description for the collection.
      * @return [io.appwrite.models.VectorsdbCollection]
      */
     @JvmOverloads
@@ -617,6 +627,7 @@ class VectorsDB(client: Client) : Service(client) {
         permissions: List<String>? = null,
         documentSecurity: Boolean? = null,
         enabled: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.VectorsdbCollection {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -634,6 +645,7 @@ class VectorsDB(client: Client) : Service(client) {
             "permissions" to permissions,
             "documentSecurity" to documentSecurity,
             "enabled" to enabled,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1620,6 +1632,7 @@ class VectorsDB(client: Client) : Service(client) {
      * @param attributes Array of attributes to index. Maximum of 100 attributes are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
      * @param lengths Length of index. Maximum of 100
+     * @param description Optional description for the index.
      * @return [io.appwrite.models.Index]
      */
     @JvmOverloads
@@ -1632,6 +1645,7 @@ class VectorsDB(client: Client) : Service(client) {
         attributes: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
+        description: String? = null,
     ): io.appwrite.models.Index {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1649,6 +1663,7 @@ class VectorsDB(client: Client) : Service(client) {
             "attributes" to attributes,
             "orders" to orders,
             "lengths" to lengths,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

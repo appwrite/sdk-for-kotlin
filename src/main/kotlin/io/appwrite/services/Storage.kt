@@ -66,6 +66,7 @@ class Storage(client: Client) : Service(client) {
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
+     * @param description Optional description for the bucket.
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -82,6 +83,7 @@ class Storage(client: Client) : Service(client) {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Bucket {
         val apiPath = "/storage/buckets"
         val apiParams = mutableMapOf<String, Any?>(
@@ -96,6 +98,7 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
             "transformations" to transformations,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -163,6 +166,7 @@ class Storage(client: Client) : Service(client) {
      * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
+     * @param description Optional description for the bucket.
      * @return [io.appwrite.models.Bucket]
      */
     @JvmOverloads
@@ -179,6 +183,7 @@ class Storage(client: Client) : Service(client) {
         encryption: Boolean? = null,
         antivirus: Boolean? = null,
         transformations: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Bucket {
         if (bucketId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"bucketId\"")
@@ -197,6 +202,7 @@ class Storage(client: Client) : Service(client) {
             "encryption" to encryption,
             "antivirus" to antivirus,
             "transformations" to transformations,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

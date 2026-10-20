@@ -57,6 +57,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is the database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Defaults to `serverless`, which creates the database on the shared pool. Any other value provisions a dedicated database on that specification.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Requires a dedicated `specification`; must be 0 for a serverless database. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Requires a dedicated `specification`; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -68,6 +69,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         name: String,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -77,6 +79,7 @@ class TablesDB(client: Client) : Service(client) {
             "databaseId" to databaseId,
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -381,6 +384,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param databaseId Database ID.
      * @param name Database name. Max length: 128 chars.
      * @param enabled Is database enabled? When set to 'disabled', users cannot access the database but Server SDKs with an API key can still read and write to the database. No data is lost when this is toggled.
+     * @param description Optional description for the database.
      * @param specification Database specification. Resizing between dedicated specifications changes cpu, memory, storage and the connection ceiling via a rolling cutover with zero downtime. Moving a `serverless` database onto a dedicated specification is a data migration, not a resize.
      * @param replicas Number of high availability replicas (0-5) for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification. High availability is enabled when greater than 0.
      * @param syncMode Replication sync mode for the dedicated database backing this database. Only valid when the database is backed by a dedicated specification; the mode is only in force once there is at least one replica. Allowed values: async, sync, quorum.
@@ -392,6 +396,7 @@ class TablesDB(client: Client) : Service(client) {
         databaseId: String,
         name: String? = null,
         enabled: Boolean? = null,
+        description: String? = null,
         specification: String? = null,
         replicas: Long? = null,
         syncMode: String? = null,
@@ -405,6 +410,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
             "enabled" to enabled,
+            "description" to description,
             "specification" to specification,
             "replicas" to replicas,
             "syncMode" to syncMode,
@@ -862,6 +868,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
      * @param columns Array of column definitions to create. Each column should contain: key (string), type (string: string, varchar, text, mediumtext, longtext, integer, bigint, double, boolean, datetime, point, linestring, polygon, email, url, ip, enum), size (integer, required for string and varchar types), required (boolean, optional), default (mixed, optional), array (boolean, optional), and type-specific options.
      * @param indexes Array of index definitions to create. Each index should contain: key (string), type (string: key, fulltext, unique, spatial, trigram), attributes (array of column keys), orders (array of ASC/DESC, optional), and lengths (array of integers, optional).
+     * @param description Optional description for the table.
      * @return [io.appwrite.models.Table]
      */
     @JvmOverloads
@@ -875,6 +882,7 @@ class TablesDB(client: Client) : Service(client) {
         enabled: Boolean? = null,
         columns: List<Map<String, Any?>>? = null,
         indexes: List<Map<String, Any?>>? = null,
+        description: String? = null,
     ): io.appwrite.models.Table {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -890,6 +898,7 @@ class TablesDB(client: Client) : Service(client) {
             "enabled" to enabled,
             "columns" to columns,
             "indexes" to indexes,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -959,6 +968,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param rowSecurity Enables configuring permissions for individual rows. A user needs one of row or table-level permissions to access a row. [Learn more about permissions](https://appwrite.io/docs/permissions).
      * @param enabled Is table enabled? When set to 'disabled', users cannot access the table but Server SDKs with and API key can still read and write to the table. No data is lost when this is toggled.
      * @param purge When true, purge all cached list responses for this table as part of the update. Use this to force readers to see fresh data immediately instead of waiting for the cache TTL to expire.
+     * @param description Optional description for the table.
      * @return [io.appwrite.models.Table]
      */
     @JvmOverloads
@@ -971,6 +981,7 @@ class TablesDB(client: Client) : Service(client) {
         rowSecurity: Boolean? = null,
         enabled: Boolean? = null,
         purge: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.Table {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -988,6 +999,7 @@ class TablesDB(client: Client) : Service(client) {
             "rowSecurity" to rowSecurity,
             "enabled" to enabled,
             "purge" to purge,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1104,6 +1116,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param max Maximum value
      * @param default Default value. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnBigint]
      */
     @JvmOverloads
@@ -1117,6 +1130,7 @@ class TablesDB(client: Client) : Service(client) {
         max: Long? = null,
         default: Long? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnBigint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1135,6 +1149,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1166,6 +1181,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param min Minimum value
      * @param max Maximum value
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnBigint]
      */
     @JvmOverloads
@@ -1179,6 +1195,7 @@ class TablesDB(client: Client) : Service(client) {
         min: Long? = null,
         max: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnBigint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1200,6 +1217,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1229,6 +1247,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnBoolean]
      */
     @JvmOverloads
@@ -1240,6 +1259,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: Boolean? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnBoolean {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1256,6 +1276,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1284,6 +1305,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnBoolean]
      */
     @JvmOverloads
@@ -1295,6 +1317,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: Boolean? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnBoolean {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1314,6 +1337,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1342,6 +1366,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for the column in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnDatetime]
      */
     @JvmOverloads
@@ -1353,6 +1378,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnDatetime {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1369,6 +1395,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1397,6 +1424,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnDatetime]
      */
     @JvmOverloads
@@ -1408,6 +1436,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnDatetime {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1427,6 +1456,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1456,6 +1486,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnEmail]
      */
     @JvmOverloads
@@ -1467,6 +1498,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnEmail {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1483,6 +1515,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1512,6 +1545,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnEmail]
      */
     @JvmOverloads
@@ -1523,6 +1557,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnEmail {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1542,6 +1577,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1571,6 +1607,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnEnum]
      */
     @JvmOverloads
@@ -1583,6 +1620,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnEnum {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1600,6 +1638,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1630,6 +1669,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnEnum]
      */
     @JvmOverloads
@@ -1642,6 +1682,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnEnum {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1662,6 +1703,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1693,6 +1735,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param max Maximum value
      * @param default Default value. Cannot be set when required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnFloat]
      */
     @JvmOverloads
@@ -1706,6 +1749,7 @@ class TablesDB(client: Client) : Service(client) {
         max: Double? = null,
         default: Double? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnFloat {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1724,6 +1768,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1755,6 +1800,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param min Minimum value
      * @param max Maximum value
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnFloat]
      */
     @JvmOverloads
@@ -1768,6 +1814,7 @@ class TablesDB(client: Client) : Service(client) {
         min: Double? = null,
         max: Double? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnFloat {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1789,6 +1836,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1820,6 +1868,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param max Maximum value
      * @param default Default value. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnInteger]
      */
     @JvmOverloads
@@ -1833,6 +1882,7 @@ class TablesDB(client: Client) : Service(client) {
         max: Long? = null,
         default: Long? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnInteger {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1851,6 +1901,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1882,6 +1933,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param min Minimum value
      * @param max Maximum value
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnInteger]
      */
     @JvmOverloads
@@ -1895,6 +1947,7 @@ class TablesDB(client: Client) : Service(client) {
         min: Long? = null,
         max: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnInteger {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1916,6 +1969,7 @@ class TablesDB(client: Client) : Service(client) {
             "max" to max,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -1945,6 +1999,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnIp]
      */
     @JvmOverloads
@@ -1956,6 +2011,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnIp {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -1972,6 +2028,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2001,6 +2058,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnIp]
      */
     @JvmOverloads
@@ -2012,6 +2070,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnIp {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2031,6 +2090,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2058,6 +2118,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param key Column Key.
      * @param required Is column required?
      * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnLine]
      */
     @JvmOverloads
@@ -2068,6 +2129,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<List<Any>>? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnLine {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2083,6 +2145,7 @@ class TablesDB(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2111,6 +2174,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided, two-dimensional array of coordinate pairs, [[longitude, latitude], [longitude, latitude], …], listing the vertices of the line in order. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnLine]
      */
     @JvmOverloads
@@ -2122,6 +2186,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnLine {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2141,6 +2206,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2171,6 +2237,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnLongtext]
      */
     @JvmOverloads
@@ -2183,6 +2250,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnLongtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2200,6 +2268,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2229,6 +2298,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnLongtext]
      */
     @JvmOverloads
@@ -2240,6 +2310,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnLongtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2259,6 +2330,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2289,6 +2361,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnMediumtext]
      */
     @JvmOverloads
@@ -2301,6 +2374,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnMediumtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2318,6 +2392,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2347,6 +2422,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnMediumtext]
      */
     @JvmOverloads
@@ -2358,6 +2434,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnMediumtext {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2377,6 +2454,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2404,6 +2482,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param key Column Key.
      * @param required Is column required?
      * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnPoint]
      */
     @JvmOverloads
@@ -2414,6 +2493,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<Double>? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnPoint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2429,6 +2509,7 @@ class TablesDB(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2457,6 +2538,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided, array of two numbers [longitude, latitude], representing a single coordinate. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnPoint]
      */
     @JvmOverloads
@@ -2468,6 +2550,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<Double>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnPoint {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2487,6 +2570,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2514,6 +2598,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param key Column Key.
      * @param required Is column required?
      * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnPolygon]
      */
     @JvmOverloads
@@ -2524,6 +2609,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         required: Boolean,
         default: List<List<Any>>? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnPolygon {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2539,6 +2625,7 @@ class TablesDB(client: Client) : Service(client) {
             "key" to key,
             "required" to required,
             "default" to default,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2567,6 +2654,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided, three-dimensional array where the outer array holds one or more linear rings, [[[longitude, latitude], …], …], the first ring is the exterior boundary, any additional rings are interior holes, and each ring must start and end with the same coordinate pair. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnPolygon]
      */
     @JvmOverloads
@@ -2578,6 +2666,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: List<List<Any>>? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnPolygon {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2597,6 +2686,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2628,6 +2718,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param key Column Key.
      * @param twoWayKey Two Way Column Key.
      * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnRelationship]
      */
     @JvmOverloads
@@ -2641,6 +2732,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String? = null,
         twoWayKey: String? = null,
         onDelete: io.appwrite.enums.RelationMutate? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnRelationship {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2659,6 +2751,7 @@ class TablesDB(client: Client) : Service(client) {
             "key" to key,
             "twoWayKey" to twoWayKey,
             "onDelete" to onDelete,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2687,6 +2780,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param key Column Key.
      * @param onDelete Delete constraint. Possible values are: cascade, restrict, setNull.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnRelationship]
      */
     @JvmOverloads
@@ -2697,6 +2791,7 @@ class TablesDB(client: Client) : Service(client) {
         key: String,
         onDelete: io.appwrite.enums.RelationMutate? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnRelationship {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2715,6 +2810,7 @@ class TablesDB(client: Client) : Service(client) {
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2746,6 +2842,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnString]
      */
     @Deprecated(
@@ -2763,6 +2860,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnString {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2781,6 +2879,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2811,6 +2910,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param size Maximum size of the string column.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnString]
      */
     @Deprecated(
@@ -2827,6 +2927,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         size: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnString {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2847,6 +2948,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "size" to size,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2877,6 +2979,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnText]
      */
     @JvmOverloads
@@ -2889,6 +2992,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnText {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2906,6 +3010,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2935,6 +3040,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnText]
      */
     @JvmOverloads
@@ -2946,6 +3052,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnText {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -2965,6 +3072,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -2994,6 +3102,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnUrl]
      */
     @JvmOverloads
@@ -3005,6 +3114,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         array: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnUrl {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3021,6 +3131,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "array" to array,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3050,6 +3161,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param required Is column required?
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnUrl]
      */
     @JvmOverloads
@@ -3061,6 +3173,7 @@ class TablesDB(client: Client) : Service(client) {
         required: Boolean,
         default: String? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnUrl {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3080,6 +3193,7 @@ class TablesDB(client: Client) : Service(client) {
             "required" to required,
             "default" to default,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3111,6 +3225,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param array Is column an array?
      * @param encrypt Toggle encryption for the column. Encryption enhances security by not storing any plain text values in the database. However, encrypted columns cannot be queried.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnVarchar]
      */
     @JvmOverloads
@@ -3124,6 +3239,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         array: Boolean? = null,
         encrypt: Boolean? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnVarchar {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3142,6 +3258,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "array" to array,
             "encrypt" to encrypt,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3172,6 +3289,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param default Default value for column when not provided. Cannot be set when column is required.
      * @param size Maximum size of the varchar column.
      * @param newKey New Column Key.
+     * @param description Optional description for the column.
      * @return [io.appwrite.models.ColumnVarchar]
      */
     @JvmOverloads
@@ -3184,6 +3302,7 @@ class TablesDB(client: Client) : Service(client) {
         default: String? = null,
         size: Long? = null,
         newKey: String? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnVarchar {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3204,6 +3323,7 @@ class TablesDB(client: Client) : Service(client) {
             "default" to default,
             "size" to size,
             "newKey" to newKey,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3393,6 +3513,7 @@ class TablesDB(client: Client) : Service(client) {
      * @param columns Array of columns to index. Maximum of 100 columns are allowed, each 32 characters long.
      * @param orders Array of index orders. Maximum of 100 orders are allowed.
      * @param lengths Length of index. Maximum of 100
+     * @param description Optional description for the index.
      * @return [io.appwrite.models.ColumnIndex]
      */
     @JvmOverloads
@@ -3405,6 +3526,7 @@ class TablesDB(client: Client) : Service(client) {
         columns: List<String>,
         orders: List<io.appwrite.enums.OrderBy>? = null,
         lengths: List<Long>? = null,
+        description: String? = null,
     ): io.appwrite.models.ColumnIndex {
         if (databaseId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
@@ -3422,6 +3544,7 @@ class TablesDB(client: Client) : Service(client) {
             "columns" to columns,
             "orders" to orders,
             "lengths" to lengths,
+            "description" to description,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -3533,12 +3656,14 @@ class TablesDB(client: Client) : Service(client) {
     /**
      * Get a list of all the user's rows in a given table. You can use the query params to filter your results.
      *
+     * Rows returned by aggregate, groupBy or distinct queries hold only the columns they select, group or aggregate, typed as a row types them, with a joined column named by its join alias (`alias.column`). They have no `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or `$tableId` unless they select or group it, and neither does a right or full join row that no row of this table matched.
+     *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -3588,12 +3713,14 @@ class TablesDB(client: Client) : Service(client) {
     /**
      * Get a list of all the user's rows in a given table. You can use the query params to filter your results.
      *
+     * Rows returned by aggregate, groupBy or distinct queries hold only the columns they select, group or aggregate, typed as a row types them, with a joined column named by its join alias (`alias.column`). They have no `$id`, `$sequence`, `$createdAt`, `$updatedAt`, `$permissions`, `$databaseId` or `$tableId` unless they select or group it, and neither does a right or full join row that no row of this table matched.
+     *
      * @param databaseId Database ID.
      * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
      * @param transactionId Transaction ID to read uncommitted changes within the transaction.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Must be between 0 and 86400 (24 hours).
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
      * @return [io.appwrite.models.RowList<T>]
      */
     @JvmOverloads
@@ -4002,6 +4129,94 @@ class TablesDB(client: Client) : Service(client) {
         tableId,
         queries,
         transactionId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Get a list of all the user's rows in a given table using a POST request. This behaves identically to the list rows endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> createQuery(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.RowList<T> {
+        if (databaseId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"databaseId\"")
+        }
+        if (tableId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"tableId\"")
+        }
+        val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/query"
+            .replace("{databaseId}", databaseId)
+            .replace("{tableId}", tableId)
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "transactionId" to transactionId,
+            "total" to total,
+            "ttl" to ttl,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.RowList<T> = {
+            io.appwrite.models.RowList.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get a list of all the user's rows in a given table using a POST request. This behaves identically to the list rows endpoint but accepts the queries in the request body, allowing much larger `queries` arrays than can fit in a URL query string.
+     *
+     *
+     * @param databaseId Database ID.
+     * @param tableId Table ID. You can create a new table using the TablesDB service [server integration](https://appwrite.io/docs/products/databases/tables#create-table).
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
+     * @param transactionId Transaction ID to read uncommitted changes within the transaction.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @param ttl TTL (seconds) for caching list responses. Responses are stored in an in-memory key-value cache, keyed per project, table, schema version (columns and indexes), caller authorization roles, and the exact query — so users with different permissions never share cached entries. Schema changes invalidate cached entries automatically; row writes do not, so choose a TTL you are comfortable serving as stale data. Set to 0 to disable caching. Lists with join queries are not cached. Must be between 0 and 86400 (24 hours).
+     * @return [io.appwrite.models.RowList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createQuery(
+        databaseId: String,
+        tableId: String,
+        queries: List<String>? = null,
+        transactionId: String? = null,
+        total: Boolean? = null,
+        ttl: Long? = null,
+    ): io.appwrite.models.RowList<Map<String, Any>> = createQuery(
+        databaseId,
+        tableId,
+        queries,
+        transactionId,
+        total,
+        ttl,
         nestedType = classOf(),
     )
 

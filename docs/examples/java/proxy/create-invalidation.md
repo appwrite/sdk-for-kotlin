@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Proxy;
 import io.appwrite.enums.InvalidationType;
 
@@ -11,18 +12,21 @@ Client client = new Client()
 
 Proxy proxy = new Proxy(client);
 
-proxy.createInvalidation(
-    "example.com", // domain
-    InvalidationType.TAG, // type
-    "<REFERENCE>", // reference (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    proxy.createInvalidation(
+        "example.com", // domain
+        InvalidationType.TAG, // type
+        "<REFERENCE>", // reference (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

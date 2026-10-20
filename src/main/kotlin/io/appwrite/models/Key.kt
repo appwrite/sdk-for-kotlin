@@ -32,6 +32,12 @@ data class Key(
     val name: String,
 
     /**
+     * Optional description for the key.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Key expiration date in ISO 8601 format.
      */
     @SerializedName("expire")
@@ -67,6 +73,7 @@ data class Key(
         "\$createdAt" to createdAt as Any,
         "\$updatedAt" to updatedAt as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "expire" to expire as Any,
         "scopes" to scopes as Any,
         "secret" to secret as Any,
@@ -83,6 +90,7 @@ data class Key(
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             expire = (if (map.containsKey("expire")) map["expire"] else "") as String,
             scopes = (if (map.containsKey("scopes")) map["scopes"] else listOf<Any?>()) as List<String>,
             secret = (if (map.containsKey("secret")) map["secret"] else "") as String,

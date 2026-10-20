@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Postgresql;
 
 Client client = new Client()
@@ -10,17 +11,20 @@ Client client = new Client()
 
 Postgresql postgresql = new Postgresql(client);
 
-postgresql.getRestoration(
-    "<DATABASE_ID>", // databaseId
-    "<RESTORATION_ID>", // restorationId
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    postgresql.getRestoration(
+        "<DATABASE_ID>", // databaseId
+        "<RESTORATION_ID>", // restorationId
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```

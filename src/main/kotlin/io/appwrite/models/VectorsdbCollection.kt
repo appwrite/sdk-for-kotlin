@@ -44,6 +44,12 @@ data class VectorsdbCollection(
     val name: String,
 
     /**
+     * Optional description for the collection.
+     */
+    @SerializedName("description")
+    val description: String,
+
+    /**
      * Collection enabled. Can be 'enabled' or 'disabled'. When disabled, the collection is inaccessible to users, but remains accessible to Server SDKs using API keys.
      */
     @SerializedName("enabled")
@@ -93,6 +99,7 @@ data class VectorsdbCollection(
         "\$permissions" to permissions as Any,
         "databaseId" to databaseId as Any,
         "name" to name as Any,
+        "description" to description as Any,
         "enabled" to enabled as Any,
         "documentSecurity" to documentSecurity as Any,
         "attributes" to attributes as Any,
@@ -113,6 +120,7 @@ data class VectorsdbCollection(
             permissions = (if (map.containsKey("\$permissions")) map["\$permissions"] else listOf<Any?>()) as List<String>,
             databaseId = (if (map.containsKey("databaseId")) map["databaseId"] else "") as String,
             name = (if (map.containsKey("name")) map["name"] else "") as String,
+            description = (if (map.containsKey("description")) map["description"] else "") as String,
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             documentSecurity = (if (map.containsKey("documentSecurity")) map["documentSecurity"] else false) as Boolean,
             attributes = (if (map.containsKey("attributes")) map["attributes"] else listOf<Any?>()) as List<Map<String, Any?>>,

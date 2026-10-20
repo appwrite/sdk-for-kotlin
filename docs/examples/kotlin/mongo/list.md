@@ -11,6 +11,7 @@ val client = Client()
 val mongo = Mongo(client)
 
 val response = mongo.list(
-    queries = listOf() // optional
+    queries = listOf(), // optional
+    total = false // optional
 )
 ```

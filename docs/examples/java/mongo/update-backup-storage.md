@@ -1,6 +1,7 @@
 ```java
 import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Mongo;
 
 Client client = new Client()
@@ -10,23 +11,26 @@ Client client = new Client()
 
 Mongo mongo = new Mongo(client);
 
-mongo.updateBackupStorage(
-    "<DATABASE_ID>", // databaseId
-    "s3", // provider
-    "<BUCKET>", // bucket
-    "<ACCESS_KEY>", // accessKey
-    "<SECRET_KEY>", // secretKey
-    "<REGION>", // region (optional)
-    "<PREFIX>", // prefix (optional)
-    "<ENDPOINT>", // endpoint (optional)
-    new CoroutineCallback<>((result, error) -> {
-        if (error != null) {
-            error.printStackTrace();
-            return;
-        }
+try {
+    mongo.updateBackupStorage(
+        "<DATABASE_ID>", // databaseId
+        "s3", // provider
+        "<BUCKET>", // bucket
+        "<ACCESS_KEY>", // accessKey
+        "<SECRET_KEY>", // secretKey
+        "<REGION>", // region (optional)
+        "<PREFIX>", // prefix (optional)
+        "<ENDPOINT>", // endpoint (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
 
-        System.out.println(result);
-    })
-);
-
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
 ```
