@@ -1,5 +1,21 @@
 # Change Log
 
+## 24.1.0
+
+* Updated: requests send response format `2.6.2`
+* Updated: redirects are no longer followed; a 3xx response throws `AppwriteException` naming its `Location`
+* Fixed: a `.` or `..` path parameter throws `AppwriteException` before the request is sent
+* Added: `migrations` service with `list`, `get`, `retry`, `delete`, Appwrite, Firebase, NHost and Supabase migrations and reports, and CSV and JSON imports and exports
+* Added: `AppwriteMigrationResource`, `FirebaseMigrationResource`, `NHostMigrationResource`, `SupabaseMigrationResource` and `OnDuplicate` enums
+* Added: `Migration`, `MigrationList` and `MigrationReport` models
+* Added: `project.updateDenyRealtimeGuestsPolicy`, `ProjectPolicyId.DENY_REALTIME_GUESTS` and the `PolicyDenyRealtimeGuests` model
+* Added: `project.deleteSessions` to sign out every session in the project
+* Added: `deploymentRetention`, `deploymentRetentionMax` and `deploymentsRetentionCount` on `BillingPlan`
+* Added: `PYTHON_3_15`, `DENO_2_9`, `GO_1_27` and `RUST_1_99` on `Runtime` and `BuildRuntime`
+* Fixed: path parameters and upload IDs are percent-encoded as one segment, so `/`, `?` and `#` stay in the value
+* Fixed: a chunked upload whose file ID returns 404 on the resume lookup starts a new upload
+* Updated: Kotlin 2.4.21, OkHttp 5.5.1 and Gradle 9.8.2
+
 ## 24.0.0
 
 * Breaking: `create` and `update` on `TablesDB`, `DocumentsDB` and `VectorsDB` take `description` before `specification`

@@ -74,7 +74,7 @@ class Project(client: Client) : Service(client) {
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = ("/project/auth-methods/{methodId}"
-            .replace("{methodId}", methodId.value)
+            .replace("{methodId}", Client.encodePath(methodId.value))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -181,7 +181,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"environmentId\"")
         }
         val apiPath = ("/project/environments/{environmentId}"
-            .replace("{environmentId}", environmentId)
+            .replace("{environmentId}", Client.encodePath(environmentId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -217,7 +217,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"environmentId\"")
         }
         val apiPath = ("/project/environments/{environmentId}"
-            .replace("{environmentId}", environmentId)
+            .replace("{environmentId}", Client.encodePath(environmentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -254,7 +254,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"environmentId\"")
         }
         val apiPath = ("/project/environments/{environmentId}"
-            .replace("{environmentId}", environmentId)
+            .replace("{environmentId}", Client.encodePath(environmentId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -357,7 +357,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"keyId\"")
         }
         val apiPath = ("/project/keys/{keyId}"
-            .replace("{keyId}", keyId)
+            .replace("{keyId}", Client.encodePath(keyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -400,7 +400,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"keyId\"")
         }
         val apiPath = ("/project/keys/{keyId}"
-            .replace("{keyId}", keyId)
+            .replace("{keyId}", Client.encodePath(keyId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -440,7 +440,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"keyId\"")
         }
         val apiPath = ("/project/keys/{keyId}"
-            .replace("{keyId}", keyId)
+            .replace("{keyId}", Client.encodePath(keyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -573,7 +573,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"number\"")
         }
         val apiPath = ("/project/mock-phones/{number}"
-            .replace("{number}", number)
+            .replace("{number}", Client.encodePath(number))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -609,7 +609,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"number\"")
         }
         val apiPath = ("/project/mock-phones/{number}"
-            .replace("{number}", number)
+            .replace("{number}", Client.encodePath(number))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "otp" to otp,
@@ -646,7 +646,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"number\"")
         }
         val apiPath = ("/project/mock-phones/{number}"
-            .replace("{number}", number)
+            .replace("{number}", Client.encodePath(number))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -2788,7 +2788,7 @@ class Project(client: Client) : Service(client) {
         providerId: io.appwrite.enums.ProjectOAuthProviderId,
     ): Any {
         val apiPath = ("/project/oauth2/{providerId}"
-            .replace("{providerId}", providerId.value)
+            .replace("{providerId}", Client.encodePath(providerId.value))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -2956,7 +2956,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/android/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -3037,7 +3037,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/apple/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -3117,7 +3117,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/linux/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -3197,7 +3197,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/web/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -3277,7 +3277,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/windows/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -3315,7 +3315,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3358,7 +3358,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"platformId\"")
         }
         val apiPath = ("/project/platforms/{platformId}"
-            .replace("{platformId}", platformId)
+            .replace("{platformId}", Client.encodePath(platformId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3517,6 +3517,38 @@ class Project(client: Client) : Service(client) {
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = "/project/policies/deny-free-email"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Project::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Configures if guests, connections without a signed-in user, may subscribe to realtime channels. When enabled, a guest can still connect and sign in over the connection, but cannot subscribe until it does.
+     *
+     * @param enabled Set whether or not to stop guests from subscribing to realtime channels.
+     * @return [io.appwrite.models.Project]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyRealtimeGuestsPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project {
+        val apiPath = "/project/policies/deny-realtime-guests"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
         )
@@ -4054,7 +4086,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, passkey.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, deny-realtime-guests, passkey.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -4062,7 +4094,7 @@ class Project(client: Client) : Service(client) {
         policyId: io.appwrite.enums.ProjectPolicyId,
     ): Any {
         val apiPath = ("/project/policies/{policyId}"
-            .replace("{policyId}", policyId.value)
+            .replace("{policyId}", Client.encodePath(policyId.value))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -4090,6 +4122,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "deny-disposable-email" -> io.appwrite.models.PolicyDenyDisposableEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-free-email" -> io.appwrite.models.PolicyDenyFreeEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-corporate-email" -> io.appwrite.models.PolicyDenyCorporateEmail.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "deny-realtime-guests" -> io.appwrite.models.PolicyDenyRealtimeGuests.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "passkey" -> io.appwrite.models.PolicyPasskey.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
@@ -4117,7 +4150,7 @@ class Project(client: Client) : Service(client) {
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = ("/project/protocols/{protocolId}"
-            .replace("{protocolId}", protocolId.value)
+            .replace("{protocolId}", Client.encodePath(protocolId.value))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -4153,7 +4186,7 @@ class Project(client: Client) : Service(client) {
         enabled: Boolean,
     ): io.appwrite.models.Project {
         val apiPath = ("/project/services/{serviceId}"
-            .replace("{serviceId}", serviceId.value)
+            .replace("{serviceId}", Client.encodePath(serviceId.value))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -4173,6 +4206,29 @@ class Project(client: Client) : Service(client) {
             apiParams,
             responseType = io.appwrite.models.Project::class.java,
             converter,
+        )
+    }
+
+    /**
+     * Delete all sessions in the project. Any session created before this request will be invalidated immediately: users will be signed out of every active client (web, mobile, server SDKs, JWTs), and will be able to sign in again afterwards. API keys are not affected by this action.
+     *
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteSessions(): Any {
+        val apiPath = "/project/sessions"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
         )
     }
 
@@ -4367,7 +4423,7 @@ class Project(client: Client) : Service(client) {
         locale: io.appwrite.enums.ProjectEmailTemplateLocale? = null,
     ): io.appwrite.models.EmailTemplate {
         val apiPath = ("/project/templates/email/{templateId}"
-            .replace("{templateId}", templateId.value)
+            .replace("{templateId}", Client.encodePath(templateId.value))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "locale" to locale,
@@ -4483,7 +4539,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/project/variables/{variableId}"
-            .replace("{variableId}", variableId)
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -4526,7 +4582,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/project/variables/{variableId}"
-            .replace("{variableId}", variableId)
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -4566,7 +4622,7 @@ class Project(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/project/variables/{variableId}"
-            .replace("{variableId}", variableId)
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

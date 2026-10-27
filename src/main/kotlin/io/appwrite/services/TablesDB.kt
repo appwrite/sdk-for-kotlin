@@ -210,7 +210,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -249,7 +249,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "commit" to commit,
@@ -287,7 +287,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/tablesdb/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -321,7 +321,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/tablesdb/transactions/{transactionId}/operations"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "operations" to operations,
@@ -358,7 +358,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -405,7 +405,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -447,7 +447,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -481,7 +481,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/failovers"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetReplicaId" to targetReplicaId,
@@ -518,7 +518,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/migrations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -557,7 +557,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/migrations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "specification" to specification,
@@ -600,8 +600,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"migrationId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{migrationId}", migrationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{migrationId}", Client.encodePath(migrationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -640,8 +640,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"migrationId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{migrationId}", migrationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{migrationId}", Client.encodePath(migrationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -677,8 +677,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"migrationId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/migrations/{migrationId}/cutovers"
-            .replace("{databaseId}", databaseId)
-            .replace("{migrationId}", migrationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{migrationId}", Client.encodePath(migrationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -720,7 +720,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/operations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
@@ -758,7 +758,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/replicas"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -792,7 +792,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/status"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -833,7 +833,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -888,7 +888,7 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "tableId" to tableId,
@@ -937,8 +937,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -990,8 +990,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1038,8 +1038,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1080,8 +1080,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -1139,8 +1139,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/bigint"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1207,9 +1207,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/bigint/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1268,8 +1268,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/boolean"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1329,9 +1329,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/boolean/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1387,8 +1387,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/datetime"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1448,9 +1448,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/datetime/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1507,8 +1507,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/email"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1569,9 +1569,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/email/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1629,8 +1629,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/enum"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1694,9 +1694,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/enum/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "elements" to elements,
@@ -1758,8 +1758,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/float"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1826,9 +1826,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/float/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1891,8 +1891,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/integer"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1959,9 +1959,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/integer/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2020,8 +2020,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/ip"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2082,9 +2082,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/ip/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2138,8 +2138,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/line"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2198,9 +2198,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/line/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2259,8 +2259,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/longtext"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2322,9 +2322,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/longtext/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2383,8 +2383,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2446,9 +2446,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/mediumtext/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2502,8 +2502,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/point"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2562,9 +2562,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/point/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2618,8 +2618,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/polygon"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2678,9 +2678,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/polygon/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2741,8 +2741,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/relationship"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "relatedTableId" to relatedTableId,
@@ -2803,9 +2803,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/relationship/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
@@ -2869,8 +2869,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/string"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2939,9 +2939,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/string/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3001,8 +3001,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/text"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3064,9 +3064,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/text/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3123,8 +3123,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/url"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3185,9 +3185,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/url/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3248,8 +3248,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/varchar"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3314,9 +3314,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/varchar/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3367,9 +3367,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3435,9 +3435,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/columns/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3478,8 +3478,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3535,8 +3535,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3588,9 +3588,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3634,9 +3634,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/indexes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3684,8 +3684,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3771,8 +3771,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "rowId" to rowId,
@@ -3853,8 +3853,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
@@ -3928,8 +3928,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "rows" to rows,
@@ -4005,8 +4005,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -4083,8 +4083,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -4162,8 +4162,8 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tableId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/query"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -4250,9 +4250,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"rowId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -4334,9 +4334,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"rowId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -4423,9 +4423,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"rowId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -4507,9 +4507,9 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"rowId\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "transactionId" to transactionId,
@@ -4565,10 +4565,10 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"column\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/decrement"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
-            .replace("{column}", column)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
+            .replace("{column}", Client.encodePath(column))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
@@ -4663,10 +4663,10 @@ class TablesDB(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"column\"")
         }
         val apiPath = ("/tablesdb/{databaseId}/tables/{tableId}/rows/{rowId}/{column}/increment"
-            .replace("{databaseId}", databaseId)
-            .replace("{tableId}", tableId)
-            .replace("{rowId}", rowId)
-            .replace("{column}", column)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{tableId}", Client.encodePath(tableId))
+            .replace("{rowId}", Client.encodePath(rowId))
+            .replace("{column}", Client.encodePath(column))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,

@@ -37,6 +37,8 @@ enum class ProjectPolicyId(val value: String) {
     DENY_FREE_EMAIL("deny-free-email"),
     @SerializedName("deny-corporate-email")
     DENY_CORPORATE_EMAIL("deny-corporate-email"),
+    @SerializedName("deny-realtime-guests")
+    DENY_REALTIME_GUESTS("deny-realtime-guests"),
     @SerializedName("passkey")
     PASSKEY("passkey");
 

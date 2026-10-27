@@ -177,6 +177,24 @@ data class BillingPlan(
     val executionsRetentionCount: Long,
 
     /**
+     * Days non-active deployments are kept when a function or site sets no retention.
+     */
+    @SerializedName("deploymentRetention")
+    var deploymentRetention: Long?,
+
+    /**
+     * Maximum deployment retention in days a function or site can set. 0 means unlimited.
+     */
+    @SerializedName("deploymentRetentionMax")
+    var deploymentRetentionMax: Long?,
+
+    /**
+     * Non-active deployments kept per function or site. 0 means unlimited.
+     */
+    @SerializedName("deploymentsRetentionCount")
+    var deploymentsRetentionCount: Long?,
+
+    /**
      * GB hours for functions
      */
     @SerializedName("GBHours")
@@ -494,6 +512,9 @@ data class BillingPlan(
         "sites" to sites as Any,
         "executions" to executions as Any,
         "executionsRetentionCount" to executionsRetentionCount as Any,
+        "deploymentRetention" to deploymentRetention as Any?,
+        "deploymentRetentionMax" to deploymentRetentionMax as Any?,
+        "deploymentsRetentionCount" to deploymentsRetentionCount as Any?,
         "GBHours" to GBHours as Any,
         "realtime" to realtime as Any,
         "realtimeMessages" to realtimeMessages as Any,
@@ -577,6 +598,9 @@ data class BillingPlan(
             sites = ((if (map.containsKey("sites")) map["sites"] else 0) as Number).toLong(),
             executions = ((if (map.containsKey("executions")) map["executions"] else 0) as Number).toLong(),
             executionsRetentionCount = ((if (map.containsKey("executionsRetentionCount")) map["executionsRetentionCount"] else 1000) as Number).toLong(),
+            deploymentRetention = (map["deploymentRetention"] as? Number)?.toLong(),
+            deploymentRetentionMax = (map["deploymentRetentionMax"] as? Number)?.toLong(),
+            deploymentsRetentionCount = (map["deploymentsRetentionCount"] as? Number)?.toLong(),
             GBHours = ((if (map.containsKey("GBHours")) map["GBHours"] else 0) as Number).toLong(),
             realtime = ((if (map.containsKey("realtime")) map["realtime"] else 0) as Number).toLong(),
             realtimeMessages = ((if (map.containsKey("realtimeMessages")) map["realtimeMessages"] else 0) as Number).toLong(),

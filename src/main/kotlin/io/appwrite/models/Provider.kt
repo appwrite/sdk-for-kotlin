@@ -50,7 +50,7 @@ data class Provider(
     val type: String,
 
     /**
-     * Provider credentials.
+     * Provider credentials. Secret values are write-only and never returned.
      */
     @SerializedName("credentials")
     val credentials: Map<String, Any?>,

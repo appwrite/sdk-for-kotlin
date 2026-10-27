@@ -159,7 +159,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -234,7 +234,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -290,7 +290,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -326,7 +326,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -366,7 +366,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -408,7 +408,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/policies"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -458,7 +458,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/policies"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "policyId" to policyId,
@@ -505,8 +505,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -554,8 +554,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -600,8 +600,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -647,7 +647,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/storage"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "provider" to provider,
@@ -695,8 +695,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"backupId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/{backupId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{backupId}", backupId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{backupId}", Client.encodePath(backupId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -735,8 +735,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"backupId\"")
         }
         val apiPath = ("/mongo/{databaseId}/backups/{backupId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{backupId}", backupId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{backupId}", Client.encodePath(backupId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -767,7 +767,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/branches"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -806,7 +806,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/branches"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "branchId" to branchId,
@@ -849,8 +849,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"branchId\"")
         }
         val apiPath = ("/mongo/{databaseId}/branches/{branchId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{branchId}", branchId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{branchId}", Client.encodePath(branchId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -885,7 +885,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/credentials"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -923,7 +923,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/failovers"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetReplicaId" to targetReplicaId,
@@ -964,7 +964,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/maintenance"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "day" to day,
@@ -1007,7 +1007,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/migrations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetType" to targetType,
@@ -1052,7 +1052,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/operations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
@@ -1090,7 +1090,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/pitr"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1124,7 +1124,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/replicas"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1167,7 +1167,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/restorations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
@@ -1223,7 +1223,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/restorations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -1271,8 +1271,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"restorationId\"")
         }
         val apiPath = ("/mongo/{databaseId}/restorations/{restorationId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{restorationId}", restorationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{restorationId}", Client.encodePath(restorationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1314,8 +1314,8 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"restorationId\"")
         }
         val apiPath = ("/mongo/{databaseId}/restorations/{restorationId}/promotions"
-            .replace("{databaseId}", databaseId)
-            .replace("{restorationId}", restorationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{restorationId}", Client.encodePath(restorationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1350,7 +1350,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/status"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1386,7 +1386,7 @@ class Mongo(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/mongo/{databaseId}/upgrades"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetVersion" to targetVersion,

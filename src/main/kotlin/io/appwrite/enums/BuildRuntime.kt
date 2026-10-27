@@ -61,6 +61,8 @@ enum class BuildRuntime(val value: String) {
     PYTHON_3_13("python-3.13"),
     @SerializedName("python-3.14")
     PYTHON_3_14("python-3.14"),
+    @SerializedName("python-3.15")
+    PYTHON_3_15("python-3.15"),
     @SerializedName("python-ml-3.11")
     PYTHON_ML_3_11("python-ml-3.11"),
     @SerializedName("python-ml-3.12")
@@ -77,6 +79,8 @@ enum class BuildRuntime(val value: String) {
     DENO_2_5("deno-2.5"),
     @SerializedName("deno-2.6")
     DENO_2_6("deno-2.6"),
+    @SerializedName("deno-2.9")
+    DENO_2_9("deno-2.9"),
     @SerializedName("dart-2.15")
     DART_2_15("dart-2.15"),
     @SerializedName("dart-2.16")
@@ -171,8 +175,12 @@ enum class BuildRuntime(val value: String) {
     GO_1_25("go-1.25"),
     @SerializedName("go-1.26")
     GO_1_26("go-1.26"),
+    @SerializedName("go-1.27")
+    GO_1_27("go-1.27"),
     @SerializedName("rust-1.83")
     RUST_1_83("rust-1.83"),
+    @SerializedName("rust-1.99")
+    RUST_1_99("rust-1.99"),
     @SerializedName("static-1")
     STATIC_1("static-1"),
     @SerializedName("flutter-3.24")

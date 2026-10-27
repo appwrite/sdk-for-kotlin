@@ -36,8 +36,8 @@ class Tokens(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"fileId\"")
         }
         val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
-            .replace("{bucketId}", bucketId)
-            .replace("{fileId}", fileId)
+            .replace("{bucketId}", Client.encodePath(bucketId))
+            .replace("{fileId}", Client.encodePath(fileId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -82,8 +82,8 @@ class Tokens(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"fileId\"")
         }
         val apiPath = ("/tokens/buckets/{bucketId}/files/{fileId}"
-            .replace("{bucketId}", bucketId)
-            .replace("{fileId}", fileId)
+            .replace("{bucketId}", Client.encodePath(bucketId))
+            .replace("{fileId}", Client.encodePath(fileId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
@@ -120,7 +120,7 @@ class Tokens(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tokenId\"")
         }
         val apiPath = ("/tokens/{tokenId}"
-            .replace("{tokenId}", tokenId)
+            .replace("{tokenId}", Client.encodePath(tokenId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -157,7 +157,7 @@ class Tokens(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tokenId\"")
         }
         val apiPath = ("/tokens/{tokenId}"
-            .replace("{tokenId}", tokenId)
+            .replace("{tokenId}", Client.encodePath(tokenId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "expire" to expire,
@@ -194,7 +194,7 @@ class Tokens(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"tokenId\"")
         }
         val apiPath = ("/tokens/{tokenId}"
-            .replace("{tokenId}", tokenId)
+            .replace("{tokenId}", Client.encodePath(tokenId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
