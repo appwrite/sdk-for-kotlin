@@ -16,7 +16,7 @@ try {
         "<POLICY_ID>", // policyId
         "<NAME>", // name (optional)
         1L, // retention (optional)
-        "", // schedule (optional)
+        null, // schedule (optional)
         false, // enabled (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {

@@ -66,7 +66,7 @@ class Presences(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"presenceId\"")
         }
         val apiPath = ("/presences/{presenceId}"
-            .replace("{presenceId}", presenceId)
+            .replace("{presenceId}", Client.encodePath(presenceId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -112,7 +112,7 @@ class Presences(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"presenceId\"")
         }
         val apiPath = ("/presences/{presenceId}"
-            .replace("{presenceId}", presenceId)
+            .replace("{presenceId}", Client.encodePath(presenceId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -167,7 +167,7 @@ class Presences(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"presenceId\"")
         }
         val apiPath = ("/presences/{presenceId}"
-            .replace("{presenceId}", presenceId)
+            .replace("{presenceId}", Client.encodePath(presenceId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -210,7 +210,7 @@ class Presences(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"presenceId\"")
         }
         val apiPath = ("/presences/{presenceId}"
-            .replace("{presenceId}", presenceId)
+            .replace("{presenceId}", Client.encodePath(presenceId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

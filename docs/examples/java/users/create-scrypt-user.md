@@ -18,7 +18,7 @@ try {
         "password", // password
         "<PASSWORD_SALT>", // passwordSalt
         8L, // passwordCpu
-        65536L, // passwordMemory
+        14L, // passwordMemory
         1L, // passwordParallel
         64L, // passwordLength
         "<NAME>", // name (optional)

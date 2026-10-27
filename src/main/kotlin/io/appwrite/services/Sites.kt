@@ -77,7 +77,7 @@ class Sites(client: Client) : Service(client) {
      * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
-     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 keeps all deployments unless the server applies a default retention.
      * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
      * @param description Optional description for the site.
      * @return [io.appwrite.models.Site]
@@ -238,7 +238,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -283,7 +283,7 @@ class Sites(client: Client) : Service(client) {
      * @param providerPaths List of file path patterns to trigger automatic deployments. Supports wildcards. Leave empty to deploy on all file changes.
      * @param buildSpecification Build specification for the site deployments.
      * @param runtimeSpecification Runtime specification for the SSR executions.
-     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 means all deployments will be kept.
+     * @param deploymentRetention Days to keep non-active deployments before deletion. Value 0 keeps all deployments unless the server applies a default retention.
      * @param scopes List of scopes allowed for API key auto-generated for every site build and SSR execution. Maximum of 200 scopes are allowed.
      * @param description Optional description for the site.
      * @return [io.appwrite.models.Site]
@@ -321,7 +321,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -381,7 +381,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -414,7 +414,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployment"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
@@ -458,7 +458,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -508,7 +508,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "installCommand" to installCommand,
@@ -556,7 +556,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/duplicate"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "deploymentId" to deploymentId,
@@ -608,7 +608,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/template"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "repository" to repository,
@@ -659,7 +659,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/vcs"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -703,8 +703,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"deploymentId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
-            .replace("{siteId}", siteId)
-            .replace("{deploymentId}", deploymentId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{deploymentId}", Client.encodePath(deploymentId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -743,8 +743,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"deploymentId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}"
-            .replace("{siteId}", siteId)
-            .replace("{deploymentId}", deploymentId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{deploymentId}", Client.encodePath(deploymentId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -785,8 +785,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"deploymentId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/download"
-            .replace("{siteId}", siteId)
-            .replace("{deploymentId}", deploymentId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{deploymentId}", Client.encodePath(deploymentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -824,8 +824,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"deploymentId\"")
         }
         val apiPath = ("/sites/{siteId}/deployments/{deploymentId}/status"
-            .replace("{siteId}", siteId)
-            .replace("{deploymentId}", deploymentId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{deploymentId}", Client.encodePath(deploymentId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -865,7 +865,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/logs"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -907,8 +907,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"logId\"")
         }
         val apiPath = ("/sites/{siteId}/logs/{logId}"
-            .replace("{siteId}", siteId)
-            .replace("{logId}", logId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{logId}", Client.encodePath(logId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -947,8 +947,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"logId\"")
         }
         val apiPath = ("/sites/{siteId}/logs/{logId}"
-            .replace("{siteId}", siteId)
-            .replace("{logId}", logId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{logId}", Client.encodePath(logId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -984,7 +984,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/variables"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -1032,7 +1032,7 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"siteId\"")
         }
         val apiPath = ("/sites/{siteId}/variables"
-            .replace("{siteId}", siteId)
+            .replace("{siteId}", Client.encodePath(siteId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "variableId" to variableId,
@@ -1078,8 +1078,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
-            .replace("{siteId}", siteId)
-            .replace("{variableId}", variableId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1127,8 +1127,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
-            .replace("{siteId}", siteId)
-            .replace("{variableId}", variableId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1173,8 +1173,8 @@ class Sites(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"variableId\"")
         }
         val apiPath = ("/sites/{siteId}/variables/{variableId}"
-            .replace("{siteId}", siteId)
-            .replace("{variableId}", variableId)
+            .replace("{siteId}", Client.encodePath(siteId))
+            .replace("{variableId}", Client.encodePath(variableId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

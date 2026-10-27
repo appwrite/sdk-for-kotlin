@@ -63,7 +63,7 @@ class Advisor(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"reportId\"")
         }
         val apiPath = ("/reports/{reportId}"
-            .replace("{reportId}", reportId)
+            .replace("{reportId}", Client.encodePath(reportId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -98,7 +98,7 @@ class Advisor(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"reportId\"")
         }
         val apiPath = ("/reports/{reportId}"
-            .replace("{reportId}", reportId)
+            .replace("{reportId}", Client.encodePath(reportId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -135,7 +135,7 @@ class Advisor(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"reportId\"")
         }
         val apiPath = ("/reports/{reportId}/insights"
-            .replace("{reportId}", reportId)
+            .replace("{reportId}", Client.encodePath(reportId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -178,8 +178,8 @@ class Advisor(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"insightId\"")
         }
         val apiPath = ("/reports/{reportId}/insights/{insightId}"
-            .replace("{reportId}", reportId)
-            .replace("{insightId}", insightId)
+            .replace("{reportId}", Client.encodePath(reportId))
+            .replace("{insightId}", Client.encodePath(insightId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

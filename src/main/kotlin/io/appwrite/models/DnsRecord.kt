@@ -32,7 +32,7 @@ data class DnsRecord(
     val type: String,
 
     /**
-     * Record name or subdomain.
+     * Record name relative to the domain, or `@` for the domain itself.
      */
     @SerializedName("name")
     val name: String,

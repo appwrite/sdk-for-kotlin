@@ -15,7 +15,7 @@ try {
     users.createArgon2User(
         "<USER_ID>", // userId
         "email@example.com", // email
-        "password", // password
+        "$argon2id$v=19$m=65536,t=4,p=1$NC8xaW1CVXlIZXFSQi9FRg$0bd4pLo1ytyqvCwl5NSijpm5OIe8J6CjZ1vFemKAg+o", // password
         "<NAME>", // name (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {

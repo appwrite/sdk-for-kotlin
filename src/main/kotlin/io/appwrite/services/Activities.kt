@@ -62,7 +62,7 @@ class Activities(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"eventId\"")
         }
         val apiPath = ("/activities/events/{eventId}"
-            .replace("{eventId}", eventId)
+            .replace("{eventId}", Client.encodePath(eventId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

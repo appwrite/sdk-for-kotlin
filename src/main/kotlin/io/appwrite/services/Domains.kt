@@ -179,7 +179,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -214,7 +214,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -249,7 +249,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/nameservers"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "nameservers" to nameservers,
@@ -288,7 +288,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/nameservers/verification"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -323,7 +323,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/google-workspace"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -358,7 +358,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/google-workspace"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -393,7 +393,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/icloud"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -428,7 +428,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/icloud"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -463,7 +463,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/mailgun"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -498,7 +498,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/mailgun"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -533,7 +533,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/outlook"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -568,7 +568,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/outlook"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -603,7 +603,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/proton-mail"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -638,7 +638,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/proton-mail"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -673,7 +673,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/zoho"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -708,7 +708,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/presets/zoho"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -749,7 +749,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -777,7 +777,7 @@ class Domains(client: Client) : Service(client) {
      * to an IPv4 address. The record value should be a valid IPv4 address.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value IPv4 address for this A record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment explaining what this record is for.
@@ -796,7 +796,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/a"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -829,7 +829,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value IPv4 address for this A record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment explaining what this record is for.
@@ -852,8 +852,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/a/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -884,7 +884,7 @@ class Domains(client: Client) : Service(client) {
      * to your domain. The record will be used to point a hostname to an IPv6 address.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value IPv6 address for this AAAA record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment explaining what this record is for.
@@ -903,7 +903,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/aaaa"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -936,7 +936,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value IPv6 address for this AAAA record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -959,8 +959,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/aaaa/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -992,7 +992,7 @@ class Domains(client: Client) : Service(client) {
      * map your domain to a target domain that may change its IP address.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target domain for this ALIAS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1011,7 +1011,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/alias"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1046,7 +1046,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target domain for this ALIAS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1069,8 +1069,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/alias/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1101,7 +1101,7 @@ class Domains(client: Client) : Service(client) {
      * Certificate Authorities (CAs) are allowed to issue SSL/TLS certificates for your domain.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value CAA value (e.g. issuer domain).
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1120,7 +1120,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/caa"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1153,7 +1153,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value CAA value (e.g. issuer domain).
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1176,8 +1176,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/caa/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1211,7 +1211,7 @@ class Domains(client: Client) : Service(client) {
      * to 'example.wordpress.com'.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Canonical target for this CNAME record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1230,7 +1230,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/cname"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1261,7 +1261,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Canonical target for this CNAME record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1284,8 +1284,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/cname/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1316,7 +1316,7 @@ class Domains(client: Client) : Service(client) {
      * settings for your domain, enabling secure communication over SSL/TLS.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target for the HTTPS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1335,7 +1335,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/https"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1368,7 +1368,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target for the HTTPS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1391,8 +1391,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/https/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1425,7 +1425,7 @@ class Domains(client: Client) : Service(client) {
      * higher priority.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Mail server domain for this MX record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param priority MX priority. Lower values are tried first.
@@ -1446,7 +1446,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/mx"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1478,7 +1478,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Mail server domain for this MX record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param priority MX priority. Lower values are tried first.
@@ -1503,8 +1503,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/mx/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1536,7 +1536,7 @@ class Domains(client: Client) : Service(client) {
      * to resolve the domain name to IP addresses. Each domain can have multiple NS records.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Nameserver target for this NS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1555,7 +1555,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/ns"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1589,7 +1589,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain).
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Nameserver target for this NS record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1612,8 +1612,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/ns/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1645,7 +1645,7 @@ class Domains(client: Client) : Service(client) {
      * handles a specific service like SIP or XMPP for the domain.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (service name).
+     * @param name Record name relative to the domain: the service and protocol, such as `_sip._tcp`. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target hostname for this SRV record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param priority Record priority. Lower values are tried first.
@@ -1670,7 +1670,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/srv"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1717,7 +1717,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (service name).
+     * @param name Record name relative to the domain: the service and protocol, such as `_sip._tcp`. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Target hostname for this SRV record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param priority Record priority. Lower values are tried first.
@@ -1746,8 +1746,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/srv/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1782,7 +1782,7 @@ class Domains(client: Client) : Service(client) {
      * verification records, SPF records, or DKIM records.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name (subdomain) for the TXT record.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param value TXT record value.
      * @param comment A comment for this record.
@@ -1801,7 +1801,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/records/txt"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1835,7 +1835,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name (subdomain) for the TXT record.
+     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
      * @param value TXT record value.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1858,8 +1858,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/txt/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1908,8 +1908,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1949,8 +1949,8 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"recordId\"")
         }
         val apiPath = ("/domains/{domainId}/records/{recordId}"
-            .replace("{domainId}", domainId)
-            .replace("{recordId}", recordId)
+            .replace("{domainId}", Client.encodePath(domainId))
+            .replace("{recordId}", Client.encodePath(recordId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1987,7 +1987,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/team"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "teamId" to teamId,
@@ -2024,7 +2024,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/transfers/status"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -2059,7 +2059,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/zone"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -2077,7 +2077,7 @@ class Domains(client: Client) : Service(client) {
 
     /**
      * Update the DNS zone for the given domain using the provided zone file content.
-     * All parsed records are imported and then the main domain document is returned.
+     * All parsed records the domain does not already have are imported and then the main domain document is returned.
      *
      * @param domainId Domain unique ID.
      * @param content DNS zone file content as a string.
@@ -2092,7 +2092,7 @@ class Domains(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"domainId\"")
         }
         val apiPath = ("/domains/{domainId}/zone"
-            .replace("{domainId}", domainId)
+            .replace("{domainId}", Client.encodePath(domainId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "content" to content,

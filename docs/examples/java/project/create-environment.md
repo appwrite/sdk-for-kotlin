@@ -3,6 +3,8 @@ import io.appwrite.Client;
 import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Project;
+import io.appwrite.enums.EnvironmentResource;
+import java.util.List;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -15,6 +17,7 @@ try {
     project.createEnvironment(
         "<ENVIRONMENT_ID>", // environmentId
         "<NAME>", // name
+        List.of(EnvironmentResource.DATABASE, EnvironmentResource.TABLE, EnvironmentResource.COLUMN, EnvironmentResource.INDEX, EnvironmentResource.BUCKET, EnvironmentResource.TEAM, EnvironmentResource.FUNCTION, EnvironmentResource.ENVIRONMENT_VARIABLE), // resources (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {
                 error.printStackTrace();

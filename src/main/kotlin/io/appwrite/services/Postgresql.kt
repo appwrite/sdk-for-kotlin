@@ -159,7 +159,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -234,7 +234,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -290,7 +290,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -326,7 +326,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -366,7 +366,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -408,7 +408,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/policies"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -458,7 +458,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/policies"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "policyId" to policyId,
@@ -505,8 +505,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -554,8 +554,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -600,8 +600,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"policyId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/policies/{policyId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{policyId}", policyId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{policyId}", Client.encodePath(policyId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -647,7 +647,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/storage"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "provider" to provider,
@@ -695,8 +695,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"backupId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/{backupId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{backupId}", backupId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{backupId}", Client.encodePath(backupId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -735,8 +735,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"backupId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/backups/{backupId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{backupId}", backupId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{backupId}", Client.encodePath(backupId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -767,7 +767,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/branches"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -806,7 +806,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/branches"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "branchId" to branchId,
@@ -849,8 +849,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"branchId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/branches/{branchId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{branchId}", branchId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{branchId}", Client.encodePath(branchId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -885,7 +885,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/credentials"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -927,7 +927,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/executions"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "sql" to sql,
@@ -966,7 +966,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/extensions"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1002,7 +1002,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/extensions"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -1044,8 +1044,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"extensionName\"")
         }
         val apiPath = ("/postgresql/{databaseId}/extensions/{extensionName}"
-            .replace("{databaseId}", databaseId)
-            .replace("{extensionName}", extensionName)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{extensionName}", Client.encodePath(extensionName))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1083,7 +1083,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/failovers"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetReplicaId" to targetReplicaId,
@@ -1124,7 +1124,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/maintenance"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "day" to day,
@@ -1167,7 +1167,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/migrations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetType" to targetType,
@@ -1212,7 +1212,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/operations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
@@ -1250,7 +1250,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/pitr"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1284,7 +1284,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/pooler"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1335,7 +1335,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/pooler"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "mode" to mode,
@@ -1379,7 +1379,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/replicas"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1422,7 +1422,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/restorations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "status" to status,
@@ -1478,7 +1478,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/restorations"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "type" to type,
@@ -1526,8 +1526,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"restorationId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/restorations/{restorationId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{restorationId}", restorationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{restorationId}", Client.encodePath(restorationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1569,8 +1569,8 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"restorationId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/restorations/{restorationId}/promotions"
-            .replace("{databaseId}", databaseId)
-            .replace("{restorationId}", restorationId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{restorationId}", Client.encodePath(restorationId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1605,7 +1605,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/status"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -1641,7 +1641,7 @@ class Postgresql(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/postgresql/{databaseId}/upgrades"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "targetVersion" to targetVersion,

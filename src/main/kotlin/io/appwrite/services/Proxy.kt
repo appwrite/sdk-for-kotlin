@@ -305,7 +305,7 @@ class Proxy(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
         }
         val apiPath = ("/proxy/rules/{ruleId}"
-            .replace("{ruleId}", ruleId)
+            .replace("{ruleId}", Client.encodePath(ruleId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -339,7 +339,7 @@ class Proxy(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
         }
         val apiPath = ("/proxy/rules/{ruleId}"
-            .replace("{ruleId}", ruleId)
+            .replace("{ruleId}", Client.encodePath(ruleId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -370,7 +370,7 @@ class Proxy(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
         }
         val apiPath = ("/proxy/rules/{ruleId}/status"
-            .replace("{ruleId}", ruleId)
+            .replace("{ruleId}", Client.encodePath(ruleId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

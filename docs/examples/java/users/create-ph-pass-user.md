@@ -15,7 +15,7 @@ try {
     users.createPHPassUser(
         "<USER_ID>", // userId
         "email@example.com", // email
-        "password", // password
+        "$P$BrOEFP1YR5W1yHpvvGuoeVUDPmw9ra/", // password
         "<NAME>", // name (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {
