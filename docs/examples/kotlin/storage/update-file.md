@@ -15,7 +15,7 @@ val storage = Storage(client)
 val response = storage.updateFile(
     bucketId = "<BUCKET_ID>",
     fileId = "<FILE_ID>",
-    name = "<NAME>", // optional
+    name = null, // optional
     permissions = listOf(Permission.read(Role.any())) // optional
 )
 ```

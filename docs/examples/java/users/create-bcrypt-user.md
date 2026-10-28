@@ -15,7 +15,7 @@ try {
     users.createBcryptUser(
         "<USER_ID>", // userId
         "email@example.com", // email
-        "password", // password
+        "$2y$10$vBiMe4NOvlbYL1iJUNdqkO.QJy17fvslZQ5oiqKq1G4uwyRWvdrXC", // password
         "<NAME>", // name (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {

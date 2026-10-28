@@ -20,7 +20,7 @@ try {
         "<SECRET_KEY>", // secretKey
         "<REGION>", // region (optional)
         "<PREFIX>", // prefix (optional)
-        "<ENDPOINT>", // endpoint (optional)
+        "https://example.com", // endpoint (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {
                 error.printStackTrace();

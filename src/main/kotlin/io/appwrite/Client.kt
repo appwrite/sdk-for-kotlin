@@ -26,6 +26,7 @@ import java.io.File
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.lang.IllegalArgumentException
+import java.net.URLEncoder
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.concurrent.atomic.AtomicInteger
@@ -47,6 +48,25 @@ class Client @JvmOverloads constructor(
     companion object {
         const val CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
         const val MAX_CONCURRENT_UPLOADS = 8
+
+        /**
+         * Encodes [value] as one path segment. Everything but letters, digits
+         * and -_.!~*'() is escaped, as encodeURIComponent does, so a value
+         * fills exactly the segment it replaces.
+         */
+        internal fun encodePath(value: String): String {
+            if (value == "." || value == "..") {
+                throw AppwriteException("Path parameter cannot be \".\" or \"..\"")
+            }
+            return URLEncoder
+                .encode(value, "UTF-8")
+                .replace("+", "%20")
+                .replace("%21", "!")
+                .replace("%27", "'")
+                .replace("%28", "(")
+                .replace("%29", ")")
+                .replace("%7E", "~")
+        }
     }
 
     override val coroutineContext: CoroutineContext
@@ -65,12 +85,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/24.0.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/24.1.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "24.0.0",
-            "x-appwrite-response-format" to "2.5.0",
+            "x-sdk-version" to "24.1.0",
+            "x-appwrite-response-format" to "2.6.2",
         )
 
         config = mutableMapOf()
@@ -265,12 +285,15 @@ class Client @JvmOverloads constructor(
     fun setSelfSigned(status: Boolean): Client {
         selfSigned = status
 
+        // Calls follow no redirects: one would carry the API key to wherever it points.
         val builder = OkHttpClient()
             .newBuilder()
+            .followRedirects(false)
+            .followSslRedirects(false)
 
         if (!selfSigned) {
             http = builder.build()
-            httpForRedirect = builder.followRedirects(false).build()
+            httpForRedirect = builder.build()
             return this
         }
 
@@ -575,17 +598,23 @@ class Client @JvmOverloads constructor(
         val providedUploadId = idParamName?.let { params[it]?.toString() }
         if (!providedUploadId.isNullOrEmpty()) {
             // Make a request to check if a file already exists
-            val current = call(
-                method = "GET",
-                path = "$path/$providedUploadId",
-                headers = headers,
-                params = emptyMap(),
-                responseType = Map::class.java,
-            )
-            val chunksUploaded = current["chunksUploaded"] as Long
-            offset = chunksUploaded * CHUNK_SIZE
-            uploadId = providedUploadId
-            result = current
+            try {
+                val current = call(
+                    method = "GET",
+                    path = "$path/${encodePath(providedUploadId)}",
+                    headers = headers,
+                    params = emptyMap(),
+                    responseType = Map::class.java,
+                )
+                val chunksUploaded = current["chunksUploaded"] as Long
+                offset = chunksUploaded * CHUNK_SIZE
+                uploadId = providedUploadId
+                result = current
+            } catch (exception: AppwriteException) {
+                if (exception.code != 404) {
+                    throw exception
+                }
+            }
         }
 
         fun readChunk(start: Long, end: Long): ByteArray {
@@ -789,6 +818,17 @@ class Client @JvmOverloads constructor(
 
             @Suppress("UNCHECKED_CAST")
             override fun onResponse(call: Call, response: Response) {
+                if (response.code in 300..399) {
+                    val body = response.body!!
+                        .charStream()
+                        .buffered()
+                        .use(BufferedReader::readText)
+                    val location = response.header("location").orEmpty()
+
+                    it.cancel(AppwriteException("Redirect to $location not followed", response.code, "", body))
+                    return
+                }
+
                 if (!response.isSuccessful) {
                     val body = response.body!!
                         .charStream()

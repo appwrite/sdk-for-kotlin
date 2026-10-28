@@ -195,7 +195,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/databases/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -238,7 +238,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/databases/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "commit" to commit,
@@ -280,7 +280,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/databases/transactions/{transactionId}"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -318,7 +318,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"transactionId\"")
         }
         val apiPath = ("/databases/transactions/{transactionId}/operations"
-            .replace("{transactionId}", transactionId)
+            .replace("{transactionId}", Client.encodePath(transactionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "operations" to operations,
@@ -359,7 +359,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/databases/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -404,7 +404,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/databases/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -447,7 +447,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/databases/{databaseId}"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -489,7 +489,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -548,7 +548,7 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"databaseId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections"
-            .replace("{databaseId}", databaseId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "collectionId" to collectionId,
@@ -601,8 +601,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -658,8 +658,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -710,8 +710,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -756,8 +756,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -819,8 +819,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/bigint"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -891,9 +891,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/bigint/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -956,8 +956,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/boolean"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1021,9 +1021,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/boolean/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1083,8 +1083,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/datetime"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1148,9 +1148,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/datetime/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1211,8 +1211,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/email"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1277,9 +1277,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/email/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1342,8 +1342,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/enum"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1411,9 +1411,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/enum/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "elements" to elements,
@@ -1479,8 +1479,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/float"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1551,9 +1551,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/float/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1620,8 +1620,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/integer"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1692,9 +1692,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/integer/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1757,8 +1757,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/ip"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1823,9 +1823,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/ip/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -1883,8 +1883,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/line"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -1947,9 +1947,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/line/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2012,8 +2012,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/longtext"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2079,9 +2079,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/longtext/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2144,8 +2144,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/mediumtext"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2211,9 +2211,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/mediumtext/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2271,8 +2271,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/point"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2335,9 +2335,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/point/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2395,8 +2395,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/polygon"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2459,9 +2459,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/polygon/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2526,8 +2526,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/relationship"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "relatedCollectionId" to relatedCollectionId,
@@ -2592,9 +2592,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/relationship/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "onDelete" to onDelete,
@@ -2658,8 +2658,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/string"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2728,9 +2728,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/string/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2794,8 +2794,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/text"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2861,9 +2861,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/text/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -2924,8 +2924,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/url"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -2990,9 +2990,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/url/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3057,8 +3057,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/varchar"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -3127,9 +3127,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/varchar/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "required" to required,
@@ -3184,9 +3184,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3256,9 +3256,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/attributes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -3310,8 +3310,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3405,8 +3405,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "documentId" to documentId,
@@ -3495,8 +3495,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "documents" to documents,
@@ -3578,8 +3578,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "documents" to documents,
@@ -3663,8 +3663,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -3749,8 +3749,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3836,8 +3836,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/query"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -3932,9 +3932,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"documentId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -4024,9 +4024,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"documentId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -4121,9 +4121,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"documentId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "data" to data,
@@ -4213,9 +4213,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"documentId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "transactionId" to transactionId,
@@ -4275,10 +4275,10 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"attribute\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/decrement"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
-            .replace("{attribute}", attribute)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
+            .replace("{attribute}", Client.encodePath(attribute))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
@@ -4381,10 +4381,10 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"attribute\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/documents/{documentId}/{attribute}/increment"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{documentId}", documentId)
-            .replace("{attribute}", attribute)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{documentId}", Client.encodePath(documentId))
+            .replace("{attribute}", Client.encodePath(attribute))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "value" to value,
@@ -4474,8 +4474,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/indexes"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -4535,8 +4535,8 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"collectionId\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/indexes"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "key" to key,
@@ -4592,9 +4592,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -4642,9 +4642,9 @@ class Databases(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"key\"")
         }
         val apiPath = ("/databases/{databaseId}/collections/{collectionId}/indexes/{key}"
-            .replace("{databaseId}", databaseId)
-            .replace("{collectionId}", collectionId)
-            .replace("{key}", key)
+            .replace("{databaseId}", Client.encodePath(databaseId))
+            .replace("{collectionId}", Client.encodePath(collectionId))
+            .replace("{key}", Client.encodePath(key))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(

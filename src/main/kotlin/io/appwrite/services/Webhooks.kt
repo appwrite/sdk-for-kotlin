@@ -121,7 +121,7 @@ class Webhooks(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"webhookId\"")
         }
         val apiPath = ("/webhooks/{webhookId}"
-            .replace("{webhookId}", webhookId)
+            .replace("{webhookId}", Client.encodePath(webhookId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -172,7 +172,7 @@ class Webhooks(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"webhookId\"")
         }
         val apiPath = ("/webhooks/{webhookId}"
-            .replace("{webhookId}", webhookId)
+            .replace("{webhookId}", Client.encodePath(webhookId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "name" to name,
@@ -216,7 +216,7 @@ class Webhooks(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"webhookId\"")
         }
         val apiPath = ("/webhooks/{webhookId}"
-            .replace("{webhookId}", webhookId)
+            .replace("{webhookId}", Client.encodePath(webhookId))
         )
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
@@ -250,7 +250,7 @@ class Webhooks(client: Client) : Service(client) {
             throw AppwriteException("Missing required parameter: \"webhookId\"")
         }
         val apiPath = ("/webhooks/{webhookId}/secret"
-            .replace("{webhookId}", webhookId)
+            .replace("{webhookId}", Client.encodePath(webhookId))
         )
         val apiParams = mutableMapOf<String, Any?>(
             "secret" to secret,
