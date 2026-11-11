@@ -56,6 +56,18 @@ data class Organization<T>(
     val budgetAlerts: List<Long>,
 
     /**
+     * Organization roles whose confirmed members are emailed when a budget alert fires.
+     */
+    @SerializedName("budgetNotify")
+    val budgetNotify: List<String>,
+
+    /**
+     * Budget alert percentages whose push notifications are critical.
+     */
+    @SerializedName("budgetCritical")
+    val budgetCritical: List<Long>,
+
+    /**
      * Organization's billing plan ID.
      */
     @SerializedName("billingPlan")
@@ -182,6 +194,12 @@ data class Organization<T>(
     var programDiscordChannelUrl: String?,
 
     /**
+     * When the education plan ends, for an organization on it.
+     */
+    @SerializedName("educationExpiresAt")
+    var educationExpiresAt: String?,
+
+    /**
      * Billing limits reached
      */
     @SerializedName("billingLimits")
@@ -227,6 +245,8 @@ data class Organization<T>(
         "prefs" to prefs.toMap() as Any,
         "billingBudget" to billingBudget as Any?,
         "budgetAlerts" to budgetAlerts as Any,
+        "budgetNotify" to budgetNotify as Any,
+        "budgetCritical" to budgetCritical as Any,
         "billingPlan" to billingPlan as Any,
         "billingPlanId" to billingPlanId as Any,
         "billingPlanDetails" to billingPlanDetails.toMap() as Any,
@@ -248,6 +268,7 @@ data class Organization<T>(
         "programManagerCalendar" to programManagerCalendar as Any?,
         "programDiscordChannelName" to programDiscordChannelName as Any?,
         "programDiscordChannelUrl" to programDiscordChannelUrl as Any?,
+        "educationExpiresAt" to educationExpiresAt as Any?,
         "billingLimits" to billingLimits?.toMap() as Any?,
         "billingPlanDowngrade" to billingPlanDowngrade as Any?,
         "billingTaxId" to billingTaxId as Any?,
@@ -266,6 +287,8 @@ data class Organization<T>(
             prefs: Preferences<Map<String, Any>>,
             billingBudget: Long?,
             budgetAlerts: List<Long>,
+            budgetNotify: List<String>,
+            budgetCritical: List<Long>,
             billingPlan: String,
             billingPlanId: String,
             billingPlanDetails: BillingPlan,
@@ -287,6 +310,7 @@ data class Organization<T>(
             programManagerCalendar: String?,
             programDiscordChannelName: String?,
             programDiscordChannelUrl: String?,
+            educationExpiresAt: String?,
             billingLimits: BillingLimits?,
             billingPlanDowngrade: String?,
             billingTaxId: String?,
@@ -302,6 +326,8 @@ data class Organization<T>(
             prefs,
             billingBudget,
             budgetAlerts,
+            budgetNotify,
+            budgetCritical,
             billingPlan,
             billingPlanId,
             billingPlanDetails,
@@ -323,6 +349,7 @@ data class Organization<T>(
             programManagerCalendar,
             programDiscordChannelName,
             programDiscordChannelUrl,
+            educationExpiresAt,
             billingLimits,
             billingPlanDowngrade,
             billingTaxId,
@@ -344,6 +371,8 @@ data class Organization<T>(
             prefs = Preferences.from(map = map["prefs"] as Map<String, Any>, nestedType),
             billingBudget = (map["billingBudget"] as? Number)?.toLong(),
             budgetAlerts = (if (map.containsKey("budgetAlerts")) map["budgetAlerts"] else listOf<Any?>(75)) as List<Long>,
+            budgetNotify = (if (map.containsKey("budgetNotify")) map["budgetNotify"] else listOf<Any?>("owner", "billing")) as List<String>,
+            budgetCritical = (if (map.containsKey("budgetCritical")) map["budgetCritical"] else listOf<Any?>()) as List<Long>,
             billingPlan = (if (map.containsKey("billingPlan")) map["billingPlan"] else "tier-0") as String,
             billingPlanId = (if (map.containsKey("billingPlanId")) map["billingPlanId"] else "tier-0") as String,
             billingPlanDetails = BillingPlan.from(map = map["billingPlanDetails"] as Map<String, Any>),
@@ -365,6 +394,7 @@ data class Organization<T>(
             programManagerCalendar = map["programManagerCalendar"] as? String,
             programDiscordChannelName = map["programDiscordChannelName"] as? String,
             programDiscordChannelUrl = map["programDiscordChannelUrl"] as? String,
+            educationExpiresAt = map["educationExpiresAt"] as? String,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             billingPlanDowngrade = map["billingPlanDowngrade"] as? String,
             billingTaxId = map["billingTaxId"] as? String,

@@ -21,6 +21,7 @@ val response = waf.updateChallengeRule(
     enabled = false, // optional
     conditions = listOf(), // optional
     difficulty = 1, // optional
-    ttl = 900 // optional
+    ttl = 900, // optional
+    schedule = mapOf( "a" to "b" ) // optional
 )
 ```

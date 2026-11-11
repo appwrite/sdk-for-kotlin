@@ -492,15 +492,16 @@ class Organization(client: Client) : Service(client) {
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, teamId, labels, search, accessedAt
      * @param search Search term to filter your list results. Max length: 256 chars.
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @return [io.appwrite.models.ProjectList]
+     * @return [io.appwrite.models.ProjectList<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun listProjects(
+    suspend fun <T> listProjects(
         queries: List<String>? = null,
         search: String? = null,
         total: Boolean? = null,
-    ): io.appwrite.models.ProjectList {
+        nestedType: Class<T>,
+    ): io.appwrite.models.ProjectList<T> {
         val apiPath = "/organization/projects"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -511,18 +512,39 @@ class Organization(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.ProjectList = {
-            io.appwrite.models.ProjectList.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.ProjectList<T> = {
+            io.appwrite.models.ProjectList.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.ProjectList::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Get a list of all projects. You can use the query params to filter your results.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, teamId, labels, search, accessedAt
+     * @param search Search term to filter your list results. Max length: 256 chars.
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.ProjectList<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listProjects(
+        queries: List<String>? = null,
+        search: String? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.ProjectList<Map<String, Any>> = listProjects(
+        queries,
+        search,
+        total,
+        nestedType = classOf(),
+    )
 
     /**
      * Create a new project.
@@ -530,15 +552,16 @@ class Organization(client: Client) : Service(client) {
      * @param projectId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, and hyphen. Can't start with a special char. Max length is 36 chars.
      * @param name Project name. Max length: 128 chars.
      * @param region Project Region.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun createProject(
+    suspend fun <T> createProject(
         projectId: String,
         name: String,
         region: io.appwrite.enums.Region? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/organization/projects"
         val apiParams = mutableMapOf<String, Any?>(
             "projectId" to projectId,
@@ -550,29 +573,51 @@ class Organization(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "POST",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Create a new project.
+     *
+     * @param projectId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, and hyphen. Can't start with a special char. Max length is 36 chars.
+     * @param name Project name. Max length: 128 chars.
+     * @param region Project Region.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createProject(
+        projectId: String,
+        name: String,
+        region: io.appwrite.enums.Region? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = createProject(
+        projectId,
+        name,
+        region,
+        nestedType = classOf(),
+    )
+
+    /**
      * Get a project.
      *
      * @param projectId Project unique ID.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun getProject(
+    suspend fun <T> getProject(
         projectId: String,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         if (projectId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"projectId\"")
         }
@@ -584,31 +629,46 @@ class Organization(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Get a project.
+     *
+     * @param projectId Project unique ID.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getProject(
+        projectId: String,
+    ): io.appwrite.models.Project<Map<String, Any>> = getProject(
+        projectId,
+        nestedType = classOf(),
+    )
 
     /**
      * Update a project by its unique ID.
      *
      * @param projectId Project unique ID.
      * @param name Project name. Max length: 128 chars.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateProject(
+    suspend fun <T> updateProject(
         projectId: String,
         name: String,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         if (projectId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"projectId\"")
         }
@@ -623,18 +683,35 @@ class Organization(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update a project by its unique ID.
+     *
+     * @param projectId Project unique ID.
+     * @param name Project name. Max length: 128 chars.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateProject(
+        projectId: String,
+        name: String,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateProject(
+        projectId,
+        name,
+        nestedType = classOf(),
+    )
 
     /**
      * Delete a project by its unique ID.

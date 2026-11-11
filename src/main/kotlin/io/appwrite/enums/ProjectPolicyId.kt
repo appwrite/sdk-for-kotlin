@@ -40,7 +40,9 @@ enum class ProjectPolicyId(val value: String) {
     @SerializedName("deny-realtime-guests")
     DENY_REALTIME_GUESTS("deny-realtime-guests"),
     @SerializedName("passkey")
-    PASSKEY("passkey");
+    PASSKEY("passkey"),
+    @SerializedName("account-devices")
+    ACCOUNT_DEVICES("account-devices");
 
     override fun toString() = value
 }

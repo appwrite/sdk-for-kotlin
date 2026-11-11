@@ -75,6 +75,8 @@ enum class AppwriteMigrationResource(val value: String) {
     PROJECT_PROTOCOLS("project-protocols"),
     @SerializedName("project-labels")
     PROJECT_LABELS("project-labels"),
+    @SerializedName("project-preferences")
+    PROJECT_PREFERENCES("project-preferences"),
     @SerializedName("project-services")
     PROJECT_SERVICES("project-services"),
     @SerializedName("project-email-template")

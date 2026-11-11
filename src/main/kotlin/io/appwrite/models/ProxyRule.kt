@@ -101,6 +101,18 @@ data class ProxyRule(
     val renewAt: String,
 
     /**
+     * Certificate expiry date in ISO 8601 format. Empty when unknown or not checked yet.
+     */
+    @SerializedName("expireAt")
+    val expireAt: String,
+
+    /**
+     * Certificate status, as last reported by the certificate provider. Possible values are "pending", "processing", "issued", "renewing", "expiring", "blocked", "failed", or "unknown". "expiring" means the certificate expires soon, or has already expired, and the provider has not renewed it yet, "blocked" means the provider waits on a DNS record from the domain owner, and "failed" means the provider stopped trying or the last issuance or renewal attempt failed. Empty until the certificate is next checked.
+     */
+    @SerializedName("certificateStatus")
+    val certificateStatus: String,
+
+    /**
      * Ingress protocol for the rule.
      */
     @SerializedName("protocol")
@@ -123,6 +135,8 @@ data class ProxyRule(
         "status" to status.value as Any,
         "logs" to logs as Any,
         "renewAt" to renewAt as Any,
+        "expireAt" to expireAt as Any,
+        "certificateStatus" to certificateStatus as Any,
         "protocol" to protocol.value as Any,
     )
 
@@ -146,6 +160,8 @@ data class ProxyRule(
             status = ProxyRuleStatus.values().find { it.value == (if (map.containsKey("status")) map["status"] else "unverified") as String }!!,
             logs = (if (map.containsKey("logs")) map["logs"] else "") as String,
             renewAt = map["renewAt"] as String,
+            expireAt = (if (map.containsKey("expireAt")) map["expireAt"] else "") as String,
+            certificateStatus = (if (map.containsKey("certificateStatus")) map["certificateStatus"] else "") as String,
             protocol = ProxyRuleProtocol.values().find { it.value == (if (map.containsKey("protocol")) map["protocol"] else "http") as String }!!,
         )
     }

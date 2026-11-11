@@ -179,6 +179,14 @@ enum class ProjectKeyScopes(val value: String) {
     WEBHOOKS_READ("webhooks.read"),
     @SerializedName("webhooks.write")
     WEBHOOKS_WRITE("webhooks.write"),
+    @SerializedName("monitors.read")
+    MONITORS_READ("monitors.read"),
+    @SerializedName("monitors.write")
+    MONITORS_WRITE("monitors.write"),
+    @SerializedName("alerts.read")
+    ALERTS_READ("alerts.read"),
+    @SerializedName("alerts.write")
+    ALERTS_WRITE("alerts.write"),
     @SerializedName("locale.read")
     LOCALE_READ("locale.read"),
     @SerializedName("avatars.read")
@@ -209,6 +217,10 @@ enum class ProjectKeyScopes(val value: String) {
     REPORTS_READ("reports.read"),
     @SerializedName("reports.write")
     REPORTS_WRITE("reports.write"),
+    @SerializedName("reviews.read")
+    REVIEWS_READ("reviews.read"),
+    @SerializedName("reviews.write")
+    REVIEWS_WRITE("reviews.write"),
     @SerializedName("presences.read")
     PRESENCES_READ("presences.read"),
     @SerializedName("presences.write")

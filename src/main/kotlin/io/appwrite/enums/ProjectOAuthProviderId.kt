@@ -87,6 +87,10 @@ enum class ProjectOAuthProviderId(val value: String) {
     TRADESHIFTBOX("tradeshiftBox"),
     @SerializedName("twitch")
     TWITCH("twitch"),
+    @SerializedName("vipps")
+    VIPPS("vipps"),
+    @SerializedName("vippsSandbox")
+    VIPPSSANDBOX("vippsSandbox"),
     @SerializedName("webflow")
     WEBFLOW("webflow"),
     @SerializedName("wordpress")
