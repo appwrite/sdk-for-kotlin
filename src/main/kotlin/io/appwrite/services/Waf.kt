@@ -63,6 +63,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to create the rule in a disabled state.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleBypass]
      */
     @JvmOverloads
@@ -76,6 +77,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleBypass {
         val apiPath = "/waf/rules/bypass"
         val apiParams = mutableMapOf<String, Any?>(
@@ -87,6 +89,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -118,6 +121,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to disable the rule.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleBypass]
      */
     @JvmOverloads
@@ -131,6 +135,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleBypass {
         if (ruleId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
@@ -146,6 +151,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -180,6 +186,7 @@ class Waf(client: Client) : Service(client) {
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
      * @param difficulty Challenge difficulty from 1 (easiest) to 5 (hardest). Higher values demand more client-side proof-of-work.
      * @param ttl How long, in seconds, a visitor stays cleared after passing the challenge before being challenged again.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleChallenge]
      */
     @JvmOverloads
@@ -196,6 +203,7 @@ class Waf(client: Client) : Service(client) {
         conditions: List<String>? = null,
         difficulty: Long? = null,
         ttl: Long? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleChallenge {
         val apiPath = "/waf/rules/challenge"
         val apiParams = mutableMapOf<String, Any?>(
@@ -210,6 +218,7 @@ class Waf(client: Client) : Service(client) {
             "conditions" to conditions,
             "difficulty" to difficulty,
             "ttl" to ttl,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -244,6 +253,7 @@ class Waf(client: Client) : Service(client) {
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
      * @param difficulty Challenge difficulty from 1 (easiest) to 5 (hardest). Higher values demand more client-side proof-of-work.
      * @param ttl How long, in seconds, a visitor stays cleared after passing the challenge before being challenged again.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleChallenge]
      */
     @JvmOverloads
@@ -260,6 +270,7 @@ class Waf(client: Client) : Service(client) {
         conditions: List<String>? = null,
         difficulty: Long? = null,
         ttl: Long? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleChallenge {
         if (ruleId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
@@ -278,6 +289,7 @@ class Waf(client: Client) : Service(client) {
             "conditions" to conditions,
             "difficulty" to difficulty,
             "ttl" to ttl,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -309,6 +321,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to create the rule in a disabled state.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleDeny]
      */
     @JvmOverloads
@@ -322,6 +335,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleDeny {
         val apiPath = "/waf/rules/deny"
         val apiParams = mutableMapOf<String, Any?>(
@@ -333,6 +347,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -364,6 +379,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to disable the rule.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleDeny]
      */
     @JvmOverloads
@@ -377,6 +393,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleDeny {
         if (ruleId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
@@ -392,6 +409,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -428,6 +446,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to create the rule in a disabled state.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleRateLimit]
      */
     @JvmOverloads
@@ -446,6 +465,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleRateLimit {
         val apiPath = "/waf/rules/rate-limit"
         val apiParams = mutableMapOf<String, Any?>(
@@ -462,6 +482,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -497,6 +518,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to disable the rule.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleRateLimit]
      */
     @JvmOverloads
@@ -514,6 +536,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleRateLimit {
         if (ruleId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
@@ -533,6 +556,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -566,6 +590,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to create the rule in a disabled state.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleRedirect]
      */
     @JvmOverloads
@@ -581,6 +606,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleRedirect {
         val apiPath = "/waf/rules/redirect"
         val apiParams = mutableMapOf<String, Any?>(
@@ -594,6 +620,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
@@ -627,6 +654,7 @@ class Waf(client: Client) : Service(client) {
      * @param priority Evaluation priority. Lower numbers run earlier.
      * @param enabled Set to false to disable the rule.
      * @param conditions Array of condition strings generated using the WAF Condition builder. Maximum of 100 conditions are allowed, each 4096 characters long.
+     * @param schedule When the rule is active: mode, days, interval, anchor, startTime and endTime (HH:MM), and an optional IANA timezone (UTC by default). Leave out for always on; on update, leave out to keep the current schedule and pass an empty object to remove it.
      * @return [io.appwrite.models.WafRuleRedirect]
      */
     @JvmOverloads
@@ -642,6 +670,7 @@ class Waf(client: Client) : Service(client) {
         priority: Long? = null,
         enabled: Boolean? = null,
         conditions: List<String>? = null,
+        schedule: Map<String, Any?>? = null,
     ): io.appwrite.models.WafRuleRedirect {
         if (ruleId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"ruleId\"")
@@ -659,6 +688,7 @@ class Waf(client: Client) : Service(client) {
             "priority" to priority,
             "enabled" to enabled,
             "conditions" to conditions,
+            "schedule" to schedule,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),

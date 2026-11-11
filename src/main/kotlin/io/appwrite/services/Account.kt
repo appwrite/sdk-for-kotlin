@@ -337,6 +337,143 @@ class Account(client: Client) : Service(client) {
     }
 
     /**
+     * Create an account switching device. A device is a container, scoped to one browser or app install, that holds multiple sessions and tracks which one is active. Once a device exists, session creation endpoints attach the new session to it automatically, so a single browser can stay signed in to several accounts and switch between them. A device holds at most one session per user: signing in again as a user it already holds replaces that user's session. The device lives as long as its newest session.
+     *
+     * The device secret is returned in a cookie. Run this on app start: if the browser already has a valid device, the existing one is returned with the same status code instead of an error, so it is always safe to call.
+     *
+     * Every session that joins the device rotates the device secret and re-issues the cookie, so an earlier copy of the secret stops working. A client that keeps the secret itself, rather than relying on the cookie, must replace it from each session response.
+     *
+     * @return [io.appwrite.models.Device]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun createDevice(): io.appwrite.models.Device {
+        val apiPath = "/account/devices"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Device = {
+            io.appwrite.models.Device.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Device::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get the account switching device for the current browser, including every session it holds, the name of the user each session belongs to, and the ID of the active session. Use the string 'current' to reference the current browser's device.
+     *
+     * @param deviceId Device ID. Use the string 'current' to reference the device of the current browser.
+     * @return [io.appwrite.models.Device]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getDevice(
+        deviceId: String,
+    ): io.appwrite.models.Device {
+        if (deviceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deviceId\"")
+        }
+        val apiPath = ("/account/devices/{deviceId}"
+            .replace("{deviceId}", Client.encodePath(deviceId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Device = {
+            io.appwrite.models.Device.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Device::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete the account switching device for the current browser. Every session the device holds is signed out, each firing its own session delete event, the device is removed, and both the device and session cookies are cleared. Use the string 'current' to reference the current browser's device.
+     *
+     * @param deviceId Device ID. Use the string 'current' to reference the device of the current browser.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteDevice(
+        deviceId: String,
+    ): Any {
+        if (deviceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deviceId\"")
+        }
+        val apiPath = ("/account/devices/{deviceId}"
+            .replace("{deviceId}", Client.encodePath(deviceId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
+     * Switch the active account on an account switching device to one of the sessions it holds. The chosen session becomes active and its secret is written to the browser's session cookie, so subsequent requests authenticate as that account. Use the string 'current' to reference the current browser's device.
+     *
+     * Switching rotates the chosen session's secret. Any other holder of that session, such as a copy kept elsewhere, stops working, so a session should not be shared across devices.
+     *
+     * @param deviceId Device ID. Use the string 'current' to reference the device of the current browser.
+     * @param sessionId ID of the session, held by the device, to make active.
+     * @return [io.appwrite.models.Session]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDeviceSession(
+        deviceId: String,
+        sessionId: String,
+    ): io.appwrite.models.Session {
+        if (deviceId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"deviceId\"")
+        }
+        val apiPath = ("/account/devices/{deviceId}/session"
+            .replace("{deviceId}", Client.encodePath(deviceId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "sessionId" to sessionId,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Session = {
+            io.appwrite.models.Session.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Session::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update currently logged in user account email address. After changing user address, the user confirmation status will get reset. A new confirmation email is not sent automatically however you can use the send confirmation email endpoint again to send the confirmation email. For security measures, user password is required to complete this request.
      * This endpoint can also be used to convert an anonymous account to a normal one, by passing an email address and a new password.
      *
@@ -2303,7 +2440,7 @@ class Account(client: Client) : Service(client) {
      *
      * A user is limited to 10 active sessions at a time by default. [Learn more about session limits](https://appwrite.io/docs/authentication-security#limits).
      *
-     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, cloudflare, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, huggingface, kakao, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, resend, salesforce, slack, spotify, stripe, tiktok, tradeshift, tradeshiftBox, twitch, webflow, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
+     * @param provider OAuth2 Provider. Currently, supported providers are: amazon, apple, appwrite, auth0, authentik, autodesk, bitbucket, bitly, box, cloudflare, dailymotion, discord, disqus, dropbox, etsy, facebook, figma, fusionauth, github, gitlab, google, huggingface, kakao, keycloak, kick, linkedin, microsoft, notion, oidc, okta, paypal, paypalSandbox, podio, resend, salesforce, slack, spotify, stripe, tiktok, tradeshift, tradeshiftBox, twitch, vipps, vippsSandbox, webflow, wordpress, x, yahoo, yammer, yandex, zoho, zoom.
      * @param success URL to redirect back to your app after a successful login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param failure URL to redirect back to your app after a failed login attempt.  Only URLs from hostnames in your project's platform list are allowed. This requirement helps to prevent an [open redirect](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html) attack against your project API.
      * @param scopes A list of custom OAuth2 scopes. Check each provider internal docs for a list of supported scopes. Maximum of 100 scopes are allowed, each 4096 characters long.

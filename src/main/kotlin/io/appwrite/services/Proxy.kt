@@ -357,7 +357,141 @@ class Proxy(client: Client) : Service(client) {
     }
 
     /**
-     * If not succeeded yet, retry verification process of a proxy rule domain. This endpoint triggers domain verification by checking DNS records. If verification is successful, a TLS certificate will be automatically provisioned for the domain asynchronously in the background.
+     * Update the function and VCS branch a function proxy rule executes. The rule domain cannot be changed.
+     *
+     * @param ruleId Rule ID.
+     * @param functionId ID of function to be executed.
+     * @param branch Name of VCS branch to deploy changes automatically
+     * @return [io.appwrite.models.ProxyRule]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateFunctionRule(
+        ruleId: String,
+        functionId: String,
+        branch: String? = null,
+    ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
+        val apiPath = ("/proxy/rules/{ruleId}/function"
+            .replace("{ruleId}", Client.encodePath(ruleId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "functionId" to functionId,
+            "branch" to branch,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ProxyRule = {
+            io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ProxyRule::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the target URL, status code and parent resource of a redirect proxy rule. The rule domain cannot be changed.
+     *
+     * @param ruleId Rule ID.
+     * @param url Target URL of redirection
+     * @param statusCode Status code of redirection
+     * @param resourceId ID of parent resource.
+     * @param resourceType Type of parent resource.
+     * @return [io.appwrite.models.ProxyRule]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateRedirectRule(
+        ruleId: String,
+        url: String,
+        statusCode: io.appwrite.enums.StatusCode,
+        resourceId: String,
+        resourceType: io.appwrite.enums.ProxyResourceType,
+    ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
+        val apiPath = ("/proxy/rules/{ruleId}/redirect"
+            .replace("{ruleId}", Client.encodePath(ruleId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "url" to url,
+            "statusCode" to statusCode,
+            "resourceId" to resourceId,
+            "resourceType" to resourceType,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ProxyRule = {
+            io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ProxyRule::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the site and VCS branch a site proxy rule serves. The rule domain cannot be changed.
+     *
+     * @param ruleId Rule ID.
+     * @param siteId ID of site to be executed.
+     * @param branch Name of VCS branch to deploy changes automatically
+     * @return [io.appwrite.models.ProxyRule]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateSiteRule(
+        ruleId: String,
+        siteId: String,
+        branch: String? = null,
+    ): io.appwrite.models.ProxyRule {
+        if (ruleId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"ruleId\"")
+        }
+        val apiPath = ("/proxy/rules/{ruleId}/site"
+            .replace("{ruleId}", Client.encodePath(ruleId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "siteId" to siteId,
+            "branch" to branch,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.ProxyRule = {
+            io.appwrite.models.ProxyRule.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.ProxyRule::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * If not succeeded yet, retry verification process of a proxy rule domain. This endpoint triggers domain verification by checking DNS records. If verification is successful, a TLS certificate will be automatically provisioned for the domain asynchronously in the background. A verified rule whose certificate renewal failed or is blocked, or whose certificate expired, is checked the same way, and its certificate renewed in the background.
      *
      * @param ruleId Rule ID.
      * @return [io.appwrite.models.ProxyRule]

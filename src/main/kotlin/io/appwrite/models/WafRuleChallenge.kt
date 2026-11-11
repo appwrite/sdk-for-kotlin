@@ -93,6 +93,12 @@ data class WafRuleChallenge(
     val config: Map<String, Any?>,
 
     /**
+     * When the rule is active: mode, days, interval, anchor, startTime, endTime and timezone. Null when the rule is always active.
+     */
+    @SerializedName("schedule")
+    var schedule: Map<String, Any?>?,
+
+    /**
      * Challenge type enforced when the rule matches.
      */
     @SerializedName("challengeType")
@@ -126,6 +132,7 @@ data class WafRuleChallenge(
         "enabled" to enabled as Any,
         "conditions" to conditions as Any,
         "config" to config as Any,
+        "schedule" to schedule as Any?,
         "challengeType" to challengeType as Any,
         "difficulty" to difficulty as Any,
         "ttl" to ttl as Any,
@@ -150,6 +157,7 @@ data class WafRuleChallenge(
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             conditions = (if (map.containsKey("conditions")) map["conditions"] else listOf<Any?>()) as List<Map<String, Any?>>,
             config = (if (map.containsKey("config")) map["config"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            schedule = map["schedule"] as? Map<String, Any?>,
             challengeType = (if (map.containsKey("challengeType")) map["challengeType"] else "compute") as String,
             difficulty = ((if (map.containsKey("difficulty")) map["difficulty"] else 3) as Number).toLong(),
             ttl = ((if (map.containsKey("ttl")) map["ttl"] else 1800) as Number).toLong(),

@@ -93,6 +93,12 @@ data class WafRuleRateLimit(
     val config: Map<String, Any?>,
 
     /**
+     * When the rule is active: mode, days, interval, anchor, startTime, endTime and timezone. Null when the rule is always active.
+     */
+    @SerializedName("schedule")
+    var schedule: Map<String, Any?>?,
+
+    /**
      * Maximum number of matching requests allowed for the given interval.
      */
     @SerializedName("limit")
@@ -138,6 +144,7 @@ data class WafRuleRateLimit(
         "enabled" to enabled as Any,
         "conditions" to conditions as Any,
         "config" to config as Any,
+        "schedule" to schedule as Any?,
         "limit" to limit as Any,
         "interval" to interval as Any,
         "key" to key as Any,
@@ -164,6 +171,7 @@ data class WafRuleRateLimit(
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             conditions = (if (map.containsKey("conditions")) map["conditions"] else listOf<Any?>()) as List<Map<String, Any?>>,
             config = (if (map.containsKey("config")) map["config"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            schedule = map["schedule"] as? Map<String, Any?>,
             limit = ((if (map.containsKey("limit")) map["limit"] else 100) as Number).toLong(),
             interval = ((if (map.containsKey("interval")) map["interval"] else 3600) as Number).toLong(),
             key = (if (map.containsKey("key")) map["key"] else "ip") as String,

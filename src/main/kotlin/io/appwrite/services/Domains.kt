@@ -1211,7 +1211,7 @@ class Domains(client: Client) : Service(client) {
      * to 'example.wordpress.com'.
      *
      * @param domainId Domain unique ID.
-     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
+     * @param name Record name relative to the domain, such as `www`. A CNAME cannot be at the domain itself; use an ALIAS record there. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Canonical target for this CNAME record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.
@@ -1261,7 +1261,7 @@ class Domains(client: Client) : Service(client) {
      *
      * @param domainId Domain unique ID.
      * @param recordId DNS record unique ID.
-     * @param name Record name relative to the domain, such as `www`, or `@` for the domain itself. A full name ending in the domain is also accepted and stored relative to it.
+     * @param name Record name relative to the domain, such as `www`. A CNAME cannot be at the domain itself; use an ALIAS record there. A full name ending in the domain is also accepted and stored relative to it.
      * @param value Canonical target for this CNAME record.
      * @param ttl Time to live, in seconds. Must be between 1 and 2147483647.
      * @param comment A comment for this record.

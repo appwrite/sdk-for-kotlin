@@ -181,6 +181,12 @@ data class ActivityEvent(
     @SerializedName("sdkVersion")
     val sdkVersion: String,
 
+    /**
+     * Why the actor made the request, as sent in the `X-Appwrite-Reason` header. Empty when no reason was given.
+     */
+    @SerializedName("reason")
+    val reason: String,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -212,6 +218,7 @@ data class ActivityEvent(
         "hostname" to hostname as Any,
         "sdk" to sdk as Any,
         "sdkVersion" to sdkVersion as Any,
+        "reason" to reason as Any,
     )
 
     companion object {
@@ -248,6 +255,7 @@ data class ActivityEvent(
             hostname = (if (map.containsKey("hostname")) map["hostname"] else "") as String,
             sdk = (if (map.containsKey("sdk")) map["sdk"] else "") as String,
             sdkVersion = (if (map.containsKey("sdkVersion")) map["sdkVersion"] else "") as String,
+            reason = (if (map.containsKey("reason")) map["reason"] else "") as String,
         )
     }
 }

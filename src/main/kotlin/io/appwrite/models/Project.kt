@@ -6,7 +6,7 @@ import io.appwrite.extensions.jsonCast
 /**
  * Project
  */
-data class Project(
+data class Project<T>(
     /**
      * Project ID.
      */
@@ -122,6 +122,12 @@ data class Project(
     val labels: List<String>,
 
     /**
+     * Project preferences as a key-value object
+     */
+    @SerializedName("prefs")
+    var prefs: Preferences<T>?,
+
+    /**
      * Project status
      */
     @SerializedName("status")
@@ -174,6 +180,12 @@ data class Project(
      */
     @SerializedName("parentId")
     var parentId: String?,
+
+    /**
+     * ID of the environment, as passed in the X-Appwrite-Environment header, when the project is accessed as one. Null when the project is not an environment.
+     */
+    @SerializedName("environmentId")
+    var environmentId: String?,
 
     /**
      * Billing limits reached
@@ -316,6 +328,7 @@ data class Project(
         "pingCount" to pingCount as Any,
         "pingedAt" to pingedAt as Any,
         "labels" to labels as Any,
+        "prefs" to prefs?.toMap() as Any?,
         "status" to status as Any,
         "onboarding" to onboarding as Any,
         "authMethods" to authMethods.map { it.toMap() } as Any,
@@ -325,6 +338,7 @@ data class Project(
         "consoleAccessedAt" to consoleAccessedAt as Any,
         "wafEnabled" to wafEnabled as Any?,
         "parentId" to parentId as Any?,
+        "environmentId" to environmentId as Any?,
         "billingLimits" to billingLimits?.toMap() as Any?,
         "firstAccessedAt" to firstAccessedAt as Any?,
         "mcpAccessedAt" to mcpAccessedAt as Any?,
@@ -348,10 +362,115 @@ data class Project(
     )
 
     companion object {
+        operator fun invoke(
+            id: String,
+            createdAt: String,
+            updatedAt: String,
+            name: String,
+            teamId: String,
+            region: String,
+            smtpEnabled: Boolean,
+            smtpSenderName: String,
+            smtpSenderEmail: String,
+            smtpReplyToName: String,
+            smtpReplyToEmail: String,
+            smtpHost: String,
+            smtpPort: Long,
+            smtpUsername: String,
+            smtpPassword: String,
+            smtpSecure: String,
+            pingCount: Long,
+            pingedAt: String,
+            labels: List<String>,
+            prefs: Preferences<Map<String, Any>>?,
+            status: String,
+            onboarding: Map<String, Any?>,
+            authMethods: List<ProjectAuthMethod>,
+            services: List<ProjectService>,
+            protocols: List<ProjectProtocol>,
+            blocks: List<Block>,
+            consoleAccessedAt: String,
+            wafEnabled: Boolean?,
+            parentId: String?,
+            environmentId: String?,
+            billingLimits: BillingLimits?,
+            firstAccessedAt: String?,
+            mcpAccessedAt: String?,
+            oAuth2ServerEnabled: Boolean?,
+            oAuth2ServerAuthorizationUrl: String?,
+            oAuth2ServerScopes: List<String>?,
+            oAuth2ServerDefaultScopes: List<String>?,
+            oAuth2ServerInstallationScopes: List<String>?,
+            oAuth2ServerAuthorizationDetailsTypes: List<String>?,
+            oAuth2ServerAccessTokenDuration: Long?,
+            oAuth2ServerRefreshTokenDuration: Long?,
+            oAuth2ServerPublicAccessTokenDuration: Long?,
+            oAuth2ServerPublicRefreshTokenDuration: Long?,
+            oAuth2ServerInstallationAccessTokenDuration: Long?,
+            oAuth2ServerConfidentialPkce: Boolean?,
+            oAuth2ServerVerificationUrl: String?,
+            oAuth2ServerUserCodeLength: Long?,
+            oAuth2ServerUserCodeFormat: String?,
+            oAuth2ServerDeviceCodeDuration: Long?,
+            oAuth2ServerDiscoveryUrl: String?,
+        ) = Project<Map<String, Any>>(
+            id,
+            createdAt,
+            updatedAt,
+            name,
+            teamId,
+            region,
+            smtpEnabled,
+            smtpSenderName,
+            smtpSenderEmail,
+            smtpReplyToName,
+            smtpReplyToEmail,
+            smtpHost,
+            smtpPort,
+            smtpUsername,
+            smtpPassword,
+            smtpSecure,
+            pingCount,
+            pingedAt,
+            labels,
+            prefs,
+            status,
+            onboarding,
+            authMethods,
+            services,
+            protocols,
+            blocks,
+            consoleAccessedAt,
+            wafEnabled,
+            parentId,
+            environmentId,
+            billingLimits,
+            firstAccessedAt,
+            mcpAccessedAt,
+            oAuth2ServerEnabled,
+            oAuth2ServerAuthorizationUrl,
+            oAuth2ServerScopes,
+            oAuth2ServerDefaultScopes,
+            oAuth2ServerInstallationScopes,
+            oAuth2ServerAuthorizationDetailsTypes,
+            oAuth2ServerAccessTokenDuration,
+            oAuth2ServerRefreshTokenDuration,
+            oAuth2ServerPublicAccessTokenDuration,
+            oAuth2ServerPublicRefreshTokenDuration,
+            oAuth2ServerInstallationAccessTokenDuration,
+            oAuth2ServerConfidentialPkce,
+            oAuth2ServerVerificationUrl,
+            oAuth2ServerUserCodeLength,
+            oAuth2ServerUserCodeFormat,
+            oAuth2ServerDeviceCodeDuration,
+            oAuth2ServerDiscoveryUrl,
+        )
+
         @Suppress("UNCHECKED_CAST")
-        fun from(
+        fun <T> from(
             map: Map<String, Any>,
-        ) = Project(
+            nestedType: Class<T>
+        ) = Project<T>(
             id = (if (map.containsKey("\$id")) map["\$id"] else "") as String,
             createdAt = (if (map.containsKey("\$createdAt")) map["\$createdAt"] else "") as String,
             updatedAt = (if (map.containsKey("\$updatedAt")) map["\$updatedAt"] else "") as String,
@@ -371,6 +490,7 @@ data class Project(
             pingCount = ((if (map.containsKey("pingCount")) map["pingCount"] else 0) as Number).toLong(),
             pingedAt = (if (map.containsKey("pingedAt")) map["pingedAt"] else "") as String,
             labels = (if (map.containsKey("labels")) map["labels"] else listOf<Any?>()) as List<String>,
+            prefs = (map["prefs"] as? Map<String, Any>)?.let { Preferences.from(map = it, nestedType) },
             status = (if (map.containsKey("status")) map["status"] else "active") as String,
             onboarding = (if (map.containsKey("onboarding")) map["onboarding"] else mapOf<String, Any?>()) as Map<String, Any?>,
             authMethods = ((if (map.containsKey("authMethods")) map["authMethods"] else listOf<Any?>()) as List<Map<String, Any>>).map { ProjectAuthMethod.from(map = it) },
@@ -380,6 +500,7 @@ data class Project(
             consoleAccessedAt = (if (map.containsKey("consoleAccessedAt")) map["consoleAccessedAt"] else "") as String,
             wafEnabled = map["wafEnabled"] as? Boolean,
             parentId = map["parentId"] as? String,
+            environmentId = map["environmentId"] as? String,
             billingLimits = (map["billingLimits"] as? Map<String, Any>)?.let { BillingLimits.from(map = it) },
             firstAccessedAt = map["firstAccessedAt"] as? String,
             mcpAccessedAt = map["mcpAccessedAt"] as? String,

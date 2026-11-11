@@ -92,6 +92,12 @@ data class WafRuleDeny(
     @SerializedName("config")
     val config: Map<String, Any?>,
 
+    /**
+     * When the rule is active: mode, days, interval, anchor, startTime, endTime and timezone. Null when the rule is always active.
+     */
+    @SerializedName("schedule")
+    var schedule: Map<String, Any?>?,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -108,6 +114,7 @@ data class WafRuleDeny(
         "enabled" to enabled as Any,
         "conditions" to conditions as Any,
         "config" to config as Any,
+        "schedule" to schedule as Any?,
     )
 
     companion object {
@@ -129,6 +136,7 @@ data class WafRuleDeny(
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             conditions = (if (map.containsKey("conditions")) map["conditions"] else listOf<Any?>()) as List<Map<String, Any?>>,
             config = (if (map.containsKey("config")) map["config"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            schedule = map["schedule"] as? Map<String, Any?>,
         )
     }
 }
