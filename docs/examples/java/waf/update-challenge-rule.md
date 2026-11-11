@@ -4,6 +4,7 @@ import io.appwrite.coroutines.CoroutineCallback;
 import io.appwrite.exceptions.AppwriteException;
 import io.appwrite.services.Waf;
 import java.util.List;
+import java.util.Map;
 
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
@@ -25,6 +26,7 @@ try {
         List.of(), // conditions (optional)
         1L, // difficulty (optional)
         900L, // ttl (optional)
+        Map.of("a", "b"), // schedule (optional)
         new CoroutineCallback<>((result, error) -> {
             if (error != null) {
                 error.printStackTrace();

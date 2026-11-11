@@ -63,7 +63,7 @@ class Storage(client: Client) : Service(client) {
      * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 5GB.
      * @param allowedFileExtensions Allowed file extensions. Maximum of 100 extensions are allowed, each 64 characters long.
      * @param compression Compression algorithm chosen for compression. Can be one of none,  [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
-     * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
+     * @param encryption Is encryption enabled? Files of any size are encrypted.
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
      * @param description Optional description for the bucket.
@@ -166,7 +166,7 @@ class Storage(client: Client) : Service(client) {
      * @param maximumFileSize Maximum file size allowed in bytes. Maximum allowed value is 5GB.
      * @param allowedFileExtensions Allowed file extensions. Maximum of 100 extensions are allowed, each 64 characters long.
      * @param compression Compression algorithm chosen for compression. Can be one of none, [gzip](https://en.wikipedia.org/wiki/Gzip), or [zstd](https://en.wikipedia.org/wiki/Zstd), For file size above 20MB compression is skipped even if it's enabled
-     * @param encryption Is encryption enabled? For file size above 20MB encryption is skipped even if it's enabled
+     * @param encryption Is encryption enabled? Files of any size are encrypted.
      * @param antivirus Is virus scanning enabled? For file size above 20MB AntiVirus scanning is skipped even if it's enabled
      * @param transformations Are image transformations enabled?
      * @param description Optional description for the bucket.

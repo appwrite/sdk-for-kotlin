@@ -22,6 +22,7 @@ val response = waf.updateRateLimitRule(
     maxBucketSize = 1, // optional
     priority = -100000, // optional
     enabled = false, // optional
-    conditions = listOf() // optional
+    conditions = listOf(), // optional
+    schedule = mapOf( "a" to "b" ) // optional
 )
 ```

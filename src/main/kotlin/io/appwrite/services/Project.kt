@@ -15,28 +15,40 @@ class Project(client: Client) : Service(client) {
     /**
      * Get a project.
      *
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun get(): io.appwrite.models.Project {
+    suspend fun <T> get(
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project"
         val apiParams = mutableMapOf<String, Any?>()
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Get a project.
+     *
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun get(): io.appwrite.models.Project<Map<String, Any>> = get(
+        nestedType = classOf(),
+    )
 
     /**
      * Delete a project.
@@ -66,13 +78,14 @@ class Project(client: Client) : Service(client) {
      *
      * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
      * @param enabled Auth method status.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateAuthMethod(
+    suspend fun <T> updateAuthMethod(
         methodId: io.appwrite.enums.ProjectAuthMethodId,
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = ("/project/auth-methods/{methodId}"
             .replace("{methodId}", Client.encodePath(methodId.value))
         )
@@ -84,32 +97,49 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
-     * Get a list of all environments of the project. You can use the query params to filter your results.
+     * Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project.
      *
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, teamId, labels, search, accessedAt, status, parentId
+     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
+     * @param enabled Auth method status.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateAuthMethod(
+        methodId: io.appwrite.enums.ProjectAuthMethodId,
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateAuthMethod(
+        methodId,
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Get a list of all environments of the project. You can use the query params to filter your results. An environment is listed by its ID, the one passed in the `X-Appwrite-Environment` header to act in it.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: $id, name, search
      * @param total When set to false, the total count returned will be 0 and will not be calculated.
-     * @return [io.appwrite.models.ProjectList]
+     * @return [io.appwrite.models.EnvironmentList]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun listEnvironments(
         queries: List<String>? = null,
         total: Boolean? = null,
-    ): io.appwrite.models.ProjectList {
+    ): io.appwrite.models.EnvironmentList {
         val apiPath = "/project/environments"
         val apiParams = mutableMapOf<String, Any?>(
             "queries" to queries,
@@ -119,28 +149,28 @@ class Project(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.ProjectList = {
-            io.appwrite.models.ProjectList.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.EnvironmentList = {
+            io.appwrite.models.EnvironmentList.from(map = it as Map<String, Any>)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.ProjectList::class.java,
+            responseType = io.appwrite.models.EnvironmentList::class.java,
             converter,
         )
     }
 
     /**
-     * Create a new environment of the project. An environment is a separate project in the same organization and region, with its own resources and users. Its usage is billed under the project it belongs to.
+     * Create a new environment of the project. An environment is a separate project in the same organization and region, with its own resources and users. Its usage is billed under the project it belongs to. Requests act in the environment when they carry the project's ID in the `X-Appwrite-Project` header and the environment's ID in the `X-Appwrite-Environment` header; the environment has no project ID of its own to pass.
      *
      * Pass `resources` to copy the project into the environment. The environment is returned at once and the copy runs as a migration of the environment, listed by its migrations routes and announced on its `migrations.*` realtime events; a resource whose ID can be chosen keeps it. Users are copied newest first and at most 90 of them, so the environment keeps room under its limit of 100 users for test accounts, and the memberships of users left behind are not copied.
      *
-     * @param environmentId Unique Id. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, and hyphen. Can't start with a special char. Max length is 36 chars.
+     * @param environmentId Environment ID, unique within the project and passed in the `X-Appwrite-Environment` header to act in the environment. Choose a custom ID such as `staging`, or generate a random ID with `ID.unique()`. Valid chars are a-z, 0-9, and hyphen. Can't start with a special char. Max length is 36 chars.
      * @param name Environment name. Max length: 128 chars.
      * @param resources Resources to copy from the project into the environment, by type. A structural type such as `database`, `table`, `column`, `index`, `bucket`, `team`, `function` or `site` copies the structure and its settings; `row`, `file`, `user`, `membership`, `deployment` and `site-deployment` copy what it holds. A function or site is copied with its active deployment; add `deployment` or `site-deployment` to copy every deployment. Users are copied newest first and at most 90 of them, leaving room under the limit of 100 users of an environment for test accounts; the memberships of users left behind are not copied. Leave empty for an empty environment. Maximum of 100 types.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Environment]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
@@ -148,7 +178,7 @@ class Project(client: Client) : Service(client) {
         environmentId: String,
         name: String,
         resources: List<io.appwrite.enums.EnvironmentResource>? = null,
-    ): io.appwrite.models.Project {
+    ): io.appwrite.models.Environment {
         val apiPath = "/project/environments"
         val apiParams = mutableMapOf<String, Any?>(
             "environmentId" to environmentId,
@@ -160,29 +190,29 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Environment = {
+            io.appwrite.models.Environment.from(map = it as Map<String, Any>)
         }
         return client.call(
             "POST",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = io.appwrite.models.Environment::class.java,
             converter,
         )
     }
 
     /**
-     * Get an environment of the project by its unique ID.
+     * Get an environment of the project by its ID, the one passed in the `X-Appwrite-Environment` header to act in it.
      *
-     * @param environmentId Environment unique ID.
-     * @return [io.appwrite.models.Project]
+     * @param environmentId Environment ID.
+     * @return [io.appwrite.models.Environment]
      */
     @Throws(AppwriteException::class)
     suspend fun getEnvironment(
         environmentId: String,
-    ): io.appwrite.models.Project {
+    ): io.appwrite.models.Environment {
         if (environmentId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"environmentId\"")
         }
@@ -194,31 +224,31 @@ class Project(client: Client) : Service(client) {
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Environment = {
+            io.appwrite.models.Environment.from(map = it as Map<String, Any>)
         }
         return client.call(
             "GET",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = io.appwrite.models.Environment::class.java,
             converter,
         )
     }
 
     /**
-     * Update the name of an environment of the project.
+     * Update the name of an environment of the project. The environment ID cannot be changed.
      *
-     * @param environmentId Environment unique ID.
+     * @param environmentId Environment ID.
      * @param name Environment name. Max length: 128 chars.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Environment]
      */
     @Throws(AppwriteException::class)
     suspend fun updateEnvironment(
         environmentId: String,
         name: String,
-    ): io.appwrite.models.Project {
+    ): io.appwrite.models.Environment {
         if (environmentId.isEmpty()) {
             throw AppwriteException("Missing required parameter: \"environmentId\"")
         }
@@ -233,15 +263,15 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Environment = {
+            io.appwrite.models.Environment.from(map = it as Map<String, Any>)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = io.appwrite.models.Environment::class.java,
             converter,
         )
     }
@@ -249,7 +279,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Delete an environment of the project, with all of its resources and users.
      *
-     * @param environmentId Environment unique ID.
+     * @param environmentId Environment ID.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -467,12 +497,13 @@ class Project(client: Client) : Service(client) {
      * Update the project labels. Labels can be used to easily filter projects in an organization.
      *
      * @param labels Array of project labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateLabels(
+    suspend fun <T> updateLabels(
         labels: List<String>,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/labels"
         val apiParams = mutableMapOf<String, Any?>(
             "labels" to labels,
@@ -482,18 +513,32 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PUT",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update the project labels. Labels can be used to easily filter projects in an organization.
+     *
+     * @param labels Array of project labels. Replaces the previous labels. Maximum of 1000 labels are allowed, each up to 36 alphanumeric characters long.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateLabels(
+        labels: List<String>,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateLabels(
+        labels,
+        nestedType = classOf(),
+    )
 
     /**
      * Get a list of all mock phones in the project. This endpoint returns an array of all mock phones and their OTPs.
@@ -723,11 +768,11 @@ class Project(client: Client) : Service(client) {
      * @param deviceCodeDuration Lifetime in seconds of device flow device codes and user codes. Device codes are intentionally short-lived. Leave empty to use default 600.
      * @param defaultScopes List of OAuth2 scopes used when an authorization request omits the scope parameter. Every default scope must also be allowed by the OAuth2 server. Maximum of 100 scopes are allowed, each up to 128 characters long.
      * @param installationScopes List of scopes an application may request when installed on a team. Omitting the parameter clears the list, so no installation scopes can be granted. Maximum of 100 scopes are allowed, each up to 128 characters long.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateOAuth2Server(
+    suspend fun <T> updateOAuth2Server(
         enabled: Boolean,
         authorizationUrl: String,
         scopes: List<String>? = null,
@@ -744,7 +789,8 @@ class Project(client: Client) : Service(client) {
         deviceCodeDuration: Long? = null,
         defaultScopes: List<String>? = null,
         installationScopes: List<String>? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/oauth2-server"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -769,18 +815,78 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PUT",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update the OAuth2 server (OIDC provider) configuration.
+     *
+     * @param enabled Enable or disable the OAuth2 server.
+     * @param authorizationUrl URL to your application with consent screen.
+     * @param scopes List of allowed OAuth2 scopes. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @param authorizationDetailsTypes List of accepted `authorization_details` types. Maximum of 100 types are allowed, each up to 128 characters long.
+     * @param accessTokenDuration Access token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 8 hours.
+     * @param refreshTokenDuration Refresh token duration in seconds for confidential clients (server-side apps that authenticate with a client secret). Leave empty to use default 1 year.
+     * @param publicAccessTokenDuration Access token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 1 hour.
+     * @param publicRefreshTokenDuration Refresh token duration in seconds for public clients (SPAs, mobile, and native apps that cannot keep a client secret). Leave empty to use default 30 days.
+     * @param installationAccessTokenDuration Access token duration in seconds for app installation access tokens. Leave empty to use default 1 hour.
+     * @param confidentialPkce When enabled, PKCE is required for confidential clients (server-side flows using client_secret). PKCE is always required for public clients regardless of this setting.
+     * @param verificationUrl URL to your application page where users enter the device flow user code. Required to enable the Device Authorization Grant.
+     * @param userCodeLength Number of characters in the device flow user code, excluding the formatting separator. Shorter codes are easier to type but weaker; pair short codes with short expiry. Leave empty to use default 8.
+     * @param userCodeFormat Character set for device flow user codes: `numeric` (digits only — best for numeric keypads and TV remotes), `alphabetic` (letters only), or `alphanumeric` (letters and digits — highest entropy per character). Defaults to `alphanumeric`.
+     * @param deviceCodeDuration Lifetime in seconds of device flow device codes and user codes. Device codes are intentionally short-lived. Leave empty to use default 600.
+     * @param defaultScopes List of OAuth2 scopes used when an authorization request omits the scope parameter. Every default scope must also be allowed by the OAuth2 server. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @param installationScopes List of scopes an application may request when installed on a team. Omitting the parameter clears the list, so no installation scopes can be granted. Maximum of 100 scopes are allowed, each up to 128 characters long.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Server(
+        enabled: Boolean,
+        authorizationUrl: String,
+        scopes: List<String>? = null,
+        authorizationDetailsTypes: List<String>? = null,
+        accessTokenDuration: Long? = null,
+        refreshTokenDuration: Long? = null,
+        publicAccessTokenDuration: Long? = null,
+        publicRefreshTokenDuration: Long? = null,
+        installationAccessTokenDuration: Long? = null,
+        confidentialPkce: Boolean? = null,
+        verificationUrl: String? = null,
+        userCodeLength: Long? = null,
+        userCodeFormat: String? = null,
+        deviceCodeDuration: Long? = null,
+        defaultScopes: List<String>? = null,
+        installationScopes: List<String>? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateOAuth2Server(
+        enabled,
+        authorizationUrl,
+        scopes,
+        authorizationDetailsTypes,
+        accessTokenDuration,
+        refreshTokenDuration,
+        publicAccessTokenDuration,
+        publicRefreshTokenDuration,
+        installationAccessTokenDuration,
+        confidentialPkce,
+        verificationUrl,
+        userCodeLength,
+        userCodeFormat,
+        deviceCodeDuration,
+        defaultScopes,
+        installationScopes,
+        nestedType = classOf(),
+    )
 
     /**
      * Update the project OAuth2 Amazon configuration.
@@ -2508,6 +2614,84 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Vipps MobilePay configuration.
+     *
+     * @param clientId 'Client ID' of Vipps MobilePay OAuth2 app. For example: 9a3a4b3e-0000-0000-0000-0f1a6d1c3b2e
+     * @param clientSecret 'Client Secret' of Vipps MobilePay OAuth2 app. For example: Ay1jb000000000000000000000000000000Vx3k
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Vipps]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Vipps(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Vipps {
+        val apiPath = "/project/oauth2/vipps"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Vipps = {
+            io.appwrite.models.OAuth2Vipps.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Vipps::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Vipps MobilePay Sandbox configuration.
+     *
+     * @param clientId 'Client ID' of Vipps MobilePay Sandbox OAuth2 app. For example: 9a3a4b3e-0000-0000-0000-0f1a6d1c3b2e
+     * @param clientSecret 'Client Secret' of Vipps MobilePay Sandbox OAuth2 app. For example: Ay1jb000000000000000000000000000000Vx3k
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Vipps]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2VippsSandbox(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Vipps {
+        val apiPath = "/project/oauth2/vippsSandbox"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Vipps = {
+            io.appwrite.models.OAuth2Vipps.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Vipps::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Webflow configuration.
      *
      * @param clientId 'Client ID' of Webflow OAuth2 app. For example: 8bb20000000000000000000000000000000000000000000000000000000040dd
@@ -2837,7 +3021,9 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "amazon" -> io.appwrite.models.OAuth2Amazon.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "etsy" -> io.appwrite.models.OAuth2Etsy.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "facebook" -> io.appwrite.models.OAuth2Facebook.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "tradeshift" -> io.appwrite.models.OAuth2Tradeshift.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "tradeshiftBox" -> io.appwrite.models.OAuth2Tradeshift.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "paypal" -> io.appwrite.models.OAuth2Paypal.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "paypalSandbox" -> io.appwrite.models.OAuth2Paypal.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "gitlab" -> io.appwrite.models.OAuth2Gitlab.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "authentik" -> io.appwrite.models.OAuth2Authentik.from(map = responseMap)
@@ -2851,6 +3037,8 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "microsoft" -> io.appwrite.models.OAuth2Microsoft.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "tiktok" -> io.appwrite.models.OAuth2TikTok.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "kakao" -> io.appwrite.models.OAuth2Kakao.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "vipps" -> io.appwrite.models.OAuth2Vipps.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "vippsSandbox" -> io.appwrite.models.OAuth2Vipps.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }
@@ -3417,15 +3605,63 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update whether account devices are enabled for the project. When enabled, a browser can create an account device that holds multiple sessions and switch between them. When disabled, account devices can no longer be created, so each browser is limited to a single active session.
+     *
+     * @param enabled Set to true to allow account devices, or false to disable them for this project.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateAccountDevicesPolicy(
+        enabled: Boolean,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
+        val apiPath = "/project/policies/account-devices"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update whether account devices are enabled for the project. When enabled, a browser can create an account device that holds multiple sessions and switch between them. When disabled, account devices can no longer be created, so each browser is limited to a single active session.
+     *
+     * @param enabled Set to true to allow account devices, or false to disable them for this project.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateAccountDevicesPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateAccountDevicesPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Configures if aliased emails such as subaddresses and emails with suffixes are denied during new users sign-ups and email updates.
      *
      * @param enabled Set whether or not to block aliased emails during signup and email updates.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateDenyAliasedEmailPolicy(
+    suspend fun <T> updateDenyAliasedEmailPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/deny-aliased-email"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3435,29 +3671,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Configures if aliased emails such as subaddresses and emails with suffixes are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block aliased emails during signup and email updates.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyAliasedEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateDenyAliasedEmailPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Configures if only corporate email addresses (non-free and non-disposable domains) are allowed during new user sign-ups and email updates.
      *
      * @param enabled Set whether or not to restrict sign-ups and email updates to corporate email addresses only.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateDenyCorporateEmailPolicy(
+    suspend fun <T> updateDenyCorporateEmailPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/deny-corporate-email"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3467,29 +3718,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Configures if only corporate email addresses (non-free and non-disposable domains) are allowed during new user sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to restrict sign-ups and email updates to corporate email addresses only.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyCorporateEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateDenyCorporateEmailPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Configures if disposable emails from known temporary domains are denied during new users sign-ups and email updates.
      *
      * @param enabled Set whether or not to block disposable email addresses during signup and email updates.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateDenyDisposableEmailPolicy(
+    suspend fun <T> updateDenyDisposableEmailPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/deny-disposable-email"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3499,29 +3765,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Configures if disposable emails from known temporary domains are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block disposable email addresses during signup and email updates.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyDisposableEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateDenyDisposableEmailPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Configures if emails from free providers such as Gmail or Yahoo are denied during new users sign-ups and email updates.
      *
      * @param enabled Set whether or not to block free email addresses during signup and email updates.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateDenyFreeEmailPolicy(
+    suspend fun <T> updateDenyFreeEmailPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/deny-free-email"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3531,29 +3812,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Configures if emails from free providers such as Gmail or Yahoo are denied during new users sign-ups and email updates.
+     *
+     * @param enabled Set whether or not to block free email addresses during signup and email updates.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyFreeEmailPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateDenyFreeEmailPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Configures if guests, connections without a signed-in user, may subscribe to realtime channels. When enabled, a guest can still connect and sign in over the connection, but cannot subscribe until it does.
      *
      * @param enabled Set whether or not to stop guests from subscribing to realtime channels.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateDenyRealtimeGuestsPolicy(
+    suspend fun <T> updateDenyRealtimeGuestsPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/deny-realtime-guests"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3563,18 +3859,32 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Configures if guests, connections without a signed-in user, may subscribe to realtime channels. When enabled, a guest can still connect and sign in over the connection, but cannot subscribe until it does.
+     *
+     * @param enabled Set whether or not to stop guests from subscribing to realtime channels.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateDenyRealtimeGuestsPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateDenyRealtimeGuestsPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
 
     /**
      * Updating this policy allows you to control if team members can see other members information. When enabled, all team members can see ID, name, email, phone number, and MFA status of other members..
@@ -3585,18 +3895,19 @@ class Project(client: Client) : Service(client) {
      * @param userName Set to true if you want make user name visible to all team members, or false to hide it.
      * @param userMFA Set to true if you want make user MFA status visible to all team members, or false to hide it.
      * @param userAccessedAt Set to true if you want make user last access time visible to all team members, or false to hide it.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateMembershipPrivacyPolicy(
+    suspend fun <T> updateMembershipPrivacyPolicy(
         userId: Boolean? = null,
         userEmail: Boolean? = null,
         userPhone: Boolean? = null,
         userName: Boolean? = null,
         userMFA: Boolean? = null,
         userAccessedAt: Boolean? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/membership-privacy"
         val apiParams = mutableMapOf<String, Any?>(
             "userId" to userId,
@@ -3611,18 +3922,48 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Updating this policy allows you to control if team members can see other members information. When enabled, all team members can see ID, name, email, phone number, and MFA status of other members..
+     *
+     * @param userId Set to true if you want make user ID visible to all team members, or false to hide it.
+     * @param userEmail Set to true if you want make user email visible to all team members, or false to hide it.
+     * @param userPhone Set to true if you want make user phone number visible to all team members, or false to hide it.
+     * @param userName Set to true if you want make user name visible to all team members, or false to hide it.
+     * @param userMFA Set to true if you want make user MFA status visible to all team members, or false to hide it.
+     * @param userAccessedAt Set to true if you want make user last access time visible to all team members, or false to hide it.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateMembershipPrivacyPolicy(
+        userId: Boolean? = null,
+        userEmail: Boolean? = null,
+        userPhone: Boolean? = null,
+        userName: Boolean? = null,
+        userMFA: Boolean? = null,
+        userAccessedAt: Boolean? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateMembershipPrivacyPolicy(
+        userId,
+        userEmail,
+        userPhone,
+        userName,
+        userMFA,
+        userAccessedAt,
+        nestedType = classOf(),
+    )
 
     /**
      * Updating this policy allows you to control which factors users can use to complete an MFA challenge. Disabled factors cannot be used to create a challenge and are reported as unavailable when listing factors. The custom factor is disabled by default; enable it to deliver challenge codes through your own channel. Recovery codes always remain available as a fallback.
@@ -3631,16 +3972,17 @@ class Project(client: Client) : Service(client) {
      * @param email Set to true to allow email to complete an MFA challenge, or false to disable it.
      * @param phone Set to true to allow phone (SMS) to complete an MFA challenge, or false to disable it.
      * @param custom Set to true to allow the custom factor to complete an MFA challenge, or false to disable it.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateMFAFactorsPolicy(
+    suspend fun <T> updateMFAFactorsPolicy(
         totp: Boolean? = null,
         email: Boolean? = null,
         phone: Boolean? = null,
         custom: Boolean? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/mfa-factors"
         val apiParams = mutableMapOf<String, Any?>(
             "totp" to totp,
@@ -3653,29 +3995,54 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Updating this policy allows you to control which factors users can use to complete an MFA challenge. Disabled factors cannot be used to create a challenge and are reported as unavailable when listing factors. The custom factor is disabled by default; enable it to deliver challenge codes through your own channel. Recovery codes always remain available as a fallback.
+     *
+     * @param totp Set to true to allow TOTP to complete an MFA challenge, or false to disable it.
+     * @param email Set to true to allow email to complete an MFA challenge, or false to disable it.
+     * @param phone Set to true to allow phone (SMS) to complete an MFA challenge, or false to disable it.
+     * @param custom Set to true to allow the custom factor to complete an MFA challenge, or false to disable it.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateMFAFactorsPolicy(
+        totp: Boolean? = null,
+        email: Boolean? = null,
+        phone: Boolean? = null,
+        custom: Boolean? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateMFAFactorsPolicy(
+        totp,
+        email,
+        phone,
+        custom,
+        nestedType = classOf(),
+    )
+
+    /**
      * Set the relying party ID passkeys are bound to: the domain of your application. Passkeys work on the project's web platforms on that domain or its subdomains, and on the domain itself for Apple apps. A localhost web platform enables passkeys for local development without a relying party ID. The relying party ID cannot change while users have passkeys, and any change invalidates ceremonies in progress.
      *
      * @param rpId Relying party ID: the domain of your application, such as `example.com`. Use `localhost` for local development, or an empty string to unset it.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updatePasskeyPolicy(
+    suspend fun <T> updatePasskeyPolicy(
         rpId: String,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/passkey"
         val apiParams = mutableMapOf<String, Any?>(
             "rpId" to rpId,
@@ -3685,15 +4052,68 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Set the relying party ID passkeys are bound to: the domain of your application. Passkeys work on the project's web platforms on that domain or its subdomains, and on the domain itself for Apple apps. A localhost web platform enables passkeys for local development without a relying party ID. The relying party ID cannot change while users have passkeys, and any change invalidates ceremonies in progress.
+     *
+     * @param rpId Relying party ID: the domain of your application, such as `example.com`. Use `localhost` for local development, or an empty string to unset it.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePasskeyPolicy(
+        rpId: String,
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasskeyPolicy(
+        rpId,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Updating this policy allows you to control if new passwords are checked against most common passwords dictionary. When enabled, and user changes their password, password must not be contained in the dictionary.
+     *
+     * Custom denyList entries use case-sensitive equality and apply only while this policy is enabled. Omit denyList or pass null to preserve it, pass an array to replace it, or pass [] to clear it. Entries are stored without trimming or deduplication. Existing passwords remain valid for sign-in and password confirmation. The combined serialized project authentication configuration must fit within 16,384 characters, even when each list meets its entry limits.
+     *
+     * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
+     * @param denyList Custom blocked values using case-sensitive equality. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updatePasswordDictionaryPolicy(
+        enabled: Boolean,
+        denyList: List<String>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
+        val apiPath = "/project/policies/password-dictionary"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+            "denyList" to denyList,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
             converter,
         )
     }
@@ -3705,33 +4125,50 @@ class Project(client: Client) : Service(client) {
      *
      * @param enabled Toggle password dictionary policy. Set to true if you want password change to block passwords in the dictionary, or false to allow them. When changing this policy, existing passwords remain valid.
      * @param denyList Custom blocked values using case-sensitive equality. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePasswordDictionaryPolicy(
         enabled: Boolean,
         denyList: List<String>? = null,
-    ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-dictionary"
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasswordDictionaryPolicy(
+        enabled,
+        denyList,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Updates one of password strength policies. Based on total length configured, previous password hashes are stored, and users cannot choose a new password that is already stored in the passwird history list, when updating an user password, or setting new one through password recovery.
+     *
+     * Keep in mind, while password history policy is disabled, the history is not being stored. Enabling the policy will not have any history on existing users, and it will only start to collect and enforce the policy on password changes since the policy is enabled.
+     *
+     * @param total Set the password history length per user. Value can be between 1 and 20, or null to disable the limit.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updatePasswordHistoryPolicy(
+        total: Long? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
+        val apiPath = "/project/policies/password-history"
         val apiParams = mutableMapOf<String, Any?>(
-            "enabled" to enabled,
-            "denyList" to denyList,
+            "total" to total,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
@@ -3742,30 +4179,52 @@ class Project(client: Client) : Service(client) {
      * Keep in mind, while password history policy is disabled, the history is not being stored. Enabling the policy will not have any history on existing users, and it will only start to collect and enforce the policy on password changes since the policy is enabled.
      *
      * @param total Set the password history length per user. Value can be between 1 and 20, or null to disable the limit.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
     suspend fun updatePasswordHistoryPolicy(
         total: Long? = null,
-    ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-history"
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasswordHistoryPolicy(
+        total,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Updating this policy allows you to control if password strength is checked against personal data. When enabled, and user sets or changes their password, the password must not contain user ID, name, email or phone number.
+     *
+     * Custom denyList entries use case-insensitive substring matching and apply only while this policy is enabled. Omit denyList or pass null to preserve it, pass an array to replace it, or pass [] to clear it. Entries are stored without trimming or deduplication. Existing passwords remain valid for sign-in and password confirmation. The combined serialized project authentication configuration must fit within 16,384 characters, even when each list meets its entry limits.
+     * Password recovery also checks the recovered user profile, closing the previous gap in profile-based personal-data validation.
+     *
+     * @param enabled Toggle password personal data policy. Set to true if you want to block passwords including user's personal data, or false to allow it. When changing this policy, existing passwords remain valid.
+     * @param denyList Custom blocked values using case-insensitive substring matching. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updatePasswordPersonalDataPolicy(
+        enabled: Boolean,
+        denyList: List<String>? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
+        val apiPath = "/project/policies/password-personal-data"
         val apiParams = mutableMapOf<String, Any?>(
-            "total" to total,
+            "enabled" to enabled,
+            "denyList" to denyList,
         )
         val apiHeaders = mutableMapOf<String, String>(
             "X-Appwrite-Project" to client.config["project"].orEmpty(),
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
@@ -3778,36 +4237,18 @@ class Project(client: Client) : Service(client) {
      *
      * @param enabled Toggle password personal data policy. Set to true if you want to block passwords including user's personal data, or false to allow it. When changing this policy, existing passwords remain valid.
      * @param denyList Custom blocked values using case-insensitive substring matching. Up to 100 entries of 1 to 256 characters. Omit or pass null to preserve, an array to replace, or [] to clear. Combined authentication settings must fit within 16,384 characters.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
     suspend fun updatePasswordPersonalDataPolicy(
         enabled: Boolean,
         denyList: List<String>? = null,
-    ): io.appwrite.models.Project {
-        val apiPath = "/project/policies/password-personal-data"
-        val apiParams = mutableMapOf<String, Any?>(
-            "enabled" to enabled,
-            "denyList" to denyList,
-        )
-        val apiHeaders = mutableMapOf<String, String>(
-            "X-Appwrite-Project" to client.config["project"].orEmpty(),
-            "content-type" to "application/json",
-            "accept" to "application/json",
-        )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
-        }
-        return client.call(
-            "PATCH",
-            apiPath,
-            apiHeaders,
-            apiParams,
-            responseType = io.appwrite.models.Project::class.java,
-            converter,
-        )
-    }
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasswordPersonalDataPolicy(
+        enabled,
+        denyList,
+        nestedType = classOf(),
+    )
 
     /**
      * Updating this policy allows you to control if passwords are checked against the Have I Been Pwned breach database. When enabled, every password a user signs up, signs in or resets with is checked and the result is recorded on the user as `passwordPwned`. On its own the policy only records. Enable `users` to reject a breached password when a user signs up or sets a new password, and `sessions` to refuse a sign-in with a breached password until it is reset. Only the first five characters of the password hash are ever shared with the service. Options left out keep their current value.
@@ -3815,15 +4256,16 @@ class Project(client: Client) : Service(client) {
      * @param enabled Toggle password pwned policy. Set to true to check passwords against known data breaches and record the result on the user, or false to never check. Default is true. On its own this only records; use `users` and `sessions` to block. When changing this policy, existing passwords remain valid.
      * @param sessions Whether a sign-in with a breached password is refused until the password is reset. Default is false, which allows the sign-in and only records the result.
      * @param users Whether a breached password is rejected when a user signs up or sets a new password. Default is false, which allows the password and only records the result.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updatePasswordPwnedPolicy(
+    suspend fun <T> updatePasswordPwnedPolicy(
         enabled: Boolean? = null,
         sessions: Boolean? = null,
         users: Boolean? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/password-pwned"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3835,32 +4277,54 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Updating this policy allows you to control if passwords are checked against the Have I Been Pwned breach database. When enabled, every password a user signs up, signs in or resets with is checked and the result is recorded on the user as `passwordPwned`. On its own the policy only records. Enable `users` to reject a breached password when a user signs up or sets a new password, and `sessions` to refuse a sign-in with a breached password until it is reset. Only the first five characters of the password hash are ever shared with the service. Options left out keep their current value.
+     *
+     * @param enabled Toggle password pwned policy. Set to true to check passwords against known data breaches and record the result on the user, or false to never check. Default is true. On its own this only records; use `users` and `sessions` to block. When changing this policy, existing passwords remain valid.
+     * @param sessions Whether a sign-in with a breached password is refused until the password is reset. Default is false, which allows the sign-in and only records the result.
+     * @param users Whether a breached password is rejected when a user signs up or sets a new password. Default is false, which allows the password and only records the result.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePasswordPwnedPolicy(
+        enabled: Boolean? = null,
+        sessions: Boolean? = null,
+        users: Boolean? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasswordPwnedPolicy(
+        enabled,
+        sessions,
+        users,
+        nestedType = classOf(),
+    )
 
     /**
      * Require a password reset when an email/password sign-in uses a password older than the configured maximum age. Options left out keep their current value.
      *
      * @param enabled Enable password rotation. Disabled by default.
      * @param maxAge Maximum password age in seconds. Minimum allowed value is 86400 seconds (1 day), and maximum is 10 years, which is 315360000 seconds. Defaults to 1 year, which is 31536000 seconds.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updatePasswordRotationPolicy(
+    suspend fun <T> updatePasswordRotationPolicy(
         enabled: Boolean? = null,
         maxAge: Long? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/password-rotation"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3871,18 +4335,36 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Require a password reset when an email/password sign-in uses a password older than the configured maximum age. Options left out keep their current value.
+     *
+     * @param enabled Enable password rotation. Disabled by default.
+     * @param maxAge Maximum password age in seconds. Minimum allowed value is 86400 seconds (1 day), and maximum is 10 years, which is 315360000 seconds. Defaults to 1 year, which is 31536000 seconds.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updatePasswordRotationPolicy(
+        enabled: Boolean? = null,
+        maxAge: Long? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updatePasswordRotationPolicy(
+        enabled,
+        maxAge,
+        nestedType = classOf(),
+    )
 
     /**
      * Update the password strength requirements for users in the project.
@@ -3933,12 +4415,13 @@ class Project(client: Client) : Service(client) {
      * Updating this policy allows you to control if email alert is sent upon session creation. When enabled, and user signs into their account, they will be sent an email notification. There is an exception, the first session after a new sign up does not trigger an alert, even if the policy is enabled.
      *
      * @param enabled Toggle session alert policy. Set to true if you want users to receive email notifications when a sessions are created for their users, or false to not send email alerts.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateSessionAlertPolicy(
+    suspend fun <T> updateSessionAlertPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/session-alert"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -3948,29 +4431,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Updating this policy allows you to control if email alert is sent upon session creation. When enabled, and user signs into their account, they will be sent an email notification. There is an exception, the first session after a new sign up does not trigger an alert, even if the policy is enabled.
+     *
+     * @param enabled Toggle session alert policy. Set to true if you want users to receive email notifications when a sessions are created for their users, or false to not send email alerts.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateSessionAlertPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateSessionAlertPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Update maximum duration how long sessions created within a project should stay active for.
      *
      * @param duration Maximum session length in seconds. Minium allowed value is 60 seconds, and maximum is 1 year, which is 31536000 seconds.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateSessionDurationPolicy(
+    suspend fun <T> updateSessionDurationPolicy(
         duration: Long,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/session-duration"
         val apiParams = mutableMapOf<String, Any?>(
             "duration" to duration,
@@ -3980,29 +4478,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Update maximum duration how long sessions created within a project should stay active for.
+     *
+     * @param duration Maximum session length in seconds. Minium allowed value is 60 seconds, and maximum is 1 year, which is 31536000 seconds.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateSessionDurationPolicy(
+        duration: Long,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateSessionDurationPolicy(
+        duration,
+        nestedType = classOf(),
+    )
+
+    /**
      * Updating this policy allows you to control if existing sessions should be invalidated when a password of a user is changed. When enabled, and user changes their password, they will be logged out of all their devices.
      *
      * @param enabled Toggle session invalidation policy. Set to true if you want password change to invalidate all sessions of an user, or false to keep sessions active.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateSessionInvalidationPolicy(
+    suspend fun <T> updateSessionInvalidationPolicy(
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/session-invalidation"
         val apiParams = mutableMapOf<String, Any?>(
             "enabled" to enabled,
@@ -4012,29 +4525,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Updating this policy allows you to control if existing sessions should be invalidated when a password of a user is changed. When enabled, and user changes their password, they will be logged out of all their devices.
+     *
+     * @param enabled Toggle session invalidation policy. Set to true if you want password change to invalidate all sessions of an user, or false to keep sessions active.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateSessionInvalidationPolicy(
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateSessionInvalidationPolicy(
+        enabled,
+        nestedType = classOf(),
+    )
+
+    /**
      * Update the maximum number of sessions allowed per user. When the limit is hit, the oldest session will be deleted to make room for new one.
      *
      * @param total Set the maximum number of sessions allowed per user. Value can be between 1 and 100.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateSessionLimitPolicy(
+    suspend fun <T> updateSessionLimitPolicy(
         total: Long,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/session-limit"
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
@@ -4044,29 +4572,44 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Update the maximum number of sessions allowed per user. When the limit is hit, the oldest session will be deleted to make room for new one.
+     *
+     * @param total Set the maximum number of sessions allowed per user. Value can be between 1 and 100.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateSessionLimitPolicy(
+        total: Long,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateSessionLimitPolicy(
+        total,
+        nestedType = classOf(),
+    )
+
+    /**
      * Update the maximum number of users in the project. When the limit is hit or amount of existing users already exceeded the limit, all users remain active, but new user sign up will be prohibited.
      *
      * @param total Set the maximum number of users allowed in the project. Value can be between 0 and 10000. Use 0 or null to disable the limit.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateUserLimitPolicy(
+    suspend fun <T> updateUserLimitPolicy(
         total: Long? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/policies/user-limit"
         val apiParams = mutableMapOf<String, Any?>(
             "total" to total,
@@ -4076,23 +4619,37 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
 
     /**
+     * Update the maximum number of users in the project. When the limit is hit or amount of existing users already exceeded the limit, all users remain active, but new user sign up will be prohibited.
+     *
+     * @param total Set the maximum number of users allowed in the project. Value can be between 0 and 10000. Use 0 or null to disable the limit.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateUserLimitPolicy(
+        total: Long? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateUserLimitPolicy(
+        total,
+        nestedType = classOf(),
+    )
+
+    /**
      * Get a policy by its unique ID. This endpoint returns the current configuration for the requested project policy.
      *
-     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, deny-realtime-guests, passkey.
+     * @param policyId Policy ID. Can be one of: password-dictionary, password-history, password-strength, password-personal-data, password-pwned, password-rotation, session-alert, session-duration, session-invalidation, session-limit, user-limit, membership-privacy, mfa-factors, deny-aliased-email, deny-disposable-email, deny-free-email, deny-corporate-email, deny-realtime-guests, passkey, account-devices.
      * @return [Any]
      */
     @Throws(AppwriteException::class)
@@ -4130,6 +4687,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "deny-corporate-email" -> io.appwrite.models.PolicyDenyCorporateEmail.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "deny-realtime-guests" -> io.appwrite.models.PolicyDenyRealtimeGuests.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "passkey" -> io.appwrite.models.PolicyPasskey.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "account-devices" -> io.appwrite.models.PolicyAccountDevices.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
             }
         }
@@ -4144,17 +4702,103 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Get the project preferences. Preferences are a key-value object stored on the project for anyone working on it.
+     *
+     * @return [io.appwrite.models.Preferences<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> getPrefs(
+        nestedType: Class<T>,
+    ): io.appwrite.models.Preferences<T> {
+        val apiPath = "/project/prefs"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Preferences<T> = {
+            io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Get the project preferences. Preferences are a key-value object stored on the project for anyone working on it.
+     *
+     * @return [io.appwrite.models.Preferences<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getPrefs(): io.appwrite.models.Preferences<Map<String, Any>> = getPrefs(
+        nestedType = classOf(),
+    )
+
+    /**
+     * Update the project preferences. The object you pass is stored as is and replaces any previous value. The maximum allowed prefs size is 64kB and throws an error if exceeded.
+     *
+     * @param prefs Prefs key-value JSON object.
+     * @return [io.appwrite.models.Preferences<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun <T> updatePrefs(
+        prefs: Map<String, Any?>,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Preferences<T> {
+        val apiPath = "/project/prefs"
+        val apiParams = mutableMapOf<String, Any?>(
+            "prefs" to prefs,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Preferences<T> = {
+            io.appwrite.models.Preferences.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PUT",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update the project preferences. The object you pass is stored as is and replaces any previous value. The maximum allowed prefs size is 64kB and throws an error if exceeded.
+     *
+     * @param prefs Prefs key-value JSON object.
+     * @return [io.appwrite.models.Preferences<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updatePrefs(
+        prefs: Map<String, Any?>,
+    ): io.appwrite.models.Preferences<Map<String, Any>> = updatePrefs(
+        prefs,
+        nestedType = classOf(),
+    )
+
+    /**
      * Update properties of a specific protocol. Use this endpoint to enable or disable a protocol in your project.
      *
      * @param protocolId Protocol name. Can be one of: rest, graphql, websocket
      * @param enabled Protocol status.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateProtocol(
+    suspend fun <T> updateProtocol(
         protocolId: io.appwrite.enums.ProjectProtocolId,
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = ("/project/protocols/{protocolId}"
             .replace("{protocolId}", Client.encodePath(protocolId.value))
         )
@@ -4166,31 +4810,49 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update properties of a specific protocol. Use this endpoint to enable or disable a protocol in your project.
+     *
+     * @param protocolId Protocol name. Can be one of: rest, graphql, websocket
+     * @param enabled Protocol status.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateProtocol(
+        protocolId: io.appwrite.enums.ProjectProtocolId,
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateProtocol(
+        protocolId,
+        enabled,
+        nestedType = classOf(),
+    )
 
     /**
      * Update properties of a specific service. Use this endpoint to enable or disable a service in your project.
      *
      * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging, advisor, oauth2
      * @param enabled Service status.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @Throws(AppwriteException::class)
-    suspend fun updateService(
+    suspend fun <T> updateService(
         serviceId: io.appwrite.enums.ProjectServiceId,
         enabled: Boolean,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = ("/project/services/{serviceId}"
             .replace("{serviceId}", Client.encodePath(serviceId.value))
         )
@@ -4202,18 +4864,35 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update properties of a specific service. Use this endpoint to enable or disable a service in your project.
+     *
+     * @param serviceId Service name. Can be one of: account, avatars, databases, tablesdb, locale, health, project, storage, teams, users, vcs, sites, functions, proxy, graphql, migrations, messaging, advisor, oauth2
+     * @param enabled Service status.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateService(
+        serviceId: io.appwrite.enums.ProjectServiceId,
+        enabled: Boolean,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateService(
+        serviceId,
+        enabled,
+        nestedType = classOf(),
+    )
 
     /**
      * Delete all sessions in the project. Any session created before this request will be invalidated immediately: users will be signed out of every active client (web, mobile, server SDKs, JWTs), and will be able to sign in again afterwards. API keys are not affected by this action.
@@ -4251,11 +4930,11 @@ class Project(client: Client) : Service(client) {
      * @param replyToName Name used when user replies to the email. Pass an empty string to clear a previously set value.
      * @param secure Configures if communication with SMTP server is encrypted. Allowed values are: tls, ssl. Leave empty for no encryption.
      * @param enabled Enable or disable custom SMTP. Custom SMTP is useful for branding purposes, but also allows use of custom email templates.
-     * @return [io.appwrite.models.Project]
+     * @return [io.appwrite.models.Project<T>]
      */
     @JvmOverloads
     @Throws(AppwriteException::class)
-    suspend fun updateSMTP(
+    suspend fun <T> updateSMTP(
         host: String? = null,
         port: Long? = null,
         username: String? = null,
@@ -4266,7 +4945,8 @@ class Project(client: Client) : Service(client) {
         replyToName: String? = null,
         secure: io.appwrite.enums.ProjectSMTPSecure? = null,
         enabled: Boolean? = null,
-    ): io.appwrite.models.Project {
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
         val apiPath = "/project/smtp"
         val apiParams = mutableMapOf<String, Any?>(
             "host" to host,
@@ -4285,18 +4965,60 @@ class Project(client: Client) : Service(client) {
             "content-type" to "application/json",
             "accept" to "application/json",
         )
-        val converter: (Any) -> io.appwrite.models.Project = {
-            io.appwrite.models.Project.from(map = it as Map<String, Any>)
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
         }
         return client.call(
             "PATCH",
             apiPath,
             apiHeaders,
             apiParams,
-            responseType = io.appwrite.models.Project::class.java,
+            responseType = classOf(),
             converter,
         )
     }
+
+    /**
+     * Update the SMTP configuration for your project. Use this endpoint to configure your project's SMTP provider with your custom settings for sending transactional emails.
+     *
+     * @param host SMTP server hostname (domain)
+     * @param port SMTP server port
+     * @param username SMTP server username. Pass an empty string to clear a previously set value.
+     * @param password SMTP server password. Pass an empty string to clear a previously set value. This property is stored securely and cannot be read in future (write-only).
+     * @param senderEmail Email address shown in inbox as the sender of the email. Pass an empty string to clear a previously set value.
+     * @param senderName Name shown in inbox as the sender of the email. Pass an empty string to clear a previously set value.
+     * @param replyToEmail Email used when user replies to the email. Pass an empty string to clear a previously set value.
+     * @param replyToName Name used when user replies to the email. Pass an empty string to clear a previously set value.
+     * @param secure Configures if communication with SMTP server is encrypted. Allowed values are: tls, ssl. Leave empty for no encryption.
+     * @param enabled Enable or disable custom SMTP. Custom SMTP is useful for branding purposes, but also allows use of custom email templates.
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateSMTP(
+        host: String? = null,
+        port: Long? = null,
+        username: String? = null,
+        password: String? = null,
+        senderEmail: String? = null,
+        senderName: String? = null,
+        replyToEmail: String? = null,
+        replyToName: String? = null,
+        secure: io.appwrite.enums.ProjectSMTPSecure? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateSMTP(
+        host,
+        port,
+        username,
+        password,
+        senderEmail,
+        senderName,
+        replyToEmail,
+        replyToName,
+        secure,
+        enabled,
+        nestedType = classOf(),
+    )
 
     /**
      * Send a test email to verify SMTP configuration.

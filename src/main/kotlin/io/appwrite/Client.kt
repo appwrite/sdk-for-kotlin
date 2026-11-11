@@ -85,12 +85,12 @@ class Client @JvmOverloads constructor(
     init {
         headers = mutableMapOf(
             "content-type" to "application/json",
-            "user-agent" to "AppwriteKotlinSDK/24.1.0 ${System.getProperty("http.agent")}",
+            "user-agent" to "AppwriteKotlinSDK/24.2.0 ${System.getProperty("http.agent")}",
             "x-sdk-name" to "Kotlin",
             "x-sdk-platform" to "server",
             "x-sdk-language" to "kotlin",
-            "x-sdk-version" to "24.1.0",
-            "x-appwrite-response-format" to "2.6.2",
+            "x-sdk-version" to "24.2.0",
+            "x-appwrite-response-format" to "2.7.1",
         )
 
         config = mutableMapOf()
@@ -182,6 +182,21 @@ class Client @JvmOverloads constructor(
     fun setLocale(value: String): Client {
         config["locale"] = value
         addHeader("x-appwrite-locale", value)
+        return this
+    }
+
+    /**
+     * Set Environment
+     *
+     * The ID of the project environment to act in, alongside the project ID. Used with Appwrite Cloud projects that have environments.
+     *
+     * @param {string} environment
+     *
+     * @return this
+     */
+    fun setEnvironment(value: String): Client {
+        config["environment"] = value
+        addHeader("x-appwrite-environment", value)
         return this
     }
 

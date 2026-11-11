@@ -93,6 +93,12 @@ data class WafRuleRedirect(
     val config: Map<String, Any?>,
 
     /**
+     * When the rule is active: mode, days, interval, anchor, startTime, endTime and timezone. Null when the rule is always active.
+     */
+    @SerializedName("schedule")
+    var schedule: Map<String, Any?>?,
+
+    /**
      * Target location for the redirect.
      */
     @SerializedName("location")
@@ -120,6 +126,7 @@ data class WafRuleRedirect(
         "enabled" to enabled as Any,
         "conditions" to conditions as Any,
         "config" to config as Any,
+        "schedule" to schedule as Any?,
         "location" to location as Any,
         "statusCode" to statusCode as Any,
     )
@@ -143,6 +150,7 @@ data class WafRuleRedirect(
             enabled = (if (map.containsKey("enabled")) map["enabled"] else true) as Boolean,
             conditions = (if (map.containsKey("conditions")) map["conditions"] else listOf<Any?>()) as List<Map<String, Any?>>,
             config = (if (map.containsKey("config")) map["config"] else mapOf<String, Any?>()) as Map<String, Any?>,
+            schedule = map["schedule"] as? Map<String, Any?>,
             location = (if (map.containsKey("location")) map["location"] else "/") as String,
             statusCode = ((if (map.containsKey("statusCode")) map["statusCode"] else 302) as Number).toLong(),
         )
