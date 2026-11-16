@@ -18,7 +18,9 @@ enum class ProjectAuthMethodId(val value: String) {
     @SerializedName("phone")
     PHONE("phone"),
     @SerializedName("passkey")
-    PASSKEY("passkey");
+    PASSKEY("passkey"),
+    @SerializedName("ldap")
+    LDAP("ldap");
 
     override fun toString() = value
 }

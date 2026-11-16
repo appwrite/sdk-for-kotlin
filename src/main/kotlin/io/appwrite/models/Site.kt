@@ -223,6 +223,18 @@ data class Site(
     @SerializedName("fallbackFile")
     val fallbackFile: String,
 
+    /**
+     * Whether the analytics tracker is injected into pages served on the site's production domains.
+     */
+    @SerializedName("analyticsEnabled")
+    val analyticsEnabled: Boolean,
+
+    /**
+     * ID of the analytics property the site reports to. Kept when analytics is turned off, so turning it back on resumes the same property.
+     */
+    @SerializedName("analyticsPropertyId")
+    val analyticsPropertyId: String,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "\$id" to id as Any,
@@ -261,6 +273,8 @@ data class Site(
         "buildRuntime" to buildRuntime as Any,
         "adapter" to adapter as Any,
         "fallbackFile" to fallbackFile as Any,
+        "analyticsEnabled" to analyticsEnabled as Any,
+        "analyticsPropertyId" to analyticsPropertyId as Any,
     )
 
     companion object {
@@ -304,6 +318,8 @@ data class Site(
             buildRuntime = (if (map.containsKey("buildRuntime")) map["buildRuntime"] else "") as String,
             adapter = map["adapter"] as String,
             fallbackFile = map["fallbackFile"] as String,
+            analyticsEnabled = (if (map.containsKey("analyticsEnabled")) map["analyticsEnabled"] else false) as Boolean,
+            analyticsPropertyId = (if (map.containsKey("analyticsPropertyId")) map["analyticsPropertyId"] else "") as String,
         )
     }
 }

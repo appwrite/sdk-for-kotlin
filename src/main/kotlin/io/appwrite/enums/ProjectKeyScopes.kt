@@ -29,10 +29,16 @@ enum class ProjectKeyScopes(val value: String) {
     PROJECT_POLICIES_READ("project.policies.read"),
     @SerializedName("project.policies.write")
     PROJECT_POLICIES_WRITE("project.policies.write"),
+    @SerializedName("project.videos.profiles.read")
+    PROJECT_VIDEOS_PROFILES_READ("project.videos.profiles.read"),
+    @SerializedName("project.videos.profiles.write")
+    PROJECT_VIDEOS_PROFILES_WRITE("project.videos.profiles.write"),
     @SerializedName("project.oauth2.read")
     PROJECT_OAUTH2_READ("project.oauth2.read"),
     @SerializedName("project.oauth2.write")
     PROJECT_OAUTH2_WRITE("project.oauth2.write"),
+    @SerializedName("project.ldap.write")
+    PROJECT_LDAP_WRITE("project.ldap.write"),
     @SerializedName("templates.read")
     TEMPLATES_READ("templates.read"),
     @SerializedName("templates.write")
@@ -225,6 +231,12 @@ enum class ProjectKeyScopes(val value: String) {
     PRESENCES_READ("presences.read"),
     @SerializedName("presences.write")
     PRESENCES_WRITE("presences.write"),
+    @SerializedName("videos.play")
+    VIDEOS_PLAY("videos.play"),
+    @SerializedName("videos.read")
+    VIDEOS_READ("videos.read"),
+    @SerializedName("videos.write")
+    VIDEOS_WRITE("videos.write"),
     @SerializedName("dedicatedDatabases.execute")
     DEDICATEDDATABASES_EXECUTE("dedicatedDatabases.execute"),
     @SerializedName("backups.policies.read")

@@ -104,6 +104,102 @@ data class Project<T>(
     val smtpSecure: String,
 
     /**
+     * Status for LDAP sign-in
+     */
+    @SerializedName("ldapEnabled")
+    val ldapEnabled: Boolean,
+
+    /**
+     * LDAP directory hosts, tried in order.
+     */
+    @SerializedName("ldapHosts")
+    val ldapHosts: List<String>,
+
+    /**
+     * LDAP directory port.
+     */
+    @SerializedName("ldapPort")
+    val ldapPort: Long,
+
+    /**
+     * LDAP transport encryption: none, ldaps or starttls.
+     */
+    @SerializedName("ldapEncryption")
+    val ldapEncryption: String,
+
+    /**
+     * Whether the LDAP directory certificate is verified.
+     */
+    @SerializedName("ldapVerification")
+    val ldapVerification: Boolean,
+
+    /**
+     * Certificate in PEM format of the authority that signed the LDAP directory certificate, or the directory certificate itself when it is self-signed. Empty for the system trust store.
+     */
+    @SerializedName("ldapCertificate")
+    val ldapCertificate: String,
+
+    /**
+     * Seconds to wait for the LDAP directory to connect and answer.
+     */
+    @SerializedName("ldapTimeout")
+    val ldapTimeout: Long,
+
+    /**
+     * LDAP subtree the user search starts from.
+     */
+    @SerializedName("ldapBaseDn")
+    val ldapBaseDn: String,
+
+    /**
+     * LDAP service account used to search for users, empty for anonymous search.
+     */
+    @SerializedName("ldapBindDn")
+    val ldapBindDn: String,
+
+    /**
+     * LDAP service account password. This property is write-only and always returned empty.
+     */
+    @SerializedName("ldapBindPassword")
+    val ldapBindPassword: String,
+
+    /**
+     * LDAP filter that finds the user signing in, with {username} where the username they enter goes.
+     */
+    @SerializedName("ldapUserFilter")
+    val ldapUserFilter: String,
+
+    /**
+     * LDAP group a user must belong to in order to sign in, empty to allow every user.
+     */
+    @SerializedName("ldapRequiredGroupDn")
+    val ldapRequiredGroupDn: String,
+
+    /**
+     * LDAP attribute holding the identifier that stays the same when an entry is renamed or moved.
+     */
+    @SerializedName("ldapIdAttribute")
+    val ldapIdAttribute: String,
+
+    /**
+     * LDAP attribute holding the email address.
+     */
+    @SerializedName("ldapEmailAttribute")
+    val ldapEmailAttribute: String,
+
+    /**
+     * LDAP attribute holding the display name.
+     */
+    @SerializedName("ldapNameAttribute")
+    val ldapNameAttribute: String,
+
+    /**
+     * LDAP attribute holding the phone number, empty when unmapped.
+     */
+    @SerializedName("ldapPhoneAttribute")
+    val ldapPhoneAttribute: String,
+
+    /**
      * Number of times the ping was received for this project.
      */
     @SerializedName("pingCount")
@@ -325,6 +421,22 @@ data class Project<T>(
         "smtpUsername" to smtpUsername as Any,
         "smtpPassword" to smtpPassword as Any,
         "smtpSecure" to smtpSecure as Any,
+        "ldapEnabled" to ldapEnabled as Any,
+        "ldapHosts" to ldapHosts as Any,
+        "ldapPort" to ldapPort as Any,
+        "ldapEncryption" to ldapEncryption as Any,
+        "ldapVerification" to ldapVerification as Any,
+        "ldapCertificate" to ldapCertificate as Any,
+        "ldapTimeout" to ldapTimeout as Any,
+        "ldapBaseDn" to ldapBaseDn as Any,
+        "ldapBindDn" to ldapBindDn as Any,
+        "ldapBindPassword" to ldapBindPassword as Any,
+        "ldapUserFilter" to ldapUserFilter as Any,
+        "ldapRequiredGroupDn" to ldapRequiredGroupDn as Any,
+        "ldapIdAttribute" to ldapIdAttribute as Any,
+        "ldapEmailAttribute" to ldapEmailAttribute as Any,
+        "ldapNameAttribute" to ldapNameAttribute as Any,
+        "ldapPhoneAttribute" to ldapPhoneAttribute as Any,
         "pingCount" to pingCount as Any,
         "pingedAt" to pingedAt as Any,
         "labels" to labels as Any,
@@ -379,6 +491,22 @@ data class Project<T>(
             smtpUsername: String,
             smtpPassword: String,
             smtpSecure: String,
+            ldapEnabled: Boolean,
+            ldapHosts: List<String>,
+            ldapPort: Long,
+            ldapEncryption: String,
+            ldapVerification: Boolean,
+            ldapCertificate: String,
+            ldapTimeout: Long,
+            ldapBaseDn: String,
+            ldapBindDn: String,
+            ldapBindPassword: String,
+            ldapUserFilter: String,
+            ldapRequiredGroupDn: String,
+            ldapIdAttribute: String,
+            ldapEmailAttribute: String,
+            ldapNameAttribute: String,
+            ldapPhoneAttribute: String,
             pingCount: Long,
             pingedAt: String,
             labels: List<String>,
@@ -430,6 +558,22 @@ data class Project<T>(
             smtpUsername,
             smtpPassword,
             smtpSecure,
+            ldapEnabled,
+            ldapHosts,
+            ldapPort,
+            ldapEncryption,
+            ldapVerification,
+            ldapCertificate,
+            ldapTimeout,
+            ldapBaseDn,
+            ldapBindDn,
+            ldapBindPassword,
+            ldapUserFilter,
+            ldapRequiredGroupDn,
+            ldapIdAttribute,
+            ldapEmailAttribute,
+            ldapNameAttribute,
+            ldapPhoneAttribute,
             pingCount,
             pingedAt,
             labels,
@@ -487,6 +631,22 @@ data class Project<T>(
             smtpUsername = (if (map.containsKey("smtpUsername")) map["smtpUsername"] else "") as String,
             smtpPassword = (if (map.containsKey("smtpPassword")) map["smtpPassword"] else "") as String,
             smtpSecure = (if (map.containsKey("smtpSecure")) map["smtpSecure"] else "") as String,
+            ldapEnabled = (if (map.containsKey("ldapEnabled")) map["ldapEnabled"] else false) as Boolean,
+            ldapHosts = (if (map.containsKey("ldapHosts")) map["ldapHosts"] else listOf<Any?>()) as List<String>,
+            ldapPort = ((if (map.containsKey("ldapPort")) map["ldapPort"] else 636) as Number).toLong(),
+            ldapEncryption = (if (map.containsKey("ldapEncryption")) map["ldapEncryption"] else "ldaps") as String,
+            ldapVerification = (if (map.containsKey("ldapVerification")) map["ldapVerification"] else true) as Boolean,
+            ldapCertificate = (if (map.containsKey("ldapCertificate")) map["ldapCertificate"] else "") as String,
+            ldapTimeout = ((if (map.containsKey("ldapTimeout")) map["ldapTimeout"] else 10) as Number).toLong(),
+            ldapBaseDn = (if (map.containsKey("ldapBaseDn")) map["ldapBaseDn"] else "") as String,
+            ldapBindDn = (if (map.containsKey("ldapBindDn")) map["ldapBindDn"] else "") as String,
+            ldapBindPassword = (if (map.containsKey("ldapBindPassword")) map["ldapBindPassword"] else "") as String,
+            ldapUserFilter = (if (map.containsKey("ldapUserFilter")) map["ldapUserFilter"] else "(uid={username})") as String,
+            ldapRequiredGroupDn = (if (map.containsKey("ldapRequiredGroupDn")) map["ldapRequiredGroupDn"] else "") as String,
+            ldapIdAttribute = (if (map.containsKey("ldapIdAttribute")) map["ldapIdAttribute"] else "entryUUID") as String,
+            ldapEmailAttribute = (if (map.containsKey("ldapEmailAttribute")) map["ldapEmailAttribute"] else "mail") as String,
+            ldapNameAttribute = (if (map.containsKey("ldapNameAttribute")) map["ldapNameAttribute"] else "cn") as String,
+            ldapPhoneAttribute = (if (map.containsKey("ldapPhoneAttribute")) map["ldapPhoneAttribute"] else "") as String,
             pingCount = ((if (map.containsKey("pingCount")) map["pingCount"] else 0) as Number).toLong(),
             pingedAt = (if (map.containsKey("pingedAt")) map["pingedAt"] else "") as String,
             labels = (if (map.containsKey("labels")) map["labels"] else listOf<Any?>()) as List<String>,

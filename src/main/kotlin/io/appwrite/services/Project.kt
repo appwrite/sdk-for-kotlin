@@ -76,7 +76,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project.
      *
-     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
+     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey,ldap
      * @param enabled Auth method status.
      * @return [io.appwrite.models.Project<T>]
      */
@@ -113,7 +113,7 @@ class Project(client: Client) : Service(client) {
     /**
      * Update properties of a specific auth method. Use this endpoint to enable or disable a method in your project.
      *
-     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey
+     * @param methodId Auth Method ID. Possible values: email-password,magic-url,email-otp,anonymous,invites,jwt,phone,passkey,ldap
      * @param enabled Auth method status.
      * @return [io.appwrite.models.Project<T>]
      */
@@ -539,6 +539,177 @@ class Project(client: Client) : Service(client) {
         labels,
         nestedType = classOf(),
     )
+
+    /**
+     * Update the LDAP configuration for your project. Use this endpoint to connect your project to an LDAP directory, such as OpenLDAP or Active Directory, so users can sign in with their directory credentials. Omitted parameters keep their stored value. Enabling LDAP connects to the directory and binds as the service account, so a project cannot be left enabled with a configuration that cannot sign anyone in.
+     *
+     * @param enabled Enable or disable LDAP sign-in. Enabling connects to the directory to validate the configuration.
+     * @param hosts Directory hostnames or IP addresses, tried in order until one answers. IPv6 addresses can be written with or without square brackets. Maximum of 10 hosts are allowed. For example: ["ldap.example.com"]
+     * @param port Directory port. Defaults to 636 for LDAPS and 389 otherwise.
+     * @param encryption Transport encryption. Use "ldaps" for TLS from the first byte, "starttls" to upgrade a plain connection, or "none" for a trusted network only. Allowed values are: none, ldaps, starttls. Defaults to ldaps.
+     * @param verification Certificate verification, false for disabled or true for enabled. Defaults to true. Has no effect when encryption is none.
+     * @param certificate Certificate in PEM format of the authority that signed the directory certificate, or the directory certificate itself when it is self-signed. Several certificates can be given one after another. Leave empty to use the system trust store. Pass an empty string to clear a previously set value.
+     * @param timeout Seconds to wait for the directory to connect and answer each operation. Maximum is 30 seconds. Defaults to 10.
+     * @param baseDn Subtree the user search starts from. For example: ou=people,dc=example,dc=com
+     * @param bindDn Service account used to search for users. Pass an empty string if the directory allows anonymous search. For example: cn=appwrite,ou=services,dc=example,dc=com
+     * @param bindPassword Service account password. This property is stored securely and cannot be read in future (write-only). Required again when hosts, port, encryption, verification, certificate or bindDn change.
+     * @param userFilter LDAP filter that finds the user signing in. {username} is replaced with the username they enter and must appear at least once. Pass an empty string to use the default, (uid={username}). For example: (sAMAccountName={username}) on Active Directory, or (|(uid={username})(mail={username})) to accept a username or an email address.
+     * @param requiredGroupDn Group a user must belong to in order to sign in, checked on every sign-in. Pass an empty string to allow every user the directory authenticates. For example: cn=staff,ou=groups,dc=example,dc=com
+     * @param idAttribute Attribute holding the identifier that stays the same when an entry is renamed or moved. Defaults to entryUUID; use objectGUID on Active Directory.
+     * @param emailAttribute Attribute holding the email address. Defaults to mail.
+     * @param nameAttribute Attribute holding the display name. Defaults to cn.
+     * @param phoneAttribute Attribute holding the phone number, in international format. Leave empty, the default, to leave the phone unmapped. For example: mobile
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun <T> updateLDAP(
+        enabled: Boolean? = null,
+        hosts: List<String>? = null,
+        port: Long? = null,
+        encryption: io.appwrite.enums.ProjectLDAPEncryption? = null,
+        verification: Boolean? = null,
+        certificate: String? = null,
+        timeout: Long? = null,
+        baseDn: String? = null,
+        bindDn: String? = null,
+        bindPassword: String? = null,
+        userFilter: String? = null,
+        requiredGroupDn: String? = null,
+        idAttribute: String? = null,
+        emailAttribute: String? = null,
+        nameAttribute: String? = null,
+        phoneAttribute: String? = null,
+        nestedType: Class<T>,
+    ): io.appwrite.models.Project<T> {
+        val apiPath = "/project/ldap"
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+            "hosts" to hosts,
+            "port" to port,
+            "encryption" to encryption,
+            "verification" to verification,
+            "certificate" to certificate,
+            "timeout" to timeout,
+            "baseDn" to baseDn,
+            "bindDn" to bindDn,
+            "bindPassword" to bindPassword,
+            "userFilter" to userFilter,
+            "requiredGroupDn" to requiredGroupDn,
+            "idAttribute" to idAttribute,
+            "emailAttribute" to emailAttribute,
+            "nameAttribute" to nameAttribute,
+            "phoneAttribute" to phoneAttribute,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Project<T> = {
+            io.appwrite.models.Project.from(map = it as Map<String, Any>, nestedType)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = classOf(),
+            converter,
+        )
+    }
+
+    /**
+     * Update the LDAP configuration for your project. Use this endpoint to connect your project to an LDAP directory, such as OpenLDAP or Active Directory, so users can sign in with their directory credentials. Omitted parameters keep their stored value. Enabling LDAP connects to the directory and binds as the service account, so a project cannot be left enabled with a configuration that cannot sign anyone in.
+     *
+     * @param enabled Enable or disable LDAP sign-in. Enabling connects to the directory to validate the configuration.
+     * @param hosts Directory hostnames or IP addresses, tried in order until one answers. IPv6 addresses can be written with or without square brackets. Maximum of 10 hosts are allowed. For example: ["ldap.example.com"]
+     * @param port Directory port. Defaults to 636 for LDAPS and 389 otherwise.
+     * @param encryption Transport encryption. Use "ldaps" for TLS from the first byte, "starttls" to upgrade a plain connection, or "none" for a trusted network only. Allowed values are: none, ldaps, starttls. Defaults to ldaps.
+     * @param verification Certificate verification, false for disabled or true for enabled. Defaults to true. Has no effect when encryption is none.
+     * @param certificate Certificate in PEM format of the authority that signed the directory certificate, or the directory certificate itself when it is self-signed. Several certificates can be given one after another. Leave empty to use the system trust store. Pass an empty string to clear a previously set value.
+     * @param timeout Seconds to wait for the directory to connect and answer each operation. Maximum is 30 seconds. Defaults to 10.
+     * @param baseDn Subtree the user search starts from. For example: ou=people,dc=example,dc=com
+     * @param bindDn Service account used to search for users. Pass an empty string if the directory allows anonymous search. For example: cn=appwrite,ou=services,dc=example,dc=com
+     * @param bindPassword Service account password. This property is stored securely and cannot be read in future (write-only). Required again when hosts, port, encryption, verification, certificate or bindDn change.
+     * @param userFilter LDAP filter that finds the user signing in. {username} is replaced with the username they enter and must appear at least once. Pass an empty string to use the default, (uid={username}). For example: (sAMAccountName={username}) on Active Directory, or (|(uid={username})(mail={username})) to accept a username or an email address.
+     * @param requiredGroupDn Group a user must belong to in order to sign in, checked on every sign-in. Pass an empty string to allow every user the directory authenticates. For example: cn=staff,ou=groups,dc=example,dc=com
+     * @param idAttribute Attribute holding the identifier that stays the same when an entry is renamed or moved. Defaults to entryUUID; use objectGUID on Active Directory.
+     * @param emailAttribute Attribute holding the email address. Defaults to mail.
+     * @param nameAttribute Attribute holding the display name. Defaults to cn.
+     * @param phoneAttribute Attribute holding the phone number, in international format. Leave empty, the default, to leave the phone unmapped. For example: mobile
+     * @return [io.appwrite.models.Project<T>]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateLDAP(
+        enabled: Boolean? = null,
+        hosts: List<String>? = null,
+        port: Long? = null,
+        encryption: io.appwrite.enums.ProjectLDAPEncryption? = null,
+        verification: Boolean? = null,
+        certificate: String? = null,
+        timeout: Long? = null,
+        baseDn: String? = null,
+        bindDn: String? = null,
+        bindPassword: String? = null,
+        userFilter: String? = null,
+        requiredGroupDn: String? = null,
+        idAttribute: String? = null,
+        emailAttribute: String? = null,
+        nameAttribute: String? = null,
+        phoneAttribute: String? = null,
+    ): io.appwrite.models.Project<Map<String, Any>> = updateLDAP(
+        enabled,
+        hosts,
+        port,
+        encryption,
+        verification,
+        certificate,
+        timeout,
+        baseDn,
+        bindDn,
+        bindPassword,
+        userFilter,
+        requiredGroupDn,
+        idAttribute,
+        emailAttribute,
+        nameAttribute,
+        phoneAttribute,
+        nestedType = classOf(),
+    )
+
+    /**
+     * Test the stored LDAP configuration against the directory without signing anyone in. Connects to the directory, binds as the service account and reads the base DN. Pass a username to also look the user up and check the required group, and a password to also verify it. The error names the step that failed.
+     *
+     * @param username Username to look up in the directory. Leave empty to test the connection and service account only.
+     * @param password Password of the user to verify. Only used together with a username.
+     * @return [Any]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createLDAPTest(
+        username: String? = null,
+        password: String? = null,
+    ): Any {
+        val apiPath = "/project/ldap/tests"
+        val apiParams = mutableMapOf<String, Any?>(
+            "username" to username,
+            "password" to password,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
 
     /**
      * Get a list of all mock phones in the project. This endpoint returns an array of all mock phones and their OTPs.
@@ -1999,6 +2170,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Naver configuration.
+     *
+     * @param clientId 'Client ID' of Naver OAuth2 app. For example: jK8pQ0000000000000Zv
+     * @param clientSecret 'Client Secret' of Naver OAuth2 app. For example: 9f42A0000000000c1dEb. Find it under Application > My Applications, on the overview of your app
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Naver]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Naver(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Naver {
+        val apiPath = "/project/oauth2/naver"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Naver = {
+            io.appwrite.models.OAuth2Naver.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Naver::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Notion configuration.
      *
      * @param oauthClientId 'OAuth Client ID' of Notion OAuth2 app. For example: 341d8700-0000-0000-0000-000000446ee3
@@ -3037,6 +3247,7 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "microsoft" -> io.appwrite.models.OAuth2Microsoft.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "tiktok" -> io.appwrite.models.OAuth2TikTok.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "kakao" -> io.appwrite.models.OAuth2Kakao.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "naver" -> io.appwrite.models.OAuth2Naver.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "vipps" -> io.appwrite.models.OAuth2Vipps.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "vippsSandbox" -> io.appwrite.models.OAuth2Vipps.from(map = responseMap)
                 else -> throw Exception("Unable to match response to any expected response model")
@@ -3049,6 +3260,29 @@ class Project(client: Client) : Service(client) {
             apiParams,
             responseType = Any::class.java,
             converter,
+        )
+    }
+
+    /**
+     * Delete all passwords in the project, forcing every user to reset their password. Any password set before this request stops working for email and password sign-in immediately: signing in returns a `user_password_reset_required` error until the user sets a new password through password recovery, or until a new password is set for them with the Users API. Existing sessions are not affected; call the delete sessions endpoint to sign users out as well. Users without a password and API keys are not affected by this action.
+     *
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deletePasswords(): Any {
+        val apiPath = "/project/passwords"
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
         )
     }
 

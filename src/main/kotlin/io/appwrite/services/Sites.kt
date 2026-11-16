@@ -399,6 +399,45 @@ class Sites(client: Client) : Service(client) {
     }
 
     /**
+     * Turn analytics on or off for a site. Turning it on links an analytics property named after the site, creating one on first use, and injects the tracker into pages served on the site's production domains. Turning it on also needs the `analytics.write` scope. Turning it off stops the injection and keeps the property and its data.
+     *
+     * @param siteId Site ID.
+     * @param enabled Inject the analytics tracker into the site's production domains. Injected pageviews and events are billed as analytics usage.
+     * @return [io.appwrite.models.Site]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun updateAnalytics(
+        siteId: String,
+        enabled: Boolean,
+    ): io.appwrite.models.Site {
+        if (siteId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"siteId\"")
+        }
+        val apiPath = ("/sites/{siteId}/analytics"
+            .replace("{siteId}", Client.encodePath(siteId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Site = {
+            io.appwrite.models.Site.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Site::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the site active deployment. Use this endpoint to switch the code deployment that should be used when visitor opens your site.
      *
      * @param siteId Site ID.

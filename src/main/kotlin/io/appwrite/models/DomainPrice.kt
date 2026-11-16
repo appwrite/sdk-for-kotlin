@@ -55,6 +55,12 @@ data class DomainPrice(
     @SerializedName("renewalPeriodYears")
     val renewalPeriodYears: Long,
 
+    /**
+     * Why the domain was not priced for the requested registration type, for example a transfer of an unregistered domain. Empty otherwise.
+     */
+    @SerializedName("reason")
+    var reason: String?,
+
 ) {
     fun toMap(): Map<String, Any?> = mapOf(
         "domain" to domain as Any,
@@ -65,6 +71,7 @@ data class DomainPrice(
         "premium" to premium as Any,
         "renewalPrice" to renewalPrice as Any?,
         "renewalPeriodYears" to renewalPeriodYears as Any,
+        "reason" to reason as Any?,
     )
 
     companion object {
@@ -80,6 +87,7 @@ data class DomainPrice(
             premium = (if (map.containsKey("premium")) map["premium"] else false) as Boolean,
             renewalPrice = (map["renewalPrice"] as? Number)?.toDouble(),
             renewalPeriodYears = ((if (map.containsKey("renewalPeriodYears")) map["renewalPeriodYears"] else 1) as Number).toLong(),
+            reason = map["reason"] as? String,
         )
     }
 }
