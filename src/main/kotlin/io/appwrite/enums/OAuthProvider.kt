@@ -57,6 +57,8 @@ enum class OAuthProvider(val value: String) {
     LINKEDIN("linkedin"),
     @SerializedName("microsoft")
     MICROSOFT("microsoft"),
+    @SerializedName("naver")
+    NAVER("naver"),
     @SerializedName("notion")
     NOTION("notion"),
     @SerializedName("oidc")
