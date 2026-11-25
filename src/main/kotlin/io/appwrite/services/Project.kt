@@ -1189,6 +1189,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Atlassian configuration.
+     *
+     * @param clientId 'Client ID' of Atlassian OAuth2 app. For example: uQ7mZ3s0000000000000000000000000
+     * @param clientSecret 'Client Secret' of Atlassian OAuth2 app. For example: ATOA0000000000000000000000000000000000000000000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Atlassian]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Atlassian(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Atlassian {
+        val apiPath = "/project/oauth2/atlassian"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Atlassian = {
+            io.appwrite.models.OAuth2Atlassian.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Atlassian::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Auth0 configuration.
      *
      * @param clientId 'Client ID' of Auth0 OAuth2 app. For example: OaOkIA000000000000000000005KLSYq
@@ -1960,6 +1999,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Instagram configuration.
+     *
+     * @param clientId 'Client ID' of Instagram OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Instagram OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Instagram]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Instagram(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Instagram {
+        val apiPath = "/project/oauth2/instagram"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Instagram = {
+            io.appwrite.models.OAuth2Instagram.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Instagram::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Kakao configuration.
      *
      * @param clientId 'REST API key' of Kakao OAuth2 app. For example: 839ff5000000000000000000013206de
@@ -2086,6 +2164,84 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 LINE configuration.
+     *
+     * @param clientId 'Client ID' of LINE OAuth2 app. For example: 1650000000
+     * @param clientSecret 'Client Secret' of LINE OAuth2 app. For example: a1b2c3d4e5f600000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Line]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Line(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Line {
+        val apiPath = "/project/oauth2/line"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Line = {
+            io.appwrite.models.OAuth2Line.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Line::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Linear configuration.
+     *
+     * @param clientId 'Client ID' of Linear OAuth2 app. For example: 5e1c0000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Linear OAuth2 app. For example: 9f8e7d6c5b4a00000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Linear]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Linear(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Linear {
+        val apiPath = "/project/oauth2/linear"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Linear = {
+            io.appwrite.models.OAuth2Linear.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Linear::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Linkedin configuration.
      *
      * @param clientId 'Client ID' of Linkedin OAuth2 app. For example: 770000000000dv
@@ -2204,6 +2360,45 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2Naver::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Netlify configuration.
+     *
+     * @param clientId 'Client ID' of Netlify OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Netlify OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Netlify]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Netlify(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Netlify {
+        val apiPath = "/project/oauth2/netlify"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Netlify = {
+            io.appwrite.models.OAuth2Netlify.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Netlify::class.java,
             converter,
         )
     }
@@ -2353,6 +2548,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Patreon configuration.
+     *
+     * @param clientId 'Client ID' of Patreon OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Patreon OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Patreon]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Patreon(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Patreon {
+        val apiPath = "/project/oauth2/patreon"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Patreon = {
+            io.appwrite.models.OAuth2Patreon.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Patreon::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Paypal configuration.
      *
      * @param clientId 'Client ID' of Paypal OAuth2 app. For example: AdhIEG7-000000000000-0000000000000000000000000000000-0000000000000000000000-2pyB
@@ -2470,6 +2704,84 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Railway configuration.
+     *
+     * @param clientId 'Client ID' of Railway OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Railway OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Railway]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Railway(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Railway {
+        val apiPath = "/project/oauth2/railway"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Railway = {
+            io.appwrite.models.OAuth2Railway.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Railway::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Reddit configuration.
+     *
+     * @param clientId 'Client ID' of Reddit OAuth2 app. For example: aBcD0000000000000000aB
+     * @param clientSecret 'Client Secret' of Reddit OAuth2 app. For example: xYz00000000000000000000000000a
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Reddit]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Reddit(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Reddit {
+        val apiPath = "/project/oauth2/reddit"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Reddit = {
+            io.appwrite.models.OAuth2Reddit.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Reddit::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Resend configuration.
      *
      * @param clientId 'Client ID' of Resend OAuth2 app. For example: f47ac10b-58cc-4372-a567-0e02b2c3d479
@@ -2504,6 +2816,45 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2Resend::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Roblox configuration.
+     *
+     * @param clientId 'Client ID' of Roblox OAuth2 app. For example: 1234567890123456789
+     * @param clientSecret 'Client Secret' of Roblox OAuth2 app. For example: RBX-0000000000000000000000000000000000000000000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Roblox]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Roblox(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Roblox {
+        val apiPath = "/project/oauth2/roblox"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Roblox = {
+            io.appwrite.models.OAuth2Roblox.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Roblox::class.java,
             converter,
         )
     }
@@ -2624,6 +2975,45 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2Spotify::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 Strava configuration.
+     *
+     * @param clientId 'Client ID' of Strava OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Strava OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Strava]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Strava(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Strava {
+        val apiPath = "/project/oauth2/strava"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Strava = {
+            io.appwrite.models.OAuth2Strava.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Strava::class.java,
             converter,
         )
     }
@@ -2824,6 +3214,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 Vercel configuration.
+     *
+     * @param clientId 'Client ID' of Vercel OAuth2 app. For example: cl_0000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of Vercel OAuth2 app. For example: vc_0000000000000000000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2Vercel]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2Vercel(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2Vercel {
+        val apiPath = "/project/oauth2/vercel"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2Vercel = {
+            io.appwrite.models.OAuth2Vercel.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2Vercel::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Vipps MobilePay configuration.
      *
      * @param clientId 'Client ID' of Vipps MobilePay OAuth2 app. For example: 9a3a4b3e-0000-0000-0000-0f1a6d1c3b2e
@@ -2902,6 +3331,45 @@ class Project(client: Client) : Service(client) {
     }
 
     /**
+     * Update the project OAuth2 VK configuration.
+     *
+     * @param clientId 'Client ID' of VK OAuth2 app. For example: 00000000000000000000000000000000
+     * @param clientSecret 'Client Secret' of VK OAuth2 app. For example: 00000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2VK]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2VK(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2VK {
+        val apiPath = "/project/oauth2/vk"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2VK = {
+            io.appwrite.models.OAuth2VK.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2VK::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Update the project OAuth2 Webflow configuration.
      *
      * @param clientId 'Client ID' of Webflow OAuth2 app. For example: 8bb20000000000000000000000000000000000000000000000000000000040dd
@@ -2975,6 +3443,45 @@ class Project(client: Client) : Service(client) {
             apiHeaders,
             apiParams,
             responseType = io.appwrite.models.OAuth2WordPress::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update the project OAuth2 WorkOS configuration.
+     *
+     * @param clientId 'Client ID' of WorkOS OAuth2 app. For example: client_01H0000000000000000000000
+     * @param clientSecret 'Client Secret' of WorkOS OAuth2 app. For example: wos0000000000000000000000000000000000000000000000000000000000000
+     * @param enabled OAuth2 sign-in method status. Set to true to enable new session creation. Setting to true will trigger end-to-end credentials validation, and will throw if the credentials are invalid.
+     * @return [io.appwrite.models.OAuth2WorkOS]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateOAuth2WorkOS(
+        clientId: String? = null,
+        clientSecret: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.OAuth2WorkOS {
+        val apiPath = "/project/oauth2/workos"
+        val apiParams = mutableMapOf<String, Any?>(
+            "clientId" to clientId,
+            "clientSecret" to clientSecret,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.OAuth2WorkOS = {
+            io.appwrite.models.OAuth2WorkOS.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.OAuth2WorkOS::class.java,
             converter,
         )
     }
@@ -3224,6 +3731,19 @@ class Project(client: Client) : Service(client) {
                 responseMap["\$id"]?.toString() == "salesforce" -> io.appwrite.models.OAuth2Salesforce.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "yahoo" -> io.appwrite.models.OAuth2Yahoo.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "huggingface" -> io.appwrite.models.OAuth2HuggingFace.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "instagram" -> io.appwrite.models.OAuth2Instagram.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "patreon" -> io.appwrite.models.OAuth2Patreon.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "strava" -> io.appwrite.models.OAuth2Strava.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "vk" -> io.appwrite.models.OAuth2VK.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "netlify" -> io.appwrite.models.OAuth2Netlify.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "railway" -> io.appwrite.models.OAuth2Railway.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "reddit" -> io.appwrite.models.OAuth2Reddit.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "vercel" -> io.appwrite.models.OAuth2Vercel.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "atlassian" -> io.appwrite.models.OAuth2Atlassian.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "line" -> io.appwrite.models.OAuth2Line.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "linear" -> io.appwrite.models.OAuth2Linear.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "roblox" -> io.appwrite.models.OAuth2Roblox.from(map = responseMap)
+                responseMap["\$id"]?.toString() == "workos" -> io.appwrite.models.OAuth2WorkOS.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "resend" -> io.appwrite.models.OAuth2Resend.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "cloudflare" -> io.appwrite.models.OAuth2Cloudflare.from(map = responseMap)
                 responseMap["\$id"]?.toString() == "linkedin" -> io.appwrite.models.OAuth2Linkedin.from(map = responseMap)

@@ -1085,6 +1085,212 @@ class Messaging(client: Client) : Service(client) {
     }
 
     /**
+     * Create a new Bird email provider. It sends email through Bird's email API with a workspace API key that holds the `emails:write` scope.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param apiKey Bird workspace API key.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address. Its domain must be verified in the Bird workspace.
+     * @param replyToName Name set in the reply to field for the mail. Default value is sender name.
+     * @param replyToEmail Email set in the reply to field for the mail. Default value is sender email.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBirdEmailProvider(
+        providerId: String,
+        name: String,
+        apiKey: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/bird-email"
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "apiKey" to apiKey,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a Bird email provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param apiKey Bird workspace API key.
+     * @param fromName Sender Name.
+     * @param fromEmail Sender email address. Its domain must be verified in the Bird workspace.
+     * @param replyToName Name set in the Reply To field for the mail. Default value is Sender Name.
+     * @param replyToEmail Email set in the Reply To field for the mail. Default value is Sender Email.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateBirdEmailProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        apiKey: String? = null,
+        fromName: String? = null,
+        fromEmail: String? = null,
+        replyToName: String? = null,
+        replyToEmail: String? = null,
+    ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
+        val apiPath = ("/messaging/providers/bird-email/{providerId}"
+            .replace("{providerId}", Client.encodePath(providerId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "apiKey" to apiKey,
+            "fromName" to fromName,
+            "fromEmail" to fromEmail,
+            "replyToName" to replyToName,
+            "replyToEmail" to replyToEmail,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a new Bird SMS provider. It sends SMS through Bird with a workspace API key that holds the `sms:write` scope.
+     *
+     * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Provider name.
+     * @param from Sender phone number or alphanumeric sender ID. Format phone numbers with a leading '+' and a country code, e.g., +16175551212.
+     * @param apiKey Bird workspace API key.
+     * @param enabled Set as enabled.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createBirdSMSProvider(
+        providerId: String,
+        name: String,
+        from: String? = null,
+        apiKey: String? = null,
+        enabled: Boolean? = null,
+    ): io.appwrite.models.Provider {
+        val apiPath = "/messaging/providers/bird-sms"
+        val apiParams = mutableMapOf<String, Any?>(
+            "providerId" to providerId,
+            "name" to name,
+            "from" to from,
+            "apiKey" to apiKey,
+            "enabled" to enabled,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a Bird SMS provider by its unique ID.
+     *
+     * @param providerId Provider ID.
+     * @param name Provider name.
+     * @param enabled Set as enabled.
+     * @param apiKey Bird workspace API key.
+     * @param from Sender phone number or alphanumeric sender ID. Format phone numbers with a leading '+' and a country code, e.g., +16175551212.
+     * @return [io.appwrite.models.Provider]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateBirdSMSProvider(
+        providerId: String,
+        name: String? = null,
+        enabled: Boolean? = null,
+        apiKey: String? = null,
+        from: String? = null,
+    ): io.appwrite.models.Provider {
+        if (providerId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"providerId\"")
+        }
+        val apiPath = ("/messaging/providers/bird-sms/{providerId}"
+            .replace("{providerId}", Client.encodePath(providerId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "enabled" to enabled,
+            "apiKey" to apiKey,
+            "from" to from,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Provider = {
+            io.appwrite.models.Provider.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Provider::class.java,
+            converter,
+        )
+    }
+
+    /**
      * Create a new Firebase Cloud Messaging provider.
      *
      * @param providerId Provider ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
