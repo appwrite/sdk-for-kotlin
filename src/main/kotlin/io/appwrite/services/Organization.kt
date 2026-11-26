@@ -121,6 +121,194 @@ class Organization(client: Client) : Service(client) {
     }
 
     /**
+     * Get a list of your organization's escalations. Use `Query.search('search', term)` to search escalation IDs and names.
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, repeat, search
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.EscalationList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listEscalations(
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.EscalationList {
+        val apiPath = "/organization/escalations"
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.EscalationList = {
+            io.appwrite.models.EscalationList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.EscalationList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create an escalation for your organization. A monitor using it notifies the escalation's steps one after another while its alert fires, each by email, push and in the console, until a member acknowledges the alert or it resolves. Each step waits its `delay` in seconds, after the alert fires for the first step and after the previous step for the others, then notifies the members holding its `roles` and those named in `userIds`. With `repeat`, the steps run again from the first, a monitor's cooldown after the last step.
+     *
+     * @param escalationId Escalation ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Escalation name. Max length: 128 chars.
+     * @param steps Steps notified in order while nobody acknowledges the alert. Each step is an object with `delay` (seconds to wait before the step, 0 to 2592000, default 0), `roles` (organization roles such as `owner` or `developer`) and `userIds` (organization members who accepted their invitation). A step names each role and member at most once and needs at least one of `roles` or `userIds`. Maximum of 100 steps.
+     * @param repeat How many more times the steps run from the first while nobody acknowledges the alert, between 0 and 9. Each round starts a monitor's cooldown after the last step.
+     * @return [io.appwrite.models.Escalation]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createEscalation(
+        escalationId: String,
+        name: String,
+        steps: List<Map<String, Any?>>,
+        repeat: Long? = null,
+    ): io.appwrite.models.Escalation {
+        val apiPath = "/organization/escalations"
+        val apiParams = mutableMapOf<String, Any?>(
+            "escalationId" to escalationId,
+            "name" to name,
+            "steps" to steps,
+            "repeat" to repeat,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Escalation = {
+            io.appwrite.models.Escalation.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Escalation::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get one of your organization's escalations by its ID.
+     *
+     * @param escalationId Escalation ID.
+     * @return [io.appwrite.models.Escalation]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getEscalation(
+        escalationId: String,
+    ): io.appwrite.models.Escalation {
+        if (escalationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"escalationId\"")
+        }
+        val apiPath = ("/organization/escalations/{escalationId}"
+            .replace("{escalationId}", Client.encodePath(escalationId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Escalation = {
+            io.appwrite.models.Escalation.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Escalation::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update an escalation's name, steps or repeats; what you leave out stays as it is. Alerts already escalating keep the steps they started with; the next alert uses the new ones.
+     *
+     * @param escalationId Escalation ID.
+     * @param name Escalation name. Max length: 128 chars.
+     * @param steps Steps notified in order while nobody acknowledges the alert. Each step is an object with `delay` (seconds to wait before the step, 0 to 2592000, default 0), `roles` (organization roles such as `owner` or `developer`) and `userIds` (organization members who accepted their invitation). A step names each role and member at most once and needs at least one of `roles` or `userIds`. Maximum of 100 steps.
+     * @param repeat How many more times the steps run from the first while nobody acknowledges the alert, between 0 and 9. Each round starts a monitor's cooldown after the last step.
+     * @return [io.appwrite.models.Escalation]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateEscalation(
+        escalationId: String,
+        name: String? = null,
+        steps: List<Map<String, Any?>>? = null,
+        repeat: Long? = null,
+    ): io.appwrite.models.Escalation {
+        if (escalationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"escalationId\"")
+        }
+        val apiPath = ("/organization/escalations/{escalationId}"
+            .replace("{escalationId}", Client.encodePath(escalationId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "steps" to steps,
+            "repeat" to repeat,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.Escalation = {
+            io.appwrite.models.Escalation.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.Escalation::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete an escalation. An escalation that a monitor uses cannot be deleted: move the monitor to another escalation or to `notify` roles first. Open alerts keep the steps they started with.
+     *
+     * @param escalationId Escalation ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteEscalation(
+        escalationId: String,
+    ): Any {
+        if (escalationId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"escalationId\"")
+        }
+        val apiPath = ("/organization/escalations/{escalationId}"
+            .replace("{escalationId}", Client.encodePath(escalationId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
+
+    /**
      * List app installations on the organization. Any organization member can read installations.
      *
      * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
