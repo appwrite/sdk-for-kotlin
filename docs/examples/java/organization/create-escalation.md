@@ -1,0 +1,41 @@
+```java
+import io.appwrite.Client;
+import io.appwrite.coroutines.CoroutineCallback;
+import io.appwrite.exceptions.AppwriteException;
+import io.appwrite.services.Organization;
+import java.util.List;
+import java.util.Map;
+
+Client client = new Client()
+    .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
+    .setProject("<YOUR_PROJECT_ID>") // Your project ID
+    .setKey("<YOUR_API_KEY>"); // Your secret API key
+
+Organization organization = new Organization(client);
+
+try {
+    organization.createEscalation(
+        "<ESCALATION_ID>", // escalationId
+        "<NAME>", // name
+        List.of(Map.of(
+            "delay", 0,
+            "roles", List.of("owner")
+        ), Map.of(
+            "delay", 900,
+            "roles", List.of("developer"),
+            "userIds", List.of("<USER_ID>")
+        )), // steps
+        1L, // repeat (optional)
+        new CoroutineCallback<>((result, error) -> {
+            if (error != null) {
+                error.printStackTrace();
+                return;
+            }
+
+            System.out.println(result);
+        })
+    );
+} catch (AppwriteException e) {
+    e.printStackTrace();
+}
+```
