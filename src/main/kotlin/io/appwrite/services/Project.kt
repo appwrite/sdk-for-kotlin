@@ -6120,4 +6120,212 @@ class Project(client: Client) : Service(client) {
             responseType = Any::class.java,
         )
     }
+
+    /**
+     * Get a list of video profiles in the current project (`GET /v1/project/videos/profiles`). Every profile is returned regardless of codec. Filter with `queries`, for example `Query.equal('codec', ['h264'])` for one encode ladder, or on `name`, `width`, `height`, `videoBitRate` and `audioBitRate`. Search with `Query.search()` on the `search` attribute.
+     *
+     *
+     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long. You may filter on the following attributes: name, codec, width, height, videoBitRate, audioBitRate, search
+     * @param total When set to false, the total count returned will be 0 and will not be calculated.
+     * @return [io.appwrite.models.VideoProfileList]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun listVideoProfiles(
+        queries: List<String>? = null,
+        total: Boolean? = null,
+    ): io.appwrite.models.VideoProfileList {
+        val apiPath = "/project/videos/profiles"
+        val apiParams = mutableMapOf<String, Any?>(
+            "queries" to queries,
+            "total" to total,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.VideoProfileList = {
+            io.appwrite.models.VideoProfileList.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.VideoProfileList::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Create a video profile (`POST /v1/project/videos/profiles`) describing an encoding target: output dimensions, video/audio bitrates, and encode codec. Only codecs enabled on this instance are accepted; the default is `h264`. A disabled codec is rejected. Creating a profile with the same width, height, bitrates, and codec fails with `video_profile_already_exists`. Bitrates are in bits per second and must be multiples of 1000. Renditions are encoded against a profile.
+     *
+     *
+     * @param profileId Video profile ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
+     * @param name Video profile name.
+     * @param videoBitRate Target video bitrate in bits per second. Must be a multiple of 1000.
+     * @param audioBitRate Target audio bitrate in bits per second. Must be a multiple of 1000.
+     * @param width Target video width in pixels. Must be an even number.
+     * @param height Target video height in pixels. Must be an even number.
+     * @param codec Video encode codec. Codecs not enabled on this instance are rejected. Defaults to `h264`.
+     * @return [io.appwrite.models.VideoProfile]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun createVideoProfile(
+        profileId: String,
+        name: String,
+        videoBitRate: Long,
+        audioBitRate: Long,
+        width: Long,
+        height: Long,
+        codec: io.appwrite.enums.VideoCodecId? = null,
+    ): io.appwrite.models.VideoProfile {
+        val apiPath = "/project/videos/profiles"
+        val apiParams = mutableMapOf<String, Any?>(
+            "profileId" to profileId,
+            "name" to name,
+            "videoBitRate" to videoBitRate,
+            "audioBitRate" to audioBitRate,
+            "width" to width,
+            "height" to height,
+            "codec" to codec,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.VideoProfile = {
+            io.appwrite.models.VideoProfile.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "POST",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.VideoProfile::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Get a video profile by its unique ID (`GET /v1/project/videos/profiles/:profileId`).
+     *
+     *
+     * @param profileId Video profile unique ID.
+     * @return [io.appwrite.models.VideoProfile]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun getVideoProfile(
+        profileId: String,
+    ): io.appwrite.models.VideoProfile {
+        if (profileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"profileId\"")
+        }
+        val apiPath = ("/project/videos/profiles/{profileId}"
+            .replace("{profileId}", Client.encodePath(profileId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.VideoProfile = {
+            io.appwrite.models.VideoProfile.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "GET",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.VideoProfile::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Update a video profile by its unique ID (`PATCH /v1/project/videos/profiles/:profileId`). Existing renditions are not re-encoded. Changing the profile onto the same width, height, bitrates, and codec as another profile fails with `video_profile_already_exists`.
+     *
+     *
+     * @param profileId Video profile unique ID.
+     * @param name Video profile name.
+     * @param videoBitRate Target video bitrate in bits per second. Must be a multiple of 1000.
+     * @param audioBitRate Target audio bitrate in bits per second. Must be a multiple of 1000.
+     * @param width Target video width in pixels. Must be an even number.
+     * @param height Target video height in pixels. Must be an even number.
+     * @return [io.appwrite.models.VideoProfile]
+     */
+    @JvmOverloads
+    @Throws(AppwriteException::class)
+    suspend fun updateVideoProfile(
+        profileId: String,
+        name: String? = null,
+        videoBitRate: Long? = null,
+        audioBitRate: Long? = null,
+        width: Long? = null,
+        height: Long? = null,
+    ): io.appwrite.models.VideoProfile {
+        if (profileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"profileId\"")
+        }
+        val apiPath = ("/project/videos/profiles/{profileId}"
+            .replace("{profileId}", Client.encodePath(profileId))
+        )
+        val apiParams = mutableMapOf<String, Any?>(
+            "name" to name,
+            "videoBitRate" to videoBitRate,
+            "audioBitRate" to audioBitRate,
+            "width" to width,
+            "height" to height,
+        )
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        val converter: (Any) -> io.appwrite.models.VideoProfile = {
+            io.appwrite.models.VideoProfile.from(map = it as Map<String, Any>)
+        }
+        return client.call(
+            "PATCH",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = io.appwrite.models.VideoProfile::class.java,
+            converter,
+        )
+    }
+
+    /**
+     * Delete a video profile by its unique ID (`DELETE /v1/project/videos/profiles/:profileId`). Renditions already encoded against it are left in place.
+     *
+     *
+     * @param profileId Video profile unique ID.
+     * @return [Any]
+     */
+    @Throws(AppwriteException::class)
+    suspend fun deleteVideoProfile(
+        profileId: String,
+    ): Any {
+        if (profileId.isEmpty()) {
+            throw AppwriteException("Missing required parameter: \"profileId\"")
+        }
+        val apiPath = ("/project/videos/profiles/{profileId}"
+            .replace("{profileId}", Client.encodePath(profileId))
+        )
+        val apiParams = mutableMapOf<String, Any?>()
+        val apiHeaders = mutableMapOf<String, String>(
+            "X-Appwrite-Project" to client.config["project"].orEmpty(),
+            "content-type" to "application/json",
+            "accept" to "application/json",
+        )
+        return client.call(
+            "DELETE",
+            apiPath,
+            apiHeaders,
+            apiParams,
+            responseType = Any::class.java,
+        )
+    }
 }
