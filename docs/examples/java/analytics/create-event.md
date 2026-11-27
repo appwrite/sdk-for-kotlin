@@ -8,7 +8,7 @@ import java.util.List;
 Client client = new Client()
     .setEndpoint("https://<REGION>.cloud.appwrite.io/v1") // Your API Endpoint
     .setProject("<YOUR_PROJECT_ID>") // Your project ID
-    .setSession(""); // The user session to authenticate with
+    .setKey("<YOUR_API_KEY>"); // Your secret API key
 
 Analytics analytics = new Analytics(client);
 
